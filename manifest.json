@@ -5,7 +5,7 @@
     "preview": "extensions/findDupeTracks/assets/preview.png",
     "authors": [{ "name": "veryboringhwl", "url": "https://github.com/veryboringhwl" }],
     "main": "dist/findDupeTracks.js",
-    "readme": "sextensionsrc/findDupeTracks/assets/README.md",
+    "readme": "extensions/findDupeTracks/assets/README.md",
     "tags": ["duplicates", "utility"]
   },
   {
