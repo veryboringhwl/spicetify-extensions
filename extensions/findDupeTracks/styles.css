@@ -1,0 +1,144 @@
+.find-dupes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.find-dupes__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.find-dupes__header-label {
+  color: var(--spice-text);
+  font-weight: bold;
+}
+
+.find-dupes__details {
+  font-size: 1.25em;
+  color: var(--spice-text);
+}
+
+.find-dupes__group-section {
+  background-color: var(--spice-player);
+  border: 1px solid rgba(var(--spice-rgb-selected-row), 0.1);
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.find-dupes__group-section-heading {
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: var(--spice-text);
+}
+
+.find-dupes__group-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.find-dupes-group {
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid rgba(var(--spice-rgb-selected-row), 0.1);
+  border-left-width: 5px;
+  border-left-style: solid;
+  transition: background-color 0.2s ease;
+  list-style: none;
+}
+
+.find-dupes-group--exact {
+  border-left-color: #f24e5c;
+}
+.find-dupes-group--likely {
+  border-left-color: #ffc726;
+}
+.find-dupes-group--possible {
+  border-left-color: #58ff33;
+}
+
+.find-dupes-group__source {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--spice-text);
+  font-size: 1.05em;
+}
+
+.find-dupes-group__duplicates-heading {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: normal;
+  color: var(--spice-subtext);
+  font-size: 0.95em;
+}
+
+.find-dupes-group__duplicates-list {
+  list-style: none;
+  padding: 0 0 0 15px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.find-dupes-group__duplicate-item {
+  padding: 10px 0;
+  font-size: 1em;
+  color: #e0e0e0;
+  border-bottom: 1px solid rgba(var(--spice-rgb-selected-row), 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.find-dupes-group__duplicate-item:last-child {
+  border-bottom: none;
+}
+
+.find-dupes-group__duplicate-name {
+  display: block;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.find-dupes-group__details {
+  color: var(--spice-subtext);
+  font-size: 0.9em;
+  margin-top: 3px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.find-dupes-group__album {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.find-dupes-group__delete-button {
+  background-color: #f24e5c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-weight: bold;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.find-dupes-group__delete-button:hover {
+  background-color: #d32f2f;
+}
+
+.find-dupes-group__delete-button:active {
+  background-color: #b71c1c;
+  transform: scale(0.98);
+}

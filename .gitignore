@@ -1,0 +1,7 @@
+node_modules
+dist/*
+!dist/findDupeTracks.js
+!dist/fullscreenLyrics.js
+extensions/*
+!extensions/findDupeTracks/
+!extensions/fullscreenLyrics/
