@@ -1,7 +1,7 @@
 import Icons from "../../shared/icons";
 import PopupModal from "../../shared/popupModal";
 import PlaylistDuplicateFinder from "./menu";
-import "./styles.css";
+import "./styles.scss";
 
 let playlistUri = null;
 

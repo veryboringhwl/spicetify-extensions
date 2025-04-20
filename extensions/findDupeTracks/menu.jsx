@@ -1,5 +1,20 @@
 import { useCallback, useEffect, useState } from "react";
 import ConfirmDialog from "../../shared/confirmDialog";
+import Dropdown from "../../shared/dropdown";
+
+async function fetchOwnedPlaylists(offset = 0, limit = 50, playlists = []) {
+  const res = await Spicetify.Platform.LibraryAPI.getContents({ offset, limit });
+  const ownedPlaylistsInBatch = res.items.filter(
+    (item) => item?.type === "playlist" && item?.isOwnedBySelf,
+  );
+  playlists.push(...ownedPlaylistsInBatch);
+
+  if (res.items.length === limit && res.totalLength > offset + limit) {
+    return fetchOwnedPlaylists(offset + limit, limit, playlists);
+  }
+
+  return playlists;
+}
 
 async function fetchAllPlaylistTracks(playlistUri, offset = 0, limit = 100, accumulatedItems = []) {
   const response = await Spicetify.Platform.PlaylistAPI.getContents(playlistUri, { offset, limit });
@@ -96,6 +111,10 @@ const normalizeForSimilarity = (name) => {
 };
 
 function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) {
+  const [ownedPlaylists, setOwnedPlaylists] = useState([]);
+  const [selectedPlaylistUri, setSelectedPlaylistUri] = useState(
+    initialSelectedPlaylist?.uri || "",
+  );
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playCounts, setPlayCounts] = useState({});
   const [duplicateGroups, setDuplicateGroups] = useState({
@@ -103,6 +122,25 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     likely: [],
     possible: [],
   });
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const playlists = await fetchOwnedPlaylists();
+        setOwnedPlaylists(playlists);
+        if (
+          initialSelectedPlaylist &&
+          playlists.some((p) => p.uri === initialSelectedPlaylist.uri)
+        ) {
+          setSelectedPlaylistUri(initialSelectedPlaylist.uri);
+        } else {
+          setSelectedPlaylistUri(initialSelectedPlaylist?.uri || "");
+        }
+      } catch (error) {
+        console.error("Error fetching playlists:", error);
+      }
+    })();
+  }, [initialSelectedPlaylist]);
 
   const findPotentialDuplicates = useCallback((tracks) => {
     const validTracks = tracks.filter((track) => track?.uri && track.name);
@@ -159,7 +197,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
         "Are you sure you want to remove this Track? You will not be able to recover it!",
       confirmText: "Remove",
       onConfirm: async () => {
-        await Spicetify.Platform.PlaylistAPI.remove(initialSelectedPlaylist.uri, [
+        await Spicetify.Platform.PlaylistAPI.remove(selectedPlaylistUri, [
           { uri: trackToRemove.uri, uid: trackToRemove.uid },
         ]);
 
@@ -191,7 +229,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
   useEffect(() => {
     (async () => {
       const initialGroupsState = { exact: [], likely: [], possible: [] };
-      if (!initialSelectedPlaylist?.uri) {
+      if (!selectedPlaylistUri) {
         setPlaylistTracks([]);
         setDuplicateGroups(initialGroupsState);
         setPlayCounts({});
@@ -203,7 +241,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       setPlayCounts({});
 
       try {
-        const playlistData = await fetchAllPlaylistTracks(initialSelectedPlaylist.uri);
+        const playlistData = await fetchAllPlaylistTracks(selectedPlaylistUri);
         const fetchedTracks = playlistData.items;
         setPlaylistTracks(fetchedTracks);
         findPotentialDuplicates(fetchedTracks);
@@ -215,7 +253,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
         console.error("Error fetching playlist tracks:", error);
       }
     })();
-  }, [initialSelectedPlaylist, findPotentialDuplicates]);
+  }, [selectedPlaylistUri, findPotentialDuplicates]);
 
   const TrackDetails = ({ track }) => {
     const playCount = playCounts[track.uri];
@@ -276,15 +314,30 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     </div>
   );
 
-  const playlistName = initialSelectedPlaylist?.name || "Selected Playlist";
+  const selectedPlaylist = ownedPlaylists.find((p) => p.uri === selectedPlaylistUri);
+  const playlistName =
+    selectedPlaylist?.name || initialSelectedPlaylist?.name || "Selected Playlist";
+  const playlistOptions = ownedPlaylists.map((p) => ({ value: p.uri, label: p.name }));
 
   return (
     <div className="find-dupes">
-      {initialSelectedPlaylist?.uri && (
+      <div className="find-dupes__header">
+        <span className="find-dupes__header-label">Select Playlist:</span>
+        <Dropdown
+          value={selectedPlaylistUri}
+          options={playlistOptions}
+          onChange={(e) => setSelectedPlaylistUri(e.target.value)}
+          disabled={ownedPlaylists.length === 0}
+        />
+      </div>
+
+      {selectedPlaylistUri && (
         <>
-          <p className="find-dupes__details">
-            Playlist: {playlistName} ({playlistTracks.length} tracks)
-          </p>
+          {selectedPlaylist && (
+            <p className="find-dupes__details">
+              Playlist: {playlistName} ({playlistTracks.length} tracks)
+            </p>
+          )}
           {renderDuplicateGroupList("Exact Duplicates (Same URI)", duplicateGroups.exact, "exact")}
           {renderDuplicateGroupList(
             "Likely Duplicates (Same Name)",
