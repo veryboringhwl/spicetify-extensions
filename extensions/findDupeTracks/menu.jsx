@@ -26,18 +26,36 @@ async function fetchAllPlaylistTracks(playlistUri, offset = 0, limit = 100, accu
   return { items: allItems, totalLength: allItems.length };
 }
 
-const fetchISRCForTracks = async (trackUri) => {
-  const parsedUri = Spicetify.URI.fromString(trackUri);
-  const trackId = parsedUri.id;
+async function fetchISRCsForTracks(trackUris) {
+  const isrcMap = new Map();
+  const trackIds = trackUris
+    .map((uri) => {
+      const parsed = Spicetify.URI.fromString(uri);
+      if (parsed.type === Spicetify.URI.Type.TRACK) {
+        return parsed.id;
+      }
+      return null;
+    })
+    .filter(Boolean);
 
-  const url = `https://api.spotify.com/v1/tracks/${trackId}`;
-  const trackData = await Spicetify.CosmosAsync.get(url);
+  const batchSize = 50;
+  for (let i = 0; i < trackIds.length; i += batchSize) {
+    const batchIds = trackIds.slice(i, i + batchSize);
+    if (batchIds.length === 0) continue;
 
-  return trackData?.external_ids?.isrc;
-};
+    const url = `https://api.spotify.com/v1/tracks?ids=${batchIds.join(",")}`;
+    const trackDataBatch = await Spicetify.CosmosAsync.get(url);
+    if (trackDataBatch?.tracks) {
+      trackDataBatch.tracks.forEach((track) => {
+        if (track?.external_ids?.isrc && track?.uri) {
+          isrcMap.set(track.uri, track.external_ids.isrc);
+        }
+      });
+    }
 
-const isrc = await fetchISRCForTracks("spotify:track:7ce20yLkzuXXLUhzIDoZih");
-console.log(`ISRC: ${isrc}`);
+    return isrcMap;
+  }
+}
 
 async function fetchPlayCountsForTracks(tracks) {
   const playCountMap = new Map();
@@ -138,8 +156,10 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
   );
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playCounts, setPlayCounts] = useState({});
+  const [isrcs, setIsrcs] = useState(new Map());
   const [duplicateGroups, setDuplicateGroups] = useState({
     exact: [],
+    isrc: [],
     likely: [],
     possible: [],
   });
@@ -156,7 +176,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     })();
   }, [initialSelectedPlaylist]);
 
-  const findPotentialDuplicates = (tracks, playCounts) => {
+  const findPotentialDuplicates = (tracks, playCounts, isrcMap) => {
     const validTracks = tracks.filter((track) => track?.uri && track.name);
 
     const groupAndFilter = (trackList, getKey, currentPlayCounts, normalizeKey = (k) => k) => {
@@ -186,6 +206,25 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     );
     const remainingTracksAfterExact = validTracks.filter((t) => !urisInExactGroups.has(t.uri));
 
+    const isrcTrackMap = new Map();
+    validTracks.forEach((track) => {
+      const isrc = isrcMap.get(track.uri);
+      if (isrc) {
+        const list = isrcTrackMap.get(isrc) || [];
+        list.push(track);
+        isrcTrackMap.set(isrc, list);
+      }
+    });
+
+    const isrcGroups = Array.from(isrcTrackMap.values())
+      .filter((list) => list.length > 1)
+      .map((list) => {
+        const sortedList = [...list].sort(
+          (a, b) => getNumericPlayCount(b.uri, playCounts) - getNumericPlayCount(a.uri, playCounts),
+        );
+        return { sourceTrack: sortedList[0], duplicates: sortedList.slice(1) };
+      });
+
     const likelyGroups = groupAndFilter(
       remainingTracksAfterExact,
       (track) => track.name,
@@ -208,6 +247,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
 
     setDuplicateGroups({
       exact: exactGroups,
+      isrc: isrcGroups,
       likely: likelyGroups,
       possible: possibleGroups,
     });
@@ -251,36 +291,44 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
 
   useEffect(() => {
     (async () => {
-      const initialGroupsState = { exact: [], likely: [], possible: [] };
+      const initialGroupsState = { exact: [], isrc: [], likely: [], possible: [] };
       if (!selectedPlaylistUri) {
         setPlaylistTracks([]);
         setDuplicateGroups(initialGroupsState);
         setPlayCounts({});
+        setIsrcs(new Map());
         return;
       }
 
       setPlaylistTracks([]);
       setDuplicateGroups(initialGroupsState);
       setPlayCounts({});
+      setIsrcs(new Map());
       let fetchedTracks = [];
       let counts = {};
+      let isrcMap = new Map();
 
       const playlistData = await fetchAllPlaylistTracks(selectedPlaylistUri);
       fetchedTracks = playlistData.items;
       setPlaylistTracks(fetchedTracks);
 
-      if (fetchedTracks.length > 0 && Spicetify.GraphQL && Spicetify.Locale) {
-        counts = await fetchPlayCountsForTracks(fetchedTracks);
-        setPlayCounts(counts);
+      if (fetchedTracks.length > 0) {
+        if (Spicetify.GraphQL && Spicetify.Locale) {
+          counts = await fetchPlayCountsForTracks(fetchedTracks);
+          setPlayCounts(counts);
+        }
+        isrcMap = await fetchISRCsForTracks(fetchedTracks.map((t) => t.uri));
+        setIsrcs(isrcMap);
       }
 
-      findPotentialDuplicates(fetchedTracks, counts);
+      findPotentialDuplicates(fetchedTracks, counts, isrcMap);
     })();
   }, [selectedPlaylistUri]);
 
   const TrackDetails = ({ track }) => {
     const playCount = playCounts[track.uri];
     const displayCount = typeof playCount === "number" ? playCount.toLocaleString() : playCount;
+    const trackIsrc = isrcs.get(track.uri);
 
     return (
       <div className="find-dupes-group__details">
@@ -294,6 +342,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
             Plays: {displayCount ?? "Loading..."}
           </span>
         )}
+        {trackIsrc && <span className="find-dupes-group__isrc"> ISRC: {trackIsrc}</span>}
       </div>
     );
   };
@@ -362,6 +411,11 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
             </p>
           )}
           {renderDuplicateGroupList("Exact Duplicates (Same URI)", duplicateGroups.exact, "exact")}
+          {renderDuplicateGroupList(
+            "ISRC Duplicates (Same Recording)",
+            duplicateGroups.isrc,
+            "isrc",
+          )}
           {renderDuplicateGroupList(
             "Likely Duplicates (Same Name)",
             duplicateGroups.likely,
