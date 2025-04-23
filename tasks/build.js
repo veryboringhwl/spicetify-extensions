@@ -95,6 +95,9 @@ const buildFolders = async () => {
 };
 
 const applyExtensions = async () => {
+  const killProcess = spawn("taskkill", ["/F", "/IM", "spotify.exe"]);
+  await new Promise((resolve) => killProcess.on("close", resolve));
+
   const spotifyExtDest = join(process.env.APPDATA, "Spotify", "Apps", "xpui", "extensions");
   const spicetifyExtDest = join(process.env.APPDATA, "spicetify", "Extensions");
 
@@ -108,8 +111,11 @@ const applyExtensions = async () => {
     fs.copyFileSync(sourceFile, join(spicetifyExtDest, file));
   }
 
-  const killProcess = spawn("taskkill", ["/F", "/IM", "spotify.exe"]);
-  await new Promise((resolve) => killProcess.on("close", resolve));
+  const file = fs.readFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"));
+  for (const pos of [file.indexOf("app-developer") + 14, file.lastIndexOf("app-developer") + 15]) {
+    file[pos] = 50;
+  }
+  fs.writeFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"), file);
 
   spawn(join(process.env.APPDATA, "Spotify", "Spotify.exe"), {
     detached: true,

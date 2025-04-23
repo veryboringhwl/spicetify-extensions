@@ -13,7 +13,7 @@ const inlineCssPlugin = {
     build.onLoad({ filter: /\.(css|scss)$/ }, async (args) => {
       let cssContent;
       if (args.path.endsWith(".scss")) {
-        const result = sass.compile(args.path, { style: "expanded" });
+        const result = sass.compile(args.path, { style: "compressed" });
         cssContent = result.css;
       } else {
         cssContent = await fsPromises.readFile(args.path, "utf8");

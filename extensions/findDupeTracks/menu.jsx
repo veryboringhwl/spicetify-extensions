@@ -26,6 +26,19 @@ async function fetchAllPlaylistTracks(playlistUri, offset = 0, limit = 100, accu
   return { items: allItems, totalLength: allItems.length };
 }
 
+const fetchISRCForTracks = async (trackUri) => {
+  const parsedUri = Spicetify.URI.fromString(trackUri);
+  const trackId = parsedUri.id;
+
+  const url = `https://api.spotify.com/v1/tracks/${trackId}`;
+  const trackData = await Spicetify.CosmosAsync.get(url);
+
+  return trackData?.external_ids?.isrc;
+};
+
+const isrc = await fetchISRCForTracks("spotify:track:7ce20yLkzuXXLUhzIDoZih");
+console.log(`ISRC: ${isrc}`);
+
 async function fetchPlayCountsForTracks(tracks) {
   const playCountMap = new Map();
   const tracksByAlbumUri = new Map();
