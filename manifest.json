@@ -11,7 +11,7 @@
   {
     "name": "Fullscreen Lyrics Plus",
     "description": "Adds a button to toggle fullscreen lyrics!",
-    "preview": "extensions/fullscreenLyrics/assets/preview.png",
+    "preview": "extensions/fullscreenLyricsPlus/assets/preview.png",
     "authors": [{ "name": "veryboringhwl", "url": "https://github.com/veryboringhwl" }],
     "main": "dist/fullscreenLyrics.js",
     "readme": "extensions/fullscreenLyrics/assets/README.md",
