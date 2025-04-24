@@ -1,0 +1,19 @@
+body.fullscreen {
+  .Root__top-container {
+    grid-template-areas:
+      "global-nav global-nav global-nav"
+      "main-view main-view main-view"
+      "main-view main-view main-view" !important;
+    gap: 0px !important;
+  }
+
+  .Root__globalNav {
+    margin-bottom: unset;
+  }
+
+  .Root__nav-bar,
+  .Root__now-playing-bar,
+  .Root__right-sidebar {
+    display: none !important;
+  }
+}
