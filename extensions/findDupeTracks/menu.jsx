@@ -34,27 +34,44 @@ async function fetchISRCsForTracks(trackUris) {
       if (parsed.type === Spicetify.URI.Type.TRACK) {
         return parsed.id;
       }
+
       return null;
     })
     .filter(Boolean);
 
-  const batchSize = 50;
+  const batchSize = 50; // Split into 50 chunks as thats is max spotify allows
+  const batchPromises = [];
   for (let i = 0; i < trackIds.length; i += batchSize) {
     const batchIds = trackIds.slice(i, i + batchSize);
     if (batchIds.length === 0) continue;
 
     const url = `https://api.spotify.com/v1/tracks?ids=${batchIds.join(",")}`;
-    const trackDataBatch = await Spicetify.CosmosAsync.get(url);
-    if (trackDataBatch?.tracks) {
-      trackDataBatch.tracks.forEach((track) => {
-        if (track?.external_ids?.isrc && track?.uri) {
-          isrcMap.set(track.uri, track.external_ids.isrc);
-        }
-      });
-    }
-
-    return isrcMap;
+    batchPromises.push(
+      Spicetify.CosmosAsync.get(url).catch((error) => {
+        console.error(`Failed to fetch batch of track data for ISRCs (URL: ${url}):`, error);
+        return null;
+      }),
+    );
   }
+
+  const results = await Promise.allSettled(batchPromises);
+
+  results.forEach((result) => {
+    if (result.status === "fulfilled" && result.value) {
+      const trackDataBatch = result.value;
+      if (trackDataBatch?.tracks) {
+        trackDataBatch.tracks.forEach((track) => {
+          if (track?.external_ids?.isrc && track?.uri) {
+            isrcMap.set(track.uri, track.external_ids.isrc);
+          }
+        });
+      }
+    } else if (result.status === "rejected") {
+      console.error("A batch request for ISRCs failed:", result.reason);
+    }
+  });
+
+  return isrcMap;
 }
 
 async function fetchPlayCountsForTracks(tracks) {
@@ -304,24 +321,22 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       setDuplicateGroups(initialGroupsState);
       setPlayCounts({});
       setIsrcs(new Map());
-      let fetchedTracks = [];
-      let counts = {};
-      let isrcMap = new Map();
 
       const playlistData = await fetchAllPlaylistTracks(selectedPlaylistUri);
-      fetchedTracks = playlistData.items;
+      const fetchedTracks = playlistData.items;
       setPlaylistTracks(fetchedTracks);
 
       if (fetchedTracks.length > 0) {
-        if (Spicetify.GraphQL && Spicetify.Locale) {
-          counts = await fetchPlayCountsForTracks(fetchedTracks);
-          setPlayCounts(counts);
-        }
-        isrcMap = await fetchISRCsForTracks(fetchedTracks.map((t) => t.uri));
-        setIsrcs(isrcMap);
+        const [fetchedPlayCounts, fetchedIsrcMap] = await Promise.all([
+          fetchPlayCountsForTracks(fetchedTracks),
+          fetchISRCsForTracks(fetchedTracks.map((t) => t.uri)),
+        ]);
+        setPlayCounts(fetchedPlayCounts);
+        setIsrcs(fetchedIsrcMap);
+        findPotentialDuplicates(fetchedTracks, fetchedPlayCounts, fetchedIsrcMap);
+      } else {
+        findPotentialDuplicates(fetchedTracks, {}, new Map());
       }
-
-      findPotentialDuplicates(fetchedTracks, counts, isrcMap);
     })();
   }, [selectedPlaylistUri]);
 
