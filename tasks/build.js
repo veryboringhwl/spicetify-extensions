@@ -19,7 +19,8 @@ const inlineCssPlugin = {
         cssContent = await fsPromises.readFile(args.path, "utf8");
       }
       const escapedCss = JSON.stringify(cssContent);
-      const styleId = `esbuild-inline-css-${args.path.replace(/[^a-zA-Z0-9]/g, "-")}`;
+      const filename = path.basename(args.path).replace(/[^a-zA-Z0-9]/g, "-");
+      const styleId = `${filename}`;
       const jsContent = `
         (() => {
           const css = ${escapedCss};
@@ -72,8 +73,14 @@ const buildExtension = async (folderName, folderPath) => {
       js: `
         (async function() {
           while (!Spicetify.React || !Spicetify.ReactDOM) {
-          await new Promise(resolve => setTimeout(resolve, 10));
-        }`,
+            await new Promise(resolve => setTimeout(resolve, 10));
+          }
+          console.debug(
+            "%c● ᴗ ● [${folderName}]%cExtension is running",
+            "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
+            "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
+          );
+          `,
     },
     footer: { js: "})();" },
   });
