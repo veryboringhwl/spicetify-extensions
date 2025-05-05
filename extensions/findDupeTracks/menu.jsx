@@ -1,146 +1,190 @@
-import { useEffect, useState } from "react";
+import Dexie from "dexie";
+import { memo, useEffect, useState } from "react";
 import ConfirmDialog from "../../shared/confirmDialog";
 import Dropdown from "../../shared/dropdown";
 
-async function fetchOwnedPlaylists(limit = 50) {
-  const res = await Spicetify.Platform.LibraryAPI.getContents({ offset: 0, limit });
-  const playlists = res.items.filter((item) => item?.type === "playlist" && item?.isOwnedBySelf);
-  const total = res.totalLength;
+const db = new Dexie("findDupeTracks");
+db.version(1).stores({
+  tracks: "&trackUri, trackName, albumUri, playCount, isrc",
+});
+
+async function fetchOwnedPlaylists(limit = 100) {
+  const initialRes = await Spicetify.Platform.LibraryAPI.getContents({ offset: 0, limit });
+  let playlists = initialRes.items.filter((item) => item.type === "playlist" && item.isOwnedBySelf);
+  const total = initialRes.totalLength;
+
   if (total > limit) {
-    const offsets = [];
-    for (let offset = limit; offset < total; offset += limit) {
-      offsets.push(offset);
-    }
+    const numBatches = Math.ceil((total - limit) / limit);
+    const offsets = Array.from({ length: numBatches }, (_, i) => limit * (i + 1));
     const responses = await Promise.all(
       offsets.map((offset) => Spicetify.Platform.LibraryAPI.getContents({ offset, limit })),
     );
     responses.forEach((batch) => {
-      playlists.push(
-        ...batch.items.filter((item) => item?.type === "playlist" && item?.isOwnedBySelf),
+      playlists = playlists.concat(
+        batch.items.filter((item) => item.type === "playlist" && item.isOwnedBySelf),
       );
     });
   }
   return playlists;
 }
 
-async function fetchAllPlaylistTracks(playlistUri, limit = 100) {
-  const res = await Spicetify.Platform.PlaylistAPI.getContents(playlistUri, {
+async function fetchAllPlaylistTracks(playlistUri, limit = 5000) {
+  const initialRes = await Spicetify.Platform.PlaylistAPI.getContents(playlistUri, {
     offset: 0,
     limit,
   });
-  const totalLength = res.totalLength;
-  const items = res.items;
+  let items = initialRes.items;
+  const totalLength = initialRes.totalLength;
 
-  const promises = [];
-  for (let offset = limit; offset < totalLength; offset += limit) {
-    promises.push(
-      Spicetify.Platform.PlaylistAPI.getContents(playlistUri, { offset, limit }).then(
-        (res) => res.items,
+  if (totalLength > limit) {
+    const numBatches = Math.ceil((totalLength - limit) / limit);
+    const offsets = Array.from({ length: numBatches }, (_, i) => limit * (i + 1));
+    const results = await Promise.all(
+      offsets.map((offset) =>
+        Spicetify.Platform.PlaylistAPI.getContents(playlistUri, { offset, limit }).then(
+          (res) => res.items,
+        ),
       ),
     );
+    items = items.concat(results.flat());
   }
-  const results = await Promise.all(promises);
-  const allItems = items.concat(results.flat());
 
-  return { items: allItems, totalLength };
+  const trackUris = items.map((track) => track.uri);
+  const existingTracks = await db.tracks.bulkGet(trackUris);
+  const existingTracksMap = new Map(existingTracks.filter(Boolean).map((t) => [t.trackUri, t]));
+
+  const tracksToPut = items.map((item) => {
+    const existing = existingTracksMap.get(item.uri);
+    return {
+      trackUri: item.uri,
+      trackName: item.name,
+      albumUri: item.album.uri,
+      playCount: existing?.playCount ?? null,
+      isrc: existing?.isrc ?? null,
+    };
+  });
+
+  await db.tracks.bulkPut(tracksToPut);
+
+  return { items, totalLength };
 }
 
 async function fetchISRCsForTracks(trackUris) {
   const isrcMap = new Map();
-  const trackIds = trackUris
-    .map((uri) => {
-      const parsed = Spicetify.URI.fromString(uri);
-      if (parsed.type === Spicetify.URI.Type.TRACK) {
-        return parsed.id;
-      }
+  const existingTracksData = await db.tracks.bulkGet(trackUris);
+  const urisToFetch = [];
 
-      return null;
-    })
-    .filter(Boolean);
-
-  const batchSize = 50; // Split into 50 chunks as thats is max spotify allows
-  const batchPromises = [];
-  for (let i = 0; i < trackIds.length; i += batchSize) {
-    const batchIds = trackIds.slice(i, i + batchSize);
-    if (batchIds.length === 0) continue;
-
-    const url = `https://api.spotify.com/v1/tracks?ids=${batchIds.join(",")}`;
-    batchPromises.push(
-      Spicetify.CosmosAsync.get(url).catch((error) => {
-        console.error(`Failed to fetch batch of track data for ISRCs (URL: ${url}):`, error);
-        return null;
-      }),
-    );
-  }
-
-  const results = await Promise.allSettled(batchPromises);
-
-  results.forEach((result) => {
-    if (result.status === "fulfilled" && result.value) {
-      const trackDataBatch = result.value;
-      if (trackDataBatch?.tracks) {
-        trackDataBatch.tracks.forEach((track) => {
-          if (track?.external_ids?.isrc && track?.uri) {
-            isrcMap.set(track.uri, track.external_ids.isrc);
-          }
-        });
-      }
-    } else if (result.status === "rejected") {
-      console.error("Request for ISRCs failed (prob rate limited):", result.reason);
+  existingTracksData.forEach((trackData, index) => {
+    const trackUri = trackUris[index];
+    if (trackData?.isrc) {
+      isrcMap.set(trackUri, trackData.isrc);
+    } else {
+      urisToFetch.push(trackUri);
     }
   });
+
+  const bulkUpdateOps = [];
+  if (urisToFetch.length > 0) {
+    const trackIds = urisToFetch.map((uri) => Spicetify.URI.fromString(uri).id);
+    const batchSize = 50;
+    const batchPromises = [];
+    for (let i = 0; i < trackIds.length; i += batchSize) {
+      const batchIds = trackIds.slice(i, i + batchSize);
+      const url = `https://api.spotify.com/v1/tracks?ids=${batchIds.join(",")}`;
+      batchPromises.push(Spicetify.CosmosAsync.get(url));
+    }
+
+    const results = await Promise.all(batchPromises);
+    results.forEach((result) => {
+      result.tracks.forEach((track) => {
+        const isrc = track?.external_ids?.isrc;
+        const trackUri = track?.uri;
+        if (isrc && trackUri) {
+          isrcMap.set(trackUri, isrc);
+          bulkUpdateOps.push({ key: trackUri, changes: { isrc: isrc } });
+        }
+      });
+    });
+  }
+
+  if (bulkUpdateOps.length > 0) {
+    await db.tracks.bulkUpdate(bulkUpdateOps);
+  }
 
   return isrcMap;
 }
 
-const fetchWithTimeout = async (promise, timeout = 1000) =>
-  Promise.race([promise, new Promise((resolve) => setTimeout(() => resolve(null), timeout))]);
-
 async function fetchPlayCountsForTracks(tracks) {
   const playCountMap = new Map();
-  const tracksByAlbumUri = new Map();
+  const trackUris = tracks.map((t) => t.uri);
+  const existingTracksData = await db.tracks.bulkGet(trackUris);
+  const urisAndAlbumsToFetch = new Map();
+  const existingTracksMap = new Map();
+
+  existingTracksData.forEach((dbData) => {
+    const trackUri = dbData.trackUri;
+    existingTracksMap.set(trackUri, dbData);
+
+    if (dbData.playCount !== null && dbData.playCount !== undefined) {
+      playCountMap.set(trackUri, dbData.playCount);
+    } else {
+      const originalTrack = tracks.find((t) => t.uri === trackUri);
+      if (originalTrack?.album?.uri) {
+        playCountMap.set(trackUri, null);
+        urisAndAlbumsToFetch.set(trackUri, originalTrack.album.uri);
+      }
+    }
+  });
+
+  const bulkUpdateOps = [];
+  if (urisAndAlbumsToFetch.size > 0) {
+    const fetchesByAlbum = new Map();
+    urisAndAlbumsToFetch.forEach((albumUri, trackUri) => {
+      fetchesByAlbum.set(albumUri, fetchesByAlbum.get(albumUri) || new Set());
+      fetchesByAlbum.get(albumUri).add(trackUri);
+    });
+
+    const albumFetchPromises = Array.from(fetchesByAlbum.entries()).map(
+      async ([albumUri, trackUrisToUpdate]) => {
+        const response = await Spicetify.GraphQL.Request(Spicetify.GraphQL.Definitions.getAlbum, {
+          uri: albumUri,
+          locale: Spicetify.Locale.getLocale(),
+          offset: 0,
+          limit: 5000,
+        });
+
+        const albumTracksData = response?.data?.albumUnion?.tracksV2?.items;
+        albumTracksData?.forEach((item) => {
+          const trackUri = item?.track?.uri;
+          if (trackUrisToUpdate.has(trackUri)) {
+            const countStr = item.track.playcount;
+            const playCountValue = countStr ? Number.parseInt(countStr, 10) : 0;
+            playCountMap.set(trackUri, playCountValue);
+            bulkUpdateOps.push({ key: trackUri, changes: { playCount: playCountValue } });
+          }
+        });
+      },
+    );
+
+    await Promise.all(albumFetchPromises);
+  }
+
+  if (bulkUpdateOps.length > 0) {
+    await db.tracks.bulkUpdate(bulkUpdateOps);
+  }
 
   tracks.forEach((track) => {
-    if (track?.album?.uri) {
-      const albumUri = track.album.uri;
-      if (!tracksByAlbumUri.has(albumUri)) {
-        tracksByAlbumUri.set(albumUri, []);
-      }
-      tracksByAlbumUri.get(albumUri).push(track.uri);
+    if (!playCountMap.has(track.uri) || playCountMap.get(track.uri) === null) {
+      playCountMap.set(track.uri, existingTracksMap.get(track.uri)?.playCount ?? 0);
     }
   });
 
-  const albumFetchPromises = Array.from(tracksByAlbumUri.entries()).map(async ([albumUri]) => {
-    const res = await fetchWithTimeout(
-      Spicetify.GraphQL.Request(Spicetify.GraphQL.Definitions.getAlbum, {
-        uri: albumUri,
-        locale: Spicetify.Locale.getLocale(),
-        offset: 0,
-        limit: 500,
-      }),
-    );
-    if (!res) return;
-    const albumTracksData = res.data?.albumUnion?.tracksV2 || res.data?.albumUnion?.tracks;
-    if (albumTracksData?.items) {
-      albumTracksData.items.forEach((item) => {
-        if (item?.track?.uri) {
-          const count = item.track.playcount;
-          playCountMap.set(
-            item.track.uri,
-            count !== null && count !== undefined ? Number.parseInt(count, 10) : "N/A",
-          );
-        }
-      });
-    }
-  });
-
-  await Promise.allSettled(albumFetchPromises);
-  return Object.fromEntries(playCountMap);
+  return playCountMap;
 }
 
-const normalizeForSimilarity = (name) => {
-  if (!name) return "";
+const getNumericPlayCount = (trackUri, playCounts) => playCounts[trackUri] ?? 0;
 
+const normalizeForSimilarity = (name) => {
   const termsToRemove = [
     "live",
     "remix",
@@ -172,7 +216,7 @@ const normalizeForSimilarity = (name) => {
   ];
   const termsPattern = termsToRemove.join("|");
   const regexRemoveTerms = new RegExp(`\\b(${termsPattern})\\b`, "gi");
-  const normalized = name
+  return name
     .toLowerCase()
     .replace(/\(.*?\)|\[.*?\]/g, "")
     .replace(regexRemoveTerms, "")
@@ -180,13 +224,6 @@ const normalizeForSimilarity = (name) => {
     .replace(/[^\p{L}\p{N}\s]/gu, "")
     .replace(/\s+/g, " ")
     .trim();
-
-  return normalized;
-};
-
-const getNumericPlayCount = (trackUri, playCounts) => {
-  const count = playCounts[trackUri];
-  return typeof count === "number" ? count : -1;
 };
 
 function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) {
@@ -205,76 +242,72 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
   });
 
   useEffect(() => {
+    let isMounted = true;
     (async () => {
       const playlists = await fetchOwnedPlaylists();
+      if (!isMounted) return;
       setOwnedPlaylists(playlists);
-      if (initialSelectedPlaylist && playlists.some((p) => p.uri === initialSelectedPlaylist.uri)) {
-        setSelectedPlaylistUri(initialSelectedPlaylist.uri);
-      } else {
-        setSelectedPlaylistUri(initialSelectedPlaylist?.uri || "");
-      }
+      const initialUri = initialSelectedPlaylist?.uri || playlists[0]?.uri || "";
+      setSelectedPlaylistUri(initialUri);
     })();
+    return () => {
+      isMounted = false;
+    };
   }, [initialSelectedPlaylist]);
 
   const findPotentialDuplicates = (tracks, playCountMap, isrcMap) => {
-    const validTracks = tracks.filter((t) => t?.uri && t.name);
-    let remaining = validTracks;
-
-    const groupDuplicates = (list, keyFn, normalizer) => {
-      const groups = list.reduce((acc, t) => {
+    const processedUris = new Set();
+    const groupAndFilter = (list, keyFn, normalizer) => {
+      const groups = new Map();
+      let skippedTracks = 0;
+      for (const t of list) {
+        if (processedUris.has(t.uri)) {
+          skippedTracks++;
+          continue;
+        }
         const key = normalizer(keyFn(t));
-        acc[key] = acc[key] || [];
-        acc[key].push(t);
-        return acc;
-      }, {});
-      return Object.values(groups)
-        .filter((group) => group.length > 1)
-        .map((group) => {
+        if (!key) continue;
+
+        groups.set(key, groups.get(key) || []);
+        groups.get(key).push(t);
+      }
+      const duplicatesResult = [];
+      let totalSortTime = 0;
+
+      for (const group of groups.values()) {
+        if (group.length > 1) {
+          const sortStart = performance.now();
           group.sort(
             (a, b) =>
               getNumericPlayCount(b.uri, playCountMap) - getNumericPlayCount(a.uri, playCountMap),
           );
-          return { mainTrack: group[0], duplicates: group.slice(1) };
-        });
-    };
+          totalSortTime += performance.now() - sortStart;
 
-    const exactDuplicates = groupDuplicates(
-      remaining,
+          group.forEach((t) => processedUris.add(t.uri));
+          duplicatesResult.push({ mainTrack: group[0], duplicates: group.slice(1) });
+        }
+      }
+      return duplicatesResult;
+    };
+    const exactDuplicates = groupAndFilter(
+      tracks,
       (t) => t.uri,
       (k) => k,
     );
-    remaining = remaining.filter(
-      (t) =>
-        !exactDuplicates.some(
-          (g) => g.mainTrack.uri === t.uri || g.duplicates.some((d) => d.uri === t.uri),
-        ),
-    );
 
-    const isrcDuplicates = groupDuplicates(
-      remaining.filter((t) => isrcMap.get(t.uri)),
+    const isrcDuplicates = groupAndFilter(
+      tracks,
       (t) => isrcMap.get(t.uri),
       (k) => k,
     );
-    remaining = remaining.filter(
-      (t) =>
-        !isrcDuplicates.some(
-          (g) => g.mainTrack.uri === t.uri || g.duplicates.some((d) => d.uri === t.uri),
-        ),
-    );
 
-    const likelyDuplicates = groupDuplicates(
-      remaining,
+    const likelyDuplicates = groupAndFilter(
+      tracks,
       (t) => t.name,
       (name) => name.toLowerCase().trim(),
     );
-    remaining = remaining.filter(
-      (t) =>
-        !likelyDuplicates.some(
-          (g) => g.mainTrack.uri === t.uri || g.duplicates.some((d) => d.uri === t.uri),
-        ),
-    );
 
-    const possibleDuplicates = groupDuplicates(remaining, (t) => t.name, normalizeForSimilarity);
+    const possibleDuplicates = groupAndFilter(tracks, (t) => t.name, normalizeForSimilarity);
 
     setDuplicateGroups({
       exact: exactDuplicates,
@@ -282,6 +315,49 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       likely: likelyDuplicates,
       possible: possibleDuplicates,
     });
+  };
+
+  const removeTrackFromPlaylist = async (trackToRemove, duplicateCategory, groupIndex) => {
+    await Spicetify.Platform.PlaylistAPI.remove(selectedPlaylistUri, [
+      { uri: trackToRemove.uri, uid: trackToRemove.uid },
+    ]);
+
+    setDuplicateGroups((prevGroups) => {
+      const categoryGroups = prevGroups[duplicateCategory];
+      const group = categoryGroups[groupIndex];
+
+      const updatedDuplicates = group.duplicates.filter(
+        (dup) => !(dup.uri === trackToRemove.uri && dup.uid === trackToRemove.uid),
+      );
+
+      let updatedGroup;
+      if (group.mainTrack.uri === trackToRemove.uri && group.mainTrack.uid === trackToRemove.uid) {
+        updatedGroup =
+          updatedDuplicates.length > 0
+            ? { mainTrack: updatedDuplicates[0], duplicates: updatedDuplicates.slice(1) }
+            : null;
+      } else {
+        updatedGroup = { ...group, duplicates: updatedDuplicates };
+      }
+
+      const newCategoryGroups = [...categoryGroups];
+      if (updatedGroup && updatedGroup.duplicates.length > 0) {
+        newCategoryGroups[groupIndex] = updatedGroup;
+      } else {
+        newCategoryGroups.splice(groupIndex, 1);
+      }
+
+      return {
+        ...prevGroups,
+        [duplicateCategory]: newCategoryGroups,
+      };
+    });
+
+    setPlaylistTracks((prevTracks) =>
+      prevTracks.filter(
+        (track) => !(track.uri === trackToRemove.uri && track.uid === trackToRemove.uid),
+      ),
+    );
   };
 
   const handleDeleteTrack = async (duplicateCategory, groupIndex, trackToRemove) => {
@@ -292,141 +368,104 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
 
     ConfirmDialog({
       titleText: "Remove Track",
-      descriptionText:
-        "Are you sure you want to remove this Track? You will not be able to recover it!",
+      descriptionText: `Are you sure you want to remove "${trackToRemove.name}"? This cannot be undone.`,
       confirmText: "Remove",
-      onConfirm: async () => {
-        await removeTrackFromPlaylist(trackToRemove, duplicateCategory, groupIndex);
-      },
+      onConfirm: () => removeTrackFromPlaylist(trackToRemove, duplicateCategory, groupIndex),
     });
-  };
-
-  const removeTrackFromPlaylist = async (trackToRemove, duplicateCategory, groupIndex) => {
-    await Spicetify.Platform.PlaylistAPI.remove(selectedPlaylistUri, [
-      { uri: trackToRemove.uri, uid: trackToRemove.uid },
-    ]);
-    setDuplicateGroups((prevGroups) => {
-      const categoryGroups = [...prevGroups[duplicateCategory]];
-      const group = categoryGroups[groupIndex];
-      if (group) {
-        group.duplicates = group.duplicates.filter(
-          (dup) => !(dup.uri === trackToRemove.uri && dup.uid === trackToRemove.uid),
-        );
-        if (
-          group.mainTrack.uri === trackToRemove.uri &&
-          group.mainTrack.uid === trackToRemove.uid
-        ) {
-          return {
-            ...prevGroups,
-            [duplicateCategory]: categoryGroups.filter((_, i) => i !== groupIndex),
-          };
-        }
-        return {
-          ...prevGroups,
-          [duplicateCategory]: categoryGroups.filter((g) => g.duplicates.length > 0),
-        };
-      }
-      return prevGroups;
-    });
-    setPlaylistTracks((previousTracks) =>
-      previousTracks.filter(
-        (track) => !(track.uri === trackToRemove.uri && track.uid === trackToRemove.uid),
-      ),
-    );
   };
 
   useEffect(() => {
-    (async () => {
-      const initialGroupsState = { exact: [], isrc: [], likely: [], possible: [] };
-      if (!selectedPlaylistUri) {
-        setPlaylistTracks([]);
-        setDuplicateGroups(initialGroupsState);
-        setPlayCounts({});
-        setIsrcs(new Map());
-        return;
-      }
+    const initialGroupsState = { exact: [], isrc: [], likely: [], possible: [] };
+    setPlaylistTracks([]);
+    setDuplicateGroups(initialGroupsState);
+    setPlayCounts({});
+    setIsrcs(new Map());
 
-      setPlaylistTracks([]);
-      setDuplicateGroups(initialGroupsState);
-      setPlayCounts({});
-      setIsrcs(new Map());
-
+    const loadData = async () => {
       const playlistData = await fetchAllPlaylistTracks(selectedPlaylistUri);
       const fetchedTracks = playlistData.items;
       setPlaylistTracks(fetchedTracks);
 
       if (fetchedTracks.length > 0) {
-        const [fetchedPlayCounts, fetchedIsrcMap] = await Promise.all([
+        const trackUris = fetchedTracks.map((t) => t.uri);
+        const [fetchedPlayCountsResult, fetchedIsrcMapResult] = await Promise.all([
           fetchPlayCountsForTracks(fetchedTracks),
-          fetchISRCsForTracks(fetchedTracks.map((t) => t.uri)),
+          fetchISRCsForTracks(trackUris),
         ]);
-        setPlayCounts(fetchedPlayCounts);
-        setIsrcs(fetchedIsrcMap);
-        findPotentialDuplicates(fetchedTracks, fetchedPlayCounts, fetchedIsrcMap);
-      } else {
-        findPotentialDuplicates(fetchedTracks, {}, new Map());
+
+        setPlayCounts(fetchedPlayCountsResult);
+        setIsrcs(fetchedIsrcMapResult);
+        findPotentialDuplicates(fetchedTracks, fetchedPlayCountsResult, fetchedIsrcMapResult);
       }
-    })();
+    };
+
+    loadData();
   }, [selectedPlaylistUri]);
 
-  const TrackDetails = ({ track }) => {
-    const playCount = playCounts[track.uri];
-    const displayCount = typeof playCount === "number" ? playCount.toLocaleString() : playCount;
-    const trackIsrc = isrcs.get(track.uri);
+  const TrackDetails = memo(({ track }) => {
+    const playCount = playCounts.get(track.uri);
+    const displayCount = playCount != null ? playCount.toLocaleString() : "N/A";
+    const trackIsrc = isrcs.get(track.uri) || "N/A";
+    const albumName = track.album?.name || "N/A";
+    const artists = track.artists?.map((a) => a.name).join(", ") || "N/A";
 
     return (
       <div className="find-dupes-group__details">
-        {track.artists ? `Artists: ${track.artists.map((a) => a.name).join(", ")}` : ""}
-        {track.album?.name && (
-          <span className="find-dupes-group__album"> Album: {track.album.name}</span>
-        )}
-        {playCount !== undefined && (
-          <span className="find-dupes-group__playcount"> Plays: {displayCount}</span>
-        )}
-        {trackIsrc && <span className="find-dupes-group__isrc"> ISRC: {trackIsrc}</span>}
+        Artists: {artists}
+        <span className="find-dupes-group__album"> Album: {albumName}</span>
+        <span className="find-dupes-group__playcount"> Plays: {displayCount}</span>
+        <span className="find-dupes-group__isrc"> ISRC: {trackIsrc}</span>
       </div>
     );
-  };
+  });
 
   const renderDuplicateGroupList = (groupTitle, groups, duplicateCategory) => (
     <div className="find-dupes__group-section">
       <p className="find-dupes__group-section-heading">{`${groupTitle} (${groups.length} found)`}</p>
-      <ul className="find-dupes__group-list">
-        {groups.map((duplicateGroup, groupIndex) => (
-          <li
-            key={`${duplicateGroup.mainTrack.uri}-${groupIndex}`}
-            className={`find-dupes-group find-dupes-group--${duplicateCategory}`}
-          >
-            <div className="find-dupes-group__source">
-              Source: {duplicateGroup.mainTrack.name}
-              <TrackDetails track={duplicateGroup.mainTrack} />
-            </div>
-            <div className="find-dupes-group__duplicates-heading">Duplicates:</div>
-            <ul className="find-dupes-group__duplicates-list">
-              {duplicateGroup.duplicates.map((dup) => (
-                <li key={dup.uri + (dup.uid || "")} className="find-dupes-group__duplicate-item">
-                  <div className="find-dupes-group__duplicate-content">
-                    <span className="find-dupes-group__duplicate-name">{dup.name}</span>
-                    <TrackDetails track={dup} />
-                  </div>
-                  <button
-                    className="find-dupes-group__delete-button"
-                    onClick={() => handleDeleteTrack(duplicateCategory, groupIndex, dup)}
+      {groups.length > 0 ? (
+        <ul className="find-dupes__group-list">
+          {groups.map((duplicateGroup, groupIndex) => (
+            <li
+              key={`${duplicateGroup.mainTrack.uri}-${duplicateGroup.mainTrack.uid || groupIndex}`}
+              className={`find-dupes-group find-dupes-group--${duplicateCategory}`}
+            >
+              <div className="find-dupes-group__source">
+                Source: {duplicateGroup.mainTrack.name}
+                <TrackDetails track={duplicateGroup.mainTrack} />
+              </div>
+              <div className="find-dupes-group__duplicates-heading">Duplicates:</div>
+              <ul className="find-dupes-group__duplicates-list">
+                {duplicateGroup.duplicates.map((dup) => (
+                  <li
+                    key={`${dup.uri}-${dup.uid || dup.uri}`}
+                    className="find-dupes-group__duplicate-item"
                   >
-                    Delete
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
+                    <div className="find-dupes-group__duplicate-content">
+                      <span className="find-dupes-group__duplicate-name">{dup.name}</span>
+                      <TrackDetails track={dup} />
+                    </div>
+                    <button
+                      type="button"
+                      className="find-dupes-group__delete-button"
+                      onClick={() => handleDeleteTrack(duplicateCategory, groupIndex, dup)}
+                      aria-label={`Remove duplicate track ${dup.name}`}
+                    >
+                      Delete
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No duplicates found in this category.</p>
+      )}
     </div>
   );
 
   const selectedPlaylist = ownedPlaylists.find((p) => p.uri === selectedPlaylistUri);
-  const playlistName =
-    selectedPlaylist?.name || initialSelectedPlaylist?.name || "Selected Playlist";
+  const playlistName = selectedPlaylist ? selectedPlaylist.name : "Select a playlist";
   const playlistOptions = ownedPlaylists.map((p) => ({ value: p.uri, label: p.name }));
 
   return (
@@ -438,32 +477,37 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
           options={playlistOptions}
           onChange={(e) => setSelectedPlaylistUri(e.target.value)}
           disabled={ownedPlaylists.length === 0}
+          aria-label="Select a playlist to scan for duplicates"
         />
       </div>
 
       {selectedPlaylistUri && (
         <>
-          {selectedPlaylist && (
-            <p className="find-dupes__details">
-              Playlist: {playlistName} ({playlistTracks.length} tracks)
-            </p>
-          )}
-          {renderDuplicateGroupList("Exact Duplicates (Same URI)", duplicateGroups.exact, "exact")}
-          {renderDuplicateGroupList(
-            "ISRC Duplicates (Same Recording)",
-            duplicateGroups.isrc,
-            "isrc",
-          )}
-          {renderDuplicateGroupList(
-            "Likely Duplicates (Same Name)",
-            duplicateGroups.likely,
-            "likely",
-          )}
-          {renderDuplicateGroupList(
-            "Possible Duplicates (Similar Name)",
-            duplicateGroups.possible,
-            "possible",
-          )}
+          <p className="find-dupes__details">
+            Playlist: {playlistName} ({playlistTracks.length} tracks analyzed)
+          </p>
+          <>
+            {renderDuplicateGroupList(
+              "Exact Duplicates (Same URI)",
+              duplicateGroups.exact,
+              "exact",
+            )}
+            {renderDuplicateGroupList(
+              "ISRC Duplicates (Same Recording)",
+              duplicateGroups.isrc,
+              "isrc",
+            )}
+            {renderDuplicateGroupList(
+              "Likely Duplicates (Same Name)",
+              duplicateGroups.likely,
+              "likely",
+            )}
+            {renderDuplicateGroupList(
+              "Possible Duplicates (Similar Name)",
+              duplicateGroups.possible,
+              "possible",
+            )}
+          </>
         </>
       )}
     </div>
