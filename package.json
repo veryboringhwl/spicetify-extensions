@@ -6,6 +6,8 @@
     "release": "bun tasks/release.js",
     "dev-build": "bun tasks/build.js --dev",
     "build": "bun tasks/build.js",
+    "dev-watch": "bun tasks/watch.js --dev",
+    "watch": "bun tasks/watch.js",
     "lint": "biome lint --write",
     "format": "biome format --write",
     "check": "biome check --fix --unsafe"
@@ -14,9 +16,12 @@
     "@biomejs/biome": "^1.9.4",
     "chokidar": "^4.0.3",
     "concurrently": "^9.1.2",
-    "esbuild": "^0.25.2",
+    "esbuild": "^0.25.3",
     "esbuild-plugin-external-global": "^1.0.1",
     "sass": "^1.87.0",
     "ws": "^8.18.1"
+  },
+  "dependencies": {
+    "dexie": "^4.0.11"
   }
 }

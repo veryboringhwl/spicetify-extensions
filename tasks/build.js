@@ -7,20 +7,21 @@ import esbuild from "esbuild";
 import externalGlobalPlugin from "esbuild-plugin-external-global";
 import * as sass from "sass";
 
-const inlineCssPlugin = {
+const inlineCssPlugin = () => ({
   name: "inline-css",
   setup(build) {
     build.onLoad({ filter: /\.(css|scss)$/ }, async (args) => {
       let cssContent;
       if (args.path.endsWith(".scss")) {
-        const result = sass.compile(args.path, { style: "expanded" });
+        const result = sass.compile(args.path, { style: "compressed" });
         cssContent = result.css;
       } else {
         cssContent = await fsPromises.readFile(args.path, "utf8");
       }
       const escapedCss = JSON.stringify(cssContent);
-      const filename = path.basename(args.path).replace(/[^a-zA-Z0-9]/g, "-");
-      const styleId = `${filename}`;
+      const base = path.basename(args.path);
+      const parentFolder = path.basename(path.dirname(args.path));
+      const styleId = `${parentFolder}-${base}`.replace(/[^a-zA-Z0-9\-\.]/g, "-");
       const jsContent = `
         (() => {
           const css = ${escapedCss};
@@ -39,7 +40,7 @@ const inlineCssPlugin = {
       };
     });
   },
-};
+});
 
 const getEntryFile = (folderPath) => {
   const files = ["app.js", "app.jsx", "app.ts", "app.tsx"];
@@ -48,8 +49,9 @@ const getEntryFile = (folderPath) => {
 
 const buildExtension = async (folderName, folderPath) => {
   const SRC = getEntryFile(folderPath);
-  const OUT = join(process.cwd(), "dist", `${folderName}.js`);
+  const OUT = join("dist", `${folderName}.mjs`);
 
+  // use mjs as js isnt treated as es module
   await esbuild.build({
     entryPoints: [SRC],
     outfile: OUT,
@@ -62,7 +64,7 @@ const buildExtension = async (folderName, folderPath) => {
     jsx: "automatic",
     external: ["react", "react-dom"],
     plugins: [
-      inlineCssPlugin,
+      inlineCssPlugin(),
       externalGlobalPlugin.externalGlobalPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",
@@ -87,7 +89,7 @@ const buildExtension = async (folderName, folderPath) => {
 };
 
 const buildFolders = async () => {
-  const SRC = join(process.cwd(), "extensions");
+  const SRC = join("extensions");
   const folders = fs
     .readdirSync(SRC, { withFileTypes: true })
     .filter((dir) => dir.isDirectory())
@@ -105,17 +107,14 @@ const applyExtensions = async () => {
   const killProcess = spawn("taskkill", ["/F", "/IM", "spotify.exe"]);
   await new Promise((resolve) => killProcess.on("close", resolve));
 
-  const spotifyExtDest = join(process.env.APPDATA, "Spotify", "Apps", "xpui", "extensions");
-  const spicetifyExtDest = join(process.env.APPDATA, "spicetify", "Extensions");
+  const SPOTIFY_OUT = join(process.env.APPDATA, "Spotify", "Apps", "xpui", "extensions");
+  const SPICETIFY_OUT = join(process.env.APPDATA, "spicetify", "Extensions");
 
-  if (!fs.existsSync(spotifyExtDest)) fs.mkdirSync(spotifyExtDest, { recursive: true });
-  if (!fs.existsSync(spicetifyExtDest)) fs.mkdirSync(spicetifyExtDest, { recursive: true });
-
-  const OUT = join(process.cwd(), "dist");
+  const OUT = join("dist");
   for (const file of fs.readdirSync(OUT)) {
     const sourceFile = join(OUT, file);
-    fs.copyFileSync(sourceFile, join(spotifyExtDest, file));
-    fs.copyFileSync(sourceFile, join(spicetifyExtDest, file));
+    fs.copyFileSync(sourceFile, join(SPOTIFY_OUT, file));
+    fs.copyFileSync(sourceFile, join(SPICETIFY_OUT, file));
   }
 
   const file = fs.readFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"));

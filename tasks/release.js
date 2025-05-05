@@ -7,7 +7,7 @@ import esbuild from "esbuild";
 import externalGlobalPlugin from "esbuild-plugin-external-global";
 import * as sass from "sass";
 
-const inlineCssPlugin = {
+const inlineCssPlugin = () => ({
   name: "inline-css",
   setup(build) {
     build.onLoad({ filter: /\.(css|scss)$/ }, async (args) => {
@@ -19,7 +19,9 @@ const inlineCssPlugin = {
         cssContent = await fsPromises.readFile(args.path, "utf8");
       }
       const escapedCss = JSON.stringify(cssContent);
-      const styleId = `esbuild-inline-css-${args.path.replace(/[^a-zA-Z0-9]/g, "-")}`;
+      const base = path.basename(args.path);
+      const parentFolder = path.basename(path.dirname(args.path));
+      const styleId = `${parentFolder}-${base}`.replace(/[^a-zA-Z0-9\-\.]/g, "-");
       const jsContent = `
         (() => {
           const css = ${escapedCss};
@@ -38,7 +40,7 @@ const inlineCssPlugin = {
       };
     });
   },
-};
+});
 
 const getEntryFile = (folderPath) => {
   const files = ["app.js", "app.jsx", "app.ts", "app.tsx"];
@@ -47,7 +49,7 @@ const getEntryFile = (folderPath) => {
 
 const buildExtension = async (folderName, folderPath) => {
   const SRC = getEntryFile(folderPath);
-  const OUT = join(process.cwd(), "dist", `${folderName}.js`);
+  const OUT = join(process.cwd(), "dist", `${folderName}.mjs`);
 
   await esbuild.build({
     entryPoints: [SRC],
@@ -61,7 +63,7 @@ const buildExtension = async (folderName, folderPath) => {
     jsx: "automatic",
     external: ["react", "react-dom"],
     plugins: [
-      inlineCssPlugin,
+      inlineCssPlugin(),
       externalGlobalPlugin.externalGlobalPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",

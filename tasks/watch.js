@@ -15,20 +15,21 @@ const getCurrentTime = () => {
   return `${now.getHours()}:${now.getMinutes().toString().padStart(2, "0")}`;
 };
 
-const inlineCssPlugin = {
+const inlineCssPlugin = () => ({
   name: "inline-css",
   setup(build) {
     build.onLoad({ filter: /\.(css|scss)$/ }, async (args) => {
       let cssContent;
       if (args.path.endsWith(".scss")) {
-        const result = sass.compile(args.path, { style: "expanded" });
+        const result = sass.compile(args.path, { style: "compressed" });
         cssContent = result.css;
       } else {
         cssContent = await fsPromises.readFile(args.path, "utf8");
       }
       const escapedCss = JSON.stringify(cssContent);
-      const filename = path.basename(args.path).replace(/[^a-zA-Z0-9]/g, "-");
-      const styleId = `${filename}`;
+      const base = path.basename(args.path);
+      const parentFolder = path.basename(path.dirname(args.path));
+      const styleId = `${parentFolder}-${base}`.replace(/[^a-zA-Z0-9\-\.]/g, "-");
       const jsContent = `
         (() => {
           const css = ${escapedCss};
@@ -47,7 +48,7 @@ const inlineCssPlugin = {
       };
     });
   },
-};
+});
 
 const getEntryFile = (folderPath) => {
   const files = ["app.js", "app.jsx", "app.ts", "app.tsx"];
@@ -61,16 +62,16 @@ const watchExtension = async (folderName, folderPath) => {
   const SRC = getEntryFile(folderPath);
   if (!SRC) return;
 
-  const OUT = join(process.cwd(), "dist", `${folderName}.js`);
+  const OUT = join("dist", `${folderName}.mjs`);
+  const SPICETIFY_OUT = join(process.env.APPDATA, "spicetify", "Extensions", `${folderName}.mjs`);
   const SPOTIFY_OUT = join(
     process.env.APPDATA,
     "Spotify",
     "Apps",
     "xpui",
     "extensions",
-    `${folderName}.js`,
+    `${folderName}.mjs`,
   );
-  const SPICETIFY_OUT = join(process.env.APPDATA, "spicetify", "Extensions", `${folderName}.js`);
 
   contexts[folderName] = await esbuild.context({
     entryPoints: [SRC],
@@ -84,7 +85,7 @@ const watchExtension = async (folderName, folderPath) => {
     jsx: "automatic",
     external: ["react", "react-dom"],
     plugins: [
-      inlineCssPlugin,
+      inlineCssPlugin(),
       externalGlobalPlugin.externalGlobalPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",
@@ -115,9 +116,9 @@ const watchExtension = async (folderName, folderPath) => {
 
   chokidar.watch(OUT).on("change", async () => {
     console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m ${folderName} changes detected.`);
-    fs.copyFileSync(OUT, SPOTIFY_OUT);
     fs.copyFileSync(OUT, SPICETIFY_OUT);
     if (shouldWatchSpotify) {
+      fs.copyFileSync(OUT, SPOTIFY_OUT);
       await reloadSpotify();
       console.log(`${folderName} was updated.`);
     }
@@ -127,7 +128,7 @@ const watchExtension = async (folderName, folderPath) => {
 };
 
 const watchFolders = async () => {
-  const SRC = join(process.cwd(), "extensions");
+  const SRC = join("extensions");
   const folders = fs
     .readdirSync(SRC, { withFileTypes: true })
     .filter((dir) => dir.isDirectory())
