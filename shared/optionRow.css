@@ -1,0 +1,19 @@
+.themeOptionRow {
+  display: flex;
+  height: 32px;
+  justify-content: space-between;
+}
+
+.themeOptionDesc {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  font-size: 15px;
+  color: var(--spice-subtext);
+}
+
+.themeOptionControl {
+  align-content: center;
+  display: flex;
+  gap: 8px;
+}

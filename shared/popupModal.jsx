@@ -1,4 +1,4 @@
-import "./popupModal.scss";
+import "./popupModal.css";
 import React, { memo } from "react";
 import ReactDOM from "react-dom";
 import Icons from "./icons";
@@ -30,7 +30,7 @@ const handleClickOutside = (event) => {
   }
 };
 
-const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon = "" } = {}) => {
+const PopupModal = ({ title = "", content, isLarge = true, buttons = null, icon = "" } = {}) => {
   modalContainer = document.getElementById("popup-modal");
   if (!modalContainer) {
     modalContainer = document.createElement("popup-modal");
@@ -39,8 +39,6 @@ const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon
   }
 
   modalRoot = ReactDOM.createRoot(modalContainer);
-  document.body.style.overflow = "hidden";
-
   document.addEventListener("keydown", handleEscKey);
   document.addEventListener("mousedown", handleClickOutside);
 
@@ -54,17 +52,7 @@ const PopupModal = ({ title = "", content, isLarge = true, buttons = false, icon
               <h1 className="Modal__title">{title}</h1>
             </div>
             <div className="Modal__buttonContainer">
-              {buttons && (
-                <Spicetify.ReactComponent.TooltipWrapper label="GitHub" placement="top">
-                  <button
-                    type="button"
-                    className="Modal__button Modal__button--github"
-                    onClick={() => window.open("https://github.com/veryboringhwl/spicetify")}
-                  >
-                    <Icons.React.github size={18} />
-                  </button>
-                </Spicetify.ReactComponent.TooltipWrapper>
-              )}
+              {buttons}
               <Spicetify.ReactComponent.TooltipWrapper label="Close" placement="top">
                 <button
                   type="button"

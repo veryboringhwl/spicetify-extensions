@@ -1,9 +1,9 @@
-import "./input.scss";
 import { memo } from "react";
+import "./input.css";
 
 const Input = memo(({ value, onChange, placeholder, disabled }) => (
   <input
-    className="themeOptionInput"
+    className="input"
     type="text"
     value={value}
     onChange={onChange}
