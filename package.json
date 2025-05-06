@@ -19,7 +19,7 @@
     "esbuild": "^0.25.3",
     "esbuild-plugin-external-global": "^1.0.1",
     "sass": "^1.87.0",
-    "ws": "^8.18.1"
+    "ws": "^8.18.2"
   },
   "dependencies": {
     "dexie": "^4.0.11"
