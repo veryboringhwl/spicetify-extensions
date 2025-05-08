@@ -5,19 +5,12 @@ import path from "node:path";
 import { join } from "node:path";
 import esbuild from "esbuild";
 import externalGlobalPlugin from "esbuild-plugin-external-global";
-import * as sass from "sass";
 
 const inlineCssPlugin = () => ({
   name: "inline-css",
   setup(build) {
-    build.onLoad({ filter: /\.(css|scss)$/ }, async (args) => {
-      let cssContent;
-      if (args.path.endsWith(".scss")) {
-        const result = sass.compile(args.path, { style: "compressed" });
-        cssContent = result.css;
-      } else {
-        cssContent = await fsPromises.readFile(args.path, "utf8");
-      }
+    build.onLoad({ filter: /\.(css)$/ }, async (args) => {
+      const cssContent = await fsPromises.readFile(args.path, "utf8");
       const escapedCss = JSON.stringify(cssContent);
       const base = path.basename(args.path);
       const parentFolder = path.basename(path.dirname(args.path));
@@ -50,7 +43,6 @@ const getEntryFile = (folderPath) => {
 const buildExtension = async (folderName, folderPath) => {
   const SRC = getEntryFile(folderPath);
   const OUT = join("dist", `${folderName}.mjs`);
-
   // use mjs as js isnt treated as es module
   await esbuild.build({
     entryPoints: [SRC],
@@ -71,8 +63,10 @@ const buildExtension = async (folderName, folderPath) => {
         "react/jsx-runtime": "Spicetify.ReactJSX",
       }),
     ],
+    //eventually v3 will make it so i dont have to do this and can use url import dexie directly
     banner: {
       js: `
+      import Dexie from "https://esm.sh/dexie";
         (async function() {
           while (!Spicetify.React || !Spicetify.ReactDOM) {
             await new Promise(resolve => setTimeout(resolve, 10));

@@ -1,4 +1,4 @@
-import "./styles.scss";
+import "./styles.css";
 import ReactDOM from "react-dom";
 
 const minimisePath =

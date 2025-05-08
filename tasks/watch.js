@@ -7,7 +7,6 @@ import readline from "node:readline";
 import chokidar from "chokidar";
 import esbuild from "esbuild";
 import externalGlobalPlugin from "esbuild-plugin-external-global";
-import * as sass from "sass";
 import WebSocket from "ws";
 
 const getCurrentTime = () => {
@@ -18,15 +17,9 @@ const getCurrentTime = () => {
 const inlineCssPlugin = () => ({
   name: "inline-css",
   setup(build) {
-    build.onLoad({ filter: /\.(css|scss)$/ }, async (args) => {
-      let cssContent;
-      if (args.path.endsWith(".scss")) {
-        const result = sass.compile(args.path, { style: "compressed" });
-        cssContent = result.css;
-      } else {
-        cssContent = await fsPromises.readFile(args.path, "utf8");
-      }
-      const escapedCss = JSON.stringify(cssContent);
+    build.onLoad({ filter: /\.(css)$/ }, async (args) => {
+      const cssContent = await fsPromises.readFile(args.path, "utf8");
+      const escapedCss = JSON.stringify(minifiedCss);
       const base = path.basename(args.path);
       const parentFolder = path.basename(path.dirname(args.path));
       const styleId = `${parentFolder}-${base}`.replace(/[^a-zA-Z0-9\-\.]/g, "-");
@@ -73,6 +66,7 @@ const watchExtension = async (folderName, folderPath) => {
     `${folderName}.mjs`,
   );
 
+  // bun doesnt have watch yet
   contexts[folderName] = await esbuild.context({
     entryPoints: [SRC],
     outfile: OUT,

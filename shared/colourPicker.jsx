@@ -1,21 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 
 const ColourPicker = ({ value, onChange }) => {
-  const hexToRgb = (hex) => {
+  const hexToRgb = useCallback((hex) => {
     const hexValue = hex.replace(/^#/, "");
     return {
       r: Number.parseInt(hexValue.substring(0, 2), 16),
       g: Number.parseInt(hexValue.substring(2, 4), 16),
       b: Number.parseInt(hexValue.substring(4, 6), 16),
     };
-  };
+  }, []);
 
-  const rgbToHex = (r, g, b) => {
+  const rgbToHex = useCallback((r, g, b) => {
     const toHex = (c) => c.toString(16).padStart(2, "0");
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-  };
+  }, []);
 
-  const rgbToHsv = (r, g, b) => {
+  const rgbToHsv = useCallback((r, g, b) => {
     const nr = r / 255;
     const ng = g / 255;
     const nb = b / 255;
@@ -45,9 +45,9 @@ const ColourPicker = ({ value, onChange }) => {
       s: Math.round(s * 100),
       v: Math.round(max * 100),
     };
-  };
+  }, []);
 
-  const hsvToRgb = (h, s, v) => {
+  const hsvToRgb = useCallback((h, s, v) => {
     const nh = h / 360;
     const ns = s / 100;
     const nv = v / 100;
@@ -99,7 +99,7 @@ const ColourPicker = ({ value, onChange }) => {
       g: Math.round(g * 255),
       b: Math.round(b * 255),
     };
-  };
+  }, []);
 
   // State management
   const [color, setColor] = useState(() => {
@@ -128,7 +128,7 @@ const ColourPicker = ({ value, onChange }) => {
       setHexValue(value);
       setHsv(rgbToHsv(newRgb.r, newRgb.g, newRgb.b));
     }
-  }, [value]);
+  }, [value, hexToRgb, rgbToHsv]);
 
   useEffect(() => {
     if (hueCanvasRef.current && colorWheelRef.current) {
@@ -147,7 +147,7 @@ const ColourPicker = ({ value, onChange }) => {
 
   useEffect(() => {
     onChange?.(rgbToHex(color.r, color.g, color.b));
-  }, [color, onChange]);
+  }, [color, onChange, rgbToHex]);
 
   useEffect(() => {
     const rgb = hsvToRgb(hsv.h, hsv.s, hsv.v);
@@ -155,7 +155,7 @@ const ColourPicker = ({ value, onChange }) => {
     setHexValue(rgbToHex(rgb.r, rgb.g, rgb.b));
     drawColorWheel();
     updateHueSliderPosition();
-  }, [hsv]);
+  }, [hsv, hsvToRgb, rgbToHex]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -252,7 +252,7 @@ const ColourPicker = ({ value, onChange }) => {
     if (value === "") return;
 
     const numValue = Number.parseInt(value, 10);
-    if (NumberisNaN(numValue)) return;
+    if (Number.isNaN(numValue)) return;
 
     const updatedValue = Math.max(0, Math.min(255, numValue));
     const updatedColor = { ...color, [channel]: updatedValue };
@@ -265,7 +265,7 @@ const ColourPicker = ({ value, onChange }) => {
   const handleAlphaChange = (value) => {
     if (value === "") return;
 
-    const numValue = NumberparseFloat(value);
+    const numValue = Number.parseFloat(value);
     if (Number.isNaN(numValue)) return;
 
     setColor((prev) => ({ ...prev, a: Math.max(0, Math.min(1, numValue)) }));
