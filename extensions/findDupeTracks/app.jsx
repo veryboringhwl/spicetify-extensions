@@ -66,7 +66,7 @@ const findDuplicatesMenuItem = new Spicetify.ContextMenuV2.Item({
   },
   shouldAdd: (props, trigger, target) => {
     const parsed = Spicetify.ContextMenuV2.parseProps(props);
-    const uri = parsed[0][0];
+    const uri = parsed?.[0]?.[0];
     const show = Spicetify.URI.isPlaylistV1OrV2(uri);
     playlistUri = show ? uri : null;
     return show;

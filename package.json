@@ -1,6 +1,6 @@
 {
-  "name": "theme",
-  "version": "0.1.0",
+  "name": "spicetify-extensions",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "release": "bun tasks/release.js",
@@ -16,12 +16,9 @@
     "@biomejs/biome": "^1.9.4",
     "chokidar": "^4.0.3",
     "concurrently": "^9.1.2",
-    "esbuild": "^0.25.3",
+    "esbuild": "^0.25.4",
     "esbuild-plugin-external-global": "^1.0.1",
     "sass": "^1.87.0",
     "ws": "^8.18.2"
-  },
-  "dependencies": {
-    "dexie": "^4.0.11"
   }
 }

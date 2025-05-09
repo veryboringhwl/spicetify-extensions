@@ -70,6 +70,7 @@ const buildExtension = async (folderName, folderPath) => {
     ],
     banner: {
       js: `
+        import Dexie from "https://esm.sh/dexie";
         (async function() {
           while (!Spicetify.React || !Spicetify.ReactDOM) {
           await new Promise(resolve => setTimeout(resolve, 10));

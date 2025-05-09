@@ -1,4 +1,3 @@
-import Dexie from "dexie";
 import { memo, useCallback, useEffect, useState } from "react";
 import ConfirmDialog from "../../shared/confirmDialog";
 import Dropdown from "../../shared/dropdown";
@@ -201,7 +200,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
   );
   const [selectedPlaylist, setSelectedPlaylist] = useState(initialSelectedPlaylist || null);
   const [playlistTracks, setPlaylistTracks] = useState([]);
-  const [playCounts, setPlayCounts] = useState({});
+  const [playCounts, setPlayCounts] = useState(new Map());
   const [isrcs, setIsrcs] = useState(new Map());
   const [duplicateGroups, setDuplicateGroups] = useState({
     exact: [],
@@ -219,12 +218,9 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
 
       const initialUri = initialSelectedPlaylist?.uri || playlists[0]?.uri || "";
       setSelectedPlaylistUri(initialUri);
-
-      if (initialSelectedPlaylist) {
-        setSelectedPlaylist(initialSelectedPlaylist);
-      } else if (playlists.length > 0) {
-        setSelectedPlaylist(playlists[0]);
-      }
+      setSelectedPlaylist(
+        initialSelectedPlaylist || playlists.find((p) => p.uri === initialUri) || null,
+      );
     })();
     return () => {
       isMounted = false;
@@ -238,10 +234,6 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     const newPlaylist = ownedPlaylists.find((p) => p.uri === newUri);
     if (newPlaylist) {
       setSelectedPlaylist(newPlaylist);
-
-      if (typeof window !== "undefined") {
-        window.currentSelectedPlaylist = newPlaylist;
-      }
     }
   };
 
@@ -249,10 +241,9 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     const processedUris = new Set();
     const groupAndFilter = (list, keyFn, normalizer) => {
       const groups = new Map();
-      let skippedTracks = 0;
+
       for (const t of list) {
         if (processedUris.has(t.uri)) {
-          skippedTracks++;
           continue;
         }
         const key = normalizer(keyFn(t));
@@ -262,16 +253,13 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
         groups.get(key).push(t);
       }
       const duplicatesResult = [];
-      let totalSortTime = 0;
 
       for (const group of groups.values()) {
         if (group.length > 1) {
-          const sortStart = performance.now();
           group.sort(
             (a, b) =>
               getNumericPlayCount(b.uri, playCountMap) - getNumericPlayCount(a.uri, playCountMap),
           );
-          totalSortTime += performance.now() - sortStart;
 
           for (const t of group) {
             processedUris.add(t.uri);
@@ -281,6 +269,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       }
       return duplicatesResult;
     };
+
     const exactDuplicates = groupAndFilter(
       tracks,
       (t) => t.uri,
@@ -296,7 +285,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     const likelyDuplicates = groupAndFilter(
       tracks,
       (t) => t.name,
-      (name) => name.toLowerCase().trim(),
+      (name) => name.trim(),
     );
 
     const possibleDuplicates = groupAndFilter(tracks, (t) => t.name, normalizeForSimilarity);
@@ -310,30 +299,18 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
   }, []);
 
   const removeTrackFromPlaylist = async (trackToRemove, duplicateCategory, groupIndex) => {
-    await Spicetify.Platform.PlaylistAPI.remove(selectedPlaylistUri, [
-      { uri: trackToRemove.uri, uid: trackToRemove.uid },
-    ]);
+    await Spicetify.Platform.PlaylistAPI.remove(selectedPlaylistUri, [{ uid: trackToRemove.uid }]);
 
     setDuplicateGroups((prevGroups) => {
       const categoryGroups = prevGroups[duplicateCategory];
       const group = categoryGroups[groupIndex];
-
       const updatedDuplicates = group.duplicates.filter(
         (dup) => !(dup.uri === trackToRemove.uri && dup.uid === trackToRemove.uid),
       );
-
-      let updatedGroup;
-      if (group.mainTrack.uri === trackToRemove.uri && group.mainTrack.uid === trackToRemove.uid) {
-        updatedGroup =
-          updatedDuplicates.length > 0
-            ? { mainTrack: updatedDuplicates[0], duplicates: updatedDuplicates.slice(1) }
-            : null;
-      } else {
-        updatedGroup = { ...group, duplicates: updatedDuplicates };
-      }
+      const updatedGroup = { ...group, duplicates: updatedDuplicates };
 
       const newCategoryGroups = [...categoryGroups];
-      if (updatedGroup && updatedGroup.duplicates.length > 0) {
+      if (updatedGroup.duplicates.length > 0) {
         newCategoryGroups[groupIndex] = updatedGroup;
       } else {
         newCategoryGroups.splice(groupIndex, 1);
@@ -373,7 +350,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     const initialGroupsState = { exact: [], isrc: [], likely: [], possible: [] };
     setPlaylistTracks([]);
     setDuplicateGroups(initialGroupsState);
-    setPlayCounts({});
+    setPlayCounts(new Map());
     setIsrcs(new Map());
 
     const loadData = async () => {
@@ -406,10 +383,14 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
 
     return (
       <div className="dupe-group__details">
-        Artists: {artists}
-        <span className="dupe-group__album"> Album: {albumName}</span>
-        <span className="dupe-group__playcount"> Plays: {displayCount}</span>
-        <span className="dupe-group__isrc"> ISRC: {trackIsrc}</span>
+        <div className="dupe-group__line">
+          <span className="dupe-group__artists"> Artists: {artists}</span>
+          <span className="dupe-group__album"> Album: {albumName}</span>
+        </div>
+        <div className="dupe-group__line">
+          <span className="dupe-group__playcount"> Plays: {displayCount}</span>
+          <span className="dupe-group__isrc"> ISRC: {trackIsrc}</span>
+        </div>
       </div>
     );
   });
@@ -422,12 +403,17 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
 
     return (
       <div className="dupe-group">
-        <p className="dupe-group__heading">{`${groupTitle} (${groups.length} found)`}</p>
+        <p className="dupe-group__heading">
+          <div className="dupe-group__heading-title">{groupTitle}</div>
+          <div className="dupe-group__heading-length">{groups.length} found</div>
+        </p>
         {groups.length > 0 ? (
-          <ul className="dupe-group__list">
+          <div className="dupe-group__list">
             {groups.map((duplicateGroup, groupIndex) => (
-              <li
-                key={`${duplicateGroup.mainTrack.uri}-${duplicateGroup.mainTrack.uid || groupIndex}`}
+              <div
+                key={`${duplicateGroup.mainTrack.uri}-${
+                  duplicateGroup.mainTrack.uid || groupIndex
+                }`}
                 className={`dupe-group__item dupe-group__item--${duplicateCategory}`}
               >
                 <div className="dupe-group__source">
@@ -435,9 +421,9 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
                   <TrackDetails track={duplicateGroup.mainTrack} />
                 </div>
                 <div className="dupe-group__duplicates-label">Duplicates:</div>
-                <ul className="dupe-group__duplicates-list">
+                <div className="dupe-group__duplicates-list">
                   {duplicateGroup.duplicates.map((dup) => (
-                    <li
+                    <div
                       key={`${dup.uri}-${dup.uid || dup.uri}`}
                       className="dupe-group__duplicate-item"
                     >
@@ -451,12 +437,12 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
                       >
                         Delete
                       </button>
-                    </li>
+                    </div>
                   ))}
-                </ul>
-              </li>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         ) : (
           <p>No duplicates found in this category.</p>
         )}

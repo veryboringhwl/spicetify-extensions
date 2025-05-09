@@ -19,7 +19,7 @@ const inlineCssPlugin = () => ({
   setup(build) {
     build.onLoad({ filter: /\.(css)$/ }, async (args) => {
       const cssContent = await fsPromises.readFile(args.path, "utf8");
-      const escapedCss = JSON.stringify(minifiedCss);
+      const escapedCss = JSON.stringify(cssContent);
       const base = path.basename(args.path);
       const parentFolder = path.basename(path.dirname(args.path));
       const styleId = `${parentFolder}-${base}`.replace(/[^a-zA-Z0-9\-\.]/g, "-");
@@ -88,6 +88,7 @@ const watchExtension = async (folderName, folderPath) => {
     ],
     banner: {
       js: `
+        import Dexie from "https://esm.sh/dexie";
         (async function() {
           while (!Spicetify.React || !Spicetify.ReactDOM) {
             await new Promise(resolve => setTimeout(resolve, 10));

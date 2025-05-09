@@ -14,15 +14,6 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-      "complexity": {
-        "noForEach": "off"
-      },
-      "security": {
-        "noDangerouslySetInnerHtml": "off"
-      },
-      "correctness": {
-        "useExhaustiveDependencies": "off"
-      },
       "a11y": { "all": false }
     }
   },
