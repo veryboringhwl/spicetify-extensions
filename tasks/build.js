@@ -12,9 +12,9 @@ const inlineCssPlugin = () => ({
     build.onLoad({ filter: /\.(css)$/ }, async (args) => {
       const cssContent = await fsPromises.readFile(args.path, "utf8");
       const escapedCss = JSON.stringify(cssContent);
+      const folderName = path.basename(path.dirname(path.dirname(args.path)));
       const base = path.basename(args.path);
-      const parentFolder = path.basename(path.dirname(args.path));
-      const styleId = `${parentFolder}-${base}`.replace(/[^a-zA-Z0-9\-\.]/g, "-");
+      const styleId = `${folderName}-${base}`.replace(/[^a-zA-Z0-9\-\.]/g, "-");
       const jsContent = `
         (() => {
           const css = ${escapedCss};
@@ -36,49 +36,44 @@ const inlineCssPlugin = () => ({
 });
 
 const getEntryFile = (folderPath) => {
+  const srcPath = join(folderPath, "src");
   const files = ["app.js", "app.jsx", "app.ts", "app.tsx"];
-  return files.map((file) => join(folderPath, file)).find(fs.existsSync) || null;
+  return files.map((file) => join(srcPath, file)).find(fs.existsSync) || null;
 };
 
 const buildExtension = async (folderName, folderPath) => {
   const SRC = getEntryFile(folderPath);
+  if (!SRC) {
+    console.warn(`No entry file found for ${folderName}`);
+    return;
+  }
   const OUT = join("dist", `${folderName}.mjs`);
   // use mjs as js isnt treated as es module
   await esbuild.build({
     entryPoints: [SRC],
     outfile: OUT,
     format: "esm",
-    target: "es2024",
+    target: "esnext",
     platform: "browser",
     bundle: true,
     sourcemap: "inline",
+    sourcesContent: true,
     minify: false,
-    jsx: "automatic",
-    external: ["react", "react-dom"],
-    plugins: [
-      inlineCssPlugin(),
-      externalGlobalPlugin.externalGlobalPlugin({
-        react: "Spicetify.React",
-        "react-dom": "Spicetify.ReactDOM",
-        "react/jsx-runtime": "Spicetify.ReactJSX",
-      }),
-    ],
-    //eventually v3 will make it so i dont have to do this and can use url import dexie directly
+    jsx: "transform",
+    external: ["react", "react-dom", "react/jsx-runtime"],
+    plugins: [inlineCssPlugin()],
     banner: {
       js: `
-      import Dexie from "https://esm.sh/dexie";
-        (async function() {
-          while (!Spicetify.React || !Spicetify.ReactDOM) {
-            await new Promise(resolve => setTimeout(resolve, 10));
-          }
-          console.debug(
-            "%c● ᴗ ● [${folderName}]%cExtension is running",
-            "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
-            "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
-          );
-          `,
+        while (!Spicetify.React || !Spicetify.ReactDOM) {
+          await new Promise(resolve => setTimeout(resolve, 10));
+        }
+        console.debug(
+          "%c● ᴗ ● [${folderName}]%cExtension is running",
+          "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
+          "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
+        );
+      `,
     },
-    footer: { js: "})();" },
   });
 };
 

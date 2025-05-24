@@ -44,8 +44,9 @@ const inlineCssPlugin = () => ({
 });
 
 const getEntryFile = (folderPath) => {
+  const srcPath = join(folderPath, "src");
   const files = ["app.js", "app.jsx", "app.ts", "app.tsx"];
-  return files.map((file) => join(folderPath, file)).find(fs.existsSync) || null;
+  return files.map((file) => join(srcPath, file)).find(fs.existsSync) || null;
 };
 
 const contexts = {};
@@ -77,33 +78,10 @@ const watchExtension = async (folderName, folderPath) => {
     sourcemap: "inline",
     minify: false,
     jsx: "automatic",
-    external: ["react", "react-dom"],
-    plugins: [
-      inlineCssPlugin(),
-      externalGlobalPlugin.externalGlobalPlugin({
-        react: "Spicetify.React",
-        "react-dom": "Spicetify.ReactDOM",
-        "react/jsx-runtime": "Spicetify.ReactJSX",
-      }),
-    ],
+    external: ["react", "react-dom", "react/jsx-runtime"],
+    plugins: [inlineCssPlugin()],
     banner: {
-      js: `
-        import Dexie from "https://esm.sh/dexie";
-        (async function() {
-          while (!Spicetify.React || !Spicetify.ReactDOM) {
-            await new Promise(resolve => setTimeout(resolve, 10));
-          }
-          console.debug(
-            "%c● ᴗ ● [${folderName}]%cExtension is running",
-            "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
-            "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
-          );
-      `.trim(),
-    },
-    footer: {
-      js: `
-        })();
-      `.trim(),
+      js: "await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve))",
     },
   });
 

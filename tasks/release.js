@@ -41,8 +41,9 @@ const inlineCssPlugin = () => ({
 });
 
 const getEntryFile = (folderPath) => {
+  const srcPath = join(folderPath, "src");
   const files = ["app.js", "app.jsx", "app.ts", "app.tsx"];
-  return files.map((file) => join(folderPath, file)).find(fs.existsSync) || null;
+  return files.map((file) => join(srcPath, file)).find(fs.existsSync) || null;
 };
 
 const buildExtension = async (folderName, folderPath) => {
@@ -69,14 +70,8 @@ const buildExtension = async (folderName, folderPath) => {
       }),
     ],
     banner: {
-      js: `
-        import Dexie from "https://esm.sh/dexie";
-        (async function() {
-          while (!Spicetify.React || !Spicetify.ReactDOM) {
-          await new Promise(resolve => setTimeout(resolve, 10));
-        }`,
+      js: "await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve))",
     },
-    footer: { js: "})();" },
   });
 };
 
