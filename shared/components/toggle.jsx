@@ -1,5 +1,5 @@
 import { memo } from "react";
-import "./toggle.css";
+import "../styles/toggle.css";
 
 const Toggle = memo(({ value, onChange, disabled }) => (
   <button className="toggle" onClick={onChange} disabled={disabled}>

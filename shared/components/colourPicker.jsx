@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const ColourPicker = ({ value, onChange }) => {
   const hexToRgb = useCallback((hex) => {

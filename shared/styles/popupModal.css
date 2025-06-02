@@ -1,4 +1,4 @@
-.Modal__overlay {
+.modal-overlay {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -11,11 +11,11 @@
   border-radius: 7px;
 }
 
-.Modal {
+.modal {
   background-color: unset;
 }
 
-.Modal__container {
+.modal__container {
   display: flex;
   flex-direction: column;
   background-color: rgba(var(--spice-rgb-main), 0.9) !important;
@@ -26,58 +26,62 @@
   box-shadow: 0 0px 20px rgba(var(--spice-rgb-shadow), 0.5) !important;
 }
 
-.Modal__container--large {
+.modal__container--large {
   max-height: 80vh;
   width: clamp(550px, 60vw, 650px);
 }
 
-.Modal__header {
+.modal__header {
   display: flex;
   justify-content: space-between;
   padding: 32px 32px 12px;
   border-bottom: 1px solid rgba(var(--spice-rgb-selected-row), 0.1);
 }
 
-.Modal__titleContainer {
+.modal__titleContainer {
   display: flex;
   gap: 8px;
 }
 
-.Modal__icon {
+.modal__icon {
   display: flex;
   align-items: center;
 }
 
-.Modal__title {
+.modal__title {
   display: flex;
 }
 
-.Modal__buttonContainer {
+.modal__buttonContainer {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.Modal__button {
+.modal__buttonContainer .modal__button {
   background-color: var(--spice-highlight);
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   height: 34px;
   cursor: pointer;
   padding: 8px;
   border: 0;
 }
 
-.Modal__button:hover {
+.modal__buttonContainer .modal__button:hover {
   transform: scale(1.1);
 }
 
-.Modal__button:active {
+.modal__buttonContainer .modal__button:active {
   transform: scale(0.9);
 }
 
-.Modal__content {
+.modal__content {
   display: flex;
   padding: 16px 24px !important;
   overflow: auto;
   scrollbar-gutter: stable both-edges;
+}
+
+.modal__content > * {
+  width: 100%;
 }

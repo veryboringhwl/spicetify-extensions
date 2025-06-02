@@ -1,6 +1,6 @@
 import { memo, useId, useRef } from "react";
 import Icons from "./icons";
-import "./dropdown.css";
+import "../styles/dropdown.css";
 
 const Dropdown = memo(({ value, options, onChange, disabled }) => {
   const popoverId = useId();

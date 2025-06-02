@@ -1,3 +1,5 @@
+import React from "react";
+
 const Icons = {
   //24px
   editButton:
@@ -28,6 +30,12 @@ const Icons = {
   //16px
   duplicate:
     "M15 3.5c0-.5-.5-1-1-1H11V1c0-.5-.5-1-1-1H2C1.5 0 1 .5 1 1V11.5c0 .5.5 1 1 1H4.5V15c0 .5.5 1 1 1H14c.5 0 1-.5 1-1ZM2.5 2c0-.25.25-.5.5-.5H9c.25 0 .5.25.5.5v8.5c0 .25-.25.5-.5.5H3c-.25 0-.5-.25-.5-.5Zm4 12.5c-.25 0-.5-.25-.5-.5V12.5h4c.5 0 1-.5 1-1V4h2c.25 0 .5.25.5.5V14c0 .25-.25.5-.5.5Z",
+  //16px
+  terminal:
+    "M3.924 5.02a.75.75 0 011.056-.096l3 2.5a.75.75 0 010 1.152l-3 2.5a.75.75 0 11-.96-1.152L6.328 8 4.02 6.076A.75.75 0 013.924 5.02zM8.25 10.5a.75.75 0 000 1.5h3a.75.75 0 000-1.5h-3zM0 3.25A2.25 2.25 0 012.25 1h11.5A2.25 2.25 0 0116 3.25v9.5A2.25 2.25 0 0113.75 15H2.25A2.25 2.25 0 010 12.75v-9.5zm2.25-.75a.75.75 0 00-.75.75v9.5c0 .414.336.75.75.75h11.5a.75.75 0 00.75-.75v-9.5a.75.75 0 00-.75-.75H2.25z",
+  // 16px
+  customArtwork:
+    "M0 2v12a2 2 90 002 2h12a2 2 90 002-2V7.33l-1.33 1.33v5.33a.66.66 90 01-.66.66H2a.66.66 90 01-.66-.66V2A.66.66 90 012 1.34h9.66L13 0H2A2 2 90 000 2zm2.66 3.33C4.32 5 4.99 3.67 5.32 2.67h.33c.33 1 1 2.33 2.66 2.6v.33c-1.66.33-2.33 1.66-2.66 2.66h-.33c-.33-1-1-2.33-2.66-2.66zm13-2.66a1.33 1.33 90 00-1.66 0L7 9.33a0 0 90 000 0l-1.66 3a.33.33 90 00.33.33l3-1.66a0 0 90 000 0l7-7a1.33 1.33 90 000-1.33z",
 };
 
 const ReactComponent = (icon, defaultSize = 16) => {
@@ -49,6 +57,8 @@ Icons.React = {
   dropdown: ReactComponent(Icons.dropdown, 24),
   palette: ReactComponent(Icons.palette, 24),
   duplicate: ReactComponent(Icons.duplicate, 16),
+  terminal: ReactComponent(Icons.terminal, 16),
+  customArtwork: ReactComponent(Icons.customArtwork, 16),
 };
 
 Icons.HTML = {
@@ -62,6 +72,8 @@ Icons.HTML = {
   dropdown: `<path d="${Icons.dropdown}"/>`,
   palette: `<path d="${Icons.palette}"/>`,
   duplicate: `<path d="${Icons.duplicate}"/>`,
+  terminal: `<path d="${Icons.terminal}"/>`,
+  customArtwork: `<path d="${Icons.customArtwork}"/>`,
 };
 
 // Usage:

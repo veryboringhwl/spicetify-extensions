@@ -12,11 +12,25 @@ const inlineCssPlugin = () => ({
     build.onLoad({ filter: /\.(css)$/ }, async (args) => {
       const cssContent = await fsPromises.readFile(args.path, "utf8");
       const escapedCss = JSON.stringify(cssContent);
-      const folderName = path.basename(path.dirname(path.dirname(args.path)));
-      const base = path.basename(args.path);
-      const styleId = `${folderName}-${base}`.replace(/[^a-zA-Z0-9\-\.]/g, "-");
+      let styleId;
+      const relativePath = path.relative(process.cwd(), args.path);
+
+      if (relativePath.startsWith(`extensions${path.sep}`)) {
+        const parts = relativePath.split(path.sep);
+        const extensionName = parts[1];
+        const base = path.basename(args.path);
+        styleId = `${extensionName}-${base}`;
+      } else if (relativePath.startsWith(`shared${path.sep}`)) {
+        const base = path.basename(args.path);
+        styleId = `shared-${base}`;
+      } else {
+        const folderName = path.basename(path.dirname(path.dirname(args.path)));
+        const base = path.basename(args.path);
+        styleId = `${folderName}-${base}`;
+      }
+      styleId = styleId.replace(/[^a-zA-Z0-9\-\.]/g, "-");
       const jsContent = `
-        (() => {
+        (function() {
           const css = ${escapedCss};
           const styleId = "${styleId}";
           if (document.getElementById(styleId)) { return; }
@@ -59,21 +73,33 @@ const buildExtension = async (folderName, folderPath) => {
     sourcemap: "inline",
     sourcesContent: true,
     minify: false,
-    jsx: "transform",
+    jsx: "automatic",
     external: ["react", "react-dom", "react/jsx-runtime"],
-    plugins: [inlineCssPlugin()],
+    plugins: [
+      inlineCssPlugin(),
+      externalGlobalPlugin.externalGlobalPlugin({
+        react: "Spicetify.React",
+        "react-dom": "Spicetify.ReactDOM",
+        "react/jsx-runtime": "Spicetify.ReactJSX",
+      }),
+    ],
     banner: {
       js: `
-        while (!Spicetify.React || !Spicetify.ReactDOM) {
-          await new Promise(resolve => setTimeout(resolve, 10));
-        }
-        console.debug(
-          "%c● ᴗ ● [${folderName}]%cExtension is running",
-          "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
-          "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
-        );
-      `,
+await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));
+console.debug(
+  "%c● ᴗ ● [${folderName}]%cExtension is running",
+  "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
+  "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
+);
+`,
     },
+    tsconfigRaw: `{
+          "compilerOptions": {
+            "experimentalDecorators": true,
+            "useDefineForClassFields": false,
+            "include": ["shared/types/**/*.d.ts"]
+          }
+        }`,
   });
 };
 

@@ -1,5 +1,5 @@
 import { memo } from "react";
-import "./input.css";
+import "../styles/input.css";
 
 const Input = memo(({ value, onChange, placeholder, disabled }) => (
   <input

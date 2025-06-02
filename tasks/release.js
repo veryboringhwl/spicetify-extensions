@@ -11,17 +11,26 @@ const inlineCssPlugin = () => ({
   setup(build) {
     build.onLoad({ filter: /\.(css)$/ }, async (args) => {
       const cssContent = await fsPromises.readFile(args.path, "utf8");
-      const { code: minifiedCss } = await esbuild.transform(cssContent, {
-        loader: "css",
-        minify: true,
-      });
+      const escapedCss = JSON.stringify(cssContent);
+      let styleId;
+      const relativePath = path.relative(process.cwd(), args.path);
 
-      const escapedCss = JSON.stringify(minifiedCss);
-      const base = path.basename(args.path);
-      const parentFolder = path.basename(path.dirname(args.path));
-      const styleId = `${parentFolder}-${base}`.replace(/[^a-zA-Z0-9\-\.]/g, "-");
+      if (relativePath.startsWith(`extensions${path.sep}`)) {
+        const parts = relativePath.split(path.sep);
+        const extensionName = parts[1];
+        const base = path.basename(args.path);
+        styleId = `${extensionName}-${base}`;
+      } else if (relativePath.startsWith(`shared${path.sep}`)) {
+        const base = path.basename(args.path);
+        styleId = `shared-${base}`;
+      } else {
+        const folderName = path.basename(path.dirname(path.dirname(args.path)));
+        const base = path.basename(args.path);
+        styleId = `${folderName}-${base}`;
+      }
+      styleId = styleId.replace(/[^a-zA-Z0-9\-\.]/g, "-");
       const jsContent = `
-        (() => {
+        (function() {
           const css = ${escapedCss};
           const styleId = "${styleId}";
           if (document.getElementById(styleId)) { return; }
@@ -60,7 +69,7 @@ const buildExtension = async (folderName, folderPath) => {
     sourcemap: false,
     minify: true,
     jsx: "automatic",
-    external: ["react", "react-dom"],
+    external: ["react", "react-dom", "react/jsx-runtime"],
     plugins: [
       inlineCssPlugin(),
       externalGlobalPlugin.externalGlobalPlugin({
@@ -70,7 +79,9 @@ const buildExtension = async (folderName, folderPath) => {
       }),
     ],
     banner: {
-      js: "await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve))",
+      js: `
+await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));
+`,
     },
   });
 };
