@@ -1,0 +1,19 @@
+.fullscreen {
+  .Root__top-container {
+    grid-template-areas:
+      "main-view"
+      "main-view" !important;
+    gap: 0px !important;
+  }
+
+  .main-topBar-container {
+    left: 30px;
+  }
+
+  .Root__globalNav,
+  .Root__nav-bar,
+  .Root__now-playing-bar,
+  .Root__right-sidebar {
+    display: none !important;
+  }
+}

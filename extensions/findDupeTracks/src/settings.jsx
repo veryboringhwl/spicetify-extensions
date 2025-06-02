@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import ConfirmDialog from "../../shared/confirmDialog";
-import Input from "../../shared/input";
-import OptionRow from "../../shared/optionRow";
-import Toggle from "../../shared/toggle";
+import ConfirmDialog from "../../../shared/components/confirmDialog";
+import Input from "../../../shared/components/input";
+import OptionRow from "../../../shared/components/optionRow";
+import Toggle from "../../../shared/components/toggle";
 
 const DEFAULT_NORMALIZE_WORDS = [
   "live",

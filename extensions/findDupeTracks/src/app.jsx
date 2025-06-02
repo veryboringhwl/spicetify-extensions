@@ -1,11 +1,21 @@
-import Icons from "../../shared/icons";
-import PopupModal from "../../shared/popupModal";
+import parseProps from "../../../shared/api/parseProps";
+import Icons from "../../../shared/components/icons";
+import PopupModal from "../../../shared/components/popupModal";
 import PlaylistDuplicateFinder from "./menu";
 import SettingsMenu from "./settings";
 import "./styles.css";
 
-// await Spicetify.Player.origin.play({ uri: "spotify:track:4vYlA6QmEJeakLpipCxNv1" }, {}, {});
-// use this to play songs
+// TODO:
+// play songs in menu to see if they are duplicates
+// add slider as well
+// Spicetify.Player.origin.play({ uri: "spotify:track:4vYlA6QmEJeakLpipCxNv1" }, {}, {});
+// Spicetify.Player.origin._state.duration
+// Spicetify.Player.origin._state.positionAsOfTimestamp
+// Spicetify.Player.origin._state.positionAsOfTimestamp / Spicetify.Player.origin._state.duration * 100
+// Spicetify.Player.origin.seekTo(163635)
+// Spicetify.Platform.History.push({ pathname: `/playlist/<playlist uri id>`, search: `?uid=<track uid>` })
+// then click once to highlight
+// add a ignore button to menu so removed from duplicate list
 
 const showDuplicateFinderModal = (selectedPlaylist, initialView = "main") => {
   const renderModal = (view) => {
@@ -25,7 +35,7 @@ const showDuplicateFinderModal = (selectedPlaylist, initialView = "main") => {
             placement="top"
           >
             <button
-              className={`Modal__button Modal__button--${isSettings ? "back" : "settings"}`}
+              className={`modal__button modal__button--${isSettings ? "back" : "settings"}`}
               onClick={() => renderModal(isSettings ? "main" : "settings")}
             >
               {isSettings ? (
@@ -37,7 +47,7 @@ const showDuplicateFinderModal = (selectedPlaylist, initialView = "main") => {
           </Spicetify.ReactComponent.TooltipWrapper>
           <Spicetify.ReactComponent.TooltipWrapper label="GitHub" placement="top">
             <button
-              className="Modal__button Modal__button--github"
+              className="modal__button modal__button--github"
               onClick={() => window.open("https://github.com/veryboringhwl/spicetify-extensions")}
             >
               <Icons.React.github size={18} />
@@ -50,26 +60,24 @@ const showDuplicateFinderModal = (selectedPlaylist, initialView = "main") => {
   renderModal(initialView);
 };
 
-let playlistUri = null;
 const findDuplicatesMenuItem = new Spicetify.ContextMenuV2.Item({
   children: "Find Duplicates",
   leadingIcon: Icons.HTML.duplicate,
-  onClick: async () => {
-    const playlistMetadata = await Spicetify.Platform.PlaylistAPI.getMetadata(playlistUri);
-
+  onClick: async (context, item, event) => {
+    const parsed = parseProps(context.props);
+    const uri = parsed.uri;
+    const name = parsed.name;
+    // sometimes the name is not there so we need to get it from metadata
     const selectedPlaylist = {
-      uri: playlistUri,
-      name: playlistMetadata.name,
+      uri: uri,
+      name: name || (await Spicetify.Platform.PlaylistAPI.getMetadata(uri)?.name),
     };
-
     showDuplicateFinderModal(selectedPlaylist);
   },
   shouldAdd: (props, trigger, target) => {
-    const parsed = Spicetify.ContextMenuV2.parseProps(props);
-    const uri = parsed?.[0]?.[0];
-    const show = Spicetify.URI.isPlaylistV1OrV2(uri);
-    playlistUri = show ? uri : null;
-    return show;
+    const parsed = parseProps(props);
+    const type = Spicetify.URI.from(parsed.uri)?.type;
+    return type === Spicetify.URI.Type.PLAYLIST || type === Spicetify.URI.Type.PLAYLIST_V2;
   },
 });
 
