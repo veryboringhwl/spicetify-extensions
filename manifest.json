@@ -1,20 +1,20 @@
 [
   {
     "name": "Find Duplicate Tracks",
-    "description": "Find duplicate songs in your playlist!",
+    "description": "Find Duplicate Tracks in your playlist!",
     "preview": "extensions/findDupeTracks/assets/preview.png",
     "authors": [{ "name": "veryboringhwl", "url": "https://github.com/veryboringhwl" }],
-    "main": "dist/findDupeTracks.js",
-    "readme": "extensions/findDupeTracks/assets/README.md",
+    "main": "dist/findDupeTracks.mjs",
+    "readme": "extensions/findDupeTracks/README.md",
     "tags": ["duplicates", "utility"]
   },
   {
     "name": "Fullscreen Lyrics Plus",
-    "description": "Adds a button to toggle fullscreen lyrics!",
+    "description": "Adds a button to lyrics plus to toggle fullscreen!",
     "preview": "extensions/fullscreenLyricsPlus/assets/preview.png",
     "authors": [{ "name": "veryboringhwl", "url": "https://github.com/veryboringhwl" }],
-    "main": "dist/fullscreenLyricsPlus.js",
-    "readme": "extensions/fullscreenLyricsPlus/assets/README.md",
+    "main": "dist/fullscreenLyricsPlus.mjs",
+    "readme": "extensions/fullscreenLyricsPlus/README.md",
     "tags": ["lyrics", "fullscreen"]
   }
 ]

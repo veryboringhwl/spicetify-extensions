@@ -1,5 +1,3 @@
-import React from "react";
-
 const Icons = {
   //24px
   editButton:

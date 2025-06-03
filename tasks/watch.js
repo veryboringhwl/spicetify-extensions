@@ -103,13 +103,7 @@ const watchExtension = async (folderName, folderPath) => {
       }),
     ],
     banner: {
-      js: `
-await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));
-console.debug(
-  "%c● ᴗ ● [${folderName}]%cExtension is running",
-  "color:#272ab0; font-weight:1000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-right:none; border-radius:3px 0 0 3px;",
-  "color:#000000; background:#ffffff; padding:3px; border:2px solid #272ab0; border-left:none; border-radius:0 3px 3px 0;"
-);`,
+      js: "await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));",
     },
   });
 

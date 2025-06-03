@@ -11,7 +11,11 @@ const inlineCssPlugin = () => ({
   setup(build) {
     build.onLoad({ filter: /\.(css)$/ }, async (args) => {
       const cssContent = await fsPromises.readFile(args.path, "utf8");
-      const escapedCss = JSON.stringify(cssContent);
+      const minifiedCss = await esbuild.transform(cssContent, {
+        loader: "css",
+        minify: true,
+      });
+      const escapedCss = JSON.stringify(minifiedCss.code);
       let styleId;
       const relativePath = path.relative(process.cwd(), args.path);
 
@@ -57,6 +61,10 @@ const getEntryFile = (folderPath) => {
 
 const buildExtension = async (folderName, folderPath) => {
   const SRC = getEntryFile(folderPath);
+  if (!SRC) {
+    console.warn(`No entry file found for ${folderName}`);
+    return;
+  }
   const OUT = join(process.cwd(), "dist", `${folderName}.mjs`);
 
   await esbuild.build({
@@ -79,9 +87,7 @@ const buildExtension = async (folderName, folderPath) => {
       }),
     ],
     banner: {
-      js: `
-await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));
-`,
+      js: "await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));",
     },
   });
 };
