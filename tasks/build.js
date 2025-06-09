@@ -75,13 +75,6 @@ const buildExtension = async (folderName, folderPath) => {
     banner: {
       js: "await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));",
     },
-    tsconfigRaw: `{
-          "compilerOptions": {
-            "experimentalDecorators": true,
-            "useDefineForClassFields": false,
-            "include": ["shared/types/**/*.d.ts"]
-          }
-        }`,
   });
 };
 
