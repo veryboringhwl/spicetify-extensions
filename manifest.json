@@ -16,5 +16,14 @@
     "main": "dist/fullscreenLyricsPlus.mjs",
     "readme": "extensions/fullscreenLyricsPlus/README.md",
     "tags": ["lyrics", "fullscreen"]
+  },
+  {
+    "name": "Developer Utilities",
+    "description": "Collection of useful tools for developers",
+    "preview": "extensions/developerUtilities/assets/preview.png",
+    "authors": [{ "name": "veryboringhwl", "url": "https://github.com/veryboringhwl" }],
+    "main": "dist/developerUtilities.mjs",
+    "readme": "extensions/developerUtilities/README.md",
+    "tags": ["lyrics", "fullscreen"]
   }
 ]

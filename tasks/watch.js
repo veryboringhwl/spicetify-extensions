@@ -2,7 +2,6 @@ import { exec, spawn } from "node:child_process";
 import fs from "node:fs";
 import fsPromises from "node:fs/promises";
 import path from "node:path";
-import { join } from "node:path";
 import readline from "node:readline";
 import chokidar from "chokidar";
 import esbuild from "esbuild";
@@ -19,23 +18,13 @@ const inlineCssPlugin = () => ({
   setup(build) {
     build.onLoad({ filter: /\.(css)$/ }, async (args) => {
       const cssContent = await fsPromises.readFile(args.path, "utf8");
-      const escapedCss = JSON.stringify(cssContent);
+      const escapedCss = JSON.stringify(cssContent.trim());
       let styleId;
       const relativePath = path.relative(process.cwd(), args.path);
-
-      if (relativePath.startsWith(`extensions${path.sep}`)) {
-        const parts = relativePath.split(path.sep);
-        const extensionName = parts[1];
-        const base = path.basename(args.path);
-        styleId = `${extensionName}-${base}`;
-      } else if (relativePath.startsWith(`shared${path.sep}`)) {
-        const base = path.basename(args.path);
-        styleId = `shared-${base}`;
-      } else {
-        const folderName = path.basename(path.dirname(path.dirname(args.path)));
-        const base = path.basename(args.path);
-        styleId = `${folderName}-${base}`;
-      }
+      const parts = relativePath.split(path.sep);
+      const prefix = parts[0] === "extensions" ? parts[1] : parts[0];
+      const base = path.basename(args.path);
+      styleId = `${prefix}-${base}`;
       styleId = styleId.replace(/[^a-zA-Z0-9\-\.]/g, "-");
       const jsContent = `
         (function() {
@@ -58,9 +47,9 @@ const inlineCssPlugin = () => ({
 });
 
 const getEntryFile = (folderPath) => {
-  const srcPath = join(folderPath, "src");
+  const srcPath = path.join(folderPath, "src");
   const files = ["app.js", "app.jsx", "app.ts", "app.tsx"];
-  return files.map((file) => join(srcPath, file)).find(fs.existsSync) || null;
+  return files.map((file) => path.join(srcPath, file)).find(fs.existsSync) || null;
 };
 
 const contexts = {};
@@ -70,9 +59,14 @@ const watchExtension = async (folderName, folderPath) => {
   const SRC = getEntryFile(folderPath);
   if (!SRC) return;
 
-  const OUT = join("dist", `${folderName}.mjs`);
-  const SPICETIFY_OUT = join(process.env.APPDATA, "spicetify", "Extensions", `${folderName}.mjs`);
-  const SPOTIFY_OUT = join(
+  const OUT = path.join("dist", `${folderName}.mjs`);
+  const SPICETIFY_OUT = path.join(
+    process.env.APPDATA,
+    "spicetify",
+    "Extensions",
+    `${folderName}.mjs`,
+  );
+  const SPOTIFY_OUT = path.join(
     process.env.APPDATA,
     "Spotify",
     "Apps",
@@ -123,7 +117,7 @@ const watchExtension = async (folderName, folderPath) => {
 };
 
 const watchFolders = async () => {
-  const SRC = join("extensions");
+  const SRC = path.join("extensions");
   const folders = fs
     .readdirSync(SRC, { withFileTypes: true })
     .filter((dir) => dir.isDirectory())
@@ -131,7 +125,7 @@ const watchFolders = async () => {
 
   await Promise.all(
     folders.map(async (folderName) => {
-      const folderPath = join(SRC, folderName);
+      const folderPath = path.join(SRC, folderName);
       await watchExtension(folderName, folderPath);
     }),
   );
@@ -144,15 +138,19 @@ const watchSpotify = async () => {
     spawn("taskkill", ["/F", "/IM", "spotify.exe"]).on("close", resolve),
   );
 
-  const file = fs.readFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"));
+  const file = fs.readFileSync(path.join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"));
   for (const pos of [file.indexOf("app-developer") + 14, file.lastIndexOf("app-developer") + 15]) {
     file[pos] = 50;
   }
-  fs.writeFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"), file);
+  fs.writeFileSync(path.join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"), file);
 
-  spawn(join(process.env.APPDATA, "Spotify", "Spotify.exe"), ["--remote-debugging-port=9222"], {
-    detached: true,
-  });
+  spawn(
+    path.join(process.env.APPDATA, "Spotify", "Spotify.exe"),
+    ["--remote-debugging-port=9222"],
+    {
+      detached: true,
+    },
+  );
 };
 
 const reloadSpotify = async () => {

@@ -2,7 +2,6 @@ import { exec } from "node:child_process";
 import fs from "node:fs";
 import fsPromises from "node:fs/promises";
 import path from "node:path";
-import { join } from "node:path";
 import esbuild from "esbuild";
 import externalGlobalPlugin from "esbuild-plugin-external-global";
 
@@ -15,23 +14,13 @@ const inlineCssPlugin = () => ({
         loader: "css",
         minify: true,
       });
-      const escapedCss = JSON.stringify(minifiedCss.code);
+      const escapedCss = JSON.stringify(minifiedCss.code.trim());
       let styleId;
       const relativePath = path.relative(process.cwd(), args.path);
-
-      if (relativePath.startsWith(`extensions${path.sep}`)) {
-        const parts = relativePath.split(path.sep);
-        const extensionName = parts[1];
-        const base = path.basename(args.path);
-        styleId = `${extensionName}-${base}`;
-      } else if (relativePath.startsWith(`shared${path.sep}`)) {
-        const base = path.basename(args.path);
-        styleId = `shared-${base}`;
-      } else {
-        const folderName = path.basename(path.dirname(path.dirname(args.path)));
-        const base = path.basename(args.path);
-        styleId = `${folderName}-${base}`;
-      }
+      const parts = relativePath.split(path.sep);
+      const prefix = parts[0] === "extensions" ? parts[1] : parts[0];
+      const base = path.basename(args.path);
+      styleId = `${prefix}-${base}`;
       styleId = styleId.replace(/[^a-zA-Z0-9\-\.]/g, "-");
       const jsContent = `
         (function() {
@@ -54,9 +43,9 @@ const inlineCssPlugin = () => ({
 });
 
 const getEntryFile = (folderPath) => {
-  const srcPath = join(folderPath, "src");
+  const srcPath = path.join(folderPath, "src");
   const files = ["app.js", "app.jsx", "app.ts", "app.tsx"];
-  return files.map((file) => join(srcPath, file)).find(fs.existsSync) || null;
+  return files.map((file) => path.join(srcPath, file)).find(fs.existsSync) || null;
 };
 
 const buildExtension = async (folderName, folderPath) => {
@@ -65,7 +54,7 @@ const buildExtension = async (folderName, folderPath) => {
     console.warn(`No entry file found for ${folderName}`);
     return;
   }
-  const OUT = join(process.cwd(), "dist", `${folderName}.mjs`);
+  const OUT = path.join(process.cwd(), "dist", `${folderName}.mjs`);
 
   await esbuild.build({
     entryPoints: [SRC],
@@ -87,13 +76,13 @@ const buildExtension = async (folderName, folderPath) => {
       }),
     ],
     banner: {
-      js: "await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));",
+      js: "await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve))",
     },
   });
 };
 
 const buildFolders = async () => {
-  const SRC = join(process.cwd(), "extensions");
+  const SRC = path.join(process.cwd(), "extensions");
   const folders = fs
     .readdirSync(SRC, { withFileTypes: true })
     .filter((dir) => dir.isDirectory())
@@ -101,7 +90,7 @@ const buildFolders = async () => {
 
   await Promise.all(
     folders.map(async (folderName) => {
-      const folderPath = join(SRC, folderName);
+      const folderPath = path.join(SRC, folderName);
       await buildExtension(folderName, folderPath);
     }),
   );

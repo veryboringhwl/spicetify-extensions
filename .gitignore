@@ -1,7 +1,9 @@
 node_modules
 dist/*
+!dist/developerUtilities.mjs
 !dist/findDupeTracks.mjs
 !dist/fullscreenLyricsPlus.mjs
 extensions/*
+!extensions/developerUtilities/
 !extensions/findDupeTracks/
 !extensions/fullscreenLyricsPlus/

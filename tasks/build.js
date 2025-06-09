@@ -2,7 +2,6 @@ import { spawn } from "node:child_process";
 import fs from "node:fs";
 import fsPromises from "node:fs/promises";
 import path from "node:path";
-import { join } from "node:path";
 import esbuild from "esbuild";
 import externalGlobalPlugin from "esbuild-plugin-external-global";
 
@@ -11,23 +10,13 @@ const inlineCssPlugin = () => ({
   setup(build) {
     build.onLoad({ filter: /\.(css)$/ }, async (args) => {
       const cssContent = await fsPromises.readFile(args.path, "utf8");
-      const escapedCss = JSON.stringify(cssContent);
+      const escapedCss = JSON.stringify(cssContent.trim());
       let styleId;
       const relativePath = path.relative(process.cwd(), args.path);
-
-      if (relativePath.startsWith(`extensions${path.sep}`)) {
-        const parts = relativePath.split(path.sep);
-        const extensionName = parts[1];
-        const base = path.basename(args.path);
-        styleId = `${extensionName}-${base}`;
-      } else if (relativePath.startsWith(`shared${path.sep}`)) {
-        const base = path.basename(args.path);
-        styleId = `shared-${base}`;
-      } else {
-        const folderName = path.basename(path.dirname(path.dirname(args.path)));
-        const base = path.basename(args.path);
-        styleId = `${folderName}-${base}`;
-      }
+      const parts = relativePath.split(path.sep);
+      const prefix = parts[0] === "extensions" ? parts[1] : parts[0];
+      const base = path.basename(args.path);
+      styleId = `${prefix}-${base}`;
       styleId = styleId.replace(/[^a-zA-Z0-9\-\.]/g, "-");
       const jsContent = `
         (function() {
@@ -50,9 +39,9 @@ const inlineCssPlugin = () => ({
 });
 
 const getEntryFile = (folderPath) => {
-  const srcPath = join(folderPath, "src");
+  const srcPath = path.join(folderPath, "src");
   const files = ["app.js", "app.jsx", "app.ts", "app.tsx"];
-  return files.map((file) => join(srcPath, file)).find(fs.existsSync) || null;
+  return files.map((file) => path.join(srcPath, file)).find(fs.existsSync) || null;
 };
 
 const buildExtension = async (folderName, folderPath) => {
@@ -61,7 +50,7 @@ const buildExtension = async (folderName, folderPath) => {
     console.warn(`No entry file found for ${folderName}`);
     return;
   }
-  const OUT = join("dist", `${folderName}.mjs`);
+  const OUT = path.join("dist", `${folderName}.mjs`);
   // use mjs as js isnt treated as es module
   await esbuild.build({
     entryPoints: [SRC],
@@ -97,7 +86,7 @@ const buildExtension = async (folderName, folderPath) => {
 };
 
 const buildFolders = async () => {
-  const SRC = join("extensions");
+  const SRC = path.join("extensions");
   const folders = fs
     .readdirSync(SRC, { withFileTypes: true })
     .filter((dir) => dir.isDirectory())
@@ -105,7 +94,7 @@ const buildFolders = async () => {
 
   await Promise.all(
     folders.map(async (folderName) => {
-      const folderPath = join(SRC, folderName);
+      const folderPath = path.join(SRC, folderName);
       await buildExtension(folderName, folderPath);
     }),
   );
@@ -115,23 +104,23 @@ const applyExtensions = async () => {
   const killProcess = spawn("taskkill", ["/F", "/IM", "spotify.exe"]);
   await new Promise((resolve) => killProcess.on("close", resolve));
 
-  const SPOTIFY_OUT = join(process.env.APPDATA, "Spotify", "Apps", "xpui", "extensions");
-  const SPICETIFY_OUT = join(process.env.APPDATA, "spicetify", "Extensions");
+  const SPOTIFY_OUT = path.join(process.env.APPDATA, "Spotify", "Apps", "xpui", "extensions");
+  const SPICETIFY_OUT = path.join(process.env.APPDATA, "spicetify", "Extensions");
 
-  const OUT = join("dist");
+  const OUT = path.join("dist");
   for (const file of fs.readdirSync(OUT)) {
-    const sourceFile = join(OUT, file);
-    fs.copyFileSync(sourceFile, join(SPOTIFY_OUT, file));
-    fs.copyFileSync(sourceFile, join(SPICETIFY_OUT, file));
+    const sourceFile = path.join(OUT, file);
+    fs.copyFileSync(sourceFile, path.join(SPOTIFY_OUT, file));
+    fs.copyFileSync(sourceFile, path.join(SPICETIFY_OUT, file));
   }
 
-  const file = fs.readFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"));
+  const file = fs.readFileSync(path.join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"));
   for (const pos of [file.indexOf("app-developer") + 14, file.lastIndexOf("app-developer") + 15]) {
     file[pos] = 50;
   }
-  fs.writeFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"), file);
+  fs.writeFileSync(path.join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"), file);
 
-  spawn(join(process.env.APPDATA, "Spotify", "Spotify.exe"), {
+  spawn(path.join(process.env.APPDATA, "Spotify", "Spotify.exe"), {
     detached: true,
   });
 };

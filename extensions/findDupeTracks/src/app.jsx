@@ -13,8 +13,6 @@ import "./styles.css";
 // Spicetify.Player.origin._state.positionAsOfTimestamp
 // Spicetify.Player.origin._state.positionAsOfTimestamp / Spicetify.Player.origin._state.duration * 100
 // Spicetify.Player.origin.seekTo(163635)
-// Spicetify.Platform.History.push({ pathname: `/playlist/<playlist uri id>`, search: `?uid=<track uid>` })
-// then click once to highlight
 // add a ignore button to menu so removed from duplicate list
 
 const showDuplicateFinderModal = (selectedPlaylist, initialView = "main") => {
