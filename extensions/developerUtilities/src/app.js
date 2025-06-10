@@ -1,3 +1,4 @@
+import parseProps from "../../../shared/api/parseProps";
 import Icons from "../../../shared/components/icons";
 import Notification from "../../../shared/components/notification";
 
@@ -28,14 +29,24 @@ const copyPlaylistPropsItem = new Spicetify.ContextMenuV2.Item({
   children: "Copy Playlist props",
   leadingIcon: Icons.HTML.duplicate,
   onClick: async (context, item, event) => {
-    Spicetify.Platform.ClipboardAPI.copy(context.props);
+    const parsed = parseProps(context.props);
+    const filtered = {
+      uri: parsed?.uri,
+      name: parsed?.name,
+      owner: parsed?.owner
+        ? {
+            name: parsed.owner.name,
+            uri: parsed.owner.uri,
+          }
+        : undefined,
+      isOwnedBySelf: parsed?.isOwnedBySelf,
+    };
+    Spicetify.Platform.ClipboardAPI.copy(filtered);
   },
-  shouldAdd: (props, trigger, target) => {
-    const parsed = Spicetify.ContextMenuV2.parseProps(props);
-    const uri = parsed?.[0]?.[0];
-    const type = Spicetify.URI.from(uri)?.type;
-    const show = type === Spicetify.URI.Type.PLAYLIST || type === Spicetify.URI.Type.PLAYLIST_V2;
-    return show;
+  shouldAdd: (props) => {
+    const parsed = parseProps(props);
+    const type = Spicetify.URI.from(parsed.uri)?.type;
+    return type === Spicetify.URI.Type.PLAYLIST || type === Spicetify.URI.Type.PLAYLIST_V2;
   },
 });
 
@@ -43,20 +54,26 @@ const copyTrackPropsItem = new Spicetify.ContextMenuV2.Item({
   children: "Copy Track props",
   leadingIcon: Icons.HTML.duplicate,
   onClick: async (context, item, event) => {
-    const filtered = { ...context.props };
-    filtered.isBanned = undefined;
-    filtered.canBan = undefined;
-    filtered.canBeRemovedFromPlaylist = undefined;
-    filtered.contextName = undefined;
-    filtered.contextUri = undefined;
+    const parsed = parseProps(context.props);
+    const filtered = {
+      name: parsed?.name,
+      uri: parsed?.uri,
+      uid: parsed?.uid,
+      albumName: parsed.album?.name,
+      albumUri: parsed.albumUri || parsed.album?.uri,
+      artists: parsed.artists?.map((artist) => ({
+        name: artist.name,
+        uri: artist.uri,
+      })),
+      contextName: parsed?.contextName,
+      contextUri: parsed.contextUri || parsed.context?.uri,
+    };
     Spicetify.Platform.ClipboardAPI.copy(filtered);
   },
-  shouldAdd: (props, trigger, target) => {
-    const parsed = Spicetify.ContextMenuV2.parseProps(props);
-    const uri = parsed?.[0]?.[0];
-    const type = Spicetify.URI.from(uri)?.type;
-    const show = type === Spicetify.URI.Type.TRACK;
-    return show;
+  shouldAdd: (props) => {
+    const parsed = parseProps(props);
+    const type = Spicetify.URI.from(parsed.uri)?.type;
+    return type === Spicetify.URI.Type.TRACK;
   },
 });
 
@@ -64,14 +81,34 @@ const copyArtistPropsItem = new Spicetify.ContextMenuV2.Item({
   children: "Copy Artist props",
   leadingIcon: Icons.HTML.duplicate,
   onClick: async (context, item, event) => {
-    Spicetify.Platform.ClipboardAPI.copy(context.props);
+    const parsed = parseProps(context.props);
+    const filtered = {
+      uri: parsed?.uri,
+    };
+    Spicetify.Platform.ClipboardAPI.copy(filtered);
   },
-  shouldAdd: (props, trigger, target) => {
-    const parsed = Spicetify.ContextMenuV2.parseProps(props);
-    const uri = parsed?.[0]?.[0];
-    const type = Spicetify.URI.from(uri)?.type;
-    const show = type === Spicetify.URI.Type.ARTIST;
-    return show;
+  shouldAdd: (props) => {
+    const parsed = parseProps(props);
+    const type = Spicetify.URI.from(parsed.uri)?.type;
+    return type === Spicetify.URI.Type.ARTIST;
+  },
+});
+
+const copyAlbumPropsItem = new Spicetify.ContextMenuV2.Item({
+  children: "Copy Album props",
+  leadingIcon: Icons.HTML.duplicate,
+  onClick: async (context, item, event) => {
+    const parsed = parseProps(context.props);
+    const filtered = {
+      uri: parsed?.uri,
+      artistUri: parsed?.artistUri,
+    };
+    Spicetify.Platform.ClipboardAPI.copy(filtered);
+  },
+  shouldAdd: (props) => {
+    const parsed = parseProps(props);
+    const type = Spicetify.URI.from(parsed.uri)?.type;
+    return type === Spicetify.URI.Type.ALBUM;
   },
 });
 
@@ -79,12 +116,11 @@ const logContextMenuPropsItem = new Spicetify.ContextMenuV2.Item({
   children: "Log context menu props",
   leadingIcon: Icons.HTML.terminal,
   onClick: async (context, item, event) => {
-    //context has all parameters from shouldAdd
     console.log("Context:", context);
     console.log("Item:", item);
     console.log("Event:", event);
   },
-  shouldAdd: (props, trigger, target) => true,
+  shouldAdd: () => true,
 });
 
 const copyAllPropsItem = new Spicetify.ContextMenuV2.Item({
@@ -100,23 +136,14 @@ const devUtilsSubMenu = new Spicetify.ContextMenuV2.ItemSubMenu({
   text: "Developer Utils",
   leadingIcon: Icons.HTML.terminal,
   items: [
+    copyAlbumPropsItem,
+    copyArtistPropsItem,
     copyPlaylistPropsItem,
     copyTrackPropsItem,
-    copyArtistPropsItem,
-    logContextMenuPropsItem,
     copyAllPropsItem,
+    logContextMenuPropsItem,
   ],
-  shouldAdd: (props, trigger, target) => {
-    const parsed = Spicetify.ContextMenuV2.parseProps(props);
-    const uri = parsed?.[0]?.[0];
-    const type = Spicetify.URI.from(uri)?.type;
-    const show =
-      type === Spicetify.URI.Type.TRACK ||
-      type === Spicetify.URI.Type.PLAYLIST ||
-      type === Spicetify.URI.Type.PLAYLIST_V2 ||
-      type === Spicetify.URI.Type.ARTIST;
-    return show;
-  },
+  shouldAdd: () => true,
 });
 
 devUtilsSubMenu.register();
