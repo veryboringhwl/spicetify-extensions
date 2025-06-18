@@ -6,7 +6,7 @@
     "authors": [{ "name": "veryboringhwl", "url": "https://github.com/veryboringhwl" }],
     "main": "dist/findDupeTracks.mjs",
     "readme": "extensions/findDupeTracks/README.md",
-    "tags": ["duplicates", "utility"]
+    "tags": ["dupe", "duplicates", "utility"]
   },
   {
     "name": "Fullscreen Lyrics Plus",
@@ -24,6 +24,6 @@
     "authors": [{ "name": "veryboringhwl", "url": "https://github.com/veryboringhwl" }],
     "main": "dist/developerUtilities.mjs",
     "readme": "extensions/developerUtilities/README.md",
-    "tags": ["lyrics", "fullscreen"]
+    "tags": ["dev", "utility", "utilities"]
   }
 ]
