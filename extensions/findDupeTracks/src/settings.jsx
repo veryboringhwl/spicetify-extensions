@@ -84,9 +84,9 @@ const SettingsMenu = () => {
   }, [settings]);
 
   const renderToggles = (title, settingsKey, labels) => (
-    <section className="dupe-settings__section">
-      <h3 className="dupe-settings__section-title">{title}</h3>
-      <div className="dupe-settings__options">
+    <section className="duplicate-settings__section">
+      <h3 className="duplicate-settings__section-title">{title}</h3>
+      <div className="duplicate-settings__options">
         {Object.entries(labels).map(([key, desc]) => (
           <OptionRow key={key} name={`${key}-${settingsKey}`} desc={desc}>
             <Toggle
@@ -151,7 +151,7 @@ const SettingsMenu = () => {
   ];
 
   return (
-    <div className="dupe-settings">
+    <div className="duplicate-settings">
       {renderToggles("Duplicate Groups to Display", "groupSettings", {
         exact: "Exact Duplicates (Same URI)",
         isrc: "ISRC Duplicates (Same Recording)",
@@ -166,9 +166,9 @@ const SettingsMenu = () => {
         possible: "Possible Duplicates",
       })}
 
-      <section className="dupe-settings__section">
-        <h3 className="dupe-settings__section-title">Normalization Words</h3>
-        <p className="dupe-settings__description">
+      <section className="duplicate-settings__section">
+        <h3 className="duplicate-settings__section-title">Normalization Words</h3>
+        <p className="duplicate-settings__description">
           Add or remove words to be ignored when comparing track names for similarity.
         </p>
         <OptionRow name="custom-words" desc="Add a word to normalization list">
@@ -183,15 +183,15 @@ const SettingsMenu = () => {
             Add
           </button>
         </OptionRow>
-        <div className="dupe-settings__words-list">
+        <div className="duplicate-settings__words-list">
           {allWords.length > 0 ? (
-            <div className="dupe-settings__words-ul">
+            <div className="duplicate-settings__words-ul">
               {allWords.map(({ word, isDefault }) => (
-                <div className="dupe-settings__word-item" key={word}>
+                <div className="duplicate-settings__word-item" key={word}>
                   {word}
                   <button
                     type="button"
-                    className="dupe-settings__word-remove"
+                    className="duplicate-settings__word-remove"
                     onClick={() => removeWord(word, isDefault)}
                   >
                     Remove
@@ -200,12 +200,12 @@ const SettingsMenu = () => {
               ))}
             </div>
           ) : (
-            <p className="dupe-settings__no-words">No normalization words</p>
+            <p className="duplicate-settings__no-words">No normalization words</p>
           )}
         </div>
       </section>
-      <div className="dupe-settings__actions">
-        <button type="button" className="dupe-settings__reset" onClick={resetSettings}>
+      <div className="duplicate-settings__actions">
+        <button type="button" className="duplicate-settings__reset" onClick={resetSettings}>
           Reset to Defaults
         </button>
       </div>

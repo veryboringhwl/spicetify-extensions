@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import ReactDOM from "react-dom";
 import Icons from "./icons";
+import "../styles/popupModal.css";
 
 let modalContainer = null;
 let modalRoot = null;

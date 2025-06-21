@@ -15,7 +15,7 @@ const Dropdown = memo(({ value, options, onChange, disabled }) => {
   const selectedLabel = options.find((opt) => opt.value === value)?.label || "Select...";
 
   return (
-    <div className={`dropdown${disabled ? " dropdown--disabled" : ""}`}>
+    <div className="dropdown">
       <button
         className="dropdown__button"
         popovertarget={popoverId}

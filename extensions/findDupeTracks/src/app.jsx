@@ -68,7 +68,7 @@ const findDuplicatesMenuItem = new Spicetify.ContextMenuV2.Item({
     // sometimes the name is not there so we need to get it from metadata
     const selectedPlaylist = {
       uri: uri,
-      name: name || (await Spicetify.Platform.PlaylistAPI.getMetadata(uri)?.name),
+      name: name || (await Spicetify.Platform.PlaylistAPI.getMetadata(uri))?.name,
     };
     showDuplicateFinderModal(selectedPlaylist);
   },

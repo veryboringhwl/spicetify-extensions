@@ -5,7 +5,7 @@
   font-size: 14px !important;
   cursor: pointer;
 
-  .dropdown--disabled {
+  &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }

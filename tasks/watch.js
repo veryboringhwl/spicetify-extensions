@@ -216,16 +216,10 @@ rl.on("line", async (input) => {
   if (command === "format") {
     console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m Formatting...`);
     exec("bunx biome check --fix --unsafe", (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error: ${error.message}`);
-        return;
-      }
-      if (stderr) {
-        console.error(`stderr: ${stderr}`);
-        return;
-      }
       console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m ${stdout}`);
     });
+  } else {
+    console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m \x1b[31mUnknown command: ${command}\x1b[0m`);
   }
 });
 

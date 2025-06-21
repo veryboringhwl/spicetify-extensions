@@ -34,6 +34,9 @@ const Icons = {
   // 16px
   customArtwork:
     "M0 2v12a2 2 90 002 2h12a2 2 90 002-2V7.33l-1.33 1.33v5.33a.66.66 90 01-.66.66H2a.66.66 90 01-.66-.66V2A.66.66 90 012 1.34h9.66L13 0H2A2 2 90 000 2zm2.66 3.33C4.32 5 4.99 3.67 5.32 2.67h.33c.33 1 1 2.33 2.66 2.6v.33c-1.66.33-2.33 1.66-2.66 2.66h-.33c-.33-1-1-2.33-2.66-2.66zm13-2.66a1.33 1.33 90 00-1.66 0L7 9.33a0 0 90 000 0l-1.66 3a.33.33 90 00.33.33l3-1.66a0 0 90 000 0l7-7a1.33 1.33 90 000-1.33z",
+  play: "M3.3333 3.516c0-1.138 1.2173-1.8613 2.2167-1.318l8.2413 4.484c1.044.5687 1.044 2.0673 0 2.6353L5.55 13.8013C4.5507 14.3453 3.3333 13.6213 3.3333 12.484V3.516Z",
+  pause:
+    "M3.8307 2A1.1667 1.1667 90 002.664 3.1667V12.8333C2.664 13.4773 3.1867 14 3.8307 14H6.164A1.1667 1.1667 90 007.3307 12.8333V3.1667A1.1667 1.1667 90 006.164 2H3.8307ZM9.8307 2A1.1667 1.1667 90 008.664 3.1667V12.8333C8.664 13.4773 9.1867 14 9.8307 14H12.164A1.1667 1.1667 90 0013.3307 12.8333V3.1667A1.1667 1.1667 90 0012.164 2H9.8307Z",
 };
 
 const ReactComponent = (icon, defaultSize = 16) => {
@@ -57,6 +60,8 @@ Icons.React = {
   duplicate: ReactComponent(Icons.duplicate, 16),
   terminal: ReactComponent(Icons.terminal, 16),
   customArtwork: ReactComponent(Icons.customArtwork, 16),
+  play: ReactComponent(Icons.play, 16),
+  pause: ReactComponent(Icons.pause, 16),
 };
 
 Icons.HTML = {
@@ -72,6 +77,8 @@ Icons.HTML = {
   duplicate: `<path d="${Icons.duplicate}"/>`,
   terminal: `<path d="${Icons.terminal}"/>`,
   customArtwork: `<path d="${Icons.customArtwork}"/>`,
+  play: `<path d="${Icons.play}"/>`,
+  pause: `<path d="${Icons.pause}"/>`,
 };
 
 // Usage:
