@@ -6,6 +6,8 @@ import fetchISRCsForTracks from "../../../shared/api/fetchISRCsForTracks";
 import fetchPlayCountsForTracks from "../../../shared/api/fetchPlayCountsForTracks";
 import ConfirmDialog from "../../../shared/components/confirmDialog";
 import Dropdown from "../../../shared/components/dropdown";
+import Icons from "../../../shared/components/icons";
+import Slider from "../../../shared/components/slider";
 import { getSettings } from "./settings";
 
 const db = new Dexie("findDupeTracks");
@@ -319,16 +321,44 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     const artists = track.artists?.map((a) => a.name).join(", ") || "N/A";
 
     return (
-      <div className="dupe-group__details">
-        <div className="dupe-group__line">
-          <span className="dupe-group__artists"> Artists: {artists}</span>
-          <span className="dupe-group__album"> Album: {albumName}</span>
+      <div className="track-details">
+        <div className="track-details__line">
+          <span className="track-details__artists"> Artists: {artists}</span>
+          <span className="track-details__album"> Album: {albumName}</span>
         </div>
-        <div className="dupe-group__line">
-          <span className="dupe-group__playcount"> Plays: {displayCount}</span>
-          <span className="dupe-group__isrc"> ISRC: {trackIsrc}</span>
+        <div className="track-details__line">
+          <span className="track-details__playcount"> Plays: {displayCount}</span>
+          <span className="track-details__isrc"> ISRC: {trackIsrc}</span>
         </div>
       </div>
+    );
+  });
+
+  const PlayPauseButton = memo(({ trackUri }) => {
+    const [playerState, setPlayerState] = useState(Spicetify.Platform.PlayerAPI._state);
+
+    useEffect(() => {
+      const listener = (event) => {
+        setPlayerState(event.data);
+      };
+      Spicetify.Player.addEventListener("onplaypause", listener);
+
+      return () => {
+        Spicetify.Player.removeEventListener("onplaypause", listener);
+      };
+    }, []);
+
+    const togglePlay = useCallback(() => {
+      Spicetify.Player.togglePlay(trackUri);
+    }, [trackUri]);
+
+    const isPlaying = !playerState.isPaused;
+    const isCurrentlyPlayingThisTrack = isPlaying && playerState.item?.uri === trackUri;
+
+    return (
+      <button className="duplicate-group__play-button" onClick={togglePlay}>
+        {isCurrentlyPlayingThisTrack ? <Icons.React.pause /> : <Icons.React.play />}
+      </button>
     );
   });
 
@@ -339,39 +369,51 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     }
 
     return (
-      <div className="dupe-group">
-        <p className="dupe-group__heading">
-          <div className="dupe-group__heading-title">{groupTitle}</div>
-          <div className="dupe-group__heading-length">{groups.length} found</div>
+      <div className="duplicate-group">
+        <p className="duplicate-group__heading">
+          <div className="duplicate-group__heading-title">{groupTitle}</div>
+          <div className="duplicate-group__heading-length">{groups.length} found</div>
         </p>
         {groups.length > 0 ? (
-          <div className="dupe-group__list">
+          <div className="duplicate-group__list">
             {groups.map((duplicateGroup, groupIndex) => (
               <div
                 key={`${duplicateGroup.mainTrack.uri}-${duplicateGroup.mainTrack.uid || groupIndex}`}
-                className={`dupe-group__item dupe-group__item--${duplicateCategory}`}
+                className={`duplicate-group__item duplicate-group__item--${duplicateCategory}`}
               >
-                <div className="dupe-group__source">
-                  Source: {duplicateGroup.mainTrack.name}
+                <div className="duplicate-group__source">
+                  <div className="duplicate-group__source-label">
+                    Source: {duplicateGroup.mainTrack.name}
+                  </div>
                   <TrackDetails track={duplicateGroup.mainTrack} />
+                  <div className="duplicate-group__actions">
+                    <PlayPauseButton trackUri={duplicateGroup.mainTrack.uri} />
+                    <Slider className="duplicate-group__slider-placeholder" text={true} />
+                  </div>
                 </div>
-                <div className="dupe-group__duplicates-label">Duplicates:</div>
-                <div className="dupe-group__duplicates-list">
+                <div className="duplicate-group__duplicates-label">Duplicates:</div>
+                <div className="duplicate-group__duplicates-list">
                   {duplicateGroup.duplicates.map((dup) => (
                     <div
                       key={`${dup.uri}-${dup.uid || dup.uri}`}
-                      className="dupe-group__duplicate-item"
+                      className="duplicate-group__duplicate-item"
                     >
-                      <div className="dupe-group__duplicate-content">
-                        <span className="dupe-group__duplicate-name">{dup.name}</span>
-                        <TrackDetails track={dup} />
+                      <div className="duplicate-group__duplicate-info">
+                        <div className="duplicate-group__duplicate-content">
+                          <span className="duplicate-group__duplicate-name">{dup.name}</span>
+                          <TrackDetails track={dup} />
+                        </div>
+                        <button
+                          className="duplicate-group__delete-button"
+                          onClick={() => handleDeleteTrack(duplicateCategory, groupIndex, dup)}
+                        >
+                          Delete
+                        </button>
                       </div>
-                      <button
-                        className="dupe-group__delete-button"
-                        onClick={() => handleDeleteTrack(duplicateCategory, groupIndex, dup)}
-                      >
-                        Delete
-                      </button>
+                      <div className="duplicate-group__actions">
+                        <PlayPauseButton trackUri={dup.uri} />
+                        <Slider className="duplicate-group__slider-placeholder" text={true} />
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -385,13 +427,12 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     );
   };
 
-  const selectedPlaylistName = selectedPlaylist ? selectedPlaylist.name : "Select a playlist";
   const playlistOptions = ownedPlaylists.map((p) => ({ value: p.uri, label: p.name }));
 
   return (
-    <div className="find-dupes">
-      <div className="find-dupes__header">
-        <span className="find-dupes__header-label">Select Playlist:</span>
+    <div className="find-duplicates">
+      <div className="find-duplicates__header">
+        <span className="find-duplicates__header-label">Select Playlist:</span>
         <Dropdown
           value={selectedPlaylist?.uri || ""}
           options={playlistOptions}
@@ -402,7 +443,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
 
       {selectedPlaylist && (
         <>
-          <p className="find-dupes__details">
+          <p className="find-duplicates__details">
             Playlist: {selectedPlaylist.name} ({playlistTracks.length} tracks analyzed)
           </p>
           <>
