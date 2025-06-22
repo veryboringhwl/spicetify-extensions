@@ -1,5 +1,5 @@
 import Dexie from "https://esm.sh/dexie";
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import fetchAllLibraryContents from "../../../shared/api/fetchAllLibraryContents";
 import fetchAllPlaylistTracks from "../../../shared/api/fetchAllPlaylistTracks";
 import fetchISRCsForTracks from "../../../shared/api/fetchISRCsForTracks";
@@ -235,29 +235,8 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     });
   }, []);
 
-  const removeTrackFromPlaylist = async (trackToRemove, duplicateCategory, groupIndex) => {
+  const removeTrackFromPlaylist = async (trackToRemove) => {
     await Spicetify.Platform.PlaylistAPI.remove(selectedPlaylist.uri, [{ uid: trackToRemove.uid }]);
-
-    setDuplicateGroups((prevGroups) => {
-      const categoryGroups = prevGroups[duplicateCategory];
-      const group = categoryGroups[groupIndex];
-      const updatedDuplicates = group.duplicates.filter(
-        (dup) => !(dup.uri === trackToRemove.uri && dup.uid === trackToRemove.uid),
-      );
-      const updatedGroup = { ...group, duplicates: updatedDuplicates };
-
-      const newCategoryGroups = [...categoryGroups];
-      if (updatedGroup.duplicates.length > 0) {
-        newCategoryGroups[groupIndex] = updatedGroup;
-      } else {
-        newCategoryGroups.splice(groupIndex, 1);
-      }
-
-      return {
-        ...prevGroups,
-        [duplicateCategory]: newCategoryGroups,
-      };
-    });
 
     setPlaylistTracks((prevTracks) =>
       prevTracks.filter(
@@ -271,7 +250,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     const shouldConfirm = settings.confirmSettings[duplicateCategory];
 
     if (!shouldConfirm) {
-      await removeTrackFromPlaylist(trackToRemove, duplicateCategory, groupIndex);
+      await removeTrackFromPlaylist(trackToRemove);
       return;
     }
 
@@ -279,14 +258,13 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       titleText: "Remove Track",
       descriptionText: `Are you sure you want to remove "${trackToRemove.name}"? This cannot be undone.`,
       confirmText: "Remove",
-      onConfirm: () => removeTrackFromPlaylist(trackToRemove, duplicateCategory, groupIndex),
+      onConfirm: () => removeTrackFromPlaylist(trackToRemove),
     });
   };
 
   useEffect(() => {
-    const initialGroupsState = { exact: [], isrc: [], likely: [], possible: [] };
     setPlaylistTracks([]);
-    setDuplicateGroups(initialGroupsState);
+    setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
     setPlayCounts(new Map());
     setIsrcs(new Map());
 
@@ -305,13 +283,19 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
 
         setPlayCounts(fetchedPlayCountsResult);
         setIsrcs(fetchedIsrcMapResult);
-
-        findPotentialDuplicates(fetchedTracks, fetchedPlayCountsResult, fetchedIsrcMapResult);
       }
     };
 
     loadData();
-  }, [selectedPlaylist, findPotentialDuplicates]);
+  }, [selectedPlaylist]);
+
+  useEffect(() => {
+    if (playlistTracks.length > 0) {
+      findPotentialDuplicates(playlistTracks, playCounts, isrcs);
+    } else {
+      setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
+    }
+  }, [playlistTracks, playCounts, isrcs, findPotentialDuplicates]);
 
   const TrackDetails = memo(({ track }) => {
     const playCount = playCounts.get(track.uri);
@@ -334,31 +318,115 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     );
   });
 
-  const PlayPauseButton = memo(({ trackUri }) => {
-    const [playerState, setPlayerState] = useState(Spicetify.Platform.PlayerAPI._state);
+  const TrackControls = memo(({ trackUri }) => {
+    const [playerState, setPlayerState] = useState(Spicetify.Platform.PlayerAPI.getState());
+    const [position, setPosition] = useState(0);
+    const [duration, setDuration] = useState(1);
+    const isSeeking = useRef(false);
+    const latestPosition = useRef(position);
+    const latestDuration = useRef(duration);
 
     useEffect(() => {
-      const listener = (event) => {
-        setPlayerState(event.data);
-      };
-      Spicetify.Player.addEventListener("onplaypause", listener);
+      latestPosition.current = position;
+    }, [position]);
 
-      return () => {
-        Spicetify.Player.removeEventListener("onplaypause", listener);
+    useEffect(() => {
+      latestDuration.current = duration;
+    }, [duration]);
+
+    useEffect(() => {
+      const updateListener = (event) => {
+        if (!event?.data) return;
+        const newPlayerState = event.data;
+        setPlayerState(newPlayerState);
+
+        if (newPlayerState.item?.uri === trackUri) {
+          if (!isSeeking.current) {
+            setPosition(newPlayerState.positionAsOfTimestamp);
+          }
+          setDuration(newPlayerState.duration);
+        } else {
+          if (latestPosition.current !== 0 || latestDuration.current !== 1) {
+            setPosition(0);
+            setDuration(1);
+          }
+        }
       };
-    }, []);
+
+      Spicetify.Platform.PlayerAPI._events.addListener("update", updateListener);
+      return () => {
+        Spicetify.Platform.PlayerAPI._events.removeListener("update", updateListener);
+      };
+    }, [trackUri]);
+
+    useEffect(() => {
+      const isCurrentlyPlayingThisTrack =
+        !playerState.isPaused && playerState.item?.uri === trackUri;
+
+      if (!isCurrentlyPlayingThisTrack) {
+        setPosition(0);
+        setDuration(1);
+        return;
+      }
+
+      const interval = setInterval(() => {
+        if (!isSeeking.current) {
+          const newPosition =
+            playerState.positionAsOfTimestamp + (Date.now() - playerState.timestamp);
+          if (newPosition < playerState.duration) {
+            setPosition(newPosition);
+          } else {
+            setPosition(playerState.duration);
+          }
+        }
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }, [playerState, trackUri]);
 
     const togglePlay = useCallback(() => {
-      Spicetify.Player.togglePlay(trackUri);
-    }, [trackUri]);
+      const currentPlayingTrack = playerState.item?.uri;
+      const isPlayerPaused = playerState.isPaused;
+
+      if (currentPlayingTrack === trackUri) {
+        if (isPlayerPaused) {
+          Spicetify.Platform.PlayerAPI.resume();
+        } else {
+          Spicetify.Platform.PlayerAPI.pause();
+        }
+      } else {
+        Spicetify.Platform.PlayerAPI.play({ uri: trackUri }, {}, {});
+      }
+    }, [playerState, trackUri]);
+
+    const handleSliderChange = useCallback((newPosition) => {
+      isSeeking.current = true;
+      setPosition(newPosition);
+    }, []);
+
+    const handleSliderSeek = useCallback(() => {
+      if (isSeeking.current) {
+        Spicetify.Platform.PlayerAPI.seekTo(position);
+        isSeeking.current = false;
+      }
+    }, [position]);
 
     const isPlaying = !playerState.isPaused;
     const isCurrentlyPlayingThisTrack = isPlaying && playerState.item?.uri === trackUri;
 
     return (
-      <button className="duplicate-group__play-button" onClick={togglePlay}>
-        {isCurrentlyPlayingThisTrack ? <Icons.React.pause /> : <Icons.React.play />}
-      </button>
+      <div className="duplicate-group__playback-controls">
+        <button className="duplicate-group__playback-button" onClick={togglePlay}>
+          {isCurrentlyPlayingThisTrack ? <Icons.React.pause /> : <Icons.React.play />}
+        </button>
+        <Slider
+          value={position}
+          max={duration}
+          onChange={handleSliderChange}
+          onSeek={handleSliderSeek}
+          disabled={!isCurrentlyPlayingThisTrack}
+        />
+      </div>
     );
   });
 
@@ -381,14 +449,28 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
                 key={`${duplicateGroup.mainTrack.uri}-${duplicateGroup.mainTrack.uid || groupIndex}`}
                 className={`duplicate-group__item duplicate-group__item--${duplicateCategory}`}
               >
-                <div className="duplicate-group__source">
-                  <div className="duplicate-group__source-label">
-                    Source: {duplicateGroup.mainTrack.name}
+                <div
+                  key={`${duplicateGroup.mainTrack.uri}-${duplicateGroup.mainTrack.uid || groupIndex}`}
+                  className={`duplicate-group__duplicate-item duplicate-group__item--${duplicateCategory}`}
+                >
+                  <div className="duplicate-group__duplicate-info">
+                    <div className="duplicate-group__duplicate-content">
+                      <span className="duplicate-group__duplicate-name">
+                        Source: {duplicateGroup.mainTrack.name}
+                      </span>
+                      <TrackDetails track={duplicateGroup.mainTrack} />
+                    </div>
+                    <button
+                      className="duplicate-group__delete-button"
+                      onClick={() => {
+                        handleDeleteTrack(duplicateCategory, groupIndex, duplicateGroup.mainTrack);
+                      }}
+                    >
+                      Delete
+                    </button>
                   </div>
-                  <TrackDetails track={duplicateGroup.mainTrack} />
                   <div className="duplicate-group__actions">
-                    <PlayPauseButton trackUri={duplicateGroup.mainTrack.uri} />
-                    <Slider className="duplicate-group__slider-placeholder" text={true} />
+                    <TrackControls trackUri={duplicateGroup.mainTrack.uri} />
                   </div>
                 </div>
                 <div className="duplicate-group__duplicates-label">Duplicates:</div>
@@ -411,8 +493,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
                         </button>
                       </div>
                       <div className="duplicate-group__actions">
-                        <PlayPauseButton trackUri={dup.uri} />
-                        <Slider className="duplicate-group__slider-placeholder" text={true} />
+                        <TrackControls trackUri={dup.uri} />
                       </div>
                     </div>
                   ))}
