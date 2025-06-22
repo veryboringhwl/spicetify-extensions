@@ -60,7 +60,7 @@
 
 .modal__buttonContainer .modal__button {
   background-color: var(--spice-highlight);
-  border-radius: var(--border-radius);
+  border-radius: 8px;
   height: 34px;
   cursor: pointer;
   padding: 8px;

@@ -100,10 +100,6 @@
     width: 32px; /* Adjust as needed */
     height: 32px; /* Adjust as needed */
 
-    &:hover {
-      color: var(--spice-main);
-    }
-
     svg {
       width: 100%;
       height: 100%;
@@ -135,6 +131,10 @@
     &:last-child {
       border-bottom: none;
     }
+  }
+
+  .duplicate-group__actions {
+    padding-bottom: 8px;
   }
 
   .duplicate-group__duplicate-info {
