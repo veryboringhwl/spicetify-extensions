@@ -132,6 +132,57 @@ const copyAllPropsItem = new Spicetify.ContextMenuV2.Item({
   shouldAdd: () => true,
 });
 
+const logPlayAPIEvents = new Spicetify.ContextMenuV2.Item({
+  children: "Log PlayerAPI Events",
+  leadingIcon: Icons.HTML.terminal,
+  onClick: async () => {
+    Notification({ message: "Only goes away after a reload/restart", isWarning: true });
+    // Spicetify's event listeners for PlayerAPI events
+    Spicetify.Platform.PlayerAPI._events.addListener("update", (event) => {
+      console.log("Update event:", event);
+    });
+
+    Spicetify.Platform.PlayerAPI._events.addListener("action", (event) => {
+      console.log("Action event:", event);
+    });
+
+    Spicetify.Platform.PlayerAPI._events.addListener("error", (event) => {
+      console.error("Error event:", event);
+    });
+
+    Spicetify.Platform.PlayerAPI._events.addListener("ready", (event) => {
+      console.log("Ready event:", event);
+    });
+
+    Spicetify.Platform.PlayerAPI._events.addListener("queue_action_complete", (event) => {
+      console.log("Queue action complete:", event);
+    });
+
+    Spicetify.Platform.PlayerAPI._events.addListener("queue_update", (event) => {
+      console.log("Queue update:", event);
+    });
+  },
+  shouldAdd: () => true,
+});
+
+const reloadSpotify = new Spicetify.ContextMenuV2.Item({
+  children: "Reload Spotify",
+  leadingIcon: Icons.HTML.reload,
+  onClick: async () => {
+    location.reload();
+  },
+  shouldAdd: () => true,
+});
+
+const restartSpotify = new Spicetify.ContextMenuV2.Item({
+  children: "Restart Spotify",
+  leadingIcon: Icons.HTML.reload,
+  onClick: async () => {
+    Spicetify.Platform.UpdateAPI.applyUpdate();
+  },
+  shouldAdd: () => true,
+});
+
 const devUtilsSubMenu = new Spicetify.ContextMenuV2.ItemSubMenu({
   text: "Developer Utils",
   leadingIcon: Icons.HTML.terminal,
@@ -142,8 +193,26 @@ const devUtilsSubMenu = new Spicetify.ContextMenuV2.ItemSubMenu({
     copyTrackPropsItem,
     copyAllPropsItem,
     logContextMenuPropsItem,
+    logPlayAPIEvents,
+    reloadSpotify,
+    restartSpotify,
   ],
   shouldAdd: () => true,
 });
 
 devUtilsSubMenu.register();
+
+// copy object that leadds to [object Object]
+// const getCircularReplacer = () => {
+//   const seen = new WeakSet();
+//   return (key, value) => {
+//     if (typeof value === "object" && value !== null) {
+//       if (seen.has(value)) {
+//         return "[Circular]";
+//       }
+//       seen.add(value);
+//     }
+//     return value;
+//   };
+// };
+// copy(JSON.stringify(temp3, getCircularReplacer()))
