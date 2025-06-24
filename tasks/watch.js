@@ -211,15 +211,19 @@ const rl = readline.createInterface({
 });
 
 rl.on("line", async (input) => {
-  const command = input.trim().toLowerCase();
-
+  const command = input.trim();
   if (command === "format") {
     console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m Formatting...`);
     exec("bunx biome check --fix --unsafe", (error, stdout, stderr) => {
       console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m ${stdout}`);
     });
   } else {
-    console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m \x1b[31mUnknown command: ${command}\x1b[0m`);
+    console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m Executing: ${command}`);
+    exec(command, (error, stdout, stderr) => {
+      if (stdout) {
+        console.log(stdout);
+      }
+    });
   }
 });
 

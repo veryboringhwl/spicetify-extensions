@@ -95,15 +95,20 @@
     cursor: pointer;
     padding: 0;
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    width: 32px; /* Adjust as needed */
-    height: 32px; /* Adjust as needed */
+    width: 32px;
+    height: 32px;
 
     svg {
       width: 100%;
       height: 100%;
     }
+  }
+
+  .slider-time {
+    font-size: 14px;
   }
 
   .duplicate-group__duplicates-label {

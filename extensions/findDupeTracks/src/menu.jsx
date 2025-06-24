@@ -22,7 +22,7 @@ async function fetchEditablePlaylists() {
 }
 
 async function fetchPlaylistTracksAndCache(playlistUri) {
-  const { items, totalLength } = await fetchAllPlaylistTracks(playlistUri);
+  const { items } = await fetchAllPlaylistTracks(playlistUri);
 
   const trackUris = items.map((track) => track.uri);
   const existingTracks = await db.tracks.bulkGet(trackUris);
@@ -46,7 +46,7 @@ async function fetchPlaylistTracksAndCache(playlistUri) {
     await db.tracks.bulkPut(tracksToPut);
   }
 
-  return { items, totalLength };
+  return { items };
 }
 
 async function fetchISRCsForTracksWithCache(tracks) {
@@ -126,8 +126,7 @@ const getNumericPlayCount = (trackUri, playCounts) => playCounts.get(trackUri) ?
 const normalizeForSimilarity = (name) => {
   const settings = getSettings();
   const termsToRemove = [...settings.defaultNormalizeWords, ...settings.customNormalizeWords];
-  const termsPattern = termsToRemove.join("|");
-  const regexRemoveTerms = new RegExp(`\\b(${termsPattern})\\b`, "gi");
+  const regexRemoveTerms = new RegExp(`\\b(${termsToRemove.join("|")})\\b`, "gi");
   return name
     .toLowerCase()
     .replace(/\(.*?\)|\[.*?\]/g, "")
@@ -157,9 +156,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       const playlists = await fetchEditablePlaylists();
       if (!isMounted) return;
       setOwnedPlaylists(playlists);
-
-      const initialPlaylist = initialSelectedPlaylist || playlists[0] || null;
-      setSelectedPlaylist(initialPlaylist);
+      setSelectedPlaylist(initialSelectedPlaylist || playlists[0] || null);
     })();
     return () => {
       isMounted = false;
@@ -167,11 +164,8 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
   }, [initialSelectedPlaylist]);
 
   const handlePlaylistChange = (e) => {
-    const newUri = e.target.value;
-    const newPlaylist = ownedPlaylists.find((p) => p.uri === newUri);
-    if (newPlaylist) {
-      setSelectedPlaylist(newPlaylist);
-    }
+    const newPlaylist = ownedPlaylists.find((p) => p.uri === e.target.value);
+    if (newPlaylist) setSelectedPlaylist(newPlaylist);
   };
 
   const findPotentialDuplicates = useCallback((tracks, playCountMap, isrcMap) => {
@@ -180,9 +174,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       const groups = new Map();
 
       for (const t of list) {
-        if (processedUris.has(t.uri)) {
-          continue;
-        }
+        if (processedUris.has(t.uri)) continue;
         const key = normalizer(keyFn(t));
         if (!key) continue;
 
@@ -206,38 +198,28 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       }
       return duplicatesResult;
     };
-
-    const exactDuplicates = groupAndFilter(
-      tracks,
-      (t) => t.uri,
-      (k) => k,
-    );
-
-    const isrcDuplicates = groupAndFilter(
-      tracks,
-      (t) => isrcMap.get(t.uri),
-      (k) => k,
-    );
-
-    const likelyDuplicates = groupAndFilter(
-      tracks,
-      (t) => t.name,
-      (name) => name.trim(),
-    );
-
-    const possibleDuplicates = groupAndFilter(tracks, (t) => t.name, normalizeForSimilarity);
-
     setDuplicateGroups({
-      exact: exactDuplicates,
-      isrc: isrcDuplicates,
-      likely: likelyDuplicates,
-      possible: possibleDuplicates,
+      exact: groupAndFilter(
+        tracks,
+        (t) => t.uri,
+        (k) => k,
+      ),
+      isrc: groupAndFilter(
+        tracks,
+        (t) => isrcMap.get(t.uri),
+        (k) => k,
+      ),
+      likely: groupAndFilter(
+        tracks,
+        (t) => t.name,
+        (name) => name.trim(),
+      ),
+      possible: groupAndFilter(tracks, (t) => t.name, normalizeForSimilarity),
     });
   }, []);
 
   const removeTrackFromPlaylist = async (trackToRemove) => {
     await Spicetify.Platform.PlaylistAPI.remove(selectedPlaylist.uri, [{ uid: trackToRemove.uid }]);
-
     setPlaylistTracks((prevTracks) =>
       prevTracks.filter(
         (track) => !(track.uri === trackToRemove.uri && track.uid === trackToRemove.uid),
@@ -245,18 +227,15 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     );
   };
 
-  const handleDeleteTrack = async (duplicateCategory, groupIndex, trackToRemove) => {
+  const handleDeleteTrack = async (duplicateCategory, _groupIndex, trackToRemove) => {
     const settings = getSettings();
-    const shouldConfirm = settings.confirmSettings[duplicateCategory];
-
-    if (!shouldConfirm) {
+    if (!settings.confirmSettings[duplicateCategory]) {
       await removeTrackFromPlaylist(trackToRemove);
       return;
     }
-
     ConfirmDialog({
       titleText: "Remove Track",
-      descriptionText: `Are you sure you want to remove "${trackToRemove.name}"? This cannot be undone.`,
+      descriptionText: `Are you sure you want to remove \"${trackToRemove.name}\"? This cannot be undone.`,
       confirmText: "Remove",
       onConfirm: () => removeTrackFromPlaylist(trackToRemove),
     });
@@ -285,16 +264,12 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
         setIsrcs(fetchedIsrcMapResult);
       }
     };
-
     loadData();
   }, [selectedPlaylist]);
 
   useEffect(() => {
-    if (playlistTracks.length > 0) {
-      findPotentialDuplicates(playlistTracks, playCounts, isrcs);
-    } else {
-      setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
-    }
+    if (playlistTracks.length > 0) findPotentialDuplicates(playlistTracks, playCounts, isrcs);
+    else setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
   }, [playlistTracks, playCounts, isrcs, findPotentialDuplicates]);
 
   const TrackDetails = memo(({ track }) => {
@@ -303,7 +278,6 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     const trackIsrc = isrcs.get(track.uri) || "N/A";
     const albumName = track.album?.name || "N/A";
     const artists = track.artists?.map((a) => a.name).join(", ") || "N/A";
-
     return (
       <div className="track-details">
         <div className="track-details__line">
@@ -323,33 +297,25 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     const [position, setPosition] = useState(0);
     const [duration, setDuration] = useState(1);
     const isSeeking = useRef(false);
-    const latestPosition = useRef(position);
-    const latestDuration = useRef(duration);
 
-    useEffect(() => {
-      latestPosition.current = position;
-    }, [position]);
-
-    useEffect(() => {
-      latestDuration.current = duration;
-    }, [duration]);
+    const formatTime = (ms) => {
+      if (Number.isNaN(ms) || ms < 0) return "0:00";
+      const totalSeconds = Math.floor(ms / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    };
 
     useEffect(() => {
       const updateListener = (event) => {
-        if (!event?.data) return;
         const newPlayerState = event.data;
         setPlayerState(newPlayerState);
-
         if (newPlayerState.item?.uri === trackUri) {
-          if (!isSeeking.current) {
-            setPosition(newPlayerState.positionAsOfTimestamp);
-          }
+          if (!isSeeking.current) setPosition(newPlayerState.positionAsOfTimestamp);
           setDuration(newPlayerState.duration);
         } else {
-          if (latestPosition.current !== 0 || latestDuration.current !== 1) {
-            setPosition(0);
-            setDuration(1);
-          }
+          setPosition(0);
+          setDuration(1);
         }
       };
 
@@ -360,40 +326,28 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     }, [trackUri]);
 
     useEffect(() => {
-      const isCurrentlyPlayingThisTrack =
-        !playerState.isPaused && playerState.item?.uri === trackUri;
-
-      if (!isCurrentlyPlayingThisTrack) {
+      const isPlaying = !playerState.isPaused && playerState.item?.uri === trackUri;
+      if (!isPlaying) {
         setPosition(0);
         setDuration(1);
         return;
       }
-
       const interval = setInterval(() => {
         if (!isSeeking.current) {
           const newPosition =
             playerState.positionAsOfTimestamp + (Date.now() - playerState.timestamp);
-          if (newPosition < playerState.duration) {
-            setPosition(newPosition);
-          } else {
-            setPosition(playerState.duration);
-          }
+          setPosition(newPosition < playerState.duration ? newPosition : playerState.duration);
         }
       }, 1000);
-
       return () => clearInterval(interval);
     }, [playerState, trackUri]);
 
     const togglePlay = useCallback(() => {
       const currentPlayingTrack = playerState.item?.uri;
-      const isPlayerPaused = playerState.isPaused;
-
       if (currentPlayingTrack === trackUri) {
-        if (isPlayerPaused) {
-          Spicetify.Platform.PlayerAPI.resume();
-        } else {
-          Spicetify.Platform.PlayerAPI.pause();
-        }
+        playerState.isPaused
+          ? Spicetify.Platform.PlayerAPI.resume()
+          : Spicetify.Platform.PlayerAPI.pause();
       } else {
         Spicetify.Platform.PlayerAPI.play({ uri: trackUri }, {}, {});
       }
@@ -404,16 +358,25 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       setPosition(newPosition);
     }, []);
 
-    const handleSliderSeek = useCallback(() => {
-      if (isSeeking.current) {
-        Spicetify.Platform.PlayerAPI.seekTo(position);
-        isSeeking.current = false;
-      }
-    }, [position]);
-
     const isPlaying = !playerState.isPaused;
     const isCurrentlyPlayingThisTrack = isPlaying && playerState.item?.uri === trackUri;
 
+    const handleSliderSeek = useCallback(async () => {
+      if (isSeeking.current) {
+        if (!isCurrentlyPlayingThisTrack) {
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          console.log("playing track");
+          Spicetify.Platform.PlayerAPI.play({ uri: trackUri }, {}, {});
+        }
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        console.log("seekingtrack", position);
+        Spicetify.Platform.PlayerAPI.seekTo(position);
+        isSeeking.current = false;
+      }
+    }, [position, isCurrentlyPlayingThisTrack, trackUri]);
+
+    const leftText = formatTime(position);
+    const rightText = formatTime(duration);
     return (
       <div className="duplicate-group__playback-controls">
         <button className="duplicate-group__playback-button" onClick={togglePlay}>
@@ -424,7 +387,8 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
           max={duration}
           onChange={handleSliderChange}
           onSeek={handleSliderSeek}
-          disabled={!isCurrentlyPlayingThisTrack}
+          leftText={leftText}
+          rightText={rightText}
         />
       </div>
     );
@@ -432,10 +396,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
 
   const renderDuplicateGroupList = (groupTitle, groups, duplicateCategory) => {
     const settings = getSettings();
-    if (!settings.groupSettings[duplicateCategory]) {
-      return null;
-    }
-
+    if (!settings.groupSettings[duplicateCategory]) return null;
     return (
       <div className="duplicate-group">
         <p className="duplicate-group__heading">
@@ -450,7 +411,6 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
                 className={`duplicate-group__item duplicate-group__item--${duplicateCategory}`}
               >
                 <div
-                  key={`${duplicateGroup.mainTrack.uri}-${duplicateGroup.mainTrack.uid || groupIndex}`}
                   className={`duplicate-group__duplicate-item duplicate-group__item--${duplicateCategory}`}
                 >
                   <div className="duplicate-group__duplicate-info">
@@ -462,9 +422,9 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
                     </div>
                     <button
                       className="duplicate-group__delete-button"
-                      onClick={() => {
-                        handleDeleteTrack(duplicateCategory, groupIndex, duplicateGroup.mainTrack);
-                      }}
+                      onClick={() =>
+                        handleDeleteTrack(duplicateCategory, groupIndex, duplicateGroup.mainTrack)
+                      }
                     >
                       Delete
                     </button>
@@ -515,13 +475,12 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       <div className="find-duplicates__header">
         <span className="find-duplicates__header-label">Select Playlist:</span>
         <Dropdown
-          value={selectedPlaylist?.uri || ""}
+          value={selectedPlaylist.uri}
           options={playlistOptions}
           onChange={handlePlaylistChange}
           disabled={ownedPlaylists.length === 0}
         />
       </div>
-
       {selectedPlaylist && (
         <>
           <p className="find-duplicates__details">
