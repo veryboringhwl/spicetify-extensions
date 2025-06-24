@@ -13,7 +13,7 @@ import { getSettings } from "./settings";
 const db = new Dexie("findDupeTracks");
 //dexie multiplies version by 10?
 db.version(0.1).stores({
-  tracks: "&trackUri, trackName, albumUri, playCount, isrc",
+  tracks: "&trackUri, trackName, trackDuration, albumUri, playCount, isrc, ignoreDuplicates",
 });
 
 async function fetchEditablePlaylists() {
@@ -35,6 +35,7 @@ async function fetchPlaylistTracksAndCache(playlistUri) {
         trackUri: item.uri,
         trackName: item.name,
         albumUri: item.album.uri,
+        trackDuration: item.duration.milliseconds,
         playCount: existing?.playCount ?? null,
         isrc: existing?.isrc ?? null,
       });
@@ -141,6 +142,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
   const [ownedPlaylists, setOwnedPlaylists] = useState([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState(initialSelectedPlaylist || null);
   const [playlistTracks, setPlaylistTracks] = useState([]);
+  const [trackDurations, setTrackDurations] = useState(new Map());
   const [playCounts, setPlayCounts] = useState(new Map());
   const [isrcs, setIsrcs] = useState(new Map());
   const [duplicateGroups, setDuplicateGroups] = useState({
@@ -246,6 +248,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
     setPlayCounts(new Map());
     setIsrcs(new Map());
+    setTrackDurations(new Map());
 
     const loadData = async () => {
       if (!selectedPlaylist?.uri) return;
@@ -255,13 +258,25 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       setPlaylistTracks(fetchedTracks);
 
       if (fetchedTracks.length > 0) {
-        const [fetchedPlayCountsResult, fetchedIsrcMapResult] = await Promise.all([
-          fetchPlayCountsForTracksWithCache(fetchedTracks),
-          fetchISRCsForTracksWithCache(fetchedTracks),
-        ]);
+        const [fetchedPlayCountsResult, fetchedIsrcMapResult, fetchedTrackDurationsResult] =
+          await Promise.all([
+            fetchPlayCountsForTracksWithCache(fetchedTracks),
+            fetchISRCsForTracksWithCache(fetchedTracks),
+            (async () => {
+              const durationMap = new Map();
+              const cachedTracksData = await db.tracks.bulkGet(fetchedTracks.map((t) => t.uri));
+              for (const t of cachedTracksData.filter(Boolean)) {
+                if (t?.trackDuration != null) {
+                  durationMap.set(t.trackUri, t.trackDuration);
+                }
+              }
+              return durationMap;
+            })(),
+          ]);
 
         setPlayCounts(fetchedPlayCountsResult);
         setIsrcs(fetchedIsrcMapResult);
+        setTrackDurations(fetchedTrackDurationsResult);
       }
     };
     loadData();
@@ -292,11 +307,11 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     );
   });
 
-  const TrackControls = memo(({ trackUri }) => {
+  const TrackControls = memo(({ trackUri, trackDuration }) => {
     const [playerState, setPlayerState] = useState(Spicetify.Platform.PlayerAPI.getState());
     const [position, setPosition] = useState(0);
     const [duration, setDuration] = useState(1);
-    const isSeeking = useRef(false);
+    const isSliderDragging = useRef(false);
 
     const formatTime = (ms) => {
       if (Number.isNaN(ms) || ms < 0) return "0:00";
@@ -311,9 +326,9 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
         const newPlayerState = event.data;
         setPlayerState(newPlayerState);
         if (newPlayerState.item?.uri === trackUri) {
-          if (!isSeeking.current) setPosition(newPlayerState.positionAsOfTimestamp);
+          if (!isSliderDragging.current) setPosition(newPlayerState.positionAsOfTimestamp);
           setDuration(newPlayerState.duration);
-        } else {
+        } else if (newPlayerState.item?.uri !== trackUri) {
           setPosition(0);
           setDuration(1);
         }
@@ -326,14 +341,18 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     }, [trackUri]);
 
     useEffect(() => {
-      const isPlaying = !playerState.isPaused && playerState.item?.uri === trackUri;
-      if (!isPlaying) {
-        setPosition(0);
-        setDuration(1);
+      const isPlayingThisTrack = playerState.item?.uri === trackUri;
+      const isPlayingAndNotPaused = isPlayingThisTrack && !playerState.isPaused;
+
+      if (!isPlayingAndNotPaused) {
+        if (!isPlayingThisTrack) {
+          setPosition(0);
+          setDuration(1);
+        }
         return;
       }
       const interval = setInterval(() => {
-        if (!isSeeking.current) {
+        if (!isSliderDragging.current) {
           const newPosition =
             playerState.positionAsOfTimestamp + (Date.now() - playerState.timestamp);
           setPosition(newPosition < playerState.duration ? newPosition : playerState.duration);
@@ -354,42 +373,47 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     }, [playerState, trackUri]);
 
     const handleSliderChange = useCallback((newPosition) => {
-      isSeeking.current = true;
+      isSliderDragging.current = true;
       setPosition(newPosition);
     }, []);
 
     const isPlaying = !playerState.isPaused;
     const isCurrentlyPlayingThisTrack = isPlaying && playerState.item?.uri === trackUri;
 
-    const handleSliderSeek = useCallback(async () => {
-      if (isSeeking.current) {
-        if (!isCurrentlyPlayingThisTrack) {
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-          console.log("playing track");
+    const handleSliderRelease = useCallback(() => {
+      if (isSliderDragging.current) {
+        const isSameTrackInPlayer = playerState.item?.uri === trackUri;
+
+        if (!isSameTrackInPlayer) {
           Spicetify.Platform.PlayerAPI.play({ uri: trackUri }, {}, {});
+          // Add a small delay to allow Spotify to switch to the new track before seeking
+          setTimeout(() => {
+            Spicetify.Platform.PlayerAPI.seekTo(position);
+          }, 500); // 500ms delay
+        } else {
+          Spicetify.Platform.PlayerAPI.seekTo(position);
         }
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        console.log("seekingtrack", position);
-        Spicetify.Platform.PlayerAPI.seekTo(position);
-        isSeeking.current = false;
+        isSliderDragging.current = false;
       }
-    }, [position, isCurrentlyPlayingThisTrack, trackUri]);
+    }, [position, trackUri, playerState]);
 
     const leftText = formatTime(position);
-    const rightText = formatTime(duration);
+    const rightText = formatTime(trackDuration || duration);
     return (
       <div className="duplicate-group__playback-controls">
         <button className="duplicate-group__playback-button" onClick={togglePlay}>
           {isCurrentlyPlayingThisTrack ? <Icons.React.pause /> : <Icons.React.play />}
         </button>
+        <span className="slider-time">{leftText}</span>
         <Slider
           value={position}
-          max={duration}
+          min={0}
+          max={trackDuration || duration}
+          step={1}
           onChange={handleSliderChange}
-          onSeek={handleSliderSeek}
-          leftText={leftText}
-          rightText={rightText}
+          onRelease={handleSliderRelease}
         />
+        <span className="slider-time">{rightText}</span>
       </div>
     );
   });
@@ -430,7 +454,10 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
                     </button>
                   </div>
                   <div className="duplicate-group__actions">
-                    <TrackControls trackUri={duplicateGroup.mainTrack.uri} />
+                    <TrackControls
+                      trackUri={duplicateGroup.mainTrack.uri}
+                      trackDuration={trackDurations.get(duplicateGroup.mainTrack.uri)}
+                    />
                   </div>
                 </div>
                 <div className="duplicate-group__duplicates-label">Duplicates:</div>
@@ -453,7 +480,10 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
                         </button>
                       </div>
                       <div className="duplicate-group__actions">
-                        <TrackControls trackUri={dup.uri} />
+                        <TrackControls
+                          trackUri={dup.uri}
+                          trackDuration={trackDurations.get(dup.uri)}
+                        />
                       </div>
                     </div>
                   ))}

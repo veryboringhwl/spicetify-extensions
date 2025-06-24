@@ -5,14 +5,6 @@ import PlaylistDuplicateFinder from "./menu";
 import SettingsMenu from "./settings";
 import "./styles.css";
 
-// TODO:
-// play songs in menu to see if they are duplicates
-// add slider as well
-// Spicetify.Player.origin.play({ uri: "spotify:track:4vYlA6QmEJeakLpipCxNv1" }, {}, {});
-// Spicetify.Player.origin._state.duration
-// Spicetify.Player.origin._state.positionAsOfTimestamp
-// Spicetify.Player.origin._state.positionAsOfTimestamp / Spicetify.Player.origin._state.duration * 100
-// Spicetify.Player.origin.seekTo(163635)
 // add a ignore button to menu so removed from duplicate list
 
 const showDuplicateFinderModal = (selectedPlaylist, initialView = "main") => {
