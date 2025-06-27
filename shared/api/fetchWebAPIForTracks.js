@@ -1,16 +1,16 @@
-async function fetchISRCsForTracks(tracks) {
-  const isrcMap = new Map();
-  const trackUrisToFetch = new Map();
+async function fetchWebAPIForTracks(trackURIs) {
+  const dataMap = new Map();
+  const trackIdsToFetch = new Map();
 
-  for (const track of tracks) {
-    if (track?.uri) {
-      trackUrisToFetch.set(track.uri, Spicetify.URI.fromString(track.uri).id);
+  for (const uri of trackURIs) {
+    if (uri) {
+      trackIdsToFetch.set(uri, Spicetify.URI.fromString(uri).id);
     }
   }
 
   // this is the maximum number spotify allows in a single request
   const batchSize = 50;
-  const batchFetchPromises = Array.from(trackUrisToFetch.values())
+  const batchFetchPromises = Array.from(trackIdsToFetch.values())
     .reduce((batches, id, i) => {
       const batchIndex = Math.floor(i / batchSize);
       batches[batchIndex] = batches[batchIndex] || [];
@@ -22,17 +22,16 @@ async function fetchISRCsForTracks(tracks) {
       const response = await Spicetify.CosmosAsync.get(url);
       if (response?.tracks) {
         for (const track of response.tracks) {
-          const isrc = track?.external_ids?.isrc;
           const trackUri = track?.uri;
-          if (isrc && trackUri) {
-            isrcMap.set(trackUri, isrc);
+          if (trackUri) {
+            dataMap.set(trackUri, track);
           }
         }
       }
     });
 
   await Promise.all(batchFetchPromises);
-  return isrcMap;
+  return dataMap;
 }
 
-export default fetchISRCsForTracks;
+export default fetchWebAPIForTracks;

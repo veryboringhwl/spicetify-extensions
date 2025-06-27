@@ -2,8 +2,8 @@ import Dexie from "https://esm.sh/dexie";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 import fetchAllLibraryContents from "../../../shared/api/fetchAllLibraryContents";
 import fetchAllPlaylistTracks from "../../../shared/api/fetchAllPlaylistTracks";
-import fetchISRCsForTracks from "../../../shared/api/fetchISRCsForTracks";
-import fetchPlayCountsForTracks from "../../../shared/api/fetchPlayCountsForTracks";
+import fetchGraphQLForAlbumTracks from "../../../shared/api/fetchGraphQLForAlbumTracks";
+import fetchWebAPIForTracks from "../../../shared/api/fetchWebAPIForTracks";
 import ConfirmDialog from "../../../shared/components/confirmDialog";
 import Dropdown from "../../../shared/components/dropdown";
 import Icons from "../../../shared/components/icons";
@@ -13,7 +13,8 @@ import { getSettings } from "./settings";
 const db = new Dexie("findDupeTracks");
 //dexie multiplies version by 10?
 db.version(0.1).stores({
-  tracks: "&trackUri, trackName, trackDuration, albumUri, playCount, isrc, ignoreDuplicates",
+  tracks:
+    "&trackUri, trackName, trackDuration, albumUri, trackPlayCount, trackIsrc, ignoreDuplicates",
 });
 
 async function fetchEditablePlaylists() {
@@ -35,9 +36,9 @@ async function fetchPlaylistTracksAndCache(playlistUri) {
         trackUri: item.uri,
         trackName: item.name,
         albumUri: item.album.uri,
-        trackDuration: item.duration.milliseconds,
-        playCount: existing?.playCount ?? null,
-        isrc: existing?.isrc ?? null,
+        trackDuration: existing?.duration.milliseconds ?? null,
+        trackPlayCount: existing?.trackPlayCount ?? null,
+        trackIsrc: existing?.trackIsrc ?? null,
       });
     }
     return acc;
@@ -63,20 +64,23 @@ async function fetchISRCsForTracksWithCache(tracks) {
 
   for (const track of validTracks) {
     const cachedTrack = cachedTracksMap.get(track.uri);
-    if (cachedTrack?.isrc) {
-      isrcMap.set(track.uri, cachedTrack.isrc);
+    if (cachedTrack?.trackIsrc) {
+      isrcMap.set(track.uri, cachedTrack.trackIsrc);
     } else {
       tracksToFetch.push(track);
     }
   }
 
   if (tracksToFetch.length > 0) {
-    const fetchedIsrcMapFromAPI = await fetchISRCsForTracks(tracksToFetch);
+    const fetchedTracksFromAPI = await fetchWebAPIForTracks(tracksToFetch.map((t) => t.uri));
     const updatesForDb = [];
 
-    for (const [trackUri, isrc] of fetchedIsrcMapFromAPI.entries()) {
-      isrcMap.set(trackUri, isrc);
-      updatesForDb.push({ key: trackUri, changes: { isrc } });
+    for (const [trackUri, track] of fetchedTracksFromAPI.entries()) {
+      const trackIsrc = track?.external_ids?.isrc;
+      if (trackIsrc) {
+        isrcMap.set(trackUri, trackIsrc);
+        updatesForDb.push({ key: trackUri, changes: { trackIsrc } });
+      }
     }
 
     if (updatesForDb.length > 0) {
@@ -86,43 +90,60 @@ async function fetchISRCsForTracksWithCache(tracks) {
   return isrcMap;
 }
 
-async function fetchPlayCountsForTracksWithCache(tracks) {
-  const playCountMap = new Map();
+async function fetchTrackPlayCountsAndDurationForTracksWithCache(tracks) {
+  const trackPlayCountMap = new Map();
+  const trackDurationMap = new Map();
   const tracksToFetch = [];
   const validTracks = tracks.filter((track) => track?.uri);
   const trackUris = validTracks.map((track) => track.uri);
 
-  if (trackUris.length === 0) return playCountMap;
+  if (trackUris.length === 0) return { trackPlayCountMap, trackDurationMap };
 
   const cachedTracksData = await db.tracks.bulkGet(trackUris);
   const cachedTracksMap = new Map(cachedTracksData.filter(Boolean).map((t) => [t.trackUri, t]));
 
   for (const track of validTracks) {
     const cachedTrack = cachedTracksMap.get(track.uri);
-    if (cachedTrack?.playCount != null) {
-      playCountMap.set(track.uri, cachedTrack.playCount);
-    } else {
+    if (cachedTrack?.trackPlayCount != null) {
+      trackPlayCountMap.set(track.uri, cachedTrack.trackPlayCount);
+    }
+    if (cachedTrack?.trackDuration != null) {
+      trackDurationMap.set(track.uri, cachedTrack.trackDuration);
+    }
+    if (cachedTrack?.trackPlayCount == null || cachedTrack?.trackDuration == null) {
       tracksToFetch.push(track);
     }
   }
 
   if (tracksToFetch.length > 0) {
-    const fetchedPlayCountsFromAPI = await fetchPlayCountsForTracks(tracksToFetch);
+    const albumUrisToFetch = new Set(tracksToFetch.map((t) => t.album.uri).filter(Boolean));
+    const fetchedDataFromAPI = await fetchGraphQLForAlbumTracks(albumUrisToFetch);
     const updatesForDb = [];
 
-    for (const [trackUri, playCount] of fetchedPlayCountsFromAPI.entries()) {
-      playCountMap.set(trackUri, playCount);
-      updatesForDb.push({ key: trackUri, changes: { playCount } });
+    for (const [trackUri, track] of fetchedDataFromAPI.entries()) {
+      const trackPlayCount = track.playcount ? Number.parseInt(track.playcount, 10) : null;
+      const trackDuration = track.duration?.totalMilliseconds ?? null;
+
+      if (trackPlayCount !== null) {
+        trackPlayCountMap.set(trackUri, trackPlayCount);
+      }
+      if (trackDuration !== null) {
+        trackDurationMap.set(trackUri, trackDuration);
+      }
+      updatesForDb.push({
+        key: trackUri,
+        changes: { trackPlayCount, trackDuration },
+      });
     }
 
     if (updatesForDb.length > 0) {
       await db.tracks.bulkUpdate(updatesForDb);
     }
   }
-  return playCountMap;
+  return { trackPlayCountMap, trackDurationMap };
 }
 
-const getNumericPlayCount = (trackUri, playCounts) => playCounts.get(trackUri) ?? 0;
+const getNumericTrackPlayCount = (trackUri, trackPlayCounts) => trackPlayCounts.get(trackUri) ?? 0;
 
 const normalizeForSimilarity = (name) => {
   const settings = getSettings();
@@ -142,9 +163,9 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
   const [ownedPlaylists, setOwnedPlaylists] = useState([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState(initialSelectedPlaylist || null);
   const [playlistTracks, setPlaylistTracks] = useState([]);
+  const [trackPlayCounts, setTrackPlayCounts] = useState(new Map());
   const [trackDurations, setTrackDurations] = useState(new Map());
-  const [playCounts, setPlayCounts] = useState(new Map());
-  const [isrcs, setIsrcs] = useState(new Map());
+  const [trackIsrcs, setTrackIsrcs] = useState(new Map());
   const [duplicateGroups, setDuplicateGroups] = useState({
     exact: [],
     isrc: [],
@@ -170,7 +191,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     if (newPlaylist) setSelectedPlaylist(newPlaylist);
   };
 
-  const findPotentialDuplicates = useCallback((tracks, playCountMap, isrcMap) => {
+  const findPotentialDuplicates = useCallback((tracks, trackPlayCountMap, trackIsrcMap) => {
     const processedUris = new Set();
     const groupAndFilter = (list, keyFn, normalizer) => {
       const groups = new Map();
@@ -189,7 +210,8 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
         if (group.length > 1) {
           group.sort(
             (a, b) =>
-              getNumericPlayCount(b.uri, playCountMap) - getNumericPlayCount(a.uri, playCountMap),
+              getNumericTrackPlayCount(b.uri, trackPlayCountMap) -
+              getNumericTrackPlayCount(a.uri, trackPlayCountMap),
           );
 
           for (const t of group) {
@@ -208,7 +230,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       ),
       isrc: groupAndFilter(
         tracks,
-        (t) => isrcMap.get(t.uri),
+        (t) => trackIsrcMap.get(t.uri),
         (k) => k,
       ),
       likely: groupAndFilter(
@@ -246,8 +268,8 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
   useEffect(() => {
     setPlaylistTracks([]);
     setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
-    setPlayCounts(new Map());
-    setIsrcs(new Map());
+    setTrackPlayCounts(new Map());
+    setTrackIsrcs(new Map());
     setTrackDurations(new Map());
 
     const loadData = async () => {
@@ -258,39 +280,30 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       setPlaylistTracks(fetchedTracks);
 
       if (fetchedTracks.length > 0) {
-        const [fetchedPlayCountsResult, fetchedIsrcMapResult, fetchedTrackDurationsResult] =
+        const [fetchedTrackPlayCountsAndDurationResult, fetchedTrackIsrcMapResult] =
           await Promise.all([
-            fetchPlayCountsForTracksWithCache(fetchedTracks),
+            fetchTrackPlayCountsAndDurationForTracksWithCache(fetchedTracks),
             fetchISRCsForTracksWithCache(fetchedTracks),
-            (async () => {
-              const durationMap = new Map();
-              const cachedTracksData = await db.tracks.bulkGet(fetchedTracks.map((t) => t.uri));
-              for (const t of cachedTracksData.filter(Boolean)) {
-                if (t?.trackDuration != null) {
-                  durationMap.set(t.trackUri, t.trackDuration);
-                }
-              }
-              return durationMap;
-            })(),
           ]);
 
-        setPlayCounts(fetchedPlayCountsResult);
-        setIsrcs(fetchedIsrcMapResult);
-        setTrackDurations(fetchedTrackDurationsResult);
+        setTrackPlayCounts(fetchedTrackPlayCountsAndDurationResult.trackPlayCountMap);
+        setTrackDurations(fetchedTrackPlayCountsAndDurationResult.trackDurationMap);
+        setTrackIsrcs(fetchedTrackIsrcMapResult);
       }
     };
     loadData();
   }, [selectedPlaylist]);
 
   useEffect(() => {
-    if (playlistTracks.length > 0) findPotentialDuplicates(playlistTracks, playCounts, isrcs);
+    if (playlistTracks.length > 0)
+      findPotentialDuplicates(playlistTracks, trackPlayCounts, trackIsrcs);
     else setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
-  }, [playlistTracks, playCounts, isrcs, findPotentialDuplicates]);
+  }, [playlistTracks, trackPlayCounts, trackIsrcs, findPotentialDuplicates]);
 
   const TrackDetails = memo(({ track }) => {
-    const playCount = playCounts.get(track.uri);
-    const displayCount = playCount != null ? playCount.toLocaleString() : "N/A";
-    const trackIsrc = isrcs.get(track.uri) || "N/A";
+    const trackPlayCount = trackPlayCounts.get(track.uri);
+    const displayCount = trackPlayCount != null ? trackPlayCount.toLocaleString() : "N/A";
+    const trackIsrc = trackIsrcs.get(track.uri) || "N/A";
     const albumName = track.album?.name || "N/A";
     const artists = track.artists?.map((a) => a.name).join(", ") || "N/A";
     return (
@@ -386,10 +399,9 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
 
         if (!isSameTrackInPlayer) {
           Spicetify.Platform.PlayerAPI.play({ uri: trackUri }, {}, {});
-          // Add a small delay to allow Spotify to switch to the new track before seeking
           setTimeout(() => {
             Spicetify.Platform.PlayerAPI.seekTo(position);
-          }, 500); // 500ms delay
+          }, 500);
         } else {
           Spicetify.Platform.PlayerAPI.seekTo(position);
         }

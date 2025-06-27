@@ -6,7 +6,6 @@ async function fetchAllPlaylistTracks(playlistUri) {
 
   return {
     items: response.items,
-    totalLength: response.totalLength,
   };
 }
 
