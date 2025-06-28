@@ -8,6 +8,7 @@ import ConfirmDialog from "../../../shared/components/confirmDialog";
 import Dropdown from "../../../shared/components/dropdown";
 import Icons from "../../../shared/components/icons";
 import Slider from "../../../shared/components/slider";
+import usePlayer from "../../../shared/hooks/usePlayer";
 import { getSettings } from "./settings";
 
 const db = new Dexie("findDupeTracks");
@@ -90,7 +91,7 @@ async function fetchISRCsForTracksWithCache(tracks) {
   return isrcMap;
 }
 
-async function fetchTrackPlayCountsAndDurationForTracksWithCache(tracks) {
+async function fetchPlayCountsAndDurationForTracksWithCache(tracks) {
   const trackPlayCountMap = new Map();
   const trackDurationMap = new Map();
   const tracksToFetch = [];
@@ -158,6 +159,170 @@ const normalizeForSimilarity = (name) => {
     .replace(/\s+/g, " ")
     .trim();
 };
+
+const TrackDetails = memo(({ track, trackPlayCounts, trackIsrcs }) => {
+  const trackPlayCount = trackPlayCounts.get(track.uri);
+  const displayCount = trackPlayCount != null ? trackPlayCount.toLocaleString() : "N/A";
+  const trackIsrc = trackIsrcs.get(track.uri) || "N/A";
+  const albumName = track.album?.name || "N/A";
+  const artists = track.artists?.map((a) => a.name).join(", ") || "N/A";
+  return (
+    <div className="track-details">
+      <div className="track-details__line">
+        <span className="track-details__artists"> Artists: {artists}</span>
+        <span className="track-details__album"> Album: {albumName}</span>
+      </div>
+      <div className="track-details__line">
+        <span className="track-details__playcount"> Plays: {displayCount}</span>
+        <span className="track-details__isrc"> ISRC: {trackIsrc}</span>
+      </div>
+    </div>
+  );
+});
+
+const TrackControls = memo(({ trackUri, trackDuration }) => {
+  const {
+    position,
+    duration,
+    isCurrentlyPlayingThisTrack,
+    togglePlay,
+    handleSliderChange,
+    handleSliderRelease,
+  } = usePlayer(trackUri, trackDuration);
+
+  const formatTime = (ms) => {
+    if (Number.isNaN(ms) || ms < 0) return "N/A";
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
+
+  const leftText = formatTime(position);
+  const rightText = formatTime(duration);
+
+  return (
+    <div className="duplicate-group__playback-controls">
+      <button type="button" className="duplicate-group__playback-button" onClick={togglePlay}>
+        {isCurrentlyPlayingThisTrack ? <Icons.React.pause /> : <Icons.React.play />}
+      </button>
+      <span className="slider-time">{leftText}</span>
+      <Slider
+        value={position}
+        min={0}
+        max={duration}
+        step={1}
+        onChange={handleSliderChange}
+        onRelease={handleSliderRelease}
+      />
+      <span className="slider-time">{rightText}</span>
+    </div>
+  );
+});
+
+const DuplicateItem = memo(
+  ({
+    track,
+    category,
+    groupIndex,
+    onDelete,
+    isSource,
+    trackPlayCounts,
+    trackIsrcs,
+    trackDurations,
+  }) => (
+    <div className={`duplicate-group__duplicate-item duplicate-group__item--${category}`}>
+      <div className="duplicate-group__duplicate-info">
+        <div className="duplicate-group__duplicate-content">
+          <span className="duplicate-group__duplicate-name">
+            {isSource ? "Source: " : ""}
+            {track.name}
+          </span>
+          <TrackDetails track={track} trackPlayCounts={trackPlayCounts} trackIsrcs={trackIsrcs} />
+        </div>
+        <button
+          type="button"
+          className="duplicate-group__delete-button"
+          onClick={() => onDelete(category, groupIndex, track)}
+        >
+          Delete
+        </button>
+      </div>
+      <div className="duplicate-group__actions">
+        <TrackControls trackUri={track.uri} trackDuration={trackDurations.get(track.uri)} />
+      </div>
+    </div>
+  ),
+);
+
+const DuplicateGroup = memo(
+  ({ group, category, groupIndex, onDelete, trackPlayCounts, trackIsrcs, trackDurations }) => (
+    <div
+      key={`${group.mainTrack.uri}-${group.mainTrack.uid || groupIndex}`}
+      className={`duplicate-group__item duplicate-group__item--${category}`}
+    >
+      <DuplicateItem
+        track={group.mainTrack}
+        category={category}
+        groupIndex={groupIndex}
+        onDelete={onDelete}
+        isSource
+        trackPlayCounts={trackPlayCounts}
+        trackIsrcs={trackIsrcs}
+        trackDurations={trackDurations}
+      />
+      <div className="duplicate-group__duplicates-label">Duplicates:</div>
+      <div className="duplicate-group__duplicates-list">
+        {group.duplicates.map((dup) => (
+          <DuplicateItem
+            key={`${dup.uri}-${dup.uid || dup.uri}`}
+            track={dup}
+            category={category}
+            groupIndex={groupIndex}
+            onDelete={onDelete}
+            trackPlayCounts={trackPlayCounts}
+            trackIsrcs={trackIsrcs}
+            trackDurations={trackDurations}
+          />
+        ))}
+      </div>
+    </div>
+  ),
+);
+
+const DuplicateGroupList = memo(
+  ({ title, groups, category, onDelete, trackPlayCounts, trackIsrcs, trackDurations }) => {
+    const settings = getSettings();
+    if (!settings.groupSettings[category]) return null;
+
+    return (
+      <div className="duplicate-group">
+        <p className="duplicate-group__heading">
+          <div className="duplicate-group__heading-title">{title}</div>
+          <div className="duplicate-group__heading-length">{groups.length} found</div>
+        </p>
+        {groups.length > 0 ? (
+          <div className="duplicate-group__list">
+            {groups.map((group, index) => (
+              <DuplicateGroup
+                key={`${group.mainTrack.uri}-${index}`}
+                group={group}
+                category={category}
+                groupIndex={index}
+                onDelete={onDelete}
+                trackPlayCounts={trackPlayCounts}
+                trackIsrcs={trackIsrcs}
+                trackDurations={trackDurations}
+              />
+            ))}
+          </div>
+        ) : (
+          <p>No duplicates found in this category.</p>
+        )}
+      </div>
+    );
+  },
+);
 
 function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) {
   const [ownedPlaylists, setOwnedPlaylists] = useState([]);
@@ -259,7 +424,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
     }
     ConfirmDialog({
       titleText: "Remove Track",
-      descriptionText: `Are you sure you want to remove \"${trackToRemove.name}\"? This cannot be undone.`,
+      descriptionText: `Are you sure you want to remove "${trackToRemove.name}"? This cannot be undone.`,
       confirmText: "Remove",
       onConfirm: () => removeTrackFromPlaylist(trackToRemove),
     });
@@ -282,7 +447,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       if (fetchedTracks.length > 0) {
         const [fetchedTrackPlayCountsAndDurationResult, fetchedTrackIsrcMapResult] =
           await Promise.all([
-            fetchTrackPlayCountsAndDurationForTracksWithCache(fetchedTracks),
+            fetchPlayCountsAndDurationForTracksWithCache(fetchedTracks),
             fetchISRCsForTracksWithCache(fetchedTracks),
           ]);
 
@@ -295,220 +460,12 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
   }, [selectedPlaylist]);
 
   useEffect(() => {
-    if (playlistTracks.length > 0)
+    if (playlistTracks.length > 0) {
       findPotentialDuplicates(playlistTracks, trackPlayCounts, trackIsrcs);
-    else setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
+    } else {
+      setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
+    }
   }, [playlistTracks, trackPlayCounts, trackIsrcs, findPotentialDuplicates]);
-
-  const TrackDetails = memo(({ track }) => {
-    const trackPlayCount = trackPlayCounts.get(track.uri);
-    const displayCount = trackPlayCount != null ? trackPlayCount.toLocaleString() : "N/A";
-    const trackIsrc = trackIsrcs.get(track.uri) || "N/A";
-    const albumName = track.album?.name || "N/A";
-    const artists = track.artists?.map((a) => a.name).join(", ") || "N/A";
-    return (
-      <div className="track-details">
-        <div className="track-details__line">
-          <span className="track-details__artists"> Artists: {artists}</span>
-          <span className="track-details__album"> Album: {albumName}</span>
-        </div>
-        <div className="track-details__line">
-          <span className="track-details__playcount"> Plays: {displayCount}</span>
-          <span className="track-details__isrc"> ISRC: {trackIsrc}</span>
-        </div>
-      </div>
-    );
-  });
-
-  const TrackControls = memo(({ trackUri, trackDuration }) => {
-    const [playerState, setPlayerState] = useState(Spicetify.Platform.PlayerAPI.getState());
-    const [position, setPosition] = useState(0);
-    const [duration, setDuration] = useState(1);
-    const isSliderDragging = useRef(false);
-
-    const formatTime = (ms) => {
-      if (Number.isNaN(ms) || ms < 0) return "0:00";
-      const totalSeconds = Math.floor(ms / 1000);
-      const minutes = Math.floor(totalSeconds / 60);
-      const seconds = totalSeconds % 60;
-      return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-    };
-
-    useEffect(() => {
-      const updateListener = (event) => {
-        const newPlayerState = event.data;
-        setPlayerState(newPlayerState);
-        if (newPlayerState.item?.uri === trackUri) {
-          if (!isSliderDragging.current) setPosition(newPlayerState.positionAsOfTimestamp);
-          setDuration(newPlayerState.duration);
-        } else if (newPlayerState.item?.uri !== trackUri) {
-          setPosition(0);
-          setDuration(1);
-        }
-      };
-
-      Spicetify.Platform.PlayerAPI._events.addListener("update", updateListener);
-      return () => {
-        Spicetify.Platform.PlayerAPI._events.removeListener("update", updateListener);
-      };
-    }, [trackUri]);
-
-    useEffect(() => {
-      const isPlayingThisTrack = playerState.item?.uri === trackUri;
-      const isPlayingAndNotPaused = isPlayingThisTrack && !playerState.isPaused;
-
-      if (!isPlayingAndNotPaused) {
-        if (!isPlayingThisTrack) {
-          setPosition(0);
-          setDuration(1);
-        }
-        return;
-      }
-      const interval = setInterval(() => {
-        if (!isSliderDragging.current) {
-          const newPosition =
-            playerState.positionAsOfTimestamp + (Date.now() - playerState.timestamp);
-          setPosition(newPosition < playerState.duration ? newPosition : playerState.duration);
-        }
-      }, 1000);
-      return () => clearInterval(interval);
-    }, [playerState, trackUri]);
-
-    const togglePlay = useCallback(() => {
-      const currentPlayingTrack = playerState.item?.uri;
-      if (currentPlayingTrack === trackUri) {
-        playerState.isPaused
-          ? Spicetify.Platform.PlayerAPI.resume()
-          : Spicetify.Platform.PlayerAPI.pause();
-      } else {
-        Spicetify.Platform.PlayerAPI.play({ uri: trackUri }, {}, {});
-      }
-    }, [playerState, trackUri]);
-
-    const handleSliderChange = useCallback((newPosition) => {
-      isSliderDragging.current = true;
-      setPosition(newPosition);
-    }, []);
-
-    const isPlaying = !playerState.isPaused;
-    const isCurrentlyPlayingThisTrack = isPlaying && playerState.item?.uri === trackUri;
-
-    const handleSliderRelease = useCallback(() => {
-      if (isSliderDragging.current) {
-        const isSameTrackInPlayer = playerState.item?.uri === trackUri;
-
-        if (!isSameTrackInPlayer) {
-          Spicetify.Platform.PlayerAPI.play({ uri: trackUri }, {}, {});
-          setTimeout(() => {
-            Spicetify.Platform.PlayerAPI.seekTo(position);
-          }, 500);
-        } else {
-          Spicetify.Platform.PlayerAPI.seekTo(position);
-        }
-        isSliderDragging.current = false;
-      }
-    }, [position, trackUri, playerState]);
-
-    const leftText = formatTime(position);
-    const rightText = formatTime(trackDuration || duration);
-    return (
-      <div className="duplicate-group__playback-controls">
-        <button className="duplicate-group__playback-button" onClick={togglePlay}>
-          {isCurrentlyPlayingThisTrack ? <Icons.React.pause /> : <Icons.React.play />}
-        </button>
-        <span className="slider-time">{leftText}</span>
-        <Slider
-          value={position}
-          min={0}
-          max={trackDuration || duration}
-          step={1}
-          onChange={handleSliderChange}
-          onRelease={handleSliderRelease}
-        />
-        <span className="slider-time">{rightText}</span>
-      </div>
-    );
-  });
-
-  const renderDuplicateGroupList = (groupTitle, groups, duplicateCategory) => {
-    const settings = getSettings();
-    if (!settings.groupSettings[duplicateCategory]) return null;
-    return (
-      <div className="duplicate-group">
-        <p className="duplicate-group__heading">
-          <div className="duplicate-group__heading-title">{groupTitle}</div>
-          <div className="duplicate-group__heading-length">{groups.length} found</div>
-        </p>
-        {groups.length > 0 ? (
-          <div className="duplicate-group__list">
-            {groups.map((duplicateGroup, groupIndex) => (
-              <div
-                key={`${duplicateGroup.mainTrack.uri}-${duplicateGroup.mainTrack.uid || groupIndex}`}
-                className={`duplicate-group__item duplicate-group__item--${duplicateCategory}`}
-              >
-                <div
-                  className={`duplicate-group__duplicate-item duplicate-group__item--${duplicateCategory}`}
-                >
-                  <div className="duplicate-group__duplicate-info">
-                    <div className="duplicate-group__duplicate-content">
-                      <span className="duplicate-group__duplicate-name">
-                        Source: {duplicateGroup.mainTrack.name}
-                      </span>
-                      <TrackDetails track={duplicateGroup.mainTrack} />
-                    </div>
-                    <button
-                      className="duplicate-group__delete-button"
-                      onClick={() =>
-                        handleDeleteTrack(duplicateCategory, groupIndex, duplicateGroup.mainTrack)
-                      }
-                    >
-                      Delete
-                    </button>
-                  </div>
-                  <div className="duplicate-group__actions">
-                    <TrackControls
-                      trackUri={duplicateGroup.mainTrack.uri}
-                      trackDuration={trackDurations.get(duplicateGroup.mainTrack.uri)}
-                    />
-                  </div>
-                </div>
-                <div className="duplicate-group__duplicates-label">Duplicates:</div>
-                <div className="duplicate-group__duplicates-list">
-                  {duplicateGroup.duplicates.map((dup) => (
-                    <div
-                      key={`${dup.uri}-${dup.uid || dup.uri}`}
-                      className="duplicate-group__duplicate-item"
-                    >
-                      <div className="duplicate-group__duplicate-info">
-                        <div className="duplicate-group__duplicate-content">
-                          <span className="duplicate-group__duplicate-name">{dup.name}</span>
-                          <TrackDetails track={dup} />
-                        </div>
-                        <button
-                          className="duplicate-group__delete-button"
-                          onClick={() => handleDeleteTrack(duplicateCategory, groupIndex, dup)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                      <div className="duplicate-group__actions">
-                        <TrackControls
-                          trackUri={dup.uri}
-                          trackDuration={trackDurations.get(dup.uri)}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>No duplicates found in this category.</p>
-        )}
-      </div>
-    );
-  };
 
   const playlistOptions = ownedPlaylists.map((p) => ({ value: p.uri, label: p.name }));
 
@@ -517,7 +474,7 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       <div className="find-duplicates__header">
         <span className="find-duplicates__header-label">Select Playlist:</span>
         <Dropdown
-          value={selectedPlaylist.uri}
+          value={selectedPlaylist?.uri}
           options={playlistOptions}
           onChange={handlePlaylistChange}
           disabled={ownedPlaylists.length === 0}
@@ -528,28 +485,42 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
           <p className="find-duplicates__details">
             Playlist: {selectedPlaylist.name} ({playlistTracks.length} tracks analyzed)
           </p>
-          <>
-            {renderDuplicateGroupList(
-              "Exact Duplicates (Same URI)",
-              duplicateGroups.exact,
-              "exact",
-            )}
-            {renderDuplicateGroupList(
-              "ISRC Duplicates (Same Recording)",
-              duplicateGroups.isrc,
-              "isrc",
-            )}
-            {renderDuplicateGroupList(
-              "Likely Duplicates (Same Name)",
-              duplicateGroups.likely,
-              "likely",
-            )}
-            {renderDuplicateGroupList(
-              "Possible Duplicates (Similar Name)",
-              duplicateGroups.possible,
-              "possible",
-            )}
-          </>
+          <DuplicateGroupList
+            title="Exact Duplicates (Same URI)"
+            groups={duplicateGroups.exact}
+            category="exact"
+            onDelete={handleDeleteTrack}
+            trackPlayCounts={trackPlayCounts}
+            trackIsrcs={trackIsrcs}
+            trackDurations={trackDurations}
+          />
+          <DuplicateGroupList
+            title="ISRC Duplicates (Same Recording)"
+            groups={duplicateGroups.isrc}
+            category="isrc"
+            onDelete={handleDeleteTrack}
+            trackPlayCounts={trackPlayCounts}
+            trackIsrcs={trackIsrcs}
+            trackDurations={trackDurations}
+          />
+          <DuplicateGroupList
+            title="Likely Duplicates (Same Name)"
+            groups={duplicateGroups.likely}
+            category="likely"
+            onDelete={handleDeleteTrack}
+            trackPlayCounts={trackPlayCounts}
+            trackIsrcs={trackIsrcs}
+            trackDurations={trackDurations}
+          />
+          <DuplicateGroupList
+            title="Possible Duplicates (Similar Name)"
+            groups={duplicateGroups.possible}
+            category="possible"
+            onDelete={handleDeleteTrack}
+            trackPlayCounts={trackPlayCounts}
+            trackIsrcs={trackIsrcs}
+            trackDurations={trackDurations}
+          />
         </>
       )}
     </div>

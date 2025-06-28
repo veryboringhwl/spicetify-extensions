@@ -52,19 +52,13 @@ const DEFAULT_SETTINGS = {
 };
 
 const loadSettings = () => {
-  try {
-    const savedSettings = localStorage.getItem("findDupeTracks");
-    if (savedSettings) {
-      const parsed = JSON.parse(savedSettings);
-      if (!parsed.defaultNormalizeWords)
-        parsed.defaultNormalizeWords = [...DEFAULT_NORMALIZE_WORDS];
-      return parsed;
-    }
-    return DEFAULT_SETTINGS;
-  } catch (e) {
-    console.error("Error loading settings:", e);
-    return DEFAULT_SETTINGS;
+  const savedSettings = localStorage.getItem("findDupeTracks");
+  if (savedSettings) {
+    const parsed = JSON.parse(savedSettings);
+    if (!parsed.defaultNormalizeWords) parsed.defaultNormalizeWords = [...DEFAULT_NORMALIZE_WORDS];
+    return parsed;
   }
+  return DEFAULT_SETTINGS;
 };
 
 const saveSettings = (settings) => {

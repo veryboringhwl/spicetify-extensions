@@ -27,6 +27,3 @@ async function fetchGraphQLForAlbumTracks(albumURIs) {
 }
 
 export default fetchGraphQLForAlbumTracks;
-// Spicetify.Platform.Registry.resolve(Symbol.for("GraphQLBatchedLoader"))
-// batched graphql??
-// (=new [\w_\$][\w_\$\d]*\.[\w_\$][\w_\$\d]*\("(\w+)","(query|mutation)","[\w\d]{64}"(?:,.*?)?\))
