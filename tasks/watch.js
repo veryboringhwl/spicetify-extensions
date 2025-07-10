@@ -138,19 +138,18 @@ const watchSpotify = async () => {
     spawn("taskkill", ["/F", "/IM", "spotify.exe"]).on("close", resolve),
   );
 
-  const file = fs.readFileSync(path.join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"));
+  const file = fs.readFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"));
   for (const pos of [file.indexOf("app-developer") + 14, file.lastIndexOf("app-developer") + 15]) {
     file[pos] = 50;
   }
-  fs.writeFileSync(path.join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"), file);
+  fs.writeFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"), file);
 
-  spawn(
-    path.join(process.env.APPDATA, "Spotify", "Spotify.exe"),
-    ["--remote-debugging-port=9222"],
-    {
-      detached: true,
-    },
-  );
+  // timeouts as other wise spotify doesnt open
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  spawn(join(process.env.APPDATA, "Spotify", "Spotify.exe"), ["--remote-debugging-port=9222"], {
+    detached: true,
+  });
+  await new Promise((resolve) => setTimeout(resolve, 500));
 };
 
 const reloadSpotify = async () => {
