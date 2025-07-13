@@ -1,86 +1,52 @@
-import { exec, spawn } from "node:child_process";
-import fs from "node:fs";
-import fsPromises from "node:fs/promises";
-import path from "node:path";
-import readline from "node:readline";
-import chokidar from "chokidar";
-import esbuild from "esbuild";
-import externalGlobalPlugin from "esbuild-plugin-external-global";
-import WebSocket from "ws";
+// @deno-types="@esbuild/mod.d.ts"
+import * as esbuild from "@esbuild/mod.js";
+import { ensureDir } from "@std/fs";
+import { join } from "@std/path";
+import { TextLineStream } from "@std/streams";
+import externalGlobalPlugin from "./pluginExternalGlobals.js";
+import inlineCssPlugin from "./pluginInlineCss.js";
+
+const APPDATA = Deno.env.get("APPDATA");
+const LOCALAPPDATA = Deno.env.get("LOCALAPPDATA");
 
 const getCurrentTime = () => {
   const now = new Date();
   return `${now.getHours()}:${now.getMinutes().toString().padStart(2, "0")}`;
 };
 
-const inlineCssPlugin = () => ({
-  name: "inline-css",
-  setup(build) {
-    build.onLoad({ filter: /\.(css)$/ }, async (args) => {
-      const cssContent = await fsPromises.readFile(args.path, "utf8");
-      const escapedCss = JSON.stringify(cssContent.trim());
-      let styleId;
-      const relativePath = path.relative(process.cwd(), args.path);
-      const parts = relativePath.split(path.sep);
-      const prefix = parts[0] === "extensions" ? parts[1] : parts[0];
-      const base = path.basename(args.path);
-      styleId = `${prefix}-${base}`;
-      styleId = styleId.replace(/[^a-zA-Z0-9\-\.]/g, "-");
-      const jsContent = `
-        (function() {
-          const css = ${escapedCss};
-          const styleId = "${styleId}";
-          if (document.getElementById(styleId)) { return; }
-          const style = document.createElement('style');
-          style.id = styleId;
-          style.textContent = css;
-          document.head.appendChild(style);
-        })();
-      `;
-      return {
-        contents: jsContent,
-        loader: "js",
-        resolveDir: path.dirname(args.path),
-      };
-    });
-  },
-});
-
-const getEntryFile = (folderPath) => {
-  const srcPath = path.join(folderPath, "src");
-  const files = ["app.js", "app.jsx", "app.ts", "app.tsx"];
-  return files.map((file) => path.join(srcPath, file)).find(fs.existsSync) || null;
+const getEntryFile = async (folderPath) => {
+  const srcDir = join(folderPath, "src");
+  try {
+    for await (const dirEntry of Deno.readDir(srcDir)) {
+      if (dirEntry.isFile && dirEntry.name.match(/^app\.(js|jsx|ts|tsx)$/)) {
+        return join(srcDir, dirEntry.name);
+      }
+    }
+  } catch (e) {
+    if (!(e instanceof Deno.errors.NotFound)) {
+      throw e;
+    }
+  }
+  return null;
 };
 
 const contexts = {};
 let shouldWatchSpotify = false;
 
 const watchExtension = async (folderName, folderPath) => {
-  const SRC = getEntryFile(folderPath);
+  const SRC = await getEntryFile(folderPath);
   if (!SRC) return;
 
-  const OUT = path.join("dist", `${folderName}.mjs`);
-  const SPICETIFY_OUT = path.join(
-    process.env.APPDATA,
-    "spicetify",
-    "Extensions",
-    `${folderName}.mjs`,
-  );
-  const SPOTIFY_OUT = path.join(
-    process.env.APPDATA,
-    "Spotify",
-    "Apps",
-    "xpui",
-    "extensions",
-    `${folderName}.mjs`,
-  );
+  const OUT = join("dist", `${folderName}.mjs`);
 
-  // bun doesnt have watch yet
+  const SPICETIFY_OUT = join(APPDATA, "spicetify", "Extensions", `${folderName}.mjs`);
+  const SPOTIFY_OUT = join(APPDATA, "Spotify", "Apps", "xpui", "extensions", `${folderName}.mjs`);
+
   contexts[folderName] = await esbuild.context({
     entryPoints: [SRC],
     outfile: OUT,
     format: "esm",
-    target: "es2024",
+    target: "esnext",
     platform: "browser",
     bundle: true,
     sourcemap: "inline",
@@ -89,12 +55,30 @@ const watchExtension = async (folderName, folderPath) => {
     jsx: "automatic",
     external: ["react", "react-dom", "react/jsx-runtime"],
     plugins: [
-      inlineCssPlugin(),
-      externalGlobalPlugin.externalGlobalPlugin({
+      inlineCssPlugin({ compressed: false }),
+      externalGlobalPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",
         "react/jsx-runtime": "Spicetify.ReactJSX",
       }),
+      {
+        name: "on-end-plugin",
+        setup(build) {
+          build.onEnd(async (result) => {
+            if (result.errors.length > 0) {
+              console.error(`\x1b[31mBuild failed for ${folderName}:\x1b[0m`, result.errors);
+            } else {
+              console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m ${folderName} changes detected.`);
+              await Deno.copyFile(OUT, SPICETIFY_OUT);
+              if (shouldWatchSpotify) {
+                await Deno.copyFile(OUT, SPOTIFY_OUT);
+                await reloadSpotify();
+                console.log(`${folderName} was updated.`);
+              }
+            }
+          });
+        },
+      },
     ],
     banner: {
       js: "await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));",
@@ -102,67 +86,83 @@ const watchExtension = async (folderName, folderPath) => {
   });
 
   await contexts[folderName].watch();
-
-  chokidar.watch(OUT).on("change", async () => {
-    console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m ${folderName} changes detected.`);
-    fs.copyFileSync(OUT, SPICETIFY_OUT);
-    if (shouldWatchSpotify) {
-      fs.copyFileSync(OUT, SPOTIFY_OUT);
-      await reloadSpotify();
-      console.log(`${folderName} was updated.`);
-    }
-  });
-
   console.log(`\x1b[36mWatcher started for ${folderName}.\x1b[0m`);
 };
 
 const watchFolders = async () => {
-  const SRC = path.join("extensions");
-  const folders = fs
-    .readdirSync(SRC, { withFileTypes: true })
-    .filter((dir) => dir.isDirectory())
-    .map((dir) => dir.name);
-
-  await Promise.all(
-    folders.map(async (folderName) => {
-      const folderPath = path.join(SRC, folderName);
-      await watchExtension(folderName, folderPath);
-    }),
-  );
+  const extensionsDir = "extensions";
+  const watchPromises = [];
+  for await (const dirEntry of Deno.readDir(extensionsDir)) {
+    if (dirEntry.isDirectory) {
+      const folderPath = join(extensionsDir, dirEntry.name);
+      watchPromises.push(watchExtension(dirEntry.name, folderPath));
+    }
+  }
+  await Promise.all(watchPromises);
 };
 
-const watchSpotify = async () => {
-  console.log("\x1b[36mWatching Spotify\x1b[0m");
-
-  await new Promise((resolve) =>
-    spawn("taskkill", ["/F", "/IM", "spotify.exe"]).on("close", resolve),
-  );
-
-  const file = fs.readFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"));
-  for (const pos of [file.indexOf("app-developer") + 14, file.lastIndexOf("app-developer") + 15]) {
-    file[pos] = 50;
+const killSpotify = async () => {
+  try {
+    await new Deno.Command("taskkill", {
+      args: ["/F", "/IM", "spotify.exe"],
+      stdout: "piped",
+      stderr: "piped",
+    }).output();
+  } catch (_e) {
+    console.log("Spotify not running.");
   }
-  fs.writeFileSync(join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"), file);
+};
 
-  // timeouts as other wise spotify doesnt open
-  await new Promise((resolve) => setTimeout(resolve, 500));
-  spawn(join(process.env.APPDATA, "Spotify", "Spotify.exe"), ["--remote-debugging-port=9222"], {
+const applyExtensions = async () => {
+  const SPOTIFY_OUT = join(APPDATA, "Spotify", "Apps", "xpui", "extensions");
+  const SPICETIFY_OUT = join(APPDATA, "spicetify", "Extensions");
+  const distDir = "dist";
+
+  for await (const file of Deno.readDir(distDir)) {
+    const sourceFile = join(distDir, file.name);
+    await Deno.copyFile(sourceFile, join(SPOTIFY_OUT, file.name));
+    await Deno.copyFile(sourceFile, join(SPICETIFY_OUT, file.name));
+  }
+
+  const bnkPath = join(LOCALAPPDATA, "Spotify", "offline.bnk");
+  try {
+    const file = await Deno.readFile(bnkPath);
+
+    const searchTerm = "app-developer";
+    let index = file.indexOf(searchTerm);
+    while (index !== -1) {
+      file[index + 14] = 50;
+      file[index + 15] = 50;
+      index = file.indexOf(searchTerm, index + 1);
+    }
+    await Deno.writeFile(bnkPath, file);
+  } catch (e) {
+    if (!(e instanceof Deno.errors.NotFound)) {
+      throw e;
+    }
+  }
+};
+
+const startSpotify = () => {
+  const spotifyPath = join(APPDATA, "Spotify", "Spotify.exe");
+  const startCommand = new Deno.Command(spotifyPath, {
+    args: ["--remote-debugging-port=9222"],
     detached: true,
   });
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  startCommand.spawn();
+  console.log("Spotify started.");
 };
 
 const reloadSpotify = async () => {
   try {
     const response = await fetch("http://localhost:9222/json/list");
-    const wsUrl = (await response.json()).find((d) =>
-      d.url.includes("spotify"),
-    )?.webSocketDebuggerUrl;
+    const targets = await response.json();
+    const wsUrl = targets.find((d) => d.url.includes("spotify"))?.webSocketDebuggerUrl;
 
     if (wsUrl) {
-      await new Promise((resolve) => {
-        const ws = new WebSocket(wsUrl);
-        ws.once("open", () => {
+      const ws = new WebSocket(wsUrl);
+      await new Promise((resolve, reject) => {
+        ws.onopen = () => {
           ws.send(
             JSON.stringify({
               id: 0,
@@ -172,27 +172,28 @@ const reloadSpotify = async () => {
           );
           ws.close();
           resolve();
-        });
+        };
+        ws.onerror = (err) => reject(err);
       });
     }
   } catch {
     console.log("Couldnt reload Spotify, attempting to restart");
-    watchSpotify();
+    await killSpotify();
+    startSpotify();
   }
 };
 
-const args = process.argv.slice(2);
+const args = Deno.args;
 const runWatchers = async () => {
   const startTime = performance.now();
 
-  if (!fs.existsSync("dist")) {
-    fs.mkdirSync("dist", { recursive: true });
-  }
+  await ensureDir("dist");
 
   if (args.includes("--dev")) {
-    await watchSpotify();
+    await killSpotify();
+    await applyExtensions();
+    startSpotify();
     shouldWatchSpotify = true;
-    await new Promise((resolve) => setTimeout(resolve, 3000));
   }
 
   await watchFolders();
@@ -204,29 +205,36 @@ const runWatchers = async () => {
 
 runWatchers();
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+const lineStream = Deno.stdin.readable
+  .pipeThrough(new TextDecoderStream())
+  .pipeThrough(new TextLineStream());
 
-rl.on("line", async (input) => {
-  const command = input.trim();
+for await (const line of lineStream) {
+  const command = line.trim();
   if (command === "format") {
     console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m Formatting...`);
-    exec("bunx biome check --fix --unsafe", (error, stdout, stderr) => {
-      console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m ${stdout}`);
+    const biomeCommand = new Deno.Command("deno", {
+      args: ["run", "-A", "npm:@biomejs/biome", "format", "--unsafe", "--write"],
     });
+    const { stdout } = await biomeCommand.output();
+    console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m ${new TextDecoder().decode(stdout)}`);
   } else {
     console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m Executing: ${command}`);
-    exec(command, (error, stdout, stderr) => {
-      if (stdout) {
-        console.log(stdout);
-      }
-    });
+    const [cmd, ...args] = command.split(" ");
+    try {
+      const p = new Deno.Command(cmd, {
+        args,
+        stdout: "inherit",
+        stderr: "inherit",
+        stdin: "inherit",
+      }).spawn();
+      await p.status;
+    } catch (e) {
+      console.log(`\x1b[31m[${getCurrentTime()}]\x1b[0m ${e.message}`);
+    }
   }
-});
-
-rl.on("SIGINT", async () => {
+}
+Deno.addSignalListener("SIGINT", async () => {
   console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m Exiting...`);
 
   for (const [folderName, context] of Object.entries(contexts)) {
@@ -234,5 +242,5 @@ rl.on("SIGINT", async () => {
     console.log(`\x1b[33m${folderName} watcher terminated.\x1b[0m`);
   }
 
-  process.exit(0);
+  Deno.exit(0);
 });

@@ -1,57 +1,35 @@
-import { spawn } from "node:child_process";
-import fs from "node:fs";
-import fsPromises from "node:fs/promises";
-import path from "node:path";
-import esbuild from "esbuild";
-import externalGlobalPlugin from "esbuild-plugin-external-global";
+// @deno-types="@esbuild/mod.d.ts"
+import * as esbuild from "@esbuild/mod.js";
+import { join } from "@std/path";
+import externalGlobalPlugin from "./pluginExternalGlobals.js";
+import inlineCssPlugin from "./pluginInlineCss.js";
 
-const inlineCssPlugin = () => ({
-  name: "inline-css",
-  setup(build) {
-    build.onLoad({ filter: /\.(css)$/ }, async (args) => {
-      const cssContent = await fsPromises.readFile(args.path, "utf8");
-      const escapedCss = JSON.stringify(cssContent.trim());
-      let styleId;
-      const relativePath = path.relative(process.cwd(), args.path);
-      const parts = relativePath.split(path.sep);
-      const prefix = parts[0] === "extensions" ? parts[1] : parts[0];
-      const base = path.basename(args.path);
-      styleId = `${prefix}-${base}`;
-      styleId = styleId.replace(/[^a-zA-Z0-9\-\.]/g, "-");
-      const jsContent = `
-        (function() {
-          const css = ${escapedCss};
-          const styleId = "${styleId}";
-          if (document.getElementById(styleId)) { return; }
-          const style = document.createElement('style');
-          style.id = styleId;
-          style.textContent = css;
-          document.head.appendChild(style);
-        })();
-      `;
-      return {
-        contents: jsContent,
-        loader: "js",
-        resolveDir: path.dirname(args.path),
-      };
-    });
-  },
-});
+const APPDATA = Deno.env.get("APPDATA");
+const LOCALAPPDATA = Deno.env.get("LOCALAPPDATA");
 
-const getEntryFile = (folderPath) => {
-  const srcPath = path.join(folderPath, "src");
-  const files = ["app.js", "app.jsx", "app.ts", "app.tsx"];
-  return files.map((file) => path.join(srcPath, file)).find(fs.existsSync) || null;
+const getEntryFile = async (folderPath) => {
+  const srcDir = join(folderPath, "src");
+  try {
+    for await (const dirEntry of Deno.readDir(srcDir)) {
+      if (dirEntry.isFile && dirEntry.name.match(/^app\.(js|jsx|ts|tsx)$/)) {
+        return join(srcDir, dirEntry.name);
+      }
+    }
+  } catch (e) {
+    if (!(e instanceof Deno.errors.NotFound)) {
+      throw e;
+    }
+  }
+  return null;
 };
 
 const buildExtension = async (folderName, folderPath) => {
-  const SRC = getEntryFile(folderPath);
+  const SRC = await getEntryFile(folderPath);
   if (!SRC) {
     console.warn(`No entry file found for ${folderName}`);
     return;
   }
-  const OUT = path.join("dist", `${folderName}.mjs`);
-  // use mjs as js isnt treated as es module
+  const OUT = join("dist", `${folderName}.mjs`);
   await esbuild.build({
     entryPoints: [SRC],
     outfile: OUT,
@@ -65,8 +43,8 @@ const buildExtension = async (folderName, folderPath) => {
     jsx: "automatic",
     external: ["react", "react-dom", "react/jsx-runtime"],
     plugins: [
-      inlineCssPlugin(),
-      externalGlobalPlugin.externalGlobalPlugin({
+      inlineCssPlugin({ compressed: false }),
+      externalGlobalPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",
         "react/jsx-runtime": "Spicetify.ReactJSX",
@@ -79,60 +57,78 @@ const buildExtension = async (folderName, folderPath) => {
 };
 
 const buildFolders = async () => {
-  const SRC = path.join("extensions");
-  const folders = fs
-    .readdirSync(SRC, { withFileTypes: true })
-    .filter((dir) => dir.isDirectory())
-    .map((dir) => dir.name);
+  const extensionsDir = "extensions";
+  const buildPromises = [];
+  for await (const dirEntry of Deno.readDir(extensionsDir)) {
+    if (dirEntry.isDirectory) {
+      const folderPath = join(extensionsDir, dirEntry.name);
+      buildPromises.push(buildExtension(dirEntry.name, folderPath));
+    }
+  }
+  await Promise.all(buildPromises);
+};
 
-  await Promise.all(
-    folders.map(async (folderName) => {
-      const folderPath = path.join(SRC, folderName);
-      await buildExtension(folderName, folderPath);
-    }),
-  );
+const killSpotify = async () => {
+  try {
+    await new Deno.Command("taskkill", {
+      args: ["/F", "/IM", "spotify.exe"],
+      stdout: "piped",
+      stderr: "piped",
+    }).output();
+  } catch (_e) {
+    console.log("Spotify not running.");
+  }
 };
 
 const applyExtensions = async () => {
-  const killProcess = spawn("taskkill", ["/F", "/IM", "spotify.exe"]);
-  await new Promise((resolve) => killProcess.on("close", resolve));
+  const SPOTIFY_OUT = join(APPDATA, "Spotify", "Apps", "xpui", "extensions");
+  const SPICETIFY_OUT = join(APPDATA, "spicetify", "Extensions");
+  const distDir = "dist";
 
-  const SPOTIFY_OUT = path.join(process.env.APPDATA, "Spotify", "Apps", "xpui", "extensions");
-  const SPICETIFY_OUT = path.join(process.env.APPDATA, "spicetify", "Extensions");
-
-  const OUT = path.join("dist");
-  for (const file of fs.readdirSync(OUT)) {
-    const sourceFile = path.join(OUT, file);
-    fs.copyFileSync(sourceFile, path.join(SPOTIFY_OUT, file));
-    fs.copyFileSync(sourceFile, path.join(SPICETIFY_OUT, file));
+  for await (const file of Deno.readDir(distDir)) {
+    const sourceFile = join(distDir, file.name);
+    await Deno.copyFile(sourceFile, join(SPOTIFY_OUT, file.name));
+    await Deno.copyFile(sourceFile, join(SPICETIFY_OUT, file.name));
   }
 
-  const file = fs.readFileSync(path.join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"));
-  for (const pos of [file.indexOf("app-developer") + 14, file.lastIndexOf("app-developer") + 15]) {
-    file[pos] = 50;
-  }
-  fs.writeFileSync(path.join(process.env.LOCALAPPDATA, "Spotify", "offline.bnk"), file);
+  const bnkPath = join(LOCALAPPDATA, "Spotify", "offline.bnk");
+  const file = await Deno.readFile(bnkPath);
 
-  spawn(path.join(process.env.APPDATA, "Spotify", "Spotify.exe"), {
-    detached: true,
-  });
+  const searchTerm = "app-developer";
+  let index = file.indexOf(searchTerm);
+  while (index !== -1) {
+    file[index + 14] = 50;
+    file[index + 15] = 50;
+    index = file.indexOf(searchTerm, index + 1);
+  }
+  await Deno.writeFile(bnkPath, file);
 };
 
-const args = process.argv.slice(2);
+const startSpotify = () => {
+  const spotifyPath = join(APPDATA, "Spotify", "Spotify.exe");
+  const startCommand = new Deno.Command(spotifyPath, {
+    args: [],
+    detached: true,
+  });
+  startCommand.spawn();
+  console.log("Spotify started.");
+};
 
 const runBuilds = async () => {
   const startTime = performance.now();
 
   await buildFolders();
 
-  if (args.includes("--dev")) {
+  if (Deno.args.includes("--dev")) {
+    await killSpotify();
     await applyExtensions();
+    startSpotify();
   }
 
   const endTime = performance.now();
   const elapsed = ((endTime - startTime) / 1000).toFixed(2);
   console.log(`\x1b[33mAll builds completed in ${elapsed} seconds.\x1b[0m`);
-  process.exit(0);
+  Deno.exit(0);
 };
 
 runBuilds();
