@@ -18,9 +18,9 @@ const Dropdown = memo(({ value, options, onChange, disabled }) => {
     <div className="dropdown">
       <button
         className="dropdown__button"
+        disabled={disabled}
         popovertarget={popoverId}
         popovertargetaction="toggle"
-        disabled={disabled}
         style={{ anchorName: anchorName }}
       >
         <div className="dropdown__text">{selectedLabel}</div>
@@ -29,10 +29,10 @@ const Dropdown = memo(({ value, options, onChange, disabled }) => {
         </div>
       </button>
       <div
-        popover="auto"
-        id={popoverId}
-        ref={popoverRef}
         className="dropdown__menu"
+        id={popoverId}
+        popover="auto"
+        ref={popoverRef}
         style={{
           top: `calc(anchor(${anchorName} bottom) + 4px)`,
           left: `anchor(${anchorName} left)`,
@@ -41,8 +41,8 @@ const Dropdown = memo(({ value, options, onChange, disabled }) => {
       >
         {options.map((option) => (
           <div
-            key={option.value}
             className={`dropdown__option${value === option.value ? " dropdown__option--selected" : ""}`}
+            key={option.value}
             onClick={() => handleSelect(option)}
           >
             {option.label}

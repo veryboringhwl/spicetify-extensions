@@ -26,16 +26,12 @@ function ConfirmDialog({
         configuration={Spicetify.Platform.RemoteConfiguration}
       >
         <Spicetify.ReactComponent.ConfirmDialog
-          titleText={titleText}
-          descriptionText={descriptionText}
+          allowHTML={allowHTML}
           cancelText={cancelText}
+          confirmLabel={confirmLabel}
           confirmText={confirmText}
+          descriptionText={descriptionText}
           isOpen={state}
-          onOutside={() => {
-            setState(false);
-            onOutside?.();
-            menu?.remove();
-          }}
           onClose={() => {
             setState(false);
             onClose?.();
@@ -46,8 +42,12 @@ function ConfirmDialog({
             onConfirm?.();
             menu?.remove();
           }}
-          confirmLabel={confirmLabel}
-          allowHTML={allowHTML}
+          onOutside={() => {
+            setState(false);
+            onOutside?.();
+            menu?.remove();
+          }}
+          titleText={titleText}
         />
       </Spicetify.ReactComponent.RemoteConfigProvider>
     );

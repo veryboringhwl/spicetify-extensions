@@ -1,0 +1,20 @@
+{
+  "tasks": {
+    "release": "deno run -A tasks/release.js",
+    "dev-build": "deno run -A tasks/build.js --dev",
+    "build": "deno run -A tasks/build.js",
+    "dev-watch": "deno run -A tasks/watch.js --dev",
+    "watch": "deno run -A tasks/watch.js",
+    "check": "deno run -A npm:@biomejs/biome check --unsafe --write --max-diagnostics 1000",
+    "format": "deno run -A npm:@biomejs/biome format --unsafe --write"
+  },
+  "imports": {
+    "@biomejs/biome": "npm:@biomejs/biome@^2.1.1",
+    "@esbuild/": "https://deno.land/x/esbuild@v0.25.6/",
+    "@std/fs": "jsr:@std/fs@^1.0.19",
+    "@std/path": "jsr:@std/path@^1.1.1",
+    "@std/streams": "jsr:@std/streams@^1.0.10",
+    "react": "https://esm.sh/react@18.3.1",
+    "react-dom": "https://esm.sh/react-dom@18.3.1"
+  }
+}

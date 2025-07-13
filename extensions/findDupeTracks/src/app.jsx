@@ -53,7 +53,7 @@ const showDuplicateFinderModal = (selectedPlaylist, initialView = "main") => {
 const findDuplicatesMenuItem = new Spicetify.ContextMenuV2.Item({
   children: "Find Duplicates",
   leadingIcon: Icons.HTML.duplicate,
-  onClick: async (context, item, event) => {
+  onClick: async (context, _item, _event) => {
     const parsed = parseProps(context.props);
     const uri = parsed.uri;
     const name = parsed.name;
@@ -64,7 +64,7 @@ const findDuplicatesMenuItem = new Spicetify.ContextMenuV2.Item({
     };
     showDuplicateFinderModal(selectedPlaylist);
   },
-  shouldAdd: (props, trigger, target) => {
+  shouldAdd: (props, _trigger, _target) => {
     const parsed = parseProps(props);
     const type = Spicetify.URI.from(parsed.uri)?.type;
     return type === Spicetify.URI.Type.PLAYLIST || type === Spicetify.URI.Type.PLAYLIST_V2;

@@ -1,12 +1,12 @@
 .modal-overlay {
   position: absolute;
   top: 0;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   background-color: rgba(var(--spice-rgb-shadow), 0.5);
   border-radius: 7px;
 }
@@ -18,17 +18,17 @@
 .modal__container {
   display: flex;
   flex-direction: column;
-  background-color: rgba(var(--spice-rgb-main), 0.9) !important;
-  backdrop-filter: blur(20px) saturate(1.4) brightness(1.2);
   width: 500px;
   max-height: 500px;
+  background-color: rgba(var(--spice-rgb-main), 0.9) !important;
   border-radius: 7px;
   box-shadow: 0 0px 20px rgba(var(--spice-rgb-shadow), 0.5) !important;
+  backdrop-filter: blur(20px) saturate(1.4) brightness(1.2);
 }
 
 .modal__container--large {
-  max-height: 80vh;
   width: clamp(550px, 60vw, 650px);
+  max-height: 80vh;
 }
 
 .modal__header {
@@ -54,17 +54,17 @@
 
 .modal__buttonContainer {
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
 }
 
 .modal__buttonContainer .modal__button {
-  background-color: var(--spice-highlight);
-  border-radius: 8px;
   height: 34px;
-  cursor: pointer;
   padding: 8px;
+  cursor: pointer;
+  background-color: var(--spice-highlight);
   border: 0;
+  border-radius: 8px;
 }
 
 .modal__buttonContainer .modal__button:hover {

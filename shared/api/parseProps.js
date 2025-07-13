@@ -6,7 +6,7 @@ function parseProps(props) {
   const mergeProps = (source, target) => {
     if (!source || typeof source !== "object") return;
     for (const key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
+      if (Object.hasOwn(source, key)) {
         if (target[key] === undefined) {
           target[key] = source[key];
         }

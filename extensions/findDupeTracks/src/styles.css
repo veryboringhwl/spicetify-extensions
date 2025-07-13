@@ -6,12 +6,12 @@
 
   .find-duplicates__header {
     display: flex;
-    align-items: center;
     gap: 10px;
+    align-items: center;
 
     .find-duplicates__header-label {
-      color: var(--spice-text);
       font-weight: bold;
+      color: var(--spice-text);
     }
   }
 
@@ -25,26 +25,26 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 12px;
   background-color: var(--spice-player);
   border: 1px solid rgba(var(--spice-rgb-selected-row), 0.1);
   border-radius: 6px;
-  padding: 12px;
 
   .duplicate-group__heading {
     display: flex;
     justify-content: space-between;
-    font-weight: bold;
     font-size: 1.2em;
+    font-weight: bold;
     color: var(--spice-text);
 
     .duplicate-group__heading-length {
-      background: #ff676746;
-      border: 1px solid #ff575766;
+      align-content: center;
+      padding: 0 12px;
       font-size: 12px;
       font-weight: 400;
+      background: #ff676746;
+      border: 1px solid #ff575766;
       border-radius: 100px;
-      padding: 0 12px;
-      align-content: center;
     }
   }
 
@@ -59,9 +59,9 @@
     flex-direction: column;
     gap: 5px;
     padding: 15px;
-    border-radius: 4px;
     border: 1px solid rgba(var(--spice-rgb-selected-row), 0.1);
     border-left: 4px solid;
+    border-radius: 4px;
 
     &.duplicate-group__item--exact {
       border-left-color: #ff5a5a;
@@ -82,24 +82,24 @@
 
   .duplicate-group__playback-controls {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
     flex-grow: 1;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
   }
 
   .duplicate-group__playback-button {
-    background: none;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 0;
     display: flex;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
     width: 32px;
     height: 32px;
+    padding: 0;
+    color: white;
+    cursor: pointer;
+    background: none;
+    border: none;
 
     svg {
       width: 100%;
@@ -112,10 +112,10 @@
   }
 
   .duplicate-group__duplicates-label {
-    color: var(--spice-subtext);
+    padding-left: 15px;
     font-size: 20px;
     font-weight: 600;
-    padding-left: 15px;
+    color: var(--spice-subtext);
   }
 
   .duplicate-group__duplicates-list {
@@ -127,11 +127,11 @@
   }
 
   .duplicate-group__duplicate-item {
-    font-size: 1em;
-    border-bottom: 1px solid rgba(var(--spice-rgb-selected-row), 0.1);
     display: flex;
     flex-direction: column;
     gap: 10px;
+    font-size: 1em;
+    border-bottom: 1px solid rgba(var(--spice-rgb-selected-row), 0.1);
 
     &:last-child {
       border-bottom: none;
@@ -155,14 +155,14 @@
   }
 
   .duplicate-group__delete-button {
-    background-color: #ff5a5a;
-    color: white;
-    border: none;
     padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
     font-size: 0.85em;
     font-weight: bold;
+    color: white;
+    cursor: pointer;
+    background-color: #ff5a5a;
+    border: none;
+    border-radius: 4px;
 
     &:hover {
       background-color: #d34f4f;
@@ -178,8 +178,8 @@
 .track-details {
   display: flex;
   flex-direction: column;
-  color: var(--spice-subtext);
   font-size: 0.9em;
+  color: var(--spice-subtext);
 
   .track-details__line {
     display: flex;
@@ -194,18 +194,18 @@
     margin-bottom: 24px;
 
     .duplicate-settings__section-title {
+      padding-bottom: 8px;
+      margin-bottom: 16px;
       font-size: 16px;
       font-weight: 700;
-      margin-bottom: 16px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 8px;
     }
   }
 
   .duplicate-settings__description {
     margin-bottom: 12px;
-    opacity: 0.7;
     font-size: 13px;
+    opacity: 0.7;
   }
 
   .duplicate-settings__options {
@@ -243,21 +243,21 @@
 
   .duplicate-settings__word-item {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     padding: 8px 12px;
+    margin-bottom: 8px;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
-    margin-bottom: 8px;
 
     .duplicate-settings__word-remove {
+      padding: 4px 8px;
+      font-size: 12px;
+      color: white;
+      cursor: pointer;
       background-color: #ff5a5a;
       border: none;
-      color: white;
-      padding: 4px 8px;
       border-radius: 4px;
-      cursor: pointer;
-      font-size: 12px;
 
       &:hover {
         background-color: #d34f4f;
@@ -271,12 +271,12 @@
     margin-top: 24px;
 
     .duplicate-settings__reset {
-      background-color: rgba(255, 50, 50, 0.3);
-      color: white;
-      border: none;
       padding: 8px 16px;
-      border-radius: 4px;
+      color: white;
       cursor: pointer;
+      background-color: rgba(255, 50, 50, 0.3);
+      border: none;
+      border-radius: 4px;
 
       &:hover {
         background-color: rgba(255, 50, 50, 0.6);

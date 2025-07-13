@@ -4,11 +4,11 @@ import "../styles/input.css";
 const Input = memo(({ value, onChange, placeholder, disabled }) => (
   <input
     className="input"
-    type="text"
-    value={value}
+    disabled={disabled}
     onChange={onChange}
     placeholder={placeholder}
-    disabled={disabled}
+    type="text"
+    value={value}
   />
 ));
 

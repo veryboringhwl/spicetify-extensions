@@ -28,7 +28,7 @@ Spicetify.Platform.ProductStateAPI.productStateApi.subValues(
 const copyPlaylistPropsItem = new Spicetify.ContextMenuV2.Item({
   children: "Copy Playlist props",
   leadingIcon: Icons.HTML.duplicate,
-  onClick: async (context, item, event) => {
+  onClick: async (context, _item, _event) => {
     const parsed = parseProps(context.props);
     const filtered = {
       uri: parsed?.uri,
@@ -53,7 +53,7 @@ const copyPlaylistPropsItem = new Spicetify.ContextMenuV2.Item({
 const copyTrackPropsItem = new Spicetify.ContextMenuV2.Item({
   children: "Copy Track props",
   leadingIcon: Icons.HTML.duplicate,
-  onClick: async (context, item, event) => {
+  onClick: async (context, _item, _event) => {
     const parsed = parseProps(context.props);
     const filtered = {
       name: parsed?.name,
@@ -80,7 +80,7 @@ const copyTrackPropsItem = new Spicetify.ContextMenuV2.Item({
 const copyArtistPropsItem = new Spicetify.ContextMenuV2.Item({
   children: "Copy Artist props",
   leadingIcon: Icons.HTML.duplicate,
-  onClick: async (context, item, event) => {
+  onClick: async (context, _item, _event) => {
     const parsed = parseProps(context.props);
     const filtered = {
       uri: parsed?.uri,
@@ -97,7 +97,7 @@ const copyArtistPropsItem = new Spicetify.ContextMenuV2.Item({
 const copyAlbumPropsItem = new Spicetify.ContextMenuV2.Item({
   children: "Copy Album props",
   leadingIcon: Icons.HTML.duplicate,
-  onClick: async (context, item, event) => {
+  onClick: async (context, _item, _event) => {
     const parsed = parseProps(context.props);
     const filtered = {
       uri: parsed?.uri,
@@ -126,7 +126,7 @@ const logContextMenuPropsItem = new Spicetify.ContextMenuV2.Item({
 const copyAllPropsItem = new Spicetify.ContextMenuV2.Item({
   children: "Copy All props",
   leadingIcon: Icons.HTML.duplicate,
-  onClick: async (context, item, event) => {
+  onClick: async (context, _item, _event) => {
     Spicetify.Platform.ClipboardAPI.copy(context.props);
   },
   shouldAdd: () => true,

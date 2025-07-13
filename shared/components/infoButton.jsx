@@ -7,6 +7,7 @@ const InfoButton = memo(({ name, popupModal }) => {
 
   return (
     <button
+      aria-label="Open popup"
       className="themeOptionPopupButton"
       onClick={() =>
         PopupModal({
@@ -15,7 +16,6 @@ const InfoButton = memo(({ name, popupModal }) => {
           isLarge: false,
         })
       }
-      aria-label="Open popup"
     >
       <Icons.React.editButton size={16} />
     </button>

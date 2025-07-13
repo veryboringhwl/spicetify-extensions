@@ -32,7 +32,7 @@ const inlineCssPlugin = (options = {}) => ({
       }
 
       let styleId = moduleName ? `${moduleName}-${filenameWithoutExt}` : filenameWithoutExt;
-      styleId = styleId.replace(/[^a-zA-Z0-9\-]/g, "-");
+      styleId = styleId.replace(/[^a-zA-Z0-9-]/g, "-");
 
       const jsContent = `
         (function() {

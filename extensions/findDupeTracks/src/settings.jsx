@@ -82,9 +82,8 @@ const SettingsMenu = () => {
       <h3 className="duplicate-settings__section-title">{title}</h3>
       <div className="duplicate-settings__options">
         {Object.entries(labels).map(([key, desc]) => (
-          <OptionRow key={key} name={`${key}-${settingsKey}`} desc={desc}>
+          <OptionRow desc={desc} key={key} name={`${key}-${settingsKey}`}>
             <Toggle
-              value={settings[settingsKey][key]}
               onChange={() =>
                 setSettings((prev) => ({
                   ...prev,
@@ -94,6 +93,7 @@ const SettingsMenu = () => {
                   },
                 }))
               }
+              value={settings[settingsKey][key]}
             />
           </OptionRow>
         ))}
@@ -165,15 +165,15 @@ const SettingsMenu = () => {
         <p className="duplicate-settings__description">
           Add or remove words to be ignored when comparing track names for similarity.
         </p>
-        <OptionRow name="custom-words" desc="Add a word to normalization list">
+        <OptionRow desc="Add a word to normalization list" name="custom-words">
           <Input
-            value={newWord}
-            onChange={(e) => setNewWord(e.target.value)}
-            placeholder="Enter word to normalize"
             disabled={false}
+            onChange={(e) => setNewWord(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && addCustomWord()}
+            placeholder="Enter word to normalize"
+            value={newWord}
           />
-          <button type="button" onClick={addCustomWord} style={{ marginLeft: 8 }}>
+          <button onClick={addCustomWord} style={{ marginLeft: 8 }} type="button">
             Add
           </button>
         </OptionRow>
@@ -184,9 +184,9 @@ const SettingsMenu = () => {
                 <div className="duplicate-settings__word-item" key={word}>
                   {word}
                   <button
-                    type="button"
                     className="duplicate-settings__word-remove"
                     onClick={() => removeWord(word, isDefault)}
+                    type="button"
                   >
                     Remove
                   </button>
@@ -199,7 +199,7 @@ const SettingsMenu = () => {
         </div>
       </section>
       <div className="duplicate-settings__actions">
-        <button type="button" className="duplicate-settings__reset" onClick={resetSettings}>
+        <button className="duplicate-settings__reset" onClick={resetSettings} type="button">
           Reset to Defaults
         </button>
       </div>

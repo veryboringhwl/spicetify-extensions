@@ -86,10 +86,10 @@ const Slider = memo(
     return (
       <div className="slider" disabled={disabled}>
         <div
-          ref={sliderRef}
           className="slider-container"
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
+          ref={sliderRef}
         >
           <div className="slider__track">
             <div className="slider__fill" style={{ width: `${progress}%` }} />

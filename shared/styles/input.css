@@ -1,15 +1,15 @@
 .input {
+  width: 128px;
+  height: 32px;
+  padding-left: 10px;
+  text-overflow: ellipsis;
+  color: rgba(var(--spice-rgb-text), 0.8);
   background: rgba(var(--spice-rgb-selected-row), 0.1);
   border: 0;
   border-radius: 4px;
-  color: rgba(var(--spice-rgb-text), 0.8);
-  height: 32px;
-  width: 128px;
-  text-overflow: ellipsis;
-  padding-left: 10px;
 
   &:disabled {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 }

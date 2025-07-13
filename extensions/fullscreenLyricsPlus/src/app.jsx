@@ -21,11 +21,11 @@ const FullscreenButton = () => {
     <Spicetify.ReactComponent.TooltipWrapper label={label}>
       <button className="lyrics-config-button" onClick={toggleFullscreen}>
         <svg
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
           fill="currentColor"
+          height="16"
           style={{ verticalAlign: "middle" }}
+          viewBox="0 0 16 16"
+          width="16"
         >
           <path d={pathData} />
         </svg>

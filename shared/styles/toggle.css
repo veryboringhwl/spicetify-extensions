@@ -1,22 +1,22 @@
 .toggle {
   display: flex;
   align-items: center;
-  border: none;
-  background: none;
   cursor: pointer;
+  background: none;
+  border: none;
 
   &:disabled {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 
   .toggle__background {
+    display: flex;
+    align-items: center;
     width: 42px;
     height: 24px;
     background: rgba(var(--spice-rgb-selected-row), 0.1);
     border-radius: 12px;
-    display: flex;
-    align-items: center;
 
     &:has(.toggle__slider--enabled) {
       background: var(--spice-button);
@@ -30,10 +30,10 @@
   .toggle__slider {
     width: 20px;
     height: 20px;
+    margin-left: 2px;
     background: var(--spice-text);
     border-radius: 50%;
-    margin-left: 2px;
-    transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
     box-shadow: 0px 0px 5px rgba(var(--spice-rgb-shadow), 0.3);
+    transition: 0.1s cubic-bezier(0.45, 0.05, 0.55, 0.95);
   }
 }

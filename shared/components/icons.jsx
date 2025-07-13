@@ -41,7 +41,7 @@ const Icons = {
 
 const ReactComponent = (icon, defaultSize = 16) => {
   return ({ size = defaultSize, fill = "currentColor" }) => (
-    <svg viewBox={`0 0 ${defaultSize} ${defaultSize}`} width={size} height={size} fill={fill}>
+    <svg fill={fill} height={size} viewBox={`0 0 ${defaultSize} ${defaultSize}`} width={size}>
       <path d={icon} />
     </svg>
   );

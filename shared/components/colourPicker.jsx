@@ -285,10 +285,10 @@ const ColourPicker = ({ value, onChange }) => {
     <div className="rgba-picker-container" ref={colorPickerRef}>
       <div
         className="rgba-picker-preview"
+        onClick={() => setIsOpen(!isOpen)}
         style={{
           backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
         }}
-        onClick={() => setIsOpen(!isOpen)}
       />
 
       {isOpen && (
@@ -296,25 +296,25 @@ const ColourPicker = ({ value, onChange }) => {
           <div className="rgba-picker-color-section">
             <div className="rgba-picker-color-square">
               <canvas
-                ref={colorWheelRef}
-                width="200"
-                height="200"
                 className="rgba-picker-color-wheel"
+                height="200"
                 onMouseDown={handleColorSquareChange}
                 onMouseMove={(e) => e.buttons === 1 && handleColorSquareChange(e)}
+                ref={colorWheelRef}
+                width="200"
               />
-              <div ref={colorThumbRef} className="rgba-picker-color-thumb" />
+              <div className="rgba-picker-color-thumb" ref={colorThumbRef} />
             </div>
             <div className="rgba-picker-hue-slider-container">
               <canvas
-                ref={hueCanvasRef}
-                width="200"
-                height="16"
                 className="rgba-picker-hue-canvas"
+                height="16"
                 onMouseDown={handleHueChange}
                 onMouseMove={(e) => e.buttons === 1 && handleHueChange(e)}
+                ref={hueCanvasRef}
+                width="200"
               />
-              <div ref={hueSliderRef} className="rgba-picker-hue-slider" />
+              <div className="rgba-picker-hue-slider" ref={hueSliderRef} />
             </div>
           </div>
 
@@ -322,20 +322,20 @@ const ColourPicker = ({ value, onChange }) => {
             <div className="rgba-picker-input">
               <label>Hex</label>
               <input
+                onChange={(e) => handleHexChange(e.target.value)}
                 type="text"
                 value={hexValue}
-                onChange={(e) => handleHexChange(e.target.value)}
               />
             </div>
             <div className="rgba-picker-input">
               <label>Alpha</label>
               <input
-                type="number"
-                min="0"
                 max="1"
-                step="0.01"
-                value={color.a}
+                min="0"
                 onChange={(e) => handleAlphaChange(e.target.value)}
+                step="0.01"
+                type="number"
+                value={color.a}
               />
             </div>
           </div>
@@ -344,31 +344,31 @@ const ColourPicker = ({ value, onChange }) => {
             <div className="rgba-picker-input">
               <label>R</label>
               <input
-                type="number"
-                min="0"
                 max="255"
-                value={color.r}
+                min="0"
                 onChange={(e) => handleRgbChange("r", e.target.value)}
+                type="number"
+                value={color.r}
               />
             </div>
             <div className="rgba-picker-input">
               <label>G</label>
               <input
-                type="number"
-                min="0"
                 max="255"
-                value={color.g}
+                min="0"
                 onChange={(e) => handleRgbChange("g", e.target.value)}
+                type="number"
+                value={color.g}
               />
             </div>
             <div className="rgba-picker-input">
               <label>B</label>
               <input
-                type="number"
-                min="0"
                 max="255"
-                value={color.b}
+                min="0"
                 onChange={(e) => handleRgbChange("b", e.target.value)}
+                type="number"
+                value={color.b}
               />
             </div>
           </div>
@@ -376,12 +376,12 @@ const ColourPicker = ({ value, onChange }) => {
           <div className="rgba-picker-alpha-slider">
             <div className="rgba-picker-alpha-gradient" />
             <input
-              type="range"
-              min="0"
               max="1"
-              step="0.01"
-              value={color.a}
+              min="0"
               onChange={(e) => handleAlphaChange(e.target.value)}
+              step="0.01"
+              type="range"
+              value={color.a}
             />
           </div>
         </div>

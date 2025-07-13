@@ -1,5 +1,5 @@
 import Dexie from "https://esm.sh/dexie";
-import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import fetchAllLibraryContents from "../../../shared/api/fetchAllLibraryContents";
 import fetchAllPlaylistTracks from "../../../shared/api/fetchAllPlaylistTracks";
 import fetchGraphQLForAlbumTracks from "../../../shared/api/fetchGraphQLForAlbumTracks";
@@ -203,17 +203,17 @@ const TrackControls = memo(({ trackUri, trackDuration }) => {
 
   return (
     <div className="duplicate-group__playback-controls">
-      <button type="button" className="duplicate-group__playback-button" onClick={togglePlay}>
+      <button className="duplicate-group__playback-button" onClick={togglePlay} type="button">
         {isCurrentlyPlayingThisTrack ? <Icons.React.pause /> : <Icons.React.play />}
       </button>
       <span className="slider-time">{leftText}</span>
       <Slider
-        value={position}
-        min={0}
         max={duration}
-        step={1}
+        min={0}
         onChange={handleSliderChange}
         onRelease={handleSliderRelease}
+        step={1}
+        value={position}
       />
       <span className="slider-time">{rightText}</span>
     </div>
@@ -238,18 +238,18 @@ const DuplicateItem = memo(
             {isSource ? "Source: " : ""}
             {track.name}
           </span>
-          <TrackDetails track={track} trackPlayCounts={trackPlayCounts} trackIsrcs={trackIsrcs} />
+          <TrackDetails track={track} trackIsrcs={trackIsrcs} trackPlayCounts={trackPlayCounts} />
         </div>
         <button
-          type="button"
           className="duplicate-group__delete-button"
           onClick={() => onDelete(category, groupIndex, track)}
+          type="button"
         >
           Delete
         </button>
       </div>
       <div className="duplicate-group__actions">
-        <TrackControls trackUri={track.uri} trackDuration={trackDurations.get(track.uri)} />
+        <TrackControls trackDuration={trackDurations.get(track.uri)} trackUri={track.uri} />
       </div>
     </div>
   ),
@@ -258,31 +258,31 @@ const DuplicateItem = memo(
 const DuplicateGroup = memo(
   ({ group, category, groupIndex, onDelete, trackPlayCounts, trackIsrcs, trackDurations }) => (
     <div
-      key={`${group.mainTrack.uri}-${group.mainTrack.uid || groupIndex}`}
       className={`duplicate-group__item duplicate-group__item--${category}`}
+      key={`${group.mainTrack.uri}-${group.mainTrack.uid || groupIndex}`}
     >
       <DuplicateItem
-        track={group.mainTrack}
         category={category}
         groupIndex={groupIndex}
-        onDelete={onDelete}
         isSource
-        trackPlayCounts={trackPlayCounts}
-        trackIsrcs={trackIsrcs}
+        onDelete={onDelete}
+        track={group.mainTrack}
         trackDurations={trackDurations}
+        trackIsrcs={trackIsrcs}
+        trackPlayCounts={trackPlayCounts}
       />
       <div className="duplicate-group__duplicates-label">Duplicates:</div>
       <div className="duplicate-group__duplicates-list">
         {group.duplicates.map((dup) => (
           <DuplicateItem
-            key={`${dup.uri}-${dup.uid || dup.uri}`}
-            track={dup}
             category={category}
             groupIndex={groupIndex}
+            key={`${dup.uri}-${dup.uid || dup.uri}`}
             onDelete={onDelete}
-            trackPlayCounts={trackPlayCounts}
-            trackIsrcs={trackIsrcs}
+            track={dup}
             trackDurations={trackDurations}
+            trackIsrcs={trackIsrcs}
+            trackPlayCounts={trackPlayCounts}
           />
         ))}
       </div>
@@ -305,14 +305,14 @@ const DuplicateGroupList = memo(
           <div className="duplicate-group__list">
             {groups.map((group, index) => (
               <DuplicateGroup
-                key={`${group.mainTrack.uri}-${index}`}
-                group={group}
                 category={category}
+                group={group}
                 groupIndex={index}
+                key={`${group.mainTrack.uri}-${index}`}
                 onDelete={onDelete}
-                trackPlayCounts={trackPlayCounts}
-                trackIsrcs={trackIsrcs}
                 trackDurations={trackDurations}
+                trackIsrcs={trackIsrcs}
+                trackPlayCounts={trackPlayCounts}
               />
             ))}
           </div>
@@ -474,10 +474,10 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
       <div className="find-duplicates__header">
         <span className="find-duplicates__header-label">Select Playlist:</span>
         <Dropdown
-          value={selectedPlaylist?.uri}
-          options={playlistOptions}
-          onChange={handlePlaylistChange}
           disabled={ownedPlaylists.length === 0}
+          onChange={handlePlaylistChange}
+          options={playlistOptions}
+          value={selectedPlaylist?.uri}
         />
       </div>
       {selectedPlaylist && (
@@ -486,40 +486,40 @@ function PlaylistDuplicateFinder({ selectedPlaylist: initialSelectedPlaylist }) 
             Playlist: {selectedPlaylist.name} ({playlistTracks.length} tracks analyzed)
           </p>
           <DuplicateGroupList
-            title="Exact Duplicates (Same URI)"
-            groups={duplicateGroups.exact}
             category="exact"
+            groups={duplicateGroups.exact}
             onDelete={handleDeleteTrack}
-            trackPlayCounts={trackPlayCounts}
-            trackIsrcs={trackIsrcs}
+            title="Exact Duplicates (Same URI)"
             trackDurations={trackDurations}
+            trackIsrcs={trackIsrcs}
+            trackPlayCounts={trackPlayCounts}
           />
           <DuplicateGroupList
-            title="ISRC Duplicates (Same Recording)"
-            groups={duplicateGroups.isrc}
             category="isrc"
+            groups={duplicateGroups.isrc}
             onDelete={handleDeleteTrack}
-            trackPlayCounts={trackPlayCounts}
-            trackIsrcs={trackIsrcs}
+            title="ISRC Duplicates (Same Recording)"
             trackDurations={trackDurations}
+            trackIsrcs={trackIsrcs}
+            trackPlayCounts={trackPlayCounts}
           />
           <DuplicateGroupList
-            title="Likely Duplicates (Same Name)"
-            groups={duplicateGroups.likely}
             category="likely"
+            groups={duplicateGroups.likely}
             onDelete={handleDeleteTrack}
-            trackPlayCounts={trackPlayCounts}
-            trackIsrcs={trackIsrcs}
+            title="Likely Duplicates (Same Name)"
             trackDurations={trackDurations}
+            trackIsrcs={trackIsrcs}
+            trackPlayCounts={trackPlayCounts}
           />
           <DuplicateGroupList
-            title="Possible Duplicates (Similar Name)"
-            groups={duplicateGroups.possible}
             category="possible"
+            groups={duplicateGroups.possible}
             onDelete={handleDeleteTrack}
-            trackPlayCounts={trackPlayCounts}
-            trackIsrcs={trackIsrcs}
+            title="Possible Duplicates (Similar Name)"
             trackDurations={trackDurations}
+            trackIsrcs={trackIsrcs}
+            trackPlayCounts={trackPlayCounts}
           />
         </>
       )}
