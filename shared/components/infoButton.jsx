@@ -7,7 +7,6 @@ const InfoButton = memo(({ name, popupModal }) => {
 
   return (
     <button
-      aria-label="Open popup"
       className="themeOptionPopupButton"
       onClick={() =>
         PopupModal({
