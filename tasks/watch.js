@@ -213,10 +213,10 @@ for await (const line of lineStream) {
   const command = line.trim();
   if (command === "format") {
     console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m Formatting...`);
-    const biomeCommand = new Deno.Command("deno", {
-      args: ["run", "-A", "npm:@biomejs/biome", "format", "--unsafe", "--write"],
+    const formatCommand = new Deno.Command("deno", {
+      args: ["task", "format"],
     });
-    const { stdout } = await biomeCommand.output();
+    const { stdout } = await formatCommand.output();
     console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m ${new TextDecoder().decode(stdout)}`);
   } else {
     console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m Executing: ${command}`);

@@ -65,12 +65,10 @@ const buildFolders = async () => {
 
 const runBiome = async () => {
   console.log("Running Biome...");
-  const biomeCommand = new Deno.Command("deno", {
-    args: ["run", "-A", "npm:@biomejs/biome", "format", "--write"],
-    stdout: "piped",
-    stderr: "piped",
+  const formatCommand = new Deno.Command("deno", {
+    args: ["task", "format"],
   });
-  const { code, stdout, stderr } = await biomeCommand.output();
+  const { code, stdout, stderr } = await formatCommand.output();
   if (code !== 0) {
     console.error("Biome failed:", new TextDecoder().decode(stderr));
   } else {

@@ -6,7 +6,7 @@
     "dev-watch": "deno run -A tasks/watch.js --dev",
     "watch": "deno run -A tasks/watch.js",
     "check": "deno run -A npm:@biomejs/biome check --unsafe --write --max-diagnostics 1000",
-    "format": "deno run -A npm:@biomejs/biome format --unsafe --write"
+    "format": "deno run -A npm:@biomejs/biome format --write"
   },
   "imports": {
     "@biomejs/biome": "npm:@biomejs/biome@^2.1.1",
