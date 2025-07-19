@@ -1,10 +1,14 @@
-// @deno-types="@esbuild/mod.d.ts"
 import * as esbuild from "@esbuild/mod.js";
 import { join } from "@std/path";
-import externalGlobalPlugin from "./pluginExternalGlobals.js";
-import inlineCssPlugin from "./pluginInlineCss.js";
+import externalGlobalPlugin from "./pluginExternalGlobals.ts";
+import inlineCssPlugin from "./pluginInlineCss.ts";
 
-const getEntryFile = async (folderPath) => {
+const APPDATA: string = Deno.env.get("APPDATA") || "";
+const _LOCALAPPDATA: string = Deno.env.get("LOCALAPPDATA") || "";
+const _SPICETIFY_OUT: string = join(APPDATA, "spicetify", "Extensions") || "";
+const _SPOTIFY_OUT: string = join(APPDATA, "Spotify", "Apps", "xpui", "extensions") || "";
+
+const getEntryFile = async (folderPath: string): Promise<string | null> => {
   const srcDir = join(folderPath, "src");
   try {
     for await (const dirEntry of Deno.readDir(srcDir)) {
@@ -20,12 +24,10 @@ const getEntryFile = async (folderPath) => {
   return null;
 };
 
-const buildExtension = async (folderName, folderPath) => {
+const buildExtension = async (folderName: string, folderPath: string): Promise<void> => {
   const SRC = await getEntryFile(folderPath);
-  if (!SRC) {
-    console.warn(`No entry file found for ${folderName}`);
-    return;
-  }
+  if (!SRC) return;
+
   const OUT = join("dist", `${folderName}.mjs`);
   await esbuild.build({
     entryPoints: [SRC],
@@ -39,7 +41,9 @@ const buildExtension = async (folderName, folderPath) => {
     jsx: "automatic",
     external: ["react", "react-dom", "react/jsx-runtime"],
     plugins: [
-      inlineCssPlugin({ compressed: true }),
+      inlineCssPlugin({
+        compressed: true,
+      }),
       externalGlobalPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",
@@ -52,7 +56,7 @@ const buildExtension = async (folderName, folderPath) => {
   });
 };
 
-const buildFolders = async () => {
+const buildFolders = async (): Promise<void> => {
   const buildPromises = [];
   for await (const dirEntry of Deno.readDir("extensions")) {
     if (dirEntry.isDirectory) {
@@ -63,20 +67,15 @@ const buildFolders = async () => {
   await Promise.all(buildPromises);
 };
 
-const runBiome = async () => {
-  console.log("Running Biome...");
+const runBiome = async (): Promise<void> => {
   const formatCommand = new Deno.Command("deno", {
     args: ["task", "format"],
   });
-  const { code, stdout, stderr } = await formatCommand.output();
-  if (code !== 0) {
-    console.error("Biome failed:", new TextDecoder().decode(stderr));
-  } else {
-    console.log("Biome check passed:", new TextDecoder().decode(stdout));
-  }
+  const { stdout } = await formatCommand.output();
+  console.log("Biome:", new TextDecoder().decode(stdout));
 };
 
-const runBuilds = async () => {
+const runBuilds = async (): Promise<void> => {
   const startTime = performance.now();
 
   await buildFolders();
