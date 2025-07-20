@@ -1,9 +1,13 @@
 .fullscreen {
   .Root__top-container {
-    grid-template-areas:
-      "main-view"
-      "main-view" !important;
+    grid-template-areas: "main-view" !important;
+    grid-template-rows: unset !important;
+    grid-template-columns: unset !important;
     gap: 0px !important;
+  }
+
+  .xlgKfueiF46Wo_sED8YA {
+    display: none;
   }
 
   .main-topBar-container {

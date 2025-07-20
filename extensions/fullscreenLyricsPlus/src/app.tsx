@@ -1,5 +1,7 @@
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./styles.css";
+
+let fullscreenButtonRoot: ReactDOM.Root | null = null;
 
 const minimisePath =
   "M6.064 10.229l-2.418 2.418L2 11v4h4l-1.647-1.646 2.418-2.418-.707-.707zM11 2l1.647 1.647-2.418 2.418.707.707 2.418-2.418L15 6V2h-4z";
@@ -36,7 +38,9 @@ const FullscreenButton = () => {
 
 const renderFullscreenButton = () => {
   const container = document.querySelector(".lyrics-config-button-container");
-  if (!container) return;
+  if (!container) {
+    return;
+  }
 
   let buttonWrapper = container.querySelector(".lyrics-tooltip-wrapper.fullscreen");
 
@@ -44,13 +48,24 @@ const renderFullscreenButton = () => {
     buttonWrapper = document.createElement("div");
     buttonWrapper.className = "lyrics-tooltip-wrapper fullscreen";
     container.appendChild(buttonWrapper);
+    fullscreenButtonRoot = ReactDOM.createRoot(buttonWrapper);
   }
 
-  ReactDOM.render(<FullscreenButton />, buttonWrapper);
+  if (fullscreenButtonRoot) {
+    fullscreenButtonRoot.render(<FullscreenButton />);
+  }
 };
 
-const observer = new MutationObserver(renderFullscreenButton);
-
-observer.observe(document.body, { childList: true, subtree: true });
-
 renderFullscreenButton();
+
+const observer = new MutationObserver(renderFullscreenButton);
+const mainViewContainer = document.querySelector(".main-view-container");
+
+if (mainViewContainer) {
+  observer.observe(mainViewContainer, {
+    childList: true,
+    subtree: true,
+  });
+} else {
+  console.warn("Main view container not found. Fullscreen button might not render correctly.");
+}
