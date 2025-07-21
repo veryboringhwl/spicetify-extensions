@@ -1,12 +1,8 @@
 import * as esbuild from "@esbuild/mod.js";
 import { join } from "@std/path";
 import externalGlobalPlugin from "./pluginExternalGlobals.ts";
+import importMapPlugin from "./pluginImportMap.ts";
 import inlineCssPlugin from "./pluginInlineCss.ts";
-
-const APPDATA: string = Deno.env.get("APPDATA") || "";
-const _LOCALAPPDATA: string = Deno.env.get("LOCALAPPDATA") || "";
-const _SPICETIFY_OUT: string = join(APPDATA, "spicetify", "Extensions") || "";
-const _SPOTIFY_OUT: string = join(APPDATA, "Spotify", "Apps", "xpui", "extensions") || "";
 
 const getEntryFile = async (folderPath: string): Promise<string | null> => {
   const srcDir = join(folderPath, "src");
@@ -41,13 +37,15 @@ const buildExtension = async (folderName: string, folderPath: string): Promise<v
     jsx: "automatic",
     external: ["react", "react-dom", "react/jsx-runtime"],
     plugins: [
-      inlineCssPlugin({
-        compressed: true,
-      }),
       externalGlobalPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",
+        "react-dom/client": "Spicetify.ReactDOM",
         "react/jsx-runtime": "Spicetify.ReactJSX",
+      }),
+      importMapPlugin(),
+      inlineCssPlugin({
+        compressed: true,
       }),
     ],
     banner: {
@@ -69,7 +67,7 @@ const buildFolders = async (): Promise<void> => {
 
 const runBiome = async (): Promise<void> => {
   const formatCommand = new Deno.Command("deno", {
-    args: ["task", "format"],
+    args: ["task", "check"],
   });
   const { stdout } = await formatCommand.output();
   console.log("Biome:", new TextDecoder().decode(stdout));

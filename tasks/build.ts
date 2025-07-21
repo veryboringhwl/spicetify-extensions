@@ -1,8 +1,10 @@
 import * as esbuild from "@esbuild/mod.js";
 import { join } from "@std/path";
 import externalGlobalPlugin from "./pluginExternalGlobals.ts";
+import importMapPlugin from "./pluginImportMap.ts";
 import inlineCssPlugin from "./pluginInlineCss.ts";
 
+//Deno bundle will have runtime api so can replace esbuild
 const APPDATA: string = Deno.env.get("APPDATA") || "";
 const LOCALAPPDATA: string = Deno.env.get("LOCALAPPDATA") || "";
 const SPICETIFY_OUT: string = join(APPDATA, "spicetify", "Extensions") || "";
@@ -42,14 +44,15 @@ async function buildExtension(folderName: string, folderPath: string): Promise<v
     jsx: "automatic",
     external: ["react", "react-dom", "react/jsx-runtime"],
     plugins: [
-      inlineCssPlugin({
-        compressed: false,
-      }),
       externalGlobalPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",
         "react-dom/client": "Spicetify.ReactDOM",
         "react/jsx-runtime": "Spicetify.ReactJSX",
+      }),
+      importMapPlugin(),
+      inlineCssPlugin({
+        compressed: false,
       }),
     ],
     banner: {

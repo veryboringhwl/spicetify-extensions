@@ -4,6 +4,7 @@ import { ensureDir } from "@std/fs";
 import { join } from "@std/path";
 import { TextLineStream } from "@std/streams";
 import externalGlobalPlugin from "./pluginExternalGlobals.ts";
+import importMapPlugin from "./pluginImportMap.ts";
 import inlineCssPlugin from "./pluginInlineCss.ts";
 
 const APPDATA: string = Deno.env.get("APPDATA") || "";
@@ -54,13 +55,15 @@ const watchExtension = async (folderName: string, folderPath: string): Promise<v
     jsx: "automatic",
     external: ["react", "react-dom", "react/jsx-runtime"],
     plugins: [
-      inlineCssPlugin({
-        compressed: false,
-      }),
       externalGlobalPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",
+        "react-dom/client": "Spicetify.ReactDOM",
         "react/jsx-runtime": "Spicetify.ReactJSX",
+      }),
+      importMapPlugin(),
+      inlineCssPlugin({
+        compressed: false,
       }),
       {
         name: "on-end-plugin",
@@ -203,7 +206,7 @@ runWatchers();
 
 const runBiome = async (): Promise<void> => {
   const formatCommand = new Deno.Command("deno", {
-    args: ["task", "format"],
+    args: ["task", "check"],
   });
   const { stdout } = await formatCommand.output();
   console.log("Biome:", new TextDecoder().decode(stdout));
@@ -237,7 +240,7 @@ for await (const line of lineStream) {
   const command = line.trim();
   if (!command) continue;
 
-  if (command === "format") {
+  if (command === "format" || command === "check") {
     await runBiome();
   } else {
     await executeCommand(command);
