@@ -1,4 +1,4 @@
-import type { Plugin } from "@esbuild/mod.js";
+import type { onResolveArgs, Plugin, PluginBuild } from "@esbuild/mod.js";
 
 function resolveImport(importPath: string, imports: Record<string, string>): string {
   const sortedKeys = Object.keys(imports).sort((a, b) => b.length - a.length);
@@ -21,7 +21,7 @@ export default function importMapPlugin(options: { configPath?: string } = {}): 
 
   return {
     name: "import-map",
-    setup(build) {
+    setup(build: PluginBuild) {
       let imports: Record<string, string>;
       try {
         const configText = Deno.readTextFileSync(configPath);
@@ -36,7 +36,7 @@ export default function importMapPlugin(options: { configPath?: string } = {}): 
 
       const externalPackages = build.initialOptions.external || [];
 
-      build.onResolve({ filter: /.*/ }, (args) => {
+      build.onResolve({ filter: /.*/ }, (args: onResolveArgs) => {
         if (
           externalPackages.includes(args.path) ||
           args.path.startsWith("./") ||

@@ -1,10 +1,10 @@
 import * as esbuild from "@esbuild/mod.js";
 import { join } from "@std/path";
-import externalGlobalPlugin from "./pluginExternalGlobals.ts";
+import externalGlobalsPlugin from "./pluginExternalGlobals.ts";
 import importMapPlugin from "./pluginImportMap.ts";
-import inlineCssPlugin from "./pluginInlineCss.ts";
+import { inlineCSSPlugin } from "./pluginInlineCSS.ts";
 
-//Deno bundle will have runtime api so can replace esbuild
+// Deno bundle will have runtime api so can replace esbuild
 const APPDATA: string = Deno.env.get("APPDATA") || "";
 const LOCALAPPDATA: string = Deno.env.get("LOCALAPPDATA") || "";
 const SPICETIFY_OUT: string = join(APPDATA, "spicetify", "Extensions") || "";
@@ -39,21 +39,18 @@ async function buildExtension(folderName: string, folderPath: string): Promise<v
     platform: "browser",
     bundle: true,
     sourcemap: "inline",
-    sourcesContent: true,
     minify: false,
     jsx: "automatic",
-    external: ["react", "react-dom", "react/jsx-runtime"],
+    external: ["react", "react-dom", "react-dom/client", "react/jsx-runtime"],
     plugins: [
-      externalGlobalPlugin({
+      externalGlobalsPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",
         "react-dom/client": "Spicetify.ReactDOM",
         "react/jsx-runtime": "Spicetify.ReactJSX",
       }),
       importMapPlugin(),
-      inlineCssPlugin({
-        compressed: false,
-      }),
+      inlineCSSPlugin({ minify: false }),
     ],
     banner: {
       js: "await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));",

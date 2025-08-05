@@ -1,6 +1,6 @@
-import type { OnLoadArgs, OnResolveArgs, Plugin, PluginBuild } from "@esbuild/mod.d.ts";
+import type { OnLoadArgs, OnResolveArgs, Plugin, PluginBuild } from "@esbuild/mod.js";
 
-const externalGlobalPlugin = (globals: Record<string, string>): Plugin => ({
+const externalGlobalsPlugin = (globals: Record<string, string>): Plugin => ({
   name: "external-global",
   setup(build: PluginBuild) {
     const filter = new RegExp(`^(${Object.keys(globals).join("|").replace(/\//g, "\\/")})$`);
@@ -28,4 +28,4 @@ const externalGlobalPlugin = (globals: Record<string, string>): Plugin => ({
   },
 });
 
-export default externalGlobalPlugin;
+export default externalGlobalsPlugin;

@@ -1,11 +1,10 @@
 import type { BuildContext } from "@esbuild/mod.js";
 import * as esbuild from "@esbuild/mod.js";
-import { ensureDir } from "@std/fs";
 import { join } from "@std/path";
 import { TextLineStream } from "@std/streams";
-import externalGlobalPlugin from "./pluginExternalGlobals.ts";
+import externalGlobalsPlugin from "./pluginExternalGlobals.ts";
 import importMapPlugin from "./pluginImportMap.ts";
-import inlineCssPlugin from "./pluginInlineCss.ts";
+import { inlineCSSPlugin } from "./pluginInlineCSS.ts";
 
 const APPDATA: string = Deno.env.get("APPDATA") || "";
 const LOCALAPPDATA: string = Deno.env.get("LOCALAPPDATA") || "";
@@ -50,20 +49,19 @@ const watchExtension = async (folderName: string, folderPath: string): Promise<v
     platform: "browser",
     bundle: true,
     sourcemap: "inline",
-    sourcesContent: true,
     minify: false,
     jsx: "automatic",
-    external: ["react", "react-dom", "react/jsx-runtime"],
+    external: ["react", "react-dom", "react-dom/client", "react/jsx-runtime"],
     plugins: [
-      externalGlobalPlugin({
+      externalGlobalsPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",
         "react-dom/client": "Spicetify.ReactDOM",
         "react/jsx-runtime": "Spicetify.ReactJSX",
       }),
       importMapPlugin(),
-      inlineCssPlugin({
-        compressed: false,
+      inlineCSSPlugin({
+        minify: false,
       }),
       {
         name: "on-end-plugin",
@@ -185,8 +183,6 @@ const args: string[] = Deno.args;
 
 const runWatchers = async (): Promise<void> => {
   const startTime = performance.now();
-
-  await ensureDir("dist");
 
   if (args.includes("--dev")) {
     await killSpotify();

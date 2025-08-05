@@ -1,8 +1,8 @@
 import * as esbuild from "@esbuild/mod.js";
 import { join } from "@std/path";
-import externalGlobalPlugin from "./pluginExternalGlobals.ts";
+import externalGlobalsPlugin from "./pluginExternalGlobals.ts";
 import importMapPlugin from "./pluginImportMap.ts";
-import inlineCssPlugin from "./pluginInlineCss.ts";
+import { inlineCSSPlugin } from "./pluginInlineCSS.ts";
 
 const getEntryFile = async (folderPath: string): Promise<string | null> => {
   const srcDir = join(folderPath, "src");
@@ -35,17 +35,17 @@ const buildExtension = async (folderName: string, folderPath: string): Promise<v
     sourcemap: false,
     minify: true,
     jsx: "automatic",
-    external: ["react", "react-dom", "react/jsx-runtime"],
+    external: ["react", "react-dom/client", "react/jsx-runtime"],
     plugins: [
-      externalGlobalPlugin({
+      externalGlobalsPlugin({
         react: "Spicetify.React",
         "react-dom": "Spicetify.ReactDOM",
         "react-dom/client": "Spicetify.ReactDOM",
         "react/jsx-runtime": "Spicetify.ReactJSX",
       }),
       importMapPlugin(),
-      inlineCssPlugin({
-        compressed: true,
+      inlineCSSPlugin({
+        minify: true,
       }),
     ],
     banner: {
