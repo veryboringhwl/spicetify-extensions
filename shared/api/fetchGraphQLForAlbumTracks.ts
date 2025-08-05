@@ -1,7 +1,7 @@
-async function fetchGraphQLForAlbumTracks(albumURIs) {
-  const dataMap = new Map();
+async function fetchGraphQLForAlbumTracks(albumURIs: Set<string>): Promise<Map<string, object>> {
+  const dataMap = new Map<string, object>();
 
-  const batchFetchPromises = Array.from(albumURIs).map(async (albumUri) => {
+  const batchFetchPromises = Array.from(albumURIs).map(async (albumUri: string): Promise<void> => {
     const response = await Spicetify.Platform.GraphQLLoader(
       Spicetify.GraphQL.Definitions.queryAlbumTracks,
       {
@@ -14,7 +14,7 @@ async function fetchGraphQLForAlbumTracks(albumURIs) {
     const albumTracksData = response?.data?.albumUnion?.tracksV2?.items;
     if (albumTracksData) {
       for (const item of albumTracksData) {
-        const trackUri = item?.track?.uri;
+        const trackUri: string | undefined = item?.track?.uri;
         if (trackUri) {
           dataMap.set(trackUri, item.track);
         }
