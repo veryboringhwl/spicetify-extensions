@@ -1,19 +1,24 @@
-.themeOptionRow {
+.option__row {
   display: flex;
   justify-content: space-between;
-  height: 32px;
-}
 
-.themeOptionDesc {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  font-size: 15px;
-  color: var(--spice-subtext);
-}
+  .option__content {
+    display: flex;
+    gap: 8px;
+    align-items: center;
 
-.themeOptionControl {
-  display: flex;
-  gap: 8px;
-  align-content: center;
+    .option__desc {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      font-size: 15px;
+      color: var(--spice-subtext);
+    }
+  }
+
+  .option__control {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
 }

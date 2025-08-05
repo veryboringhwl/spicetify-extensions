@@ -1,18 +1,13 @@
-.modal-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(var(--spice-rgb-shadow), 0.5);
-  border-radius: 7px;
+dialog.modal {
+  padding: 0;
+  overflow: visible;
+  color: var(--spice-text);
+  background: transparent;
+  border: none;
 }
 
-.modal {
-  background-color: unset;
+dialog.modal::backdrop {
+  background-color: rgba(var(--spice-rgb-shadow), 0.5);
 }
 
 .modal__container {
@@ -22,7 +17,7 @@
   max-height: 500px;
   background-color: rgba(var(--spice-rgb-main), 0.9) !important;
   border-radius: 7px;
-  box-shadow: 0 0px 20px rgba(var(--spice-rgb-shadow), 0.5) !important;
+  box-shadow: 0 0 20px rgba(var(--spice-rgb-shadow), 0.5) !important;
   backdrop-filter: blur(20px) saturate(1.4) brightness(1.2);
 }
 
