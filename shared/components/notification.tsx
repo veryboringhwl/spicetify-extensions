@@ -1,13 +1,23 @@
-import Icons from "./icons";
+import type { JSX } from "react";
+import { Icons } from "./icons.tsx";
 
-const Notification = ({
+export interface NotificationProps {
+  message?: string | JSX.Element;
+  keyPrefix?: string;
+  autoHideDuration?: number;
+  backgroundColour?: string;
+  colour?: string;
+  isWarning?: boolean;
+}
+
+export const Notification = ({
   message = "",
   keyPrefix = "custom-notif",
   autoHideDuration = 3000,
   backgroundColour = "#fff",
   colour = "#000",
   isWarning = false,
-} = {}) => {
+}: NotificationProps) => {
   const content = isWarning ? (
     <>
       <Icons.React.warning size={24} />
@@ -21,6 +31,7 @@ const Notification = ({
   const Colour = isWarning ? "#fff" : colour;
 
   try {
+    // @ts-ignore
     Spicetify.Snackbar.enqueueCustomSnackbar(keyPrefix, {
       keyPrefix,
       autoHideDuration,
@@ -43,9 +54,17 @@ const Notification = ({
       ),
     });
   } catch (error) {
-    Console.Error("Error displaying notification:", error);
+    console.error("Error displaying notification:", error);
   }
 };
+
+// Example usage:
+// Notification({
+//   autoHideDuration: 5000,
+//   backgroundColor: "#ff9800",
+//   isWarning: true,
+//   message: <span>Theme only supports Spotify versions greater than 1.2.66.000</span>,
+// });
 
 // Example usage:
 // Notification({
