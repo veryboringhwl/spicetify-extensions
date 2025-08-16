@@ -31,7 +31,6 @@ export const Notification = ({
   const Colour = isWarning ? "#fff" : colour;
 
   try {
-    // @ts-ignore
     Spicetify.Snackbar.enqueueCustomSnackbar(keyPrefix, {
       keyPrefix,
       autoHideDuration,

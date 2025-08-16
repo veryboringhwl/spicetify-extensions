@@ -1,4 +1,9 @@
-import type { onResolveArgs, Plugin, PluginBuild } from "@esbuild/mod.js";
+import type { OnResolveArgs, Plugin, PluginBuild } from "@esbuild/mod.js";
+
+type ImportMap = {
+  imports?: Record<string, string>;
+  scopes?: Record<string, Record<string, string>>;
+};
 
 function resolveImport(importPath: string, imports: Record<string, string>): string {
   const sortedKeys = Object.keys(imports).sort((a, b) => b.length - a.length);
@@ -16,27 +21,48 @@ function resolveImport(importPath: string, imports: Record<string, string>): str
   return importPath;
 }
 
-export default function importMapPlugin(options: { configPath?: string } = {}): Plugin {
+export function importMapPlugin(options: { configPath?: string } = {}): Plugin {
   const configPath = options.configPath || "deno.json";
 
   return {
     name: "import-map",
     setup(build: PluginBuild) {
-      let imports: Record<string, string>;
+      let imports: Record<string, string> = {};
       try {
         const configText = Deno.readTextFileSync(configPath);
-        const config = JSON.parse(configText);
-        imports = {
-          ...config.imports,
-          ...config.scopes?.[build.initialOptions.entryPoints?.[0]]?.imports,
-        };
+        const config = JSON.parse(configText) as ImportMap;
+
+        imports = { ...(config.imports ?? {}) };
+
+        const entryPoints = build.initialOptions.entryPoints;
+        let firstEntryPath: string | undefined;
+
+        if (Array.isArray(entryPoints)) {
+          const first = entryPoints[0] as unknown;
+          if (typeof first === "string") {
+            firstEntryPath = first;
+          } else if (
+            first &&
+            typeof first === "object" &&
+            "in" in (first as Record<string, unknown>)
+          ) {
+            firstEntryPath = (first as { in: string }).in;
+          }
+        } else if (entryPoints && typeof entryPoints === "object") {
+          const values = Object.values(entryPoints as Record<string, string>);
+          firstEntryPath = values[0];
+        }
+
+        if (firstEntryPath && config.scopes && firstEntryPath in config.scopes) {
+          imports = { ...imports, ...config.scopes[firstEntryPath]! };
+        }
       } catch {
         return;
       }
 
       const externalPackages = build.initialOptions.external || [];
 
-      build.onResolve({ filter: /.*/ }, (args: onResolveArgs) => {
+      build.onResolve({ filter: /.*/ }, (args: OnResolveArgs) => {
         if (
           externalPackages.includes(args.path) ||
           args.path.startsWith("./") ||

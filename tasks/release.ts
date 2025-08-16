@@ -1,7 +1,7 @@
 import * as esbuild from "@esbuild/mod.js";
 import { join } from "@std/path";
-import externalGlobalsPlugin from "./pluginExternalGlobals.ts";
-import importMapPlugin from "./pluginImportMap.ts";
+import { externalGlobalsPlugin } from "./pluginExternalGlobals.ts";
+import { importMapPlugin } from "./pluginImportMap.ts";
 import { inlineCSSPlugin } from "./pluginInlineCSS.ts";
 
 const getEntryFile = async (folderPath: string): Promise<string | null> => {

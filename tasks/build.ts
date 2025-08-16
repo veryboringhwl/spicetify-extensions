@@ -1,7 +1,7 @@
 import * as esbuild from "@esbuild/mod.js";
 import { join } from "@std/path";
-import externalGlobalsPlugin from "./pluginExternalGlobals.ts";
-import importMapPlugin from "./pluginImportMap.ts";
+import { externalGlobalsPlugin } from "./pluginExternalGlobals.ts";
+import { importMapPlugin } from "./pluginImportMap.ts";
 import { inlineCSSPlugin } from "./pluginInlineCSS.ts";
 
 // Deno bundle will have runtime api so can replace esbuild
@@ -86,19 +86,67 @@ async function applyExtensions(): Promise<void> {
   }
 
   const bnkPath = join(LOCALAPPDATA, "Spotify", "offline.bnk");
+  const data = new Uint8Array(await Deno.readFile(bnkPath));
 
-  const fileBytes = await Deno.readFile(bnkPath);
-  const content = new TextDecoder().decode(fileBytes);
+  const encoder = new TextEncoder();
+  const keyBytes = encoder.encode("app-developer");
 
-  const firstLocation = content.indexOf("app-developer");
-  const firstPatchLocation = firstLocation + 14;
-  const secondLocation = content.lastIndexOf("app-developer");
-  const secondPatchLocation = secondLocation + 15;
+  const GT = 0x3e; // '>'
+  const LT = 0x3c; // '<'
+  const D0 = 0x30; // '0'
+  const D1 = 0x31; // '1'
+  const D2 = 0x32; // '2'
+  const XX = 0x78; // 'x'
+  const C1 = 0x01; // \x01
 
-  const modifiedBytes = new Uint8Array(fileBytes);
-  modifiedBytes[firstPatchLocation] = 50;
-  modifiedBytes[secondPatchLocation] = 50;
-  await Deno.writeFile(bnkPath, modifiedBytes);
+  const indexOfSequence = (haystack: Uint8Array, needle: Uint8Array, fromIndex: number): number => {
+    const limit = haystack.length - needle.length;
+    outer: for (let i = fromIndex; i <= limit; i++) {
+      for (let j = 0; j < needle.length; j++) {
+        if (haystack[i + j] !== needle[j]) continue outer;
+      }
+      return i;
+    }
+    return -1;
+  };
+
+  let cursor = 0;
+  let changed = false;
+
+  while (true) {
+    const hit = indexOfSequence(data, keyBytes, cursor);
+    if (hit === -1) break;
+
+    const start = hit + keyBytes.length;
+    const end = Math.min(start + 64, data.length - 1);
+
+    for (let k = start; k < end; k++) {
+      const v = data[k];
+      if (v !== D0 && v !== D1) continue;
+
+      if (k - 1 >= 0 && data[k - 1] === GT && k + 1 < data.length && data[k + 1] === LT) {
+        data[k] = D2;
+        changed = true;
+        break;
+      }
+
+      if (k + 1 < data.length && data[k + 1] === XX) {
+        const prevCtrl = (k - 1 >= 0 && data[k - 1] === C1) || (k - 2 >= 0 && data[k - 2] === C1);
+        const nextCtrl =
+          (k + 2 < data.length && data[k + 2] === C1) ||
+          (k + 3 < data.length && data[k + 3] === C1);
+        if (prevCtrl && nextCtrl) {
+          data[k] = D2;
+          changed = true;
+          break;
+        }
+      }
+    }
+
+    cursor = hit + keyBytes.length;
+  }
+
+  if (changed) await Deno.writeFile(bnkPath, data);
 }
 
 function startSpotify(): void {

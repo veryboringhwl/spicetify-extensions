@@ -11,6 +11,7 @@
     "lineWidth": 100
   },
   "linter": {
+    "includes": ["**", "!**/src/js/types/**"],
     "enabled": true,
     "domains": {
       "react": "all"
@@ -18,8 +19,7 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noDebugger": "off",
-        "noExplicitAny": "off"
+        "noDebugger": "off"
       },
       "a11y": "off"
     }

@@ -6,7 +6,7 @@ let intervalId = null;
 const startProgressTracking = () => {
   if (intervalId) return;
   intervalId = setInterval(() => {
-    const currentState = Spicetify.Platform.PlayerAPI.getState();
+    const currentState = Spicetify.Platform.PlayerAPI._state;
     Spicetify.Platform.PlayerAPI._events.emit("progress", currentState);
   }, 100);
 };
@@ -19,7 +19,7 @@ const stopProgressTracking = () => {
 };
 
 const usePlayer = (trackUri, trackDuration) => {
-  const [playerState, setPlayerState] = useState(() => Spicetify.Platform.PlayerAPI.getState());
+  const [playerState, setPlayerState] = useState(Spicetify.Platform.PlayerAPI._state);
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(trackDuration);
 
@@ -66,7 +66,7 @@ const usePlayer = (trackUri, trackDuration) => {
     }
     listenerCount++;
 
-    const initialPlayerState = Spicetify.Platform.PlayerAPI.getState();
+    const initialPlayerState = Spicetify.Platform.PlayerAPI._state;
     updatePlayerData(initialPlayerState);
 
     const updateListener = (event) => updatePlayerData(event.data);
@@ -83,7 +83,7 @@ const usePlayer = (trackUri, trackDuration) => {
       Spicetify.Platform.PlayerAPI._events.removeListener("update", updateListener);
       Spicetify.Platform.PlayerAPI._events.removeListener("progress", progressListener);
     };
-  }, [trackUri, trackDuration, updatePlayerData]);
+  }, [updatePlayerData]);
 
   const togglePlay = useCallback(() => {
     const currentPlayingTrack = playerState.item?.uri;
@@ -92,7 +92,13 @@ const usePlayer = (trackUri, trackDuration) => {
         ? Spicetify.Platform.PlayerAPI.resume()
         : Spicetify.Platform.PlayerAPI.pause();
     } else {
-      Spicetify.Platform.PlayerAPI.play({ uri: trackUri }, {}, {});
+      Spicetify.Platform.PlayerAPI.play(
+        {
+          uri: trackUri,
+        },
+        {},
+        {},
+      );
     }
   }, [playerState, trackUri]);
 
@@ -107,7 +113,13 @@ const usePlayer = (trackUri, trackDuration) => {
       const isSameTrackInPlayer = playerState.item?.uri === trackUri;
 
       if (!isSameTrackInPlayer) {
-        Spicetify.Platform.PlayerAPI.play({ uri: trackUri }, {}, {});
+        Spicetify.Platform.PlayerAPI.play(
+          {
+            uri: trackUri,
+          },
+          {},
+          {},
+        );
       } else {
         Spicetify.Platform.PlayerAPI.seekTo(position);
       }
