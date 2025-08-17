@@ -10,13 +10,17 @@ document.adoptedStyleSheets.push(styles);
 interface SelectedPlaylist {
   uri: string;
   name: string;
+  type: string;
 }
 
 // add a ignore button to menu so removed from duplicate list
 // would be playlist specific??
 
-const showDuplicateFinderModal = (selectedPlaylist: SelectedPlaylist, initialView = "main") => {
-  const renderModal = (view: string) => {
+const showDuplicateFinderModal = (
+  selectedPlaylist: SelectedPlaylist,
+  initialView: "main" | "settings" = "main",
+) => {
+  const renderModal = (view: "main" | "settings") => {
     const isSettings = view === "settings";
     PopupModal({
       title: isSettings ? "Find Duplicates Settings" : "Find Duplicates",
@@ -65,10 +69,18 @@ const findDuplicatesMenuItem = new Spicetify.ContextMenuV2.Item({
     const parsed: any = parseProps(context.props);
     const uri = parsed.uri;
     const name = parsed.name;
-    // sometimes the name is not there so we need to get it from metadata
+    const type = Spicetify.URI.from(uri)?.type;
     const selectedPlaylist: SelectedPlaylist = {
       uri: uri,
-      name: name || (await Spicetify.Platform.PlaylistAPI.getMetadata(uri, {})?.name),
+      name:
+        name ||
+        (
+          (await Spicetify.Platform.PlaylistAPI.getMetadata(uri, {})) as unknown as {
+            name?: string;
+          }
+        )?.name ||
+        "",
+      type: type || "",
     };
     showDuplicateFinderModal(selectedPlaylist);
   },

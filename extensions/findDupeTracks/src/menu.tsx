@@ -1,15 +1,15 @@
-import Dexie, { type Table } from "Dexie";
-import { memo, useCallback, useEffect, useState } from "react";
+import Dexie, { type Table } from "dexie";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import fetchAllLibraryContents from "../../../shared/api/fetchAllLibraryContents.ts";
 import fetchAllPlaylistTracks from "../../../shared/api/fetchAllPlaylistTracks.ts";
 import fetchGraphQLForAlbumTracks from "../../../shared/api/fetchGraphQLForAlbumTracks.ts";
 import fetchWebAPIForTracks from "../../../shared/api/fetchWebAPIForTracks.ts";
-import { ConfirmDialog } from "../../../shared/components/confirmDialog.jsx";
+import { ConfirmDialog } from "../../../shared/components/confirmDialog.tsx";
 import { Dropdown } from "../../../shared/components/dropdown.tsx";
 import { Icons } from "../../../shared/components/icons.tsx";
 import { Slider } from "../../../shared/components/slider.tsx";
 import usePlayer from "../../../shared/hooks/usePlayer.jsx";
-import { getSettings } from "./settings.jsx";
+import { getSettings } from "./settings.tsx";
 
 interface Track {
   uri: string;
@@ -22,6 +22,16 @@ interface Track {
   uid?: string;
 }
 
+const DUPLICATE_CATEGORIES = ["exact", "isrc", "likely", "possible"] as const;
+type DuplicateCategory = (typeof DUPLICATE_CATEGORIES)[number];
+
+interface PlaylistSummary {
+  uri: string;
+  name: string;
+  type: "playlist" | string;
+  canAddTo?: boolean;
+}
+
 interface DbTrack {
   trackUri: string;
   trackName: string;
@@ -31,55 +41,61 @@ interface DbTrack {
   trackIsrc: string | null;
   ignoreDuplicates?: string;
 }
+
 interface DuplicateGroup {
   mainTrack: Track;
   duplicates: Track[];
 }
 
-interface DuplicateGroups {
-  exact: DuplicateGroup[];
-  isrc: DuplicateGroup[];
-  likely: DuplicateGroup[];
-  possible: DuplicateGroup[];
+type DuplicateGroups = Record<DuplicateCategory, DuplicateGroup[]>;
+
+class FindDupeTracksDB extends Dexie {
+  public tracks!: Table<DbTrack, string>;
+
+  constructor() {
+    super("findDupeTracks");
+    this.version(1).stores({
+      tracks:
+        "&trackUri, trackName, trackDuration, albumUri, trackPlayCount, trackIsrc, ignoreDuplicates",
+    });
+  }
 }
 
-interface FindDupeTracksDB extends Dexie {
-  tracks: Table<DbTrack, string>;
-}
+const db = new FindDupeTracksDB();
 
-const db: FindDupeTracksDB = new Dexie("findDupeTracks") as FindDupeTracksDB;
-(db as Dexie).version(1).stores({
-  tracks:
-    "&trackUri, trackName, trackDuration, albumUri, trackPlayCount, trackIsrc, ignoreDuplicates",
-});
-
-async function fetchEditablePlaylists(): Promise<object[]> {
+async function fetchEditablePlaylists(): Promise<PlaylistSummary[]> {
   const playlists = await fetchAllLibraryContents();
-  return playlists.filter((item: any) => item.type === "playlist" && item.canAddTo);
+  return (playlists as PlaylistSummary[]).filter(
+    (item) => item.type === "playlist" && Boolean(item.canAddTo),
+  );
 }
-async function fetchPlaylistTracksAndCache(playlistUri: string): Promise<{ items: any[] }> {
-  const { items } = await fetchAllPlaylistTracks(playlistUri);
 
-  const trackUris: string[] = items.map((track: any) => track.uri);
+async function fetchPlaylistTracksAndCache(playlistUri: string): Promise<{ items: Track[] }> {
+  const response = await fetchAllPlaylistTracks(playlistUri);
+  const items = response.items as Track[];
+
+  const trackUris: string[] = items.map((track) => track.uri);
   const existingTracks = await db.tracks.bulkGet(trackUris);
-  const existingTracksMap = new Map<string, DbTrack>(
-    existingTracks.filter((t): t is DbTrack => Boolean(t)).map((t: DbTrack) => [t.trackUri, t]),
+  const existingTracksMap = new Map(
+    existingTracks.filter((t): t is DbTrack => Boolean(t)).map((t) => [t.trackUri, t]),
   );
 
-  const tracksToPut = items.reduce((acc: DbTrack[], item: any) => {
-    const existing: DbTrack | undefined = existingTracksMap.get(item.uri);
+  const tracksToPut: DbTrack[] = items.flatMap((item) => {
+    const existing = existingTracksMap.get(item.uri);
     if (!existing || existing.trackName !== item.name || existing.albumUri !== item.album.uri) {
-      acc.push({
-        trackUri: item.uri,
-        trackName: item.name,
-        albumUri: item.album.uri,
-        trackDuration: existing?.trackDuration ?? null,
-        trackPlayCount: existing?.trackPlayCount ?? null,
-        trackIsrc: existing?.trackIsrc ?? null,
-      });
+      return [
+        {
+          trackUri: item.uri,
+          trackName: item.name,
+          albumUri: item.album.uri,
+          trackDuration: existing?.trackDuration ?? null,
+          trackPlayCount: existing?.trackPlayCount ?? null,
+          trackIsrc: existing?.trackIsrc ?? null,
+        } satisfies DbTrack,
+      ];
     }
-    return acc;
-  }, [] as DbTrack[]);
+    return [] as DbTrack[];
+  });
 
   if (tracksToPut.length > 0) {
     await db.tracks.bulkPut(tracksToPut);
@@ -89,19 +105,18 @@ async function fetchPlaylistTracksAndCache(playlistUri: string): Promise<{ items
 }
 
 async function fetchISRCsForTracksWithCache(
-  tracks: any[],
+  tracks: Track[],
 ): Promise<{ isrcMap: Map<string, string> }> {
   const isrcMap = new Map<string, string>();
-  const tracksToFetch: any[] = [];
-  const validTracks = tracks.filter((track: any) => track?.uri);
-  const trackUris: string[] = validTracks.map((track: any) => track.uri);
+  const tracksToFetch: Track[] = [];
+  const validTracks = tracks.filter((track) => track?.uri);
+  const trackUris: string[] = validTracks.map((track) => track.uri);
+
   if (trackUris.length === 0) return { isrcMap };
 
   const cachedTracksData = await db.tracks.bulkGet(trackUris);
-  const cachedTracksMap = new Map<string, DbTrack>(
-    cachedTracksData
-      .filter((t: DbTrack | undefined): t is DbTrack => Boolean(t))
-      .map((t: DbTrack) => [t.trackUri, t]),
+  const cachedTracksMap = new Map(
+    cachedTracksData.filter((t): t is DbTrack => Boolean(t)).map((t) => [t.trackUri, t]),
   );
 
   for (const track of validTracks) {
@@ -114,11 +129,14 @@ async function fetchISRCsForTracksWithCache(
   }
 
   if (tracksToFetch.length > 0) {
-    const fetchedTracksFromAPI = await fetchWebAPIForTracks(tracksToFetch.map((t: any) => t.uri));
+    const fetchedTracksFromAPI = await fetchWebAPIForTracks(tracksToFetch.map((t) => t.uri));
+    interface WebApiTrack {
+      external_ids?: { isrc?: string };
+    }
     const updatesForDb: Array<{ key: string; changes: { trackIsrc: string } }> = [];
 
     for (const [trackUri, track] of fetchedTracksFromAPI.entries()) {
-      const trackIsrc = (track as any)?.external_ids?.isrc;
+      const trackIsrc = (track as unknown as WebApiTrack)?.external_ids?.isrc;
       if (trackIsrc) {
         isrcMap.set(trackUri, trackIsrc);
         updatesForDb.push({ key: trackUri, changes: { trackIsrc } });
@@ -131,21 +149,22 @@ async function fetchISRCsForTracksWithCache(
   }
   return { isrcMap };
 }
-async function fetchPlayCountsAndDurationForTracksWithCache(
-  tracks: any[],
-): Promise<{ trackPlayCountMap: Map<string, number>; trackDurationMap: Map<string, number> }> {
+
+async function fetchPlayCountsAndDurationForTracksWithCache(tracks: Track[]): Promise<{
+  trackPlayCountMap: Map<string, number>;
+  trackDurationMap: Map<string, number>;
+}> {
   const trackPlayCountMap = new Map<string, number>();
   const trackDurationMap = new Map<string, number>();
-  const tracksToFetch: any[] = [];
-  const validTracks = tracks.filter((track: any) => track?.uri);
-  const trackUris: string[] = validTracks.map((track: any) => track.uri);
+  const tracksToFetch: Track[] = [];
+  const validTracks = tracks.filter((track) => track?.uri);
+  const trackUris: string[] = validTracks.map((track) => track.uri);
+
   if (trackUris.length === 0) return { trackPlayCountMap, trackDurationMap };
 
   const cachedTracksData = await db.tracks.bulkGet(trackUris);
-  const cachedTracksMap = new Map<string, DbTrack>(
-    cachedTracksData
-      .filter((t: DbTrack | undefined): t is DbTrack => Boolean(t))
-      .map((t: DbTrack) => [t.trackUri, t]),
+  const cachedTracksMap = new Map(
+    cachedTracksData.filter((t): t is DbTrack => Boolean(t)).map((t) => [t.trackUri, t]),
   );
 
   for (const track of validTracks) {
@@ -162,7 +181,7 @@ async function fetchPlayCountsAndDurationForTracksWithCache(
   }
 
   if (tracksToFetch.length > 0) {
-    const albumUrisToFetch = new Set(tracksToFetch.map((t: any) => t.album.uri).filter(Boolean));
+    const albumUrisToFetch = new Set(tracksToFetch.map((t) => t.album.uri).filter(Boolean));
     const fetchedDataFromAPI = await fetchGraphQLForAlbumTracks(albumUrisToFetch);
     const updatesForDb: Array<{
       key: string;
@@ -170,10 +189,13 @@ async function fetchPlayCountsAndDurationForTracksWithCache(
     }> = [];
 
     for (const [trackUri, track] of fetchedDataFromAPI.entries()) {
-      const trackPlayCount = (track as any).playcount
-        ? Number.parseInt((track as any).playcount, 10)
-        : null;
-      const trackDuration = (track as any).duration?.totalMilliseconds ?? null;
+      interface GraphQLTrack {
+        playcount?: string | number | null;
+        duration?: { totalMilliseconds?: number | null };
+      }
+      const t = track as unknown as GraphQLTrack;
+      const trackPlayCount = t.playcount != null ? Number.parseInt(String(t.playcount), 10) : null;
+      const trackDuration = t.duration?.totalMilliseconds ?? null;
 
       if (trackPlayCount !== null) {
         trackPlayCountMap.set(trackUri, trackPlayCount);
@@ -196,33 +218,16 @@ async function fetchPlayCountsAndDurationForTracksWithCache(
 
 const normalizeForSimilarity = (name: string): string => {
   const settings = getSettings();
-
-  const termsToRemove = [...settings.defaultNormalizeWords, ...settings.customNormalizeWords]
-    .filter((w: string) => typeof w === "string")
-    .map((w: string) => w.trim())
-    .filter((w: string) => w.length > 0);
-
-  const escapeRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const regexRemoveTerms =
-    termsToRemove.length > 0
-      ? new RegExp(`\\b(${termsToRemove.map(escapeRegex).join("|")})\\b`, "gi")
-      : null;
-
-  const normalized = name
+  const termsToRemove = [...settings.defaultNormalizeWords, ...settings.customNormalizeWords];
+  const regexRemoveTerms = new RegExp(`\\b(${termsToRemove.join("|")})\\b`, "gi");
+  return name
     .toLowerCase()
-
     .replace(/\(.*?\)|\[.*?\]/g, "")
-
+    .replace(regexRemoveTerms, "")
     .replace(/-/g, " ")
     .replace(/[^\p{L}\p{N}\s]/gu, "")
-
     .replace(/\s+/g, " ")
-
     .trim();
-
-  return regexRemoveTerms
-    ? normalized.replace(regexRemoveTerms, "").replace(/\s+/g, " ").trim()
-    : normalized;
 };
 
 interface TrackDetailsProps {
@@ -231,7 +236,11 @@ interface TrackDetailsProps {
   trackIsrcs: Map<string, string>;
 }
 
-const TrackDetails = memo(({ track, trackPlayCounts, trackIsrcs }: TrackDetailsProps) => {
+const TrackDetails = memo(function TrackDetails({
+  track,
+  trackPlayCounts,
+  trackIsrcs,
+}: TrackDetailsProps) {
   const trackPlayCount: number | undefined = trackPlayCounts.get(track.uri);
   const displayCount: string = trackPlayCount != null ? trackPlayCount.toLocaleString() : "N/A";
   const trackIsrc: string = trackIsrcs.get(track.uri) || "N/A";
@@ -250,12 +259,13 @@ const TrackDetails = memo(({ track, trackPlayCounts, trackIsrcs }: TrackDetailsP
     </div>
   );
 });
+
 interface TrackControlsProps {
   trackUri: string;
   trackDuration: number | undefined;
 }
 
-const TrackControls = memo(({ trackUri, trackDuration }: TrackControlsProps) => {
+const TrackControls = memo(function TrackControls({ trackUri, trackDuration }: TrackControlsProps) {
   const {
     position,
     duration,
@@ -299,26 +309,26 @@ const TrackControls = memo(({ trackUri, trackDuration }: TrackControlsProps) => 
 
 interface DuplicateItemProps {
   track: Track;
-  category: string;
+  category: DuplicateCategory;
   groupIndex: number;
-  onDelete: (category: string, groupIndex: number, track: Track) => void;
+  onDelete: (category: DuplicateCategory, groupIndex: number, track: Track) => void;
   isSource?: boolean;
   trackPlayCounts: Map<string, number>;
   trackIsrcs: Map<string, string>;
   trackDurations: Map<string, number>;
 }
 
-const DuplicateItem = memo(
-  ({
-    track,
-    category,
-    groupIndex,
-    onDelete,
-    isSource,
-    trackPlayCounts,
-    trackIsrcs,
-    trackDurations,
-  }: DuplicateItemProps) => (
+const DuplicateItem = memo(function DuplicateItem({
+  track,
+  category,
+  groupIndex,
+  onDelete,
+  isSource,
+  trackPlayCounts,
+  trackIsrcs,
+  trackDurations,
+}: DuplicateItemProps) {
+  return (
     <div className={`duplicate-group__duplicate-item duplicate-group__item--${category}`}>
       <div className="duplicate-group__duplicate-info">
         <div className="duplicate-group__duplicate-content">
@@ -340,33 +350,29 @@ const DuplicateItem = memo(
         <TrackControls trackDuration={trackDurations.get(track.uri)} trackUri={track.uri} />
       </div>
     </div>
-  ),
-);
+  );
+});
 
 interface DuplicateGroupComponentProps {
   group: DuplicateGroup;
-  category: "exact" | "isrc" | "likely" | "possible";
+  category: DuplicateCategory;
   groupIndex: number;
-  onDelete: (
-    category: "exact" | "isrc" | "likely" | "possible",
-    groupIndex: number,
-    track: Track,
-  ) => void;
+  onDelete: (category: DuplicateCategory, groupIndex: number, track: Track) => void;
   trackPlayCounts: Map<string, number>;
   trackIsrcs: Map<string, string>;
   trackDurations: Map<string, number>;
 }
 
-const DuplicateGroupComponent = memo(
-  ({
-    group,
-    category,
-    groupIndex,
-    onDelete,
-    trackPlayCounts,
-    trackIsrcs,
-    trackDurations,
-  }: DuplicateGroupComponentProps) => (
+const DuplicateGroupComponent = memo(function DuplicateGroupComponent({
+  group,
+  category,
+  groupIndex,
+  onDelete,
+  trackPlayCounts,
+  trackIsrcs,
+  trackDurations,
+}: DuplicateGroupComponentProps) {
+  return (
     <div
       className={`duplicate-group__item duplicate-group__item--${category}`}
       key={`${group.mainTrack.uri}-${group.mainTrack.uid || groupIndex}`}
@@ -397,77 +403,68 @@ const DuplicateGroupComponent = memo(
         ))}
       </div>
     </div>
-  ),
-);
+  );
+});
 
 interface DuplicateGroupListProps {
   title: string;
-
   groups: DuplicateGroup[];
-
-  category: "exact" | "isrc" | "likely" | "possible";
-  onDelete: (
-    category: "exact" | "isrc" | "likely" | "possible",
-    groupIndex: number,
-    track: Track,
-  ) => void;
-
+  category: DuplicateCategory;
+  onDelete: (category: DuplicateCategory, groupIndex: number, track: Track) => void;
   trackPlayCounts: Map<string, number>;
-
   trackIsrcs: Map<string, string>;
-
   trackDurations: Map<string, number>;
 }
 
-const DuplicateGroupList = memo(
-  ({
-    title,
-    groups,
-    category,
-    onDelete,
-    trackPlayCounts,
-    trackIsrcs,
-    trackDurations,
-  }: DuplicateGroupListProps) => {
-    const settings = getSettings();
-    if (!settings.groupSettings[category]) return null;
+const DuplicateGroupList = memo(function DuplicateGroupList({
+  title,
+  groups,
+  category,
+  onDelete,
+  trackPlayCounts,
+  trackIsrcs,
+  trackDurations,
+}: DuplicateGroupListProps) {
+  const settings = getSettings();
+  if (!settings.groupSettings[category]) return null;
 
-    return (
-      <div className="duplicate-group">
-        <div className="duplicate-group__heading">
-          <div className="duplicate-group__heading-title">{title}</div>
-          <div className="duplicate-group__heading-length">{groups.length} found</div>
-        </div>
-        {groups.length > 0 ? (
-          <div className="duplicate-group__list">
-            {groups.map((group: DuplicateGroup, index: number) => (
-              <DuplicateGroupComponent
-                category={category}
-                group={group}
-                groupIndex={index}
-                key={`${group.mainTrack.uri}-${index}`}
-                onDelete={onDelete}
-                trackDurations={trackDurations}
-                trackIsrcs={trackIsrcs}
-                trackPlayCounts={trackPlayCounts}
-              />
-            ))}
-          </div>
-        ) : (
-          <p>No duplicates found in this category.</p>
-        )}
+  return (
+    <div className="duplicate-group">
+      <div className="duplicate-group__heading">
+        <div className="duplicate-group__heading-title">{title}</div>
+        <div className="duplicate-group__heading-length">{groups.length} found</div>
       </div>
-    );
-  },
-);
+      {groups.length > 0 ? (
+        <div className="duplicate-group__list">
+          {groups.map((group: DuplicateGroup, index: number) => (
+            <DuplicateGroupComponent
+              category={category}
+              group={group}
+              groupIndex={index}
+              key={`${group.mainTrack.uri}-${index}`}
+              onDelete={onDelete}
+              trackDurations={trackDurations}
+              trackIsrcs={trackIsrcs}
+              trackPlayCounts={trackPlayCounts}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="duplicate-group__empty">No duplicates found in this category.</div>
+      )}
+    </div>
+  );
+});
 
 function PlaylistDuplicateFinder({
   selectedPlaylist: initialSelectedPlaylist,
 }: {
-  selectedPlaylist?: any;
+  selectedPlaylist?: PlaylistSummary;
 }) {
-  const [ownedPlaylists, setOwnedPlaylists] = useState<any[]>([]);
-  const [selectedPlaylist, setSelectedPlaylist] = useState<any>(initialSelectedPlaylist || null);
+  const [ownedPlaylists, setOwnedPlaylists] = useState<PlaylistSummary[]>([]);
+  const [selectedPlaylist, setSelectedPlaylist] = useState<PlaylistSummary | null>(
+    initialSelectedPlaylist || null,
+  );
   const [playlistTracks, setPlaylistTracks] = useState<Track[]>([]);
   const [trackPlayCounts, setTrackPlayCounts] = useState<Map<string, number>>(new Map());
   const [trackDurations, setTrackDurations] = useState<Map<string, number>>(new Map());
@@ -479,23 +476,28 @@ function PlaylistDuplicateFinder({
     possible: [],
   });
 
+  // Load editable playlists on mount
   useEffect(() => {
-    let isMounted: boolean = true;
+    let cancelled = false;
     (async () => {
-      const playlists: any[] = await fetchEditablePlaylists();
-      if (!isMounted) return;
+      const playlists: PlaylistSummary[] = await fetchEditablePlaylists();
+      if (cancelled) return;
       setOwnedPlaylists(playlists);
-      setSelectedPlaylist(initialSelectedPlaylist || playlists[0] || null);
+      setSelectedPlaylist(initialSelectedPlaylist || playlists.at(0) || null);
     })();
     return () => {
-      isMounted = false;
+      cancelled = true;
     };
   }, [initialSelectedPlaylist]);
 
-  const handlePlaylistChange = (uri: string | number): void => {
-    const newPlaylist: any = ownedPlaylists.find((p: any) => p.uri === uri);
-    if (newPlaylist) setSelectedPlaylist(newPlaylist);
-  };
+  const handlePlaylistChange = useCallback(
+    (uri: string) => {
+      const newPlaylist = ownedPlaylists.find((p) => p.uri === uri) ?? null;
+      setSelectedPlaylist(newPlaylist);
+    },
+    [ownedPlaylists],
+  );
+
   const findPotentialDuplicates = useCallback(
     (
       tracks: Track[],
@@ -503,6 +505,7 @@ function PlaylistDuplicateFinder({
       trackIsrcMap: Map<string, string>,
     ) => {
       const processedUris = new Set<string>();
+
       const groupAndFilter = (
         list: Track[],
         keyFn: (t: Track) => string | undefined,
@@ -514,27 +517,28 @@ function PlaylistDuplicateFinder({
           if (processedUris.has(t.uri)) continue;
           const key: string | undefined = normalizer(keyFn(t));
           if (!key) continue;
-
-          groups.set(key, groups.get(key) || []);
-          groups.get(key)?.push(t);
+          const existing = groups.get(key);
+          if (existing) existing.push(t);
+          else groups.set(key, [t]);
         }
-        const duplicatesResult: DuplicateGroup[] = [];
 
+        const duplicatesResult: DuplicateGroup[] = [];
         for (const group of groups.values()) {
           if (group.length > 1) {
-            group.sort(
+            const sorted = group.toSorted(
               (a: Track, b: Track) =>
                 (trackPlayCountMap.get(b.uri) ?? 0) - (trackPlayCountMap.get(a.uri) ?? 0),
             );
-
-            for (const t of group) {
-              processedUris.add(t.uri);
-            }
-            duplicatesResult.push({ mainTrack: group[0], duplicates: group.slice(1) });
+            for (const t of sorted) processedUris.add(t.uri);
+            duplicatesResult.push({
+              mainTrack: sorted[0]!,
+              duplicates: sorted.slice(1),
+            });
           }
         }
         return duplicatesResult;
       };
+
       setDuplicateGroups({
         exact: groupAndFilter(
           tracks,
@@ -561,38 +565,45 @@ function PlaylistDuplicateFinder({
     [],
   );
 
-  const removeTrackFromPlaylist = async (trackToRemove: Track): Promise<void> => {
-    await Spicetify.Platform.PlaylistAPI.remove(selectedPlaylist.uri, [{ uid: trackToRemove.uid }]);
-    setPlaylistTracks((prevTracks: Track[]) =>
-      prevTracks.filter(
-        (track: Track) => !(track.uri === trackToRemove.uri && track.uid === trackToRemove.uid),
-      ),
-    );
-  };
+  const removeTrackFromPlaylist = useCallback(
+    async (trackToRemove: Track): Promise<void> => {
+      if (!selectedPlaylist) return;
+      await Spicetify.Platform.PlaylistAPI.remove(selectedPlaylist.uri, [
+        { uid: trackToRemove.uid },
+      ]);
+      setPlaylistTracks((prevTracks: Track[]) =>
+        prevTracks.filter(
+          (track: Track) => !(track.uri === trackToRemove.uri && track.uid === trackToRemove.uid),
+        ),
+      );
+    },
+    [selectedPlaylist],
+  );
 
-  const handleDeleteTrack = async (
-    duplicateCategory: "exact" | "isrc" | "likely" | "possible",
-    _groupIndex: number,
-    trackToRemove: Track,
-  ): Promise<void> => {
-    const settings = getSettings();
-    if (!settings.confirmSettings[duplicateCategory]) {
-      await removeTrackFromPlaylist(trackToRemove);
-      return;
-    }
-    ConfirmDialog({
-      titleText: "Remove Track",
-      descriptionText: `Are you sure you want to remove "${trackToRemove.name}"? This cannot be undone.`,
-      confirmText: "Remove",
-      onConfirm: () => removeTrackFromPlaylist(trackToRemove),
-      onClose: () => {},
-      onOpen: () => {},
-      onOutside: () => {},
-      confirmLabel: "Remove",
-      allowHTML: false,
-    });
-  };
+  const handleDeleteTrack = useCallback(
+    async (
+      duplicateCategory: DuplicateCategory,
+      _groupIndex: number,
+      trackToRemove: Track,
+    ): Promise<void> => {
+      const settings = getSettings();
+      if (!settings.confirmSettings[duplicateCategory]) {
+        await removeTrackFromPlaylist(trackToRemove);
+        return;
+      }
+      ConfirmDialog({
+        titleText: "Remove Track",
+        descriptionText: `Are you sure you want to remove "${trackToRemove.name}"? This cannot be undone.`,
+        confirmText: "Remove",
+        onConfirm: () => void removeTrackFromPlaylist(trackToRemove),
+        confirmLabel: "Remove",
+        allowHTML: false,
+      });
+    },
+    [removeTrackFromPlaylist],
+  );
 
+  // Load data for selected playlist
   useEffect(() => {
     setPlaylistTracks([]);
     setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
@@ -600,12 +611,15 @@ function PlaylistDuplicateFinder({
     setTrackIsrcs(new Map());
     setTrackDurations(new Map());
 
+    let cancelled = false;
     const loadData = async (): Promise<void> => {
       if (!selectedPlaylist?.uri) return;
 
-      const playlistData: { items: any[] } = await fetchPlaylistTracksAndCache(
+      const playlistData: { items: Track[] } = await fetchPlaylistTracksAndCache(
         selectedPlaylist.uri,
       );
+      if (cancelled) return;
+
       const fetchedTracks: Track[] = playlistData.items;
       setPlaylistTracks(fetchedTracks);
 
@@ -616,15 +630,20 @@ function PlaylistDuplicateFinder({
             fetchISRCsForTracksWithCache(fetchedTracks),
           ],
         );
+        if (cancelled) return;
 
         setTrackPlayCounts(fetchedTrackPlayCountsAndDurationResult.trackPlayCountMap);
         setTrackDurations(fetchedTrackPlayCountsAndDurationResult.trackDurationMap);
         setTrackIsrcs(fetchedTrackIsrcResult.isrcMap);
       }
     };
-    loadData();
+    void loadData();
+    return () => {
+      cancelled = true;
+    };
   }, [selectedPlaylist]);
 
+  // Recompute duplicates when inputs change
   useEffect(() => {
     if (playlistTracks.length > 0) {
       findPotentialDuplicates(playlistTracks, trackPlayCounts, trackIsrcs);
@@ -633,7 +652,11 @@ function PlaylistDuplicateFinder({
     }
   }, [playlistTracks, trackPlayCounts, trackIsrcs, findPotentialDuplicates]);
 
-  const playlistOptions = ownedPlaylists.map((p: any) => ({ value: p.uri, label: p.name }));
+  const playlistOptions = useMemo(
+    () => ownedPlaylists.map((p) => ({ value: p.uri, label: p.name })),
+    [ownedPlaylists],
+  );
+
   return (
     <div className="find-duplicates">
       <div className="find-duplicates__header">

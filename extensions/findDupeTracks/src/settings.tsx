@@ -33,19 +33,22 @@ const DEFAULT_NORMALIZE_WORDS = [
   "single",
 ];
 
-type ToggleSettings = {
+export type ToggleSettings = {
   exact: boolean;
   isrc: boolean;
   likely: boolean;
   possible: boolean;
 };
 
-interface Settings {
+export interface Settings {
   groupSettings: ToggleSettings;
   confirmSettings: ToggleSettings;
   defaultNormalizeWords: string[];
   customNormalizeWords: string[];
 }
+
+export const SETTINGS_STORAGE_KEY = "findDupeTracks";
+export const SETTINGS_CHANGED_EVENT = "findDupeTracks:settingsChanged";
 
 const DEFAULT_SETTINGS: Settings = {
   groupSettings: {
@@ -65,7 +68,7 @@ const DEFAULT_SETTINGS: Settings = {
 };
 
 const loadSettings = (): Settings => {
-  const savedSettings = localStorage.getItem("findDupeTracks");
+  const savedSettings = localStorage.getItem(SETTINGS_STORAGE_KEY);
   if (savedSettings) {
     const parsed = JSON.parse(savedSettings);
     if (!parsed.defaultNormalizeWords) {
@@ -83,7 +86,8 @@ const loadSettings = (): Settings => {
 };
 
 const saveSettings = (settings: Settings) => {
-  localStorage.setItem("findDupeTracks", JSON.stringify(settings));
+  localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(settings));
+  window.dispatchEvent(new CustomEvent(SETTINGS_CHANGED_EVENT));
 };
 
 export const getSettings = (): Settings => {

@@ -53,8 +53,11 @@ export function importMapPlugin(options: { configPath?: string } = {}): Plugin {
           firstEntryPath = values[0];
         }
 
-        if (firstEntryPath && config.scopes && firstEntryPath in config.scopes) {
-          imports = { ...imports, ...config.scopes[firstEntryPath]! };
+        if (firstEntryPath && config.scopes) {
+          const scope = config.scopes[firstEntryPath];
+          if (scope) {
+            imports = { ...imports, ...scope };
+          }
         }
       } catch {
         return;
