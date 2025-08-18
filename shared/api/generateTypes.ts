@@ -1,4 +1,4 @@
-const knownConstructors = new Map<any, string>([
+const knownConstructors = new Map<new (...args: any[]) => any, string>([
   [Date, "Date"],
   [RegExp, "RegExp"],
   [Error, "Error"],
@@ -6,7 +6,7 @@ const knownConstructors = new Map<any, string>([
   [ArrayBuffer, "ArrayBuffer"],
   [Uint8Array, "Uint8Array"],
   [Int32Array, "Int32Array"],
-]);
+]) satisfies Map<new (...args: any[]) => any, string>;
 
 if (typeof HTMLElement !== "undefined") {
   knownConstructors.set(HTMLElement, "HTMLElement");
@@ -15,179 +15,323 @@ if (typeof Element !== "undefined") {
   knownConstructors.set(Element, "Element");
 }
 
+type BaseNodeInfo = {
+  id: string;
+  occurrences: Set<string>;
+};
+
+type NodeInfo =
+  | (BaseNodeInfo & { kind: "object"; props: Map<string, string> })
+  | (BaseNodeInfo & { kind: "function"; arity: number })
+  | (BaseNodeInfo & { kind: "array"; elements: string[] })
+  | (BaseNodeInfo & { kind: "map"; mapEntries: Array<[string, string]> })
+  | (BaseNodeInfo & { kind: "set"; elements: string[] });
+
 export const generateTypes = (rootObject: any, rootTypeName: string): string => {
   const indent = "  ";
   const arraySampleSize = 10;
 
+  const runtimeUsername: string | null = (() => {
+    try {
+      return typeof Spicetify?.Platform?.username !== "undefined"
+        ? String(Spicetify.Platform.username)
+        : null;
+    } catch (_e) {
+      return null;
+    }
+  })();
+
+  const escapedUsername = runtimeUsername
+    ? runtimeUsername.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    : null;
+
   const definitions = new Map<string, string>();
   const visited = new WeakMap<object, string>();
+  const nodes = new Map<string, NodeInfo>();
+  let nodeCounter = 0;
 
-  const getUniqueTypeName = (path: string, baseName: string): string => {
+  const normalizePathForNaming = (path: string): string => {
+    let usedPath = path || "";
+    if (escapedUsername) {
+      usedPath = usedPath.replace(new RegExp(escapedUsername, "g"), "USERNAME");
+    }
+
+    usedPath = usedPath.replace(/\[\d+\]/g, "");
+
+    const parts = usedPath.split(/[._[\]]/).filter(Boolean);
+
+    const collapsed = parts.reduce<string[]>((acc, part) => {
+      if (acc.length === 0 || acc.at(-1) !== part) {
+        acc.push(part);
+      }
+      return acc;
+    }, []);
+
+    const MAX_SEGMENTS = 12;
+    if (collapsed.length > MAX_SEGMENTS) {
+      const head = collapsed.slice(0, MAX_SEGMENTS - 4);
+      const tail = collapsed.slice(-3);
+      return [...head, "...", ...tail].join(".");
+    }
+    return collapsed.join(".");
+  };
+
+  const deriveNameFromPath = (path: string, baseName: string): string => {
+    const normalizedPath = normalizePathForNaming(path);
+    const parts = normalizedPath.split(".").filter(Boolean);
     const name =
-      path
-        .replace(/\[\d+\]/g, "")
-        .split(/[._[\]]/)
-        .filter(Boolean)
+      parts
         .map((part) => {
           const sanitized = part.replace(/[^a-zA-Z0-9_$]/g, "");
-          return sanitized.charAt(0).toUpperCase() + sanitized.slice(1);
+          return sanitized ? sanitized.charAt(0).toUpperCase() + sanitized.slice(1) : "";
         })
+        .filter(Boolean)
         .join("") || baseName;
+    return name;
+  };
 
-    if (!definitions.has(name)) {
-      return name;
-    }
-
+  const getUniqueTypeName = (base: string): string => {
+    if (!definitions.has(base)) return base;
     let counter = 2;
-    while (definitions.has(`${name}${counter}`)) {
-      counter++;
-    }
-    return `${name}${counter}`;
+    while (definitions.has(`${base}${counter}`)) counter++;
+    return `${base}${counter}`;
   };
 
-  const generateFunctionType = (value: (...args: any[]) => any, path: string): string => {
-    const existingTypeName = visited.get(value);
-    if (existingTypeName) return existingTypeName;
-
-    const typeName = getUniqueTypeName(path, `FunctionType${definitions.size}`);
-    visited.set(value, typeName);
-
-    const args = Array.from({ length: value.length }, (_, i) => `arg${i}: any`).join(", ");
-    const funcType = `(${args}) => unknown`;
-
-    definitions.set(typeName, `export type ${typeName} = ${funcType};`);
-    return typeName;
-  };
-
-  const generateComplexType = (
-    value: any[],
-    path: string,
-    depth: number,
-    baseElementTypeName: string,
-    wrapperPrefix: string,
-    wrapperSuffix: string,
-  ): string => {
-    if (value.length === 0) return `${wrapperPrefix}unknown${wrapperSuffix}`;
-
-    const sample = value.length > arraySampleSize ? value.slice(0, arraySampleSize) : value;
-    const elementTypes = sample.map((element) =>
-      generateTypeForValue(element, `${path}${baseElementTypeName}`, depth),
-    );
-    const uniqueTypes = [...new Set(elementTypes)].sort().join(" | ") || "unknown";
-
-    return `${wrapperPrefix}${uniqueTypes}${wrapperSuffix}`;
-  };
-
-  const generateArrayType = (value: any[], path: string, depth: number): string => {
-    return generateComplexType(value, path, depth, "Item", "Array<", ">");
-  };
-
-  const generateSetType = (value: Set<any>, path: string, depth: number): string => {
-    return generateComplexType(Array.from(value.values()), path, depth, "SetElement", "Set<", ">");
-  };
-
-  const generateMapType = (value: Map<any, any>, path: string, depth: number): string => {
-    if (value.size === 0) return "Map<unknown, unknown>";
-
-    const sample = Array.from(value.entries()).slice(0, arraySampleSize);
-
-    const keyTypes =
-      [...new Set(sample.map(([key]) => generateTypeForValue(key, `${path}Key`, depth)))]
-        .sort()
-        .join(" | ") || "unknown";
-    const valueTypes =
-      [...new Set(sample.map(([, val]) => generateTypeForValue(val, `${path}Value`, depth)))]
-        .sort()
-        .join(" | ") || "unknown";
-
-    return `Map<${keyTypes}, ${valueTypes}>`;
-  };
-
-  const generateObjectType = (value: object, path: string, depth: number): string => {
-    const existingTypeName = visited.get(value);
-    if (existingTypeName) return existingTypeName;
-
-    const typeName = getUniqueTypeName(path, "ObjectType");
-    visited.set(value, typeName);
-
-    definitions.set(typeName, `export interface ${typeName} {}`); // Placeholder for circular refs
-
-    const properties: string[] = [];
-    const seenKeys = new Set<string | symbol>();
-    const nextIndent = indent.repeat(depth + 1);
-
-    let currentProto = value;
-    while (currentProto && currentProto !== Object.prototype) {
-      const keys = Reflect.ownKeys(currentProto);
-
-      for (const key of keys) {
-        if (key === "constructor" || seenKeys.has(key)) continue;
-        seenKeys.add(key);
-
-        const propertyKey =
-          typeof key === "symbol"
-            ? `[${JSON.stringify(key.toString())}]`
-            : /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key)
-              ? key
-              : `"${key}"`;
-
-        try {
-          const propertyValue = Reflect.get(value, key);
-
-          const propertyPath =
-            typeof key === "symbol" ? `${path}[${key.description || "symbol"}]` : `${path}.${key}`;
-
-          const propertyType = generateTypeForValue(propertyValue, propertyPath, depth + 1);
-          properties.push(`${nextIndent}${propertyKey}: ${propertyType};`);
-        } catch (_e) {
-          properties.push(`${nextIndent}${propertyKey}: any; // Error accessing property`);
-        }
+  const getNodeFor = <T extends NodeInfo["kind"]>(
+    obj: object,
+    initialPath: string,
+    kind: T,
+  ): { id: string; info: NodeInfo & { kind: T }; isNew: boolean } => {
+    const existingId = visited.get(obj);
+    if (existingId) {
+      const info = nodes.get(existingId);
+      if (!info) {
+        throw new Error(
+          `Internal state inconsistency: visited map has ID ${existingId} but nodes map does not.`,
+        );
       }
-      currentProto = Object.getPrototypeOf(currentProto);
+      info.occurrences.add(initialPath);
+      return { id: existingId, info: info as NodeInfo & { kind: T }, isNew: false };
     }
 
-    properties.sort();
+    const id = `__N${++nodeCounter}`;
+    visited.set(obj, id);
+    const baseInfo: BaseNodeInfo = { id, occurrences: new Set([initialPath]) };
 
-    if (properties.length > 0) {
-      const currentIndent = indent.repeat(depth);
-      const interfaceBody = `\n${properties.join("\n")}\n${currentIndent}`;
-      definitions.set(typeName, `export interface ${typeName} {${interfaceBody}}`);
-    } else {
-      definitions.set(typeName, `export type ${typeName} = Record<string, unknown>;`);
+    let info: NodeInfo;
+    switch (kind) {
+      case "object":
+        info = { ...baseInfo, kind, props: new Map() };
+        break;
+      case "function":
+        info = { ...baseInfo, kind, arity: 0 };
+        break;
+      case "array":
+        info = { ...baseInfo, kind, elements: [] };
+        break;
+      case "map":
+        info = { ...baseInfo, kind, mapEntries: [] };
+        break;
+      case "set":
+        info = { ...baseInfo, kind, elements: [] };
+        break;
     }
-    return typeName;
+
+    nodes.set(id, info);
+    return { id, info: info as NodeInfo & { kind: T }, isNew: true };
   };
 
-  const generateTypeForValue = (value: any, path: string, depth: number): string => {
+  const generateTypeToken = (value: any, path: string): string => {
     if (value === null) return "null";
+
     const basicType = typeof value;
-    if (basicType !== "object" && basicType !== "function") return basicType;
+    if (basicType !== "object" && basicType !== "function") {
+      return basicType;
+    }
 
     for (const [ctor, typeName] of knownConstructors.entries()) {
-      if (value instanceof ctor) return typeName;
+      try {
+        if (value instanceof ctor) return typeName;
+      } catch {}
     }
 
-    if (value instanceof Map) return generateMapType(value, path, depth);
-    if (value instanceof Set) return generateSetType(value, path, depth);
+    if (value instanceof Map) {
+      const { id, info, isNew } = getNodeFor(value, path, "map");
+      if (isNew && value.size > 0) {
+        const sample = Array.from(value.entries()).slice(0, arraySampleSize);
+        for (const [key, val] of sample) {
+          info.mapEntries.push([
+            generateTypeToken(key, `${path}.Key`),
+            generateTypeToken(val, `${path}.Value`),
+          ]);
+        }
+      }
+      return id;
+    }
 
-    const existingTypeName = visited.get(value);
-    if (existingTypeName) return existingTypeName;
+    if (value instanceof Set) {
+      const { id, info, isNew } = getNodeFor(value, path, "set");
+      if (isNew && value.size > 0) {
+        const sample = Array.from(value.values()).slice(0, arraySampleSize);
+        for (const element of sample) {
+          info.elements.push(generateTypeToken(element, `${path}.SetElement`));
+        }
+      }
+      return id;
+    }
 
-    if (Array.isArray(value)) return generateArrayType(value, path, depth);
-    if (typeof value === "function") return generateFunctionType(value, path);
-    if (typeof value === "object") return generateObjectType(value, path, depth);
+    if (Array.isArray(value)) {
+      const { id, info, isNew } = getNodeFor(value, path, "array");
+      if (isNew && value.length > 0) {
+        const sample = value.slice(0, arraySampleSize);
+        for (const element of sample) {
+          info.elements.push(generateTypeToken(element, `${path}.Item`));
+        }
+      }
+      return id;
+    }
+
+    if (typeof value === "function") {
+      const { id, info, isNew } = getNodeFor(value, path, "function");
+      if (isNew) info.arity = value.length;
+      return id;
+    }
+
+    if (typeof value === "object") {
+      const { id, info, isNew } = getNodeFor(value, path, "object");
+      if (!isNew) return id;
+
+      let currentProto: object | null = value;
+      const seenKeys = new Set<string | symbol>();
+      while (currentProto && currentProto !== Object.prototype) {
+        for (const key of Reflect.ownKeys(currentProto)) {
+          if (key === "constructor" || typeof key === "symbol" || seenKeys.has(key)) {
+            continue;
+          }
+          seenKeys.add(key);
+          const propPath = `${path}.${key}`;
+          try {
+            const propVal = value[key as keyof typeof value];
+            const token = generateTypeToken(propVal, propPath);
+            info.props.set(key, token);
+          } catch {
+            info.props.set(key, "any /* inaccessible */");
+          }
+        }
+        currentProto = Object.getPrototypeOf(currentProto);
+      }
+      return id;
+    }
 
     return "unknown";
   };
 
-  generateTypeForValue(rootObject, rootTypeName, 0);
+  const rootToken = generateTypeToken(rootObject, rootTypeName);
+
+  const placeholderToName = new Map<string, string>();
+
+  const buildBaseNameForNode = (node: NodeInfo): string => {
+    const pathSegmentCount = (p: string) => normalizePathForNaming(p).split(".").length;
+    const bestPath =
+      Array.from(node.occurrences).toSorted((a, b) => {
+        const segA = pathSegmentCount(a);
+        const segB = pathSegmentCount(b);
+        return segA !== segB ? segA - segB : a.localeCompare(b);
+      })[0] ?? node.id;
+
+    const kindToBaseName: Record<NodeInfo["kind"], string> = {
+      object: "ObjectType",
+      function: "FunctionType",
+      array: "ArrayType",
+      map: "MapType",
+      set: "SetType",
+    };
+    return deriveNameFromPath(bestPath, kindToBaseName[node.kind]);
+  };
+
+  for (const node of nodes.values()) {
+    const baseName = buildBaseNameForNode(node);
+    const uniqueName = getUniqueTypeName(baseName);
+    placeholderToName.set(node.id, uniqueName);
+    definitions.set(uniqueName, `/* Analyzing ${uniqueName}... */`);
+  }
+
+  const resolveToken = (token: string): string => {
+    if (token == null) return "unknown";
+    return token.replace(/__N\d+/g, (match) => placeholderToName.get(match) ?? "unknown");
+  };
+
+  const buildDefinitionForNode = (node: NodeInfo, finalName: string): string => {
+    switch (node.kind) {
+      case "function": {
+        const args = Array.from({ length: node.arity }, (_, i) => `arg${i}: any`).join(", ");
+        return `export type ${finalName} = (${args}) => unknown;`;
+      }
+      case "array":
+      case "set": {
+        const elements = node.elements.length > 0 ? node.elements : ["unknown"];
+        const uniqueTypes = [...new Set(elements.map(resolveToken))].toSorted().join(" | ");
+        const wrapper = node.kind === "array" ? "Array" : "Set";
+        return `export type ${finalName} = ${wrapper}<${uniqueTypes}>;`;
+      }
+      case "map": {
+        if (node.mapEntries.length === 0) {
+          return `export type ${finalName} = Map<unknown, unknown>;`;
+        }
+        const keyTypes = [...new Set(node.mapEntries.map(([k]) => resolveToken(k)))]
+          .toSorted()
+          .join(" | ");
+        const valueTypes = [...new Set(node.mapEntries.map(([, v]) => resolveToken(v)))]
+          .toSorted()
+          .join(" | ");
+        return `export type ${finalName} = Map<${keyTypes}, ${valueTypes}>;`;
+      }
+      case "object": {
+        if (node.props.size === 0) {
+          return `export type ${finalName} = Record<string, unknown>;`;
+        }
+        const properties = Array.from(node.props.entries()).map(([key, token]) => {
+          const safeKey = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key) ? key : `"${key}"`;
+          return `${indent}${safeKey}: ${resolveToken(token)};`;
+        });
+        const body = `\n${properties.toSorted().join("\n")}\n`;
+        return `export interface ${finalName} {${body}}`;
+      }
+    }
+  };
+
+  for (const node of nodes.values()) {
+    const finalName = placeholderToName.get(node.id);
+    if (!finalName) {
+      throw new Error(
+        `Internal state inconsistency: placeholderToName map missing name for node ID ${node.id}.`,
+      );
+    }
+    definitions.set(finalName, buildDefinitionForNode(node, finalName));
+  }
+
+  if (/__N\d+/.test(rootToken)) {
+    const rootPlaceholder = rootToken;
+    const mappedName = placeholderToName.get(rootPlaceholder);
+    if (mappedName && rootTypeName !== mappedName) {
+      definitions.set(rootTypeName, `export type ${rootTypeName} = ${mappedName};`);
+    }
+  } else {
+    definitions.set(rootTypeName, `export type ${rootTypeName} = ${resolveToken(rootToken)};`);
+  }
 
   const header = `// Auto-generated by type-generator script at ${new Date().toISOString()}`;
-  const sortedDefinitions = Array.from(definitions.entries())
-    .sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
-    .map(([, value]) => value);
 
-  return [header, ...sortedDefinitions].join("\n\n");
+  const sortedDefinitions = Array.from(definitions.entries())
+    .toSorted(([a], [b]) => a.localeCompare(b))
+    .map(([, val]) => val);
+
+  let output = [header, ...sortedDefinitions].join("\n\n");
+  if (runtimeUsername) {
+    output = output.split(runtimeUsername).join("USERNAME");
+  }
+
+  return output;
 };
 
 export default generateTypes;
