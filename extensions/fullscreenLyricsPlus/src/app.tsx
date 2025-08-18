@@ -1,7 +1,9 @@
-import ReactDOM from "react-dom/client";
-import "./styles.css";
+import { createRoot, type Root } from "react-dom/client";
+import styles from "./styles.css" with { type: "css" };
 
-let fullscreenButtonRoot: ReactDOM.Root | null = null;
+document.adoptedStyleSheets.push(styles);
+
+let fullscreenButtonRoot: Root | null = null;
 
 const minimisePath =
   "M6.064 10.229l-2.418 2.418L2 11v4h4l-1.647-1.646 2.418-2.418-.707-.707zM11 2l1.647 1.647-2.418 2.418.707.707 2.418-2.418L15 6V2h-4z";
@@ -48,7 +50,7 @@ const renderFullscreenButton = () => {
     buttonWrapper = document.createElement("div");
     buttonWrapper.className = "lyrics-tooltip-wrapper fullscreen";
     container.appendChild(buttonWrapper);
-    fullscreenButtonRoot = ReactDOM.createRoot(buttonWrapper);
+    fullscreenButtonRoot = createRoot(buttonWrapper);
   }
 
   if (fullscreenButtonRoot) {
