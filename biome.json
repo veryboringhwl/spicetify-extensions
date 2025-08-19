@@ -4,7 +4,7 @@
     "includes": ["**", "!**/dist"]
   },
   "formatter": {
-    "enabled": true,
+    "includes": ["**"],
     "formatWithErrors": true,
     "indentStyle": "space",
     "indentWidth": 2,
@@ -19,7 +19,8 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noDebugger": "off"
+        "noDebugger": "off",
+        "noExplicitAny": "off"
       },
       "a11y": "off"
     }

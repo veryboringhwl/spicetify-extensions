@@ -150,10 +150,9 @@ async function fetchISRCsForTracksWithCache(
   return { isrcMap };
 }
 
-async function fetchPlayCountsAndDurationForTracksWithCache(tracks: Track[]): Promise<{
-  trackPlayCountMap: Map<string, number>;
-  trackDurationMap: Map<string, number>;
-}> {
+async function fetchPlayCountsAndDurationForTracksWithCache(
+  tracks: Track[],
+): Promise<{ trackPlayCountMap: Map<string, number>; trackDurationMap: Map<string, number> }> {
   const trackPlayCountMap = new Map<string, number>();
   const trackDurationMap = new Map<string, number>();
   const tracksToFetch: Track[] = [];
@@ -456,6 +455,72 @@ const DuplicateGroupList = memo(function DuplicateGroupList({
   );
 });
 
+const findPotentialDuplicates = (
+  tracks: Track[],
+  trackPlayCountMap: Map<string, number>,
+  trackIsrcMap: Map<string, string>,
+): DuplicateGroups => {
+  const processedUris = new Set<string>();
+
+  const groupAndFilter = (
+    list: Track[],
+    keyFn: (t: Track) => string | undefined,
+    normalizer: (key: string | undefined) => string | undefined,
+  ): DuplicateGroup[] => {
+    const unprocessedTracks = list.filter((t) => !processedUris.has(t.uri));
+
+    const tracksWithKey = unprocessedTracks.filter((t) => {
+      const k = normalizer(keyFn(t));
+      return k != null && k !== "";
+    });
+
+    const groups = Object.groupBy(tracksWithKey, (t: Track) => normalizer(keyFn(t)) as PropertyKey);
+
+    const duplicatesResult: DuplicateGroup[] = [];
+
+    for (const group of Object.values(groups)) {
+      if (group && group.length > 1) {
+        const sorted = group.toSorted(
+          (a: Track, b: Track) =>
+            (trackPlayCountMap.get(b.uri) ?? 0) - (trackPlayCountMap.get(a.uri) ?? 0),
+        );
+        for (const t of sorted) processedUris.add(t.uri);
+        duplicatesResult.push({ mainTrack: sorted[0], duplicates: sorted.slice(1) });
+      }
+    }
+
+    return duplicatesResult.sort((a, b) => {
+      const aPlayCount = trackPlayCountMap.get(a.mainTrack.uri) ?? 0;
+      const bPlayCount = trackPlayCountMap.get(b.mainTrack.uri) ?? 0;
+      if (bPlayCount !== aPlayCount) return bPlayCount - aPlayCount;
+      return a.mainTrack.name.localeCompare(b.mainTrack.name);
+    });
+  };
+
+  return {
+    exact: groupAndFilter(
+      tracks,
+      (t: Track) => t.uri,
+      (k: string | undefined) => k,
+    ),
+    isrc: groupAndFilter(
+      tracks,
+      (t: Track) => trackIsrcMap.get(t.uri),
+      (k: string | undefined) => k,
+    ),
+    likely: groupAndFilter(
+      tracks,
+      (t: Track) => t.name,
+      (name: string | undefined) => name?.trim(),
+    ),
+    possible: groupAndFilter(
+      tracks,
+      (t: Track) => t.name,
+      (name: string | undefined) => (name ? normalizeForSimilarity(name) : undefined),
+    ),
+  };
+};
+
 function PlaylistDuplicateFinder({
   selectedPlaylist: initialSelectedPlaylist,
 }: {
@@ -476,7 +541,6 @@ function PlaylistDuplicateFinder({
     possible: [],
   });
 
-  // Load editable playlists on mount
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -496,73 +560,6 @@ function PlaylistDuplicateFinder({
       setSelectedPlaylist(newPlaylist);
     },
     [ownedPlaylists],
-  );
-
-  const findPotentialDuplicates = useCallback(
-    (
-      tracks: Track[],
-      trackPlayCountMap: Map<string, number>,
-      trackIsrcMap: Map<string, string>,
-    ) => {
-      const processedUris = new Set<string>();
-
-      const groupAndFilter = (
-        list: Track[],
-        keyFn: (t: Track) => string | undefined,
-        normalizer: (key: string | undefined) => string | undefined,
-      ): DuplicateGroup[] => {
-        const groups = new Map<string, Track[]>();
-
-        for (const t of list) {
-          if (processedUris.has(t.uri)) continue;
-          const key: string | undefined = normalizer(keyFn(t));
-          if (!key) continue;
-          const existing = groups.get(key);
-          if (existing) existing.push(t);
-          else groups.set(key, [t]);
-        }
-
-        const duplicatesResult: DuplicateGroup[] = [];
-        for (const group of groups.values()) {
-          if (group.length > 1) {
-            const sorted = group.toSorted(
-              (a: Track, b: Track) =>
-                (trackPlayCountMap.get(b.uri) ?? 0) - (trackPlayCountMap.get(a.uri) ?? 0),
-            );
-            for (const t of sorted) processedUris.add(t.uri);
-            duplicatesResult.push({
-              mainTrack: sorted[0]!,
-              duplicates: sorted.slice(1),
-            });
-          }
-        }
-        return duplicatesResult;
-      };
-
-      setDuplicateGroups({
-        exact: groupAndFilter(
-          tracks,
-          (t: Track) => t.uri,
-          (k: string | undefined) => k,
-        ),
-        isrc: groupAndFilter(
-          tracks,
-          (t: Track) => trackIsrcMap.get(t.uri),
-          (k: string | undefined) => k,
-        ),
-        likely: groupAndFilter(
-          tracks,
-          (t: Track) => t.name,
-          (name: string | undefined) => name?.trim(),
-        ),
-        possible: groupAndFilter(
-          tracks,
-          (t: Track) => t.name,
-          (name: string | undefined) => (name ? normalizeForSimilarity(name) : undefined),
-        ),
-      });
-    },
-    [],
   );
 
   const removeTrackFromPlaylist = useCallback(
@@ -603,7 +600,6 @@ function PlaylistDuplicateFinder({
     [removeTrackFromPlaylist],
   );
 
-  // Load data for selected playlist
   useEffect(() => {
     setPlaylistTracks([]);
     setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
@@ -643,14 +639,13 @@ function PlaylistDuplicateFinder({
     };
   }, [selectedPlaylist]);
 
-  // Recompute duplicates when inputs change
   useEffect(() => {
-    if (playlistTracks.length > 0) {
-      findPotentialDuplicates(playlistTracks, trackPlayCounts, trackIsrcs);
-    } else {
+    if (playlistTracks.length === 0) {
       setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
+    } else if (trackPlayCounts.size > 0 || trackIsrcs.size > 0) {
+      setDuplicateGroups(findPotentialDuplicates(playlistTracks, trackPlayCounts, trackIsrcs));
     }
-  }, [playlistTracks, trackPlayCounts, trackIsrcs, findPotentialDuplicates]);
+  }, [playlistTracks, trackPlayCounts, trackIsrcs]);
 
   const playlistOptions = useMemo(
     () => ownedPlaylists.map((p) => ({ value: p.uri, label: p.name })),
