@@ -246,7 +246,7 @@ const runWatchers = async (): Promise<void> => {
   console.log(`\x1b[33mWatchers started in ${elapsed} seconds.\x1b[0m`);
 };
 
-runWatchers();
+await runWatchers();
 
 const runBiome = async (): Promise<void> => {
   const formatCommand = new Deno.Command("deno", {
@@ -276,21 +276,6 @@ async function executeCommand(commandString: string): Promise<void> {
   }
 }
 
-const lineStream = Deno.stdin.readable
-  .pipeThrough(new TextDecoderStream())
-  .pipeThrough(new TextLineStream());
-
-for await (const line of lineStream) {
-  const command = line.trim();
-  if (!command) continue;
-
-  if (command === "format" || command === "check") {
-    await runBiome();
-  } else {
-    await executeCommand(command);
-  }
-}
-
 Deno.addSignalListener("SIGINT", async () => {
   console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m Exiting...`);
 
@@ -301,3 +286,20 @@ Deno.addSignalListener("SIGINT", async () => {
 
   Deno.exit(0);
 });
+
+const lineStream = Deno.stdin.readable
+  .pipeThrough(new TextDecoderStream())
+  .pipeThrough(new TextLineStream());
+
+(async () => {
+  for await (const line of lineStream) {
+    const command = line.trim();
+    if (!command) continue;
+
+    if (command === "format" || command === "check") {
+      await runBiome();
+    } else {
+      await executeCommand(command);
+    }
+  }
+})();

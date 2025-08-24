@@ -5,7 +5,7 @@ interface PropsInput extends MergedObject {
   reference?: MergedObject;
 }
 
-function parseProps(props: PropsInput | null | undefined): MergedObject {
+export function parseProps(props: PropsInput | null | undefined): MergedObject {
   if (!props) return {};
 
   const parsed: MergedObject = {};
@@ -27,5 +27,3 @@ function parseProps(props: PropsInput | null | undefined): MergedObject {
 
   return parsed;
 }
-
-export default parseProps;
