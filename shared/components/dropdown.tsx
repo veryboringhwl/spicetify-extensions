@@ -29,13 +29,13 @@ export const Dropdown: FC<DropdownProps> = memo(({ value, options, onChange, dis
   const selectedLabel = options.find((opt) => opt.value === value)?.label || "Select...";
 
   return (
-    // @ts-ignore
+    // @ts-expect-error
     <div className="dropdown" disabled={disabled}>
       <button
         className="dropdown__button"
         popoverTarget={popoverId}
         popoverTargetAction="toggle"
-        // @ts-ignore
+        // @ts-expect-error
         style={{ anchorName: anchorName }}
       >
         <div className="dropdown__text">{selectedLabel}</div>
@@ -56,8 +56,9 @@ export const Dropdown: FC<DropdownProps> = memo(({ value, options, onChange, dis
       >
         {options.map((option) => (
           <div
-            aria-selected={value === option.value}
-            className={`dropdown__option${value === option.value ? " dropdown__option--selected" : ""}`}
+            className={`dropdown__option${
+              value === option.value ? " dropdown__option--selected" : ""
+            }`}
             key={option.value}
             onClick={() => handleSelect(option)}
             onKeyDown={(e) => e.key === "Enter" && handleSelect(option)}

@@ -15,11 +15,11 @@
 
   &:hover {
     .slider__thumb {
-      opacity: 1 !important;
+      opacity: 1;
     }
 
     .slider__fill {
-      background-color: var(--fill-color) !important;
+      background-color: var(--fill-color);
     }
   }
 

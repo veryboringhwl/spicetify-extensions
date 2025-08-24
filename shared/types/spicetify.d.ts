@@ -871,13 +871,11 @@ declare global {
       public toplist?: any;
 
       /**
-       *
        * @return The URI representation of this uri.
        */
       toURI(): string;
 
       /**
-       *
        * @return The URI representation of this uri.
        */
       toString(): string;
@@ -891,7 +889,6 @@ declare global {
       toURLPath(opt_leadingSlash: boolean): string;
 
       /**
-       *
        * @param origin The origin to use for the URL.
        * @return The URL string for the uri.
        */
@@ -916,7 +913,6 @@ declare global {
        *
        * Note that some of the types in this enum are not real URI types, but are
        * actually URI particles. They are marked so.
-       *
        */
       static Type: {
         AD: string;
@@ -1367,6 +1363,9 @@ declare global {
 
     /** Stock React components exposed from Spotify library */
     namespace ReactComponent {
+      const Router: any;
+      const Routes: any;
+      const Route: any;
       type ContextMenuProps = {
         /**
          * Decide whether to use the global singleton context menu (rendered in <body>)
@@ -2139,7 +2138,6 @@ declare global {
        * @param sectionIndex Index of the section in which the drag originated
        * @param dropOriginUri URI of the desired drop target. Leave empty to allow drop anywhere
        * @return Function to handle drag event. Should be passed to `onDragStart` prop of the element. All parameters passed onto the hook will be passed onto the handler unless declared otherwise.
-       *
        */
       function DragHandler(
         uris?: string[],

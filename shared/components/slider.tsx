@@ -102,7 +102,7 @@ export const Slider: FC<SliderProps> = memo(
     }, [handleMouseMove, handleMouseUp, handleTouchMove]);
 
     return (
-      // @ts-ignore
+      // @ts-expect-error
       <div className="slider" disabled={disabled}>
         <div
           className="slider-container"

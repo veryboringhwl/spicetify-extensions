@@ -15,9 +15,9 @@ dialog.modal::backdrop {
   flex-direction: column;
   width: 500px;
   max-height: 500px;
-  background-color: rgba(var(--spice-rgb-main), 0.9) !important;
+  background-color: rgba(var(--spice-rgb-main), 0.9);
   border-radius: 7px;
-  box-shadow: 0 0 20px rgba(var(--spice-rgb-shadow), 0.5) !important;
+  box-shadow: 0 0 20px rgba(var(--spice-rgb-shadow), 0.5);
   backdrop-filter: blur(20px) saturate(1.4) brightness(1.2);
 }
 
@@ -72,7 +72,7 @@ dialog.modal::backdrop {
 
 .modal__content {
   display: flex;
-  padding: 16px 24px !important;
+  padding: 16px 24px;
   overflow: auto;
   scrollbar-gutter: stable both-edges;
 }

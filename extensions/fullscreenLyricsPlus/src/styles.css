@@ -1,9 +1,9 @@
 .fullscreen {
   .Root__top-container {
-    grid-template-areas: "main-view" !important;
-    grid-template-rows: unset !important;
-    grid-template-columns: unset !important;
-    gap: 0px !important;
+    grid-template-areas: "main-view";
+    grid-template-rows: unset;
+    grid-template-columns: unset;
+    gap: 0px;
   }
 
   .xlgKfueiF46Wo_sED8YA {
@@ -18,6 +18,6 @@
   .Root__nav-bar,
   .Root__now-playing-bar,
   .Root__right-sidebar {
-    display: none !important;
+    display: none;
   }
 }
