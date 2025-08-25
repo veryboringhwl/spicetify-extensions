@@ -1,14 +1,14 @@
 import Dexie, { type Table } from "dexie";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
-import fetchAllLibraryContents from "../../../shared/api/fetchAllLibraryContents.ts";
-import fetchAllPlaylistTracks from "../../../shared/api/fetchAllPlaylistTracks.ts";
-import fetchGraphQLForAlbumTracks from "../../../shared/api/fetchGraphQLForAlbumTracks.ts";
-import fetchWebAPIForTracks from "../../../shared/api/fetchWebAPIForTracks.ts";
+import { fetchAllLibraryContents } from "../../../shared/api/fetchAllLibraryContents.ts";
+import { fetchAllPlaylistTracks } from "../../../shared/api/fetchAllPlaylistTracks.ts";
+import { fetchGraphQLForAlbumTracks } from "../../../shared/api/fetchGraphQLForAlbumTracks.ts";
+import { fetchWebAPIForTracks } from "../../../shared/api/fetchWebAPIForTracks.ts";
 import { ConfirmDialog } from "../../../shared/components/confirmDialog.tsx";
 import { Dropdown } from "../../../shared/components/dropdown.tsx";
 import { Icons } from "../../../shared/components/icons.tsx";
 import { Slider } from "../../../shared/components/slider.tsx";
-import usePlayer from "../../../shared/hooks/usePlayer.jsx";
+import { usePlayer } from "../../../shared/hooks/usePlayer.jsx";
 import { getSettings } from "./settings.tsx";
 
 interface Track {
@@ -22,7 +22,7 @@ interface Track {
   uid?: string;
 }
 
-const DUPLICATE_CATEGORIES = ["exact", "isrc", "likely", "possible"] as const;
+const DUPLICATE_CATEGORIES = ["exact", "isrc", "likely", "possible", "probable"] as const;
 type DuplicateCategory = (typeof DUPLICATE_CATEGORIES)[number];
 
 interface PlaylistSummary {
@@ -54,7 +54,7 @@ class FindDupeTracksDB extends Dexie {
 
   constructor() {
     super("findDupeTracks");
-    this.version(1).stores({
+    this.version(0.1).stores({
       tracks:
         "&trackUri, trackName, trackDuration, albumUri, trackPlayCount, trackIsrc, ignoreDuplicates",
     });
@@ -150,9 +150,10 @@ async function fetchISRCsForTracksWithCache(
   return { isrcMap };
 }
 
-async function fetchPlayCountsAndDurationForTracksWithCache(
-  tracks: Track[],
-): Promise<{ trackPlayCountMap: Map<string, number>; trackDurationMap: Map<string, number> }> {
+async function fetchPlayCountsAndDurationForTracksWithCache(tracks: Track[]): Promise<{
+  trackPlayCountMap: Map<string, number>;
+  trackDurationMap: Map<string, number>;
+}> {
   const trackPlayCountMap = new Map<string, number>();
   const trackDurationMap = new Map<string, number>();
   const tracksToFetch: Track[] = [];
@@ -508,6 +509,14 @@ const findPotentialDuplicates = (
       (t: Track) => trackIsrcMap.get(t.uri),
       (k: string | undefined) => k,
     ),
+    probable: groupAndFilter(
+      tracks,
+      (t: Track) => {
+        const sortedArtists = t.artists.map((a) => a.name).sort();
+        return `${t.name}|${sortedArtists[0] || ""}`;
+      },
+      (k: string | undefined) => k?.toLowerCase().trim(),
+    ),
     likely: groupAndFilter(
       tracks,
       (t: Track) => t.name,
@@ -537,6 +546,7 @@ function PlaylistDuplicateFinder({
   const [duplicateGroups, setDuplicateGroups] = useState<DuplicateGroups>({
     exact: [],
     isrc: [],
+    probable: [],
     likely: [],
     possible: [],
   });
@@ -565,8 +575,15 @@ function PlaylistDuplicateFinder({
   const removeTrackFromPlaylist = useCallback(
     async (trackToRemove: Track): Promise<void> => {
       if (!selectedPlaylist) return;
-      await Spicetify.Platform.PlaylistAPI.remove(selectedPlaylist.uri, [
-        { uid: trackToRemove.uid },
+
+      const PlaylistAPI =
+        Spicetify.Platform.PlaylistAPI ||
+        Spicetify.Platform.Registry.resolve(Symbol.for("PlaylistAPI"));
+
+      await PlaylistAPI.remove(selectedPlaylist.uri, [
+        {
+          uid: trackToRemove.uid,
+        },
       ]);
       setPlaylistTracks((prevTracks: Track[]) =>
         prevTracks.filter(
@@ -602,7 +619,13 @@ function PlaylistDuplicateFinder({
 
   useEffect(() => {
     setPlaylistTracks([]);
-    setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
+    setDuplicateGroups({
+      exact: [],
+      isrc: [],
+      probable: [],
+      likely: [],
+      possible: [],
+    });
     setTrackPlayCounts(new Map());
     setTrackIsrcs(new Map());
     setTrackDurations(new Map());
@@ -641,7 +664,13 @@ function PlaylistDuplicateFinder({
 
   useEffect(() => {
     if (playlistTracks.length === 0) {
-      setDuplicateGroups({ exact: [], isrc: [], likely: [], possible: [] });
+      setDuplicateGroups({
+        exact: [],
+        isrc: [],
+        probable: [],
+        likely: [],
+        possible: [],
+      });
     } else if (trackPlayCounts.size > 0 || trackIsrcs.size > 0) {
       setDuplicateGroups(findPotentialDuplicates(playlistTracks, trackPlayCounts, trackIsrcs));
     }
@@ -677,6 +706,15 @@ function PlaylistDuplicateFinder({
         groups={duplicateGroups.isrc}
         onDelete={handleDeleteTrack}
         title="Same ISRC"
+        trackDurations={trackDurations}
+        trackIsrcs={trackIsrcs}
+        trackPlayCounts={trackPlayCounts}
+      />
+      <DuplicateGroupList
+        category="probable"
+        groups={duplicateGroups.probable}
+        onDelete={handleDeleteTrack}
+        title="Same Title + Same artist (Probable Duplicates)"
         trackDurations={trackDurations}
         trackIsrcs={trackIsrcs}
         trackPlayCounts={trackPlayCounts}

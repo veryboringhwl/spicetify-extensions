@@ -1,10 +1,13 @@
-async function fetchWebAPIForTracks(trackURIs: Array<string>): Promise<Map<string, object>> {
+export async function fetchWebAPIForTracks(trackURIs: Array<string>): Promise<Map<string, object>> {
   const dataMap = new Map<string, object>();
   const trackIdsToFetch = new Map<string, string>();
 
   for (const uri of trackURIs) {
     if (uri) {
-      trackIdsToFetch.set(uri, Spicetify.URI.fromString(uri).id);
+      const id = Spicetify.URI.fromString(uri).id;
+      if (id) {
+        trackIdsToFetch.set(uri, id);
+      }
     }
   }
 
@@ -33,5 +36,3 @@ async function fetchWebAPIForTracks(trackURIs: Array<string>): Promise<Map<strin
   await Promise.all(batchFetchPromises);
   return dataMap;
 }
-
-export default fetchWebAPIForTracks;

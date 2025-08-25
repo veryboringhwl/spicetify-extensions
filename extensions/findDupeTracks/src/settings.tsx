@@ -36,6 +36,7 @@ const DEFAULT_NORMALIZE_WORDS = [
 export type ToggleSettings = {
   exact: boolean;
   isrc: boolean;
+  probable: boolean;
   likely: boolean;
   possible: boolean;
 };
@@ -54,12 +55,14 @@ const DEFAULT_SETTINGS: Settings = {
   groupSettings: {
     exact: true,
     isrc: true,
+    probable: true,
     likely: true,
     possible: true,
   },
   confirmSettings: {
     exact: false,
     isrc: false,
+    probable: true,
     likely: true,
     possible: true,
   },
@@ -192,6 +195,7 @@ const SettingsMenu = () => {
       {renderToggles("Duplicate Groups to Display", "groupSettings", {
         exact: "Exact Duplicates (Same URI)",
         isrc: "ISRC Duplicates (Same Recording)",
+        probable: "Probable Duplicates (Same Name + Artist)",
         likely: "Likely Duplicates (Same Name)",
         possible: "Possible Duplicates (Similar Name)",
       })}
@@ -199,6 +203,7 @@ const SettingsMenu = () => {
       {renderToggles("Confirm Before Deleting", "confirmSettings", {
         exact: "Exact Duplicates",
         isrc: "ISRC Duplicates",
+        probable: "Probable Duplicates",
         likely: "Likely Duplicates",
         possible: "Possible Duplicates",
       })}

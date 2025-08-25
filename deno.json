@@ -3,13 +3,14 @@
     "release": "deno run -A tasks/release.ts",
     "dev-build": "deno run -A tasks/build.ts --dev",
     "build": "deno run -A tasks/build.ts",
+    "concat": "deno run -A tasks/concat.ts",
     "dev-watch": "deno run -A tasks/watch.ts --dev",
     "watch": "deno run -A tasks/watch.ts",
     "check": "deno run -A npm:@biomejs/biome check --write --unsafe",
     "format": "deno run -A npm:@biomejs/biome format --write"
   },
   "imports": {
-    "@biomejs/biome": "npm:@biomejs/biome@^2.1.3",
+    "@biomejs/biome": "npm:@biomejs/biome@^2.2.0",
     "@esbuild/": "https://deno.land/x/esbuild@v0.25.8/",
     "@std/fs": "jsr:@std/fs@^1.0.19",
     "@std/path": "jsr:@std/path@^1.1.1",
