@@ -18,7 +18,7 @@ const stopProgressTracking = () => {
   }
 };
 
-const usePlayer = (trackUri, trackDuration) => {
+export const usePlayer = (trackUri, trackDuration) => {
   const [playerState, setPlayerState] = useState(Spicetify.Platform.PlayerAPI._state);
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(trackDuration);
@@ -141,5 +141,3 @@ const usePlayer = (trackUri, trackDuration) => {
     handleSliderRelease,
   };
 };
-
-export default usePlayer;

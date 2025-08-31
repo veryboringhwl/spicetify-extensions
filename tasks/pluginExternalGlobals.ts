@@ -112,7 +112,6 @@ export const externalGlobalsPlugin = (globals: Record<string, string>): Plugin =
             `const __external_global__ = ${globalRef};`,
             `export const jsx = __external_global__.jsx;`,
             `export const jsxs = __external_global__.jsxs;`,
-            `export const jsxDEV = __external_global__.jsxDEV;`,
             `export const Fragment = __external_global__.Fragment;`,
             `export default __external_global__;`,
           ].join("\n"),

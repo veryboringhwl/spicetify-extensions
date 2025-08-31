@@ -1,15 +1,8 @@
-import {
-  type FC,
-  memo,
-  type MouseEvent as ReactMouseEvent,
-  type TouchEvent as ReactTouchEvent,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
+import { type FC, memo, type PointerEvent as ReactPointerEvent, useCallback, useRef } from "react";
 import sliderStyles from "../styles/slider.css" with { type: "css" };
 
 document.adoptedStyleSheets.push(sliderStyles);
+
 export interface SliderProps {
   value: number;
   min?: number;
@@ -33,81 +26,64 @@ export const Slider: FC<SliderProps> = memo(
         : 0;
 
     const handleInteraction = useCallback(
-      (e: MouseEvent | TouchEvent) => {
+      (e: PointerEvent) => {
         if (!sliderRef.current || disabled) return;
+
         const rect = sliderRef.current.getBoundingClientRect();
-        const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
+        const clientX = e.clientX;
+
         const newX = Math.max(0, Math.min(clientX - rect.left, rect.width));
+
         let newValue = (newX / rect.width) * (max - min) + min;
         newValue = Math.round(newValue / step) * step;
         newValue = Math.max(min, Math.min(newValue, max));
+
         onChange(newValue);
       },
       [min, max, step, onChange, disabled],
     );
 
-    const handleMouseDown = useCallback(
-      (e: ReactMouseEvent) => {
-        if (disabled) return;
+    const handlePointerDown = useCallback(
+      (e: ReactPointerEvent) => {
+        if (disabled || !sliderRef.current) return;
+
         isDragging.current = true;
-        handleInteraction(e.nativeEvent);
+        sliderRef.current.setPointerCapture(e.pointerId);
+
+        handleInteraction(e.nativeEvent as PointerEvent);
       },
       [handleInteraction, disabled],
     );
 
-    const handleTouchStart = useCallback(
-      (e: ReactTouchEvent) => {
-        if (disabled) return;
-        isDragging.current = true;
-        handleInteraction(e.nativeEvent);
+    const handlePointerMove = useCallback(
+      (e: ReactPointerEvent) => {
+        if (!isDragging.current) return;
+        handleInteraction(e.nativeEvent as PointerEvent);
       },
-      [handleInteraction, disabled],
+      [handleInteraction],
     );
 
-    const handleMouseUp = useCallback(() => {
-      if (isDragging.current) {
+    const handlePointerRelease = useCallback(
+      (e: ReactPointerEvent) => {
+        if (!isDragging.current || !sliderRef.current) return;
+
+        isDragging.current = false;
+        sliderRef.current.releasePointerCapture(e.pointerId);
+
         onRelease?.();
-      }
-      isDragging.current = false;
-    }, [onRelease]);
-
-    const handleMouseMove = useCallback(
-      (e: MouseEvent) => {
-        if (!isDragging.current) return;
-        e.preventDefault();
-        handleInteraction(e);
       },
-      [handleInteraction],
+      [onRelease],
     );
-
-    const handleTouchMove = useCallback(
-      (e: TouchEvent) => {
-        if (!isDragging.current) return;
-        handleInteraction(e);
-      },
-      [handleInteraction],
-    );
-
-    useEffect(() => {
-      window.addEventListener("mousemove", handleMouseMove);
-      window.addEventListener("mouseup", handleMouseUp);
-      window.addEventListener("touchmove", handleTouchMove, { passive: false });
-      window.addEventListener("touchend", handleMouseUp);
-      return () => {
-        window.removeEventListener("mousemove", handleMouseMove);
-        window.removeEventListener("mouseup", handleMouseUp);
-        window.removeEventListener("touchmove", handleTouchMove);
-        window.removeEventListener("touchend", handleMouseUp);
-      };
-    }, [handleMouseMove, handleMouseUp, handleTouchMove]);
 
     return (
       // @ts-expect-error
       <div className="slider" disabled={disabled}>
         <div
           className="slider-container"
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleTouchStart}
+          onPointerCancel={handlePointerRelease}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerRelease}
           ref={sliderRef}
         >
           <div className="slider__track">

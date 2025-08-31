@@ -311,7 +311,7 @@ interface DuplicateItemProps {
   track: Track;
   category: DuplicateCategory;
   groupIndex: number;
-  onDelete: (category: DuplicateCategory, groupIndex: number, track: Track) => void;
+  onDelete: (category: DuplicateCategory, track: Track) => void;
   isSource?: boolean;
   trackPlayCounts: Map<string, number>;
   trackIsrcs: Map<string, string>;
@@ -340,7 +340,7 @@ const DuplicateItem = memo(function DuplicateItem({
         </div>
         <button
           className="duplicate-group__delete-button"
-          onClick={() => onDelete(category, groupIndex, track)}
+          onClick={() => onDelete(category, track)}
           type="button"
         >
           Delete
@@ -357,7 +357,7 @@ interface DuplicateGroupComponentProps {
   group: DuplicateGroup;
   category: DuplicateCategory;
   groupIndex: number;
-  onDelete: (category: DuplicateCategory, groupIndex: number, track: Track) => void;
+  onDelete: (category: DuplicateCategory, track: Track) => void;
   trackPlayCounts: Map<string, number>;
   trackIsrcs: Map<string, string>;
   trackDurations: Map<string, number>;
@@ -410,7 +410,7 @@ interface DuplicateGroupListProps {
   title: string;
   groups: DuplicateGroup[];
   category: DuplicateCategory;
-  onDelete: (category: DuplicateCategory, groupIndex: number, track: Track) => void;
+  onDelete: (category: DuplicateCategory, track: Track) => void;
   trackPlayCounts: Map<string, number>;
   trackIsrcs: Map<string, string>;
   trackDurations: Map<string, number>;
@@ -595,11 +595,7 @@ function PlaylistDuplicateFinder({
   );
 
   const handleDeleteTrack = useCallback(
-    async (
-      duplicateCategory: DuplicateCategory,
-      _groupIndex: number,
-      trackToRemove: Track,
-    ): Promise<void> => {
+    async (duplicateCategory: DuplicateCategory, trackToRemove: Track): Promise<void> => {
       const settings = getSettings();
       if (!settings.confirmSettings[duplicateCategory]) {
         await removeTrackFromPlaylist(trackToRemove);

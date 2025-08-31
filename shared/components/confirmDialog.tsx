@@ -1,6 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 
+// @ts-expect-error
+const require = webpackChunkclient_web.push([[Symbol()], {}, (re) => re]);
+const chunks = Object.entries(require.m);
+
+const foundModules = chunks.filter(
+  ([_, definition]) =>
+    typeof definition === "function" &&
+    definition.toString().includes("main-confirmDialog-container"),
+);
+
+const component = foundModules.flatMap(([id]) => Object.values(require(id)))[0];
+// @ts-expect-error
+Spicetify.ReactComponent.ConfirmDialog = component;
+
 export interface ConfirmDialogProps {
   titleText: string;
   descriptionText: string;
