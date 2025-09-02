@@ -1,13 +1,13 @@
-dialog.modal {
-  padding: 0;
-  overflow: visible;
-  color: var(--spice-text);
-  background: transparent;
-  border: none;
-}
-
-dialog.modal::backdrop {
-  background-color: rgba(var(--spice-rgb-shadow), 0.5);
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(var(--color-rgb-shadow), 0.5);
 }
 
 .modal__container {
@@ -15,10 +15,10 @@ dialog.modal::backdrop {
   flex-direction: column;
   width: 500px;
   max-height: 500px;
-  background-color: rgba(var(--spice-rgb-main), 0.9);
-  border-radius: 7px;
-  box-shadow: 0 0 20px rgba(var(--spice-rgb-shadow), 0.5);
-  backdrop-filter: blur(20px) saturate(1.4) brightness(1.2);
+  background-color: rgba(var(--color-rgb-main), 0.9);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: var(--mica-effect);
 }
 
 .modal__container--large {
@@ -29,13 +29,13 @@ dialog.modal::backdrop {
 .modal__header {
   display: flex;
   justify-content: space-between;
-  padding: 32px 32px 12px;
-  border-bottom: 1px solid rgba(var(--spice-rgb-selected-row), 0.1);
+  padding: var(--space-xl) var(--space-xl) var(--space-s);
+  border-bottom: 1px solid rgba(var(--color-rgb-selected-row), 0.1);
 }
 
 .modal__titleContainer {
   display: flex;
-  gap: 8px;
+  gap: var(--space-xs);
 }
 
 .modal__icon {
@@ -49,17 +49,17 @@ dialog.modal::backdrop {
 
 .modal__buttonContainer {
   display: flex;
-  gap: 8px;
+  gap: var(--space-xs);
   align-items: center;
 }
 
 .modal__buttonContainer .modal__button {
-  height: 34px;
-  padding: 8px;
+  height: var(--space-xl);
+  padding: var(--space-xs);
   cursor: pointer;
-  background-color: var(--spice-highlight);
+  background-color: var(--color-highlight);
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .modal__buttonContainer .modal__button:hover {
@@ -72,7 +72,7 @@ dialog.modal::backdrop {
 
 .modal__content {
   display: flex;
-  padding: 16px 24px;
+  padding: var(--space-m) var(--space-lg);
   overflow: auto;
   scrollbar-gutter: stable both-edges;
 }

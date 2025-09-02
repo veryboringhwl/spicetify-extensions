@@ -1,4 +1,4 @@
-import type { ComponentType, FC, MouseEvent, ReactNode } from "react";
+import type { ComponentType, FC, KeyboardEvent, MouseEvent, ReactNode } from "react";
 import { isValidElement, memo, useEffect, useRef } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import styles from "../styles/popupModal.css" with { type: "css" };
@@ -35,32 +35,31 @@ const closeModal = (): void => {
 
 const ModalComponent: FC<ModalComponentProps> = memo(
   ({ title, content, isLarge, buttons, icon, onClose }) => {
-    const dialogRef = useRef<HTMLDialogElement>(null);
+    const modalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-      const dialogElement = dialogRef.current;
-      if (dialogElement) {
-        dialogElement.addEventListener("cancel", (event) => {
+      document.body.style.overflow = "hidden";
+
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Escape") {
           event.preventDefault();
-        });
-        dialogElement.showModal();
-        document.body.style.overflow = "hidden";
+          onClose();
+        }
+      };
 
-        const handleDialogClose = () => onClose();
-        dialogElement.addEventListener("close", handleDialogClose);
+      document.addEventListener("keydown", handleKeyDown as any);
 
-        return () => {
-          dialogElement.removeEventListener("close", handleDialogClose);
-        };
-      }
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown as any);
+      };
     }, [onClose]);
 
     const handleClose = () => {
-      dialogRef.current?.close();
+      onClose();
     };
 
-    const handleBackdropClick = (event: MouseEvent<HTMLDialogElement>) => {
-      if (event.target === dialogRef.current) {
+    const handleBackdropClick = (event: MouseEvent<HTMLDivElement>) => {
+      if (event.target === modalRef.current) {
         handleClose();
       }
     };
@@ -77,7 +76,7 @@ const ModalComponent: FC<ModalComponentProps> = memo(
     };
 
     return (
-      <dialog className="modal" onClick={handleBackdropClick} ref={dialogRef}>
+      <div className="modal" onClick={handleBackdropClick} ref={modalRef}>
         <div className={`modal__container${isLarge ? " modal__container--large" : ""}`}>
           <div className="modal__header">
             <div className="modal__titleContainer">
@@ -95,7 +94,7 @@ const ModalComponent: FC<ModalComponentProps> = memo(
           </div>
           <div className="modal__content">{renderContent()}</div>
         </div>
-      </dialog>
+      </div>
     );
   },
 );

@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 let listenerCount = 0;
-let intervalId = null;
+let intervalId: number | null = null;
 
-const startProgressTracking = () => {
+const startProgressTracking = (): void => {
   if (intervalId) return;
   intervalId = setInterval(() => {
     const currentState = Spicetify.Platform.PlayerAPI._state;
@@ -11,23 +11,44 @@ const startProgressTracking = () => {
   }, 100);
 };
 
-const stopProgressTracking = () => {
+const stopProgressTracking = (): void => {
   if (intervalId) {
     clearInterval(intervalId);
     intervalId = null;
   }
 };
 
-export const usePlayer = (trackUri, trackDuration) => {
-  const [playerState, setPlayerState] = useState(Spicetify.Platform.PlayerAPI._state);
-  const [position, setPosition] = useState(0);
-  const [duration, setDuration] = useState(trackDuration);
+interface PlayerStateItem {
+  uri: string;
+}
 
-  const isSliderDragging = useRef(false);
-  const seekPositionRef = useRef(0);
+interface PlayerState {
+  item?: PlayerStateItem;
+  isPaused: boolean;
+  positionAsOfTimestamp: number;
+  timestamp: number;
+  duration: number;
+}
+
+interface UsePlayerReturn {
+  position: number;
+  duration: number;
+  isCurrentlyPlayingThisTrack: boolean;
+  togglePlay: () => void;
+  handleSliderChange: (newPosition: number) => void;
+  handleSliderRelease: () => void;
+}
+
+export const usePlayer = (trackUri: string, trackDuration: number): UsePlayerReturn => {
+  const [playerState, setPlayerState] = useState<PlayerState>(Spicetify.Platform.PlayerAPI._state);
+  const [position, setPosition] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(trackDuration);
+
+  const isSliderDragging = useRef<boolean>(false);
+  const seekPositionRef = useRef<number>(0);
 
   const updatePlayerData = useCallback(
-    (newPlayerState, isProgressUpdate = false) => {
+    (newPlayerState: PlayerState, isProgressUpdate = false): void => {
       setPlayerState(newPlayerState);
 
       const isPlayingThisTrack = newPlayerState.item?.uri === trackUri;
@@ -69,46 +90,46 @@ export const usePlayer = (trackUri, trackDuration) => {
     const initialPlayerState = Spicetify.Platform.PlayerAPI._state;
     updatePlayerData(initialPlayerState);
 
-    const updateListener = (event) => updatePlayerData(event.data);
-    const progressListener = (event) => updatePlayerData(event.data, true);
+    const updateListener = (event: { data: PlayerState }): void => updatePlayerData(event.data);
+    const progressListener = (event: { data: PlayerState }): void =>
+      updatePlayerData(event.data, true);
 
-    Spicetify.Platform.PlayerAPI._events.addListener("update", updateListener);
-    Spicetify.Platform.PlayerAPI._events.addListener("progress", progressListener);
+    Spicetify.Platform.PlayerAPI._events.addListener("update", updateListener, {});
+    Spicetify.Platform.PlayerAPI._events.addListener("progress", progressListener, {});
 
-    return () => {
+    return (): void => {
       listenerCount--;
       if (listenerCount === 0) {
         stopProgressTracking();
       }
-      Spicetify.Platform.PlayerAPI._events.removeListener("update", updateListener);
-      Spicetify.Platform.PlayerAPI._events.removeListener("progress", progressListener);
+      Spicetify.Platform.PlayerAPI._events.removeListener("update", updateListener, {});
+      Spicetify.Platform.PlayerAPI._events.removeListener("progress", progressListener, {});
     };
   }, [updatePlayerData]);
 
-  const togglePlay = useCallback(() => {
+  const togglePlay = useCallback((): void => {
     const currentPlayingTrack = playerState.item?.uri;
     if (currentPlayingTrack === trackUri) {
       playerState.isPaused
-        ? Spicetify.Platform.PlayerAPI.resume()
-        : Spicetify.Platform.PlayerAPI.pause();
+        ? Spicetify.Platform.PlayerAPI.resume({})
+        : Spicetify.Platform.PlayerAPI.pause({});
     } else {
       Spicetify.Platform.PlayerAPI.play(
         {
           uri: trackUri,
         },
         {},
-        {},
       );
     }
   }, [playerState, trackUri]);
 
-  const handleSliderChange = useCallback((newPosition) => {
+  const handleSliderChange = useCallback((newPosition: number): void => {
     isSliderDragging.current = true;
     setPosition(newPosition);
     seekPositionRef.current = newPosition;
   }, []);
 
-  const handleSliderRelease = useCallback(() => {
+  const handleSliderRelease = useCallback((): void => {
     if (isSliderDragging.current) {
       const isSameTrackInPlayer = playerState.item?.uri === trackUri;
 
@@ -117,7 +138,6 @@ export const usePlayer = (trackUri, trackDuration) => {
           {
             uri: trackUri,
           },
-          {},
           {},
         );
       } else {
@@ -128,7 +148,7 @@ export const usePlayer = (trackUri, trackDuration) => {
   }, [position, trackUri, playerState]);
 
   const isCurrentlyPlayingThisTrack = useMemo(
-    () => !playerState.isPaused && playerState.item?.uri === trackUri,
+    (): boolean => !playerState.isPaused && playerState.item?.uri === trackUri,
     [playerState, trackUri],
   );
 

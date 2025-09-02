@@ -1,4 +1,4 @@
-// Auto-generated at 2025-08-31T08:19:36.098Z on Spotify Version: 1.2.71.421
+// Auto-generated at 2025-09-01T23:00:00.042Z on Spotify Version: 1.2.71.421
 
 export interface PlatformTypes {
   ActionStoreAPI: PlatformTypesActionStoreAPI;
@@ -778,7 +778,7 @@ export interface PlatformTypesAdManagersHptoFocusState {
   removeFocusListener: PlatformTypesAdManagersAdStateReporterFocusStateRemoveFocusListener;
 }
 
-export type PlatformTypesAdManagersHptoFocusStateListeners = Array<unknown>;
+export type PlatformTypesAdManagersHptoFocusStateListeners = Array<PlatformTypesAdManagersHpto>;
 
 export type PlatformTypesAdManagersHptoGetNativeData = (arg0: any, arg1: any) => unknown;
 
@@ -1037,6 +1037,7 @@ export type PlatformTypesAdManagersHptoViewDestroyed = () => unknown;
 export type PlatformTypesAdManagersHptoViewRendered = (arg0: any) => unknown;
 
 export interface PlatformTypesAdManagersHptoVisibilityObserver {
+  callback: PlatformTypesAdManagersHptoOnVisibilityChanged;
   currentState: string;
   disconnect: PlatformTypesAdManagersHptoVisibilityObserverDisconnect;
   intersectionObserver: PlatformTypesAdManagersHptoVisibilityObserverIntersectionObserver;
@@ -1101,6 +1102,7 @@ export interface PlatformTypesAdManagersLeaderboard {
   adPlaybackId: null;
   adToLeaderboard: PlatformTypesAdManagersLeaderboardAdToLeaderboard;
   appStartupId: string;
+  cachedConfig: PlatformTypesAdManagersLeaderboardCachedConfig;
   clearCurrentAd: PlatformTypesAdManagersLeaderboardClearCurrentAd;
   currentAd: PlatformTypesAdManagersLeaderboardCurrentAd;
   disableLeaderboard: PlatformTypesAdManagersLeaderboardDisableLeaderboard;
@@ -1137,6 +1139,11 @@ export interface PlatformTypesAdManagersLeaderboard {
 }
 
 export type PlatformTypesAdManagersLeaderboardAdToLeaderboard = (arg0: any) => unknown;
+
+export interface PlatformTypesAdManagersLeaderboardCachedConfig {
+  displayTimeIntervalMs: number;
+  timeInViewThresholdMs: number;
+}
 
 export type PlatformTypesAdManagersLeaderboardClearCurrentAd = () => unknown;
 
@@ -1241,6 +1248,7 @@ export interface PlatformTypesAdManagersLeaderboardRefreshDecisioner {
   onlineStateChanged: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnlineStateChanged;
   setRefreshDelegate: PlatformTypesAdManagersLeaderboardRefreshDecisionerSetRefreshDelegate;
   startRefreshTimer: PlatformTypesAdManagersLeaderboardRefreshDecisionerStartRefreshTimer;
+  timeOfLastViewUpdate: number;
   triggerRefresh: PlatformTypesAdManagersLeaderboardRefreshDecisionerTriggerRefresh;
   updateViewTimer: PlatformTypesAdManagersLeaderboardRefreshDecisionerUpdateViewTimer;
   viewTimer: number;
@@ -1750,19 +1758,33 @@ export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListeners {
   deviceConnected: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnected;
 }
 
-export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnected =
-  Array<PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem>;
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnected = Array<
+  | PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem
+  | PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem2
+>;
 
 export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem {
   listener: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener;
   options: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions;
 }
 
+export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem2 {
+  listener: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener2;
+  options: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions2;
+}
+
 export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener = (
   arg0: any,
 ) => unknown;
 
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener2 = (
+  arg0: any,
+) => unknown;
+
 export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions2 =
   Record<string, unknown>;
 
 export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterMetaListeners {
@@ -1967,6 +1989,7 @@ export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptions = Map<
   | PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue5
   | PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue6
   | PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue7
+  | PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue8
 >;
 
 export interface PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue {
@@ -2012,6 +2035,19 @@ export interface PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue7 {
   onMessage: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage7;
 }
 
+export interface PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue8 {
+  connectionId: string;
+  ident: string;
+  isPrefix: boolean;
+  onCancel: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnCancel;
+  onMessage: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage8;
+  onSubscribe: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnSubscribe;
+}
+
+export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnCancel = (
+  arg0: any,
+) => unknown;
+
 export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage = () => unknown;
 
 export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage2 = () => unknown;
@@ -2031,6 +2067,14 @@ export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage6
 ) => unknown;
 
 export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage7 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage8 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnSubscribe = (
   arg0: any,
 ) => unknown;
 
@@ -3106,7 +3150,40 @@ export interface PlatformTypesCollectionPlatformAPIEventsEmitter {
   removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
 }
 
-export type PlatformTypesCollectionPlatformAPIEventsEmitterListeners = Record<string, unknown>;
+export interface PlatformTypesCollectionPlatformAPIEventsEmitterListeners {
+  added: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAdded;
+  removed: PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemoved;
+}
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersAdded =
+  Array<PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItem>;
+
+export interface PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItem {
+  listener: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemListener;
+  options: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemOptions;
+}
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemoved =
+  Array<PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItem>;
+
+export interface PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItem {
+  listener: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemListener;
+  options: PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItemOptions;
+}
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItemOptions = Record<
+  string,
+  unknown
+>;
 
 export interface PlatformTypesCollectionPlatformAPIEventsEmitterMetaListeners {
   add: PlatformTypesCollectionPlatformAPIEventsEmitterMetaListenersAdd;
@@ -4357,7 +4434,7 @@ export interface PlatformTypesCurationAPIEvents {
   onCuratedBatchChanged: PlatformTypesCurationAPIEventsOnCuratedBatchChanged;
   onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
   removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
-  streamIsCuratedCancellable: null;
+  streamIsCuratedCancellable: PlatformTypesCurationAPIEventsStreamIsCuratedCancellable;
 }
 
 export interface PlatformTypesCurationAPIEventsAggregator {
@@ -4379,7 +4456,7 @@ export interface PlatformTypesCurationAPIEventsAggregator {
 
 export type PlatformTypesCurationAPIEventsAggregatorAdditions = Map<unknown, unknown>;
 
-export type PlatformTypesCurationAPIEventsAggregatorBatch = Map<unknown, unknown>;
+export type PlatformTypesCurationAPIEventsAggregatorBatch = Map<string, number>;
 
 export type PlatformTypesCurationAPIEventsAggregatorDeletions = Map<unknown, unknown>;
 
@@ -4445,7 +4522,25 @@ export interface PlatformTypesCurationAPIEventsEmitter {
   removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
 }
 
-export type PlatformTypesCurationAPIEventsEmitterListeners = Record<string, unknown>;
+export interface PlatformTypesCurationAPIEventsEmitterListeners {
+  update_curated_item: PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItem;
+}
+
+export type PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItem =
+  Array<PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItem>;
+
+export interface PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItem {
+  listener: PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemListener;
+  options: PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemOptions;
+}
+
+export type PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemListener = (
+  arg0: any,
+) => unknown;
+
+export interface PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemOptions {
+  uri: string;
+}
 
 export interface PlatformTypesCurationAPIEventsEmitterMetaListeners {
   add: PlatformTypesCurationAPIEventsEmitterMetaListenersAdd;
@@ -4495,6 +4590,12 @@ export type PlatformTypesCurationAPIEventsEmitUpdateCuratedItems = (
 ) => unknown;
 
 export type PlatformTypesCurationAPIEventsOnCuratedBatchChanged = (arg0: any) => unknown;
+
+export interface PlatformTypesCurationAPIEventsStreamIsCuratedCancellable {
+  cancel: PlatformTypesCurationAPIEventsStreamIsCuratedCancellableCancel;
+}
+
+export type PlatformTypesCurationAPIEventsStreamIsCuratedCancellableCancel = () => unknown;
 
 export type PlatformTypesCurationAPIGetAvailableSortOrders = () => unknown;
 
@@ -4825,8 +4926,10 @@ export type PlatformTypesEqualizerAPILocalStorageAPIGetItem = (arg0: any) => unk
 
 export interface PlatformTypesEqualizerAPILocalStorageAPIItems {
   "USERNAME:cinema-media-preference": string;
+  "USERNAME:connect-nudge-triggered-at": string;
   "USERNAME:fusionSearchHistory": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEfusionSearchHistory;
   "USERNAME:homePins": string;
+  "USERNAME:isPlaybackBarRemainingTimeToggled": boolean;
   "USERNAME:items-view": number;
   "USERNAME:items-view-fullscreen": number;
   "USERNAME:lastVisitedLocation": string;
@@ -4834,16 +4937,23 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItems {
   "USERNAME:left-sidebar-expanded-state-width": number;
   "USERNAME:left-sidebar-state": number;
   "USERNAME:library-row-mode": null;
+  "USERNAME:lintHtmlWithCss": boolean;
   "USERNAME:onboarding-checklist": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEonboardingchecklist;
   "USERNAME:onboarding-checklist-completed-at": null;
+  "USERNAME:opened-folder-uri": string;
   "USERNAME:panel-width": number;
   "USERNAME:playbackSpeed": number;
   "USERNAME:queue-view": string;
   "USERNAME:remote-config-overrides": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconfigoverrides;
+  "USERNAME:smart-shuffle-menu": number;
   "USERNAME:toggleNowPlayingView": boolean;
   "USERNAME:ui.right_sidebar_content": string;
+  "USERNAME:ylx-active-filter-ids": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivefilterids;
+  "USERNAME:ylx-active-sort-order-by-filter-id": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivesortorderbyfilterid;
   "USERNAME:ylx-default-state-nav-bar-width": number;
+  "USERNAME:ylx-expanded-folders": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxexpandedfolders;
   "USERNAME:ylx-expanded-state-nav-bar-width": number;
+  "USERNAME:ylx-sort-order-and-direction-by-filter-id": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxsortorderanddirectionbyfilterid;
 }
 
 export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEfusionSearchHistory =
@@ -4932,6 +5042,22 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconf
   enableYlxReverseSorting: boolean;
   hideUpgradeCTA: boolean;
 }
+
+export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivefilterids {
+  "": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivefilterids2;
+}
+
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivefilterids2 =
+  Array<unknown>;
+
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivesortorderbyfilterid =
+  Record<string, unknown>;
+
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxexpandedfolders =
+  Array<unknown>;
+
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxsortorderanddirectionbyfilterid =
+  Record<string, unknown>;
 
 export type PlatformTypesEqualizerAPILocalStorageAPIListenToStorageEvents = () => unknown;
 
@@ -5539,7 +5665,7 @@ export interface PlatformTypesHistoryLocation {
 }
 
 export interface PlatformTypesHistoryLocationState {
-  navigationalRoot: undefined;
+  navigationalRoot: string;
 }
 
 export type PlatformTypesHistoryPush = (arg0: any, arg1: any) => unknown;
@@ -5996,7 +6122,10 @@ export interface PlatformTypesLibraryAPIEventsEmitter {
 
 export interface PlatformTypesLibraryAPIEventsEmitterListeners {
   operation: PlatformTypesLibraryAPIEventsEmitterListenersOperation;
+  update: PlatformTypesLibraryAPIEventsEmitterListenersUpdate;
   update_item: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem;
+  update_pin: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePin;
+  update_pin_error: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinError;
 }
 
 export type PlatformTypesLibraryAPIEventsEmitterListenersOperation =
@@ -6016,21 +6145,87 @@ export type PlatformTypesLibraryAPIEventsEmitterListenersOperationItemOptions = 
   unknown
 >;
 
-export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem =
-  Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItem>;
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdate =
+  Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem2>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem = Array<
+  | PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItem
+  | PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItem2
+>;
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem2 {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemListener;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemOptions;
+}
 
 export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItem {
   listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemListener;
   options: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemOptions;
 }
 
+export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItem2 {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemListener2;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemOptions2;
+}
+
 export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemListener2 = (
   arg0: any,
 ) => unknown;
 
 export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemOptions {
   uri: string;
 }
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemOptions2 {
+  uri: string;
+}
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePin =
+  Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItem>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinError =
+  Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItem>;
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItem {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItemListener;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItemOptions;
+}
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItemOptions = Record<
+  string,
+  unknown
+>;
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItem {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItemListener;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItemOptions;
+}
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItemOptions = Record<
+  string,
+  unknown
+>;
 
 export interface PlatformTypesLibraryAPIEventsEmitterMetaListeners {
   add: PlatformTypesLibraryAPIEventsEmitterMetaListenersAdd;
@@ -6429,7 +6624,24 @@ export interface PlatformTypesLocalFilesAPIEventsEmitter {
   removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
 }
 
-export type PlatformTypesLocalFilesAPIEventsEmitterListeners = Record<string, unknown>;
+export interface PlatformTypesLocalFilesAPIEventsEmitterListeners {
+  update: PlatformTypesLocalFilesAPIEventsEmitterListenersUpdate;
+}
+
+export type PlatformTypesLocalFilesAPIEventsEmitterListenersUpdate =
+  Array<PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItem>;
+
+export interface PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItem {
+  listener: PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItemListener;
+  options: PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItemOptions;
+}
+
+export type PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItemListener = () => unknown;
+
+export type PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItemOptions = Record<
+  string,
+  unknown
+>;
 
 export interface PlatformTypesLocalFilesAPIEventsEmitterMetaListeners {
   add: PlatformTypesLocalFilesAPIEventsEmitterMetaListenersAdd;
@@ -7429,6 +7641,8 @@ export type PlatformTypesPlayerAPIEventsEmitterListenersAction = Array<
   | PlatformTypesPlayerAPIEventsEmitterListenersActionItem3
   | PlatformTypesPlayerAPIEventsEmitterListenersActionItem4
   | PlatformTypesPlayerAPIEventsEmitterListenersActionItem5
+  | PlatformTypesPlayerAPIEventsEmitterListenersActionItem6
+  | PlatformTypesPlayerAPIEventsEmitterListenersActionItem7
 >;
 
 export interface PlatformTypesPlayerAPIEventsEmitterListenersActionItem {
@@ -7456,6 +7670,16 @@ export interface PlatformTypesPlayerAPIEventsEmitterListenersActionItem5 {
   options: PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions5;
 }
 
+export interface PlatformTypesPlayerAPIEventsEmitterListenersActionItem6 {
+  listener: PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener6;
+  options: PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions6;
+}
+
+export interface PlatformTypesPlayerAPIEventsEmitterListenersActionItem7 {
+  listener: PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener7;
+  options: PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions7;
+}
+
 export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener = (arg0: any) => unknown;
 
 export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener2 = (
@@ -7471,6 +7695,14 @@ export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener4 = (
 ) => unknown;
 
 export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener5 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener6 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener7 = (
   arg0: any,
 ) => unknown;
 
@@ -7492,6 +7724,16 @@ export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions4 = Rec
 >;
 
 export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions5 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions6 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions7 = Record<
   string,
   unknown
 >;
@@ -7980,6 +8222,17 @@ export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata {
 export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata10 {
   "artist_name:1": string;
   "artist_uri:1": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -8049,6 +8302,8 @@ export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata3 
 }
 
 export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata4 {
+  "artist_name:1": string;
+  "artist_uri:1": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -8072,8 +8327,17 @@ export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata4 
 }
 
 export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata5 {
-  "artist_name:1": string;
-  "artist_uri:1": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -8157,6 +8421,7 @@ export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata7 
   has_lyrics: string;
   image_small_url: string;
   image_url: string;
+  is_explicit: string;
   iteration: string;
   marked_for_download: string;
   title: string;
@@ -8165,17 +8430,6 @@ export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata7 
 }
 
 export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata8 {
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -8191,7 +8445,6 @@ export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata8 
   has_lyrics: string;
   image_small_url: string;
   image_url: string;
-  is_explicit: string;
   iteration: string;
   marked_for_download: string;
   title: string;
@@ -8200,6 +8453,8 @@ export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata8 
 }
 
 export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata9 {
+  "artist_name:1": string;
+  "artist_uri:1": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -8250,6 +8505,7 @@ export type PlatformTypesPlayerAPIQueuePrevTracks = Array<
   | PlatformTypesPlayerAPIQueuePrevTracksItem5
   | PlatformTypesPlayerAPIQueuePrevTracksItem6
   | PlatformTypesPlayerAPIQueuePrevTracksItem7
+  | PlatformTypesPlayerAPIQueuePrevTracksItem8
 >;
 
 export interface PlatformTypesPlayerAPIQueuePrevTracksItem {
@@ -8301,6 +8557,13 @@ export interface PlatformTypesPlayerAPIQueuePrevTracksItem7 {
   removed: PlatformTypesPlayerAPIQueuePrevTracksItemRemoved7;
 }
 
+export interface PlatformTypesPlayerAPIQueuePrevTracksItem8 {
+  blocked: PlatformTypesPlayerAPIQueuePrevTracksItemBlocked8;
+  contextTrack: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack8;
+  provider: string;
+  removed: PlatformTypesPlayerAPIQueuePrevTracksItemRemoved8;
+}
+
 export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked = Array<unknown>;
 
 export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked2 = Array<unknown>;
@@ -8314,6 +8577,8 @@ export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked5 = Array<unknown>;
 export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked6 = Array<unknown>;
 
 export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked7 = Array<unknown>;
+
+export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked8 = Array<unknown>;
 
 export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack {
   metadata: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata;
@@ -8353,6 +8618,12 @@ export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack6 {
 
 export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack7 {
   metadata: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata7;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack8 {
+  metadata: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata8;
   uid: string;
   uri: string;
 }
@@ -8556,10 +8827,44 @@ export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata6 
 }
 
 export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata7 {
-  "actions.skipping_next_past_track": string;
-  "actions.skipping_prev_past_track": string;
   "artist_name:1": string;
   "artist_uri:1": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_small_url: string;
+  image_url: string;
+  iteration: string;
+  marked_for_download: string;
+  title: string;
+  track_player: string;
+  view_index: string;
+}
+
+export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata8 {
+  "actions.skipping_next_past_track": string;
+  "actions.skipping_prev_past_track": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -8597,6 +8902,8 @@ export type PlatformTypesPlayerAPIQueuePrevTracksItemRemoved5 = Array<unknown>;
 export type PlatformTypesPlayerAPIQueuePrevTracksItemRemoved6 = Array<unknown>;
 
 export type PlatformTypesPlayerAPIQueuePrevTracksItemRemoved7 = Array<unknown>;
+
+export type PlatformTypesPlayerAPIQueuePrevTracksItemRemoved8 = Array<unknown>;
 
 export interface PlatformTypesPlayerAPIQueueQueueState {
   current: PlatformTypesPlayerAPIQueueQueueStateCurrent;
@@ -9046,8 +9353,8 @@ export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists =
   Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem>;
 
 export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists10 = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem11
   | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem12
+  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem13
 >;
 
 export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists2 =
@@ -9056,13 +9363,13 @@ export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists2 =
 export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists3 =
   Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem3>;
 
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists4 =
-  Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem4>;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists5 = Array<
+export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists4 = Array<
+  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem4
   | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem5
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem6
 >;
+
+export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists5 =
+  Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem6>;
 
 export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists6 =
   Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem7>;
@@ -9073,8 +9380,10 @@ export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists7 =
 export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists8 =
   Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem9>;
 
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists9 =
-  Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem10>;
+export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists9 = Array<
+  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem10
+  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem11
+>;
 
 export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem {
   name: string;
@@ -9095,6 +9404,12 @@ export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem11 {
 }
 
 export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem12 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem13 {
   name: string;
   type: string;
   uri: string;
@@ -9264,17 +9579,6 @@ export interface PlatformTypesPlayerAPIQueueTrackContextTrack {
 export interface PlatformTypesPlayerAPIQueueTrackContextTrackMetadata {
   "actions.skipping_next_past_track": string;
   "actions.skipping_prev_past_track": string;
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -9518,17 +9822,6 @@ export type PlatformTypesPlayerAPIStateItemImages = Array<
 export interface PlatformTypesPlayerAPIStateItemMetadata {
   "actions.skipping_next_past_track": string;
   "actions.skipping_prev_past_track": string;
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -10026,8 +10319,8 @@ export type PlatformTypesPlayerAPIStateNextItemsItemArtists =
   Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem>;
 
 export type PlatformTypesPlayerAPIStateNextItemsItemArtists10 = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem11
   | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem12
+  | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem13
 >;
 
 export type PlatformTypesPlayerAPIStateNextItemsItemArtists2 =
@@ -10036,13 +10329,13 @@ export type PlatformTypesPlayerAPIStateNextItemsItemArtists2 =
 export type PlatformTypesPlayerAPIStateNextItemsItemArtists3 =
   Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem3>;
 
-export type PlatformTypesPlayerAPIStateNextItemsItemArtists4 =
-  Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem4>;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemArtists5 = Array<
+export type PlatformTypesPlayerAPIStateNextItemsItemArtists4 = Array<
+  | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem4
   | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem5
-  | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem6
 >;
+
+export type PlatformTypesPlayerAPIStateNextItemsItemArtists5 =
+  Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem6>;
 
 export type PlatformTypesPlayerAPIStateNextItemsItemArtists6 =
   Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem7>;
@@ -10053,8 +10346,10 @@ export type PlatformTypesPlayerAPIStateNextItemsItemArtists7 =
 export type PlatformTypesPlayerAPIStateNextItemsItemArtists8 =
   Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem9>;
 
-export type PlatformTypesPlayerAPIStateNextItemsItemArtists9 =
-  Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem10>;
+export type PlatformTypesPlayerAPIStateNextItemsItemArtists9 = Array<
+  | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem10
+  | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem11
+>;
 
 export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem {
   name: string;
@@ -10075,6 +10370,12 @@ export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem11 {
 }
 
 export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem12 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem13 {
   name: string;
   type: string;
   uri: string;
@@ -10273,6 +10574,17 @@ export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata {
 export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata10 {
   "artist_name:1": string;
   "artist_uri:1": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -10363,6 +10675,8 @@ export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata3 {
 }
 
 export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata4 {
+  "artist_name:1": string;
+  "artist_uri:1": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -10393,8 +10707,17 @@ export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata4 {
 }
 
 export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata5 {
-  "artist_name:1": string;
-  "artist_uri:1": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -10498,6 +10821,7 @@ export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata7 {
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
+  is_explicit: string;
   iteration: string;
   marked_for_download: string;
   popularity: string;
@@ -10507,17 +10831,6 @@ export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata7 {
 }
 
 export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata8 {
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -10539,7 +10852,6 @@ export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata8 {
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
-  is_explicit: string;
   iteration: string;
   marked_for_download: string;
   popularity: string;
@@ -10549,6 +10861,8 @@ export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata8 {
 }
 
 export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata9 {
+  "artist_name:1": string;
+  "artist_uri:1": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -10634,18 +10948,10 @@ export interface PlatformTypesPlayerAPIStatePreviousItemsItemAlbumImagesItem4 {
   url: string;
 }
 
-export type PlatformTypesPlayerAPIStatePreviousItemsItemArtists = Array<
-  | PlatformTypesPlayerAPIStatePreviousItemsItemArtistsItem
-  | PlatformTypesPlayerAPIStatePreviousItemsItemArtistsItem2
->;
+export type PlatformTypesPlayerAPIStatePreviousItemsItemArtists =
+  Array<PlatformTypesPlayerAPIStatePreviousItemsItemArtistsItem>;
 
 export interface PlatformTypesPlayerAPIStatePreviousItemsItemArtistsItem {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStatePreviousItemsItemArtistsItem2 {
   name: string;
   type: string;
   uri: string;
@@ -10665,8 +10971,17 @@ export type PlatformTypesPlayerAPIStatePreviousItemsItemImages = Array<
 export interface PlatformTypesPlayerAPIStatePreviousItemsItemMetadata {
   "actions.skipping_next_past_track": string;
   "actions.skipping_prev_past_track": string;
-  "artist_name:1": string;
-  "artist_uri:1": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -13744,69 +14059,16 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenIt
   unknown
 >;
 
-export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticated = Array<
-  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem
-  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem2
-  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem3
-  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem4
-  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem5
->;
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticated =
+  Array<PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem>;
 
 export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem {
   listener: PlatformTypesRegistryMapValueInstanceOnAuthenticated;
   options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions;
 }
 
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem2 {
-  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener;
-  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions2;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem3 {
-  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener2;
-  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions3;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem4 {
-  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener3;
-  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions4;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem5 {
-  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener4;
-  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions5;
-}
-
-export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener =
-  () => unknown;
-
-export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener2 =
-  () => unknown;
-
-export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener3 =
-  () => unknown;
-
-export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener4 =
-  () => unknown;
-
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions =
   Record<string, unknown>;
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions2 {
-  once: boolean;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions3 {
-  once: boolean;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions4 {
-  once: boolean;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions5 {
-  once: boolean;
-}
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticationFailed = Array<
   | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticationFailedItem
@@ -15797,17 +16059,31 @@ export type PlatformTypesRootlistAPIEventsEmitterListenersOperationItemOptions =
   unknown
 >;
 
-export type PlatformTypesRootlistAPIEventsEmitterListenersUpdate =
-  Array<PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem>;
+export type PlatformTypesRootlistAPIEventsEmitterListenersUpdate = Array<
+  | PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem
+  | PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem2
+>;
 
 export interface PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem {
   listener: PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemListener;
   options: PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemOptions;
 }
 
+export interface PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem2 {
+  listener: PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemListener2;
+  options: PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemOptions2;
+}
+
 export type PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemListener = () => unknown;
 
+export type PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemListener2 = () => unknown;
+
 export type PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemOptions2 = Record<
   string,
   unknown
 >;
@@ -17574,7 +17850,9 @@ export interface PlatformTypesShuffleAPIEventsEmitter {
 
 export interface PlatformTypesShuffleAPIEventsEmitterListeners {
   availability_update: PlatformTypesShuffleAPIEventsEmitterListenersAvailabilityUpdate;
+  update: PlatformTypesShuffleAPIEventsEmitterListenersUpdate;
   update_complete: PlatformTypesShuffleAPIEventsEmitterListenersUpdateComplete;
+  update_error: PlatformTypesShuffleAPIEventsEmitterListenersUpdateError;
 }
 
 export type PlatformTypesShuffleAPIEventsEmitterListenersAvailabilityUpdate =
@@ -17594,19 +17872,67 @@ export type PlatformTypesShuffleAPIEventsEmitterListenersAvailabilityUpdateItemO
   unknown
 >;
 
-export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateComplete =
-  Array<PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem>;
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdate =
+  Array<PlatformTypesShuffleAPIEventsEmitterListenersUpdateItem>;
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateComplete = Array<
+  | PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem
+  | PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem2
+>;
 
 export interface PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem {
   listener: PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemListener;
   options: PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions;
 }
 
+export interface PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem2 {
+  listener: PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemListener2;
+  options: PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions2;
+}
+
 export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemListener = (
   arg0: any,
 ) => unknown;
 
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemListener2 = (
+  arg0: any,
+) => unknown;
+
 export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions2 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateError =
+  Array<PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItem>;
+
+export interface PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItem {
+  listener: PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItemListener;
+  options: PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItemOptions;
+}
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItemListener = () => unknown;
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItemOptions = Record<
+  string,
+  unknown
+>;
+
+export interface PlatformTypesShuffleAPIEventsEmitterListenersUpdateItem {
+  listener: PlatformTypesShuffleAPIEventsEmitterListenersUpdateItemListener;
+  options: PlatformTypesShuffleAPIEventsEmitterListenersUpdateItemOptions;
+}
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateItemOptions = Record<
   string,
   unknown
 >;
@@ -18662,13 +18988,29 @@ export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmi
 }
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListeners {
+  muted_changed: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChanged;
   volume: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolume;
 }
+
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChanged =
+  Array<PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItem>;
+
+export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItem {
+  listener: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItemListener;
+  options: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItemOptions;
+}
+
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItemOptions =
+  Record<string, unknown>;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolume =
   Array<
     | PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem
     | PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem2
+    | PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem3
   >;
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem {
@@ -18681,16 +19023,27 @@ export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmi
   options: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions2;
 }
 
+export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem3 {
+  listener: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemListener3;
+  options: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions3;
+}
+
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemListener =
   (arg0: any) => unknown;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemListener2 =
   (arg0: any) => unknown;
 
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemListener3 =
+  (arg0: any) => unknown;
+
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions =
   Record<string, unknown>;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions3 =
   Record<string, unknown>;
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterMetaListeners {
@@ -21966,10 +22319,7 @@ export type PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterGetItem =
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterItems = Map<
-  unknown,
-  unknown
->;
+export type PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterItems = Map<string, string>;
 
 export type PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterRemoveItem = (
   arg0: any,
@@ -22159,9 +22509,27 @@ export interface PlatformTypesVideoAPIEventsEmitter {
 }
 
 export interface PlatformTypesVideoAPIEventsEmitterListeners {
+  picture_in_picture_changed: PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChanged;
   subtitle_languages_changed: PlatformTypesVideoAPIEventsEmitterListenersSubtitleLanguagesChanged;
   subtitle_preferred_language_changed: PlatformTypesVideoAPIEventsEmitterListenersSubtitlePreferredLanguageChanged;
 }
+
+export type PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChanged =
+  Array<PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItem>;
+
+export interface PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItem {
+  listener: PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItemListener;
+  options: PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItemOptions = Record<
+  string,
+  unknown
+>;
 
 export type PlatformTypesVideoAPIEventsEmitterListenersSubtitleLanguagesChanged =
   Array<PlatformTypesVideoAPIEventsEmitterListenersSubtitleLanguagesChangedItem>;
