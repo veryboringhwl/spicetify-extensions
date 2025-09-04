@@ -6,15 +6,14 @@
     "concat": "deno run -A tasks/concat.ts",
     "dev-watch": "deno run -A tasks/watch.ts --dev",
     "watch": "deno run -A tasks/watch.ts",
-    "check": "deno run -A npm:@biomejs/biome check --write --unsafe",
-    "format": "deno run -A npm:@biomejs/biome format --write"
+    "check": "deno run -A @biomejs/biome check --write --unsafe",
+    "format": "deno run -A @biomejs/biome format --write"
   },
   "imports": {
-    "@biomejs/biome": "npm:@biomejs/biome@^2.2.0",
+    "@biomejs/biome": "npm:@biomejs/biome@2.2.0",
     "@esbuild/": "https://deno.land/x/esbuild@v0.25.8/",
-    "@std/fs": "jsr:@std/fs@^1.0.19",
-    "@std/path": "jsr:@std/path@^1.1.1",
-    "@std/streams": "jsr:@std/streams@^1.0.10",
+    "@std/path": "jsr:@std/path@1.1.1",
+    "@std/streams": "jsr:@std/streams@1.0.10",
     "dexie": "https://esm.sh/dexie@4.0.11",
     "react": "https://esm.sh/react@19.1.0",
     "react-dom": "https://esm.sh/react-dom@19.1.0",

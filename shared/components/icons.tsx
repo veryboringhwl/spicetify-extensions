@@ -86,7 +86,6 @@ const createReactComponent = (name: IconName): ReactIconComponent => {
       <path d={path} />
     </svg>
   );
-  Component.displayName = `Icon(${name})`;
   Component.defaultProps = {
     size: defaultSize,
     fill: "currentColor",

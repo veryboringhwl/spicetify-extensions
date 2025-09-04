@@ -2,24 +2,14 @@
   "version": "5",
   "specifiers": {
     "jsr:@std/bytes@^1.0.6": "1.0.6",
-    "jsr:@std/fs@^1.0.19": "1.0.19",
     "jsr:@std/internal@^1.0.9": "1.0.10",
-    "jsr:@std/path@^1.1.1": "1.1.1",
-    "jsr:@std/streams@^1.0.10": "1.0.10",
-    "npm:@biomejs/biome@*": "2.2.0",
-    "npm:@biomejs/biome@^2.2.0": "2.2.0",
-    "npm:@types/node@*": "22.15.15"
+    "jsr:@std/path@1.1.1": "1.1.1",
+    "jsr:@std/streams@1.0.10": "1.0.10",
+    "npm:@biomejs/biome@2.2.0": "2.2.0"
   },
   "jsr": {
     "@std/bytes@1.0.6": {
       "integrity": "f6ac6adbd8ccd99314045f5703e23af0a68d7f7e58364b47d2c7f408aeb5820a"
-    },
-    "@std/fs@1.0.19": {
-      "integrity": "051968c2b1eae4d2ea9f79a08a3845740ef6af10356aff43d3e2ef11ed09fb06",
-      "dependencies": [
-        "jsr:@std/internal",
-        "jsr:@std/path"
-      ]
     },
     "@std/internal@1.0.10": {
       "integrity": "e3be62ce42cab0e177c27698e5d9800122f67b766a0bea6ca4867886cbde8cf7"
@@ -91,48 +81,24 @@
       "integrity": "sha512-Nawu5nHjP/zPKTIryh2AavzTc/KEg4um/MxWdXW0A6P/RZOyIpa7+QSjeXwAwX/utJGaCoXRPWtF3m5U/bB3Ww==",
       "os": ["win32"],
       "cpu": ["x64"]
-    },
-    "@types/node@22.15.15": {
-      "integrity": "sha512-R5muMcZob3/Jjchn5LcO8jdKwSCbzqmPB6ruBxMcf9kbxtniZHP327s6C37iOfuw8mbKK3cAQa7sEl7afLrQ8A==",
-      "dependencies": [
-        "undici-types"
-      ]
-    },
-    "undici-types@6.21.0": {
-      "integrity": "sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ=="
     }
   },
   "redirects": {
-    "https://esm.sh/@types/react-dom@~19.0.4/client.d.ts": "https://esm.sh/@types/react-dom@19.0.6/client.d.ts",
-    "https://esm.sh/@types/react@~19.0.12/index.d.ts": "https://esm.sh/@types/react@19.0.14/index.d.ts",
-    "https://esm.sh/@types/react@~19.0.12/jsx-runtime.d.ts": "https://esm.sh/@types/react@19.0.14/jsx-runtime.d.ts",
-    "https://esm.sh/@types/scheduler@~0.23.0/index.d.ts": "https://esm.sh/@types/scheduler@0.23.0/index.d.ts",
-    "https://esm.sh/scheduler@^0.26.0?target=denonext": "https://esm.sh/scheduler@0.26.0?target=denonext"
+    "https://esm.sh/@types/react@~19.0.12/jsx-runtime.d.ts": "https://esm.sh/@types/react@19.0.14/jsx-runtime.d.ts"
   },
   "remote": {
     "https://deno.land/x/denoflate@1.2.1/mod.ts": "f5628e44b80b3d80ed525afa2ba0f12408e3849db817d47a883b801f9ce69dd6",
     "https://deno.land/x/denoflate@1.2.1/pkg/denoflate.js": "b9f9ad9457d3f12f28b1fb35c555f57443427f74decb403113d67364e4f2caf4",
     "https://deno.land/x/denoflate@1.2.1/pkg/denoflate_bg.wasm.js": "d581956245407a2115a3d7e8d85a9641c032940a8e810acbd59ca86afd34d44d",
     "https://deno.land/x/esbuild@v0.25.8/mod.js": "a3a34e05849068a0f6e3b3f8d30d3f4affaa9e7b39b1877718caca560dab2132",
-    "https://esm.sh/dexie@4.0.11": "9adecb83911543ac0032b1786fea6cf9a2ce6b4844c59a608e564c33bebb8de8",
-    "https://esm.sh/dexie@4.0.11/denonext/dexie.mjs": "0b4199f8c72ff4b986b3c0f48fed0228595675c3003a6c3001223ab95c535a11",
-    "https://esm.sh/react-dom@19.1.0": "0af10bc13bc7ef60cd74313dc427d357184e28c86cc878340add5cde7ba00120",
-    "https://esm.sh/react-dom@19.1.0/client": "a84db2e3e86b71bf712d55f37603df8be4a624d7e93b63795524ec0554b1a6af",
-    "https://esm.sh/react-dom@19.1.0/denonext/client.mjs": "9568d5484e41d9b0b8b717f4ddb990b74e8158ded3772ad51c737dc7899b42f8",
-    "https://esm.sh/react-dom@19.1.0/denonext/react-dom.mjs": "34f13de407660b571cc98e6902abc6aded524314c56c77a1ee7527b4f501f727",
-    "https://esm.sh/react@19.1.0": "8cb1e2ba1aeb012dc6807c8b3cf6ae90579b448317c9debc9d888dcabc246e66",
     "https://esm.sh/react@19.1.0/denonext/jsx-runtime.mjs": "fbd3137c02ae8733d3bfaf434884aada41253c9074bdd3baf598879de24fe70b",
-    "https://esm.sh/react@19.1.0/denonext/react.mjs": "b43f435068776ab7a40daea8854ab1f8eca6252e86a9ac8b716bb9110ffeb76e",
-    "https://esm.sh/react@19.1.0/jsx-runtime": "8c80348342f0448fbf5499e9f357ab3f678db3b7fbf782f8899fc88bb0a182c3",
-    "https://esm.sh/scheduler@0.26.0/denonext/scheduler.mjs": "b62267951094a7c42b7170c51e31f57198981b08ebfae60be0d076101a4c6f91",
-    "https://esm.sh/scheduler@0.26.0?target=denonext": "102f3b685ea5271452bd93de89ab0d99668aecb08f7706e3b9c6629699dd92e0"
+    "https://esm.sh/react@19.1.0/jsx-runtime": "8c80348342f0448fbf5499e9f357ab3f678db3b7fbf782f8899fc88bb0a182c3"
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/fs@^1.0.19",
-      "jsr:@std/path@^1.1.1",
-      "jsr:@std/streams@^1.0.10",
-      "npm:@biomejs/biome@^2.2.0"
+      "jsr:@std/path@1.1.1",
+      "jsr:@std/streams@1.0.10",
+      "npm:@biomejs/biome@2.2.0"
     ]
   }
 }

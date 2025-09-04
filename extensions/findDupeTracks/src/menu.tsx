@@ -8,7 +8,7 @@ import { ConfirmDialog } from "../../../shared/components/confirmDialog.tsx";
 import { Dropdown } from "../../../shared/components/dropdown.tsx";
 import { Icons } from "../../../shared/components/icons.tsx";
 import { Slider } from "../../../shared/components/slider.tsx";
-import { usePlayer } from "../../../shared/hooks/usePlayer.jsx";
+import { usePlayer } from "../../../shared/hooks/usePlayer.ts";
 import { getSettings } from "./settings.tsx";
 
 interface Track {
@@ -321,7 +321,6 @@ interface DuplicateItemProps {
 const DuplicateItem = memo(function DuplicateItem({
   track,
   category,
-  groupIndex,
   onDelete,
   isSource,
   trackPlayCounts,

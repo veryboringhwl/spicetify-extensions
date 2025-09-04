@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { waitForElement } from "../utils/waitForElement.ts";
 
@@ -7,59 +7,65 @@ type CreatePageProps = {
   element: ReactNode;
 };
 
-interface HistoryLocation {
-  pathname: string;
-}
+type RouteInfo = {
+  path: string;
+  element: ReactNode;
+};
 
-interface HistoryState {
-  location: HistoryLocation;
-  pathname?: string;
-}
+let reactRoot: Root;
+let rootDiv: HTMLDivElement;
+const routes: RouteInfo[] = [];
 
-export const createPage = ({ path, element }: CreatePageProps) => {
-  const urlPath = `/${path}`;
-  let reactRoot: Root | null = null;
+let initPromise: Promise<void> | null = null;
 
-  const PageWrapper = () => {
-    return (
-      <Spicetify.ReactComponent.Router
-        location={Spicetify.Platform.History.location}
-        navigator={Spicetify.Platform.History}
-      >
-        <Spicetify.ReactComponent.Routes>
-          <Spicetify.ReactComponent.Route element={element} path={urlPath} />
-        </Spicetify.ReactComponent.Routes>
-      </Spicetify.ReactComponent.Router>
+const AppRouter = () => {
+  const [location, setLocation] = useState(Spicetify.Platform.History.location);
+
+  useEffect(() => {
+    const unlisten = Spicetify.Platform.History.listen(() =>
+      setLocation(Spicetify.Platform.History.location),
     );
-  };
+    return () => (unlisten as () => void)();
+  }, []);
 
-  const mount = async () => {
-    if (reactRoot) return;
+  return (
+    <Spicetify.ReactComponent.Router location={location} navigator={Spicetify.Platform.History}>
+      <Spicetify.ReactComponent.Routes>
+        {routes.map((route, index) => (
+          <Spicetify.ReactComponent.Route
+            element={route.element}
+            key={`${route.path}-${index}`}
+            path={`/${route.path}`}
+          />
+        ))}
+      </Spicetify.ReactComponent.Routes>
+    </Spicetify.ReactComponent.Router>
+  );
+};
 
-    const mainContainer = await waitForElement("main");
-    if (!mainContainer) return;
+const initRoot = async () => {
+  const main = await waitForElement(".main-view-container__scroll-node-child");
+  if (!main) throw new Error("main-view-container__scroll-node-child not found");
+  rootDiv = document.createElement("div");
+  main.appendChild(rootDiv);
+  reactRoot = createRoot(rootDiv);
+};
 
-    reactRoot = createRoot(mainContainer);
-    reactRoot.render(<PageWrapper />);
-  };
+export const createPage = async ({ path, element }: CreatePageProps) => {
+  if (!initPromise) {
+    initPromise = (async () => {
+      await initRoot();
+    })();
+  }
 
-  const unmount = () => {
-    if (!reactRoot) return;
+  await initPromise;
 
-    reactRoot.unmount();
-    reactRoot = null;
-  };
+  const existingRouteIndex = routes.findIndex((route) => route.path === path);
+  if (existingRouteIndex >= 0) {
+    routes[existingRouteIndex] = { path, element };
+  } else {
+    routes.push({ path, element });
+  }
 
-  const historyListener = (history: HistoryState) => {
-    const currentPath = history.pathname || history.location?.pathname;
-
-    if (currentPath === urlPath) {
-      mount();
-    } else {
-      unmount();
-    }
-  };
-
-  historyListener(Spicetify.Platform.History);
-  Spicetify.Platform.History.listen(historyListener);
+  reactRoot.render(<AppRouter />);
 };
