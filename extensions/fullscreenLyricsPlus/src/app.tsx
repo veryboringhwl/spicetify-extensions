@@ -1,4 +1,5 @@
 import { createRoot, type Root } from "react-dom/client";
+import { waitForElement } from "../../../shared/utils/waitForElement.ts";
 import styles from "./styles.css" with { type: "css" };
 
 document.adoptedStyleSheets.push(styles);
@@ -61,13 +62,11 @@ const renderFullscreenButton = () => {
 renderFullscreenButton();
 
 const observer = new MutationObserver(renderFullscreenButton);
-const mainViewContainer = document.querySelector(".main-view-container");
+const mainViewContainer = await waitForElement(".main-view-container");
 
 if (mainViewContainer) {
   observer.observe(mainViewContainer, {
     childList: true,
     subtree: true,
   });
-} else {
-  console.warn("Main view container not found. Fullscreen button might not render correctly.");
 }
