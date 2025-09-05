@@ -6,6 +6,7 @@
     gap: 0px;
   }
 
+  /*bunch of stuff in Root__top-container*/
   .xlgKfueiF46Wo_sED8YA {
     display: none;
   }
@@ -19,5 +20,11 @@
   .Root__now-playing-bar,
   .Root__right-sidebar {
     display: none;
+  }
+
+  .Root__main-view {
+    /*required for lucid theme*/
+    grid-row: unset;
+    grid-column: unset;
   }
 }
