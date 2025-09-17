@@ -1,4 +1,4 @@
-// Auto-generated at 2025-09-01T23:00:00.042Z on Spotify Version: 1.2.71.421
+// Auto-generated at 2025-09-08T20:09:36.659Z on Spotify Version: 1.2.72.437
 
 export interface PlatformTypes {
   ActionStoreAPI: PlatformTypesActionStoreAPI;
@@ -68,6 +68,7 @@ export interface PlatformTypes {
   StandalonePlayerCoordinatorAPI: PlatformTypesStandalonePlayerCoordinatorAPI;
   Translations: PlatformTypesTranslations;
   Transport: PlatformTypesTransport;
+  TunaAPI: PlatformTypesTunaAPI;
   UBILogger: PlatformTypesUBILogger;
   UpdateAPI: PlatformTypesUpdateAPI;
   UrlDispenserServiceClient: PlatformTypesUrlDispenserServiceClient;
@@ -97,7 +98,6 @@ export interface PlatformTypesAdManagers {
   billboard: PlatformTypesAdManagersBillboard;
   config: PlatformTypesAdManagersConfig;
   embeddedAd: PlatformTypesAdManagersEmbeddedAd;
-  embeddedPlaylist: PlatformTypesAdManagersEmbeddedPlaylist;
   home: PlatformTypesAdManagersHome;
   hpto: PlatformTypesAdManagersHpto;
   inStreamApi: PlatformTypesAdManagersInStreamApi;
@@ -618,96 +618,6 @@ export type PlatformTypesAdManagersEmbeddedAdEmbeddedNPVAdEventLoggerLog = (
   arg2: any,
 ) => unknown;
 
-export interface PlatformTypesAdManagersEmbeddedPlaylist {
-  embeddedPlaylistAdEventLogger: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLogger;
-  embeddedPlaylistManager: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManager;
-  scrollCardAdEventLogger: PlatformTypesAdManagersEmbeddedPlaylistScrollCardAdEventLogger;
-}
-
-export interface PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLogger {
-  eventsClient: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerEventsClient;
-  log: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerLog;
-}
-
-export interface PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerEventsClient {
-  options: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerEventsClientOptions;
-  postEvent: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerEventsClientPostEvent;
-  postUnmanagedEvent: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerEventsClientPostUnmanagedEvent;
-  subEvent: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerEventsClientSubEvent;
-  transport: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerEventsClientTransport;
-}
-
-export type PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerEventsClientOptions =
-  Record<string, unknown>;
-
-export type PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerEventsClientPostEvent =
-  (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerEventsClientPostUnmanagedEvent =
-  (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerEventsClientSubEvent =
-  (arg0: any, arg1: any) => unknown;
-
-export interface PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerEventsClientTransport {
-  _onCancel: PlatformTypesRegistryMapValueInstanceOnCancel;
-  _onSend: PlatformTypesRegistryMapValueInstanceOnSend;
-  call: PlatformTypesRegistryMapValueInstanceCall;
-  callSingle: PlatformTypesRegistryMapValueInstanceCallSingle;
-  callStream: PlatformTypesRegistryMapValueInstanceCallStream;
-}
-
-export type PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistAdEventLoggerLog = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export interface PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManager {
-  embeddedPlaylistApi: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManagerEmbeddedPlaylistApi;
-  fetchAd: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManagerFetchAd;
-  getSlotSettings: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManagerGetSlotSettings;
-}
-
-export interface PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManagerEmbeddedPlaylistApi {
-  adsCoreConnector: PlatformTypesAdManagersAudioInStreamApiAdsCoreConnector;
-  createSlot: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManagerEmbeddedPlaylistApiCreateSlot;
-  fetchAd: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManagerEmbeddedPlaylistApiFetchAd;
-  getSlotSettings: PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManagerEmbeddedPlaylistApiGetSlotSettings;
-}
-
-export type PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManagerEmbeddedPlaylistApiCreateSlot =
-  () => unknown;
-
-export type PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManagerEmbeddedPlaylistApiFetchAd =
-  (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManagerEmbeddedPlaylistApiGetSlotSettings =
-  () => unknown;
-
-export type PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManagerFetchAd = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesAdManagersEmbeddedPlaylistEmbeddedPlaylistManagerGetSlotSettings =
-  () => unknown;
-
-export interface PlatformTypesAdManagersEmbeddedPlaylistScrollCardAdEventLogger {
-  appStartupId: string;
-  eventSender: PlatformTypesEventSender;
-  fireTrackingEvent: PlatformTypesAdManagersEmbeddedPlaylistScrollCardAdEventLoggerFireTrackingEvent;
-  log: PlatformTypesAdManagersEmbeddedPlaylistScrollCardAdEventLoggerLog;
-}
-
-export type PlatformTypesAdManagersEmbeddedPlaylistScrollCardAdEventLoggerFireTrackingEvent = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesAdManagersEmbeddedPlaylistScrollCardAdEventLoggerLog = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
 export interface PlatformTypesAdManagersHome {
   enableLegacyHptoContainerLoader: boolean;
   fetchHomeAd: PlatformTypesAdManagersHomeFetchHomeAd;
@@ -778,7 +688,7 @@ export interface PlatformTypesAdManagersHptoFocusState {
   removeFocusListener: PlatformTypesAdManagersAdStateReporterFocusStateRemoveFocusListener;
 }
 
-export type PlatformTypesAdManagersHptoFocusStateListeners = Array<PlatformTypesAdManagersHpto>;
+export type PlatformTypesAdManagersHptoFocusStateListeners = Array<unknown>;
 
 export type PlatformTypesAdManagersHptoGetNativeData = (arg0: any, arg1: any) => unknown;
 
@@ -1037,7 +947,6 @@ export type PlatformTypesAdManagersHptoViewDestroyed = () => unknown;
 export type PlatformTypesAdManagersHptoViewRendered = (arg0: any) => unknown;
 
 export interface PlatformTypesAdManagersHptoVisibilityObserver {
-  callback: PlatformTypesAdManagersHptoOnVisibilityChanged;
   currentState: string;
   disconnect: PlatformTypesAdManagersHptoVisibilityObserverDisconnect;
   intersectionObserver: PlatformTypesAdManagersHptoVisibilityObserverIntersectionObserver;
@@ -1099,7 +1008,7 @@ export interface PlatformTypesAdManagersInStreamApi {
 }
 
 export interface PlatformTypesAdManagersLeaderboard {
-  adPlaybackId: null;
+  adPlaybackId: string;
   adToLeaderboard: PlatformTypesAdManagersLeaderboardAdToLeaderboard;
   appStartupId: string;
   cachedConfig: PlatformTypesAdManagersLeaderboardCachedConfig;
@@ -1107,6 +1016,7 @@ export interface PlatformTypesAdManagersLeaderboard {
   currentAd: PlatformTypesAdManagersLeaderboardCurrentAd;
   disableLeaderboard: PlatformTypesAdManagersLeaderboardDisableLeaderboard;
   disableLeaderboardMessageHandler: PlatformTypesAdManagersLeaderboardDisableLeaderboardMessageHandler;
+  domTarget: HTMLElement;
   enableLeaderboard: PlatformTypesAdManagersLeaderboardEnableLeaderboard;
   enableLeaderboardMessageHandler: PlatformTypesAdManagersLeaderboardEnableLeaderboardMessageHandler;
   enabled: boolean;
@@ -1122,7 +1032,7 @@ export interface PlatformTypesAdManagersLeaderboard {
   isCurrentAdSax: PlatformTypesAdManagersLeaderboardIsCurrentAdSax;
   isPreviewServiceAd: PlatformTypesAdManagersLeaderboardIsPreviewServiceAd;
   leaderboardApi: PlatformTypesAdManagersLeaderboardLeaderboardApi;
-  leaderboardWrapper: null;
+  leaderboardWrapper: HTMLElement;
   logLeaderboardEvent: PlatformTypesAdManagersLeaderboardLogLeaderboardEvent;
   offlineObserver: PlatformTypesAdManagersLeaderboardOfflineObserver;
   onAdSlotEvent: PlatformTypesAdManagersLeaderboardOnAdSlotEvent;
@@ -1135,6 +1045,7 @@ export interface PlatformTypesAdManagersLeaderboard {
   requestSlot: PlatformTypesAdManagersLeaderboardRequestSlot;
   setCurrentAd: PlatformTypesAdManagersLeaderboardSetCurrentAd;
   setLeaderboardElement: PlatformTypesAdManagersLeaderboardSetLeaderboardElement;
+  subscription: PlatformTypesAdManagersLeaderboardSubscription;
   teardownCurrentAd: PlatformTypesAdManagersLeaderboardTeardownCurrentAd;
 }
 
@@ -1148,10 +1059,58 @@ export interface PlatformTypesAdManagersLeaderboardCachedConfig {
 export type PlatformTypesAdManagersLeaderboardClearCurrentAd = () => unknown;
 
 export interface PlatformTypesAdManagersLeaderboardCurrentAd {
-  ad: null;
+  ad: PlatformTypesAdManagersLeaderboardCurrentAdAd;
   creativeId: null;
   lineItemId: null;
 }
+
+export interface PlatformTypesAdManagersLeaderboardCurrentAdAd {
+  adId: string;
+  audio: PlatformTypesAdManagersLeaderboardCurrentAdAdAudio;
+  clickthroughUrl: string;
+  companions: PlatformTypesAdManagersLeaderboardCurrentAdAdCompanions;
+  coverArt: PlatformTypesAdManagersLeaderboardCurrentAdAdCoverArt;
+  display: PlatformTypesAdManagersLeaderboardCurrentAdAdDisplay;
+  format: number;
+  isDsaEligible: boolean;
+  isDummy: boolean;
+  metadata: PlatformTypesAdManagersLeaderboardCurrentAdAdMetadata;
+  requestId: string;
+  slot: string;
+  trackingEvents: PlatformTypesAdManagersLeaderboardCurrentAdAdTrackingEvents;
+  video: PlatformTypesAdManagersLeaderboardCurrentAdAdVideo;
+}
+
+export type PlatformTypesAdManagersLeaderboardCurrentAdAdAudio = Array<unknown>;
+
+export type PlatformTypesAdManagersLeaderboardCurrentAdAdCompanions = Array<unknown>;
+
+export type PlatformTypesAdManagersLeaderboardCurrentAdAdCoverArt = Array<unknown>;
+
+export type PlatformTypesAdManagersLeaderboardCurrentAdAdDisplay =
+  Array<PlatformTypesAdManagersLeaderboardCurrentAdAdDisplayItem>;
+
+export interface PlatformTypesAdManagersLeaderboardCurrentAdAdDisplayItem {
+  audioFileId: undefined;
+  bitrate: number;
+  duration: bigint;
+  height: number;
+  imageFileId: undefined;
+  mimeType: string;
+  text: string;
+  url: undefined;
+  videoManifestId: undefined;
+  width: number;
+}
+
+export interface PlatformTypesAdManagersLeaderboardCurrentAdAdMetadata {
+  ad_system: string;
+  cleanup_timeout_ms: string;
+}
+
+export type PlatformTypesAdManagersLeaderboardCurrentAdAdTrackingEvents = Record<string, unknown>;
+
+export type PlatformTypesAdManagersLeaderboardCurrentAdAdVideo = Array<unknown>;
 
 export type PlatformTypesAdManagersLeaderboardDisableLeaderboard = () => unknown;
 
@@ -1171,7 +1130,48 @@ export interface PlatformTypesAdManagersLeaderboardFocusState {
   removeFocusListener: PlatformTypesAdManagersAdStateReporterFocusStateRemoveFocusListener;
 }
 
-export type PlatformTypesAdManagersLeaderboardFocusStateListeners = Array<unknown>;
+export type PlatformTypesAdManagersLeaderboardFocusStateListeners = Array<
+  PlatformTypesAdManagersLeaderboard | PlatformTypesAdManagersLeaderboardRefreshDecisioner
+>;
+
+export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemIsPastViewThreshold =
+  () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemNotifyRefreshIfPossible =
+  () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnFocusChanged = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnLeaderboardDisabled =
+  () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnLeaderboardEnabled =
+  () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnlineStateChanged = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnNavigationChanged =
+  () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnViewLoaded = () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnViewUnloaded = () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemSetRefreshDelegate = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemStartRefreshTimer =
+  () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemTriggerRefresh = () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemUpdateViewTimer =
+  () => unknown;
 
 export type PlatformTypesAdManagersLeaderboardGetCurrentAd = () => unknown;
 
@@ -1236,57 +1236,24 @@ export type PlatformTypesAdManagersLeaderboardOnNavigationChanged = () => unknow
 export interface PlatformTypesAdManagersLeaderboardRefreshDecisioner {
   delegate: PlatformTypesAdManagersLeaderboard;
   focusState: PlatformTypesAdManagersLeaderboardFocusState;
-  isPastViewThreshold: PlatformTypesAdManagersLeaderboardRefreshDecisionerIsPastViewThreshold;
+  isPastViewThreshold: PlatformTypesAdManagersLeaderboardFocusStateListenersItemIsPastViewThreshold;
   lastOnlineStatus: boolean;
-  notifyRefreshIfPossible: PlatformTypesAdManagersLeaderboardRefreshDecisionerNotifyRefreshIfPossible;
-  onFocusChanged: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnFocusChanged;
-  onLeaderboardDisabled: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnLeaderboardDisabled;
-  onLeaderboardEnabled: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnLeaderboardEnabled;
-  onNavigationChanged: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnNavigationChanged;
-  onViewLoaded: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnViewLoaded;
-  onViewUnloaded: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnViewUnloaded;
-  onlineStateChanged: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnlineStateChanged;
-  setRefreshDelegate: PlatformTypesAdManagersLeaderboardRefreshDecisionerSetRefreshDelegate;
-  startRefreshTimer: PlatformTypesAdManagersLeaderboardRefreshDecisionerStartRefreshTimer;
+  notifyRefreshIfPossible: PlatformTypesAdManagersLeaderboardFocusStateListenersItemNotifyRefreshIfPossible;
+  onFocusChanged: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnFocusChanged;
+  onLeaderboardDisabled: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnLeaderboardDisabled;
+  onLeaderboardEnabled: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnLeaderboardEnabled;
+  onNavigationChanged: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnNavigationChanged;
+  onViewLoaded: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnViewLoaded;
+  onViewUnloaded: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnViewUnloaded;
+  onlineStateChanged: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnlineStateChanged;
+  refreshTimeout: number;
+  setRefreshDelegate: PlatformTypesAdManagersLeaderboardFocusStateListenersItemSetRefreshDelegate;
+  startRefreshTimer: PlatformTypesAdManagersLeaderboardFocusStateListenersItemStartRefreshTimer;
   timeOfLastViewUpdate: number;
-  triggerRefresh: PlatformTypesAdManagersLeaderboardRefreshDecisionerTriggerRefresh;
-  updateViewTimer: PlatformTypesAdManagersLeaderboardRefreshDecisionerUpdateViewTimer;
+  triggerRefresh: PlatformTypesAdManagersLeaderboardFocusStateListenersItemTriggerRefresh;
+  updateViewTimer: PlatformTypesAdManagersLeaderboardFocusStateListenersItemUpdateViewTimer;
   viewTimer: number;
 }
-
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerIsPastViewThreshold = () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerNotifyRefreshIfPossible =
-  () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnFocusChanged = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnLeaderboardDisabled =
-  () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnLeaderboardEnabled = () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnlineStateChanged = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnNavigationChanged = () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnViewLoaded = () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnViewUnloaded = () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerSetRefreshDelegate = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerStartRefreshTimer = () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerTriggerRefresh = () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerUpdateViewTimer = () => unknown;
 
 export type PlatformTypesAdManagersLeaderboardRefreshLeaderboard = () => unknown;
 
@@ -1303,6 +1270,12 @@ export type PlatformTypesAdManagersLeaderboardRequestSlot = (arg0: any) => unkno
 export type PlatformTypesAdManagersLeaderboardSetCurrentAd = (arg0: any) => unknown;
 
 export type PlatformTypesAdManagersLeaderboardSetLeaderboardElement = (arg0: any) => unknown;
+
+export interface PlatformTypesAdManagersLeaderboardSubscription {
+  cancel: PlatformTypesAdManagersLeaderboardSubscriptionCancel;
+}
+
+export type PlatformTypesAdManagersLeaderboardSubscriptionCancel = () => unknown;
 
 export type PlatformTypesAdManagersLeaderboardTeardownCurrentAd = () => unknown;
 
@@ -1705,10 +1678,20 @@ export type PlatformTypesAudioOutputDevicesAPIAudioObserverGetAudioOutputDevices
 
 export type PlatformTypesAudioOutputDevicesAPIAudioObserverOptions = Record<string, unknown>;
 
-export type PlatformTypesAudioOutputDevicesAPIDevices =
-  Array<PlatformTypesAudioOutputDevicesAPIDevicesItem>;
+export type PlatformTypesAudioOutputDevicesAPIDevices = Array<
+  PlatformTypesAudioOutputDevicesAPIDevicesItem | PlatformTypesAudioOutputDevicesAPIDevicesItem2
+>;
 
 export interface PlatformTypesAudioOutputDevicesAPIDevicesItem {
+  fullName: string;
+  id: string;
+  isDefaultDevice: boolean;
+  name: string;
+  terminalType: string;
+  transportType: string;
+}
+
+export interface PlatformTypesAudioOutputDevicesAPIDevicesItem2 {
   fullName: string;
   id: string;
   isDefaultDevice: boolean;
@@ -2147,36 +2130,15 @@ export interface PlatformTypesCollectionPlatformAPI {
 export type PlatformTypesCollectionPlatformAPIAdd = (arg0: any, arg1: any) => unknown;
 
 export interface PlatformTypesCollectionPlatformAPICacheBySet {
-  artist: PlatformTypesCollectionPlatformAPICacheBySetArtist;
   artistban: PlatformTypesCollectionPlatformAPICacheBySetArtistban;
-  author: PlatformTypesCollectionPlatformAPICacheBySetAuthor;
-  ban: PlatformTypesCollectionPlatformAPICacheBySetBan;
-  collection: PlatformTypesCollectionPlatformAPICacheBySetCollection;
+  concerts: PlatformTypesCollectionPlatformAPICacheBySetConcerts;
   enhanced: PlatformTypesCollectionPlatformAPICacheBySetEnhanced;
   ignoreinrecs: PlatformTypesCollectionPlatformAPICacheBySetIgnoreinrecs;
-  listenlater: PlatformTypesCollectionPlatformAPICacheBySetListenlater;
   markedasfinished: PlatformTypesCollectionPlatformAPICacheBySetMarkedasfinished;
   notinterested: PlatformTypesCollectionPlatformAPICacheBySetNotinterested;
+  playcontextbans: PlatformTypesCollectionPlatformAPICacheBySetPlaycontextbans;
   prerelease: PlatformTypesCollectionPlatformAPICacheBySetPrerelease;
-  show: PlatformTypesCollectionPlatformAPICacheBySetShow;
   tags: PlatformTypesCollectionPlatformAPICacheBySetTags;
-  ylpin: PlatformTypesCollectionPlatformAPICacheBySetYlpin;
-}
-
-export interface PlatformTypesCollectionPlatformAPICacheBySetArtist {
-  _cache: PlatformTypesCollectionPlatformAPICacheBySetArtistCache;
-  _ttl: number;
-  cleanup: PlatformTypesCurationAPICacheCleanup;
-  clear: PlatformTypesCurationAPICacheClear;
-  create: PlatformTypesCurationAPICacheCreate;
-  delete: PlatformTypesCurationAPICacheDelete;
-  entries: PlatformTypesCurationAPICacheEntries;
-  get: PlatformTypesCurationAPICacheGet;
-  getExpiry: PlatformTypesCurationAPICacheGetExpiry;
-  has: PlatformTypesCurationAPICacheHas;
-  isExpired: PlatformTypesCurationAPICacheIsExpired;
-  peek: PlatformTypesCurationAPICachePeek;
-  set: PlatformTypesCurationAPICacheSet;
 }
 
 export interface PlatformTypesCollectionPlatformAPICacheBySetArtistban {
@@ -2197,10 +2159,8 @@ export interface PlatformTypesCollectionPlatformAPICacheBySetArtistban {
 
 export type PlatformTypesCollectionPlatformAPICacheBySetArtistbanCache = Map<unknown, unknown>;
 
-export type PlatformTypesCollectionPlatformAPICacheBySetArtistCache = Map<unknown, unknown>;
-
-export interface PlatformTypesCollectionPlatformAPICacheBySetAuthor {
-  _cache: PlatformTypesCollectionPlatformAPICacheBySetAuthorCache;
+export interface PlatformTypesCollectionPlatformAPICacheBySetConcerts {
+  _cache: PlatformTypesCollectionPlatformAPICacheBySetConcertsCache;
   _ttl: number;
   cleanup: PlatformTypesCurationAPICacheCleanup;
   clear: PlatformTypesCurationAPICacheClear;
@@ -2215,43 +2175,7 @@ export interface PlatformTypesCollectionPlatformAPICacheBySetAuthor {
   set: PlatformTypesCurationAPICacheSet;
 }
 
-export type PlatformTypesCollectionPlatformAPICacheBySetAuthorCache = Map<unknown, unknown>;
-
-export interface PlatformTypesCollectionPlatformAPICacheBySetBan {
-  _cache: PlatformTypesCollectionPlatformAPICacheBySetBanCache;
-  _ttl: number;
-  cleanup: PlatformTypesCurationAPICacheCleanup;
-  clear: PlatformTypesCurationAPICacheClear;
-  create: PlatformTypesCurationAPICacheCreate;
-  delete: PlatformTypesCurationAPICacheDelete;
-  entries: PlatformTypesCurationAPICacheEntries;
-  get: PlatformTypesCurationAPICacheGet;
-  getExpiry: PlatformTypesCurationAPICacheGetExpiry;
-  has: PlatformTypesCurationAPICacheHas;
-  isExpired: PlatformTypesCurationAPICacheIsExpired;
-  peek: PlatformTypesCurationAPICachePeek;
-  set: PlatformTypesCurationAPICacheSet;
-}
-
-export type PlatformTypesCollectionPlatformAPICacheBySetBanCache = Map<unknown, unknown>;
-
-export interface PlatformTypesCollectionPlatformAPICacheBySetCollection {
-  _cache: PlatformTypesCollectionPlatformAPICacheBySetCollectionCache;
-  _ttl: number;
-  cleanup: PlatformTypesCurationAPICacheCleanup;
-  clear: PlatformTypesCurationAPICacheClear;
-  create: PlatformTypesCurationAPICacheCreate;
-  delete: PlatformTypesCurationAPICacheDelete;
-  entries: PlatformTypesCurationAPICacheEntries;
-  get: PlatformTypesCurationAPICacheGet;
-  getExpiry: PlatformTypesCurationAPICacheGetExpiry;
-  has: PlatformTypesCurationAPICacheHas;
-  isExpired: PlatformTypesCurationAPICacheIsExpired;
-  peek: PlatformTypesCurationAPICachePeek;
-  set: PlatformTypesCurationAPICacheSet;
-}
-
-export type PlatformTypesCollectionPlatformAPICacheBySetCollectionCache = Map<unknown, unknown>;
+export type PlatformTypesCollectionPlatformAPICacheBySetConcertsCache = Map<unknown, unknown>;
 
 export interface PlatformTypesCollectionPlatformAPICacheBySetEnhanced {
   _cache: PlatformTypesCollectionPlatformAPICacheBySetEnhancedCache;
@@ -2288,24 +2212,6 @@ export interface PlatformTypesCollectionPlatformAPICacheBySetIgnoreinrecs {
 }
 
 export type PlatformTypesCollectionPlatformAPICacheBySetIgnoreinrecsCache = Map<unknown, unknown>;
-
-export interface PlatformTypesCollectionPlatformAPICacheBySetListenlater {
-  _cache: PlatformTypesCollectionPlatformAPICacheBySetListenlaterCache;
-  _ttl: number;
-  cleanup: PlatformTypesCurationAPICacheCleanup;
-  clear: PlatformTypesCurationAPICacheClear;
-  create: PlatformTypesCurationAPICacheCreate;
-  delete: PlatformTypesCurationAPICacheDelete;
-  entries: PlatformTypesCurationAPICacheEntries;
-  get: PlatformTypesCurationAPICacheGet;
-  getExpiry: PlatformTypesCurationAPICacheGetExpiry;
-  has: PlatformTypesCurationAPICacheHas;
-  isExpired: PlatformTypesCurationAPICacheIsExpired;
-  peek: PlatformTypesCurationAPICachePeek;
-  set: PlatformTypesCurationAPICacheSet;
-}
-
-export type PlatformTypesCollectionPlatformAPICacheBySetListenlaterCache = Map<unknown, unknown>;
 
 export interface PlatformTypesCollectionPlatformAPICacheBySetMarkedasfinished {
   _cache: PlatformTypesCollectionPlatformAPICacheBySetMarkedasfinishedCache;
@@ -2346,6 +2252,27 @@ export interface PlatformTypesCollectionPlatformAPICacheBySetNotinterested {
 
 export type PlatformTypesCollectionPlatformAPICacheBySetNotinterestedCache = Map<unknown, unknown>;
 
+export interface PlatformTypesCollectionPlatformAPICacheBySetPlaycontextbans {
+  _cache: PlatformTypesCollectionPlatformAPICacheBySetPlaycontextbansCache;
+  _ttl: number;
+  cleanup: PlatformTypesCurationAPICacheCleanup;
+  clear: PlatformTypesCurationAPICacheClear;
+  create: PlatformTypesCurationAPICacheCreate;
+  delete: PlatformTypesCurationAPICacheDelete;
+  entries: PlatformTypesCurationAPICacheEntries;
+  get: PlatformTypesCurationAPICacheGet;
+  getExpiry: PlatformTypesCurationAPICacheGetExpiry;
+  has: PlatformTypesCurationAPICacheHas;
+  isExpired: PlatformTypesCurationAPICacheIsExpired;
+  peek: PlatformTypesCurationAPICachePeek;
+  set: PlatformTypesCurationAPICacheSet;
+}
+
+export type PlatformTypesCollectionPlatformAPICacheBySetPlaycontextbansCache = Map<
+  unknown,
+  unknown
+>;
+
 export interface PlatformTypesCollectionPlatformAPICacheBySetPrerelease {
   _cache: PlatformTypesCollectionPlatformAPICacheBySetPrereleaseCache;
   _ttl: number;
@@ -2364,24 +2291,6 @@ export interface PlatformTypesCollectionPlatformAPICacheBySetPrerelease {
 
 export type PlatformTypesCollectionPlatformAPICacheBySetPrereleaseCache = Map<unknown, unknown>;
 
-export interface PlatformTypesCollectionPlatformAPICacheBySetShow {
-  _cache: PlatformTypesCollectionPlatformAPICacheBySetShowCache;
-  _ttl: number;
-  cleanup: PlatformTypesCurationAPICacheCleanup;
-  clear: PlatformTypesCurationAPICacheClear;
-  create: PlatformTypesCurationAPICacheCreate;
-  delete: PlatformTypesCurationAPICacheDelete;
-  entries: PlatformTypesCurationAPICacheEntries;
-  get: PlatformTypesCurationAPICacheGet;
-  getExpiry: PlatformTypesCurationAPICacheGetExpiry;
-  has: PlatformTypesCurationAPICacheHas;
-  isExpired: PlatformTypesCurationAPICacheIsExpired;
-  peek: PlatformTypesCurationAPICachePeek;
-  set: PlatformTypesCurationAPICacheSet;
-}
-
-export type PlatformTypesCollectionPlatformAPICacheBySetShowCache = Map<unknown, unknown>;
-
 export interface PlatformTypesCollectionPlatformAPICacheBySetTags {
   _cache: PlatformTypesCollectionPlatformAPICacheBySetTagsCache;
   _ttl: number;
@@ -2399,24 +2308,6 @@ export interface PlatformTypesCollectionPlatformAPICacheBySetTags {
 }
 
 export type PlatformTypesCollectionPlatformAPICacheBySetTagsCache = Map<unknown, unknown>;
-
-export interface PlatformTypesCollectionPlatformAPICacheBySetYlpin {
-  _cache: PlatformTypesCollectionPlatformAPICacheBySetYlpinCache;
-  _ttl: number;
-  cleanup: PlatformTypesCurationAPICacheCleanup;
-  clear: PlatformTypesCurationAPICacheClear;
-  create: PlatformTypesCurationAPICacheCreate;
-  delete: PlatformTypesCurationAPICacheDelete;
-  entries: PlatformTypesCurationAPICacheEntries;
-  get: PlatformTypesCurationAPICacheGet;
-  getExpiry: PlatformTypesCurationAPICacheGetExpiry;
-  has: PlatformTypesCurationAPICacheHas;
-  isExpired: PlatformTypesCurationAPICacheIsExpired;
-  peek: PlatformTypesCurationAPICachePeek;
-  set: PlatformTypesCurationAPICacheSet;
-}
-
-export type PlatformTypesCollectionPlatformAPICacheBySetYlpinCache = Map<unknown, unknown>;
 
 export type PlatformTypesCollectionPlatformAPIContains = (arg0: any, arg1: any) => unknown;
 
@@ -2440,43 +2331,16 @@ export interface PlatformTypesCollectionPlatformAPIEvents {
 }
 
 export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2Set {
-  artist: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtist;
   artistban: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistban;
-  author: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthor;
-  ban: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBan;
-  collection: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollection;
+  concerts: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcerts;
   enhanced: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetEnhanced;
   ignoreinrecs: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetIgnoreinrecs;
-  listenlater: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlater;
   markedasfinished: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetMarkedasfinished;
   notinterested: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetNotinterested;
+  playcontextbans: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbans;
   prerelease: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPrerelease;
-  show: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShow;
   tags: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetTags;
-  ylpin: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpin;
 }
-
-export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtist {
-  _additions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistAdditions;
-  _batch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistBatch;
-  _deletions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistDeletions;
-  _onAdd: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistOnAdd;
-  _onBatch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistOnBatch;
-  _onRemove: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistOnRemove;
-  _onUpdate: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistOnUpdate;
-  _timeout: number;
-  _timeoutId: null;
-  getBatch: PlatformTypesCurationAPIEventsAggregatorGetBatch;
-  onUpdate: PlatformTypesCurationAPIEventsAggregatorOnUpdate;
-  scheduleUpdate: PlatformTypesCurationAPIEventsAggregatorScheduleUpdate;
-  subscribe: PlatformTypesCurationAPIEventsAggregatorSubscribe;
-  unsubscribe: PlatformTypesCurationAPIEventsAggregatorUnsubscribe;
-}
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistAdditions = Map<
-  unknown,
-  unknown
->;
 
 export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistban {
   _additions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistbanAdditions;
@@ -2526,44 +2390,14 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAr
   arg2: any,
 ) => unknown;
 
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistBatch = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistDeletions = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistOnAdd = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistOnBatch = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistOnRemove = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistOnUpdate = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthor {
-  _additions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorAdditions;
-  _batch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorBatch;
-  _deletions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorDeletions;
-  _onAdd: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorOnAdd;
-  _onBatch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorOnBatch;
-  _onRemove: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorOnRemove;
-  _onUpdate: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorOnUpdate;
+export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcerts {
+  _additions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsAdditions;
+  _batch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsBatch;
+  _deletions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsDeletions;
+  _onAdd: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsOnAdd;
+  _onBatch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsOnBatch;
+  _onRemove: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsOnRemove;
+  _onUpdate: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsOnUpdate;
   _timeout: number;
   _timeoutId: null;
   getBatch: PlatformTypesCurationAPIEventsAggregatorGetBatch;
@@ -2573,136 +2407,32 @@ export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2
   unsubscribe: PlatformTypesCurationAPIEventsAggregatorUnsubscribe;
 }
 
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorAdditions = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorBatch = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorDeletions = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorOnAdd = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorOnBatch = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorOnRemove = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAuthorOnUpdate = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBan {
-  _additions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanAdditions;
-  _batch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanBatch;
-  _deletions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanDeletions;
-  _onAdd: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanOnAdd;
-  _onBatch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanOnBatch;
-  _onRemove: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanOnRemove;
-  _onUpdate: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanOnUpdate;
-  _timeout: number;
-  _timeoutId: null;
-  getBatch: PlatformTypesCurationAPIEventsAggregatorGetBatch;
-  onUpdate: PlatformTypesCurationAPIEventsAggregatorOnUpdate;
-  scheduleUpdate: PlatformTypesCurationAPIEventsAggregatorScheduleUpdate;
-  subscribe: PlatformTypesCurationAPIEventsAggregatorSubscribe;
-  unsubscribe: PlatformTypesCurationAPIEventsAggregatorUnsubscribe;
-}
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanAdditions = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanBatch = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanDeletions = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanOnAdd = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanOnBatch = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanOnRemove = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetBanOnUpdate = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollection {
-  _additions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionAdditions;
-  _batch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionBatch;
-  _deletions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionDeletions;
-  _onAdd: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionOnAdd;
-  _onBatch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionOnBatch;
-  _onRemove: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionOnRemove;
-  _onUpdate: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionOnUpdate;
-  _timeout: number;
-  _timeoutId: null;
-  getBatch: PlatformTypesCurationAPIEventsAggregatorGetBatch;
-  onUpdate: PlatformTypesCurationAPIEventsAggregatorOnUpdate;
-  scheduleUpdate: PlatformTypesCurationAPIEventsAggregatorScheduleUpdate;
-  subscribe: PlatformTypesCurationAPIEventsAggregatorSubscribe;
-  unsubscribe: PlatformTypesCurationAPIEventsAggregatorUnsubscribe;
-}
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionAdditions =
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsAdditions =
   Map<unknown, unknown>;
 
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionBatch = Map<
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsBatch = Map<
   unknown,
   unknown
 >;
 
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionDeletions =
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsDeletions =
   Map<unknown, unknown>;
 
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionOnAdd = (
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsOnAdd = (
   arg0: any,
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionOnBatch = (
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsOnBatch = (
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionOnRemove = (
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsOnRemove = (
   arg0: any,
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCollectionOnUpdate = (
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsOnUpdate = (
   arg0: any,
   arg1: any,
   arg2: any,
@@ -2796,47 +2526,6 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetIg
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetIgnoreinrecsOnUpdate =
   (arg0: any, arg1: any, arg2: any) => unknown;
 
-export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlater {
-  _additions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterAdditions;
-  _batch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterBatch;
-  _deletions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterDeletions;
-  _onAdd: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterOnAdd;
-  _onBatch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterOnBatch;
-  _onRemove: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterOnRemove;
-  _onUpdate: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterOnUpdate;
-  _timeout: number;
-  _timeoutId: null;
-  getBatch: PlatformTypesCurationAPIEventsAggregatorGetBatch;
-  onUpdate: PlatformTypesCurationAPIEventsAggregatorOnUpdate;
-  scheduleUpdate: PlatformTypesCurationAPIEventsAggregatorScheduleUpdate;
-  subscribe: PlatformTypesCurationAPIEventsAggregatorSubscribe;
-  unsubscribe: PlatformTypesCurationAPIEventsAggregatorUnsubscribe;
-}
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterAdditions =
-  Map<unknown, unknown>;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterBatch =
-  Map<unknown, unknown>;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterDeletions =
-  Map<unknown, unknown>;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterOnAdd = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterOnBatch = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterOnRemove =
-  (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetListenlaterOnUpdate =
-  (arg0: any, arg1: any, arg2: any) => unknown;
-
 export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetMarkedasfinished {
   _additions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetMarkedasfinishedAdditions;
   _batch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetMarkedasfinishedBatch;
@@ -2915,6 +2604,44 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetNo
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetNotinterestedOnUpdate =
   (arg0: any, arg1: any, arg2: any) => unknown;
 
+export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbans {
+  _additions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansAdditions;
+  _batch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansBatch;
+  _deletions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansDeletions;
+  _onAdd: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansOnAdd;
+  _onBatch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansOnBatch;
+  _onRemove: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansOnRemove;
+  _onUpdate: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansOnUpdate;
+  _timeout: number;
+  _timeoutId: null;
+  getBatch: PlatformTypesCurationAPIEventsAggregatorGetBatch;
+  onUpdate: PlatformTypesCurationAPIEventsAggregatorOnUpdate;
+  scheduleUpdate: PlatformTypesCurationAPIEventsAggregatorScheduleUpdate;
+  subscribe: PlatformTypesCurationAPIEventsAggregatorSubscribe;
+  unsubscribe: PlatformTypesCurationAPIEventsAggregatorUnsubscribe;
+}
+
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansAdditions =
+  Map<unknown, unknown>;
+
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansBatch =
+  Map<unknown, unknown>;
+
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansDeletions =
+  Map<unknown, unknown>;
+
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansOnAdd =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansOnBatch =
+  (arg0: any) => unknown;
+
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansOnRemove =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansOnUpdate =
+  (arg0: any, arg1: any, arg2: any) => unknown;
+
 export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPrerelease {
   _additions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPrereleaseAdditions;
   _batch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPrereleaseBatch;
@@ -2958,58 +2685,6 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPr
 ) => unknown;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPrereleaseOnUpdate = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShow {
-  _additions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowAdditions;
-  _batch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowBatch;
-  _deletions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowDeletions;
-  _onAdd: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowOnAdd;
-  _onBatch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowOnBatch;
-  _onRemove: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowOnRemove;
-  _onUpdate: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowOnUpdate;
-  _timeout: number;
-  _timeoutId: null;
-  getBatch: PlatformTypesCurationAPIEventsAggregatorGetBatch;
-  onUpdate: PlatformTypesCurationAPIEventsAggregatorOnUpdate;
-  scheduleUpdate: PlatformTypesCurationAPIEventsAggregatorScheduleUpdate;
-  subscribe: PlatformTypesCurationAPIEventsAggregatorSubscribe;
-  unsubscribe: PlatformTypesCurationAPIEventsAggregatorUnsubscribe;
-}
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowAdditions = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowBatch = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowDeletions = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowOnAdd = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowOnBatch = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowOnRemove = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetShowOnUpdate = (
   arg0: any,
   arg1: any,
   arg2: any,
@@ -3062,58 +2737,6 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetTa
 ) => unknown;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetTagsOnUpdate = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export interface PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpin {
-  _additions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinAdditions;
-  _batch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinBatch;
-  _deletions: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinDeletions;
-  _onAdd: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinOnAdd;
-  _onBatch: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinOnBatch;
-  _onRemove: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinOnRemove;
-  _onUpdate: PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinOnUpdate;
-  _timeout: number;
-  _timeoutId: null;
-  getBatch: PlatformTypesCurationAPIEventsAggregatorGetBatch;
-  onUpdate: PlatformTypesCurationAPIEventsAggregatorOnUpdate;
-  scheduleUpdate: PlatformTypesCurationAPIEventsAggregatorScheduleUpdate;
-  subscribe: PlatformTypesCurationAPIEventsAggregatorSubscribe;
-  unsubscribe: PlatformTypesCurationAPIEventsAggregatorUnsubscribe;
-}
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinAdditions = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinBatch = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinDeletions = Map<
-  unknown,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinOnAdd = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinOnBatch = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinOnRemove = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetYlpinOnUpdate = (
   arg0: any,
   arg1: any,
   arg2: any,
@@ -3251,31 +2874,67 @@ export type PlatformTypesCollectionPlatformAPIRemove = (arg0: any, arg1: any) =>
 
 export interface PlatformTypesCollectionPlatformAPIService {
   add: PlatformTypesCollectionPlatformAPIServiceAdd;
+  addContextItems: PlatformTypesCollectionPlatformAPIServiceAddContextItems;
   contains: PlatformTypesCollectionPlatformAPIServiceContains;
+  containsContextItems: PlatformTypesCollectionPlatformAPIServiceContainsContextItems;
   get: PlatformTypesCollectionPlatformAPIServiceGet;
+  getContextItems: PlatformTypesCollectionPlatformAPIServiceGetContextItems;
   options: PlatformTypesCollectionPlatformAPIServiceOptions;
   remove: PlatformTypesCollectionPlatformAPIServiceRemove;
+  removeContextItems: PlatformTypesCollectionPlatformAPIServiceRemoveContextItems;
   streamContains: PlatformTypesCollectionPlatformAPIServiceStreamContains;
+  streamContainsContextItems: PlatformTypesCollectionPlatformAPIServiceStreamContainsContextItems;
   streamGet: PlatformTypesCollectionPlatformAPIServiceStreamGet;
+  streamGetContextItems: PlatformTypesCollectionPlatformAPIServiceStreamGetContextItems;
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
 
 export type PlatformTypesCollectionPlatformAPIServiceAdd = (arg0: any, arg1: any) => unknown;
 
+export type PlatformTypesCollectionPlatformAPIServiceAddContextItems = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
 export type PlatformTypesCollectionPlatformAPIServiceContains = (arg0: any, arg1: any) => unknown;
 
+export type PlatformTypesCollectionPlatformAPIServiceContainsContextItems = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
 export type PlatformTypesCollectionPlatformAPIServiceGet = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesCollectionPlatformAPIServiceGetContextItems = (
+  arg0: any,
+  arg1: any,
+) => unknown;
 
 export type PlatformTypesCollectionPlatformAPIServiceOptions = Record<string, unknown>;
 
 export type PlatformTypesCollectionPlatformAPIServiceRemove = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesCollectionPlatformAPIServiceRemoveContextItems = (
+  arg0: any,
+  arg1: any,
+) => unknown;
 
 export type PlatformTypesCollectionPlatformAPIServiceStreamContains = (
   arg0: any,
   arg1: any,
 ) => unknown;
 
+export type PlatformTypesCollectionPlatformAPIServiceStreamContainsContextItems = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
 export type PlatformTypesCollectionPlatformAPIServiceStreamGet = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesCollectionPlatformAPIServiceStreamGetContextItems = (
+  arg0: any,
+  arg1: any,
+) => unknown;
 
 export type PlatformTypesCollectionPlatformAPISubscribe = (arg0: any, arg1: any) => unknown;
 
@@ -3309,6 +2968,7 @@ export type PlatformTypesConnectAPICheckDeviceId = (arg0: any) => unknown;
 export interface PlatformTypesConnectAPIConnectServiceClient {
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
+  clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
   forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
   getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
@@ -3338,6 +2998,11 @@ export type PlatformTypesConnectAPIConnectServiceClientBecomeInactive = (
 ) => unknown;
 
 export type PlatformTypesConnectAPIConnectServiceClientCancelTransfer = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection = (
   arg0: any,
   arg1: any,
 ) => unknown;
@@ -3540,6 +3205,7 @@ export interface PlatformTypesConnectAPIStateActiveDevice {
   supportedMediaTypes: PlatformTypesConnectAPIStateActiveDeviceSupportedMediaTypes;
   supportsDJNarration: boolean;
   supportsLogout: boolean;
+  supportsPlaylistMixing: boolean;
   supportsRemoteSleepTimer: boolean;
   type: string;
   volume: number;
@@ -3581,6 +3247,7 @@ export type PlatformTypesConnectDeviceManagementAPICheckDeviceId = (arg0: any) =
 export interface PlatformTypesConnectDeviceManagementAPIConnectServiceClient {
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
+  clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
   forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
   getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
@@ -3654,6 +3321,7 @@ export interface PlatformTypesConnectDevicesAPIEvents {
 export interface PlatformTypesConnectDevicesAPIEventsConnectServiceClient {
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
+  clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
   forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
   getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
@@ -3915,6 +3583,7 @@ export interface PlatformTypesConnectDevicesAPIStateActiveDevice {
   supportedMediaTypes: PlatformTypesConnectDevicesAPIStateActiveDeviceSupportedMediaTypes;
   supportsDJNarration: boolean;
   supportsLogout: boolean;
+  supportsPlaylistMixing: boolean;
   supportsRemoteSleepTimer: boolean;
   type: string;
   volume: number;
@@ -3946,6 +3615,7 @@ export interface PlatformTypesConnectDiscoveryAPI {
 export interface PlatformTypesConnectDiscoveryAPIConnectServiceClient {
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
+  clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
   forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
   getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
@@ -3994,6 +3664,7 @@ export interface PlatformTypesConnectTransferAPI {
 export interface PlatformTypesConnectTransferAPIConnectServiceClient {
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
+  clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
   forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
   getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
@@ -4307,12 +3978,18 @@ export type PlatformTypesControlMessageAPINotifyViewLoaded = (arg0: any) => unkn
 
 export interface PlatformTypesControlMessageAPIPartnerApiClient {
   enablePartnerApiEndpoint: PlatformTypesControlMessageAPIPartnerApiClientEnablePartnerApiEndpoint;
+  notifyUIReady: PlatformTypesControlMessageAPIPartnerApiClientNotifyUIReady;
   options: PlatformTypesControlMessageAPIPartnerApiClientOptions;
   setPartnerApiTcpPorts: PlatformTypesControlMessageAPIPartnerApiClientSetPartnerApiTcpPorts;
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
 
 export type PlatformTypesControlMessageAPIPartnerApiClientEnablePartnerApiEndpoint = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesControlMessageAPIPartnerApiClientNotifyUIReady = (
   arg0: any,
   arg1: any,
 ) => unknown;
@@ -4434,7 +4111,7 @@ export interface PlatformTypesCurationAPIEvents {
   onCuratedBatchChanged: PlatformTypesCurationAPIEventsOnCuratedBatchChanged;
   onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
   removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
-  streamIsCuratedCancellable: PlatformTypesCurationAPIEventsStreamIsCuratedCancellable;
+  streamIsCuratedCancellable: null;
 }
 
 export interface PlatformTypesCurationAPIEventsAggregator {
@@ -4456,7 +4133,7 @@ export interface PlatformTypesCurationAPIEventsAggregator {
 
 export type PlatformTypesCurationAPIEventsAggregatorAdditions = Map<unknown, unknown>;
 
-export type PlatformTypesCurationAPIEventsAggregatorBatch = Map<string, number>;
+export type PlatformTypesCurationAPIEventsAggregatorBatch = Map<unknown, unknown>;
 
 export type PlatformTypesCurationAPIEventsAggregatorDeletions = Map<unknown, unknown>;
 
@@ -4522,25 +4199,7 @@ export interface PlatformTypesCurationAPIEventsEmitter {
   removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
 }
 
-export interface PlatformTypesCurationAPIEventsEmitterListeners {
-  update_curated_item: PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItem;
-}
-
-export type PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItem =
-  Array<PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItem>;
-
-export interface PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItem {
-  listener: PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemListener;
-  options: PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemOptions;
-}
-
-export type PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemListener = (
-  arg0: any,
-) => unknown;
-
-export interface PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemOptions {
-  uri: string;
-}
+export type PlatformTypesCurationAPIEventsEmitterListeners = Record<string, unknown>;
 
 export interface PlatformTypesCurationAPIEventsEmitterMetaListeners {
   add: PlatformTypesCurationAPIEventsEmitterMetaListenersAdd;
@@ -4591,12 +4250,6 @@ export type PlatformTypesCurationAPIEventsEmitUpdateCuratedItems = (
 
 export type PlatformTypesCurationAPIEventsOnCuratedBatchChanged = (arg0: any) => unknown;
 
-export interface PlatformTypesCurationAPIEventsStreamIsCuratedCancellable {
-  cancel: PlatformTypesCurationAPIEventsStreamIsCuratedCancellableCancel;
-}
-
-export type PlatformTypesCurationAPIEventsStreamIsCuratedCancellableCancel = () => unknown;
-
 export type PlatformTypesCurationAPIGetAvailableSortOrders = () => unknown;
 
 export type PlatformTypesCurationAPIGetCapabilities = () => unknown;
@@ -4621,6 +4274,7 @@ export interface PlatformTypesCurationAPIYourLibrary {
   options: PlatformTypesCurationAPIYourLibraryOptions;
   pin: PlatformTypesOfflineAPIYourLibraryPin;
   streamAll: PlatformTypesOfflineAPIYourLibraryStreamAll;
+  streamBans: PlatformTypesOfflineAPIYourLibraryStreamBans;
   streamContains: PlatformTypesOfflineAPIYourLibraryStreamContains;
   streamDecorate: PlatformTypesOfflineAPIYourLibraryStreamDecorate;
   streamIsCurated: PlatformTypesOfflineAPIYourLibraryStreamIsCurated;
@@ -4658,14 +4312,14 @@ export type PlatformTypesDesktopLogsAPIServiceOptions = Record<string, unknown>;
 
 export interface PlatformTypesEqualizerAPI {
   filters: PlatformTypesEqualizerAPIFilters;
+  getActivePreset: PlatformTypesEqualizerAPIGetActivePreset;
   getFilters: PlatformTypesEqualizerAPIGetFilters;
-  getPreset: PlatformTypesEqualizerAPIGetPreset;
   isSupported: PlatformTypesEqualizerAPIIsSupported;
   localStorageAPI: PlatformTypesLocalStorageAPI;
   prefs: PlatformTypesEqualizerAPIPrefs;
+  setActivePreset: PlatformTypesEqualizerAPISetActivePreset;
   setEnabledState: PlatformTypesEqualizerAPISetEnabledState;
   setFilterGain: PlatformTypesEqualizerAPISetFilterGain;
-  setPreset: PlatformTypesEqualizerAPISetPreset;
   subscribeToEnabledState: PlatformTypesEqualizerAPISubscribeToEnabledState;
   subscribeToPresetChange: PlatformTypesEqualizerAPISubscribeToPresetChange;
 }
@@ -4721,9 +4375,9 @@ export interface PlatformTypesEqualizerAPIFiltersItem6 {
   type: string;
 }
 
-export type PlatformTypesEqualizerAPIGetFilters = () => unknown;
+export type PlatformTypesEqualizerAPIGetActivePreset = () => unknown;
 
-export type PlatformTypesEqualizerAPIGetPreset = () => unknown;
+export type PlatformTypesEqualizerAPIGetFilters = () => unknown;
 
 export type PlatformTypesEqualizerAPIIsSupported = () => unknown;
 
@@ -4938,6 +4592,7 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItems {
   "USERNAME:left-sidebar-state": number;
   "USERNAME:library-row-mode": null;
   "USERNAME:lintHtmlWithCss": boolean;
+  "USERNAME:mixing-not-available-for-device-notifications": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEmixingnotavailablefordevicenotifications;
   "USERNAME:onboarding-checklist": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEonboardingchecklist;
   "USERNAME:onboarding-checklist-completed-at": null;
   "USERNAME:opened-folder-uri": string;
@@ -4945,7 +4600,6 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItems {
   "USERNAME:playbackSpeed": number;
   "USERNAME:queue-view": string;
   "USERNAME:remote-config-overrides": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconfigoverrides;
-  "USERNAME:smart-shuffle-menu": number;
   "USERNAME:toggleNowPlayingView": boolean;
   "USERNAME:ui.right_sidebar_content": string;
   "USERNAME:ylx-active-filter-ids": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivefilterids;
@@ -4959,6 +4613,9 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItems {
 export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEfusionSearchHistory =
   Array<unknown>;
 
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEmixingnotavailablefordevicenotifications =
+  Record<string, unknown>;
+
 export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEonboardingchecklist {
   completed: PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEonboardingchecklistCompleted;
 }
@@ -4971,13 +4628,13 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconf
   betamaxUsePendingStorage: boolean;
   canYourDJUserBeConvertedToPremium: boolean;
   embeddedAdsPrioritizeCanvas: boolean;
-  enableAboutRecsDisclosure: boolean;
   enableAdaptiveTitleEntities: boolean;
   enableAlbumSortByReleaseDate: boolean;
   enableAudiobookAdExclusivity: boolean;
   enableAudiobookCardPlayButton: boolean;
   enableAuthorPage: boolean;
   enableAutoSeekToVideoBufferedStartPosition: boolean;
+  enableBackendSearchHistory: boolean;
   enableBetamaxSdkSubtitlesDesktopX: boolean;
   enableBetamaxSdkVideoOnVideoSai: boolean;
   enableBetamaxSdkVmp: boolean;
@@ -4993,30 +4650,24 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconf
   enableEmbeddedNpvAds: boolean;
   enableEqualizer: boolean;
   enableEsperantoMigrationLeaderboard: boolean;
-  enableEventsInYourLibrary: boolean;
   enableFeedBaselineAudioPreviews: boolean;
   enableFeedBaselineTranscripts: boolean;
   enableFeedBaselineVideoPreviews: boolean;
   enableFullscreenLibrary: boolean;
   enableFullscreenMode: boolean;
-  enableHybridHomeLowDensity: boolean;
-  enableHybridHomeRecentlyPlayedDensity: boolean;
   enableImprovedCinemaModeCanvas: boolean;
   enableImprovedCinemaModeScrollCards: boolean;
   enableInAppMessaging: boolean;
   enableJamNearbyJoining: boolean;
-  enableLauncherAutoStartToggle: boolean;
   enableLikedSongsFilterTags: boolean;
   enableLyricsScrollToCurrentLineButton: boolean;
   enableLyricsUpsell: boolean;
   enableMandalorianEasterEgg: string;
   enableNavigateToGalleryFromConceptPill: boolean;
   enableNearbyJams: boolean;
-  enableNewOrchestratorMiddleware: boolean;
   enableNewShuffleModeOrder: boolean;
   enableNpvAboutPodcast: boolean;
   enableNpvCreditsImpressions: boolean;
-  enableOutroPreviewReporting: string;
   enablePiPMiniPlayer: boolean;
   enablePiPMiniPlayerVideo: boolean;
   enablePlaybackBarAnimation: boolean;
@@ -5028,10 +4679,8 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconf
   enableShowLeavebehindConsolidation: boolean;
   enableSleepTimer: boolean;
   enableSmartShuffle: boolean;
-  enableSponsoredPlaylistV2: boolean;
   enableStaticImage2Optimizer: boolean;
   enableStructuredDescriptionHtml: boolean;
-  enableTrackCreditsModalV2: boolean;
   enableUserCommentsForEpisodes: boolean;
   enableVenuePages: boolean;
   enableViewMode: boolean;
@@ -5043,12 +4692,10 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconf
   hideUpgradeCTA: boolean;
 }
 
-export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivefilterids {
-  "": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivefilterids2;
-}
-
-export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivefilterids2 =
-  Array<unknown>;
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivefilterids = Record<
+  string,
+  unknown
+>;
 
 export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivesortorderbyfilterid =
   Record<string, unknown>;
@@ -5101,11 +4748,11 @@ export type PlatformTypesEqualizerAPIPrefsSub = (arg0: any, arg1: any) => unknow
 
 export type PlatformTypesEqualizerAPIPrefsSubAll = (arg0: any, arg1: any) => unknown;
 
+export type PlatformTypesEqualizerAPISetActivePreset = (arg0: any) => unknown;
+
 export type PlatformTypesEqualizerAPISetEnabledState = (arg0: any) => unknown;
 
 export type PlatformTypesEqualizerAPISetFilterGain = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesEqualizerAPISetPreset = (arg0: any) => unknown;
 
 export type PlatformTypesEqualizerAPISubscribeToEnabledState = (arg0: any) => unknown;
 
@@ -5232,40 +4879,29 @@ export interface PlatformTypesFeedbackAPIClient {
   banInPlayContext: PlatformTypesFeedbackAPIClientBanInPlayContext;
   contains: PlatformTypesFeedbackAPIClientContains;
   decorate: PlatformTypesFeedbackAPIClientDecorate;
-  getAlbumTrackList: PlatformTypesFeedbackAPIClientGetAlbumTrackList;
-  getAlbumView: PlatformTypesFeedbackAPIClientGetAlbumView;
   getArtistTrackList: PlatformTypesFeedbackAPIClientGetArtistTrackList;
   getArtistView: PlatformTypesFeedbackAPIClientGetArtistView;
   getBans: PlatformTypesFeedbackAPIClientGetBans;
   getBucketSyncStatus: PlatformTypesFeedbackAPIClientGetBucketSyncStatus;
-  getEpisodeList: PlatformTypesFeedbackAPIClientGetEpisodeList;
   getResumePoints: PlatformTypesFeedbackAPIClientGetResumePoints;
   getTrackList: PlatformTypesFeedbackAPIClientGetTrackList;
-  getTrackListMetadata: PlatformTypesFeedbackAPIClientGetTrackListMetadata;
   getUnplayedEpisodes: PlatformTypesFeedbackAPIClientGetUnplayedEpisodes;
   isSnoozed: PlatformTypesFeedbackAPIClientIsSnoozed;
-  offlineAlbum: PlatformTypesFeedbackAPIClientOfflineAlbum;
   offlineArtist: PlatformTypesFeedbackAPIClientOfflineArtist;
   offlineTracks: PlatformTypesFeedbackAPIClientOfflineTracks;
   options: PlatformTypesFeedbackAPIClientOptions;
-  playAlbum: PlatformTypesFeedbackAPIClientPlayAlbum;
   playArtist: PlatformTypesFeedbackAPIClientPlayArtist;
   playTracks: PlatformTypesFeedbackAPIClientPlayTracks;
   remove: PlatformTypesFeedbackAPIClientRemove;
-  removeOfflineAlbum: PlatformTypesFeedbackAPIClientRemoveOfflineAlbum;
   removeOfflineArtist: PlatformTypesFeedbackAPIClientRemoveOfflineArtist;
   removeOfflineTracks: PlatformTypesFeedbackAPIClientRemoveOfflineTracks;
   removeUnplayed: PlatformTypesFeedbackAPIClientRemoveUnplayed;
   snooze: PlatformTypesFeedbackAPIClientSnooze;
-  streamAlbumTrackList: PlatformTypesFeedbackAPIClientStreamAlbumTrackList;
-  streamAlbumView: PlatformTypesFeedbackAPIClientStreamAlbumView;
   streamArtistTrackList: PlatformTypesFeedbackAPIClientStreamArtistTrackList;
   streamArtistView: PlatformTypesFeedbackAPIClientStreamArtistView;
   streamBans: PlatformTypesFeedbackAPIClientStreamBans;
-  streamChanges: PlatformTypesFeedbackAPIClientStreamChanges;
   streamContains: PlatformTypesFeedbackAPIClientStreamContains;
   streamDecorate: PlatformTypesFeedbackAPIClientStreamDecorate;
-  streamEpisodeList: PlatformTypesFeedbackAPIClientStreamEpisodeList;
   streamTagsInfo: PlatformTypesFeedbackAPIClientStreamTagsInfo;
   streamTrackList: PlatformTypesFeedbackAPIClientStreamTrackList;
   streamTrackListMetadata: PlatformTypesFeedbackAPIClientStreamTrackListMetadata;
@@ -5292,10 +4928,6 @@ export type PlatformTypesFeedbackAPIClientContains = (arg0: any, arg1: any) => u
 
 export type PlatformTypesFeedbackAPIClientDecorate = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesFeedbackAPIClientGetAlbumTrackList = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesFeedbackAPIClientGetAlbumView = (arg0: any, arg1: any) => unknown;
-
 export type PlatformTypesFeedbackAPIClientGetArtistTrackList = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientGetArtistView = (arg0: any, arg1: any) => unknown;
@@ -5304,19 +4936,13 @@ export type PlatformTypesFeedbackAPIClientGetBans = (arg0: any, arg1: any) => un
 
 export type PlatformTypesFeedbackAPIClientGetBucketSyncStatus = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesFeedbackAPIClientGetEpisodeList = (arg0: any, arg1: any) => unknown;
-
 export type PlatformTypesFeedbackAPIClientGetResumePoints = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientGetTrackList = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesFeedbackAPIClientGetTrackListMetadata = (arg0: any, arg1: any) => unknown;
-
 export type PlatformTypesFeedbackAPIClientGetUnplayedEpisodes = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientIsSnoozed = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesFeedbackAPIClientOfflineAlbum = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientOfflineArtist = (arg0: any, arg1: any) => unknown;
 
@@ -5324,15 +4950,11 @@ export type PlatformTypesFeedbackAPIClientOfflineTracks = (arg0: any, arg1: any)
 
 export type PlatformTypesFeedbackAPIClientOptions = Record<string, unknown>;
 
-export type PlatformTypesFeedbackAPIClientPlayAlbum = (arg0: any, arg1: any) => unknown;
-
 export type PlatformTypesFeedbackAPIClientPlayArtist = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientPlayTracks = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientRemove = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesFeedbackAPIClientRemoveOfflineAlbum = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientRemoveOfflineArtist = (arg0: any, arg1: any) => unknown;
 
@@ -5342,23 +4964,15 @@ export type PlatformTypesFeedbackAPIClientRemoveUnplayed = (arg0: any, arg1: any
 
 export type PlatformTypesFeedbackAPIClientSnooze = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesFeedbackAPIClientStreamAlbumTrackList = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesFeedbackAPIClientStreamAlbumView = (arg0: any, arg1: any) => unknown;
-
 export type PlatformTypesFeedbackAPIClientStreamArtistTrackList = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientStreamArtistView = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientStreamBans = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesFeedbackAPIClientStreamChanges = (arg0: any, arg1: any) => unknown;
-
 export type PlatformTypesFeedbackAPIClientStreamContains = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientStreamDecorate = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesFeedbackAPIClientStreamEpisodeList = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientStreamTagsInfo = (arg0: any, arg1: any) => unknown;
 
@@ -5665,7 +5279,7 @@ export interface PlatformTypesHistoryLocation {
 }
 
 export interface PlatformTypesHistoryLocationState {
-  navigationalRoot: string;
+  navigationalRoot: undefined;
 }
 
 export type PlatformTypesHistoryPush = (arg0: any, arg1: any) => unknown;
@@ -5731,7 +5345,9 @@ export interface PlatformTypesInitialProductState {
   "license-agreements": string;
   "list-private-by-default": string;
   "metadata-link-lookup-modes": string;
+  "mixing-tools": string;
   "mobile-payment": string;
+  "music-videos": string;
   "network-operator-premium-activation": string;
   "nft-disabled": string;
   "obfuscate-restricted-tracks": string;
@@ -5867,8 +5483,8 @@ export interface PlatformTypesLibraryAPI {
   _isAlbumSortByReleaseDateEnabled: boolean;
   _isAuthorsEnabled: boolean;
   _isCoursesEnabled: boolean;
-  _isEventsInYourLibraryEnabled: boolean;
   _isTagsInfoSynced: PlatformTypesLibraryAPIIsTagsInfoSynced;
+  _isVenuesInYourLibraryEnabled: boolean;
   _playlistDataClient: PlatformTypesLibraryAPIPlaylistDataClient;
   _playlistServiceClient: PlatformTypesLibraryAPIPlaylistServiceClient;
   _your_library: PlatformTypesLibraryAPIYourLibrary;
@@ -5881,6 +5497,7 @@ export interface PlatformTypesLibraryAPI {
   getCustomSortOrderId: PlatformTypesLibraryAPIGetCustomSortOrderId;
   getEvents: PlatformTypesLibraryAPIGetEvents;
   getFilterLabel: PlatformTypesLibraryAPIGetFilterLabel;
+  getIsPinned: PlatformTypesLibraryAPIGetIsPinned;
   getRecentsSortOrderId: PlatformTypesLibraryAPIGetRecentsSortOrderId;
   getSortOrderLabel: PlatformTypesLibraryAPIGetSortOrderLabel;
   getStaticallyKnownFilters: PlatformTypesLibraryAPIGetStaticallyKnownFilters;
@@ -5895,7 +5512,7 @@ export interface PlatformTypesLibraryAPI {
 
 export type PlatformTypesLibraryAPIAdd = (arg0: any) => unknown;
 
-export type PlatformTypesLibraryAPICache = Map<string, boolean>;
+export type PlatformTypesLibraryAPICache = Map<unknown, unknown>;
 
 export interface PlatformTypesLibraryAPICollection {
   add: PlatformTypesFeedbackAPIClientAdd;
@@ -5905,40 +5522,29 @@ export interface PlatformTypesLibraryAPICollection {
   banInPlayContext: PlatformTypesFeedbackAPIClientBanInPlayContext;
   contains: PlatformTypesFeedbackAPIClientContains;
   decorate: PlatformTypesFeedbackAPIClientDecorate;
-  getAlbumTrackList: PlatformTypesFeedbackAPIClientGetAlbumTrackList;
-  getAlbumView: PlatformTypesFeedbackAPIClientGetAlbumView;
   getArtistTrackList: PlatformTypesFeedbackAPIClientGetArtistTrackList;
   getArtistView: PlatformTypesFeedbackAPIClientGetArtistView;
   getBans: PlatformTypesFeedbackAPIClientGetBans;
   getBucketSyncStatus: PlatformTypesFeedbackAPIClientGetBucketSyncStatus;
-  getEpisodeList: PlatformTypesFeedbackAPIClientGetEpisodeList;
   getResumePoints: PlatformTypesFeedbackAPIClientGetResumePoints;
   getTrackList: PlatformTypesFeedbackAPIClientGetTrackList;
-  getTrackListMetadata: PlatformTypesFeedbackAPIClientGetTrackListMetadata;
   getUnplayedEpisodes: PlatformTypesFeedbackAPIClientGetUnplayedEpisodes;
   isSnoozed: PlatformTypesFeedbackAPIClientIsSnoozed;
-  offlineAlbum: PlatformTypesFeedbackAPIClientOfflineAlbum;
   offlineArtist: PlatformTypesFeedbackAPIClientOfflineArtist;
   offlineTracks: PlatformTypesFeedbackAPIClientOfflineTracks;
   options: PlatformTypesLibraryAPICollectionOptions;
-  playAlbum: PlatformTypesFeedbackAPIClientPlayAlbum;
   playArtist: PlatformTypesFeedbackAPIClientPlayArtist;
   playTracks: PlatformTypesFeedbackAPIClientPlayTracks;
   remove: PlatformTypesFeedbackAPIClientRemove;
-  removeOfflineAlbum: PlatformTypesFeedbackAPIClientRemoveOfflineAlbum;
   removeOfflineArtist: PlatformTypesFeedbackAPIClientRemoveOfflineArtist;
   removeOfflineTracks: PlatformTypesFeedbackAPIClientRemoveOfflineTracks;
   removeUnplayed: PlatformTypesFeedbackAPIClientRemoveUnplayed;
   snooze: PlatformTypesFeedbackAPIClientSnooze;
-  streamAlbumTrackList: PlatformTypesFeedbackAPIClientStreamAlbumTrackList;
-  streamAlbumView: PlatformTypesFeedbackAPIClientStreamAlbumView;
   streamArtistTrackList: PlatformTypesFeedbackAPIClientStreamArtistTrackList;
   streamArtistView: PlatformTypesFeedbackAPIClientStreamArtistView;
   streamBans: PlatformTypesFeedbackAPIClientStreamBans;
-  streamChanges: PlatformTypesFeedbackAPIClientStreamChanges;
   streamContains: PlatformTypesFeedbackAPIClientStreamContains;
   streamDecorate: PlatformTypesFeedbackAPIClientStreamDecorate;
-  streamEpisodeList: PlatformTypesFeedbackAPIClientStreamEpisodeList;
   streamTagsInfo: PlatformTypesFeedbackAPIClientStreamTagsInfo;
   streamTrackList: PlatformTypesFeedbackAPIClientStreamTrackList;
   streamTrackListMetadata: PlatformTypesFeedbackAPIClientStreamTrackListMetadata;
@@ -5962,10 +5568,10 @@ export interface PlatformTypesLibraryAPIEvents {
   _cache: PlatformTypesLibraryAPICache;
   _cancellables: PlatformTypesLibraryAPIEventsCancellables;
   _collection: PlatformTypesLibraryAPICollection;
-  _containsCancellable: PlatformTypesLibraryAPIEventsContainsCancellable;
+  _containsCancellable: null;
   _emitter: PlatformTypesLibraryAPIEventsEmitter;
   _isAuthorsEnabled: boolean;
-  _isEventsInYourLibraryEnabled: boolean;
+  _isVenuesInYourLibraryEnabled: boolean;
   _numListeners: number;
   _playlist: PlatformTypesLibraryAPIPlaylistDataClient;
   _your_library: PlatformTypesLibraryAPIYourLibrary;
@@ -6005,7 +5611,7 @@ export interface PlatformTypesLibraryAPIEventsAggregator {
 
 export type PlatformTypesLibraryAPIEventsAggregatorAdditions = Map<unknown, unknown>;
 
-export type PlatformTypesLibraryAPIEventsAggregatorBatch = Map<string, number>;
+export type PlatformTypesLibraryAPIEventsAggregatorBatch = Map<unknown, unknown>;
 
 export type PlatformTypesLibraryAPIEventsAggregatorDeletions = Map<unknown, unknown>;
 
@@ -6080,12 +5686,6 @@ export interface PlatformTypesLibraryAPIEventsCancellablesTracks {
 
 export type PlatformTypesLibraryAPIEventsCancellablesTracksCancel = () => unknown;
 
-export interface PlatformTypesLibraryAPIEventsContainsCancellable {
-  cancel: PlatformTypesLibraryAPIEventsContainsCancellableCancel;
-}
-
-export type PlatformTypesLibraryAPIEventsContainsCancellableCancel = () => unknown;
-
 export type PlatformTypesLibraryAPIEventsEmitOperationComplete = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesLibraryAPIEventsEmitOperationSync = (
@@ -6123,7 +5723,6 @@ export interface PlatformTypesLibraryAPIEventsEmitter {
 export interface PlatformTypesLibraryAPIEventsEmitterListeners {
   operation: PlatformTypesLibraryAPIEventsEmitterListenersOperation;
   update: PlatformTypesLibraryAPIEventsEmitterListenersUpdate;
-  update_item: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem;
   update_pin: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePin;
   update_pin_error: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinError;
 }
@@ -6146,42 +5745,11 @@ export type PlatformTypesLibraryAPIEventsEmitterListenersOperationItemOptions = 
 >;
 
 export type PlatformTypesLibraryAPIEventsEmitterListenersUpdate =
-  Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem2>;
+  Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem>;
 
-export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem = Array<
-  | PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItem
-  | PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItem2
->;
-
-export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem2 {
+export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem {
   listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemListener;
   options: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemOptions;
-}
-
-export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItem {
-  listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemListener;
-  options: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemOptions;
-}
-
-export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItem2 {
-  listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemListener2;
-  options: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemOptions2;
-}
-
-export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemListener = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemListener2 = (
-  arg0: any,
-) => unknown;
-
-export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemOptions {
-  uri: string;
-}
-
-export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemOptions2 {
-  uri: string;
 }
 
 export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemListener = (
@@ -6334,6 +5902,8 @@ export type PlatformTypesLibraryAPIGetEvents = () => unknown;
 
 export type PlatformTypesLibraryAPIGetFilterLabel = (arg0: any) => unknown;
 
+export type PlatformTypesLibraryAPIGetIsPinned = () => unknown;
+
 export type PlatformTypesLibraryAPIGetRecentsSortOrderId = () => unknown;
 
 export type PlatformTypesLibraryAPIGetSortOrderLabel = (arg0: any) => unknown;
@@ -6479,6 +6049,7 @@ export interface PlatformTypesLibraryAPIYourLibrary {
   options: PlatformTypesLibraryAPIYourLibraryOptions;
   pin: PlatformTypesOfflineAPIYourLibraryPin;
   streamAll: PlatformTypesOfflineAPIYourLibraryStreamAll;
+  streamBans: PlatformTypesOfflineAPIYourLibraryStreamBans;
   streamContains: PlatformTypesOfflineAPIYourLibraryStreamContains;
   streamDecorate: PlatformTypesOfflineAPIYourLibraryStreamDecorate;
   streamIsCurated: PlatformTypesOfflineAPIYourLibraryStreamIsCurated;
@@ -6784,6 +6355,7 @@ export interface PlatformTypesOfflineAPIEventsEmitter {
 export interface PlatformTypesOfflineAPIEventsEmitterListeners {
   error: PlatformTypesOfflineAPIEventsEmitterListenersError;
   update_capabilities: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilities;
+  update_total_progress: PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgress;
 }
 
 export type PlatformTypesOfflineAPIEventsEmitterListenersError =
@@ -6811,6 +6383,23 @@ export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemL
 ) => unknown;
 
 export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgress =
+  Array<PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItem>;
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItem {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItemListener;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItemOptions;
+}
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItemOptions = Record<
   string,
   unknown
 >;
@@ -7036,10 +6625,10 @@ export type PlatformTypesOfflineAPIGetStatistics = () => unknown;
 
 export interface PlatformTypesOfflineAPIOffline {
   addDownload: PlatformTypesOfflineAPIOfflineAddDownload;
-  getContextForDevices: PlatformTypesOfflineAPIOfflineGetContextForDevices;
   getContexts: PlatformTypesOfflineAPIOfflineGetContexts;
   getContextsProgress: PlatformTypesOfflineAPIOfflineGetContextsProgress;
   getDevices: PlatformTypesOfflineAPIOfflineGetDevices;
+  getEstimatedStorageIncrease: PlatformTypesOfflineAPIOfflineGetEstimatedStorageIncrease;
   getItems: PlatformTypesOfflineAPIOfflineGetItems;
   getLocalDevice: PlatformTypesOfflineAPIOfflineGetLocalDevice;
   getOfflineLicenseInfo: PlatformTypesOfflineAPIOfflineGetOfflineLicenseInfo;
@@ -7049,7 +6638,6 @@ export interface PlatformTypesOfflineAPIOffline {
   removeAllDownloads: PlatformTypesOfflineAPIOfflineRemoveAllDownloads;
   removeDownload: PlatformTypesOfflineAPIOfflineRemoveDownload;
   setOfflinePlaybackAllowed: PlatformTypesOfflineAPIOfflineSetOfflinePlaybackAllowed;
-  subscribeContextForDevices: PlatformTypesOfflineAPIOfflineSubscribeContextForDevices;
   subscribeContexts: PlatformTypesOfflineAPIOfflineSubscribeContexts;
   subscribeContextsProgress: PlatformTypesOfflineAPIOfflineSubscribeContextsProgress;
   subscribeDevicesWithContext: PlatformTypesOfflineAPIOfflineSubscribeDevicesWithContext;
@@ -7062,13 +6650,16 @@ export interface PlatformTypesOfflineAPIOffline {
 
 export type PlatformTypesOfflineAPIOfflineAddDownload = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesOfflineAPIOfflineGetContextForDevices = (arg0: any, arg1: any) => unknown;
-
 export type PlatformTypesOfflineAPIOfflineGetContexts = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesOfflineAPIOfflineGetContextsProgress = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesOfflineAPIOfflineGetDevices = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesOfflineAPIOfflineGetEstimatedStorageIncrease = (
+  arg0: any,
+  arg1: any,
+) => unknown;
 
 export type PlatformTypesOfflineAPIOfflineGetItems = (arg0: any, arg1: any) => unknown;
 
@@ -7090,11 +6681,6 @@ export type PlatformTypesOfflineAPIOfflineRemoveAllDownloads = (arg0: any, arg1:
 export type PlatformTypesOfflineAPIOfflineRemoveDownload = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesOfflineAPIOfflineSetOfflinePlaybackAllowed = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesOfflineAPIOfflineSubscribeContextForDevices = (
   arg0: any,
   arg1: any,
 ) => unknown;
@@ -7197,6 +6783,7 @@ export interface PlatformTypesOfflineAPIYourLibrary {
   options: PlatformTypesOfflineAPIYourLibraryOptions;
   pin: PlatformTypesOfflineAPIYourLibraryPin;
   streamAll: PlatformTypesOfflineAPIYourLibraryStreamAll;
+  streamBans: PlatformTypesOfflineAPIYourLibraryStreamBans;
   streamContains: PlatformTypesOfflineAPIYourLibraryStreamContains;
   streamDecorate: PlatformTypesOfflineAPIYourLibraryStreamDecorate;
   streamIsCurated: PlatformTypesOfflineAPIYourLibraryStreamIsCurated;
@@ -7221,6 +6808,8 @@ export type PlatformTypesOfflineAPIYourLibraryOptions = Record<string, unknown>;
 export type PlatformTypesOfflineAPIYourLibraryPin = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesOfflineAPIYourLibraryStreamAll = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesOfflineAPIYourLibraryStreamBans = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesOfflineAPIYourLibraryStreamContains = (arg0: any, arg1: any) => unknown;
 
@@ -7364,40 +6953,29 @@ export interface PlatformTypesPlayerAPICollection {
   banInPlayContext: PlatformTypesFeedbackAPIClientBanInPlayContext;
   contains: PlatformTypesFeedbackAPIClientContains;
   decorate: PlatformTypesFeedbackAPIClientDecorate;
-  getAlbumTrackList: PlatformTypesFeedbackAPIClientGetAlbumTrackList;
-  getAlbumView: PlatformTypesFeedbackAPIClientGetAlbumView;
   getArtistTrackList: PlatformTypesFeedbackAPIClientGetArtistTrackList;
   getArtistView: PlatformTypesFeedbackAPIClientGetArtistView;
   getBans: PlatformTypesFeedbackAPIClientGetBans;
   getBucketSyncStatus: PlatformTypesFeedbackAPIClientGetBucketSyncStatus;
-  getEpisodeList: PlatformTypesFeedbackAPIClientGetEpisodeList;
   getResumePoints: PlatformTypesFeedbackAPIClientGetResumePoints;
   getTrackList: PlatformTypesFeedbackAPIClientGetTrackList;
-  getTrackListMetadata: PlatformTypesFeedbackAPIClientGetTrackListMetadata;
   getUnplayedEpisodes: PlatformTypesFeedbackAPIClientGetUnplayedEpisodes;
   isSnoozed: PlatformTypesFeedbackAPIClientIsSnoozed;
-  offlineAlbum: PlatformTypesFeedbackAPIClientOfflineAlbum;
   offlineArtist: PlatformTypesFeedbackAPIClientOfflineArtist;
   offlineTracks: PlatformTypesFeedbackAPIClientOfflineTracks;
   options: PlatformTypesPlayerAPICollectionOptions;
-  playAlbum: PlatformTypesFeedbackAPIClientPlayAlbum;
   playArtist: PlatformTypesFeedbackAPIClientPlayArtist;
   playTracks: PlatformTypesFeedbackAPIClientPlayTracks;
   remove: PlatformTypesFeedbackAPIClientRemove;
-  removeOfflineAlbum: PlatformTypesFeedbackAPIClientRemoveOfflineAlbum;
   removeOfflineArtist: PlatformTypesFeedbackAPIClientRemoveOfflineArtist;
   removeOfflineTracks: PlatformTypesFeedbackAPIClientRemoveOfflineTracks;
   removeUnplayed: PlatformTypesFeedbackAPIClientRemoveUnplayed;
   snooze: PlatformTypesFeedbackAPIClientSnooze;
-  streamAlbumTrackList: PlatformTypesFeedbackAPIClientStreamAlbumTrackList;
-  streamAlbumView: PlatformTypesFeedbackAPIClientStreamAlbumView;
   streamArtistTrackList: PlatformTypesFeedbackAPIClientStreamArtistTrackList;
   streamArtistView: PlatformTypesFeedbackAPIClientStreamArtistView;
   streamBans: PlatformTypesFeedbackAPIClientStreamBans;
-  streamChanges: PlatformTypesFeedbackAPIClientStreamChanges;
   streamContains: PlatformTypesFeedbackAPIClientStreamContains;
   streamDecorate: PlatformTypesFeedbackAPIClientStreamDecorate;
-  streamEpisodeList: PlatformTypesFeedbackAPIClientStreamEpisodeList;
   streamTagsInfo: PlatformTypesFeedbackAPIClientStreamTagsInfo;
   streamTrackList: PlatformTypesFeedbackAPIClientStreamTrackList;
   streamTrackListMetadata: PlatformTypesFeedbackAPIClientStreamTrackListMetadata;
@@ -7995,14 +7573,14 @@ export interface PlatformTypesPlayerAPIQueue {
   markAsQueued: PlatformTypesPlayerAPIQueueMarkAsQueued;
   removeFromQueue: PlatformTypesPlayerAPIQueueRemoveFromQueue;
   reorderQueue: PlatformTypesPlayerAPIQueueReorderQueue;
-  timeoutId: null;
+  timeoutId: number;
 }
 
 export interface PlatformTypesPlayerAPIQueue2 {
   nextTracks: PlatformTypesPlayerAPIQueueNextTracks;
   prevTracks: PlatformTypesPlayerAPIQueuePrevTracks;
   queueRevision: bigint;
-  track: PlatformTypesPlayerAPIQueueTrack;
+  track: undefined;
 }
 
 export type PlatformTypesPlayerAPIQueueAddToQueue = (arg0: any, arg1: any) => unknown;
@@ -8029,1582 +7607,23 @@ export type PlatformTypesPlayerAPIQueueIsSameItem = (arg0: any, arg1: any) => un
 
 export type PlatformTypesPlayerAPIQueueMarkAsQueued = (arg0: any) => unknown;
 
-export type PlatformTypesPlayerAPIQueueNextTracks = Array<
-  | PlatformTypesPlayerAPIQueueNextTracksItem
-  | PlatformTypesPlayerAPIQueueNextTracksItem10
-  | PlatformTypesPlayerAPIQueueNextTracksItem2
-  | PlatformTypesPlayerAPIQueueNextTracksItem3
-  | PlatformTypesPlayerAPIQueueNextTracksItem4
-  | PlatformTypesPlayerAPIQueueNextTracksItem5
-  | PlatformTypesPlayerAPIQueueNextTracksItem6
-  | PlatformTypesPlayerAPIQueueNextTracksItem7
-  | PlatformTypesPlayerAPIQueueNextTracksItem8
-  | PlatformTypesPlayerAPIQueueNextTracksItem9
->;
+export type PlatformTypesPlayerAPIQueueNextTracks = Array<unknown>;
 
-export interface PlatformTypesPlayerAPIQueueNextTracksItem {
-  blocked: PlatformTypesPlayerAPIQueueNextTracksItemBlocked;
-  contextTrack: PlatformTypesPlayerAPIQueueNextTracksItemContextTrack;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueueNextTracksItemRemoved;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItem10 {
-  blocked: PlatformTypesPlayerAPIQueueNextTracksItemBlocked10;
-  contextTrack: PlatformTypesPlayerAPIQueueNextTracksItemContextTrack10;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueueNextTracksItemRemoved10;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItem2 {
-  blocked: PlatformTypesPlayerAPIQueueNextTracksItemBlocked2;
-  contextTrack: PlatformTypesPlayerAPIQueueNextTracksItemContextTrack2;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueueNextTracksItemRemoved2;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItem3 {
-  blocked: PlatformTypesPlayerAPIQueueNextTracksItemBlocked3;
-  contextTrack: PlatformTypesPlayerAPIQueueNextTracksItemContextTrack3;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueueNextTracksItemRemoved3;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItem4 {
-  blocked: PlatformTypesPlayerAPIQueueNextTracksItemBlocked4;
-  contextTrack: PlatformTypesPlayerAPIQueueNextTracksItemContextTrack4;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueueNextTracksItemRemoved4;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItem5 {
-  blocked: PlatformTypesPlayerAPIQueueNextTracksItemBlocked5;
-  contextTrack: PlatformTypesPlayerAPIQueueNextTracksItemContextTrack5;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueueNextTracksItemRemoved5;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItem6 {
-  blocked: PlatformTypesPlayerAPIQueueNextTracksItemBlocked6;
-  contextTrack: PlatformTypesPlayerAPIQueueNextTracksItemContextTrack6;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueueNextTracksItemRemoved6;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItem7 {
-  blocked: PlatformTypesPlayerAPIQueueNextTracksItemBlocked7;
-  contextTrack: PlatformTypesPlayerAPIQueueNextTracksItemContextTrack7;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueueNextTracksItemRemoved7;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItem8 {
-  blocked: PlatformTypesPlayerAPIQueueNextTracksItemBlocked8;
-  contextTrack: PlatformTypesPlayerAPIQueueNextTracksItemContextTrack8;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueueNextTracksItemRemoved8;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItem9 {
-  blocked: PlatformTypesPlayerAPIQueueNextTracksItemBlocked9;
-  contextTrack: PlatformTypesPlayerAPIQueueNextTracksItemContextTrack9;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueueNextTracksItemRemoved9;
-}
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemBlocked = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemBlocked10 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemBlocked2 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemBlocked3 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemBlocked4 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemBlocked5 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemBlocked6 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemBlocked7 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemBlocked8 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemBlocked9 = Array<unknown>;
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrack {
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrack10 {
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata10;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrack2 {
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata2;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrack3 {
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata3;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrack4 {
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata4;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrack5 {
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata5;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrack6 {
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata6;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrack7 {
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata7;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrack8 {
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata8;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrack9 {
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata9;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata {
-  "actions.skipping_next_past_track": string;
-  "actions.skipping_prev_past_track": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata10 {
-  "artist_name:1": string;
-  "artist_uri:1": string;
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata2 {
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata3 {
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata4 {
-  "artist_name:1": string;
-  "artist_uri:1": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata5 {
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata6 {
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata7 {
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  is_explicit: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata8 {
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata9 {
-  "artist_name:1": string;
-  "artist_uri:1": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemRemoved = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemRemoved10 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemRemoved2 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemRemoved3 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemRemoved4 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemRemoved5 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemRemoved6 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemRemoved7 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemRemoved8 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueNextTracksItemRemoved9 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracks = Array<
-  | PlatformTypesPlayerAPIQueuePrevTracksItem
-  | PlatformTypesPlayerAPIQueuePrevTracksItem2
-  | PlatformTypesPlayerAPIQueuePrevTracksItem3
-  | PlatformTypesPlayerAPIQueuePrevTracksItem4
-  | PlatformTypesPlayerAPIQueuePrevTracksItem5
-  | PlatformTypesPlayerAPIQueuePrevTracksItem6
-  | PlatformTypesPlayerAPIQueuePrevTracksItem7
-  | PlatformTypesPlayerAPIQueuePrevTracksItem8
->;
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItem {
-  blocked: PlatformTypesPlayerAPIQueuePrevTracksItemBlocked;
-  contextTrack: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueuePrevTracksItemRemoved;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItem2 {
-  blocked: PlatformTypesPlayerAPIQueuePrevTracksItemBlocked2;
-  contextTrack: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack2;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueuePrevTracksItemRemoved2;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItem3 {
-  blocked: PlatformTypesPlayerAPIQueuePrevTracksItemBlocked3;
-  contextTrack: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack3;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueuePrevTracksItemRemoved3;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItem4 {
-  blocked: PlatformTypesPlayerAPIQueuePrevTracksItemBlocked4;
-  contextTrack: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack4;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueuePrevTracksItemRemoved4;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItem5 {
-  blocked: PlatformTypesPlayerAPIQueuePrevTracksItemBlocked5;
-  contextTrack: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack5;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueuePrevTracksItemRemoved5;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItem6 {
-  blocked: PlatformTypesPlayerAPIQueuePrevTracksItemBlocked6;
-  contextTrack: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack6;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueuePrevTracksItemRemoved6;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItem7 {
-  blocked: PlatformTypesPlayerAPIQueuePrevTracksItemBlocked7;
-  contextTrack: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack7;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueuePrevTracksItemRemoved7;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItem8 {
-  blocked: PlatformTypesPlayerAPIQueuePrevTracksItemBlocked8;
-  contextTrack: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack8;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueuePrevTracksItemRemoved8;
-}
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked2 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked3 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked4 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked5 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked6 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked7 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemBlocked8 = Array<unknown>;
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack {
-  metadata: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack2 {
-  metadata: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata2;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack3 {
-  metadata: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata3;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack4 {
-  metadata: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata4;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack5 {
-  metadata: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata5;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack6 {
-  metadata: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata6;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack7 {
-  metadata: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata7;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrack8 {
-  metadata: PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata8;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata {
-  "artist_name:1": string;
-  "artist_uri:1": string;
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  is_explicit: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata2 {
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata3 {
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata4 {
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata5 {
-  "artist_name:1": string;
-  "artist_uri:1": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata6 {
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata7 {
-  "artist_name:1": string;
-  "artist_uri:1": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIQueuePrevTracksItemContextTrackMetadata8 {
-  "actions.skipping_next_past_track": string;
-  "actions.skipping_prev_past_track": string;
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemRemoved = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemRemoved2 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemRemoved3 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemRemoved4 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemRemoved5 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemRemoved6 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemRemoved7 = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracksItemRemoved8 = Array<unknown>;
+export type PlatformTypesPlayerAPIQueuePrevTracks = Array<unknown>;
 
 export interface PlatformTypesPlayerAPIQueueQueueState {
-  current: PlatformTypesPlayerAPIQueueQueueStateCurrent;
+  current: null;
   nextUp: PlatformTypesPlayerAPIQueueQueueStateNextUp;
   queued: PlatformTypesPlayerAPIQueueQueueStateQueued;
 }
 
-export interface PlatformTypesPlayerAPIQueueQueueStateCurrent {
-  album: PlatformTypesPlayerAPIQueueQueueStateCurrentAlbum;
-  artists: PlatformTypesPlayerAPIQueueQueueStateCurrentArtists;
-  duration: PlatformTypesPlayerAPIQueueQueueStateCurrentDuration;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIQueueQueueStateCurrentImages;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIQueueTrackContextTrackMetadata;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateCurrentAlbum {
-  images: PlatformTypesPlayerAPIQueueQueueStateCurrentImages;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateCurrentAlbumImagesItem {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateCurrentAlbumImagesItem2 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateCurrentAlbumImagesItem3 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateCurrentAlbumImagesItem4 {
-  label: string;
-  url: string;
-}
-
-export type PlatformTypesPlayerAPIQueueQueueStateCurrentArtists =
-  Array<PlatformTypesPlayerAPIQueueQueueStateCurrentArtistsItem>;
-
-export interface PlatformTypesPlayerAPIQueueQueueStateCurrentArtistsItem {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateCurrentDuration {
-  milliseconds: number;
-}
-
-export type PlatformTypesPlayerAPIQueueQueueStateCurrentImages = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateCurrentAlbumImagesItem
-  | PlatformTypesPlayerAPIQueueQueueStateCurrentAlbumImagesItem2
-  | PlatformTypesPlayerAPIQueueQueueStateCurrentAlbumImagesItem3
-  | PlatformTypesPlayerAPIQueueQueueStateCurrentAlbumImagesItem4
->;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUp = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItem
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItem10
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItem2
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItem3
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItem4
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItem5
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItem6
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItem7
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItem8
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItem9
->;
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItem {
-  album: PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum;
-  artists: PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists;
-  duration: PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItem10 {
-  album: PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum10;
-  artists: PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists10;
-  duration: PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration10;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages10;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata10;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItem2 {
-  album: PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum2;
-  artists: PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists2;
-  duration: PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration2;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages2;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata2;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItem3 {
-  album: PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum3;
-  artists: PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists3;
-  duration: PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration3;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages3;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata3;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItem4 {
-  album: PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum4;
-  artists: PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists4;
-  duration: PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration4;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages4;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata4;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItem5 {
-  album: PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum5;
-  artists: PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists5;
-  duration: PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration5;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages5;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata5;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItem6 {
-  album: PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum6;
-  artists: PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists6;
-  duration: PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration6;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages6;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata6;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItem7 {
-  album: PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum7;
-  artists: PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists7;
-  duration: PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration7;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages7;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata7;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItem8 {
-  album: PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum8;
-  artists: PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists8;
-  duration: PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration8;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages8;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata8;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItem9 {
-  album: PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum9;
-  artists: PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists9;
-  duration: PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration9;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages9;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIQueueNextTracksItemContextTrackMetadata9;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum {
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum10 {
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages10;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum2 {
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages2;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum3 {
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages3;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum4 {
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages4;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum5 {
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages5;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum6 {
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages6;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum7 {
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages7;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum8 {
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages8;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbum9 {
-  images: PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages9;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem10 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem11 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem12 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem13 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem14 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem15 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem16 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem17 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem18 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem19 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem2 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem20 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem21 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem22 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem3 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem4 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem5 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem6 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem7 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem8 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem9 {
-  label: string;
-  url: string;
-}
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists =
-  Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem>;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists10 = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem12
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem13
->;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists2 =
-  Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem2>;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists3 =
-  Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem3>;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists4 = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem4
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem5
->;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists5 =
-  Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem6>;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists6 =
-  Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem7>;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists7 =
-  Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem8>;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists8 =
-  Array<PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem9>;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtists9 = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem10
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem11
->;
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem10 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem11 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem12 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem13 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem2 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem3 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem4 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem5 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem6 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem7 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem8 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemArtistsItem9 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration10 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration2 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration3 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration4 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration5 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration6 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration7 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration8 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIQueueQueueStateNextUpItemDuration9 {
-  milliseconds: number;
-}
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem2
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem3
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem4
->;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages10 = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem21
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem22
->;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages2 = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem5
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem6
->;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages3 = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem7
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem8
->;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages4 = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem10
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem9
->;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages5 = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem11
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem12
->;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages6 = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem13
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem14
->;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages7 = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem15
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem16
->;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages8 = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem17
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem18
->;
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUpItemImages9 = Array<
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem19
-  | PlatformTypesPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem20
->;
+export type PlatformTypesPlayerAPIQueueQueueStateNextUp = Array<unknown>;
 
 export type PlatformTypesPlayerAPIQueueQueueStateQueued = Array<unknown>;
 
 export type PlatformTypesPlayerAPIQueueRemoveFromQueue = (arg0: any) => unknown;
 
 export type PlatformTypesPlayerAPIQueueReorderQueue = (arg0: any, arg1: any) => unknown;
-
-export interface PlatformTypesPlayerAPIQueueTrack {
-  blocked: PlatformTypesPlayerAPIQueueTrackBlocked;
-  contextTrack: PlatformTypesPlayerAPIQueueTrackContextTrack;
-  provider: string;
-  removed: PlatformTypesPlayerAPIQueueTrackRemoved;
-}
-
-export type PlatformTypesPlayerAPIQueueTrackBlocked = Array<unknown>;
-
-export interface PlatformTypesPlayerAPIQueueTrackContextTrack {
-  metadata: PlatformTypesPlayerAPIQueueTrackContextTrackMetadata;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIQueueTrackContextTrackMetadata {
-  "actions.skipping_next_past_track": string;
-  "actions.skipping_prev_past_track": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  "media.start_position": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export type PlatformTypesPlayerAPIQueueTrackRemoved = Array<unknown>;
 
 export type PlatformTypesPlayerAPIRefreshCurrentContext = () => unknown;
 
@@ -9707,15 +7726,15 @@ export type PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientPu
 
 export interface PlatformTypesPlayerAPIState {
   context: PlatformTypesPlayerAPIStateContext;
-  duration: number;
-  format: number;
+  duration: null;
+  format: null;
   hasContext: boolean;
   index: PlatformTypesPlayerAPIStateIndex;
   isBuffering: boolean;
   isPaused: boolean;
-  item: PlatformTypesPlayerAPIStateItem;
+  item: null;
   nextItems: PlatformTypesPlayerAPIStateNextItems;
-  playbackId: string;
+  playbackId: null;
   playbackQuality: PlatformTypesPlayerAPIStatePlaybackQuality;
   positionAsOfTimestamp: number;
   previousItems: PlatformTypesPlayerAPIStatePreviousItems;
@@ -9739,1158 +7758,15 @@ export interface PlatformTypesPlayerAPIStateContext {
 
 export interface PlatformTypesPlayerAPIStateContextMetadata {
   "player.arch": string;
-  context_description: string;
-  context_owner: string;
-  enhanced_context: string;
-  image_url: string;
-  playlist_number_of_episodes: string;
-  playlist_number_of_tracks: string;
-  playlist_volatile_context_id: string;
 }
 
 export interface PlatformTypesPlayerAPIStateIndex {
-  itemIndex: number;
-  pageIndex: number;
+  itemIndex: null;
+  pageIndex: null;
   pageURI: null;
 }
 
-export interface PlatformTypesPlayerAPIStateItem {
-  album: PlatformTypesPlayerAPIStateItemAlbum;
-  artists: PlatformTypesPlayerAPIStateItemArtists;
-  duration: PlatformTypesPlayerAPIStateItemDuration;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIStateItemImages;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIStateItemMetadata;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateItemAlbum {
-  images: PlatformTypesPlayerAPIStateItemImages;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateItemAlbumImagesItem {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateItemAlbumImagesItem2 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateItemAlbumImagesItem3 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateItemAlbumImagesItem4 {
-  label: string;
-  url: string;
-}
-
-export type PlatformTypesPlayerAPIStateItemArtists =
-  Array<PlatformTypesPlayerAPIStateItemArtistsItem>;
-
-export interface PlatformTypesPlayerAPIStateItemArtistsItem {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateItemDuration {
-  milliseconds: number;
-}
-
-export type PlatformTypesPlayerAPIStateItemImages = Array<
-  | PlatformTypesPlayerAPIStateItemAlbumImagesItem
-  | PlatformTypesPlayerAPIStateItemAlbumImagesItem2
-  | PlatformTypesPlayerAPIStateItemAlbumImagesItem3
-  | PlatformTypesPlayerAPIStateItemAlbumImagesItem4
->;
-
-export interface PlatformTypesPlayerAPIStateItemMetadata {
-  "actions.skipping_next_past_track": string;
-  "actions.skipping_prev_past_track": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  "media.start_position": string;
-  album_artist_name: string;
-  album_disc_count: string;
-  album_disc_number: string;
-  album_title: string;
-  album_track_count: string;
-  album_track_number: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  popularity: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export type PlatformTypesPlayerAPIStateNextItems = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItem
-  | PlatformTypesPlayerAPIStateNextItemsItem10
-  | PlatformTypesPlayerAPIStateNextItemsItem2
-  | PlatformTypesPlayerAPIStateNextItemsItem3
-  | PlatformTypesPlayerAPIStateNextItemsItem4
-  | PlatformTypesPlayerAPIStateNextItemsItem5
-  | PlatformTypesPlayerAPIStateNextItemsItem6
-  | PlatformTypesPlayerAPIStateNextItemsItem7
-  | PlatformTypesPlayerAPIStateNextItemsItem8
-  | PlatformTypesPlayerAPIStateNextItemsItem9
->;
-
-export interface PlatformTypesPlayerAPIStateNextItemsItem {
-  album: PlatformTypesPlayerAPIStateNextItemsItemAlbum;
-  artists: PlatformTypesPlayerAPIStateNextItemsItemArtists;
-  duration: PlatformTypesPlayerAPIStateNextItemsItemDuration;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIStateNextItemsItemMetadata;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItem10 {
-  album: PlatformTypesPlayerAPIStateNextItemsItemAlbum10;
-  artists: PlatformTypesPlayerAPIStateNextItemsItemArtists10;
-  duration: PlatformTypesPlayerAPIStateNextItemsItemDuration10;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages10;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIStateNextItemsItemMetadata10;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItem2 {
-  album: PlatformTypesPlayerAPIStateNextItemsItemAlbum2;
-  artists: PlatformTypesPlayerAPIStateNextItemsItemArtists2;
-  duration: PlatformTypesPlayerAPIStateNextItemsItemDuration2;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages2;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIStateNextItemsItemMetadata2;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItem3 {
-  album: PlatformTypesPlayerAPIStateNextItemsItemAlbum3;
-  artists: PlatformTypesPlayerAPIStateNextItemsItemArtists3;
-  duration: PlatformTypesPlayerAPIStateNextItemsItemDuration3;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages3;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIStateNextItemsItemMetadata3;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItem4 {
-  album: PlatformTypesPlayerAPIStateNextItemsItemAlbum4;
-  artists: PlatformTypesPlayerAPIStateNextItemsItemArtists4;
-  duration: PlatformTypesPlayerAPIStateNextItemsItemDuration4;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages4;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIStateNextItemsItemMetadata4;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItem5 {
-  album: PlatformTypesPlayerAPIStateNextItemsItemAlbum5;
-  artists: PlatformTypesPlayerAPIStateNextItemsItemArtists5;
-  duration: PlatformTypesPlayerAPIStateNextItemsItemDuration5;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages5;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIStateNextItemsItemMetadata5;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItem6 {
-  album: PlatformTypesPlayerAPIStateNextItemsItemAlbum6;
-  artists: PlatformTypesPlayerAPIStateNextItemsItemArtists6;
-  duration: PlatformTypesPlayerAPIStateNextItemsItemDuration6;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages6;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIStateNextItemsItemMetadata6;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItem7 {
-  album: PlatformTypesPlayerAPIStateNextItemsItemAlbum7;
-  artists: PlatformTypesPlayerAPIStateNextItemsItemArtists7;
-  duration: PlatformTypesPlayerAPIStateNextItemsItemDuration7;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages7;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIStateNextItemsItemMetadata7;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItem8 {
-  album: PlatformTypesPlayerAPIStateNextItemsItemAlbum8;
-  artists: PlatformTypesPlayerAPIStateNextItemsItemArtists8;
-  duration: PlatformTypesPlayerAPIStateNextItemsItemDuration8;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages8;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIStateNextItemsItemMetadata8;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItem9 {
-  album: PlatformTypesPlayerAPIStateNextItemsItemAlbum9;
-  artists: PlatformTypesPlayerAPIStateNextItemsItemArtists9;
-  duration: PlatformTypesPlayerAPIStateNextItemsItemDuration9;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages9;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIStateNextItemsItemMetadata9;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbum {
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbum10 {
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages10;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbum2 {
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages2;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbum3 {
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages3;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbum4 {
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages4;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbum5 {
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages5;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbum6 {
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages6;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbum7 {
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages7;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbum8 {
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages8;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbum9 {
-  images: PlatformTypesPlayerAPIStateNextItemsItemImages9;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem10 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem11 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem12 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem13 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem14 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem15 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem16 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem17 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem18 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem19 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem2 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem20 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem21 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem22 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem23 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem24 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem25 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem26 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem27 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem28 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem29 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem3 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem30 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem31 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem32 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem33 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem34 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem35 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem36 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem37 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem38 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem39 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem4 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem40 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem5 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem6 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem7 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem8 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem9 {
-  label: string;
-  url: string;
-}
-
-export type PlatformTypesPlayerAPIStateNextItemsItemArtists =
-  Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem>;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemArtists10 = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem12
-  | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem13
->;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemArtists2 =
-  Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem2>;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemArtists3 =
-  Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem3>;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemArtists4 = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem4
-  | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem5
->;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemArtists5 =
-  Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem6>;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemArtists6 =
-  Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem7>;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemArtists7 =
-  Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem8>;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemArtists8 =
-  Array<PlatformTypesPlayerAPIStateNextItemsItemArtistsItem9>;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemArtists9 = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem10
-  | PlatformTypesPlayerAPIStateNextItemsItemArtistsItem11
->;
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem10 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem11 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem12 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem13 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem2 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem3 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem4 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem5 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem6 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem7 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem8 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemArtistsItem9 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemDuration {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemDuration10 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemDuration2 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemDuration3 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemDuration4 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemDuration5 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemDuration6 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemDuration7 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemDuration8 {
-  milliseconds: number;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemDuration9 {
-  milliseconds: number;
-}
-
-export type PlatformTypesPlayerAPIStateNextItemsItemImages = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem2
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem3
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem4
->;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemImages10 = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem37
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem38
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem39
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem40
->;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemImages2 = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem5
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem6
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem7
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem8
->;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemImages3 = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem10
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem11
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem12
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem9
->;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemImages4 = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem13
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem14
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem15
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem16
->;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemImages5 = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem17
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem18
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem19
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem20
->;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemImages6 = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem21
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem22
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem23
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem24
->;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemImages7 = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem25
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem26
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem27
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem28
->;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemImages8 = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem29
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem30
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem31
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem32
->;
-
-export type PlatformTypesPlayerAPIStateNextItemsItemImages9 = Array<
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem33
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem34
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem35
-  | PlatformTypesPlayerAPIStateNextItemsItemAlbumImagesItem36
->;
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata {
-  "actions.skipping_next_past_track": string;
-  "actions.skipping_prev_past_track": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_disc_count: string;
-  album_disc_number: string;
-  album_title: string;
-  album_track_count: string;
-  album_track_number: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  popularity: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata10 {
-  "artist_name:1": string;
-  "artist_uri:1": string;
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_disc_count: string;
-  album_disc_number: string;
-  album_title: string;
-  album_track_count: string;
-  album_track_number: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  popularity: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata2 {
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_disc_count: string;
-  album_disc_number: string;
-  album_title: string;
-  album_track_count: string;
-  album_track_number: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  popularity: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata3 {
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_disc_count: string;
-  album_disc_number: string;
-  album_title: string;
-  album_track_count: string;
-  album_track_number: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  popularity: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata4 {
-  "artist_name:1": string;
-  "artist_uri:1": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_disc_count: string;
-  album_disc_number: string;
-  album_title: string;
-  album_track_count: string;
-  album_track_number: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  popularity: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata5 {
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_disc_count: string;
-  album_disc_number: string;
-  album_title: string;
-  album_track_count: string;
-  album_track_number: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  popularity: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata6 {
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_disc_count: string;
-  album_disc_number: string;
-  album_title: string;
-  album_track_count: string;
-  album_track_number: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  popularity: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata7 {
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_disc_count: string;
-  album_disc_number: string;
-  album_title: string;
-  album_track_count: string;
-  album_track_number: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  is_explicit: string;
-  iteration: string;
-  marked_for_download: string;
-  popularity: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata8 {
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_disc_count: string;
-  album_disc_number: string;
-  album_title: string;
-  album_track_count: string;
-  album_track_number: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  popularity: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
-export interface PlatformTypesPlayerAPIStateNextItemsItemMetadata9 {
-  "artist_name:1": string;
-  "artist_uri:1": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_disc_count: string;
-  album_disc_number: string;
-  album_title: string;
-  album_track_count: string;
-  album_track_number: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  popularity: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
+export type PlatformTypesPlayerAPIStateNextItems = Array<unknown>;
 
 export interface PlatformTypesPlayerAPIStatePlaybackQuality {
   bitrateLevel: number;
@@ -10900,116 +7776,7 @@ export interface PlatformTypesPlayerAPIStatePlaybackQuality {
   targetBitrateLevel: number;
 }
 
-export type PlatformTypesPlayerAPIStatePreviousItems =
-  Array<PlatformTypesPlayerAPIStatePreviousItemsItem>;
-
-export interface PlatformTypesPlayerAPIStatePreviousItemsItem {
-  album: PlatformTypesPlayerAPIStatePreviousItemsItemAlbum;
-  artists: PlatformTypesPlayerAPIStatePreviousItemsItemArtists;
-  duration: PlatformTypesPlayerAPIStatePreviousItemsItemDuration;
-  hasAssociatedVideo: boolean;
-  images: PlatformTypesPlayerAPIStatePreviousItemsItemImages;
-  is19PlusOnly: boolean;
-  isExplicit: boolean;
-  isLocal: boolean;
-  mediaType: string;
-  metadata: PlatformTypesPlayerAPIStatePreviousItemsItemMetadata;
-  name: string;
-  provider: string;
-  type: string;
-  uid: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStatePreviousItemsItemAlbum {
-  images: PlatformTypesPlayerAPIStatePreviousItemsItemImages;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStatePreviousItemsItemAlbumImagesItem {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStatePreviousItemsItemAlbumImagesItem2 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStatePreviousItemsItemAlbumImagesItem3 {
-  label: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStatePreviousItemsItemAlbumImagesItem4 {
-  label: string;
-  url: string;
-}
-
-export type PlatformTypesPlayerAPIStatePreviousItemsItemArtists =
-  Array<PlatformTypesPlayerAPIStatePreviousItemsItemArtistsItem>;
-
-export interface PlatformTypesPlayerAPIStatePreviousItemsItemArtistsItem {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesPlayerAPIStatePreviousItemsItemDuration {
-  milliseconds: number;
-}
-
-export type PlatformTypesPlayerAPIStatePreviousItemsItemImages = Array<
-  | PlatformTypesPlayerAPIStatePreviousItemsItemAlbumImagesItem
-  | PlatformTypesPlayerAPIStatePreviousItemsItemAlbumImagesItem2
-  | PlatformTypesPlayerAPIStatePreviousItemsItemAlbumImagesItem3
-  | PlatformTypesPlayerAPIStatePreviousItemsItemAlbumImagesItem4
->;
-
-export interface PlatformTypesPlayerAPIStatePreviousItemsItemMetadata {
-  "actions.skipping_next_past_track": string;
-  "actions.skipping_prev_past_track": string;
-  "canvas.artist.avatar": string;
-  "canvas.artist.name": string;
-  "canvas.artist.uri": string;
-  "canvas.canvasUri": string;
-  "canvas.entityUri": string;
-  "canvas.explicit": string;
-  "canvas.fileId": string;
-  "canvas.id": string;
-  "canvas.type": string;
-  "canvas.uploadedBy": string;
-  "canvas.url": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_disc_count: string;
-  album_disc_number: string;
-  album_title: string;
-  album_track_count: string;
-  album_track_number: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  popularity: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
+export type PlatformTypesPlayerAPIStatePreviousItems = Array<unknown>;
 
 export interface PlatformTypesPlayerAPIStateRestrictions {
   canPause: boolean;
@@ -11040,20 +7807,20 @@ export type PlatformTypesPlayerAPIStateRestrictionsDisallowAddToQueueReasons = A
 
 export type PlatformTypesPlayerAPIStateRestrictionsDisallowPausingReasons = Array<string>;
 
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowResumingReasons = Array<unknown>;
+export type PlatformTypesPlayerAPIStateRestrictionsDisallowResumingReasons = Array<string>;
 
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowSeekingReasons = Array<unknown>;
+export type PlatformTypesPlayerAPIStateRestrictionsDisallowSeekingReasons = Array<string>;
 
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowSetQueueReasons = Array<unknown>;
+export type PlatformTypesPlayerAPIStateRestrictionsDisallowSetQueueReasons = Array<string>;
 
 export type PlatformTypesPlayerAPIStateRestrictionsDisallowSettingPlaybackSpeedReasons =
   Array<string>;
 
 export type PlatformTypesPlayerAPIStateRestrictionsDisallowSignals = Record<string, unknown>;
 
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowSkippingNextReasons = Array<unknown>;
+export type PlatformTypesPlayerAPIStateRestrictionsDisallowSkippingNextReasons = Array<string>;
 
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowSkippingPreviousReasons = Array<unknown>;
+export type PlatformTypesPlayerAPIStateRestrictionsDisallowSkippingPreviousReasons = Array<string>;
 
 export type PlatformTypesPlayerAPIStateRestrictionsDisallowTogglingRepeatContextReasons =
   Array<unknown>;
@@ -11293,300 +8060,35 @@ export type PlatformTypesPlayHistoryAPIPlayerOptions = Record<string, unknown>;
 
 export interface PlatformTypesPlaylistAPI {
   _builder: PlatformTypesRequestBuilder;
-  _events: PlatformTypesPlaylistAPIEvents;
-  _getLensedPlaylistUri: PlatformTypesPlaylistAPIGetLensedPlaylistUri;
-  _getPlaylistDecorationPolicies: PlatformTypesPlaylistAPIGetPlaylistDecorationPolicies;
+  _events: PlatformTypesShuffleAPIPlaylistAPIEvents;
+  _getLensedPlaylistUri: PlatformTypesShuffleAPIPlaylistAPIGetLensedPlaylistUri;
+  _getPlaylistDecorationPolicies: PlatformTypesShuffleAPIPlaylistAPIGetPlaylistDecorationPolicies;
   _isAuthorPageEnabled: boolean;
   _isTunaEnabled: boolean;
   _isWatchFeedEntityPagesEnabled: boolean;
-  _playlistDataClient: PlatformTypesPlaylistAPIPlaylistDataClient;
-  _playlistServiceClient: PlatformTypesPlaylistAPIPlaylistServiceClient;
+  _playlistDataClient: PlatformTypesShuffleAPIPlaylistAPIPlaylistDataClient;
+  _playlistServiceClient: PlatformTypesShuffleAPIPlaylistAPIPlaylistServiceClient;
   _resyncAPI: PlatformTypesPlaylistResyncAPI;
   _smartShuffleEligibilityAPI: PlatformTypesSmartShuffleEligibilityAPI;
-  add: PlatformTypesPlaylistAPIAdd;
-  clearAttributes: PlatformTypesPlaylistAPIClearAttributes;
-  getCapabilities: PlatformTypesPlaylistAPIGetCapabilities;
-  getContents: PlatformTypesPlaylistAPIGetContents;
-  getEvents: PlatformTypesPlaylistAPIGetEvents;
-  getMetadata: PlatformTypesPlaylistAPIGetMetadata;
-  getPlaylist: PlatformTypesPlaylistAPIGetPlaylist;
-  getRecommendedBookUris: PlatformTypesPlaylistAPIGetRecommendedBookUris;
-  getRecommendedTracks: PlatformTypesPlaylistAPIGetRecommendedTracks;
-  move: PlatformTypesPlaylistAPIMove;
-  remove: PlatformTypesPlaylistAPIRemove;
-  requestLenses: PlatformTypesPlaylistAPIRequestLenses;
-  resolvePlaylistFormatURI: PlatformTypesPlaylistAPIResolvePlaylistFormatURI;
-  resync: PlatformTypesPlaylistAPIResync;
-  sendSignal: PlatformTypesPlaylistAPISendSignal;
-  setAttributes: PlatformTypesPlaylistAPISetAttributes;
-  updateDetails: PlatformTypesPlaylistAPIUpdateDetails;
-  uploadImage: PlatformTypesPlaylistAPIUploadImage;
+  add: PlatformTypesShuffleAPIPlaylistAPIAdd;
+  clearAttributes: PlatformTypesShuffleAPIPlaylistAPIClearAttributes;
+  getCapabilities: PlatformTypesShuffleAPIPlaylistAPIGetCapabilities;
+  getContents: PlatformTypesShuffleAPIPlaylistAPIGetContents;
+  getEvents: PlatformTypesShuffleAPIPlaylistAPIGetEvents;
+  getMetadata: PlatformTypesShuffleAPIPlaylistAPIGetMetadata;
+  getPlaylist: PlatformTypesShuffleAPIPlaylistAPIGetPlaylist;
+  getRecommendedBookUris: PlatformTypesShuffleAPIPlaylistAPIGetRecommendedBookUris;
+  getRecommendedTracks: PlatformTypesShuffleAPIPlaylistAPIGetRecommendedTracks;
+  move: PlatformTypesShuffleAPIPlaylistAPIMove;
+  remove: PlatformTypesShuffleAPIPlaylistAPIRemove;
+  requestLenses: PlatformTypesShuffleAPIPlaylistAPIRequestLenses;
+  resolvePlaylistFormatURI: PlatformTypesShuffleAPIPlaylistAPIResolvePlaylistFormatURI;
+  resync: PlatformTypesShuffleAPIPlaylistAPIResync;
+  sendSignal: PlatformTypesShuffleAPIPlaylistAPISendSignal;
+  setAttributes: PlatformTypesShuffleAPIPlaylistAPISetAttributes;
+  updateDetails: PlatformTypesShuffleAPIPlaylistAPIUpdateDetails;
+  uploadImage: PlatformTypesShuffleAPIPlaylistAPIUploadImage;
 }
-
-export type PlatformTypesPlaylistAPIAdd = (arg0: any, arg1: any, arg2: any, arg3: any) => unknown;
-
-export type PlatformTypesPlaylistAPIClearAttributes = (arg0: any, arg1: any) => unknown;
-
-export interface PlatformTypesPlaylistAPIEvents {
-  _aggregator: PlatformTypesPlaylistAPIEventsAggregator;
-  _dataClient: PlatformTypesPlaylistAPIPlaylistDataClient;
-  _emitter: PlatformTypesPlaylistAPIEventsEmitter;
-  _subscriptions: PlatformTypesPlaylistAPIEventsSubscriptions;
-  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
-  emitAddComplete: PlatformTypesPlaylistAPIEventsEmitAddComplete;
-  emitAddSync: PlatformTypesPlaylistAPIEventsEmitAddSync;
-  emitMoveComplete: PlatformTypesPlaylistAPIEventsEmitMoveComplete;
-  emitMoveSync: PlatformTypesPlaylistAPIEventsEmitMoveSync;
-  emitRemoveComplete: PlatformTypesPlaylistAPIEventsEmitRemoveComplete;
-  emitRemoveSync: PlatformTypesPlaylistAPIEventsEmitRemoveSync;
-  emitSendSignalComplete: PlatformTypesPlaylistAPIEventsEmitSendSignalComplete;
-  emitSendSignalSync: PlatformTypesPlaylistAPIEventsEmitSendSignalSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
-  emitUpdateComplete: PlatformTypesPlaylistAPIEventsEmitUpdateComplete;
-  emitUpdateSync: PlatformTypesPlaylistAPIEventsEmitUpdateSync;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
-  onBatchChanged: PlatformTypesPlaylistAPIEventsOnBatchChanged;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
-}
-
-export interface PlatformTypesPlaylistAPIEventsAggregator {
-  _additions: PlatformTypesPlaylistAPIEventsAggregatorAdditions;
-  _batch: PlatformTypesPlaylistAPIEventsAggregatorBatch;
-  _deletions: PlatformTypesPlaylistAPIEventsAggregatorDeletions;
-  _onAdd: PlatformTypesPlaylistAPIEventsAggregatorOnAdd;
-  _onBatch: PlatformTypesPlaylistAPIEventsAggregatorOnBatch;
-  _onRemove: PlatformTypesPlaylistAPIEventsAggregatorOnRemove;
-  _onUpdate: PlatformTypesPlaylistAPIEventsAggregatorOnUpdate;
-  _timeout: number;
-  _timeoutId: null;
-  getBatch: PlatformTypesCurationAPIEventsAggregatorGetBatch;
-  onUpdate: PlatformTypesCurationAPIEventsAggregatorOnUpdate;
-  scheduleUpdate: PlatformTypesCurationAPIEventsAggregatorScheduleUpdate;
-  subscribe: PlatformTypesCurationAPIEventsAggregatorSubscribe;
-  unsubscribe: PlatformTypesCurationAPIEventsAggregatorUnsubscribe;
-}
-
-export type PlatformTypesPlaylistAPIEventsAggregatorAdditions = Map<unknown, unknown>;
-
-export type PlatformTypesPlaylistAPIEventsAggregatorBatch = Map<unknown, unknown>;
-
-export type PlatformTypesPlaylistAPIEventsAggregatorDeletions = Map<unknown, unknown>;
-
-export type PlatformTypesPlaylistAPIEventsAggregatorOnAdd = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsAggregatorOnBatch = (arg0: any) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsAggregatorOnRemove = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsAggregatorOnUpdate = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsEmitAddComplete = (arg0: any) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsEmitAddSync = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsEmitMoveComplete = (arg0: any) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsEmitMoveSync = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsEmitRemoveComplete = (arg0: any) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsEmitRemoveSync = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsEmitSendSignalComplete = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsEmitSendSignalSync = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export interface PlatformTypesPlaylistAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
-  _listeners: PlatformTypesPlaylistAPIEventsEmitterListeners;
-  _metaListeners: PlatformTypesPlaylistAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
-}
-
-export type PlatformTypesPlaylistAPIEventsEmitterListeners = Record<string, unknown>;
-
-export interface PlatformTypesPlaylistAPIEventsEmitterMetaListeners {
-  add: PlatformTypesPlaylistAPIEventsEmitterMetaListenersAdd;
-  remove: PlatformTypesPlaylistAPIEventsEmitterMetaListenersRemove;
-}
-
-export interface PlatformTypesPlaylistAPIEventsEmitterMetaListenersAdd {
-  update: PlatformTypesPlaylistAPIEventsEmitterMetaListenersAddUpdate;
-}
-
-export type PlatformTypesPlaylistAPIEventsEmitterMetaListenersAddUpdate =
-  Array<PlatformTypesPlaylistAPIEventsEmitterMetaListenersAddUpdateItem>;
-
-export interface PlatformTypesPlaylistAPIEventsEmitterMetaListenersAddUpdateItem {
-  listener: PlatformTypesPlaylistAPIEventsEmitterMetaListenersAddUpdateItemListener;
-  options: PlatformTypesPlaylistAPIEventsEmitterMetaListenersAddUpdateItemOptions;
-}
-
-export type PlatformTypesPlaylistAPIEventsEmitterMetaListenersAddUpdateItemListener = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsEmitterMetaListenersAddUpdateItemOptions = Record<
-  string,
-  unknown
->;
-
-export interface PlatformTypesPlaylistAPIEventsEmitterMetaListenersRemove {
-  update: PlatformTypesPlaylistAPIEventsEmitterMetaListenersRemoveUpdate;
-}
-
-export type PlatformTypesPlaylistAPIEventsEmitterMetaListenersRemoveUpdate =
-  Array<PlatformTypesPlaylistAPIEventsEmitterMetaListenersRemoveUpdateItem>;
-
-export interface PlatformTypesPlaylistAPIEventsEmitterMetaListenersRemoveUpdateItem {
-  listener: PlatformTypesPlaylistAPIEventsEmitterMetaListenersRemoveUpdateItemListener;
-  options: PlatformTypesPlaylistAPIEventsEmitterMetaListenersRemoveUpdateItemOptions;
-}
-
-export type PlatformTypesPlaylistAPIEventsEmitterMetaListenersRemoveUpdateItemListener = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsEmitterMetaListenersRemoveUpdateItemOptions = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlaylistAPIEventsEmitUpdateComplete = (arg0: any) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsEmitUpdateSync = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsOnBatchChanged = (arg0: any) => unknown;
-
-export type PlatformTypesPlaylistAPIEventsSubscriptions = Map<unknown, unknown>;
-
-export type PlatformTypesPlaylistAPIGetCapabilities = () => unknown;
-
-export type PlatformTypesPlaylistAPIGetContents = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlaylistAPIGetEvents = () => unknown;
-
-export type PlatformTypesPlaylistAPIGetLensedPlaylistUri = (arg0: any) => unknown;
-
-export type PlatformTypesPlaylistAPIGetMetadata = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlaylistAPIGetPlaylist = (arg0: any, arg1: any, arg2: any) => unknown;
-
-export type PlatformTypesPlaylistAPIGetPlaylistDecorationPolicies = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesPlaylistAPIGetRecommendedBookUris = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesPlaylistAPIGetRecommendedTracks = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesPlaylistAPIMove = (arg0: any, arg1: any, arg2: any) => unknown;
-
-export interface PlatformTypesPlaylistAPIPlaylistDataClient {
-  find: PlatformTypesLibraryAPIPlaylistDataClientFind;
-  get: PlatformTypesLibraryAPIPlaylistDataClientGet;
-  multiGet: PlatformTypesLibraryAPIPlaylistDataClientMultiGet;
-  options: PlatformTypesPlaylistAPIPlaylistDataClientOptions;
-  subscribe: PlatformTypesLibraryAPIPlaylistDataClientSubscribe;
-  transport: PlatformTypesVideoAPIEsperantoTransport;
-}
-
-export type PlatformTypesPlaylistAPIPlaylistDataClientOptions = Record<string, unknown>;
-
-export interface PlatformTypesPlaylistAPIPlaylistServiceClient {
-  clearToken: PlatformTypesLibraryAPIPlaylistServiceClientClearToken;
-  contains: PlatformTypesLibraryAPIPlaylistServiceClientContains;
-  emitItemSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitItemSignals;
-  emitSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitSignals;
-  getMembers: PlatformTypesLibraryAPIPlaylistServiceClientGetMembers;
-  invalidateRevisions: PlatformTypesLibraryAPIPlaylistServiceClientInvalidateRevisions;
-  modify: PlatformTypesLibraryAPIPlaylistServiceClientModify;
-  options: PlatformTypesPlaylistAPIPlaylistServiceClientOptions;
-  requestLenses: PlatformTypesLibraryAPIPlaylistServiceClientRequestLenses;
-  resync: PlatformTypesLibraryAPIPlaylistServiceClientResync;
-  setBasePermission: PlatformTypesLibraryAPIPlaylistServiceClientSetBasePermission;
-  setMemberPermission: PlatformTypesLibraryAPIPlaylistServiceClientSetMemberPermission;
-  setOfflineState: PlatformTypesLibraryAPIPlaylistServiceClientSetOfflineState;
-  setToken: PlatformTypesLibraryAPIPlaylistServiceClientSetToken;
-  signal: PlatformTypesLibraryAPIPlaylistServiceClientSignal;
-  signalItem: PlatformTypesLibraryAPIPlaylistServiceClientSignalItem;
-  subscribeToMembers: PlatformTypesLibraryAPIPlaylistServiceClientSubscribeToMembers;
-  transport: PlatformTypesVideoAPIEsperantoTransport;
-}
-
-export type PlatformTypesPlaylistAPIPlaylistServiceClientOptions = Record<string, unknown>;
-
-export type PlatformTypesPlaylistAPIRemove = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlaylistAPIRequestLenses = (arg0: any, arg1: any, arg2: any) => unknown;
-
-export type PlatformTypesPlaylistAPIResolvePlaylistFormatURI = (arg0: any) => unknown;
-
-export type PlatformTypesPlaylistAPIResync = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlaylistAPISendSignal = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-  arg3: any,
-) => unknown;
-
-export type PlatformTypesPlaylistAPISetAttributes = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlaylistAPIUpdateDetails = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlaylistAPIUploadImage = (arg0: any) => unknown;
 
 export interface PlatformTypesPlaylistPermissionsAPI {
   _builder: PlatformTypesRequestBuilder;
@@ -12117,7 +8619,9 @@ export interface PlatformTypesRegistryMapValueInstanceCacheValueValue {
   "license-agreements": string;
   "list-private-by-default": string;
   "metadata-link-lookup-modes": string;
+  "mixing-tools": string;
   "mobile-payment": string;
+  "music-videos": string;
   "network-operator-premium-activation": string;
   "nft-disabled": string;
   "obfuscate-restricted-tracks": string;
@@ -12503,7 +9007,7 @@ export type PlatformTypesRegistryMapValueInstancePost = (arg0: any) => unknown;
 export interface PlatformTypesRegistryMapValueInstanceProductStateApi {
   delOverridesValues: PlatformTypesOfflineAPIProductStateDelOverridesValues;
   getValues: PlatformTypesOfflineAPIProductStateGetValues;
-  options: PlatformTypesRegistryMapValueInstanceProductStateServiceOptions;
+  options: PlatformTypesRegistryMapValueInstanceProductStateApiOptions;
   putOverridesValues: PlatformTypesOfflineAPIProductStatePutOverridesValues;
   putValues: PlatformTypesOfflineAPIProductStatePutValues;
   putValuesSync: PlatformTypesOfflineAPIProductStatePutValuesSync;
@@ -12511,10 +9015,7 @@ export interface PlatformTypesRegistryMapValueInstanceProductStateApi {
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
 
-export type PlatformTypesRegistryMapValueInstanceProductStateServiceOptions = Record<
-  string,
-  unknown
->;
+export type PlatformTypesRegistryMapValueInstanceProductStateApiOptions = Record<string, unknown>;
 
 export type PlatformTypesRegistryMapValueInstancePut = (arg0: any, arg1: any, arg2: any) => unknown;
 
@@ -14059,16 +10560,69 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenIt
   unknown
 >;
 
-export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticated =
-  Array<PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem>;
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticated = Array<
+  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem
+  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem2
+  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem3
+  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem4
+  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem5
+>;
 
 export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem {
   listener: PlatformTypesRegistryMapValueInstanceOnAuthenticated;
   options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions;
 }
 
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem2 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions2;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem3 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener2;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions3;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem4 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener3;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions4;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem5 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener4;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions5;
+}
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener =
+  () => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener2 =
+  () => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener3 =
+  () => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener4 =
+  () => unknown;
+
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions =
   Record<string, unknown>;
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions2 {
+  once: boolean;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions3 {
+  once: boolean;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions4 {
+  once: boolean;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions5 {
+  once: boolean;
+}
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticationFailed = Array<
   | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticationFailedItem
@@ -15601,10 +12155,7 @@ export interface PlatformTypesRemoteConfigDebugAPILocalConfiguration {
 export type PlatformTypesRemoteConfigDebugAPILocalConfigurationAccessListeners =
   Set<PlatformTypesRemoteConfigurationAccessListenersSetElement>;
 
-export type PlatformTypesRemoteConfigDebugAPILocalConfigurationValues = Map<
-  string,
-  boolean | number
->;
+export type PlatformTypesRemoteConfigDebugAPILocalConfigurationValues = Map<string, boolean>;
 
 export interface PlatformTypesRemoteConfigDebugAPIOverrides {
   accessListeners: PlatformTypesRemoteConfigDebugAPIOverridesAccessListeners;
@@ -15800,7 +12351,7 @@ export type PlatformTypesRemoteConfigurationToBuilder = () => unknown;
 
 export type PlatformTypesRemoteConfigurationToJSON = () => unknown;
 
-export type PlatformTypesRemoteConfigurationValues = Map<string, boolean | number>;
+export type PlatformTypesRemoteConfigurationValues = Map<string, boolean>;
 
 export interface PlatformTypesRemoteConfigurationWithLocalOverrides {
   accessListeners: PlatformTypesRemoteConfigurationWithLocalOverridesAccessListeners;
@@ -15813,10 +12364,7 @@ export interface PlatformTypesRemoteConfigurationWithLocalOverrides {
 export type PlatformTypesRemoteConfigurationWithLocalOverridesAccessListeners =
   Set<PlatformTypesRemoteConfigurationAccessListenersSetElement>;
 
-export type PlatformTypesRemoteConfigurationWithLocalOverridesValues = Map<
-  string,
-  boolean | number
->;
+export type PlatformTypesRemoteConfigurationWithLocalOverridesValues = Map<string, boolean>;
 
 export interface PlatformTypesReportAPI {
   _playlistAPI: PlatformTypesPlaylistAPI;
@@ -15868,6 +12416,7 @@ export interface PlatformTypesRootlistAPI {
   _playlistDataClient: PlatformTypesRootlistAPIPlaylistDataClient;
   _rootlistDataClient: PlatformTypesRootlistAPIRootlistDataClient;
   _rootlistModificationClient: PlatformTypesRootlistAPIRootlistModificationClient;
+  _yourLibraryClient: PlatformTypesRootlistAPIYourLibraryClient;
   add: PlatformTypesRootlistAPIAdd;
   applyModification: PlatformTypesRootlistAPIApplyModification;
   contains: PlatformTypesRootlistAPIContains;
@@ -16247,6 +12796,26 @@ export type PlatformTypesRootlistAPIRootlistModificationClientModify = (
 export type PlatformTypesRootlistAPIRootlistModificationClientOptions = Record<string, unknown>;
 
 export type PlatformTypesRootlistAPISetPublishedState = (arg0: any, arg1: any) => unknown;
+
+export interface PlatformTypesRootlistAPIYourLibraryClient {
+  all: PlatformTypesOfflineAPIYourLibraryAll;
+  contains: PlatformTypesOfflineAPIYourLibraryContains;
+  decorate: PlatformTypesOfflineAPIYourLibraryDecorate;
+  getKeys: PlatformTypesOfflineAPIYourLibraryGetKeys;
+  isCurated: PlatformTypesOfflineAPIYourLibraryIsCurated;
+  movePin: PlatformTypesOfflineAPIYourLibraryMovePin;
+  options: PlatformTypesRootlistAPIYourLibraryClientOptions;
+  pin: PlatformTypesOfflineAPIYourLibraryPin;
+  streamAll: PlatformTypesOfflineAPIYourLibraryStreamAll;
+  streamBans: PlatformTypesOfflineAPIYourLibraryStreamBans;
+  streamContains: PlatformTypesOfflineAPIYourLibraryStreamContains;
+  streamDecorate: PlatformTypesOfflineAPIYourLibraryStreamDecorate;
+  streamIsCurated: PlatformTypesOfflineAPIYourLibraryStreamIsCurated;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+  unPin: PlatformTypesOfflineAPIYourLibraryUnPin;
+}
+
+export type PlatformTypesRootlistAPIYourLibraryClientOptions = Record<string, unknown>;
 
 export interface PlatformTypesSegmentsAPI {
   _client: PlatformTypesSegmentsAPIClient;
@@ -16810,10 +13379,13 @@ export type PlatformTypesSettingsAPIPlaybackSmartShuffleGetValue = () => unknown
 export interface PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPI {
   disableSmartShuffle: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIDisableSmartShuffle;
   getDisableSmartShuffle: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetDisableSmartShuffle;
+  getSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetSettings;
   getShuffleState: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetShuffleState;
   options: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIOptions;
   setDisableSmartShuffle: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetDisableSmartShuffle;
+  setSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetSettings;
   setShuffleState: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetShuffleState;
+  streamSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamSettings;
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
 
@@ -16824,6 +13396,11 @@ export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIDisab
 
 export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetDisableSmartShuffle =
   (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetSettings = (
+  arg0: any,
+  arg1: any,
+) => unknown;
 
 export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetShuffleState = (
   arg0: any,
@@ -16838,7 +13415,17 @@ export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIOptio
 export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetDisableSmartShuffle =
   (arg0: any, arg1: any) => unknown;
 
+export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetSettings = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
 export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetShuffleState = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamSettings = (
   arg0: any,
   arg1: any,
 ) => unknown;
@@ -17120,6 +13707,7 @@ export type PlatformTypesSettingsAPIQualityRemoteQualityCallbacks = Set<unknown>
 export interface PlatformTypesSettingsAPIQualityRemoteQualityConnectService {
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
+  clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
   forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
   getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
@@ -17753,15 +14341,30 @@ export type PlatformTypesShowAPIPodcastPaywallsClientPutShowSubscription = (
 ) => unknown;
 
 export interface PlatformTypesShowAPIResumptionProgressClient {
+  getAllDetails: PlatformTypesShowAPIResumptionProgressClientGetAllDetails;
   getDetails: PlatformTypesShowAPIResumptionProgressClientGetDetails;
+  getResumePoint: PlatformTypesShowAPIResumptionProgressClientGetResumePoint;
   getState: PlatformTypesShowAPIResumptionProgressClientGetState;
+  markAsFinished: PlatformTypesShowAPIResumptionProgressClientMarkAsFinished;
+  markAsNotStarted: PlatformTypesShowAPIResumptionProgressClientMarkAsNotStarted;
   options: PlatformTypesShowAPIResumptionProgressClientOptions;
   subDetails: PlatformTypesShowAPIResumptionProgressClientSubDetails;
+  subResumePoint: PlatformTypesShowAPIResumptionProgressClientSubResumePoint;
   subState: PlatformTypesShowAPIResumptionProgressClientSubState;
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
 
+export type PlatformTypesShowAPIResumptionProgressClientGetAllDetails = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
 export type PlatformTypesShowAPIResumptionProgressClientGetDetails = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesShowAPIResumptionProgressClientGetResumePoint = (
   arg0: any,
   arg1: any,
 ) => unknown;
@@ -17771,9 +14374,24 @@ export type PlatformTypesShowAPIResumptionProgressClientGetState = (
   arg1: any,
 ) => unknown;
 
+export type PlatformTypesShowAPIResumptionProgressClientMarkAsFinished = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesShowAPIResumptionProgressClientMarkAsNotStarted = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
 export type PlatformTypesShowAPIResumptionProgressClientOptions = Record<string, unknown>;
 
 export type PlatformTypesShowAPIResumptionProgressClientSubDetails = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesShowAPIResumptionProgressClientSubResumePoint = (
   arg0: any,
   arg1: any,
 ) => unknown;
@@ -17788,11 +14406,14 @@ export type PlatformTypesShowAPIShowServiceClientOptions = Record<string, unknow
 export type PlatformTypesShowAPIUpdateUserRating = (arg0: any, arg1: any) => unknown;
 
 export interface PlatformTypesShuffleAPI {
+  _connectDevicesAPI: PlatformTypesConnectDevicesAPI;
   _contextualShuffle: PlatformTypesContextualShuffleAPI;
   _events: PlatformTypesShuffleAPIEvents;
   _history: PlatformTypesHistory;
   _isDsaEnabled: boolean;
+  _isUnifiedSmartShuffleSignalsEnabled: boolean;
   _player: PlatformTypesPlayerAPI;
+  _playlistAPI: PlatformTypesPlaylistAPI;
   _playlistDataServiceClient: PlatformTypesShuffleAPIPlaylistDataServiceClient;
   _playlistServiceClient: PlatformTypesShuffleAPIPlaylistServiceClient;
   _productStateApi: PlatformTypesProductStateAPI;
@@ -17850,9 +14471,7 @@ export interface PlatformTypesShuffleAPIEventsEmitter {
 
 export interface PlatformTypesShuffleAPIEventsEmitterListeners {
   availability_update: PlatformTypesShuffleAPIEventsEmitterListenersAvailabilityUpdate;
-  update: PlatformTypesShuffleAPIEventsEmitterListenersUpdate;
   update_complete: PlatformTypesShuffleAPIEventsEmitterListenersUpdateComplete;
-  update_error: PlatformTypesShuffleAPIEventsEmitterListenersUpdateError;
 }
 
 export type PlatformTypesShuffleAPIEventsEmitterListenersAvailabilityUpdate =
@@ -17872,67 +14491,19 @@ export type PlatformTypesShuffleAPIEventsEmitterListenersAvailabilityUpdateItemO
   unknown
 >;
 
-export type PlatformTypesShuffleAPIEventsEmitterListenersUpdate =
-  Array<PlatformTypesShuffleAPIEventsEmitterListenersUpdateItem>;
-
-export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateComplete = Array<
-  | PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem
-  | PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem2
->;
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateComplete =
+  Array<PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem>;
 
 export interface PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem {
   listener: PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemListener;
   options: PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions;
 }
 
-export interface PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem2 {
-  listener: PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemListener2;
-  options: PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions2;
-}
-
 export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemListener = (
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemListener2 = (
-  arg0: any,
-) => unknown;
-
 export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions2 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateError =
-  Array<PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItem>;
-
-export interface PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItem {
-  listener: PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItemListener;
-  options: PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItemOptions;
-}
-
-export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItemListener = () => unknown;
-
-export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItemOptions = Record<
-  string,
-  unknown
->;
-
-export interface PlatformTypesShuffleAPIEventsEmitterListenersUpdateItem {
-  listener: PlatformTypesShuffleAPIEventsEmitterListenersUpdateItemListener;
-  options: PlatformTypesShuffleAPIEventsEmitterListenersUpdateItemOptions;
-}
-
-export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateItemListener = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateItemOptions = Record<
   string,
   unknown
 >;
@@ -17966,6 +14537,295 @@ export type PlatformTypesShuffleAPIGetAvailableShuffleModes = (arg0: any) => unk
 export type PlatformTypesShuffleAPIGetEvents = () => unknown;
 
 export type PlatformTypesShuffleAPIGetShuffle = (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIAdd = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+  arg3: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIClearAttributes = (arg0: any, arg1: any) => unknown;
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEvents {
+  _aggregator: PlatformTypesShuffleAPIPlaylistAPIEventsAggregator;
+  _dataClient: PlatformTypesShuffleAPIPlaylistAPIPlaylistDataClient;
+  _emitter: PlatformTypesShuffleAPIPlaylistAPIEventsEmitter;
+  _subscriptions: PlatformTypesShuffleAPIPlaylistAPIEventsSubscriptions;
+  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
+  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
+  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
+  emitAddComplete: PlatformTypesShuffleAPIPlaylistAPIEventsEmitAddComplete;
+  emitAddSync: PlatformTypesShuffleAPIPlaylistAPIEventsEmitAddSync;
+  emitMoveComplete: PlatformTypesShuffleAPIPlaylistAPIEventsEmitMoveComplete;
+  emitMoveSync: PlatformTypesShuffleAPIPlaylistAPIEventsEmitMoveSync;
+  emitRemoveComplete: PlatformTypesShuffleAPIPlaylistAPIEventsEmitRemoveComplete;
+  emitRemoveSync: PlatformTypesShuffleAPIPlaylistAPIEventsEmitRemoveSync;
+  emitSendSignalComplete: PlatformTypesShuffleAPIPlaylistAPIEventsEmitSendSignalComplete;
+  emitSendSignalSync: PlatformTypesShuffleAPIPlaylistAPIEventsEmitSendSignalSync;
+  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
+  emitUpdateComplete: PlatformTypesShuffleAPIPlaylistAPIEventsEmitUpdateComplete;
+  emitUpdateSync: PlatformTypesShuffleAPIPlaylistAPIEventsEmitUpdateSync;
+  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
+  onBatchChanged: PlatformTypesShuffleAPIPlaylistAPIEventsOnBatchChanged;
+  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
+  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
+}
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsAggregator {
+  _additions: PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorAdditions;
+  _batch: PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorBatch;
+  _deletions: PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorDeletions;
+  _onAdd: PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorOnAdd;
+  _onBatch: PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorOnBatch;
+  _onRemove: PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorOnRemove;
+  _onUpdate: PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorOnUpdate;
+  _timeout: number;
+  _timeoutId: null;
+  getBatch: PlatformTypesCurationAPIEventsAggregatorGetBatch;
+  onUpdate: PlatformTypesCurationAPIEventsAggregatorOnUpdate;
+  scheduleUpdate: PlatformTypesCurationAPIEventsAggregatorScheduleUpdate;
+  subscribe: PlatformTypesCurationAPIEventsAggregatorSubscribe;
+  unsubscribe: PlatformTypesCurationAPIEventsAggregatorUnsubscribe;
+}
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorAdditions = Map<unknown, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorBatch = Map<unknown, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorDeletions = Map<unknown, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorOnAdd = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorOnBatch = (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorOnRemove = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorOnUpdate = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitAddComplete = (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitAddSync = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitMoveComplete = (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitMoveSync = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitRemoveComplete = (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitRemoveSync = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitSendSignalComplete = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitSendSignalSync = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitter {
+  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _listeners: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListeners;
+  _metaListeners: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListeners;
+  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
+  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
+  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
+  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
+  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
+  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
+  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
+  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
+  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
+  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
+  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
+  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
+  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
+  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
+  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
+  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
+  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
+  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+}
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListeners = Record<string, unknown>;
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListeners {
+  add: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersAdd;
+  remove: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersRemove;
+}
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersAdd {
+  update: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersAddUpdate;
+}
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersAddUpdate =
+  Array<PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersAddUpdateItem>;
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersAddUpdateItem {
+  listener: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersAddUpdateItemListener;
+  options: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersAddUpdateItemOptions;
+}
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersAddUpdateItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersAddUpdateItemOptions =
+  Record<string, unknown>;
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersRemove {
+  update: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersRemoveUpdate;
+}
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersRemoveUpdate =
+  Array<PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersRemoveUpdateItem>;
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersRemoveUpdateItem {
+  listener: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersRemoveUpdateItemListener;
+  options: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersRemoveUpdateItemOptions;
+}
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersRemoveUpdateItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersRemoveUpdateItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitUpdateComplete = (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitUpdateSync = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsOnBatchChanged = (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsSubscriptions = Map<unknown, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIGetCapabilities = () => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIGetContents = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIGetEvents = () => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIGetLensedPlaylistUri = (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIGetMetadata = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIGetPlaylist = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIGetPlaylistDecorationPolicies = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIGetRecommendedBookUris = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIGetRecommendedTracks = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIMove = (arg0: any, arg1: any, arg2: any) => unknown;
+
+export interface PlatformTypesShuffleAPIPlaylistAPIPlaylistDataClient {
+  find: PlatformTypesLibraryAPIPlaylistDataClientFind;
+  get: PlatformTypesLibraryAPIPlaylistDataClientGet;
+  multiGet: PlatformTypesLibraryAPIPlaylistDataClientMultiGet;
+  options: PlatformTypesShuffleAPIPlaylistAPIPlaylistDataClientOptions;
+  subscribe: PlatformTypesLibraryAPIPlaylistDataClientSubscribe;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesShuffleAPIPlaylistAPIPlaylistDataClientOptions = Record<string, unknown>;
+
+export interface PlatformTypesShuffleAPIPlaylistAPIPlaylistServiceClient {
+  clearToken: PlatformTypesLibraryAPIPlaylistServiceClientClearToken;
+  contains: PlatformTypesLibraryAPIPlaylistServiceClientContains;
+  emitItemSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitItemSignals;
+  emitSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitSignals;
+  getMembers: PlatformTypesLibraryAPIPlaylistServiceClientGetMembers;
+  invalidateRevisions: PlatformTypesLibraryAPIPlaylistServiceClientInvalidateRevisions;
+  modify: PlatformTypesLibraryAPIPlaylistServiceClientModify;
+  options: PlatformTypesShuffleAPIPlaylistAPIPlaylistServiceClientOptions;
+  requestLenses: PlatformTypesLibraryAPIPlaylistServiceClientRequestLenses;
+  resync: PlatformTypesLibraryAPIPlaylistServiceClientResync;
+  setBasePermission: PlatformTypesLibraryAPIPlaylistServiceClientSetBasePermission;
+  setMemberPermission: PlatformTypesLibraryAPIPlaylistServiceClientSetMemberPermission;
+  setOfflineState: PlatformTypesLibraryAPIPlaylistServiceClientSetOfflineState;
+  setToken: PlatformTypesLibraryAPIPlaylistServiceClientSetToken;
+  signal: PlatformTypesLibraryAPIPlaylistServiceClientSignal;
+  signalItem: PlatformTypesLibraryAPIPlaylistServiceClientSignalItem;
+  subscribeToMembers: PlatformTypesLibraryAPIPlaylistServiceClientSubscribeToMembers;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesShuffleAPIPlaylistAPIPlaylistServiceClientOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIRemove = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIRequestLenses = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIResolvePlaylistFormatURI = (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIResync = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPISendSignal = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+  arg3: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPISetAttributes = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIUpdateDetails = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIUploadImage = (arg0: any) => unknown;
 
 export interface PlatformTypesShuffleAPIPlaylistDataServiceClient {
   find: PlatformTypesLibraryAPIPlaylistDataClientFind;
@@ -18563,8 +15423,10 @@ export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIBroadcastSt
 
 export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClient {
   options: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientOptions;
+  startBleBroadcasting: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientStartBleBroadcasting;
   startBroadcasting: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientStartBroadcasting;
   startScanning: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientStartScanning;
+  stopBleBroadcasting: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientStopBleBroadcasting;
   stopBroadcasting: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientStopBroadcasting;
   stopScanning: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientStopScanning;
   subNetworkInterfaces: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientSubNetworkInterfaces;
@@ -18574,10 +15436,16 @@ export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDeskto
 export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientOptions =
   Record<string, unknown>;
 
+export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientStartBleBroadcasting =
+  (arg0: any, arg1: any) => unknown;
+
 export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientStartBroadcasting =
   (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientStartScanning =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientStopBleBroadcasting =
   (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClientStopBroadcasting =
@@ -18785,7 +15653,6 @@ export interface PlatformTypesStandalonePlayerCoordinatorAPI {
   inactivateInstance: PlatformTypesStandalonePlayerCoordinatorAPIInactivateInstance;
   instances: PlatformTypesStandalonePlayerCoordinatorAPIInstances;
   outroPreviewReportingState: string;
-  outroReporter: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporter;
   playbackAPI: PlatformTypesPlaybackAPI;
   playerAPI: PlatformTypesPlayerAPI;
   setupOutroReporter: PlatformTypesStandalonePlayerCoordinatorAPISetupOutroReporter;
@@ -18821,107 +15688,10 @@ export type PlatformTypesStandalonePlayerCoordinatorAPIInstancesSet = (
   arg1: any,
 ) => unknown;
 
-export interface PlatformTypesStandalonePlayerCoordinatorAPIOutroReporter {
-  _calculateIsVideoOn: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterCalculateIsVideoOn;
-  _createPlaybackMetadataStore: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterCreatePlaybackMetadataStore;
-  _eventSender: PlatformTypesEventSender;
-  _getPlaybackMetadataStore: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterGetPlaybackMetadataStore;
-  _hasUserAgent: boolean;
-  _onDurationChanged: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnDurationChanged;
-  _onMediaPlaybackModeChanged: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnMediaPlaybackModeChanged;
-  _onMutedChanged: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnMutedChanged;
-  _onPaused: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnPaused;
-  _onPlaybackSpeedChanged: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnPlaybackSpeedChanged;
-  _onPlaying: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnPlaying;
-  _onPositionChanged: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnPositionChanged;
-  _onProgress: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnProgress;
-  _onTrackingDataCreated: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnTrackingDataCreated;
-  _onTrackingDataFinalized: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnTrackingDataFinalized;
-  _onVideoSurfaceChanged: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnVideoSurfaceChanged;
-  _onVideoVisibilityChanged: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnVideoVisibilityChanged;
-  _reportingInterval: number;
-  _sendSegment: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterSendSegment;
-  _testId: string;
-  deregister: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterDeregister;
-  register: PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterRegister;
-}
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterCalculateIsVideoOn = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterCreatePlaybackMetadataStore = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterDeregister = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterGetPlaybackMetadataStore = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnDurationChanged = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnMediaPlaybackModeChanged = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnMutedChanged = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnPaused = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnPlaybackSpeedChanged = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnPlaying = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnPositionChanged = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnProgress = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnTrackingDataCreated = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnTrackingDataFinalized = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnVideoSurfaceChanged = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterOnVideoVisibilityChanged = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterRegister = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIOutroReporterSendSegment = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIConnectServiceClient {
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
+  clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
   forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
   getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
@@ -19280,7 +16050,6 @@ export interface PlatformTypesTranslations {
   "age.restriction.nineeteen-badge": string;
   "album-page.more-by-artist": string;
   "album-page.more-releases": PlatformTypesTranslationsAlbumpageMorereleases;
-  "album.page-title": string;
   "artist-page-discography.all": string;
   "artist-page.appearson.seo.title": string;
   "artist-page.artist-playlists": string;
@@ -19552,6 +16321,7 @@ export interface PlatformTypesTranslations {
   "contextmenu.pin-prerelease-album": string;
   "contextmenu.pin-prerelease-audiobook": string;
   "contextmenu.pin-show": string;
+  "contextmenu.pin-venue": string;
   "contextmenu.remove-from-folders": string;
   "contextmenu.remove-from-library": string;
   "contextmenu.remove-from-playlist": string;
@@ -19582,6 +16352,7 @@ export interface PlatformTypesTranslations {
   "contextmenu.unpin-prerelease-album": string;
   "contextmenu.unpin-prerelease-audiobook": string;
   "contextmenu.unpin-show": string;
+  "contextmenu.unpin-venue": string;
   "country-hubs.featured-charts-metadata-description": string;
   "country-hubs.featured-charts-metadata-title": string;
   "country-hubs.featured-charts-title": string;
@@ -20055,7 +16826,6 @@ export interface PlatformTypesTranslations {
   "i18n.meta.author.title.author-bibliography": string;
   "i18n.meta.author.title.author-overview": string;
   "i18n.meta.home.title": string;
-  "i18n.meta.prerelease.title": string;
   "i18n.meta.track-lyrics.title": string;
   "i18n.meta.track.title": string;
   "image-upload.legal-disclaimer": string;
@@ -20113,6 +16883,9 @@ export interface PlatformTypesTranslations {
   "leave-playlist.dialog.public-contributor-description": string;
   "leave-playlist.dialog.public-listener-description": string;
   "leave-playlist.dialog.title": string;
+  "library-import.cta": string;
+  "library-import.description": string;
+  "library-import.title": string;
   "licenses.title": string;
   "live_events.all_events_tab": string;
   "live_events.date_picker_button_text": string;
@@ -20750,7 +17523,7 @@ export interface PlatformTypesTranslations {
   "view.recently-played": string;
   "view.see-all": string;
   "view.web-player-home": string;
-  "web-player.age-assurance.verify-age-action.title": string;
+  "web-player.age-assurance.confirm-age-action.title": string;
   "web-player.album.anniversary": PlatformTypesTranslationsWebplayerAlbumAnniversary;
   "web-player.album.open_coverart_modal": string;
   "web-player.album.premium-only-banner-album": string;
@@ -20846,6 +17619,7 @@ export interface PlatformTypesTranslations {
   "web-player.connect.device-picker.google-cast-devices": string;
   "web-player.connect.device-picker.help-external-link": string;
   "web-player.connect.device-picker.install-spotify": string;
+  "web-player.connect.device-picker.managed-account-on-disallowed-device": string;
   "web-player.connect.device-picker.no-devices-found": string;
   "web-player.connect.device-picker.no-devices-local-network": string;
   "web-player.connect.device-picker.on-other-networks": string;
@@ -20877,6 +17651,8 @@ export interface PlatformTypesTranslations {
   "web-player.cover-art-modal.close": string;
   "web-player.cultural-moments.unsupported.appleAppStoreAlt": string;
   "web-player.cultural-moments.unsupported.googlePlayStoreAlt": string;
+  "web-player.deeplink-intent.add-to-library.album-prerelease-description": string;
+  "web-player.deeplink-intent.add-to-library.album-prerelease-title": string;
   "web-player.deeplink-intent.add-to-library.already-in-library": string;
   "web-player.deeplink-intent.add-to-library.artist-description": string;
   "web-player.deeplink-intent.add-to-library.audiobook-prerelease-description": string;
@@ -21189,6 +17965,12 @@ export interface PlatformTypesTranslations {
   "web-player.settings.content-preferences": string;
   "web-player.settings.edit-login-methods": string;
   "web-player.settings.edit-login-methods-button": string;
+  "web-player.settings.equalizer.custom-presets": string;
+  "web-player.settings.equalizer.delete-preset": string;
+  "web-player.settings.equalizer.save-preset": string;
+  "web-player.settings.equalizer.save-preset-modal.name-exists": string;
+  "web-player.settings.equalizer.save-preset-modal.name-placeholder": string;
+  "web-player.settings.equalizer.save-preset-modal.name-required": string;
   "web-player.settings.personalized-recommendations": string;
   "web-player.settings.personalized-recommendations-body-text": string;
   "web-player.settings.personalized-recommendations-turned-off.modal-body": string;
@@ -21251,6 +18033,8 @@ export interface PlatformTypesTranslations {
   "web-player.smart-shuffle.add-to-playlist-feedback-fallback": string;
   "web-player.smart-shuffle.button-disable-shuffle-generic": string;
   "web-player.smart-shuffle.button-disable-shuffle-specific": string;
+  "web-player.smart-shuffle.button-disable-smart-shuffle-generic": string;
+  "web-player.smart-shuffle.button-disable-smart-shuffle-specific": string;
   "web-player.smart-shuffle.button-enable-shuffle-generic": string;
   "web-player.smart-shuffle.button-enable-shuffle-specific": string;
   "web-player.smart-shuffle.button-enable-smart-shuffle-generic": string;
@@ -21351,10 +18135,13 @@ export interface PlatformTypesTranslations {
   "web-player.social-connect.toast.queue-only-mode.host.enabled": string;
   "web-player.social-connect.toast.two-people-joined": string;
   "web-player.social-connect.toast.two-people-left": string;
+  "web-player.tuna.connect-snackbar.text": string;
   "web-player.tuna.custom-sort-order-modal.body": string;
   "web-player.tuna.custom-sort-order-modal.cancel": string;
   "web-player.tuna.custom-sort-order-modal.confirm": string;
   "web-player.tuna.custom-sort-order-modal.title": string;
+  "web-player.tuna.custom-sort-order-snackbar.title": string;
+  "web-player.tuna.custom-sort-order-tooltip.turn-off-mixing": string;
   "web-player.tuna.edit-on-mobile-dialog.body": string;
   "web-player.tuna.edit-on-mobile-dialog.confirm": string;
   "web-player.tuna.edit-on-mobile-dialog.title": string;
@@ -21424,7 +18211,9 @@ export interface PlatformTypesTranslations {
   "web-player.venues.error.not_found.message": string;
   "web-player.venues.error.not_found.title": string;
   "web-player.venues.events": string;
+  "web-player.venues.follow": string;
   "web-player.venues.followers": PlatformTypesTranslationsWebplayerVenuesFollowers;
+  "web-player.venues.unfollow": string;
   "web-player.venues.venue": string;
   "web-player.watch-feed.entity-button.aria-label": string;
   "web-player.watch-feed.entity-button.label-album": string;
@@ -21517,6 +18306,7 @@ export interface PlatformTypesTranslations {
   "web-player.your-library-x.filter_options": string;
   "web-player.your-library-x.minimize-your-library-fullscreen": string;
   "web-player.your-library-x.navigate-back-folder": string;
+  "web-player.your-library-x.new-release": string;
   "web-player.your-library-x.open-your-library": string;
   "web-player.your-library-x.pin-error.message": string;
   "web-player.your-library-x.pin-error.no-pin-in-folder.message": string;
@@ -21970,6 +18760,34 @@ export interface PlatformTypesTransport {
   unmatchMessages: PlatformTypesRegistryMapValueInstanceTransportUnmatchMessages;
 }
 
+export interface PlatformTypesTunaAPI {
+  disableTunaForPlaylist: PlatformTypesTunaAPIDisableTunaForPlaylist;
+  enableTunaForPlaylist: PlatformTypesTunaAPIEnableTunaForPlaylist;
+  maybeApplyAutoTuna: PlatformTypesTunaAPIMaybeApplyAutoTuna;
+  playTransition: PlatformTypesTunaAPIPlayTransition;
+  setTunaDetailsForTracks: PlatformTypesTunaAPISetTunaDetailsForTracks;
+  turnOffTunaForPlaylist: PlatformTypesTunaAPITurnOffTunaForPlaylist;
+  turnOnTunaForPlaylist: PlatformTypesTunaAPITurnOnTunaForPlaylist;
+}
+
+export type PlatformTypesTunaAPIDisableTunaForPlaylist = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesTunaAPIEnableTunaForPlaylist = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesTunaAPIMaybeApplyAutoTuna = (arg0: any) => unknown;
+
+export type PlatformTypesTunaAPIPlayTransition = (arg0: any, arg1: any, arg2: any) => unknown;
+
+export type PlatformTypesTunaAPISetTunaDetailsForTracks = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesTunaAPITurnOffTunaForPlaylist = (arg0: any) => unknown;
+
+export type PlatformTypesTunaAPITurnOnTunaForPlaylist = (arg0: any) => unknown;
+
 export interface PlatformTypesUBILogger {
   _events: PlatformTypesUBILoggerEvents;
   formatUiNavigateEvent: PlatformTypesUBILoggerFormatUiNavigateEvent;
@@ -21979,6 +18797,7 @@ export interface PlatformTypesUBILogger {
   logImpression: PlatformTypesUBILoggerLogImpression;
   logInteraction: PlatformTypesUBILoggerLogInteraction;
   logNavigation: PlatformTypesUBILoggerLogNavigation;
+  pageTransitionLogger: PlatformTypesUBILoggerPageTransitionLogger;
   ubiLogger: PlatformTypesUBILoggerUbiLogger;
 }
 
@@ -22044,25 +18863,143 @@ export type PlatformTypesUBILoggerLogInteraction = (arg0: any) => unknown;
 
 export type PlatformTypesUBILoggerLogNavigation = (arg0: any) => unknown;
 
+export interface PlatformTypesUBILoggerPageTransitionLogger {
+  backgroundMonitor: PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitor;
+  currentLocationProvider: PlatformTypesUBILoggerPageTransitionLoggerCurrentLocationProvider;
+  handleBackgroundTransition: PlatformTypesUBILoggerPageTransitionLoggerHandleBackgroundTransition;
+  handleForegroundTransition: PlatformTypesUBILoggerPageTransitionLoggerHandleForegroundTransition;
+  lastLocation: null;
+  logBackgroundTransition: PlatformTypesUBILoggerPageTransitionLoggerLogBackgroundTransition;
+  logClientStart: PlatformTypesUBILoggerPageTransitionLoggerLogClientStart;
+  logForegroundTransition: PlatformTypesUBILoggerPageTransitionLoggerLogForegroundTransition;
+  logNavigation: PlatformTypesUBILoggerPageTransitionLoggerLogNavigation;
+  logPageTransitionTriggeredByReason: PlatformTypesUBILoggerPageTransitionLoggerLogPageTransitionTriggeredByReason;
+  logPageView: PlatformTypesUBILoggerPageTransitionLoggerLogPageView;
+  pageTransitionManager: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManager;
+  toPrevPageInfo: PlatformTypesUBILoggerPageTransitionLoggerToPrevPageInfo;
+}
+
+export interface PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitor {
+  handleWindowStateChange: PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorHandleWindowStateChange;
+  isForeground: PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorIsForeground;
+  onBackgroundTransition: PlatformTypesUBILoggerPageTransitionLoggerHandleBackgroundTransition;
+  onForegroundTransition: PlatformTypesUBILoggerPageTransitionLoggerHandleForegroundTransition;
+  registerEventListeners: PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorRegisterEventListeners;
+  windowState: PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorWindowState;
+}
+
+export type PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorHandleWindowStateChange = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorIsForeground = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorRegisterEventListeners =
+  () => unknown;
+
+export interface PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorWindowState {
+  focused: boolean;
+  visible: boolean;
+}
+
+export interface PlatformTypesUBILoggerPageTransitionLoggerCurrentLocationProvider {
+  getLocation: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderGetLocation;
+  getNavigationalRoot: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderGetNavigationalRoot;
+  getPageId: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderGetPageId;
+  getPageInstanceId: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderGetPageInstanceId;
+  getPageUri: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderGetPageUri;
+  getPathName: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderGetPathName;
+  isValidLocation: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderIsValidLocation;
+  setLocation: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderSetLocation;
+  setPageInstanceId: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderSetPageInstanceId;
+  storageManager: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManager;
+}
+
+export type PlatformTypesUBILoggerPageTransitionLoggerHandleBackgroundTransition = () => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerHandleForegroundTransition = () => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerLogBackgroundTransition = () => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerLogClientStart = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerLogForegroundTransition = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerLogNavigation = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerLogPageTransitionTriggeredByReason = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerLogPageView = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export interface PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManager {
+  authenticationProvider: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerAuthenticationProvider;
+  eventSender: PlatformTypesEventSender;
+  flowIdProvider: undefined;
+  logClientGainedFocus: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogClientGainedFocus;
+  logClientLostFocus: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogClientLostFocus;
+  logClientStarted: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogClientStarted;
+  logNavigation: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogNavigation;
+}
+
+export interface PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerAuthenticationProvider {
+  isAuthenticated: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerAuthenticationProviderIsAuthenticated;
+}
+
+export type PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerAuthenticationProviderIsAuthenticated =
+  () => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogClientGainedFocus = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogClientLostFocus = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogClientStarted = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogNavigation = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerToPrevPageInfo = (arg0: any) => unknown;
+
 export interface PlatformTypesUBILoggerUbiLogger {
   authenticationProvider: PlatformTypesUBILoggerUbiLoggerAuthenticationProvider;
   contextualProviders: PlatformTypesUBILoggerUbiLoggerContextualProviders;
-  disableAutoBackgroundMonitoring: boolean;
+  currentLocationProvider: PlatformTypesUBILoggerPageTransitionLoggerCurrentLocationProvider;
   eventSender: PlatformTypesEventSender;
-  getPageInstanceId: PlatformTypesUBILoggerUbiLoggerGetPageInstanceId;
-  logClientGainedFocus: PlatformTypesUBILoggerUbiLoggerLogClientGainedFocus;
-  logClientLostFocus: PlatformTypesUBILoggerUbiLoggerLogClientLostFocus;
-  logClientStarted: PlatformTypesUBILoggerUbiLoggerLogClientStarted;
+  getContextualInfo: PlatformTypesUBILoggerUbiLoggerGetContextualInfo;
+  logAuthImpression: PlatformTypesUBILoggerUbiLoggerLogAuthImpression;
+  logAuthInteraction: PlatformTypesUBILoggerUbiLoggerLogAuthInteraction;
   logImpression: PlatformTypesUBILoggerUbiLoggerLogImpression;
+  logImpressionSegment: PlatformTypesUBILoggerUbiLoggerLogImpressionSegment;
   logInteraction: PlatformTypesUBILoggerUbiLoggerLogInteraction;
-  logNavigation: PlatformTypesUBILoggerUbiLoggerLogNavigation;
-  logNavigationEnd: PlatformTypesUBILoggerUbiLoggerLogNavigationEnd;
-  logNavigationStart: PlatformTypesUBILoggerUbiLoggerLogNavigationStart;
-  pageInfoProvider: PlatformTypesUBILoggerUbiLoggerPageInfoProvider;
-  pageViewLogger: PlatformTypesUBILoggerUbiLoggerPageViewLogger;
-  registerEventListeners: PlatformTypesUBILoggerUbiLoggerRegisterEventListeners;
-  storageManager: PlatformTypesUBILoggerUbiLoggerStorageManager;
-  unregisterEventListeners: PlatformTypesUBILoggerUbiLoggerUnregisterEventListeners;
+  logNonAuthImpression: PlatformTypesUBILoggerUbiLoggerLogNonAuthImpression;
+  logNonAuthInteraction: PlatformTypesUBILoggerUbiLoggerLogNonAuthInteraction;
 }
 
 export interface PlatformTypesUBILoggerUbiLoggerAuthenticationProvider {
@@ -22090,247 +19027,124 @@ export interface PlatformTypesUBILoggerUbiLoggerContextualProvidersPlayContextUr
 export type PlatformTypesUBILoggerUbiLoggerContextualProvidersPlayContextUriProviderGetPlayContextUri =
   () => unknown;
 
-export type PlatformTypesUBILoggerUbiLoggerGetPageInstanceId = () => unknown;
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderGetLocation = () => unknown;
 
-export type PlatformTypesUBILoggerUbiLoggerLogClientGainedFocus = () => unknown;
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderGetNavigationalRoot =
+  () => unknown;
 
-export type PlatformTypesUBILoggerUbiLoggerLogClientLostFocus = () => unknown;
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderGetPageId = () => unknown;
 
-export type PlatformTypesUBILoggerUbiLoggerLogClientStarted = (
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderGetPageInstanceId = () => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderGetPageUri = () => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderGetPathName = () => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderIsValidLocation = () => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderSetLocation = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderSetPageInstanceId = (
+  arg0: any,
+) => unknown;
+
+export interface PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManager {
+  clear: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerClear;
+  getItem: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerGetItem;
+  getStorageType: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerGetStorageType;
+  removeItem: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerRemoveItem;
+  setItem: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerSetItem;
+  storageAdapter: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapter;
+}
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerClear =
+  () => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerGetItem = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerGetStorageType =
+  () => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerRemoveItem = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerSetItem = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export interface PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapter {
+  clear: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapterClear;
+  getItem: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapterGetItem;
+  items: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapterItems;
+  removeItem: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapterRemoveItem;
+  setItem: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapterSetItem;
+}
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapterClear =
+  () => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapterGetItem =
+  (arg0: any) => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapterItems =
+  Map<unknown, unknown>;
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapterRemoveItem =
+  (arg0: any) => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapterSetItem =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerGetContextualInfo = () => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerLogAuthImpression = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+  arg3: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerUbiLoggerLogAuthInteraction = (
   arg0: any,
   arg1: any,
   arg2: any,
 ) => unknown;
 
-export type PlatformTypesUBILoggerUbiLoggerLogImpression = (arg0: any) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerLogInteraction = (arg0: any) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerLogNavigation = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerLogNavigationEnd = (arg0: any) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerLogNavigationStart = (arg0: any) => unknown;
-
-export interface PlatformTypesUBILoggerUbiLoggerPageInfoProvider {
-  getNavigationalRoot: PlatformTypesUBILoggerUbiLoggerPageInfoProviderGetNavigationalRoot;
-  getPageId: PlatformTypesUBILoggerUbiLoggerPageInfoProviderGetPageId;
-  getPageInfo: PlatformTypesUBILoggerUbiLoggerPageInfoProviderGetPageInfo;
-  getPageInstanceId: PlatformTypesUBILoggerUbiLoggerPageInfoProviderGetPageInstanceId;
-  getPageUri: PlatformTypesUBILoggerUbiLoggerPageInfoProviderGetPageUri;
-  getPathName: PlatformTypesUBILoggerUbiLoggerPageInfoProviderGetPathName;
-  isValidPageInfo: PlatformTypesUBILoggerUbiLoggerPageInfoProviderIsValidPageInfo;
-  setPageInfo: PlatformTypesUBILoggerUbiLoggerPageInfoProviderSetPageInfo;
-  setPageInstanceId: PlatformTypesUBILoggerUbiLoggerPageInfoProviderSetPageInstanceId;
-  storageManager: PlatformTypesUBILoggerUbiLoggerStorageManager;
-}
-
-export type PlatformTypesUBILoggerUbiLoggerPageInfoProviderGetNavigationalRoot = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageInfoProviderGetPageId = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageInfoProviderGetPageInfo = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageInfoProviderGetPageInstanceId = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageInfoProviderGetPageUri = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageInfoProviderGetPathName = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageInfoProviderIsValidPageInfo = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageInfoProviderSetPageInfo = (arg0: any) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageInfoProviderSetPageInstanceId = (
-  arg0: any,
-) => unknown;
-
-export interface PlatformTypesUBILoggerUbiLoggerPageViewLogger {
-  addEventListeners: PlatformTypesUBILoggerUbiLoggerPageViewLoggerAddEventListeners;
-  authenticationProvider: PlatformTypesUBILoggerUbiLoggerAuthenticationProvider;
-  completeNavigation: PlatformTypesUBILoggerUbiLoggerPageViewLoggerCompleteNavigation;
-  currentWindowState: PlatformTypesUBILoggerUbiLoggerPageViewLoggerCurrentWindowState;
-  disableAutoBackgroundMonitoring: boolean;
-  eventSender: PlatformTypesEventSender;
-  flowIdProvider: undefined;
-  generatePageInstanceId: PlatformTypesUBILoggerUbiLoggerPageViewLoggerGeneratePageInstanceId;
-  getCurrentEntityUri: PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetCurrentEntityUri;
-  getCurrentNavigationalRoot: PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetCurrentNavigationalRoot;
-  getCurrentPageId: PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetCurrentPageId;
-  getCurrentPageInstanceId: PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetCurrentPageInstanceId;
-  getNavigationStatus: PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetNavigationStatus;
-  getPendingInteractionId: PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetPendingInteractionId;
-  getPendingNavigationReason: PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetPendingNavigationReason;
-  getPendingNavigationalRoot: PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetPendingNavigationalRoot;
-  handleFocusChange: PlatformTypesUBILoggerUbiLoggerPageViewLoggerHandleFocusChange;
-  handleFocusStateChange: PlatformTypesUBILoggerUbiLoggerPageViewLoggerHandleFocusStateChange;
-  handleVisibilityChange: PlatformTypesUBILoggerUbiLoggerPageViewLoggerHandleVisibilityChange;
-  isForeground: PlatformTypesUBILoggerUbiLoggerPageViewLoggerIsForeground;
-  logClientGainedFocus: PlatformTypesUBILoggerUbiLoggerPageViewLoggerLogClientGainedFocus;
-  logClientLostFocus: PlatformTypesUBILoggerUbiLoggerPageViewLoggerLogClientLostFocus;
-  logClientStarted: PlatformTypesUBILoggerUbiLoggerPageViewLoggerLogClientStarted;
-  onBlur: PlatformTypesUBILoggerUbiLoggerPageViewLoggerOnBlur;
-  onFocus: PlatformTypesUBILoggerUbiLoggerPageViewLoggerOnFocus;
-  onVisibilityChange: PlatformTypesUBILoggerUbiLoggerPageViewLoggerOnVisibilityChange;
-  pageInfoProvider: PlatformTypesUBILoggerUbiLoggerPageInfoProvider;
-  populateNavigationReason: PlatformTypesUBILoggerUbiLoggerPageViewLoggerPopulateNavigationReason;
-  removeEventListeners: PlatformTypesUBILoggerUbiLoggerPageViewLoggerRemoveEventListeners;
-  resetNavStartInfo: PlatformTypesUBILoggerUbiLoggerPageViewLoggerResetNavStartInfo;
-  setCurrent: PlatformTypesUBILoggerUbiLoggerPageViewLoggerSetCurrent;
-  setNavigationStatus: PlatformTypesUBILoggerUbiLoggerPageViewLoggerSetNavigationStatus;
-  setPendingInteractionId: PlatformTypesUBILoggerUbiLoggerPageViewLoggerSetPendingInteractionId;
-  setPendingNavigationReason: PlatformTypesUBILoggerUbiLoggerPageViewLoggerSetPendingNavigationReason;
-  setPendingNavigationalRoot: PlatformTypesUBILoggerUbiLoggerPageViewLoggerSetPendingNavigationalRoot;
-  startNavigation: PlatformTypesUBILoggerUbiLoggerPageViewLoggerStartNavigation;
-  storageManager: PlatformTypesUBILoggerUbiLoggerStorageManager;
-}
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerAddEventListeners = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerCompleteNavigation = (
-  arg0: any,
-) => unknown;
-
-export interface PlatformTypesUBILoggerUbiLoggerPageViewLoggerCurrentWindowState {
-  focused: boolean;
-  visible: boolean;
-}
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerGeneratePageInstanceId = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetCurrentEntityUri = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetCurrentNavigationalRoot = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetCurrentPageId = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetCurrentPageInstanceId = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetNavigationStatus = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetPendingInteractionId = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetPendingNavigationalRoot = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerGetPendingNavigationReason = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerHandleFocusChange = (arg0: any) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerHandleFocusStateChange = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerHandleVisibilityChange = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerIsForeground = (arg0: any) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerLogClientGainedFocus = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerLogClientLostFocus = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerLogClientStarted = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerOnBlur = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerOnFocus = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerOnVisibilityChange = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerPopulateNavigationReason = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerRemoveEventListeners = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerResetNavStartInfo = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerSetCurrent = (
+export type PlatformTypesUBILoggerUbiLoggerLogImpression = (
   arg0: any,
   arg1: any,
   arg2: any,
   arg3: any,
   arg4: any,
-  arg5: any,
 ) => unknown;
 
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerSetNavigationStatus = (
-  arg0: any,
-) => unknown;
+export type PlatformTypesUBILoggerUbiLoggerLogImpressionSegment = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerSetPendingInteractionId = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerSetPendingNavigationalRoot = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerSetPendingNavigationReason = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerPageViewLoggerStartNavigation = (arg0: any) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerRegisterEventListeners = () => unknown;
-
-export interface PlatformTypesUBILoggerUbiLoggerStorageManager {
-  clear: PlatformTypesUBILoggerUbiLoggerStorageManagerClear;
-  getItem: PlatformTypesUBILoggerUbiLoggerStorageManagerGetItem;
-  getStorageType: PlatformTypesUBILoggerUbiLoggerStorageManagerGetStorageType;
-  removeItem: PlatformTypesUBILoggerUbiLoggerStorageManagerRemoveItem;
-  setItem: PlatformTypesUBILoggerUbiLoggerStorageManagerSetItem;
-  storageAdapter: PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapter;
-}
-
-export type PlatformTypesUBILoggerUbiLoggerStorageManagerClear = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerStorageManagerGetItem = (arg0: any) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerStorageManagerGetStorageType = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerStorageManagerRemoveItem = (arg0: any) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerStorageManagerSetItem = (
+export type PlatformTypesUBILoggerUbiLoggerLogInteraction = (
   arg0: any,
   arg1: any,
+  arg2: any,
+  arg3: any,
 ) => unknown;
 
-export interface PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapter {
-  clear: PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterClear;
-  getItem: PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterGetItem;
-  items: PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterItems;
-  removeItem: PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterRemoveItem;
-  setItem: PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterSetItem;
-}
-
-export type PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterClear = () => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterGetItem = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterItems = Map<string, string>;
-
-export type PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterRemoveItem = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesUBILoggerUbiLoggerStorageManagerStorageAdapterSetItem = (
+export type PlatformTypesUBILoggerUbiLoggerLogNonAuthImpression = (
   arg0: any,
   arg1: any,
+  arg2: any,
+  arg3: any,
 ) => unknown;
 
-export type PlatformTypesUBILoggerUbiLoggerUnregisterEventListeners = () => unknown;
+export type PlatformTypesUBILoggerUbiLoggerLogNonAuthInteraction = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
 
 export interface PlatformTypesUpdateAPI {
   _updateClient: PlatformTypesUpdateAPIUpdateClient;
@@ -22384,7 +19198,6 @@ export type PlatformTypesUrlDispenserServiceClientGetShortUrl = (arg0: any, arg1
 
 export interface PlatformTypesUserAPI {
   _cosmos: PlatformTypesClipboardAPICosmos;
-  _product_state_service: PlatformTypesRegistryMapValueInstanceProductStateApi;
   getUser: PlatformTypesRegistryMapValueInstanceGetUser;
 }
 
@@ -22392,7 +19205,9 @@ export interface PlatformTypesUserCommentsAPI {
   _loader: PlatformTypesGraphQLLoader;
   addComment: PlatformTypesUserCommentsAPIAddComment;
   addCommentReaction: PlatformTypesUserCommentsAPIAddCommentReaction;
+  addCommentReply: PlatformTypesUserCommentsAPIAddCommentReply;
   deleteComment: PlatformTypesUserCommentsAPIDeleteComment;
+  deleteCommentReaction: PlatformTypesUserCommentsAPIDeleteCommentReaction;
   getComments: PlatformTypesUserCommentsAPIGetComments;
   getTopComments: PlatformTypesUserCommentsAPIGetTopComments;
 }
@@ -22401,7 +19216,11 @@ export type PlatformTypesUserCommentsAPIAddComment = (arg0: any, arg1: any) => u
 
 export type PlatformTypesUserCommentsAPIAddCommentReaction = (arg0: any, arg1: any) => unknown;
 
+export type PlatformTypesUserCommentsAPIAddCommentReply = (arg0: any, arg1: any) => unknown;
+
 export type PlatformTypesUserCommentsAPIDeleteComment = (arg0: any) => unknown;
+
+export type PlatformTypesUserCommentsAPIDeleteCommentReaction = (arg0: any) => unknown;
 
 export type PlatformTypesUserCommentsAPIGetComments = (arg0: any, arg1: any) => unknown;
 

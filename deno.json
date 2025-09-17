@@ -10,20 +10,28 @@
     "format": "deno run -A @biomejs/biome format --write"
   },
   "imports": {
-    "@biomejs/biome": "npm:@biomejs/biome@2.2.0",
+    "@babel/preset-react": "npm:@babel/preset-react@7.27.1",
+    "@babel/preset-typescript": "npm:@babel/preset-typescript@7.27.1",
+    "@biomejs/biome": "npm:@biomejs/biome@2.2.4",
     "@esbuild/": "https://deno.land/x/esbuild@v0.25.8/",
-    "@std/path": "jsr:@std/path@1.1.1",
-    "@std/streams": "jsr:@std/streams@1.0.10",
+    "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@^0.11.1",
+    "@oazmi/esbuild-plugin-deno": "jsr:@oazmi/esbuild-plugin-deno@^0.4.4",
+    "@std/path": "jsr:@std/path@1.1.2",
+    "@std/streams": "jsr:@std/streams@1.0.12",
+    "babel-plugin-react-compiler": "npm:babel-plugin-react-compiler@19.1.0-rc.3",
+    "esbuild-plugin-babel": "npm:esbuild-plugin-babel@0.2.3",
     "dexie": "https://esm.sh/dexie@4.0.11",
     "react": "https://esm.sh/react@19.1.0",
+    "react-compiler-runtime": "npm:react-compiler-runtime@19.1.0-rc.3",
     "react-dom": "https://esm.sh/react-dom@19.1.0",
     "react-dom/client": "https://esm.sh/react-dom@19.1.0/client",
     "react/jsx-runtime": "https://esm.sh/react@19.1.0/jsx-runtime"
   },
   "compilerOptions": {
-    "lib": ["ESNext", "DOM", "DOM.Iterable", "dom.asynciterable", "deno.ns"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "dom.asynciterable", "deno.ns", "deno.unstable"],
     "jsx": "react-jsx"
   },
+  "nodeModulesDir": "auto",
   "lint": {
     "exclude": ["**/*"]
   }
