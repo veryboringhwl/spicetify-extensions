@@ -1,8 +1,9 @@
 import * as esbuild from "@esbuild/mod.js";
+import { denoPlugins } from "@oazmi/esbuild-plugin-deno";
 import { join } from "@std/path";
-import { externalGlobalsPlugin } from "./pluginExternalGlobals.ts";
-import { importMapPlugin } from "./pluginImportMap.ts";
 import { inlineCSSPlugin } from "./pluginInlineCSS.ts";
+import { reactCompilerPlugin } from "./reactCompilerPlugin.ts";
+import { spicetifyShims } from "./spicetifyShimsPlugin.ts";
 
 const getEntryFile = async (folderPath: string): Promise<string | null> => {
   const srcDir = join(folderPath, "src");
@@ -36,18 +37,19 @@ const buildExtension = async (folderName: string, folderPath: string): Promise<v
     minify: true,
     jsx: "automatic",
     external: ["react", "react-dom/client", "react/jsx-runtime"],
+    legalComments: "external",
     plugins: [
-      externalGlobalsPlugin({
-        react: "Spicetify.React",
-        "react-dom": "Spicetify.ReactDOM",
-        "react-dom/client": "Spicetify.ReactDOM",
-        "react/jsx-runtime": "Spicetify.ReactJSX",
-      }),
-      importMapPlugin(),
+      spicetifyShims(),
       inlineCSSPlugin({
         minify: true,
       }),
-    ],
+      ...denoPlugins({
+        initialPluginData: {
+          runtimePackage: "./deno.json",
+        },
+      }),
+      reactCompilerPlugin(),
+    ] as esbuild.Plugin[],
     banner: {
       js: "await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));",
     },
@@ -85,4 +87,4 @@ const runBuilds = async (): Promise<void> => {
   Deno.exit(0);
 };
 
-runBuilds();
+await runBuilds();

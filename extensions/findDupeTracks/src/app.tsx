@@ -89,6 +89,7 @@ const findDuplicatesMenuItem = new Spicetify.ContextMenuV2.Item({
     };
     showDuplicateFinderModal(selectedPlaylist);
   },
+  divider: "after",
   shouldAdd: (props: any, _trigger: any, _target: any) => {
     const parsed: any = parseProps(props);
     const type = Spicetify.URI.from(parsed.uri)?.type;

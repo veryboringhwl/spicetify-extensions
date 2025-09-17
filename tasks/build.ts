@@ -1,8 +1,8 @@
 import * as esbuild from "@esbuild/mod.js";
+import { denoPlugins } from "@oazmi/esbuild-plugin-deno";
 import { join } from "@std/path";
-import { externalGlobalsPlugin } from "./pluginExternalGlobals.ts";
-import { importMapPlugin } from "./pluginImportMap.ts";
 import { inlineCSSPlugin } from "./pluginInlineCSS.ts";
+import { spicetifyShims } from "./spicetifyShimsPlugin.ts";
 
 // Deno bundle will have runtime api so can replace esbuild
 const APPDATA: string = Deno.env.get("APPDATA") || "";
@@ -42,16 +42,18 @@ async function buildExtension(folderName: string, folderPath: string): Promise<v
     minify: false,
     jsx: "automatic",
     external: ["react", "react-dom", "react-dom/client", "react/jsx-runtime"],
+    legalComments: "external",
     plugins: [
-      externalGlobalsPlugin({
-        react: "Spicetify.React",
-        "react-dom": "Spicetify.ReactDOM",
-        "react-dom/client": "Spicetify.ReactDOM",
-        "react/jsx-runtime": "Spicetify.ReactJSX",
+      spicetifyShims(),
+      inlineCSSPlugin({
+        minify: false,
       }),
-      importMapPlugin(),
-      inlineCSSPlugin({ minify: false }),
-    ],
+      ...denoPlugins({
+        initialPluginData: {
+          runtimePackage: "./deno.json",
+        },
+      }),
+    ] as esbuild.Plugin[],
     banner: {
       js: "await new Promise((resolve) => Spicetify.Events.webpackLoaded.on(resolve));",
     },

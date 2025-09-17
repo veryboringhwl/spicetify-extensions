@@ -28,6 +28,33 @@ const AppRouter = () => {
     return () => (unlisten as () => void)();
   }, []);
 
+  useEffect(() => {
+    const rootDiv = document.querySelector<HTMLDivElement>(".custom-pages");
+    const mainEl = document.querySelector<HTMLElement>("main");
+    const mainContainer = document.querySelector<HTMLDivElement>(
+      ".main-view-container__scroll-node-child",
+    );
+    if (!(mainEl && mainContainer && rootDiv)) {
+      return;
+    }
+
+    const hasPagesActive = routes.some((route) => `/${route.path}` === location.pathname);
+
+    if (hasPagesActive) {
+      mainEl.style.display = "none";
+      mainContainer.style.overflow = "hidden";
+      rootDiv.style.height = "100%";
+      rootDiv.style.width = "100%";
+      rootDiv.style.overflow = "hidden";
+    } else {
+      mainEl.style.display = "";
+      mainContainer.style.overflow = "";
+      rootDiv.style.height = "";
+      rootDiv.style.width = "";
+      rootDiv.style.overflow = "";
+    }
+  }, [location]);
+
   return (
     <Spicetify.ReactComponent.Router location={location} navigator={Spicetify.Platform.History}>
       <Spicetify.ReactComponent.Routes>
@@ -47,6 +74,7 @@ const initRoot = async () => {
   const main = await waitForElement(".main-view-container__scroll-node-child");
   if (!main) throw new Error("main-view-container__scroll-node-child not found");
   rootDiv = document.createElement("div");
+  rootDiv.className = "custom-pages";
   main.appendChild(rootDiv);
   reactRoot = createRoot(rootDiv);
 };

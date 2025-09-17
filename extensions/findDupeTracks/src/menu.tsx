@@ -19,7 +19,7 @@ interface Track {
     name: string;
   };
   artists: Array<{ name: string }>;
-  uid?: string;
+  uid: string;
 }
 
 const DUPLICATE_CATEGORIES = ["exact", "isrc", "likely", "possible", "probable"] as const;

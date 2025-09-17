@@ -56,9 +56,7 @@ export const Dropdown: FC<DropdownProps> = memo(({ value, options, onChange, dis
       >
         {options.map((option) => (
           <div
-            className={`dropdown__option${
-              value === option.value ? " dropdown__option--selected" : ""
-            }`}
+            className={`dropdown__option${value === option.value ? " dropdown__option--selected" : ""}`}
             key={option.value}
             onClick={() => handleSelect(option)}
             onKeyDown={(e) => e.key === "Enter" && handleSelect(option)}

@@ -12,7 +12,6 @@ const foundModules = chunks.filter(
 );
 
 const component = foundModules.flatMap(([id]) => Object.values(require(id)))[0];
-// @ts-expect-error
 Spicetify.ReactComponent.ConfirmDialog = component;
 
 export interface ConfirmDialogProps {

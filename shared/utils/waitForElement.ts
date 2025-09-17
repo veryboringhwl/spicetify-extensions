@@ -1,12 +1,16 @@
-export const waitForElement = (
+interface waitForElementOptions {
+  timeout?: number;
+}
+
+export const waitForElement = async <T extends Element>(
   selector: string,
-  { timeout = 5000 } = {},
-): Promise<Element | null> => {
+  { timeout = 3000 }: waitForElementOptions = {},
+): Promise<T | null> => {
   const startTime = performance.now();
 
   return new Promise((resolve) => {
-    function check(): void {
-      const element = document.querySelector(selector);
+    const check = (): void => {
+      const element = document.querySelector<T>(selector);
 
       if (element) {
         resolve(element);
@@ -14,13 +18,13 @@ export const waitForElement = (
       }
 
       if (performance.now() - startTime > timeout) {
-        console.warn(`Timeout: Could not find element: ${selector}`);
         resolve(null);
+        console.warn(`Timeout: Could not find element with selector: ${selector}`);
         return;
       }
 
       requestAnimationFrame(check);
-    }
+    };
 
     check();
   });
