@@ -1,5 +1,7 @@
-import parseProps from "../../../shared/api/parseProps.ts";
-import generateTypes from "../../../shared/api/testGenerateTypes.ts";
+// biome-ignore lint: Disabled to avoid regenerating types on page load
+import { generateTypes } from "../../../shared/api/generateTypes.ts";
+import { parseProps } from "../../../shared/api/parseProps.ts";
+// import { createPage } from "../../../shared/components/createPage.tsx";
 import { Icons } from "../../../shared/components/icons.tsx";
 import { Notification } from "../../../shared/components/notification.tsx";
 
@@ -27,7 +29,7 @@ Spicetify.Platform.ProductStateAPI.productStateApi.subValues(
       return;
     }
 
-    if (requestCount < 3) {
+    if (requestCount < 5) {
       const current = data?.pairs?.["app-developer"];
       if (current !== "2") {
         console.log('"app-developer" value changed. Resetting to "2".');
@@ -40,7 +42,7 @@ Spicetify.Platform.ProductStateAPI.productStateApi.subValues(
         requestCount++;
       }
     } else {
-      console.warn("Rate limit exceeded for product state changes. Permanently disabling.");
+      console.error("Rate limit exceeded for product state changes. Permanently disabling.");
       permanentlyDisabled = true;
     }
   },
@@ -133,6 +135,16 @@ const copyAlbumPropsItem = new Spicetify.ContextMenuV2.Item({
   },
 });
 
+const copyAllPropsItem = new Spicetify.ContextMenuV2.Item({
+  children: "Copy All props to clipboard",
+  leadingIcon: Icons.HTML.duplicate,
+  divider: "after",
+  onClick: (context: any, _item: any, _event: any) => {
+    Spicetify.Platform.ClipboardAPI.copy(context.props);
+  },
+  shouldAdd: () => true,
+});
+
 const logContextMenuPropsItem = new Spicetify.ContextMenuV2.Item({
   children: "Log context menu props",
   leadingIcon: Icons.HTML.terminal,
@@ -140,15 +152,6 @@ const logContextMenuPropsItem = new Spicetify.ContextMenuV2.Item({
     console.log("Context:", context);
     console.log("Item:", item);
     console.log("Event:", event);
-  },
-  shouldAdd: () => true,
-});
-
-const copyAllPropsItem = new Spicetify.ContextMenuV2.Item({
-  children: "Copy All props to clipboard",
-  leadingIcon: Icons.HTML.duplicate,
-  onClick: (context: any, _item: any, _event: any) => {
-    Spicetify.Platform.ClipboardAPI.copy(context.props);
   },
   shouldAdd: () => true,
 });
@@ -254,7 +257,7 @@ function patchUbiLogger() {
 
 const logUbiEventsItem = new Spicetify.ContextMenuV2.Item({
   children: "Log User Behavior Insights Events",
-  leadingIcon: Icons.HTML.terminal,
+  leadingIcon: Icons.HTML.person,
   onClick: () => {
     Notification({
       message: "Only goes away after a reload/restart",
@@ -277,25 +280,33 @@ const reloadSpotify = new Spicetify.ContextMenuV2.Item({
 
 const restartSpotify = new Spicetify.ContextMenuV2.Item({
   children: "Restart Spotify",
-  leadingIcon: Icons.HTML.reload,
-  onClick: () => {
-    Spicetify.Platform.LifecycleAPI.restart();
+  leadingIcon: Icons.HTML.restart,
+  onClick: async () => {
+    await Spicetify.Platform.LifecycleAPI.restart();
   },
   shouldAdd: () => true,
 });
 
 const closeSpotify = new Spicetify.ContextMenuV2.Item({
   children: "Close Spotify",
-  leadingIcon: Icons.HTML.close,
-  onClick: () => {
-    Spicetify.Platform.LifecycleAPI.shutdown();
+  leadingIcon: Icons.HTML.power,
+  onClick: async () => {
+    await Spicetify.Platform.LifecycleAPI.shutdown();
   },
+  shouldAdd: () => true,
+});
+
+const windowsSubMenu = new Spicetify.ContextMenuV2.ItemSubMenu({
+  text: "Window Utils",
+  leadingIcon: Icons.HTML.power,
+  items: [reloadSpotify, restartSpotify, closeSpotify],
   shouldAdd: () => true,
 });
 
 const devUtilsSubMenu = new Spicetify.ContextMenuV2.ItemSubMenu({
   text: "Developer Utils",
-  leadingIcon: Icons.HTML.terminal,
+  leadingIcon: Icons.HTML.code,
+  divider: "after",
   items: [
     copyAlbumPropsItem,
     copyArtistPropsItem,
@@ -305,13 +316,46 @@ const devUtilsSubMenu = new Spicetify.ContextMenuV2.ItemSubMenu({
     logContextMenuPropsItem,
     logEventsItem,
     logUbiEventsItem,
-    reloadSpotify,
-    restartSpotify,
-    closeSpotify,
+    windowsSubMenu,
   ],
   shouldAdd: () => true,
 });
 
 devUtilsSubMenu.register();
 
-Spicetify.Platform.ClipboardAPI.copy(generateTypes(Spicetify.Platform, "PlatformTypes"));
+// Spicetify.Platform.Registry.resolve(Symbol.for("stuff"));
+
+// Spicetify.Platform.ClipboardAPI.copy(generateTypes(Spicetify.Platform, "PlatformTypes"));
+
+// // @ts-expect-error
+// const require = globalThis.webpackChunkclient_web.push([[Symbol()], {}, (re) => re]);
+// const chunks = Object.entries(require.m);
+
+// const foundModules = chunks.filter(
+//   ([_, definition]) =>
+//     typeof definition === "function" &&
+//     definition.toString().includes("main-confirmDialog-container"),
+// );
+
+// if (foundModules.length === 1) {
+//   const component = foundModules.flatMap(([id]) => Object.values(require(id)))[0];
+//   globalThis.Spicetify.ReactComponent.ConfirmDialog = component;
+// } else {
+//   console.error("ConfirmDialog not found");
+// }
+
+// const playerInstance = Spicetify.Platform.StandalonePlayerCoordinatorAPI.createStandalonePlayerInstance({});
+
+//   const getCircularReplacer = () => {
+//       const seen = new WeakSet();
+//       return (key, value) => {
+//         if (typeof value === "object" && value !== null) {
+//           if (seen.has(value)) {
+//             return "[Circular]";
+//           }
+//           seen.add(value);
+//         }
+//         return value;
+//       };
+//     };
+//     Spicetify.Platform.ClipboardAPI.copy(JSON.stringify(playerInstance, getCircularReplacer()))
