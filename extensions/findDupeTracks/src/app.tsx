@@ -1,7 +1,7 @@
 import { parseProps } from "../../../shared/api/parseProps.ts";
 import { Icons } from "../../../shared/components/icons.tsx";
 import { PopupModal } from "../../../shared/components/popupModal.tsx";
-import PlaylistDuplicateFinder from "./menu.tsx";
+import { PlaylistDuplicateFinder } from "./menu.tsx";
 import SettingsMenu from "./settings.tsx";
 import styles from "./styles.css" with { type: "css" };
 

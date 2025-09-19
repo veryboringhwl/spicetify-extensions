@@ -23,6 +23,7 @@
   flex-direction: column;
   gap: var(--fdp-gap);
   width: 100%;
+  min-height: 500px;
   animation: fdp-fade-in 240ms ease-out both;
 
   .find-duplicates__header {
@@ -45,6 +46,13 @@
   .find-duplicates__details {
     font-size: 1.1rem;
     color: var(--fdp-subtext);
+  }
+
+  .find-duplicates__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
 }
 
