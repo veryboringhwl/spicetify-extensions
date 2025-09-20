@@ -1,30 +1,24 @@
 .fullscreen {
   .Root__top-container {
-    grid-template-areas: "main-view";
-    grid-template-rows: unset;
-    grid-template-columns: unset;
+    grid-template: "main-view" 1fr / 1fr !important;
     gap: 0px;
-  }
-
-  /*bunch of stuff in Root__top-container*/
-  .xlgKfueiF46Wo_sED8YA {
-    display: none;
   }
 
   .main-topBar-container {
     left: 30px;
   }
 
-  .Root__globalNav,
-  .Root__nav-bar,
-  .Root__now-playing-bar,
-  .Root__right-sidebar {
+  .Root__top-container > *:not(.Root__main-view) {
     display: none;
   }
 
+  /*required for lucid theme*/
   .Root__main-view {
-    /*required for lucid theme*/
-    grid-row: unset;
-    grid-column: unset;
+    grid-area: "main-view" !important;
+    grid-row-end: unset !important;
+  }
+
+  .lyrics-config-button-container {
+    padding-bottom: unset !important;
   }
 }
