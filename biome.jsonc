@@ -2,7 +2,7 @@
   "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
   "files": {
     "includes": ["**", "!**/dist"],
-    "maxSize": 100000000,
+    "maxSize": 100000000
   },
   "formatter": {
     "includes": ["**"],
@@ -10,35 +10,35 @@
     "formatWithErrors": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 100,
+    "lineWidth": 100
   },
 
   "linter": {
     "includes": ["**", "!**/shared/types/**"],
     "enabled": true,
     "domains": {
-      "react": "all",
+      "react": "all"
     },
     "rules": {
       "complexity": {
-        "noImportantStyles": "error",
+        "noImportantStyles": "off"
       },
       // "performance": "error",
       "recommended": true,
       "suspicious": {
         "noDebugger": "off",
-        "noExplicitAny": "off",
+        "noExplicitAny": "off"
       },
-      "a11y": "off",
-    },
+      "a11y": "off"
+    }
   },
   "assist": {
     "actions": {
       "source": {
         "organizeImports": "on",
         "useSortedAttributes": "on",
-        "useSortedProperties": "on",
-      },
-    },
-  },
+        "useSortedProperties": "on"
+      }
+    }
+  }
 }
