@@ -3,27 +3,36 @@ export async function fetchGraphQLForAlbumTracks(
 ): Promise<Map<string, object>> {
   const dataMap = new Map<string, object>();
 
-  const batchFetchPromises = Array.from(albumURIs).map(async (albumUri: string): Promise<void> => {
-    const response = (await Spicetify.Platform.GraphQLLoader(
-      Spicetify.GraphQL.Definitions.queryAlbumTracks,
-      {
-        uri: albumUri,
-        locale: Spicetify.Locale.getLocale(),
-        offset: 0,
-        limit: 5000,
-      },
-    )) as { data: any };
-    const albumTracksData = response?.data?.albumUnion?.tracksV2?.items;
-    if (albumTracksData) {
-      for (const item of albumTracksData) {
-        const trackUri: string | undefined = item?.track?.uri;
-        if (trackUri) {
-          dataMap.set(trackUri, item.track);
+  const BATCH_SIZE = 250;
+  const albumArray = Array.from(albumURIs);
+
+  for (let i = 0; i < albumArray.length; i += BATCH_SIZE) {
+    const batch = albumArray.slice(i, i + BATCH_SIZE);
+
+    const batchPromises = batch.map(async (albumUri: string): Promise<void> => {
+      const response = (await Spicetify.Platform.GraphQLLoader(
+        Spicetify.GraphQL.Definitions.queryAlbumTracks,
+        {
+          uri: albumUri,
+          locale: Spicetify.Locale.getLocale(),
+          offset: 0,
+          limit: 5000,
+        },
+      )) as { data: any };
+
+      const albumTracksData = response?.data?.albumUnion?.tracksV2?.items;
+      if (albumTracksData) {
+        for (const item of albumTracksData) {
+          const trackUri: string | undefined = item?.track?.uri;
+          if (trackUri) {
+            dataMap.set(trackUri, item.track);
+          }
         }
       }
-    }
-  });
+    });
 
-  await Promise.all(batchFetchPromises);
+    await Promise.allSettled(batchPromises);
+  }
+
   return dataMap;
 }

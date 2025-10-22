@@ -670,15 +670,15 @@ export function PlaylistDuplicateFinder({
         return;
       }
 
-      const [countsAndDurationResult, isrcResult] = await Promise.all([
+      const [countsAndDurationResult, isrcResult] = await Promise.allSettled([
         fetchPlayCountsAndDurationForTracksWithCache(fetchedTracks),
         fetchISRCsForTracksWithCache(fetchedTracks),
       ]);
       if (cancelled) return;
 
-      const newPlayCounts = countsAndDurationResult.trackPlayCountMap;
-      const newDurations = countsAndDurationResult.trackDurationMap;
-      const newIsrcs = isrcResult.isrcMap;
+      const newPlayCounts = countsAndDurationResult.value.trackPlayCountMap;
+      const newDurations = countsAndDurationResult.value.trackDurationMap;
+      const newIsrcs = isrcResult.value.isrcMap;
 
       const newDuplicateGroups = findPotentialDuplicates(fetchedTracks, newPlayCounts, newIsrcs);
 
@@ -768,7 +768,7 @@ export function PlaylistDuplicateFinder({
       {isLoading ? (
         <div className="find-duplicates__loading">
           {/*@ts-expect-error*/}
-          <UI.ProgressDots size={"large"} />
+          <UI.ProgressDots size={"medium"} />
         </div>
       ) : (
         <>

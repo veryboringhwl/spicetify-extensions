@@ -33,6 +33,6 @@ export async function fetchWebAPIForTracks(trackURIs: Array<string>): Promise<Ma
       }
     });
 
-  await Promise.all(batchFetchPromises);
+  await Promise.allSettled(batchFetchPromises);
   return dataMap;
 }
