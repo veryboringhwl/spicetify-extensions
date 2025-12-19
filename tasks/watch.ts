@@ -52,7 +52,6 @@ const watchExtension = async (folderName: string, folderPath: string): Promise<v
     minify: false,
     jsx: "automatic",
     external: ["react", "react-dom", "react-dom/client", "react/jsx-runtime"],
-    legalComments: "external",
     plugins: [
       spicetifyShims(),
       ...denoPlugins({

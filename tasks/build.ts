@@ -4,7 +4,6 @@ import { join } from "@std/path";
 import { inlineCSSPlugin } from "./pluginInlineCSS.ts";
 import { spicetifyShims } from "./spicetifyShimsPlugin.ts";
 
-// Deno bundle will have runtime api so can replace esbuild
 const APPDATA: string = Deno.env.get("APPDATA") || "";
 const LOCALAPPDATA: string = Deno.env.get("LOCALAPPDATA") || "";
 const SPICETIFY_OUT: string = join(APPDATA, "spicetify", "Extensions") || "";
@@ -42,7 +41,6 @@ async function buildExtension(folderName: string, folderPath: string): Promise<v
     minify: false,
     jsx: "automatic",
     external: ["react", "react-dom", "react-dom/client", "react/jsx-runtime"],
-    legalComments: "external",
     plugins: [
       spicetifyShims(),
       inlineCSSPlugin({

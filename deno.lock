@@ -1,19 +1,19 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@luca/esbuild-deno-loader@~0.11.1": "0.11.1",
-    "jsr:@oazmi/esbuild-plugin-deno@~0.4.4": "0.4.4",
-    "jsr:@oazmi/kitchensink@0.9.14": "0.9.14",
+    "jsr:@luca/esbuild-deno-loader@0.11.1": "0.11.1",
+    "jsr:@oazmi/esbuild-plugin-deno@0.4.5": "0.4.5",
+    "jsr:@oazmi/kitchensink@0.9.15": "0.9.15",
     "jsr:@std/bytes@^1.0.2": "1.0.6",
     "jsr:@std/bytes@^1.0.6": "1.0.6",
     "jsr:@std/encoding@^1.0.5": "1.0.10",
-    "jsr:@std/internal@^1.0.10": "1.0.10",
-    "jsr:@std/path@1.1.2": "1.1.2",
-    "jsr:@std/path@^1.0.6": "1.1.2",
-    "jsr:@std/streams@1.0.12": "1.0.12",
-    "npm:@babel/preset-react@7.27.1": "7.27.1_@babel+core@7.28.4",
-    "npm:@babel/preset-typescript@7.27.1": "7.27.1_@babel+core@7.28.4",
-    "npm:@biomejs/biome@2.2.4": "2.2.4",
+    "jsr:@std/internal@^1.0.12": "1.0.12",
+    "jsr:@std/path@1.1.3": "1.1.3",
+    "jsr:@std/path@^1.0.6": "1.1.3",
+    "jsr:@std/streams@1.0.14": "1.0.14",
+    "npm:@babel/preset-react@7.28.5": "7.28.5_@babel+core@7.28.4",
+    "npm:@babel/preset-typescript@7.28.5": "7.28.5_@babel+core@7.28.4",
+    "npm:@biomejs/biome@^2.3.10": "2.3.10",
     "npm:babel-plugin-react-compiler@19.1.0-rc.3": "19.1.0-rc.3",
     "npm:esbuild-plugin-babel@0.2.3": "0.2.3_@babel+core@7.28.4",
     "npm:react-compiler-runtime@19.1.0-rc.3": "19.1.0-rc.3_react@19.1.1"
@@ -27,14 +27,14 @@
         "jsr:@std/path@^1.0.6"
       ]
     },
-    "@oazmi/esbuild-plugin-deno@0.4.4": {
-      "integrity": "08b03f9cac9c9a606a27bd1c4896c1cf08a5b8a43400b78910dcc32a5d20217f",
+    "@oazmi/esbuild-plugin-deno@0.4.5": {
+      "integrity": "e3171fdb4194f38fe824a3cf24535942e6a4bb36ac597a721949301faff033bb",
       "dependencies": [
         "jsr:@oazmi/kitchensink"
       ]
     },
-    "@oazmi/kitchensink@0.9.14": {
-      "integrity": "3510645cd38bfc03f391e64c2cafb075fbc33f334f8891f0498d95444878a11d"
+    "@oazmi/kitchensink@0.9.15": {
+      "integrity": "01fce611fb67dfe100aaf0e98ac3a039c47b84cf01dd299c0b3647bff88c3d86"
     },
     "@std/bytes@1.0.6": {
       "integrity": "f6ac6adbd8ccd99314045f5703e23af0a68d7f7e58364b47d2c7f408aeb5820a"
@@ -42,17 +42,17 @@
     "@std/encoding@1.0.10": {
       "integrity": "8783c6384a2d13abd5e9e87a7ae0520a30e9f56aeeaa3bdf910a3eaaf5c811a1"
     },
-    "@std/internal@1.0.10": {
-      "integrity": "e3be62ce42cab0e177c27698e5d9800122f67b766a0bea6ca4867886cbde8cf7"
+    "@std/internal@1.0.12": {
+      "integrity": "972a634fd5bc34b242024402972cd5143eac68d8dffaca5eaa4dba30ce17b027"
     },
-    "@std/path@1.1.2": {
-      "integrity": "c0b13b97dfe06546d5e16bf3966b1cadf92e1cc83e56ba5476ad8b498d9e3038",
+    "@std/path@1.1.3": {
+      "integrity": "b015962d82a5e6daea980c32b82d2c40142149639968549c649031a230b1afb3",
       "dependencies": [
         "jsr:@std/internal"
       ]
     },
-    "@std/streams@1.0.12": {
-      "integrity": "ae925fa1dc459b1abf5cbaa28cc5c7b0485853af3b2a384b0dc22d86e59dfbf4",
+    "@std/streams@1.0.14": {
+      "integrity": "c0df6cdd73bd4bbcbe4baa89e323b88418c90ceb2d926f95aa99bdcdbfca2411",
       "dependencies": [
         "jsr:@std/bytes@^1.0.6"
       ]
@@ -81,7 +81,7 @@
         "@babel/parser",
         "@babel/template",
         "@babel/traverse",
-        "@babel/types",
+        "@babel/types@7.28.5",
         "@jridgewell/remapping",
         "convert-source-map",
         "debug",
@@ -90,11 +90,11 @@
         "semver"
       ]
     },
-    "@babel/generator@7.28.3": {
-      "integrity": "sha512-3lSpxGgvnmZznmBkCRnVREPUFJv2wrv9iAoFDvADJc0ypmdOxdUtcLeBgBJ6zE0PMeTKnxeQzyk0xTBq4Ep7zw==",
+    "@babel/generator@7.28.5": {
+      "integrity": "sha512-3EwLFhZ38J4VyIP6WNtt2kUdW9dokXA9Cr4IVIFHuCpZ3H8/YFOl5JjZHisrn1fATPBmKKqXzDFvh9fUwHz6CQ==",
       "dependencies": [
         "@babel/parser",
-        "@babel/types",
+        "@babel/types@7.28.5",
         "@jridgewell/gen-mapping",
         "@jridgewell/trace-mapping",
         "jsesc"
@@ -103,7 +103,7 @@
     "@babel/helper-annotate-as-pure@7.27.3": {
       "integrity": "sha512-fXSwMQqitTGeHLBC08Eq5yXz2m37E4pJX1qAU1+2cNedz/ifv/bVXft90VeSav5nFO61EcNgwr0aJxbyPaWBPg==",
       "dependencies": [
-        "@babel/types"
+        "@babel/types@7.28.5"
       ]
     },
     "@babel/helper-compilation-targets@7.27.2": {
@@ -116,8 +116,8 @@
         "semver"
       ]
     },
-    "@babel/helper-create-class-features-plugin@7.28.3_@babel+core@7.28.4": {
-      "integrity": "sha512-V9f6ZFIYSLNEbuGA/92uOvYsGCJNsuA8ESZ4ldc09bWk/j8H8TKiPw8Mk1eG6olpnO0ALHJmYfZvF4MEE4gajg==",
+    "@babel/helper-create-class-features-plugin@7.28.5_@babel+core@7.28.4": {
+      "integrity": "sha512-q3WC4JfdODypvxArsJQROfupPBq9+lMwjKq7C33GhbFYJsufD0yd/ziwD+hJucLeWsnFPWZjsU2DNFqBPE7jwQ==",
       "dependencies": [
         "@babel/core",
         "@babel/helper-annotate-as-pure",
@@ -132,18 +132,18 @@
     "@babel/helper-globals@7.28.0": {
       "integrity": "sha512-+W6cISkXFa1jXsDEdYA8HeevQT/FULhxzR99pxphltZcVaugps53THCeiWA8SguxxpSp3gKPiuYfSWopkLQ4hw=="
     },
-    "@babel/helper-member-expression-to-functions@7.27.1": {
-      "integrity": "sha512-E5chM8eWjTp/aNoVpcbfM7mLxu9XGLWYise2eBKGQomAk/Mb4XoxyqXTZbuTohbsl8EKqdlMhnDI2CCLfcs9wA==",
+    "@babel/helper-member-expression-to-functions@7.28.5": {
+      "integrity": "sha512-cwM7SBRZcPCLgl8a7cY0soT1SptSzAlMH39vwiRpOQkJlh53r5hdHwLSCZpQdVLT39sZt+CRpNwYG4Y2v77atg==",
       "dependencies": [
         "@babel/traverse",
-        "@babel/types"
+        "@babel/types@7.28.5"
       ]
     },
     "@babel/helper-module-imports@7.27.1": {
       "integrity": "sha512-0gSFWUPNXNopqtIPQvlD5WgXYI5GY2kP2cCvoT8kczjbfcfuIljTbcWrulD1CIPIX2gt1wghbDy08yE1p+/r3w==",
       "dependencies": [
         "@babel/traverse",
-        "@babel/types"
+        "@babel/types@7.28.5"
       ]
     },
     "@babel/helper-module-transforms@7.28.3_@babel+core@7.28.4": {
@@ -158,7 +158,7 @@
     "@babel/helper-optimise-call-expression@7.27.1": {
       "integrity": "sha512-URMGH08NzYFhubNSGJrpUEphGKQwMQYBySzat5cAByY1/YgIRkULnIy3tAMeszlL/so2HbeilYloUmSpd7GdVw==",
       "dependencies": [
-        "@babel/types"
+        "@babel/types@7.28.5"
       ]
     },
     "@babel/helper-plugin-utils@7.27.1": {
@@ -177,14 +177,14 @@
       "integrity": "sha512-Tub4ZKEXqbPjXgWLl2+3JpQAYBJ8+ikpQ2Ocj/q/r0LwE3UhENh7EUabyHjz2kCEsrRY83ew2DQdHluuiDQFzg==",
       "dependencies": [
         "@babel/traverse",
-        "@babel/types"
+        "@babel/types@7.28.5"
       ]
     },
     "@babel/helper-string-parser@7.27.1": {
       "integrity": "sha512-qMlSxKbpRlAridDExk92nSobyDdpPijUq2DW6oDnUqd0iOGxmQjyqhMIihI9+zv4LPyZdRje2cavWPbCbWm3eA=="
     },
-    "@babel/helper-validator-identifier@7.27.1": {
-      "integrity": "sha512-D2hP9eA+Sqx1kBZgzxZh0y1trbuU+JoDkiEwqhQ36nodYqJwyEIhPSdMNd7lOm/4io72luTPWH20Yda0xOuUow=="
+    "@babel/helper-validator-identifier@7.28.5": {
+      "integrity": "sha512-qSs4ifwzKJSV39ucNjsvc6WVHs6b7S03sOh2OcHF9UHfVPqWWALUsNUVzhSBiItjRZoLHx7nIarVjqKVusUZ1Q=="
     },
     "@babel/helper-validator-option@7.27.1": {
       "integrity": "sha512-YvjJow9FxbhFFKDSuFnVCe2WxXk1zWc22fFePVNEaWJEu8IrZVlda6N0uHwzZrUM1il7NC9Mlp4MaJYbYd9JSg=="
@@ -193,13 +193,13 @@
       "integrity": "sha512-HFN59MmQXGHVyYadKLVumYsA9dBFun/ldYxipEjzA4196jpLZd8UjEEBLkbEkvfYreDqJhZxYAWFPtrfhNpj4w==",
       "dependencies": [
         "@babel/template",
-        "@babel/types"
+        "@babel/types@7.28.5"
       ]
     },
-    "@babel/parser@7.28.4": {
-      "integrity": "sha512-yZbBqeM6TkpP9du/I2pUZnJsRMGGvOuIrhjzC1AwHwW+6he4mni6Bp/m8ijn0iOuZuPI2BfkCoSRunpyjnrQKg==",
+    "@babel/parser@7.28.5": {
+      "integrity": "sha512-KKBU1VGYR7ORr3At5HAtUQ+TV3SzRCXmA/8OdDZiLDBIZxVyzXuztPjfLd3BV1PRAQGCMWWSHYhL0F8d5uHBDQ==",
       "dependencies": [
-        "@babel/types"
+        "@babel/types@7.28.5"
       ],
       "bin": true
     },
@@ -247,7 +247,7 @@
         "@babel/helper-module-imports",
         "@babel/helper-plugin-utils",
         "@babel/plugin-syntax-jsx",
-        "@babel/types"
+        "@babel/types@7.28.5"
       ]
     },
     "@babel/plugin-transform-react-pure-annotations@7.27.1_@babel+core@7.28.4": {
@@ -258,8 +258,8 @@
         "@babel/helper-plugin-utils"
       ]
     },
-    "@babel/plugin-transform-typescript@7.28.0_@babel+core@7.28.4": {
-      "integrity": "sha512-4AEiDEBPIZvLQaWlc9liCavE0xRM0dNca41WtBeM3jgFptfUOSG9z0uteLhq6+3rq+WB6jIvUwKDTpXEHPJ2Vg==",
+    "@babel/plugin-transform-typescript@7.28.5_@babel+core@7.28.4": {
+      "integrity": "sha512-x2Qa+v/CuEoX7Dr31iAfr0IhInrVOWZU/2vJMJ00FOR/2nM0BcBEclpaf9sWCDc+v5e9dMrhSH8/atq/kX7+bA==",
       "dependencies": [
         "@babel/core",
         "@babel/helper-annotate-as-pure",
@@ -269,8 +269,8 @@
         "@babel/plugin-syntax-typescript"
       ]
     },
-    "@babel/preset-react@7.27.1_@babel+core@7.28.4": {
-      "integrity": "sha512-oJHWh2gLhU9dW9HHr42q0cI0/iHHXTLGe39qvpAZZzagHy0MzYLCnCVV0symeRvzmjHyVU7mw2K06E6u/JwbhA==",
+    "@babel/preset-react@7.28.5_@babel+core@7.28.4": {
+      "integrity": "sha512-Z3J8vhRq7CeLjdC58jLv4lnZ5RKFUJWqH5emvxmv9Hv3BD1T9R/Im713R4MTKwvFaV74ejZ3sM01LyEKk4ugNQ==",
       "dependencies": [
         "@babel/core",
         "@babel/helper-plugin-utils",
@@ -281,8 +281,8 @@
         "@babel/plugin-transform-react-pure-annotations"
       ]
     },
-    "@babel/preset-typescript@7.27.1_@babel+core@7.28.4": {
-      "integrity": "sha512-l7WfQfX0WK4M0v2RudjuQK4u99BS6yLHYEmdtVPP7lKV013zr9DygFuWNlnbvQ9LR+LS0Egz/XAvGx5U9MX0fQ==",
+    "@babel/preset-typescript@7.28.5_@babel+core@7.28.4": {
+      "integrity": "sha512-+bQy5WOI2V6LJZpPVxY+yp66XdZ2yifu0Mc1aP5CQKgjn4QM5IN2i5fAZ4xKop47pr8rpVhiAeu+nDQa12C8+g==",
       "dependencies": [
         "@babel/core",
         "@babel/helper-plugin-utils",
@@ -297,18 +297,18 @@
       "dependencies": [
         "@babel/code-frame",
         "@babel/parser",
-        "@babel/types"
+        "@babel/types@7.28.5"
       ]
     },
-    "@babel/traverse@7.28.4": {
-      "integrity": "sha512-YEzuboP2qvQavAcjgQNVgsvHIDv6ZpwXvcvjmyySP2DIMuByS/6ioU5G9pYrWHM6T2YDfc7xga9iNzYOs12CFQ==",
+    "@babel/traverse@7.28.5": {
+      "integrity": "sha512-TCCj4t55U90khlYkVV/0TfkJkAkUg3jZFA3Neb7unZT8CPok7iiRfaX0F+WnqWqt7OxhOn0uBKXCw4lbL8W0aQ==",
       "dependencies": [
         "@babel/code-frame",
         "@babel/generator",
         "@babel/helper-globals",
         "@babel/parser",
         "@babel/template",
-        "@babel/types",
+        "@babel/types@7.28.5",
         "debug"
       ]
     },
@@ -319,8 +319,15 @@
         "@babel/helper-validator-identifier"
       ]
     },
-    "@biomejs/biome@2.2.4": {
-      "integrity": "sha512-TBHU5bUy/Ok6m8c0y3pZiuO/BZoY/OcGxoLlrfQof5s8ISVwbVBdFINPQZyFfKwil8XibYWb7JMwnT8wT4WVPg==",
+    "@babel/types@7.28.5": {
+      "integrity": "sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==",
+      "dependencies": [
+        "@babel/helper-string-parser",
+        "@babel/helper-validator-identifier"
+      ]
+    },
+    "@biomejs/biome@2.3.10": {
+      "integrity": "sha512-/uWSUd1MHX2fjqNLHNL6zLYWBbrJeG412/8H7ESuK8ewoRoMPUgHDebqKrPTx/5n6f17Xzqc9hdg3MEqA5hXnQ==",
       "optionalDependencies": [
         "@biomejs/cli-darwin-arm64",
         "@biomejs/cli-darwin-x64",
@@ -333,43 +340,43 @@
       ],
       "bin": true
     },
-    "@biomejs/cli-darwin-arm64@2.2.4": {
-      "integrity": "sha512-RJe2uiyaloN4hne4d2+qVj3d3gFJFbmrr5PYtkkjei1O9c+BjGXgpUPVbi8Pl8syumhzJjFsSIYkcLt2VlVLMA==",
+    "@biomejs/cli-darwin-arm64@2.3.10": {
+      "integrity": "sha512-M6xUjtCVnNGFfK7HMNKa593nb7fwNm43fq1Mt71kpLpb+4mE7odO8W/oWVDyBVO4ackhresy1ZYO7OJcVo/B7w==",
       "os": ["darwin"],
       "cpu": ["arm64"]
     },
-    "@biomejs/cli-darwin-x64@2.2.4": {
-      "integrity": "sha512-cFsdB4ePanVWfTnPVaUX+yr8qV8ifxjBKMkZwN7gKb20qXPxd/PmwqUH8mY5wnM9+U0QwM76CxFyBRJhC9tQwg==",
+    "@biomejs/cli-darwin-x64@2.3.10": {
+      "integrity": "sha512-Vae7+V6t/Avr8tVbFNjnFSTKZogZHFYl7MMH62P/J1kZtr0tyRQ9Fe0onjqjS2Ek9lmNLmZc/VR5uSekh+p1fg==",
       "os": ["darwin"],
       "cpu": ["x64"]
     },
-    "@biomejs/cli-linux-arm64-musl@2.2.4": {
-      "integrity": "sha512-7TNPkMQEWfjvJDaZRSkDCPT/2r5ESFPKx+TEev+I2BXDGIjfCZk2+b88FOhnJNHtksbOZv8ZWnxrA5gyTYhSsQ==",
+    "@biomejs/cli-linux-arm64-musl@2.3.10": {
+      "integrity": "sha512-B9DszIHkuKtOH2IFeeVkQmSMVUjss9KtHaNXquYYWCjH8IstNgXgx5B0aSBQNr6mn4RcKKRQZXn9Zu1rM3O0/A==",
       "os": ["linux"],
       "cpu": ["arm64"]
     },
-    "@biomejs/cli-linux-arm64@2.2.4": {
-      "integrity": "sha512-M/Iz48p4NAzMXOuH+tsn5BvG/Jb07KOMTdSVwJpicmhN309BeEyRyQX+n1XDF0JVSlu28+hiTQ2L4rZPvu7nMw==",
+    "@biomejs/cli-linux-arm64@2.3.10": {
+      "integrity": "sha512-hhPw2V3/EpHKsileVOFynuWiKRgFEV48cLe0eA+G2wO4SzlwEhLEB9LhlSrVeu2mtSn205W283LkX7Fh48CaxA==",
       "os": ["linux"],
       "cpu": ["arm64"]
     },
-    "@biomejs/cli-linux-x64-musl@2.2.4": {
-      "integrity": "sha512-m41nFDS0ksXK2gwXL6W6yZTYPMH0LughqbsxInSKetoH6morVj43szqKx79Iudkp8WRT5SxSh7qVb8KCUiewGg==",
+    "@biomejs/cli-linux-x64-musl@2.3.10": {
+      "integrity": "sha512-QTfHZQh62SDFdYc2nfmZFuTm5yYb4eO1zwfB+90YxUumRCR171tS1GoTX5OD0wrv4UsziMPmrePMtkTnNyYG3g==",
       "os": ["linux"],
       "cpu": ["x64"]
     },
-    "@biomejs/cli-linux-x64@2.2.4": {
-      "integrity": "sha512-orr3nnf2Dpb2ssl6aihQtvcKtLySLta4E2UcXdp7+RTa7mfJjBgIsbS0B9GC8gVu0hjOu021aU8b3/I1tn+pVQ==",
+    "@biomejs/cli-linux-x64@2.3.10": {
+      "integrity": "sha512-wwAkWD1MR95u+J4LkWP74/vGz+tRrIQvr8kfMMJY8KOQ8+HMVleREOcPYsQX82S7uueco60L58Wc6M1I9WA9Dw==",
       "os": ["linux"],
       "cpu": ["x64"]
     },
-    "@biomejs/cli-win32-arm64@2.2.4": {
-      "integrity": "sha512-NXnfTeKHDFUWfxAefa57DiGmu9VyKi0cDqFpdI+1hJWQjGJhJutHPX0b5m+eXvTKOaf+brU+P0JrQAZMb5yYaQ==",
+    "@biomejs/cli-win32-arm64@2.3.10": {
+      "integrity": "sha512-o7lYc9n+CfRbHvkjPhm8s9FgbKdYZu5HCcGVMItLjz93EhgJ8AM44W+QckDqLA9MKDNFrR8nPbO4b73VC5kGGQ==",
       "os": ["win32"],
       "cpu": ["arm64"]
     },
-    "@biomejs/cli-win32-x64@2.2.4": {
-      "integrity": "sha512-3Y4V4zVRarVh/B/eSHczR4LYoSVyv3Dfuvm3cWs5w/HScccS0+Wt/lHOcDTRYeHjQmMYVC3rIRWqyN2EI52+zg==",
+    "@biomejs/cli-win32-x64@2.3.10": {
+      "integrity": "sha512-pHEFgq7dUEsKnqG9mx9bXihxGI49X+ar+UBrEIj3Wqj3UCZp1rNgV+OoyjFgcXsjCWpuEAF4VJdkZr3TrWdCbQ==",
       "os": ["win32"],
       "cpu": ["x64"]
     },
@@ -403,7 +410,7 @@
     "babel-plugin-react-compiler@19.1.0-rc.3": {
       "integrity": "sha512-mjRn69WuTz4adL0bXGx8Rsyk1086zFJeKmes6aK0xPuK3aaXmDJdLHqwKKMrpm6KAI1MCoUK72d2VeqQbu8YIA==",
       "dependencies": [
-        "@babel/types"
+        "@babel/types@7.28.4"
       ]
     },
     "baseline-browser-mapping@2.8.5": {
@@ -501,7 +508,12 @@
     }
   },
   "redirects": {
+    "https://esm.sh/@types/react-dom@~19.1.11/client.d.ts": "https://esm.sh/@types/react-dom@19.1.11/client.d.ts",
+    "https://esm.sh/@types/react-dom@~19.1.11/index.d.ts": "https://esm.sh/@types/react-dom@19.1.11/index.d.ts",
     "https://esm.sh/@types/react@~19.0.12/jsx-runtime.d.ts": "https://esm.sh/@types/react@19.0.14/jsx-runtime.d.ts",
+    "https://esm.sh/@types/react@~19.1.17/index.d.ts": "https://esm.sh/@types/react@19.1.17/index.d.ts",
+    "https://esm.sh/@types/react@~19.1.17/jsx-runtime.d.ts": "https://esm.sh/@types/react@19.1.17/jsx-runtime.d.ts",
+    "https://esm.sh/@types/scheduler@~0.26.0/index.d.ts": "https://esm.sh/@types/scheduler@0.26.0/index.d.ts",
     "https://esm.sh/scheduler@^0.26.0?target=denonext": "https://esm.sh/scheduler@0.26.0?target=denonext"
   },
   "remote": {
@@ -509,6 +521,7 @@
     "https://deno.land/x/denoflate@1.2.1/pkg/denoflate.js": "b9f9ad9457d3f12f28b1fb35c555f57443427f74decb403113d67364e4f2caf4",
     "https://deno.land/x/denoflate@1.2.1/pkg/denoflate_bg.wasm.js": "d581956245407a2115a3d7e8d85a9641c032940a8e810acbd59ca86afd34d44d",
     "https://deno.land/x/esbuild@v0.25.8/mod.js": "a3a34e05849068a0f6e3b3f8d30d3f4affaa9e7b39b1877718caca560dab2132",
+    "https://deno.land/x/esbuild@v0.27.2/mod.js": "c9acd48c94887809e8690c3cad2865816a000e441e696323d4760ff2c9b15724",
     "https://esm.sh/dexie@4.0.11": "9adecb83911543ac0032b1786fea6cf9a2ce6b4844c59a608e564c33bebb8de8",
     "https://esm.sh/dexie@4.0.11/denonext/dexie.mjs": "0b4199f8c72ff4b986b3c0f48fed0228595675c3003a6c3001223ab95c535a11",
     "https://esm.sh/react-dom@19.1.0": "0af10bc13bc7ef60cd74313dc427d357184e28c86cc878340add5cde7ba00120",
@@ -524,13 +537,13 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@luca/esbuild-deno-loader@~0.11.1",
-      "jsr:@oazmi/esbuild-plugin-deno@~0.4.4",
-      "jsr:@std/path@1.1.2",
-      "jsr:@std/streams@1.0.12",
-      "npm:@babel/preset-react@7.27.1",
-      "npm:@babel/preset-typescript@7.27.1",
-      "npm:@biomejs/biome@2.2.4",
+      "jsr:@luca/esbuild-deno-loader@0.11.1",
+      "jsr:@oazmi/esbuild-plugin-deno@0.4.5",
+      "jsr:@std/path@1.1.3",
+      "jsr:@std/streams@1.0.14",
+      "npm:@babel/preset-react@7.28.5",
+      "npm:@babel/preset-typescript@7.28.5",
+      "npm:@biomejs/biome@^2.3.10",
       "npm:babel-plugin-react-compiler@19.1.0-rc.3",
       "npm:esbuild-plugin-babel@0.2.3",
       "npm:react-compiler-runtime@19.1.0-rc.3"
