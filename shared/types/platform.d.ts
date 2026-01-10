@@ -1,4 +1,4 @@
-// Auto-generated at 2025-09-08T20:09:36.659Z on Spotify Version: 1.2.72.437
+// Auto-generated at 2026-01-10T16:18:36.586Z on Spotify Version: 1.2.80.354
 
 export interface PlatformTypes {
   ActionStoreAPI: PlatformTypesActionStoreAPI;
@@ -22,6 +22,7 @@ export interface PlatformTypes {
   DesktopLogsAPI: PlatformTypesDesktopLogsAPI;
   EqualizerAPI: PlatformTypesEqualizerAPI;
   EventSender: PlatformTypesEventSender;
+  ExclusiveModeAPI: PlatformTypesExclusiveModeAPI;
   ExternalAccessoryAPI: PlatformTypesExternalAccessoryAPI;
   FeatureFlags: PlatformTypesFeatureFlags;
   FeedbackAPI: PlatformTypesFeedbackAPI;
@@ -32,21 +33,26 @@ export interface PlatformTypes {
   JamDevicesAPI: PlatformTypesJamDevicesAPI;
   LibraryAPI: PlatformTypesLibraryAPI;
   LifecycleAPI: PlatformTypesLifecycleAPI;
+  ListPlatformAPI: PlatformTypesListPlatformAPI;
   LocalFilesAPI: PlatformTypesLocalFilesAPI;
   LocalStorageAPI: PlatformTypesLocalStorageAPI;
+  MagpieAPI: PlatformTypesMagpieAPI;
   NativeAPI: PlatformTypesNativeAPI;
   OfflineAPI: PlatformTypesOfflineAPI;
   PlatformData: PlatformTypesPlatformData;
   PlayHistoryAPI: PlatformTypesPlayHistoryAPI;
+  PlayabilityAPI: PlatformTypesPlayabilityAPI;
   PlaybackAPI: PlatformTypesPlaybackAPI;
   PlayerAPI: PlatformTypesPlayerAPI;
   PlaylistAPI: PlatformTypesPlaylistAPI;
+  PlaylistMixingAPI: PlatformTypesPlaylistMixingAPI;
   PlaylistPermissionsAPI: PlatformTypesPlaylistPermissionsAPI;
   PlaylistResyncAPI: PlatformTypesPlaylistResyncAPI;
   PrivateSessionAPI: PlatformTypesPrivateSessionAPI;
   ProductStateAPI: PlatformTypesProductStateAPI;
   PubSubAPI: PlatformTypesPubSubAPI;
   RecentlyPlayedAPI: PlatformTypesRecentlyPlayedAPI;
+  RecentsAPI: PlatformTypesRecentsAPI;
   ReduxStore: PlatformTypesActionStoreAPI;
   Registry: PlatformTypesRegistry;
   RemoteConfigDebugAPI: PlatformTypesRemoteConfigDebugAPI;
@@ -68,7 +74,6 @@ export interface PlatformTypes {
   StandalonePlayerCoordinatorAPI: PlatformTypesStandalonePlayerCoordinatorAPI;
   Translations: PlatformTypesTranslations;
   Transport: PlatformTypesTransport;
-  TunaAPI: PlatformTypesTunaAPI;
   UBILogger: PlatformTypesUBILogger;
   UpdateAPI: PlatformTypesUpdateAPI;
   UrlDispenserServiceClient: PlatformTypesUrlDispenserServiceClient;
@@ -108,11 +113,18 @@ export interface PlatformTypesAdManagers {
 }
 
 export interface PlatformTypesAdManagersAdStateReporter {
+  destroy: PlatformTypesAdManagersAdStateReporterDestroy;
   focusState: PlatformTypesAdManagersAdStateReporterFocusState;
   history: PlatformTypesHistory;
+  historyUnlisten: PlatformTypesAdManagersAdStateReporterHistoryUnlisten;
+  initialize: PlatformTypesAdManagersAdStateReporterInitialize;
   onFocusChanged: PlatformTypesAdManagersAdStateReporterOnFocusChanged;
-  setAdStateKey: PlatformTypesAdManagersAdStateReporterSetAdStateKey;
+  reportStateChange: PlatformTypesAdManagersAdStateReporterReportStateChange;
+  stateUpdater: PlatformTypesAdManagersAdStateReporterStateUpdater;
+  toViewUri: PlatformTypesAdManagersAdStateReporterToViewUri;
 }
+
+export type PlatformTypesAdManagersAdStateReporterDestroy = () => unknown;
 
 export interface PlatformTypesAdManagersAdStateReporterFocusState {
   addFocusListener: PlatformTypesAdManagersAdStateReporterFocusStateAddFocusListener;
@@ -137,9 +149,20 @@ export type PlatformTypesAdManagersAdStateReporterFocusStateRemoveFocusListener 
   arg0: any,
 ) => unknown;
 
+export type PlatformTypesAdManagersAdStateReporterHistoryUnlisten = () => unknown;
+
+export type PlatformTypesAdManagersAdStateReporterInitialize = () => unknown;
+
 export type PlatformTypesAdManagersAdStateReporterOnFocusChanged = (arg0: any) => unknown;
 
-export type PlatformTypesAdManagersAdStateReporterSetAdStateKey = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesAdManagersAdStateReporterReportStateChange = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesAdManagersAdStateReporterStateUpdater = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersAdStateReporterToViewUri = (arg0: any) => unknown;
 
 export interface PlatformTypesAdManagersAudio {
   audioApi: PlatformTypesAdManagersAudioAudioApi;
@@ -151,8 +174,7 @@ export interface PlatformTypesAdManagersAudio {
   inStreamApi: PlatformTypesAdManagersInStreamApi;
   logClick: PlatformTypesAdManagersAudioLogClick;
   onAdMessage: PlatformTypesAdManagersAudioOnAdMessage;
-  onInfoCallback: PlatformTypesAdManagersAudioOnInfoCallback;
-  subscription: PlatformTypesAdManagersAudioSubscription;
+  subscription: null;
 }
 
 export interface PlatformTypesAdManagersAudioAudioApi {
@@ -185,7 +207,7 @@ export interface PlatformTypesAdManagersAudioInStreamApiAdsCoreConnector {
   overrideCountry: PlatformTypesAdManagersAudioInStreamApiAdsCoreConnectorOverrideCountry;
   overridePodcastMetadata: PlatformTypesAdManagersAudioInStreamApiAdsCoreConnectorOverridePodcastMetadata;
   prepareNextContextSlot: PlatformTypesAdManagersAudioInStreamApiAdsCoreConnectorPrepareNextContextSlot;
-  putState: PlatformTypesAdManagersAdStateReporterSetAdStateKey;
+  putState: PlatformTypesAdManagersAdStateReporterStateUpdater;
   putTargeting: PlatformTypesAdManagersAudioInStreamApiAdsCoreConnectorPutTargeting;
   removeRequestHeader: PlatformTypesAdManagersAudioInStreamApiAdsCoreConnectorRemoveRequestHeader;
   setRequestHeader: PlatformTypesAdManagersAudioInStreamApiAdsCoreConnectorSetRequestHeader;
@@ -202,6 +224,7 @@ export interface PlatformTypesAdManagersAudioInStreamApiAdsCoreConnector {
 
 export type PlatformTypesAdManagersAudioInStreamApiAdsCoreConnectorClearSlot = (
   arg0: any,
+  arg1: any,
 ) => unknown;
 
 export type PlatformTypesAdManagersAudioInStreamApiAdsCoreConnectorCreateSlot = (
@@ -320,9 +343,7 @@ export type PlatformTypesAdManagersAudioInStreamApiEnable = (arg0: any) => unkno
 
 export type PlatformTypesAdManagersAudioInStreamApiGetInStreamAd = () => unknown;
 
-export type PlatformTypesAdManagersAudioInStreamApiOnAdMessageCallbacks = Array<
-  PlatformTypesAdManagersAudioOnAdMessage | PlatformTypesAdManagersVtoManagerOnAdMessage
->;
+export type PlatformTypesAdManagersAudioInStreamApiOnAdMessageCallbacks = Array<unknown>;
 
 export type PlatformTypesAdManagersAudioInStreamApiProcessMessage = (arg0: any) => unknown;
 
@@ -334,25 +355,16 @@ export type PlatformTypesAdManagersAudioLogClick = (arg0: any, arg1: any) => unk
 
 export type PlatformTypesAdManagersAudioOnAdMessage = (arg0: any) => unknown;
 
-export type PlatformTypesAdManagersAudioOnInfoCallback = (arg0: any) => unknown;
-
-export interface PlatformTypesAdManagersAudioSubscription {
-  cancel: PlatformTypesAdManagersAudioSubscriptionCancel;
-}
-
-export type PlatformTypesAdManagersAudioSubscriptionCancel = () => unknown;
-
 export interface PlatformTypesAdManagersBillboard {
   activating: boolean;
-  activitySubscription: PlatformTypesAdManagersBillboardActivitySubscription;
   adClick: PlatformTypesAdManagersBillboardAdClick;
   billboardApi: PlatformTypesAdManagersBillboardBillboardApi;
   clearSlot: PlatformTypesAdManagersBillboardClearSlot;
   disable: PlatformTypesAdManagersBillboardDisable;
-  disableWindow: PlatformTypesAdManagersBillboardDisableWindow;
   displayBillboard: PlatformTypesAdManagersBillboardDisplayBillboard;
   enable: PlatformTypesAdManagersBillboardEnable;
   enabled: boolean;
+  ensureImpressionLogged: PlatformTypesAdManagersBillboardEnsureImpressionLogged;
   finish: PlatformTypesAdManagersBillboardFinish;
   focusMinimize: PlatformTypesAdManagersBillboardFocusMinimize;
   focusState: PlatformTypesAdManagersBillboardFocusState;
@@ -362,7 +374,6 @@ export interface PlatformTypesAdManagersBillboard {
   handleDiscard: PlatformTypesAdManagersBillboardHandleDiscard;
   handlePreview: PlatformTypesAdManagersBillboardHandlePreview;
   isPreviewServiceAd: PlatformTypesAdManagersBillboardIsPreviewServiceAd;
-  listener: PlatformTypesAdManagersBillboardListener;
   logEvent: PlatformTypesAdManagersBillboardLogEvent;
   mapBillboardData: PlatformTypesAdManagersBillboardMapBillboardData;
   minimize: PlatformTypesAdManagersBillboardMinimize;
@@ -373,12 +384,9 @@ export interface PlatformTypesAdManagersBillboard {
   onFocusChanged: PlatformTypesAdManagersBillboardOnFocusChanged;
   onRender: PlatformTypesAdManagersBillboardOnRender;
   resetState: PlatformTypesAdManagersBillboardResetState;
-  subscription: PlatformTypesAdManagersBillboardSubscription;
   triggerAutoMinimizeIfPossible: PlatformTypesAdManagersBillboardTriggerAutoMinimizeIfPossible;
   viewedTimestamp: number;
 }
-
-export type PlatformTypesAdManagersBillboardActivitySubscription = () => unknown;
 
 export type PlatformTypesAdManagersBillboardAdClick = () => unknown;
 
@@ -432,11 +440,11 @@ export type PlatformTypesAdManagersBillboardClearSlot = () => unknown;
 
 export type PlatformTypesAdManagersBillboardDisable = () => unknown;
 
-export type PlatformTypesAdManagersBillboardDisableWindow = () => unknown;
-
 export type PlatformTypesAdManagersBillboardDisplayBillboard = () => unknown;
 
 export type PlatformTypesAdManagersBillboardEnable = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersBillboardEnsureImpressionLogged = () => unknown;
 
 export type PlatformTypesAdManagersBillboardFinish = () => unknown;
 
@@ -450,8 +458,7 @@ export interface PlatformTypesAdManagersBillboardFocusState {
   removeFocusListener: PlatformTypesAdManagersAdStateReporterFocusStateRemoveFocusListener;
 }
 
-export type PlatformTypesAdManagersBillboardFocusStateListeners =
-  Array<PlatformTypesAdManagersBillboard>;
+export type PlatformTypesAdManagersBillboardFocusStateListeners = Array<unknown>;
 
 export type PlatformTypesAdManagersBillboardGetFocusTimeoutMs = () => unknown;
 
@@ -464,24 +471,6 @@ export type PlatformTypesAdManagersBillboardHandleDiscard = () => unknown;
 export type PlatformTypesAdManagersBillboardHandlePreview = (arg0: any) => unknown;
 
 export type PlatformTypesAdManagersBillboardIsPreviewServiceAd = (arg0: any) => unknown;
-
-export interface PlatformTypesAdManagersBillboardListener {
-  canShow: PlatformTypesAdManagersBillboardListenerCanShow;
-  create: PlatformTypesAdManagersBillboardListenerCreate;
-  destroy: PlatformTypesAdManagersBillboardListenerDestroy;
-  isActive: PlatformTypesAdManagersBillboardListenerIsActive;
-  minimize: PlatformTypesAdManagersBillboardListenerMinimize;
-}
-
-export type PlatformTypesAdManagersBillboardListenerCanShow = () => unknown;
-
-export type PlatformTypesAdManagersBillboardListenerCreate = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersBillboardListenerDestroy = () => unknown;
-
-export type PlatformTypesAdManagersBillboardListenerIsActive = () => unknown;
-
-export type PlatformTypesAdManagersBillboardListenerMinimize = () => unknown;
 
 export type PlatformTypesAdManagersBillboardLogEvent = (arg0: any) => unknown;
 
@@ -502,12 +491,6 @@ export type PlatformTypesAdManagersBillboardOnFocusChanged = (arg0: any) => unkn
 export type PlatformTypesAdManagersBillboardOnRender = () => unknown;
 
 export type PlatformTypesAdManagersBillboardResetState = () => unknown;
-
-export interface PlatformTypesAdManagersBillboardSubscription {
-  cancel: PlatformTypesAdManagersBillboardSubscriptionCancel;
-}
-
-export type PlatformTypesAdManagersBillboardSubscriptionCancel = () => unknown;
 
 export type PlatformTypesAdManagersBillboardTriggerAutoMinimizeIfPossible = () => unknown;
 
@@ -557,7 +540,6 @@ export interface PlatformTypesAdManagersEmbeddedAdEmbeddedAdManager {
   embeddedAdsApi: PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerEmbeddedAdsApi;
   enable: PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerEnable;
   fetchSlot: PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerFetchSlot;
-  subscription: PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerSubscription;
   triggerSlot: PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerTriggerSlot;
 }
 
@@ -598,12 +580,6 @@ export type PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerEnable = (
 ) => unknown;
 
 export type PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerFetchSlot = () => unknown;
-
-export interface PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerSubscription {
-  cancel: PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerSubscriptionCancel;
-}
-
-export type PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerSubscriptionCancel = () => unknown;
 
 export type PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerTriggerSlot = () => unknown;
 
@@ -698,15 +674,10 @@ export interface PlatformTypesAdManagersHptoHptoApi {
   adsCoreConnector: PlatformTypesAdManagersAudioInStreamApiAdsCoreConnector;
   esperantoPreviewParser: PlatformTypesAdManagersHptoHptoApiEsperantoPreviewParser;
   eventSender: PlatformTypesEventSender;
-  getAlbum: PlatformTypesAdManagersHptoHptoApiGetAlbum;
   getAlgoPlaylistInfo: PlatformTypesAdManagersHptoHptoApiGetAlgoPlaylistInfo;
-  getArtist: PlatformTypesAdManagersHptoHptoApiGetArtist;
-  getEpisode: PlatformTypesAdManagersHptoHptoApiGetEpisode;
-  getPlaylist: PlatformTypesAdManagersHptoHptoApiGetPlaylist;
-  getShow: PlatformTypesAdManagersHptoHptoApiGetShow;
   getSlot: PlatformTypesAdManagersHptoHptoApiGetSlot;
-  getTrack: PlatformTypesAdManagersHptoHptoApiGetTrack;
   logEvent: PlatformTypesAdManagersHptoHptoApiLogEvent;
+  lookupEntity: PlatformTypesAdManagersHptoHptoApiLookupEntity;
   nativeHptoApi: PlatformTypesAdManagersHptoHptoApiNativeHptoApi;
   subscribeToPreview: PlatformTypesAdManagersHptoHptoApiSubscribeToPreview;
 }
@@ -745,161 +716,20 @@ export type PlatformTypesAdManagersHptoHptoApiEsperantoPreviewParserRenameImageB
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesAdManagersHptoHptoApiGetAlbum = (arg0: any) => unknown;
-
 export type PlatformTypesAdManagersHptoHptoApiGetAlgoPlaylistInfo = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiGetArtist = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiGetEpisode = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiGetPlaylist = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiGetShow = (arg0: any) => unknown;
 
 export type PlatformTypesAdManagersHptoHptoApiGetSlot = (arg0: any) => unknown;
 
-export type PlatformTypesAdManagersHptoHptoApiGetTrack = (arg0: any) => unknown;
-
 export type PlatformTypesAdManagersHptoHptoApiLogEvent = (arg0: any) => unknown;
 
+export type PlatformTypesAdManagersHptoHptoApiLookupEntity = (arg0: any) => unknown;
+
 export interface PlatformTypesAdManagersHptoHptoApiNativeHptoApi {
-  endpoints: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpoints;
-  getAlbum: PlatformTypesAdManagersHptoHptoApiNativeHptoApiGetAlbum;
-  getArtist: PlatformTypesAdManagersHptoHptoApiNativeHptoApiGetArtist;
-  getEpisode: PlatformTypesAdManagersHptoHptoApiNativeHptoApiGetEpisode;
-  getPlaylist: PlatformTypesAdManagersHptoHptoApiNativeHptoApiGetPlaylist;
-  getShow: PlatformTypesAdManagersHptoHptoApiNativeHptoApiGetShow;
-  getTrack: PlatformTypesAdManagersHptoHptoApiNativeHptoApiGetTrack;
-  imageSelection: PlatformTypesAdManagersHptoHptoApiNativeHptoApiImageSelection;
-  mapDefaultData: PlatformTypesAdManagersHptoHptoApiNativeHptoApiMapDefaultData;
-  mapEpisode: PlatformTypesAdManagersHptoHptoApiNativeHptoApiMapEpisode;
-  mapTrack: PlatformTypesAdManagersHptoHptoApiNativeHptoApiMapTrack;
-  spotifyTransport: PlatformTypesRequestBuilder;
+  gqlLoader: PlatformTypesGraphQLLoader;
+  lookupEntity: PlatformTypesAdManagersHptoHptoApiNativeHptoApiLookupEntity;
 }
 
-export interface PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpoints {
-  Album: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsAlbum;
-  Artist: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsArtist;
-  Playlist: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsPlaylist;
-  Show: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsShow;
-  Track: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsTrack;
-}
-
-export interface PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsAlbum {
-  __esModule: boolean;
-  getAlbum: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsAlbumGetAlbum;
-}
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsAlbumGetAlbum = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export interface PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsArtist {
-  __esModule: boolean;
-  getArtist: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsArtistGetArtist;
-}
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsArtistGetArtist = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export interface PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsPlaylist {
-  __esModule: boolean;
-  getOnDemandPlaylists: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsPlaylistGetOnDemandPlaylists;
-  getPlaylist: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsPlaylistGetPlaylist;
-}
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsPlaylistGetOnDemandPlaylists = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsPlaylistGetPlaylist = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export interface PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsShow {
-  __esModule: boolean;
-  createCheckoutSession: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsShowCreateCheckoutSession;
-  getEpisode: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsShowGetEpisode;
-  getShow: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsShowGetShow;
-}
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsShowCreateCheckoutSession = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsShowGetEpisode = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsShowGetShow = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export interface PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsTrack {
-  __esModule: boolean;
-  getTrack: PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsTrackGetTrack;
-}
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiEndpointsTrackGetTrack = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiGetAlbum = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiGetArtist = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiGetEpisode = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiGetPlaylist = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiGetShow = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiGetTrack = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiImageSelection = () => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiMapDefaultData = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiMapEpisode = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiMapTrack = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportBuild = () => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportGlobalRequestHeaders =
-  Array<
-    | PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportGlobalRequestHeadersItem
-    | PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportGlobalRequestHeadersItem2
-  >;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportGlobalRequestHeadersItem =
-  Array<string>;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportGlobalRequestHeadersItem2 =
-  Array<string>;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportPendingRequests =
-  Set<string>;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportRequestImplementation = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportResetPendingRequests =
-  () => unknown;
+export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiLookupEntity = (arg0: any) => unknown;
 
 export type PlatformTypesAdManagersHptoHptoApiSubscribeToPreview = (arg0: any) => unknown;
 
@@ -1000,7 +830,7 @@ export interface PlatformTypesAdManagersInStreamApi {
   enabled: boolean;
   getInStreamAd: PlatformTypesAdManagersAudioInStreamApiGetInStreamAd;
   inStreamAd: null;
-  inStreamAdsSubscription: PlatformTypesAdManagersAudioSubscription;
+  inStreamAdsSubscription: null;
   onAdMessageCallbacks: PlatformTypesAdManagersAudioInStreamApiOnAdMessageCallbacks;
   processMessage: PlatformTypesAdManagersAudioInStreamApiProcessMessage;
   skipToNext: PlatformTypesAdManagersAudioInStreamApiSkipToNext;
@@ -1008,15 +838,13 @@ export interface PlatformTypesAdManagersInStreamApi {
 }
 
 export interface PlatformTypesAdManagersLeaderboard {
-  adPlaybackId: string;
+  adPlaybackId: null;
   adToLeaderboard: PlatformTypesAdManagersLeaderboardAdToLeaderboard;
   appStartupId: string;
-  cachedConfig: PlatformTypesAdManagersLeaderboardCachedConfig;
   clearCurrentAd: PlatformTypesAdManagersLeaderboardClearCurrentAd;
   currentAd: PlatformTypesAdManagersLeaderboardCurrentAd;
   disableLeaderboard: PlatformTypesAdManagersLeaderboardDisableLeaderboard;
   disableLeaderboardMessageHandler: PlatformTypesAdManagersLeaderboardDisableLeaderboardMessageHandler;
-  domTarget: HTMLElement;
   enableLeaderboard: PlatformTypesAdManagersLeaderboardEnableLeaderboard;
   enableLeaderboardMessageHandler: PlatformTypesAdManagersLeaderboardEnableLeaderboardMessageHandler;
   enabled: boolean;
@@ -1032,7 +860,7 @@ export interface PlatformTypesAdManagersLeaderboard {
   isCurrentAdSax: PlatformTypesAdManagersLeaderboardIsCurrentAdSax;
   isPreviewServiceAd: PlatformTypesAdManagersLeaderboardIsPreviewServiceAd;
   leaderboardApi: PlatformTypesAdManagersLeaderboardLeaderboardApi;
-  leaderboardWrapper: HTMLElement;
+  leaderboardWrapper: null;
   logLeaderboardEvent: PlatformTypesAdManagersLeaderboardLogLeaderboardEvent;
   offlineObserver: PlatformTypesAdManagersLeaderboardOfflineObserver;
   onAdSlotEvent: PlatformTypesAdManagersLeaderboardOnAdSlotEvent;
@@ -1045,72 +873,18 @@ export interface PlatformTypesAdManagersLeaderboard {
   requestSlot: PlatformTypesAdManagersLeaderboardRequestSlot;
   setCurrentAd: PlatformTypesAdManagersLeaderboardSetCurrentAd;
   setLeaderboardElement: PlatformTypesAdManagersLeaderboardSetLeaderboardElement;
-  subscription: PlatformTypesAdManagersLeaderboardSubscription;
   teardownCurrentAd: PlatformTypesAdManagersLeaderboardTeardownCurrentAd;
 }
 
 export type PlatformTypesAdManagersLeaderboardAdToLeaderboard = (arg0: any) => unknown;
 
-export interface PlatformTypesAdManagersLeaderboardCachedConfig {
-  displayTimeIntervalMs: number;
-  timeInViewThresholdMs: number;
-}
-
 export type PlatformTypesAdManagersLeaderboardClearCurrentAd = () => unknown;
 
 export interface PlatformTypesAdManagersLeaderboardCurrentAd {
-  ad: PlatformTypesAdManagersLeaderboardCurrentAdAd;
+  ad: null;
   creativeId: null;
   lineItemId: null;
 }
-
-export interface PlatformTypesAdManagersLeaderboardCurrentAdAd {
-  adId: string;
-  audio: PlatformTypesAdManagersLeaderboardCurrentAdAdAudio;
-  clickthroughUrl: string;
-  companions: PlatformTypesAdManagersLeaderboardCurrentAdAdCompanions;
-  coverArt: PlatformTypesAdManagersLeaderboardCurrentAdAdCoverArt;
-  display: PlatformTypesAdManagersLeaderboardCurrentAdAdDisplay;
-  format: number;
-  isDsaEligible: boolean;
-  isDummy: boolean;
-  metadata: PlatformTypesAdManagersLeaderboardCurrentAdAdMetadata;
-  requestId: string;
-  slot: string;
-  trackingEvents: PlatformTypesAdManagersLeaderboardCurrentAdAdTrackingEvents;
-  video: PlatformTypesAdManagersLeaderboardCurrentAdAdVideo;
-}
-
-export type PlatformTypesAdManagersLeaderboardCurrentAdAdAudio = Array<unknown>;
-
-export type PlatformTypesAdManagersLeaderboardCurrentAdAdCompanions = Array<unknown>;
-
-export type PlatformTypesAdManagersLeaderboardCurrentAdAdCoverArt = Array<unknown>;
-
-export type PlatformTypesAdManagersLeaderboardCurrentAdAdDisplay =
-  Array<PlatformTypesAdManagersLeaderboardCurrentAdAdDisplayItem>;
-
-export interface PlatformTypesAdManagersLeaderboardCurrentAdAdDisplayItem {
-  audioFileId: undefined;
-  bitrate: number;
-  duration: bigint;
-  height: number;
-  imageFileId: undefined;
-  mimeType: string;
-  text: string;
-  url: undefined;
-  videoManifestId: undefined;
-  width: number;
-}
-
-export interface PlatformTypesAdManagersLeaderboardCurrentAdAdMetadata {
-  ad_system: string;
-  cleanup_timeout_ms: string;
-}
-
-export type PlatformTypesAdManagersLeaderboardCurrentAdAdTrackingEvents = Record<string, unknown>;
-
-export type PlatformTypesAdManagersLeaderboardCurrentAdAdVideo = Array<unknown>;
 
 export type PlatformTypesAdManagersLeaderboardDisableLeaderboard = () => unknown;
 
@@ -1130,48 +904,7 @@ export interface PlatformTypesAdManagersLeaderboardFocusState {
   removeFocusListener: PlatformTypesAdManagersAdStateReporterFocusStateRemoveFocusListener;
 }
 
-export type PlatformTypesAdManagersLeaderboardFocusStateListeners = Array<
-  PlatformTypesAdManagersLeaderboard | PlatformTypesAdManagersLeaderboardRefreshDecisioner
->;
-
-export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemIsPastViewThreshold =
-  () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemNotifyRefreshIfPossible =
-  () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnFocusChanged = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnLeaderboardDisabled =
-  () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnLeaderboardEnabled =
-  () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnlineStateChanged = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnNavigationChanged =
-  () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnViewLoaded = () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnViewUnloaded = () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemSetRefreshDelegate = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemStartRefreshTimer =
-  () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemTriggerRefresh = () => unknown;
-
-export type PlatformTypesAdManagersLeaderboardFocusStateListenersItemUpdateViewTimer =
-  () => unknown;
+export type PlatformTypesAdManagersLeaderboardFocusStateListeners = Array<unknown>;
 
 export type PlatformTypesAdManagersLeaderboardGetCurrentAd = () => unknown;
 
@@ -1236,24 +969,56 @@ export type PlatformTypesAdManagersLeaderboardOnNavigationChanged = () => unknow
 export interface PlatformTypesAdManagersLeaderboardRefreshDecisioner {
   delegate: PlatformTypesAdManagersLeaderboard;
   focusState: PlatformTypesAdManagersLeaderboardFocusState;
-  isPastViewThreshold: PlatformTypesAdManagersLeaderboardFocusStateListenersItemIsPastViewThreshold;
+  isPastViewThreshold: PlatformTypesAdManagersLeaderboardRefreshDecisionerIsPastViewThreshold;
   lastOnlineStatus: boolean;
-  notifyRefreshIfPossible: PlatformTypesAdManagersLeaderboardFocusStateListenersItemNotifyRefreshIfPossible;
-  onFocusChanged: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnFocusChanged;
-  onLeaderboardDisabled: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnLeaderboardDisabled;
-  onLeaderboardEnabled: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnLeaderboardEnabled;
-  onNavigationChanged: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnNavigationChanged;
-  onViewLoaded: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnViewLoaded;
-  onViewUnloaded: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnViewUnloaded;
-  onlineStateChanged: PlatformTypesAdManagersLeaderboardFocusStateListenersItemOnlineStateChanged;
-  refreshTimeout: number;
-  setRefreshDelegate: PlatformTypesAdManagersLeaderboardFocusStateListenersItemSetRefreshDelegate;
-  startRefreshTimer: PlatformTypesAdManagersLeaderboardFocusStateListenersItemStartRefreshTimer;
-  timeOfLastViewUpdate: number;
-  triggerRefresh: PlatformTypesAdManagersLeaderboardFocusStateListenersItemTriggerRefresh;
-  updateViewTimer: PlatformTypesAdManagersLeaderboardFocusStateListenersItemUpdateViewTimer;
+  notifyRefreshIfPossible: PlatformTypesAdManagersLeaderboardRefreshDecisionerNotifyRefreshIfPossible;
+  onFocusChanged: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnFocusChanged;
+  onLeaderboardDisabled: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnLeaderboardDisabled;
+  onLeaderboardEnabled: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnLeaderboardEnabled;
+  onNavigationChanged: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnNavigationChanged;
+  onViewLoaded: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnViewLoaded;
+  onViewUnloaded: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnViewUnloaded;
+  onlineStateChanged: PlatformTypesAdManagersLeaderboardRefreshDecisionerOnlineStateChanged;
+  setRefreshDelegate: PlatformTypesAdManagersLeaderboardRefreshDecisionerSetRefreshDelegate;
+  startRefreshTimer: PlatformTypesAdManagersLeaderboardRefreshDecisionerStartRefreshTimer;
+  triggerRefresh: PlatformTypesAdManagersLeaderboardRefreshDecisionerTriggerRefresh;
+  updateViewTimer: PlatformTypesAdManagersLeaderboardRefreshDecisionerUpdateViewTimer;
   viewTimer: number;
 }
+
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerIsPastViewThreshold = () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerNotifyRefreshIfPossible =
+  () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnFocusChanged = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnLeaderboardDisabled =
+  () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnLeaderboardEnabled = () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnlineStateChanged = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnNavigationChanged = () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnViewLoaded = () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnViewUnloaded = () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerSetRefreshDelegate = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerStartRefreshTimer = () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerTriggerRefresh = () => unknown;
+
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerUpdateViewTimer = () => unknown;
 
 export type PlatformTypesAdManagersLeaderboardRefreshLeaderboard = () => unknown;
 
@@ -1271,12 +1036,6 @@ export type PlatformTypesAdManagersLeaderboardSetCurrentAd = (arg0: any) => unkn
 
 export type PlatformTypesAdManagersLeaderboardSetLeaderboardElement = (arg0: any) => unknown;
 
-export interface PlatformTypesAdManagersLeaderboardSubscription {
-  cancel: PlatformTypesAdManagersLeaderboardSubscriptionCancel;
-}
-
-export type PlatformTypesAdManagersLeaderboardSubscriptionCancel = () => unknown;
-
 export type PlatformTypesAdManagersLeaderboardTeardownCurrentAd = () => unknown;
 
 export interface PlatformTypesAdManagersSponsoredPlaylist {
@@ -1287,7 +1046,6 @@ export interface PlatformTypesAdManagersSponsoredPlaylist {
   requestSponsoredPlaylistAd: PlatformTypesAdManagersSponsoredPlaylistRequestSponsoredPlaylistAd;
   requestSponsoredPlaylists: PlatformTypesAdManagersSponsoredPlaylistRequestSponsoredPlaylists;
   sponsoredPlaylistApi: PlatformTypesAdManagersSponsoredPlaylistSponsoredPlaylistApi;
-  subscription: PlatformTypesAdManagersSponsoredPlaylistSubscription;
 }
 
 export type PlatformTypesAdManagersSponsoredPlaylistDisable = () => unknown;
@@ -1326,12 +1084,6 @@ export type PlatformTypesAdManagersSponsoredPlaylistSponsoredPlaylistApiSubscrib
   arg0: any,
 ) => unknown;
 
-export interface PlatformTypesAdManagersSponsoredPlaylistSubscription {
-  cancel: PlatformTypesAdManagersSponsoredPlaylistSubscriptionCancel;
-}
-
-export type PlatformTypesAdManagersSponsoredPlaylistSubscriptionCancel = () => unknown;
-
 export interface PlatformTypesAdManagersSurvey {
   logger: PlatformTypesAdManagersSurveyLogger;
 }
@@ -1365,8 +1117,11 @@ export type PlatformTypesAdManagersVtoFactoriesItem = (arg0: any) => unknown;
 
 export interface PlatformTypesAdManagersVtoManager {
   active: boolean;
+  cleanupSkipListener: PlatformTypesAdManagersVtoManagerCleanupSkipListener;
+  currentSkipObserver: null;
   disable: PlatformTypesAdManagersVtoManagerDisable;
   enable: PlatformTypesAdManagersVtoManagerEnable;
+  enableNewVideoAdSkipLogic: boolean;
   enabled: boolean;
   fireImpressionOnStart: boolean;
   focusState: PlatformTypesAdManagersVtoManagerFocusState;
@@ -1374,7 +1129,6 @@ export interface PlatformTypesAdManagersVtoManager {
   handleApplicationGainedFocus: PlatformTypesAdManagersVtoManagerHandleApplicationGainedFocus;
   handleApplicationLostFocus: PlatformTypesAdManagersVtoManagerHandleApplicationLostFocus;
   inStreamApi: PlatformTypesAdManagersInStreamApi;
-  listener: PlatformTypesAdManagersVtoManagerListener;
   log: PlatformTypesAdManagersVtoManagerLog;
   logEvent: PlatformTypesAdManagersVtoManagerLogEvent;
   onAdMessage: PlatformTypesAdManagersVtoManagerOnAdMessage;
@@ -1386,10 +1140,15 @@ export interface PlatformTypesAdManagersVtoManager {
   onStarted: PlatformTypesAdManagersVtoManagerOnStarted;
   onStateUpdate: PlatformTypesAdManagersVtoManagerOnStateUpdate;
   parseInfo: PlatformTypesAdManagersVtoManagerParseInfo;
+  playerAPI: PlatformTypesPlayerAPI;
+  removeSkipListener: null;
   resetState: PlatformTypesAdManagersVtoManagerResetState;
-  subscription: PlatformTypesAdManagersAudioSubscription;
+  setSkipObserver: PlatformTypesAdManagersVtoManagerSetSkipObserver;
+  subscription: null;
   videoTakeoverApi: PlatformTypesAdManagersVtoManagerVideoTakeoverApi;
 }
+
+export type PlatformTypesAdManagersVtoManagerCleanupSkipListener = () => unknown;
 
 export type PlatformTypesAdManagersVtoManagerDisable = () => unknown;
 
@@ -1403,32 +1162,13 @@ export interface PlatformTypesAdManagersVtoManagerFocusState {
   removeFocusListener: PlatformTypesAdManagersAdStateReporterFocusStateRemoveFocusListener;
 }
 
-export type PlatformTypesAdManagersVtoManagerFocusStateListeners =
-  Array<PlatformTypesAdManagersVtoManager>;
+export type PlatformTypesAdManagersVtoManagerFocusStateListeners = Array<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerGetEnabled = () => unknown;
 
 export type PlatformTypesAdManagersVtoManagerHandleApplicationGainedFocus = () => unknown;
 
 export type PlatformTypesAdManagersVtoManagerHandleApplicationLostFocus = () => unknown;
-
-export interface PlatformTypesAdManagersVtoManagerListener {
-  onCreated: PlatformTypesAdManagersVtoManagerListenerOnCreated;
-  onEnded: PlatformTypesAdManagersVtoManagerListenerOnEnded;
-  onFirstReady: PlatformTypesAdManagersVtoManagerListenerOnFirstReady;
-  onInfo: PlatformTypesAdManagersVtoManagerListenerOnInfo;
-  onStarted: PlatformTypesAdManagersVtoManagerListenerOnStarted;
-}
-
-export type PlatformTypesAdManagersVtoManagerListenerOnCreated = () => unknown;
-
-export type PlatformTypesAdManagersVtoManagerListenerOnEnded = () => unknown;
-
-export type PlatformTypesAdManagersVtoManagerListenerOnFirstReady = () => unknown;
-
-export type PlatformTypesAdManagersVtoManagerListenerOnInfo = (arg0: any) => unknown;
-
-export type PlatformTypesAdManagersVtoManagerListenerOnStarted = () => unknown;
 
 export type PlatformTypesAdManagersVtoManagerLog = (arg0: any, arg1: any, arg2: any) => unknown;
 
@@ -1456,7 +1196,4039 @@ export type PlatformTypesAdManagersVtoManagerOnStateUpdate = (arg0: any) => unkn
 
 export type PlatformTypesAdManagersVtoManagerParseInfo = (arg0: any) => unknown;
 
+export type PlatformTypesAdManagersVtoManagerPlayerAPIAddToQueue = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPICanPlayEncryptedContent = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPICanSendSignal = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIClearQueue = () => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPICollection {
+  add: PlatformTypesFeedbackAPIClientAdd;
+  addUnplayed: PlatformTypesFeedbackAPIClientAddUnplayed;
+  ban: PlatformTypesFeedbackAPIClientBan;
+  banGlobal: PlatformTypesFeedbackAPIClientBanGlobal;
+  banInPlayContext: PlatformTypesFeedbackAPIClientBanInPlayContext;
+  contains: PlatformTypesFeedbackAPIClientContains;
+  decorate: PlatformTypesFeedbackAPIClientDecorate;
+  getArtistTrackList: PlatformTypesFeedbackAPIClientGetArtistTrackList;
+  getArtistView: PlatformTypesFeedbackAPIClientGetArtistView;
+  getBans: PlatformTypesFeedbackAPIClientGetBans;
+  getBucketSyncStatus: PlatformTypesFeedbackAPIClientGetBucketSyncStatus;
+  getResumePoints: PlatformTypesFeedbackAPIClientGetResumePoints;
+  getTrackList: PlatformTypesFeedbackAPIClientGetTrackList;
+  getUnplayedEpisodes: PlatformTypesFeedbackAPIClientGetUnplayedEpisodes;
+  isSnoozed: PlatformTypesFeedbackAPIClientIsSnoozed;
+  offlineArtist: PlatformTypesFeedbackAPIClientOfflineArtist;
+  offlineTracks: PlatformTypesFeedbackAPIClientOfflineTracks;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPICollectionOptions;
+  playArtist: PlatformTypesFeedbackAPIClientPlayArtist;
+  playTracks: PlatformTypesFeedbackAPIClientPlayTracks;
+  remove: PlatformTypesFeedbackAPIClientRemove;
+  removeOfflineArtist: PlatformTypesFeedbackAPIClientRemoveOfflineArtist;
+  removeOfflineTracks: PlatformTypesFeedbackAPIClientRemoveOfflineTracks;
+  removeUnplayed: PlatformTypesFeedbackAPIClientRemoveUnplayed;
+  snooze: PlatformTypesFeedbackAPIClientSnooze;
+  streamArtistTrackList: PlatformTypesFeedbackAPIClientStreamArtistTrackList;
+  streamArtistView: PlatformTypesFeedbackAPIClientStreamArtistView;
+  streamBans: PlatformTypesFeedbackAPIClientStreamBans;
+  streamContains: PlatformTypesFeedbackAPIClientStreamContains;
+  streamDecorate: PlatformTypesFeedbackAPIClientStreamDecorate;
+  streamTagsInfo: PlatformTypesFeedbackAPIClientStreamTagsInfo;
+  streamTrackList: PlatformTypesFeedbackAPIClientStreamTrackList;
+  streamTrackListMetadata: PlatformTypesFeedbackAPIClientStreamTrackListMetadata;
+  streamUnplayedEpisodes: PlatformTypesFeedbackAPIClientStreamUnplayedEpisodes;
+  tracksOfflineStatus: PlatformTypesFeedbackAPIClientTracksOfflineStatus;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+  unban: PlatformTypesFeedbackAPIClientUnban;
+  unbanGlobal: PlatformTypesFeedbackAPIClientUnbanGlobal;
+  unbanInPlayContext: PlatformTypesFeedbackAPIClientUnbanInPlayContext;
+  unsnooze: PlatformTypesFeedbackAPIClientUnsnooze;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPICollectionOptions = Record<string, unknown>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextPlayer {
+  addToQueue: PlatformTypesPlayHistoryAPIPlayerAddToQueue;
+  deleteSession: PlatformTypesPlayHistoryAPIPlayerDeleteSession;
+  getError: PlatformTypesPlayHistoryAPIPlayerGetError;
+  getPlayHistory: PlatformTypesPlayHistoryAPIPlayerGetPlayHistory;
+  getPositionState: PlatformTypesPlayHistoryAPIPlayerGetPositionState;
+  getQueue: PlatformTypesPlayHistoryAPIPlayerGetQueue;
+  getState: PlatformTypesPlayHistoryAPIPlayerGetState;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIContextPlayerOptions;
+  pause: PlatformTypesPlayHistoryAPIPlayerPause;
+  play: PlatformTypesPlayHistoryAPIPlayerPlay;
+  playAsNextInQueue: PlatformTypesPlayHistoryAPIPlayerPlayAsNextInQueue;
+  playPrepared: PlatformTypesPlayHistoryAPIPlayerPlayPrepared;
+  preparePlay: PlatformTypesPlayHistoryAPIPlayerPreparePlay;
+  resume: PlatformTypesPlayHistoryAPIPlayerResume;
+  seekTo: PlatformTypesPlayHistoryAPIPlayerSeekTo;
+  setOptions: PlatformTypesPlayHistoryAPIPlayerSetOptions;
+  setQueue: PlatformTypesPlayHistoryAPIPlayerSetQueue;
+  setRepeatingContext: PlatformTypesPlayHistoryAPIPlayerSetRepeatingContext;
+  setRepeatingTrack: PlatformTypesPlayHistoryAPIPlayerSetRepeatingTrack;
+  setShufflingContext: PlatformTypesPlayHistoryAPIPlayerSetShufflingContext;
+  setSleepTimer: PlatformTypesPlayHistoryAPIPlayerSetSleepTimer;
+  signal: PlatformTypesPlayHistoryAPIPlayerSignal;
+  skipNext: PlatformTypesPlayHistoryAPIPlayerSkipNext;
+  skipPrev: PlatformTypesPlayHistoryAPIPlayerSkipPrev;
+  stop: PlatformTypesPlayHistoryAPIPlayerStop;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+  updateContext: PlatformTypesPlayHistoryAPIPlayerUpdateContext;
+  updateContextPage: PlatformTypesPlayHistoryAPIPlayerUpdateContextPage;
+  updateContextTrack: PlatformTypesPlayHistoryAPIPlayerUpdateContextTrack;
+  updateViewUri: PlatformTypesPlayHistoryAPIPlayerUpdateViewUri;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextPlayerOptions = Record<
+  string,
+  unknown
+>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEvents {
+  _emitter: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitter;
+  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
+  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
+  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
+  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
+  emitUpdateContextualShuffleModeCompleteSync: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitUpdateContextualShuffleModeCompleteSync;
+  emitUpdateContextualShuffleModeErrorSync: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitUpdateContextualShuffleModeErrorSync;
+  emitUpdateContextualShuffleModeSync: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitUpdateContextualShuffleModeSync;
+  emitUpdateSetting: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitUpdateSetting;
+  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
+  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
+  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitter {
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
+  _listeners: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterListeners;
+  _metaListeners: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterMetaListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterCompleteItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterCompleteItemOptions =
+  Record<string, unknown>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterListeners {
+  setting_update: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterListenersSettingUpdate;
+  update_complete: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterListenersUpdateComplete;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterListenersSettingUpdate =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterListenersSettingUpdateItem>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterListenersSettingUpdateItem {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterUpdateItemListener;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterUpdateItemOptions;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterListenersUpdateComplete =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterListenersUpdateCompleteItem>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterListenersUpdateCompleteItem {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterCompleteItemListener;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterCompleteItemOptions;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterMetaListeners {
+  add: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterMetaListenersAdd;
+  remove: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterMetaListenersRemove;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterMetaListenersAdd =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterMetaListenersRemove =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterUpdateItemListener =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitterUpdateItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitUpdateContextualShuffleModeCompleteSync =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitUpdateContextualShuffleModeErrorSync =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitUpdateContextualShuffleModeSync =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitUpdateSetting =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleGetContextualShuffleMode = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleGetEvents = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleGetIsSmartShuffleSettingEnabled =
+  () => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffle {
+  _events: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleEvents;
+  _indexedDbAPI: PlatformTypesIndexedDbAPI;
+  getContextualShuffleMode: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleGetContextualShuffleMode;
+  getEvents: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleGetEvents;
+  getIsSmartShuffleSettingEnabled: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleGetIsSmartShuffleSettingEnabled;
+  setContextualShuffleMode: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleSetContextualShuffleMode;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleEvents {
+  _emitter: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleEventsEmitter;
+  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
+  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
+  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
+  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
+  emitUpdateContextualShuffleModeCompleteSync: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitUpdateContextualShuffleModeCompleteSync;
+  emitUpdateContextualShuffleModeErrorSync: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitUpdateContextualShuffleModeErrorSync;
+  emitUpdateContextualShuffleModeSync: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitUpdateContextualShuffleModeSync;
+  emitUpdateSetting: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmitUpdateSetting;
+  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
+  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
+  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleEventsEmitter {
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
+  _listeners: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleEventsEmitterListeners;
+  _metaListeners: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleEventsEmitterMetaListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleEventsEmitterListeners =
+  Record<string, unknown>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleEventsEmitterMetaListeners {
+  add: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleEventsEmitterMetaListenersAdd;
+  remove: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleEventsEmitterMetaListenersRemove;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleEventsEmitterMetaListenersAdd =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleEventsEmitterMetaListenersRemove =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleGetContextualShuffleMode =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleGetEvents =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleGetIsSmartShuffleSettingEnabled =
+  () => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannel {
+  addEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelAddEventListener;
+  close: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelClose;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
+  name: string;
+  onmessage: null;
+  onmessageerror: null;
+  postMessage: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelPostMessage;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelAddEventListener =
+  (arg0: any, arg1: any, arg2: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelClose =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelPostMessage =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIDeleteItem =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIDeleteItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIDeleteItemOptions =
+  Record<string, unknown>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEvents {
+  _emitter: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitter;
+  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
+  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
+  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
+  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
+  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
+  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
+  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitter {
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
+  _listeners: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitterListeners;
+  _metaListeners: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitterMetaListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitterListeners {
+  delete: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitterListenersDelete;
+  update: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitterListenersUpdate;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitterListenersDelete =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIListenersDeleteItem>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitterListenersUpdate =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIListenersUpdateItem>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitterMetaListeners {
+  add: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitterMetaListenersAdd;
+  remove: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitterMetaListenersRemove;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitterMetaListenersAdd =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEventsEmitterMetaListenersRemove =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIGetEvents =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIGetItem =
+  (arg0: any, arg1: any) => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIListenersDeleteItem {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIDeleteItemListener;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIDeleteItemOptions;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIListenersUpdateItem {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIUpdateItemListener;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIUpdateItemOptions;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIOpenDb =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPISetItem =
+  (arg0: any, arg1: any, arg2: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIUpdateItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIUpdateItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleSetContextualShuffleMode =
+  (arg0: any, arg1: any) => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePlaybackSettingsClient {
+  getDeviceSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetDeviceSettings;
+  getSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetSettings;
+  getShuffleState: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetShuffleState;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePlaybackSettingsClientOptions;
+  setDeviceStreamQuality: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetDeviceStreamQuality;
+  setSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetSettings;
+  setShuffleState: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetShuffleState;
+  streamDeviceSettingFieldChanges: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamDeviceSettingFieldChanges;
+  streamSettingChanges: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamSettingChanges;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePlaybackSettingsClientOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPICancelSubscription =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPICreateSubscription =
+  (arg0: any, arg1: any, arg2: any) => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEvents {
+  _emitter: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEventsEmitter;
+  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
+  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
+  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
+  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
+  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
+  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
+  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEventsEmitter {
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
+  _listeners: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEventsEmitterListeners;
+  _metaListeners: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEventsEmitterMetaListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEventsEmitterListeners =
+  Record<string, unknown>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEventsEmitterMetaListeners {
+  add: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEventsEmitterMetaListenersAdd;
+  remove: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEventsEmitterMetaListenersRemove;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEventsEmitterMetaListenersAdd =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEventsEmitterMetaListenersRemove =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIGetConnectionId =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIGetEvents =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIGetMessages =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIGetSubscriptions =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIMessages =
+  Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIOnConnectionId = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIRefreshSubscription =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscribe = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscribeToConnectionId =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscribeToMessages =
+  (arg0: any, arg1: any, arg2: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptions = Map<
+  number,
+  | PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue
+  | PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue3
+  | PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue4
+  | PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue5
+  | PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue6
+  | PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue7
+  | PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue8
+>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue {
+  connectionId: string;
+  ident: string;
+  isPrefix: boolean;
+  onMessage: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue2 {
+  connectionId: string;
+  ident: string;
+  isPrefix: boolean;
+  onMessage: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage2;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue3 {
+  connectionId: string;
+  ident: string;
+  onMessage: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage3;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue4 {
+  connectionId: string;
+  ident: string;
+  onMessage: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage4;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue5 {
+  connectionId: string;
+  ident: string;
+  onMessage: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage5;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue6 {
+  connectionId: string;
+  ident: string;
+  onMessage: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage6;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue7 {
+  connectionId: string;
+  ident: string;
+  onMessage: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage7;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue8 {
+  connectionId: string;
+  ident: string;
+  onMessage: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage8;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage3 =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage4 =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage5 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage6 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage7 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage8 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleSetContextualShuffleMode = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPICosmos {
+  del: PlatformTypesAdManagersVtoManagerPlayerAPICosmosDel;
+  get: PlatformTypesAdManagersVtoManagerPlayerAPICosmosGet;
+  head: PlatformTypesRegistryMapValueInstanceHead;
+  patch: PlatformTypesAdManagersVtoManagerPlayerAPICosmosPatch;
+  post: PlatformTypesAdManagersVtoManagerPlayerAPICosmosPost;
+  postSub: PlatformTypesRegistryMapValueInstancePostSub;
+  put: PlatformTypesAdManagersVtoManagerPlayerAPICosmosPut;
+  request: PlatformTypesRegistryMapValueInstanceRequest;
+  requestFactory: PlatformTypesRegistryMapValueInstanceRequestFactory;
+  resolve: PlatformTypesRegistryMapValueInstanceResolve;
+  resolver: PlatformTypesRegistryMapValueInstanceResolver;
+  sub: PlatformTypesRegistryMapValueInstanceSub;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPICosmosDel = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPICosmosGet = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPICosmosPatch = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPICosmosPost = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPICosmosPut = (arg0: any, arg1: any) => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEvents {
+  _client: PlatformTypesAdManagersVtoManagerPlayerAPIContextPlayer;
+  _emitter: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitter;
+  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
+  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
+  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
+  emitPauseSync: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitPauseSync;
+  emitPlaySync: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitPlaySync;
+  emitQueueActionComplete: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitQueueActionComplete;
+  emitQueueActionSync: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitQueueActionSync;
+  emitQueueUpdate: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitQueueUpdate;
+  emitResumeSync: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitResumeSync;
+  emitSkipToNextSync: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitSkipToNextSync;
+  emitSkipToPreviousSync: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitSkipToPreviousSync;
+  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
+  isReady: PlatformTypesAdManagersVtoManagerPlayerAPIEventsIsReady;
+  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
+  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
+  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitPauseSync = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitPlaySync = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitQueueActionComplete = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitQueueActionSync = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitQueueUpdate = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitResumeSync = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitSkipToNextSync = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitSkipToPreviousSync = () => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitter {
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
+  _listeners: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListeners;
+  _metaListeners: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterMetaListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListeners {
+  action: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersAction;
+  error: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersError;
+  ready: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersReady;
+  update: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdate;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersAction = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem3
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem4
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem5
+>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemListener;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem2 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemListener2;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions2;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem3 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemListener3;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions3;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem4 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemListener4;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions4;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem5 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemListener5;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions5;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemListener3 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemListener4 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemListener5 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions3 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions4 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions5 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersError =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItem>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItem {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItemListener;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItemOptions;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItemListener =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersReady =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersReadyItem>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersReadyItem {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersReadyItemListener;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersReadyItemOptions;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersReadyItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersReadyItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdate = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem10
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem3
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem4
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem5
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem6
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem7
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem8
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem9
+>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem10 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener10;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions10;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem2 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener2;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions2;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem3 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener3;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions3;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem4 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener4;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions4;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem5 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener5;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions5;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem6 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener6;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions6;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem7 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener7;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions7;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem8 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener8;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions8;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItem9 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener9;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions9;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener10 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener3 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener4 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener5 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener6 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener7 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener8 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener9 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions10 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions3 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions4 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions5 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions6 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions7 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions8 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemOptions9 =
+  Record<string, unknown>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterMetaListeners {
+  add: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterMetaListenersAdd;
+  remove: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterMetaListenersRemove;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterMetaListenersAdd = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterMetaListenersRemove = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsIsReady = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIGetCapabilities = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIGetEvents = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIGetQueue = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIGetReferrer = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIGetSleepTimerCore = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIGetState = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIInsertIntoQueue = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPause = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPlay = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPlayAsNextInQueue = (arg0: any) => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistPlayServiceClient {
+  getPlayContext: PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistPlayServiceClientGetPlayContext;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistPlayServiceClientOptions;
+  play: PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistPlayServiceClientPlay;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistPlayServiceClientGetPlayContext = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistPlayServiceClientOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistPlayServiceClientPlay = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPILastSync = Map<
+  unknown,
+  unknown
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPIMaybeResync = (
+  arg0: any,
+) => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPIPlaylistServiceClient {
+  clearToken: PlatformTypesLibraryAPIPlaylistServiceClientClearToken;
+  contains: PlatformTypesLibraryAPIPlaylistServiceClientContains;
+  emitItemSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitItemSignals;
+  emitSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitSignals;
+  getMembers: PlatformTypesLibraryAPIPlaylistServiceClientGetMembers;
+  invalidateRevisions: PlatformTypesLibraryAPIPlaylistServiceClientInvalidateRevisions;
+  modify: PlatformTypesLibraryAPIPlaylistServiceClientModify;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPIPlaylistServiceClientOptions;
+  requestLenses: PlatformTypesLibraryAPIPlaylistServiceClientRequestLenses;
+  resync: PlatformTypesLibraryAPIPlaylistServiceClientResync;
+  setBasePermission: PlatformTypesLibraryAPIPlaylistServiceClientSetBasePermission;
+  setMemberPermission: PlatformTypesLibraryAPIPlaylistServiceClientSetMemberPermission;
+  setOfflineState: PlatformTypesLibraryAPIPlaylistServiceClientSetOfflineState;
+  setToken: PlatformTypesLibraryAPIPlaylistServiceClientSetToken;
+  signal: PlatformTypesLibraryAPIPlaylistServiceClientSignal;
+  signalItem: PlatformTypesLibraryAPIPlaylistServiceClientSignalItem;
+  subscribeToMembers: PlatformTypesLibraryAPIPlaylistServiceClientSubscribeToMembers;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPIPlaylistServiceClientOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPIResync = (
+  arg0: any,
+) => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistServiceClient {
+  clearToken: PlatformTypesLibraryAPIPlaylistServiceClientClearToken;
+  contains: PlatformTypesLibraryAPIPlaylistServiceClientContains;
+  emitItemSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitItemSignals;
+  emitSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitSignals;
+  getMembers: PlatformTypesLibraryAPIPlaylistServiceClientGetMembers;
+  invalidateRevisions: PlatformTypesLibraryAPIPlaylistServiceClientInvalidateRevisions;
+  modify: PlatformTypesLibraryAPIPlaylistServiceClientModify;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistServiceClientOptions;
+  requestLenses: PlatformTypesLibraryAPIPlaylistServiceClientRequestLenses;
+  resync: PlatformTypesLibraryAPIPlaylistServiceClientResync;
+  setBasePermission: PlatformTypesLibraryAPIPlaylistServiceClientSetBasePermission;
+  setMemberPermission: PlatformTypesLibraryAPIPlaylistServiceClientSetMemberPermission;
+  setOfflineState: PlatformTypesLibraryAPIPlaylistServiceClientSetOfflineState;
+  setToken: PlatformTypesLibraryAPIPlaylistServiceClientSetToken;
+  signal: PlatformTypesLibraryAPIPlaylistServiceClientSignal;
+  signalItem: PlatformTypesLibraryAPIPlaylistServiceClientSignalItem;
+  subscribeToMembers: PlatformTypesLibraryAPIPlaylistServiceClientSubscribeToMembers;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistServiceClientOptions = Record<
+  string,
+  unknown
+>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueue {
+  _client: PlatformTypesAdManagersVtoManagerPlayerAPIContextPlayer;
+  _events: PlatformTypesAdManagersVtoManagerPlayerAPIEvents;
+  _queue: PlatformTypesAdManagersVtoManagerPlayerAPIQueue2;
+  _queueState: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueState;
+  addToQueue: PlatformTypesAdManagersVtoManagerPlayerAPIQueueAddToQueue;
+  clearQueue: PlatformTypesAdManagersVtoManagerPlayerAPIQueueClearQueue;
+  convertQueueState: PlatformTypesAdManagersVtoManagerPlayerAPIQueueConvertQueueState;
+  createQueueItem: PlatformTypesAdManagersVtoManagerPlayerAPIQueueCreateQueueItem;
+  getInternalQueue: PlatformTypesAdManagersVtoManagerPlayerAPIQueueGetInternalQueue;
+  getQueue: PlatformTypesAdManagersVtoManagerPlayerAPIQueueGetQueue;
+  insertIntoQueue: PlatformTypesAdManagersVtoManagerPlayerAPIQueueInsertIntoQueue;
+  isQueued: PlatformTypesAdManagersVtoManagerPlayerAPIQueueIsQueued;
+  isSameItem: PlatformTypesAdManagersVtoManagerPlayerAPIQueueIsSameItem;
+  markAsQueued: PlatformTypesAdManagersVtoManagerPlayerAPIQueueMarkAsQueued;
+  removeFromQueue: PlatformTypesAdManagersVtoManagerPlayerAPIQueueRemoveFromQueue;
+  reorderQueue: PlatformTypesAdManagersVtoManagerPlayerAPIQueueReorderQueue;
+  timeoutId: null;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueue2 {
+  nextTracks: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracks;
+  prevTracks: PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracks;
+  queueRevision: bigint;
+  track: PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrack;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueAddToQueue = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueClearQueue = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueConvertQueueState = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueCreateQueueItem = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueGetInternalQueue = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueGetQueue = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueInsertIntoQueue = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueIsQueued = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueIsSameItem = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueMarkAsQueued = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracks = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem10
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem3
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem4
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem5
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem6
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem7
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem8
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem9
+>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem10 {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked10;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack10;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved10;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem2 {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked2;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack2;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved2;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem3 {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked3;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack3;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved3;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem4 {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked4;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack4;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved4;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem5 {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked5;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack5;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved5;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem6 {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked6;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack6;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved6;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem7 {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked7;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack7;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved7;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem8 {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked8;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack8;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved8;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItem9 {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked9;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack9;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved9;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked10 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked2 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked3 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked4 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked5 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked6 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked7 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked8 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemBlocked9 = Array<unknown>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack10 {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata10;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack2 {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata2;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack3 {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata3;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack4 {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata4;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack5 {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata5;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack6 {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata6;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack7 {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata7;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack8 {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata8;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrack9 {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata9;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata {
+  "actions.skipping_next_past_track": string;
+  "actions.skipping_prev_past_track": string;
+  "artist_name:1": string;
+  "artist_name:2": string;
+  "artist_uri:1": string;
+  "artist_uri:2": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  is_explicit: string;
+  iteration: string;
+  marked_for_download: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata10 {
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_small_url: string;
+  image_url: string;
+  iteration: string;
+  marked_for_download: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata2 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_small_url: string;
+  image_url: string;
+  iteration: string;
+  marked_for_download: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata3 {
+  "artist_name:1": string;
+  "artist_uri:1": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_small_url: string;
+  image_url: string;
+  is_explicit: string;
+  iteration: string;
+  marked_for_download: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata4 {
+  "artist_name:1": string;
+  "artist_name:2": string;
+  "artist_name:3": string;
+  "artist_uri:1": string;
+  "artist_uri:2": string;
+  "artist_uri:3": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_small_url: string;
+  image_url: string;
+  iteration: string;
+  marked_for_download: string;
+  title: string;
+  track_player: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata5 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_small_url: string;
+  image_url: string;
+  iteration: string;
+  marked_for_download: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata6 {
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_small_url: string;
+  image_url: string;
+  iteration: string;
+  marked_for_download: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata7 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_small_url: string;
+  image_url: string;
+  iteration: string;
+  marked_for_download: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata8 {
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_small_url: string;
+  image_url: string;
+  iteration: string;
+  marked_for_download: string;
+  title: string;
+  track_player: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata9 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_small_url: string;
+  image_url: string;
+  iteration: string;
+  marked_for_download: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved10 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved2 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved3 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved4 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved5 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved6 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved7 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved8 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved9 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracks = Array<unknown>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueState {
+  current: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrent;
+  nextUp: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUp;
+  queued: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateQueued;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrent {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentAlbum;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentArtists;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentDuration;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentImages;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackContextTrackMetadata;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentAlbum {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentImages;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentAlbumImagesItem {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentAlbumImagesItem2 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentAlbumImagesItem3 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentAlbumImagesItem4 {
+  label: string;
+  url: string;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentArtists =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentArtistsItem>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentArtistsItem {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentDuration {
+  milliseconds: number;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentImages = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentAlbumImagesItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentAlbumImagesItem2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentAlbumImagesItem3
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrentAlbumImagesItem4
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUp = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem10
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem3
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem4
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem5
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem6
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem7
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem8
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem9
+>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem10 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum10;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists10;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration10;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages10;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata10;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem2 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum2;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists2;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration2;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages2;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata2;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem3 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum3;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists3;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration3;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages3;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata3;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem4 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum4;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists4;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration4;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages4;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata4;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem5 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum5;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists5;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration5;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages5;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata5;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem6 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum6;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists6;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration6;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages6;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata6;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem7 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum7;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists7;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration7;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages7;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata7;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem8 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum8;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists8;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration8;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages8;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata8;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItem9 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum9;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists9;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration9;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages9;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata9;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum10 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages10;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum2 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages2;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum3 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages3;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum4 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages4;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum5 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages5;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum6 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages6;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum7 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages7;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum8 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages8;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbum9 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages9;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem10 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem11 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem12 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem13 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem14 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem15 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem16 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem17 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem18 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem19 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem2 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem20 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem21 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem22 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem3 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem4 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem5 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem6 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem7 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem8 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem9 {
+  label: string;
+  url: string;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem3
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists10 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem16>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists2 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem4>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists3 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem5
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem6
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists4 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem10
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem7
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem8
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem9
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists5 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem11>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists6 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem12>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists7 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem13>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists8 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem14>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists9 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem15>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem10 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem11 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem12 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem13 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem14 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem15 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem16 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem2 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem3 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem4 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem5 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem6 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem7 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem8 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem9 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration10 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration2 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration3 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration4 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration5 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration6 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration7 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration8 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemDuration9 {
+  milliseconds: number;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem3
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem4
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages10 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem21
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem22
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages2 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem5
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem6
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages3 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem7
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem8
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages4 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem10
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem9
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages5 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem11
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem12
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages6 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem13
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem14
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages7 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem15
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem16
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages8 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem17
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem18
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemImages9 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem19
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemAlbumImagesItem20
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateQueued = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueRemoveFromQueue = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueReorderQueue = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrack {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackBlocked;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackContextTrack;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackRemoved;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackBlocked = Array<unknown>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackContextTrack {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackContextTrackMetadata;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackContextTrackMetadata {
+  "actions.skipping_next_past_track": string;
+  "actions.skipping_prev_past_track": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  "media.start_position": string;
+  "shuffle.distribution": string;
+  "shuffle.partition_shuffle": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  iteration: string;
+  marked_for_download: string;
+  title: string;
+  track_player: string;
+  view_index: string;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackRemoved = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIRefreshCurrentContext = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIRemoveFromQueue = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIReorderQueue = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIResume = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISeekBackward = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISeekBy = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISeekForward = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISeekTo = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISendSignal = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISetDefaultFeatureVersion = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISetReferrer = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISetRepeat = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISetShuffle = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISetSleepTimer = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISetSpeed = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISkipTo = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISkipToNext = (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISkipToPrevious = () => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCore {
+  SLEEP_TIMER_ORIGIN: PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreSLEEPTIMERORIGIN;
+  _contextPlayer: PlatformTypesAdManagersVtoManagerPlayerAPIContextPlayer;
+  _events: PlatformTypesAdManagersVtoManagerPlayerAPIEvents;
+  clearSleepTimerTimeout: PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreClearSleepTimerTimeout;
+  handleEndOfTrackSleepTimer: PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreHandleEndOfTrackSleepTimer;
+  handleTimestampSleepTimer: PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreHandleTimestampSleepTimer;
+  monitoredUri: null;
+  onStateUpdate: PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreOnStateUpdate;
+  sleepTimerEnd: PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreSleepTimerEnd;
+  timeoutId: null;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreClearSleepTimerTimeout =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreHandleEndOfTrackSleepTimer = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreHandleTimestampSleepTimer = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreOnStateUpdate = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreSleepTimerEnd = () => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreSLEEPTIMERORIGIN {
+  featureIdentifier: string;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityGetEligibility = (
+  arg0: any,
+) => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIBatchFetcher {
+  batchFetcher: null;
+  createBatchedFetcher: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIBatchFetcherCreateBatchedFetcher;
+  fetch: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIBatchFetcherFetch;
+  fetchBatched: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIBatchFetcherFetchBatched;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIBatchFetcherCreateBatchedFetcher =
+  (arg0: any, arg1: any, arg2: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIBatchFetcherFetch =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIBatchFetcherFetchBatched =
+  (arg0: any, arg1: any) => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEvents {
+  _emitter: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEventsEmitter;
+  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
+  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
+  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
+  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
+  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
+  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
+  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEventsEmitter {
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
+  _listeners: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEventsEmitterListeners;
+  _metaListeners: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEventsEmitterMetaListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEventsEmitterListeners =
+  Record<string, unknown>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEventsEmitterMetaListeners {
+  add: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEventsEmitterMetaListenersAdd;
+  remove: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEventsEmitterMetaListenersRemove;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEventsEmitterMetaListenersAdd =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEventsEmitterMetaListenersRemove =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIExpire =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIFetch =
+  () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIFetchBatched =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIGetEvents =
+  () => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIMetadataServiceClient {
+  expire: PlatformTypesShowAPIMetadataServiceClientExpire;
+  fetch: PlatformTypesShowAPIMetadataServiceClientFetch;
+  observe: PlatformTypesShowAPIMetadataServiceClientObserve;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIMetadataServiceClientOptions;
+  purge: PlatformTypesShowAPIMetadataServiceClientPurge;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIMetadataServiceClientOptions =
+  Record<string, unknown>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIPubSubClient {
+  addOnNewConnectionID: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIPubSubClientAddOnNewConnectionID;
+  addOnPushedMessageForIdent: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIPubSubClientAddOnPushedMessageForIdent;
+  addOnPushedMessageForIdentFilter: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIPubSubClientAddOnPushedMessageForIdentFilter;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIPubSubClientOptions;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIPubSubClientAddOnNewConnectionID =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIPubSubClientAddOnPushedMessageForIdent =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIPubSubClientAddOnPushedMessageForIdentFilter =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIPubSubClientOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPISubscribe =
+  (arg0: any) => unknown;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIState {
+  context: PlatformTypesAdManagersVtoManagerPlayerAPIStateContext;
+  duration: number;
+  format: number;
+  hasContext: boolean;
+  index: PlatformTypesAdManagersVtoManagerPlayerAPIStateIndex;
+  isBuffering: boolean;
+  isPaused: boolean;
+  item: PlatformTypesAdManagersVtoManagerPlayerAPIStateItem;
+  nextItems: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItems;
+  playbackId: string;
+  playbackQuality: PlatformTypesAdManagersVtoManagerPlayerAPIStatePlaybackQuality;
+  positionAsOfTimestamp: number;
+  previousItems: PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItems;
+  repeat: number;
+  restrictions: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictions;
+  sessionId: string;
+  shuffle: boolean;
+  signals: PlatformTypesAdManagersVtoManagerPlayerAPIStateSignals;
+  sleepTimer: PlatformTypesAdManagersVtoManagerPlayerAPIStateSleepTimer;
+  smartShuffle: boolean;
+  speed: number;
+  speedEsperanto: number;
+  timestamp: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateContext {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIStateContextMetadata;
+  uri: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateContextMetadata {
+  "player.arch": string;
+  context_description: string;
+  context_owner: string;
+  enhanced_context: string;
+  ignore_enhance_lens: string;
+  image_url: string;
+  playlist_number_of_episodes: string;
+  playlist_number_of_tracks: string;
+  playlist_volatile_context_id: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateIndex {
+  itemIndex: number;
+  pageIndex: number;
+  pageURI: null;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateItem {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIStateItemAlbum;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIStateItemArtists;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIStateItemDuration;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateItemImages;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIStateItemMetadata;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateItemAlbum {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateItemImages;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateItemAlbumImagesItem {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateItemAlbumImagesItem2 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateItemAlbumImagesItem3 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateItemAlbumImagesItem4 {
+  label: string;
+  url: string;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateItemArtists =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateItemArtistsItem>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateItemArtistsItem {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateItemDuration {
+  milliseconds: number;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateItemImages = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateItemAlbumImagesItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateItemAlbumImagesItem2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateItemAlbumImagesItem3
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateItemAlbumImagesItem4
+>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateItemMetadata {
+  "actions.skipping_next_past_track": string;
+  "actions.skipping_prev_past_track": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  "media.start_position": string;
+  "shuffle.distribution": string;
+  "shuffle.partition_shuffle": string;
+  album_artist_name: string;
+  album_disc_count: string;
+  album_disc_number: string;
+  album_title: string;
+  album_track_count: string;
+  album_track_number: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  iteration: string;
+  marked_for_download: string;
+  popularity: string;
+  title: string;
+  track_player: string;
+  view_index: string;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItems = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem10
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem3
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem4
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem5
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem6
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem7
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem8
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem9
+>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem10 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum10;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists10;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration10;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages10;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata10;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem2 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum2;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists2;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration2;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages2;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata2;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem3 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum3;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists3;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration3;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages3;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata3;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem4 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum4;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists4;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration4;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages4;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata4;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem5 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum5;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists5;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration5;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages5;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata5;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem6 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum6;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists6;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration6;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages6;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata6;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem7 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum7;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists7;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration7;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages7;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata7;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem8 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum8;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists8;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration8;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages8;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata8;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItem9 {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum9;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists9;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration9;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages9;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata9;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum10 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages10;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum2 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages2;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum3 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages3;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum4 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages4;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum5 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages5;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum6 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages6;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum7 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages7;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum8 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages8;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbum9 {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages9;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem10 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem11 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem12 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem13 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem14 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem15 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem16 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem17 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem18 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem19 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem2 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem20 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem21 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem22 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem23 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem24 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem25 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem26 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem27 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem28 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem29 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem3 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem30 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem31 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem32 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem33 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem34 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem35 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem36 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem37 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem38 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem39 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem4 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem40 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem5 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem6 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem7 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem8 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem9 {
+  label: string;
+  url: string;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem3
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists10 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem16>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists2 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem4>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists3 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem5
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem6
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists4 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem10
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem7
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem8
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem9
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists5 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem11>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists6 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem12>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists7 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem13>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists8 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem14>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists9 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem15>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem10 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem11 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem12 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem13 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem14 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem15 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem16 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem2 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem3 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem4 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem5 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem6 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem7 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem8 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem9 {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration10 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration2 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration3 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration4 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration5 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration6 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration7 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration8 {
+  milliseconds: number;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemDuration9 {
+  milliseconds: number;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem3
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem4
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages10 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem37
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem38
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem39
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem40
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages2 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem5
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem6
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem7
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem8
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages3 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem10
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem11
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem12
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem9
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages4 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem13
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem14
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem15
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem16
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages5 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem17
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem18
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem19
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem20
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages6 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem21
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem22
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem23
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem24
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages7 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem25
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem26
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem27
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem28
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages8 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem29
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem30
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem31
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem32
+>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages9 = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem33
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem34
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem35
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlbumImagesItem36
+>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata {
+  "actions.skipping_next_past_track": string;
+  "actions.skipping_prev_past_track": string;
+  "artist_name:1": string;
+  "artist_name:2": string;
+  "artist_uri:1": string;
+  "artist_uri:2": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_disc_count: string;
+  album_disc_number: string;
+  album_title: string;
+  album_track_count: string;
+  album_track_number: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  is_explicit: string;
+  iteration: string;
+  marked_for_download: string;
+  popularity: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata10 {
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_disc_count: string;
+  album_disc_number: string;
+  album_title: string;
+  album_track_count: string;
+  album_track_number: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  iteration: string;
+  marked_for_download: string;
+  popularity: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata2 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_disc_count: string;
+  album_disc_number: string;
+  album_title: string;
+  album_track_count: string;
+  album_track_number: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  iteration: string;
+  marked_for_download: string;
+  popularity: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata3 {
+  "artist_name:1": string;
+  "artist_uri:1": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_disc_count: string;
+  album_disc_number: string;
+  album_title: string;
+  album_track_count: string;
+  album_track_number: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  is_explicit: string;
+  iteration: string;
+  marked_for_download: string;
+  popularity: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata4 {
+  "artist_name:1": string;
+  "artist_name:2": string;
+  "artist_name:3": string;
+  "artist_uri:1": string;
+  "artist_uri:2": string;
+  "artist_uri:3": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_disc_count: string;
+  album_disc_number: string;
+  album_title: string;
+  album_track_count: string;
+  album_track_number: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  iteration: string;
+  marked_for_download: string;
+  popularity: string;
+  title: string;
+  track_player: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata5 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_disc_count: string;
+  album_disc_number: string;
+  album_title: string;
+  album_track_count: string;
+  album_track_number: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  iteration: string;
+  marked_for_download: string;
+  popularity: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata6 {
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_disc_count: string;
+  album_disc_number: string;
+  album_title: string;
+  album_track_count: string;
+  album_track_number: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  iteration: string;
+  marked_for_download: string;
+  popularity: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata7 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_disc_count: string;
+  album_disc_number: string;
+  album_title: string;
+  album_track_count: string;
+  album_track_number: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  iteration: string;
+  marked_for_download: string;
+  popularity: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata8 {
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_disc_count: string;
+  album_disc_number: string;
+  album_title: string;
+  album_track_count: string;
+  album_track_number: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  iteration: string;
+  marked_for_download: string;
+  popularity: string;
+  title: string;
+  track_player: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata9 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_disc_count: string;
+  album_disc_number: string;
+  album_title: string;
+  album_track_count: string;
+  album_track_number: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  iteration: string;
+  marked_for_download: string;
+  popularity: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStatePlaybackQuality {
+  bitrateLevel: number;
+  losslessStatus: number;
+  strategy: number;
+  targetBitrateAvailable: boolean;
+  targetBitrateLevel: number;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItems = Array<unknown>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictions {
+  canPause: boolean;
+  canResume: boolean;
+  canSeek: boolean;
+  canSkipNext: boolean;
+  canSkipPrevious: boolean;
+  canToggleRepeatContext: boolean;
+  canToggleRepeatTrack: boolean;
+  canToggleShuffle: boolean;
+  canToggleSmartShuffle: boolean;
+  disallowAddToQueueReasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowAddToQueueReasons;
+  disallowPausingReasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowPausingReasons;
+  disallowResumingReasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowResumingReasons;
+  disallowSeekingReasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSeekingReasons;
+  disallowSetQueueReasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSetQueueReasons;
+  disallowSettingPlaybackSpeedReasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSettingPlaybackSpeedReasons;
+  disallowSignals: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignals;
+  disallowSkippingNextReasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSkippingNextReasons;
+  disallowSkippingPreviousReasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSkippingPreviousReasons;
+  disallowTogglingRepeatContextReasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowTogglingRepeatContextReasons;
+  disallowTogglingRepeatTrackReasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowTogglingRepeatTrackReasons;
+  disallowTogglingShuffleReasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowTogglingShuffleReasons;
+  disallowTransferringPlaybackReasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowTransferringPlaybackReasons;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowAddToQueueReasons =
+  Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowPausingReasons =
+  Array<string>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowResumingReasons =
+  Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSeekingReasons =
+  Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSetQueueReasons =
+  Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSettingPlaybackSpeedReasons =
+  Array<string>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignals {
+  "switch-to-audio": PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtoaudio;
+  "switch-to-video": PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtovideo;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtoaudio {
+  reasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtoaudioReasons;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtoaudioReasons =
+  Array<string>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtovideo {
+  reasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtovideoReasons;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtovideoReasons =
+  Array<string>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSkippingNextReasons =
+  Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSkippingPreviousReasons =
+  Array<string>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowTogglingRepeatContextReasons =
+  Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowTogglingRepeatTrackReasons =
+  Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowTogglingShuffleReasons =
+  Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowTransferringPlaybackReasons =
+  Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateSignals = Array<string>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateSleepTimer {
+  timestamp: null;
+  type: number;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIUpdateContext = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
 export type PlatformTypesAdManagersVtoManagerResetState = () => unknown;
+
+export type PlatformTypesAdManagersVtoManagerSetSkipObserver = (arg0: any) => unknown;
 
 export interface PlatformTypesAdManagersVtoManagerVideoTakeoverApi {
   esperantoConnector: PlatformTypesAdManagersAudioInStreamApiAdsCoreConnector;
@@ -1504,69 +5276,30 @@ export type PlatformTypesAudiobookCappingAPIEventsEmit = (arg0: any, arg1: any) 
 export type PlatformTypesAudiobookCappingAPIEventsEmitSync = (arg0: any, arg1: any) => unknown;
 
 export interface PlatformTypesAudiobookCappingAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesAudiobookCappingAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesAudiobookCappingAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterAddListener = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners = (arg0: any) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterEmit = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent = (arg0: any) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync = (arg0: any) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync = (
-  arg0: any,
-  arg1: any,
-) => unknown;
 
 export type PlatformTypesAudiobookCappingAPIEventsEmitterListeners = Record<string, unknown>;
 
@@ -1581,53 +5314,6 @@ export type PlatformTypesAudiobookCappingAPIEventsEmitterMetaListenersRemove = R
   string,
   unknown
 >;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterOn = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterOnce = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners = (arg0: any) => unknown;
 
 export type PlatformTypesAudiobookCappingAPIEventsOnAddListener = (arg0: any, arg1: any) => unknown;
 
@@ -1712,62 +5398,48 @@ export interface PlatformTypesAudioOutputDevicesAPIEvents {
 }
 
 export interface PlatformTypesAudioOutputDevicesAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesAudioOutputDevicesAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesAudioOutputDevicesAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListeners {
   deviceConnected: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnected;
 }
 
-export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnected = Array<
-  | PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem
-  | PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem2
->;
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnected =
+  Array<PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem>;
 
 export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem {
   listener: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener;
   options: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions;
 }
 
-export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem2 {
-  listener: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener2;
-  options: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions2;
-}
-
 export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener = (
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener2 = (
-  arg0: any,
-) => unknown;
-
 export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions =
-  Record<string, unknown>;
-
-export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions2 =
   Record<string, unknown>;
 
 export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterMetaListeners {
@@ -1869,198 +5541,6 @@ export interface PlatformTypesBuddyFeedAPIPresence2 {
   unsubscribeFromBuddiesActivity: PlatformTypesBuddyFeedAPIPresence2UnsubscribeFromBuddiesActivity;
 }
 
-export type PlatformTypesBuddyFeedAPIPresence2PubsubCancelSubscription = (arg0: any) => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubCreateSubscription = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export interface PlatformTypesBuddyFeedAPIPresence2PubsubEvents {
-  _emitter: PlatformTypesBuddyFeedAPIPresence2PubsubEventsEmitter;
-  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
-}
-
-export interface PlatformTypesBuddyFeedAPIPresence2PubsubEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
-  _listeners: PlatformTypesBuddyFeedAPIPresence2PubsubEventsEmitterListeners;
-  _metaListeners: PlatformTypesBuddyFeedAPIPresence2PubsubEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
-}
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubEventsEmitterListeners = Record<
-  string,
-  unknown
->;
-
-export interface PlatformTypesBuddyFeedAPIPresence2PubsubEventsEmitterMetaListeners {
-  add: PlatformTypesBuddyFeedAPIPresence2PubsubEventsEmitterMetaListenersAdd;
-  remove: PlatformTypesBuddyFeedAPIPresence2PubsubEventsEmitterMetaListenersRemove;
-}
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubEventsEmitterMetaListenersAdd = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubEventsEmitterMetaListenersRemove = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubGetConnectionId = () => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubGetEvents = () => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubGetMessages = () => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubGetSubscriptions = () => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubMessages = Array<unknown>;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubOnConnectionId = (arg0: any) => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubRefreshSubscription = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscribe = (arg0: any) => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscribeToConnectionId = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscribeToMessages = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptions = Map<
-  number,
-  | PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue
-  | PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue2
-  | PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue3
-  | PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue4
-  | PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue5
-  | PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue6
-  | PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue7
-  | PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue8
->;
-
-export interface PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue {
-  connectionId: string;
-  ident: string;
-  isPrefix: boolean;
-  onMessage: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage;
-}
-
-export interface PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue2 {
-  connectionId: string;
-  ident: string;
-  onMessage: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage2;
-}
-
-export interface PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue3 {
-  connectionId: string;
-  ident: string;
-  onMessage: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage3;
-}
-
-export interface PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue4 {
-  connectionId: string;
-  ident: string;
-  onMessage: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage4;
-}
-
-export interface PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue5 {
-  connectionId: string;
-  ident: string;
-  onMessage: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage5;
-}
-
-export interface PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue6 {
-  connectionId: string;
-  ident: string;
-  onMessage: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage6;
-}
-
-export interface PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue7 {
-  connectionId: string;
-  ident: string;
-  onMessage: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage7;
-}
-
-export interface PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValue8 {
-  connectionId: string;
-  ident: string;
-  isPrefix: boolean;
-  onCancel: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnCancel;
-  onMessage: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage8;
-  onSubscribe: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnSubscribe;
-}
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnCancel = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage = () => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage2 = () => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage3 = () => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage4 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage5 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage6 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage7 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnMessage8 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptionsValueOnSubscribe = (
-  arg0: any,
-) => unknown;
-
 export type PlatformTypesBuddyFeedAPIPresence2SubscribeToBuddyActivity = (
   arg0: any,
   arg1: any,
@@ -2077,6 +5557,27 @@ export interface PlatformTypesBuddyFeedAPIPresenceView {
   getBuddyFeed: PlatformTypesBuddyFeedAPIPresenceViewGetBuddyFeed;
   getBuddyFeedWithSubscribing: PlatformTypesBuddyFeedAPIPresenceViewGetBuddyFeedWithSubscribing;
 }
+
+export type PlatformTypesBuddyFeedAPIPresenceViewBuilderBuild = () => unknown;
+
+export type PlatformTypesBuddyFeedAPIPresenceViewBuilderGlobalRequestHeaders = Array<
+  | PlatformTypesBuddyFeedAPIPresenceViewBuilderGlobalRequestHeadersItem
+  | PlatformTypesBuddyFeedAPIPresenceViewBuilderGlobalRequestHeadersItem2
+>;
+
+export type PlatformTypesBuddyFeedAPIPresenceViewBuilderGlobalRequestHeadersItem = Array<string>;
+
+export type PlatformTypesBuddyFeedAPIPresenceViewBuilderGlobalRequestHeadersItem2 = Array<string>;
+
+export type PlatformTypesBuddyFeedAPIPresenceViewBuilderPendingRequests = Set<string>;
+
+export type PlatformTypesBuddyFeedAPIPresenceViewBuilderRequestImplementation = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesBuddyFeedAPIPresenceViewBuilderResetPendingRequests = () => unknown;
 
 export type PlatformTypesBuddyFeedAPIPresenceViewGetBuddyActivity = (arg0: any) => unknown;
 
@@ -2099,16 +5600,16 @@ export type PlatformTypesClipboardAPICopy = (arg0: any) => unknown;
 export interface PlatformTypesClipboardAPICosmos {
   del: PlatformTypesRegistryMapValueInstanceDel;
   get: PlatformTypesRegistryMapValueInstanceGet;
-  head: PlatformTypesPlayerAPICosmosHead;
+  head: PlatformTypesRegistryMapValueInstanceHead;
   patch: PlatformTypesRegistryMapValueInstancePatch;
   post: PlatformTypesRegistryMapValueInstancePost;
-  postSub: PlatformTypesPlayerAPICosmosPostSub;
+  postSub: PlatformTypesRegistryMapValueInstancePostSub;
   put: PlatformTypesRegistryMapValueInstancePut;
-  request: PlatformTypesPlayerAPICosmosRequest;
-  requestFactory: PlatformTypesPlayerAPICosmosRequestFactory;
-  resolve: PlatformTypesPlayerAPICosmosResolve;
-  resolver: PlatformTypesPlayerAPICosmosResolver;
-  sub: PlatformTypesPlayerAPICosmosSub;
+  request: PlatformTypesRegistryMapValueInstanceRequest;
+  requestFactory: PlatformTypesRegistryMapValueInstanceRequestFactory;
+  resolve: PlatformTypesRegistryMapValueInstanceResolve;
+  resolver: PlatformTypesRegistryMapValueInstanceResolver;
+  sub: PlatformTypesRegistryMapValueInstanceSub;
 }
 
 export type PlatformTypesClipboardAPIPaste = () => unknown;
@@ -2748,65 +6249,32 @@ export type PlatformTypesCollectionPlatformAPIEventsContainsCancelFunctionByColl
 >;
 
 export interface PlatformTypesCollectionPlatformAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesCollectionPlatformAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesCollectionPlatformAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
-export interface PlatformTypesCollectionPlatformAPIEventsEmitterListeners {
-  added: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAdded;
-  removed: PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemoved;
-}
-
-export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersAdded =
-  Array<PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItem>;
-
-export interface PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItem {
-  listener: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemListener;
-  options: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemOptions;
-}
-
-export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemListener = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemOptions = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemoved =
-  Array<PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItem>;
-
-export interface PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItem {
-  listener: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemListener;
-  options: PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItemOptions;
-}
-
-export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItemOptions = Record<
-  string,
-  unknown
->;
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListeners = Record<string, unknown>;
 
 export interface PlatformTypesCollectionPlatformAPIEventsEmitterMetaListeners {
   add: PlatformTypesCollectionPlatformAPIEventsEmitterMetaListenersAdd;
@@ -2954,9 +6422,7 @@ export interface PlatformTypesConnectAPI {
   getState: PlatformTypesConnectAPIGetState;
   initiateLocalDiscovery: PlatformTypesConnectAPIInitiateLocalDiscovery;
   logout: PlatformTypesConnectAPILogout;
-  mapIncarnationToLoginType: PlatformTypesConnectAPIMapIncarnationToLoginType;
   pullToLocal: PlatformTypesConnectAPIPullToLocal;
-  setPreferredIncarnation: PlatformTypesConnectAPISetPreferredIncarnation;
   state: PlatformTypesConnectAPIState;
   transferPlayback: PlatformTypesConnectAPITransferPlayback;
   transferToRemote: PlatformTypesConnectAPITransferToRemote;
@@ -3104,29 +6570,29 @@ export interface PlatformTypesConnectAPIEvents {
 }
 
 export interface PlatformTypesConnectAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesConnectAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesConnectAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesConnectAPIEventsEmitterListeners {
@@ -3169,11 +6635,7 @@ export type PlatformTypesConnectAPIInitiateLocalDiscovery = () => unknown;
 
 export type PlatformTypesConnectAPILogout = (arg0: any) => unknown;
 
-export type PlatformTypesConnectAPIMapIncarnationToLoginType = (arg0: any) => unknown;
-
 export type PlatformTypesConnectAPIPullToLocal = (arg0: any) => unknown;
-
-export type PlatformTypesConnectAPISetPreferredIncarnation = (arg0: any, arg1: any) => unknown;
 
 export interface PlatformTypesConnectAPIState {
   activeDevice: PlatformTypesConnectAPIStateActiveDevice;
@@ -3188,7 +6650,6 @@ export interface PlatformTypesConnectAPIStateActiveDevice {
   currentState: string;
   disabledReason: undefined;
   id: string;
-  incarnation: PlatformTypesConnectAPIStateActiveDeviceIncarnation;
   isActive: boolean;
   isConnecting: boolean;
   isDisabled: boolean;
@@ -3211,13 +6672,6 @@ export interface PlatformTypesConnectAPIStateActiveDevice {
   volume: number;
 }
 
-export interface PlatformTypesConnectAPIStateActiveDeviceIncarnation {
-  available: PlatformTypesConnectAPIStateActiveDeviceIncarnationAvailable;
-  preferred: undefined;
-}
-
-export type PlatformTypesConnectAPIStateActiveDeviceIncarnationAvailable = Array<unknown>;
-
 export interface PlatformTypesConnectAPIStateActiveDeviceLosslessSupport {
   deviceSupported: boolean;
   fullySupported: boolean;
@@ -3238,8 +6692,6 @@ export interface PlatformTypesConnectDeviceManagementAPI {
   checkDeviceId: PlatformTypesConnectDeviceManagementAPICheckDeviceId;
   connectServiceClient: PlatformTypesConnectDeviceManagementAPIConnectServiceClient;
   logout: PlatformTypesConnectDeviceManagementAPILogout;
-  mapIncarnationToLoginType: PlatformTypesConnectDeviceManagementAPIMapIncarnationToLoginType;
-  setPreferredIncarnation: PlatformTypesConnectDeviceManagementAPISetPreferredIncarnation;
 }
 
 export type PlatformTypesConnectDeviceManagementAPICheckDeviceId = (arg0: any) => unknown;
@@ -3277,15 +6729,6 @@ export type PlatformTypesConnectDeviceManagementAPIConnectServiceClientOptions =
 >;
 
 export type PlatformTypesConnectDeviceManagementAPILogout = (arg0: any) => unknown;
-
-export type PlatformTypesConnectDeviceManagementAPIMapIncarnationToLoginType = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesConnectDeviceManagementAPISetPreferredIncarnation = (
-  arg0: any,
-  arg1: any,
-) => unknown;
 
 export interface PlatformTypesConnectDevicesAPI {
   connectRestrictor: PlatformTypesConnectDevicesAPIConnectRestrictor;
@@ -3351,29 +6794,29 @@ export type PlatformTypesConnectDevicesAPIEventsConnectServiceClientOptions = Re
 >;
 
 export interface PlatformTypesConnectDevicesAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesConnectDevicesAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesConnectDevicesAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesConnectDevicesAPIEventsEmitterListeners {
@@ -3566,7 +7009,6 @@ export interface PlatformTypesConnectDevicesAPIStateActiveDevice {
   currentState: string;
   disabledReason: undefined;
   id: string;
-  incarnation: PlatformTypesConnectDevicesAPIStateActiveDeviceIncarnation;
   isActive: boolean;
   isConnecting: boolean;
   isDisabled: boolean;
@@ -3588,13 +7030,6 @@ export interface PlatformTypesConnectDevicesAPIStateActiveDevice {
   type: string;
   volume: number;
 }
-
-export interface PlatformTypesConnectDevicesAPIStateActiveDeviceIncarnation {
-  available: PlatformTypesConnectDevicesAPIStateActiveDeviceIncarnationAvailable;
-  preferred: undefined;
-}
-
-export type PlatformTypesConnectDevicesAPIStateActiveDeviceIncarnationAvailable = Array<unknown>;
 
 export interface PlatformTypesConnectDevicesAPIStateActiveDeviceLosslessSupport {
   deviceSupported: boolean;
@@ -3699,256 +7134,17 @@ export type PlatformTypesConnectTransferAPITransferPlayback = (arg0: any, arg1: 
 export type PlatformTypesConnectTransferAPITransferToRemote = (arg0: any, arg1: any) => unknown;
 
 export interface PlatformTypesContextualShuffleAPI {
-  _events: PlatformTypesContextualShuffleAPIEvents;
-  _indexedDbAPI: PlatformTypesIndexedDbAPI;
-  getContextualShuffleMode: PlatformTypesContextualShuffleAPIGetContextualShuffleMode;
-  getEvents: PlatformTypesContextualShuffleAPIGetEvents;
-  getIsSmartShuffleSettingEnabled: PlatformTypesContextualShuffleAPIGetIsSmartShuffleSettingEnabled;
-  setContextualShuffleMode: PlatformTypesContextualShuffleAPISetContextualShuffleMode;
+  _events: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEvents;
+  _isCentralisedSmartShuffleToggleRCFlagEnabled: boolean;
+  _isSmartShuffleSettingEnabled: boolean;
+  _localContextualShuffle: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffle;
+  _playbackSettingsClient: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePlaybackSettingsClient;
+  _pubSubAPI: PlatformTypesPubSubAPI;
+  getContextualShuffleMode: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleGetContextualShuffleMode;
+  getEvents: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleGetEvents;
+  getIsSmartShuffleSettingEnabled: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleGetIsSmartShuffleSettingEnabled;
+  setContextualShuffleMode: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleSetContextualShuffleMode;
 }
-
-export interface PlatformTypesContextualShuffleAPIEvents {
-  _emitter: PlatformTypesContextualShuffleAPIEventsEmitter;
-  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
-  emitUpdateContextualShuffleModeCompleteSync: PlatformTypesContextualShuffleAPIEventsEmitUpdateContextualShuffleModeCompleteSync;
-  emitUpdateContextualShuffleModeErrorSync: PlatformTypesContextualShuffleAPIEventsEmitUpdateContextualShuffleModeErrorSync;
-  emitUpdateContextualShuffleModeSync: PlatformTypesContextualShuffleAPIEventsEmitUpdateContextualShuffleModeSync;
-  emitUpdateSetting: PlatformTypesContextualShuffleAPIEventsEmitUpdateSetting;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
-}
-
-export interface PlatformTypesContextualShuffleAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
-  _listeners: PlatformTypesContextualShuffleAPIEventsEmitterListeners;
-  _metaListeners: PlatformTypesContextualShuffleAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
-}
-
-export interface PlatformTypesContextualShuffleAPIEventsEmitterListeners {
-  update_complete: PlatformTypesContextualShuffleAPIEventsEmitterListenersUpdateComplete;
-}
-
-export type PlatformTypesContextualShuffleAPIEventsEmitterListenersUpdateComplete =
-  Array<PlatformTypesContextualShuffleAPIEventsEmitterListenersUpdateCompleteItem>;
-
-export interface PlatformTypesContextualShuffleAPIEventsEmitterListenersUpdateCompleteItem {
-  listener: PlatformTypesContextualShuffleAPIEventsEmitterListenersUpdateCompleteItemListener;
-  options: PlatformTypesContextualShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions;
-}
-
-export type PlatformTypesContextualShuffleAPIEventsEmitterListenersUpdateCompleteItemListener = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesContextualShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions =
-  Record<string, unknown>;
-
-export interface PlatformTypesContextualShuffleAPIEventsEmitterMetaListeners {
-  add: PlatformTypesContextualShuffleAPIEventsEmitterMetaListenersAdd;
-  remove: PlatformTypesContextualShuffleAPIEventsEmitterMetaListenersRemove;
-}
-
-export type PlatformTypesContextualShuffleAPIEventsEmitterMetaListenersAdd = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesContextualShuffleAPIEventsEmitterMetaListenersRemove = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesContextualShuffleAPIEventsEmitUpdateContextualShuffleModeCompleteSync = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesContextualShuffleAPIEventsEmitUpdateContextualShuffleModeErrorSync = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesContextualShuffleAPIEventsEmitUpdateContextualShuffleModeSync = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesContextualShuffleAPIEventsEmitUpdateSetting = () => unknown;
-
-export type PlatformTypesContextualShuffleAPIGetContextualShuffleMode = (arg0: any) => unknown;
-
-export type PlatformTypesContextualShuffleAPIGetEvents = () => unknown;
-
-export type PlatformTypesContextualShuffleAPIGetIsSmartShuffleSettingEnabled = () => unknown;
-
-export interface PlatformTypesContextualShuffleAPIIndexedDbAPIChannel {
-  addEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelAddEventListener;
-  close: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelClose;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
-  name: string;
-  onmessage: null;
-  onmessageerror: null;
-  postMessage: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelPostMessage;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
-}
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIChannelAddEventListener = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIChannelClose = () => unknown;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIChannelPostMessage = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen = (arg0: any) => unknown;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIDeleteItem = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export interface PlatformTypesContextualShuffleAPIIndexedDbAPIEvents {
-  _emitter: PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitter;
-  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
-}
-
-export interface PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
-  _listeners: PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListeners;
-  _metaListeners: PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
-}
-
-export interface PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListeners {
-  delete: PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersDelete;
-  update: PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersUpdate;
-}
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersDelete =
-  Array<PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersDeleteItem>;
-
-export interface PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersDeleteItem {
-  listener: PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersDeleteItemListener;
-  options: PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersDeleteItemOptions;
-}
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersDeleteItemListener =
-  (arg0: any) => unknown;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersDeleteItemOptions =
-  Record<string, unknown>;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersUpdate =
-  Array<PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersUpdateItem>;
-
-export interface PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersUpdateItem {
-  listener: PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersUpdateItemListener;
-  options: PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersUpdateItemOptions;
-}
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersUpdateItemListener =
-  (arg0: any) => unknown;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterListenersUpdateItemOptions =
-  Record<string, unknown>;
-
-export interface PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterMetaListeners {
-  add: PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterMetaListenersAdd;
-  remove: PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterMetaListenersRemove;
-}
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterMetaListenersAdd = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIEventsEmitterMetaListenersRemove = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIGetEvents = () => unknown;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIGetItem = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPIOpenDb = () => unknown;
-
-export type PlatformTypesContextualShuffleAPIIndexedDbAPISetItem = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesContextualShuffleAPISetContextualShuffleMode = (
-  arg0: any,
-  arg1: any,
-) => unknown;
 
 export interface PlatformTypesControlMessageAPI {
   _cosmos: PlatformTypesClipboardAPICosmos;
@@ -4085,7 +7281,7 @@ export type PlatformTypesCurationAPICacheGetExpiry = () => unknown;
 
 export type PlatformTypesCurationAPICacheHas = (arg0: any) => unknown;
 
-export type PlatformTypesCurationAPICacheIsExpired = (arg0: any) => unknown;
+export type PlatformTypesCurationAPICacheIsExpired = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesCurationAPICachePeek = (arg0: any) => unknown;
 
@@ -4174,29 +7370,29 @@ export type PlatformTypesCurationAPIEventsEmitOperationSync = (
 ) => unknown;
 
 export interface PlatformTypesCurationAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesCurationAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesCurationAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export type PlatformTypesCurationAPIEventsEmitterListeners = Record<string, unknown>;
@@ -4397,29 +7593,29 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIEvents {
 }
 
 export interface PlatformTypesEqualizerAPILocalStorageAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesEqualizerAPILocalStorageAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesEqualizerAPILocalStorageAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesEqualizerAPILocalStorageAPIEventsEmitterListeners {
@@ -4580,10 +7776,8 @@ export type PlatformTypesEqualizerAPILocalStorageAPIGetItem = (arg0: any) => unk
 
 export interface PlatformTypesEqualizerAPILocalStorageAPIItems {
   "USERNAME:cinema-media-preference": string;
-  "USERNAME:connect-nudge-triggered-at": string;
   "USERNAME:fusionSearchHistory": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEfusionSearchHistory;
   "USERNAME:homePins": string;
-  "USERNAME:isPlaybackBarRemainingTimeToggled": boolean;
   "USERNAME:items-view": number;
   "USERNAME:items-view-fullscreen": number;
   "USERNAME:lastVisitedLocation": string;
@@ -4591,30 +7785,20 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItems {
   "USERNAME:left-sidebar-expanded-state-width": number;
   "USERNAME:left-sidebar-state": number;
   "USERNAME:library-row-mode": null;
-  "USERNAME:lintHtmlWithCss": boolean;
-  "USERNAME:mixing-not-available-for-device-notifications": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEmixingnotavailablefordevicenotifications;
   "USERNAME:onboarding-checklist": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEonboardingchecklist;
   "USERNAME:onboarding-checklist-completed-at": null;
-  "USERNAME:opened-folder-uri": string;
   "USERNAME:panel-width": number;
   "USERNAME:playbackSpeed": number;
   "USERNAME:queue-view": string;
   "USERNAME:remote-config-overrides": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconfigoverrides;
   "USERNAME:toggleNowPlayingView": boolean;
   "USERNAME:ui.right_sidebar_content": string;
-  "USERNAME:ylx-active-filter-ids": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivefilterids;
-  "USERNAME:ylx-active-sort-order-by-filter-id": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivesortorderbyfilterid;
   "USERNAME:ylx-default-state-nav-bar-width": number;
-  "USERNAME:ylx-expanded-folders": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxexpandedfolders;
   "USERNAME:ylx-expanded-state-nav-bar-width": number;
-  "USERNAME:ylx-sort-order-and-direction-by-filter-id": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxsortorderanddirectionbyfilterid;
 }
 
 export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEfusionSearchHistory =
   Array<unknown>;
-
-export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEmixingnotavailablefordevicenotifications =
-  Record<string, unknown>;
 
 export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEonboardingchecklist {
   completed: PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEonboardingchecklistCompleted;
@@ -4626,19 +7810,23 @@ export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEonboardingcheck
 export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconfigoverrides {
   betamaxSdkDataSaverV2: boolean;
   betamaxUsePendingStorage: boolean;
-  canYourDJUserBeConvertedToPremium: boolean;
-  embeddedAdsPrioritizeCanvas: boolean;
   enableAdaptiveTitleEntities: boolean;
+  enableAgeAssuranceContent: boolean;
+  enableAgeAssuranceSettings: boolean;
   enableAlbumSortByReleaseDate: boolean;
   enableAudiobookAdExclusivity: boolean;
   enableAudiobookCardPlayButton: boolean;
   enableAuthorPage: boolean;
+  enableAutoPlayOnLoad: boolean;
   enableAutoSeekToVideoBufferedStartPosition: boolean;
-  enableBackendSearchHistory: boolean;
   enableBetamaxSdkSubtitlesDesktopX: boolean;
   enableBetamaxSdkVideoOnVideoSai: boolean;
   enableBetamaxSdkVmp: boolean;
+  enableBuyOptionInAudiobookContextMenu: boolean;
   enableCanvasAds: boolean;
+  enableCentralisedSmartShuffle: boolean;
+  enableCheetara: boolean;
+  enableCommentThreadsReactionsForEpisodes: boolean;
   enableConcertDistanceRadius: boolean;
   enableConcertsNearYou: boolean;
   enableConcertsNotInterested: boolean;
@@ -4646,65 +7834,84 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconf
   enableContextualTrackBans: boolean;
   enableCreateButton: string;
   enableDebugTools: boolean;
-  enableDesktopMusicLeavebehinds: boolean;
-  enableEmbeddedNpvAds: boolean;
+  enableDynamicLiveEventsFeed: boolean;
   enableEqualizer: boolean;
-  enableEsperantoMigrationLeaderboard: boolean;
+  enableExcludeTrackFromTasteProfile: boolean;
   enableFeedBaselineAudioPreviews: boolean;
   enableFeedBaselineTranscripts: boolean;
   enableFeedBaselineVideoPreviews: boolean;
   enableFullscreenLibrary: boolean;
   enableFullscreenMode: boolean;
+  enableHomeFollowingSubfeeds: boolean;
+  enableHybridHome: boolean;
+  enableHybridHomeLowDensity: boolean;
   enableImprovedCinemaModeCanvas: boolean;
-  enableImprovedCinemaModeScrollCards: boolean;
   enableInAppMessaging: boolean;
   enableJamNearbyJoining: boolean;
+  enableLauncherAutoStartToggle: boolean;
+  enableLibraryAlbumNewReleaseSignifier: boolean;
+  enableLibraryImportCTAForInactiveUsers: string;
+  enableLibraryImportSettings: string;
   enableLikedSongsFilterTags: boolean;
-  enableLyricsScrollToCurrentLineButton: boolean;
-  enableLyricsUpsell: boolean;
+  enableMagpie: boolean;
   enableMandalorianEasterEgg: string;
+  enableMixedFilterInYourLibrary: boolean;
+  enableNPVideosV2: boolean;
   enableNavigateToGalleryFromConceptPill: boolean;
   enableNearbyJams: boolean;
   enableNewShuffleModeOrder: boolean;
+  enableNotificationCenter: boolean;
+  enableNowPlayingBarVideo: boolean;
   enableNpvAboutPodcast: boolean;
   enableNpvCreditsImpressions: boolean;
+  enableParrot: boolean;
+  enablePeekNpv: boolean;
   enablePiPMiniPlayer: boolean;
+  enablePiPMiniPlayerQueue: boolean;
+  enablePiPMiniPlayerSettings: boolean;
   enablePiPMiniPlayerVideo: boolean;
   enablePlaybackBarAnimation: boolean;
+  enablePlaylistMixingBranding: boolean;
+  enablePlaylistSessionControlChips: boolean;
+  enablePrefetching: boolean;
+  enablePremiumFlagForLyrics: boolean;
   enablePremiumPage: boolean;
   enablePremiumUserForMiniPlayer: boolean;
+  enableProgressBarRefactorWithChapters: boolean;
   enablePushCinemaModeStateToHistory: boolean;
   enableReactQueryPersistence: boolean;
+  enableRelatedVideos: boolean;
   enableReportAudiobookAuthors: boolean;
+  enableSearchSuggestions: boolean;
   enableShowLeavebehindConsolidation: boolean;
+  enableShuffleSettings: boolean;
+  enableSingAlong: boolean;
   enableSleepTimer: boolean;
   enableSmartShuffle: boolean;
-  enableStaticImage2Optimizer: boolean;
   enableStructuredDescriptionHtml: boolean;
+  enableSyncingSearchHistoryToBackend: boolean;
+  enableTheStageDesktop: boolean;
+  enableTrackCreditsModalV2: boolean;
+  enableTuna: boolean;
+  enableUnderAgeBlockingModal: boolean;
+  enableUnmappedVideos: boolean;
   enableUserCommentsForEpisodes: boolean;
-  enableVenuePages: boolean;
+  enableVenuePageFollow: boolean;
+  enableVenuePageGenres: boolean;
+  enableVenuesInYourLibrary: boolean;
+  enableVideoAutoplayAlways: boolean;
   enableViewMode: boolean;
   enableWatchFeed: boolean;
   enableWatchFeedEntityPages: boolean;
   enableYLXPrereleaseAlbums: boolean;
   enableYlxGroupByLabels: boolean;
   enableYlxReverseSorting: boolean;
+  enableYourDJ: boolean;
+  episodeTranscriptTabSource: string;
   hideUpgradeCTA: boolean;
+  transitionRowInteractionVariant: string;
+  useHarmonyCoreExtension: boolean;
 }
-
-export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivefilterids = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivesortorderbyfilterid =
-  Record<string, unknown>;
-
-export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxexpandedfolders =
-  Array<unknown>;
-
-export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxsortorderanddirectionbyfilterid =
-  Record<string, unknown>;
 
 export type PlatformTypesEqualizerAPILocalStorageAPIListenToStorageEvents = () => unknown;
 
@@ -4759,22 +7966,22 @@ export type PlatformTypesEqualizerAPISubscribeToEnabledState = (arg0: any) => un
 export type PlatformTypesEqualizerAPISubscribeToPresetChange = (arg0: any) => unknown;
 
 export interface PlatformTypesEventSender {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesRegistryMapValueInstanceListeners;
   _metaListeners: PlatformTypesRegistryMapValueInstanceMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
   buildEvent: PlatformTypesRegistryMapValueInstanceBuildEvent;
   commitAndUploadESStats: PlatformTypesRegistryMapValueInstanceCommitAndUploadESStats;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
   destroy: PlatformTypesRegistryMapValueInstanceDestroy;
   droppedEventsTracker: PlatformTypesRegistryMapValueInstanceDroppedEventsTracker;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
   eventsManager: PlatformTypesRegistryMapValueInstanceEventsManager;
   finalFlush: PlatformTypesRegistryMapValueInstanceFinalFlush;
   flush: PlatformTypesRegistryMapValueInstanceFlush;
@@ -4790,20 +7997,20 @@ export interface PlatformTypesEventSender {
   instanceContexts: PlatformTypesRegistryMapValueInstanceInstanceContexts;
   isUsingESS2NAOptimization: PlatformTypesRegistryMapValueInstanceIsUsingESS2NAOptimization;
   lastFlush: PlatformTypesRegistryMapValueInstanceLastFlush;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
   onBeforeDisconnect: PlatformTypesRegistryMapValueInstanceOnBeforeDisconnect;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
   onSuccessfullySentESStats: PlatformTypesRegistryMapValueInstanceOnSuccessfullySentESStats;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
   ownerProvider: PlatformTypesRegistryMapValueInstanceOwnerProvider;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
   send: PlatformTypesRegistryMapValueInstanceSend;
   sendESS2NAWithOptimization: PlatformTypesRegistryMapValueInstanceSendESS2NAWithOptimization;
   sendESStats: PlatformTypesRegistryMapValueInstanceSendESStats;
@@ -4821,6 +8028,59 @@ export interface PlatformTypesEventSender {
   useOptimizedESS2NA: boolean;
   validateEventData: PlatformTypesRegistryMapValueInstanceValidateEventData;
 }
+
+export interface PlatformTypesExclusiveModeAPI {
+  exclusiveModeService: PlatformTypesExclusiveModeAPIExclusiveModeService;
+  getExclusiveModeEnabled: PlatformTypesExclusiveModeAPIGetExclusiveModeEnabled;
+  getSelectedAudioOutputDevice: PlatformTypesExclusiveModeAPIGetSelectedAudioOutputDevice;
+  setExclusiveModeEnabled: PlatformTypesExclusiveModeAPISetExclusiveModeEnabled;
+  setSelectedAudioOutputDevice: PlatformTypesExclusiveModeAPISetSelectedAudioOutputDevice;
+}
+
+export interface PlatformTypesExclusiveModeAPIExclusiveModeService {
+  enumerateDevices: PlatformTypesExclusiveModeAPIExclusiveModeServiceEnumerateDevices;
+  getDevice: PlatformTypesExclusiveModeAPIExclusiveModeServiceGetDevice;
+  getEnable: PlatformTypesExclusiveModeAPIExclusiveModeServiceGetEnable;
+  options: PlatformTypesExclusiveModeAPIExclusiveModeServiceOptions;
+  setDevice: PlatformTypesExclusiveModeAPIExclusiveModeServiceSetDevice;
+  setEnable: PlatformTypesExclusiveModeAPIExclusiveModeServiceSetEnable;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesExclusiveModeAPIExclusiveModeServiceEnumerateDevices = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesExclusiveModeAPIExclusiveModeServiceGetDevice = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesExclusiveModeAPIExclusiveModeServiceGetEnable = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesExclusiveModeAPIExclusiveModeServiceOptions = Record<string, unknown>;
+
+export type PlatformTypesExclusiveModeAPIExclusiveModeServiceSetDevice = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesExclusiveModeAPIExclusiveModeServiceSetEnable = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesExclusiveModeAPIGetExclusiveModeEnabled = () => unknown;
+
+export type PlatformTypesExclusiveModeAPIGetSelectedAudioOutputDevice = () => unknown;
+
+export type PlatformTypesExclusiveModeAPISetExclusiveModeEnabled = (arg0: any) => unknown;
+
+export type PlatformTypesExclusiveModeAPISetSelectedAudioOutputDevice = (arg0: any) => unknown;
 
 export interface PlatformTypesExternalAccessoryAPI {
   _builder: PlatformTypesRequestBuilder;
@@ -5025,29 +8285,29 @@ export type PlatformTypesFeedbackAPIEventsContextualBanCancelFunctionByContextUr
 >;
 
 export interface PlatformTypesFeedbackAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesFeedbackAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesFeedbackAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export type PlatformTypesFeedbackAPIEventsEmitterListeners = Record<string, unknown>;
@@ -5168,29 +8428,29 @@ export type PlatformTypesFollowAPIEventsEmitOperationComplete = (arg0: any, arg1
 export type PlatformTypesFollowAPIEventsEmitOperationSync = (arg0: any, arg1: any) => unknown;
 
 export interface PlatformTypesFollowAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesFollowAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesFollowAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesFollowAPIEventsEmitterListeners {
@@ -5275,11 +8535,7 @@ export interface PlatformTypesHistoryLocation {
   key: string;
   pathname: string;
   search: string;
-  state: PlatformTypesHistoryLocationState;
-}
-
-export interface PlatformTypesHistoryLocationState {
-  navigationalRoot: undefined;
+  state: undefined;
 }
 
 export type PlatformTypesHistoryPush = (arg0: any, arg1: any) => unknown;
@@ -5287,14 +8543,14 @@ export type PlatformTypesHistoryPush = (arg0: any, arg1: any) => unknown;
 export type PlatformTypesHistoryReplace = (arg0: any, arg1: any) => unknown;
 
 export interface PlatformTypesIndexedDbAPI {
-  _channel: PlatformTypesContextualShuffleAPIIndexedDbAPIChannel;
-  _events: PlatformTypesContextualShuffleAPIIndexedDbAPIEvents;
-  deleteItem: PlatformTypesContextualShuffleAPIIndexedDbAPIDeleteItem;
-  getEvents: PlatformTypesContextualShuffleAPIIndexedDbAPIGetEvents;
-  getItem: PlatformTypesContextualShuffleAPIIndexedDbAPIGetItem;
+  _channel: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannel;
+  _events: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIEvents;
+  deleteItem: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIDeleteItem;
+  getEvents: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIGetEvents;
+  getItem: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIGetItem;
   name: string;
-  openDb: PlatformTypesContextualShuffleAPIIndexedDbAPIOpenDb;
-  setItem: PlatformTypesContextualShuffleAPIIndexedDbAPISetItem;
+  openDb: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIOpenDb;
+  setItem: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPISetItem;
   version: number;
 }
 
@@ -5311,7 +8567,6 @@ export interface PlatformTypesInitialProductState {
   "audio-preview-url-template": string;
   "audio-quality": string;
   "audiobook-onboarding-completed": string;
-  "browse-overview-enabled": string;
   "capping-bar-threshold": string;
   "com.spotify.madprops.delivered.by.ucs": string;
   "com.spotify.madprops.use.ucs.product.state": string;
@@ -5336,24 +8591,26 @@ export interface PlatformTypesInitialProductState {
   "is-pigeon": string;
   "is-puffin": string;
   "is-standalone-audiobooks": string;
+  "is-thalia": string;
   "is-tuna": string;
+  "jam-social-session": string;
   "key-caching-auto-offline": string;
   "key-caching-max-count": string;
   "key-caching-max-offline-seconds": string;
   "key-memory-cache-mode": string;
-  "license-acceptance-grace-days": string;
   "license-agreements": string;
   "list-private-by-default": string;
+  "loudness-levels": string;
+  "market-portfolio-type": string;
   "metadata-link-lookup-modes": string;
   "mixing-tools": string;
-  "mobile-payment": string;
-  "music-videos": string;
-  "network-operator-premium-activation": string;
   "nft-disabled": string;
   "obfuscate-restricted-tracks": string;
+  "offline-backup": string;
   "on-demand": string;
   "on-demand-trial": string;
   "on-demand-trial-in-progress": string;
+  "payments-initial-campaign": string;
   "payments-locked-state": string;
   "pick-and-shuffle": string;
   "player-license": string;
@@ -5363,6 +8620,7 @@ export interface PlatformTypesInitialProductState {
   "prefetch-keys": string;
   "prefetch-strategy": string;
   "prefetch-window-max": string;
+  "product-expiry": string;
   "public-toplist": string;
   "publish-activity": string;
   "publish-playlist": string;
@@ -5385,10 +8643,8 @@ export interface PlatformTypesInitialProductState {
   "streaming-rules": string;
   "ugc-abuse-report": string;
   "ugc-abuse-report-url": string;
-  "user-profile-show-invitation-codes": string;
   "video-cdn-sampling": string;
   "video-device-blacklisted": string;
-  "video-keyframe-url": string;
   "video-manifest-url": string;
   "widevine-license-url": string;
   "yl-kids-restricted-content": string;
@@ -5408,10 +8664,12 @@ export interface PlatformTypesInitialProductState {
   name: string;
   offline: string;
   parrot: string;
+  partner: string;
   product: string;
   radio: string;
   shuffle: string;
   streaming: string;
+  unrestricted: string;
 }
 
 export interface PlatformTypesInitialUser {
@@ -5483,14 +8741,18 @@ export interface PlatformTypesLibraryAPI {
   _isAlbumSortByReleaseDateEnabled: boolean;
   _isAuthorsEnabled: boolean;
   _isCoursesEnabled: boolean;
+  _isLikedSongsListPlatformEnabled: boolean;
+  _isMixedFilterEnabled: boolean;
   _isTagsInfoSynced: PlatformTypesLibraryAPIIsTagsInfoSynced;
   _isVenuesInYourLibraryEnabled: boolean;
+  _likedSongsUri: string;
   _playlistDataClient: PlatformTypesLibraryAPIPlaylistDataClient;
   _playlistServiceClient: PlatformTypesLibraryAPIPlaylistServiceClient;
   _your_library: PlatformTypesLibraryAPIYourLibrary;
   add: PlatformTypesLibraryAPIAdd;
   contains: PlatformTypesLibraryAPIContains;
   containsSync: PlatformTypesLibraryAPIContainsSync;
+  getArtistView: PlatformTypesLibraryAPIGetArtistView;
   getCapabilities: PlatformTypesLibraryAPIGetCapabilities;
   getContents: PlatformTypesLibraryAPIGetContents;
   getContentsPrimaryFilterId: PlatformTypesLibraryAPIGetContentsPrimaryFilterId;
@@ -5565,10 +8827,12 @@ export type PlatformTypesLibraryAPIContainsSync = (arg0: any) => unknown;
 
 export interface PlatformTypesLibraryAPIEvents {
   _aggregator: PlatformTypesLibraryAPIEventsAggregator;
+  _artistViewAggregator: PlatformTypesLibraryAPIEventsArtistViewAggregator;
+  _artistViewSubscriptions: PlatformTypesLibraryAPIEventsArtistViewSubscriptions;
   _cache: PlatformTypesLibraryAPICache;
   _cancellables: PlatformTypesLibraryAPIEventsCancellables;
   _collection: PlatformTypesLibraryAPICollection;
-  _containsCancellable: null;
+  _containsCancellable: PlatformTypesLibraryAPIEventsContainsCancellable;
   _emitter: PlatformTypesLibraryAPIEventsEmitter;
   _isAuthorsEnabled: boolean;
   _isVenuesInYourLibraryEnabled: boolean;
@@ -5585,6 +8849,7 @@ export interface PlatformTypesLibraryAPIEvents {
   emitUpdatePin: PlatformTypesLibraryAPIEventsEmitUpdatePin;
   emitUpdatePinErrorTooManyPins: PlatformTypesLibraryAPIEventsEmitUpdatePinErrorTooManyPins;
   onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
+  onArtistViewBatchChanged: PlatformTypesLibraryAPIEventsOnArtistViewBatchChanged;
   onBatchChanged: PlatformTypesLibraryAPIEventsOnBatchChanged;
   onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
   removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
@@ -5611,7 +8876,7 @@ export interface PlatformTypesLibraryAPIEventsAggregator {
 
 export type PlatformTypesLibraryAPIEventsAggregatorAdditions = Map<unknown, unknown>;
 
-export type PlatformTypesLibraryAPIEventsAggregatorBatch = Map<unknown, unknown>;
+export type PlatformTypesLibraryAPIEventsAggregatorBatch = Map<string, number>;
 
 export type PlatformTypesLibraryAPIEventsAggregatorDeletions = Map<unknown, unknown>;
 
@@ -5626,6 +8891,49 @@ export type PlatformTypesLibraryAPIEventsAggregatorOnUpdate = (
   arg1: any,
   arg2: any,
 ) => unknown;
+
+export interface PlatformTypesLibraryAPIEventsArtistViewAggregator {
+  _additions: PlatformTypesLibraryAPIEventsArtistViewAggregatorAdditions;
+  _batch: PlatformTypesLibraryAPIEventsArtistViewAggregatorBatch;
+  _deletions: PlatformTypesLibraryAPIEventsArtistViewAggregatorDeletions;
+  _onAdd: PlatformTypesLibraryAPIEventsArtistViewAggregatorOnAdd;
+  _onBatch: PlatformTypesLibraryAPIEventsArtistViewAggregatorOnBatch;
+  _onRemove: PlatformTypesLibraryAPIEventsArtistViewAggregatorOnRemove;
+  _onUpdate: PlatformTypesLibraryAPIEventsArtistViewAggregatorOnUpdate;
+  _timeout: number;
+  _timeoutId: null;
+  getBatch: PlatformTypesCurationAPIEventsAggregatorGetBatch;
+  onUpdate: PlatformTypesCurationAPIEventsAggregatorOnUpdate;
+  scheduleUpdate: PlatformTypesCurationAPIEventsAggregatorScheduleUpdate;
+  subscribe: PlatformTypesCurationAPIEventsAggregatorSubscribe;
+  unsubscribe: PlatformTypesCurationAPIEventsAggregatorUnsubscribe;
+}
+
+export type PlatformTypesLibraryAPIEventsArtistViewAggregatorAdditions = Map<unknown, unknown>;
+
+export type PlatformTypesLibraryAPIEventsArtistViewAggregatorBatch = Map<unknown, unknown>;
+
+export type PlatformTypesLibraryAPIEventsArtistViewAggregatorDeletions = Map<unknown, unknown>;
+
+export type PlatformTypesLibraryAPIEventsArtistViewAggregatorOnAdd = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsArtistViewAggregatorOnBatch = (arg0: any) => unknown;
+
+export type PlatformTypesLibraryAPIEventsArtistViewAggregatorOnRemove = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsArtistViewAggregatorOnUpdate = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsArtistViewSubscriptions = Map<unknown, unknown>;
 
 export interface PlatformTypesLibraryAPIEventsCancellables {
   albums: PlatformTypesLibraryAPIEventsCancellablesAlbums;
@@ -5686,6 +8994,12 @@ export interface PlatformTypesLibraryAPIEventsCancellablesTracks {
 
 export type PlatformTypesLibraryAPIEventsCancellablesTracksCancel = () => unknown;
 
+export interface PlatformTypesLibraryAPIEventsContainsCancellable {
+  cancel: PlatformTypesLibraryAPIEventsContainsCancellableCancel;
+}
+
+export type PlatformTypesLibraryAPIEventsContainsCancellableCancel = () => unknown;
+
 export type PlatformTypesLibraryAPIEventsEmitOperationComplete = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesLibraryAPIEventsEmitOperationSync = (
@@ -5695,36 +9009,34 @@ export type PlatformTypesLibraryAPIEventsEmitOperationSync = (
 ) => unknown;
 
 export interface PlatformTypesLibraryAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesLibraryAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesLibraryAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesLibraryAPIEventsEmitterListeners {
   operation: PlatformTypesLibraryAPIEventsEmitterListenersOperation;
-  update: PlatformTypesLibraryAPIEventsEmitterListenersUpdate;
-  update_pin: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePin;
-  update_pin_error: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinError;
+  update_item: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem;
 }
 
 export type PlatformTypesLibraryAPIEventsEmitterListenersOperation =
@@ -5744,56 +9056,21 @@ export type PlatformTypesLibraryAPIEventsEmitterListenersOperationItemOptions = 
   unknown
 >;
 
-export type PlatformTypesLibraryAPIEventsEmitterListenersUpdate =
-  Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem>;
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem =
+  Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItem>;
 
-export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem {
-  listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemListener;
-  options: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemOptions;
+export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItem {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemListener;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemOptions;
 }
 
-export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemListener = (
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemListener = (
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemOptions = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePin =
-  Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItem>;
-
-export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinError =
-  Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItem>;
-
-export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItem {
-  listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItemListener;
-  options: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItemOptions;
+export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemOptions {
+  uri: string;
 }
-
-export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItemListener = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItemOptions = Record<
-  string,
-  unknown
->;
-
-export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItem {
-  listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItemListener;
-  options: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItemOptions;
-}
-
-export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItemListener = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItemOptions = Record<
-  string,
-  unknown
->;
 
 export interface PlatformTypesLibraryAPIEventsEmitterMetaListeners {
   add: PlatformTypesLibraryAPIEventsEmitterMetaListenersAdd;
@@ -5802,11 +9079,27 @@ export interface PlatformTypesLibraryAPIEventsEmitterMetaListeners {
 
 export interface PlatformTypesLibraryAPIEventsEmitterMetaListenersAdd {
   update: PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdate;
+  update_artist_view: PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdateArtistView;
   update_item: PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdateItem2;
 }
 
 export type PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdate =
   Array<PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdateItem>;
+
+export type PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdateArtistView =
+  Array<PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdateArtistViewItem>;
+
+export interface PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdateArtistViewItem {
+  listener: PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdateArtistViewItemListener;
+  options: PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdateArtistViewItemOptions;
+}
+
+export type PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdateArtistViewItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdateArtistViewItemOptions =
+  Record<string, unknown>;
 
 export interface PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdateItem {
   listener: PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdateItemListener;
@@ -5839,11 +9132,27 @@ export type PlatformTypesLibraryAPIEventsEmitterMetaListenersAddUpdateItemOption
 
 export interface PlatformTypesLibraryAPIEventsEmitterMetaListenersRemove {
   update: PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdate;
+  update_artist_view: PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdateArtistView;
   update_item: PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdateItem2;
 }
 
 export type PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdate =
   Array<PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdateItem>;
+
+export type PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdateArtistView =
+  Array<PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdateArtistViewItem>;
+
+export interface PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdateArtistViewItem {
+  listener: PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdateArtistViewItemListener;
+  options: PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdateArtistViewItemOptions;
+}
+
+export type PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdateArtistViewItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdateArtistViewItemOptions =
+  Record<string, unknown>;
 
 export interface PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdateItem {
   listener: PlatformTypesLibraryAPIEventsEmitterMetaListenersRemoveUpdateItemListener;
@@ -5884,11 +9193,15 @@ export type PlatformTypesLibraryAPIEventsEmitUpdatePinErrorTooManyPins = (
   arg1: any,
 ) => unknown;
 
+export type PlatformTypesLibraryAPIEventsOnArtistViewBatchChanged = (arg0: any) => unknown;
+
 export type PlatformTypesLibraryAPIEventsOnBatchChanged = (arg0: any) => unknown;
 
 export type PlatformTypesLibraryAPIEventsSubscribeToUpdates = () => unknown;
 
 export type PlatformTypesLibraryAPIEventsUnsubscribeFromUpdates = () => unknown;
+
+export type PlatformTypesLibraryAPIGetArtistView = (arg0: any) => unknown;
 
 export type PlatformTypesLibraryAPIGetCapabilities = () => unknown;
 
@@ -6082,6 +9395,212 @@ export type PlatformTypesLifecycleAPIRestart = () => unknown;
 
 export type PlatformTypesLifecycleAPIShutdown = () => unknown;
 
+export interface PlatformTypesListPlatformAPI {
+  _listPlatformFetchAPI: PlatformTypesListPlatformAPIListPlatformFetchAPI;
+  _listPlatformMutationAPI: PlatformTypesListPlatformAPIListPlatformMutationAPI;
+  _playabilityAPI: PlatformTypesPlayabilityAPI;
+  _playlistAPI: PlatformTypesPlaylistAPI;
+  _playlistDataClient: PlatformTypesListPlatformAPIPlaylistDataClient;
+  add: PlatformTypesListPlatformAPIAdd;
+  emitItemSignals: PlatformTypesListPlatformAPIEmitItemSignals;
+  emitSignals: PlatformTypesListPlatformAPIEmitSignals;
+  getCapabilities: PlatformTypesListPlatformAPIGetCapabilities;
+  getEvents: PlatformTypesListPlatformAPIGetEvents;
+  getList: PlatformTypesListPlatformAPIGetList;
+  getListContents: PlatformTypesListPlatformAPIGetListContents;
+  move: PlatformTypesListPlatformAPIMove;
+  onListUpdate: PlatformTypesListPlatformAPIOnListUpdate;
+  remove: PlatformTypesListPlatformAPIRemove;
+  removeAll: PlatformTypesListPlatformAPIRemoveAll;
+  requestLenses: PlatformTypesListPlatformAPIRequestLenses;
+  subscribeList: PlatformTypesListPlatformAPISubscribeList;
+}
+
+export type PlatformTypesListPlatformAPIAdd = () => unknown;
+
+export type PlatformTypesListPlatformAPIEmitItemSignals = () => unknown;
+
+export type PlatformTypesListPlatformAPIEmitSignals = () => unknown;
+
+export type PlatformTypesListPlatformAPIGetCapabilities = () => unknown;
+
+export type PlatformTypesListPlatformAPIGetEvents = () => unknown;
+
+export type PlatformTypesListPlatformAPIGetList = () => unknown;
+
+export type PlatformTypesListPlatformAPIGetListContents = () => unknown;
+
+export interface PlatformTypesListPlatformAPIListPlatformFetchAPI {
+  _playabilityAPI: PlatformTypesPlayabilityAPI;
+  _playlistDataClient: PlatformTypesListPlatformAPIPlaylistDataClient;
+  _updatePlayabilityCache: PlatformTypesListPlatformAPIListPlatformFetchAPIUpdatePlayabilityCache;
+  getList: PlatformTypesListPlatformAPIListPlatformFetchAPIGetList;
+  getListContents: PlatformTypesListPlatformAPIListPlatformFetchAPIGetListContents;
+  getPlaylistGetRequest: PlatformTypesListPlatformAPIListPlatformFetchAPIGetPlaylistGetRequest;
+  onListUpdate: PlatformTypesListPlatformAPIListPlatformFetchAPIOnListUpdate;
+  subscribeList: PlatformTypesListPlatformAPIListPlatformFetchAPISubscribeList;
+}
+
+export type PlatformTypesListPlatformAPIListPlatformFetchAPIGetList = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesListPlatformAPIListPlatformFetchAPIGetListContents = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesListPlatformAPIListPlatformFetchAPIGetPlaylistGetRequest = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesListPlatformAPIListPlatformFetchAPIOnListUpdate = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesListPlatformAPIListPlatformFetchAPISubscribeList = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+  arg3: any,
+) => unknown;
+
+export type PlatformTypesListPlatformAPIListPlatformFetchAPIUpdatePlayabilityCache = (
+  arg0: any,
+) => unknown;
+
+export interface PlatformTypesListPlatformAPIListPlatformMutationAPI {
+  _playlistAPI: PlatformTypesPlaylistAPI;
+  _playlistDataClient: PlatformTypesListPlatformAPIPlaylistDataClient;
+  add: PlatformTypesListPlatformAPIListPlatformMutationAPIAdd;
+  move: PlatformTypesListPlatformAPIListPlatformMutationAPIMove;
+  remove: PlatformTypesListPlatformAPIListPlatformMutationAPIRemove;
+  removeAll: PlatformTypesListPlatformAPIListPlatformMutationAPIRemoveAll;
+}
+
+export type PlatformTypesListPlatformAPIListPlatformMutationAPIAdd = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesListPlatformAPIListPlatformMutationAPIMove = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesListPlatformAPIListPlatformMutationAPIRemove = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesListPlatformAPIListPlatformMutationAPIRemoveAll = (arg0: any) => unknown;
+
+export type PlatformTypesListPlatformAPIMove = () => unknown;
+
+export type PlatformTypesListPlatformAPIOnListUpdate = () => unknown;
+
+export interface PlatformTypesListPlatformAPIPlayabilityAPICache {
+  _cache: PlatformTypesListPlatformAPIPlayabilityAPICache2;
+  _ttl: number;
+  cleanup: PlatformTypesCurationAPICacheCleanup;
+  clear: PlatformTypesCurationAPICacheClear;
+  create: PlatformTypesCurationAPICacheCreate;
+  delete: PlatformTypesCurationAPICacheDelete;
+  entries: PlatformTypesCurationAPICacheEntries;
+  get: PlatformTypesCurationAPICacheGet;
+  getExpiry: PlatformTypesCurationAPICacheGetExpiry;
+  has: PlatformTypesCurationAPICacheHas;
+  isExpired: PlatformTypesCurationAPICacheIsExpired;
+  peek: PlatformTypesCurationAPICachePeek;
+  set: PlatformTypesCurationAPICacheSet;
+}
+
+export type PlatformTypesListPlatformAPIPlayabilityAPICache2 = Map<unknown, unknown>;
+
+export interface PlatformTypesListPlatformAPIPlayabilityAPICollectionClient {
+  add: PlatformTypesFeedbackAPIClientAdd;
+  addUnplayed: PlatformTypesFeedbackAPIClientAddUnplayed;
+  ban: PlatformTypesFeedbackAPIClientBan;
+  banGlobal: PlatformTypesFeedbackAPIClientBanGlobal;
+  banInPlayContext: PlatformTypesFeedbackAPIClientBanInPlayContext;
+  contains: PlatformTypesFeedbackAPIClientContains;
+  decorate: PlatformTypesFeedbackAPIClientDecorate;
+  getArtistTrackList: PlatformTypesFeedbackAPIClientGetArtistTrackList;
+  getArtistView: PlatformTypesFeedbackAPIClientGetArtistView;
+  getBans: PlatformTypesFeedbackAPIClientGetBans;
+  getBucketSyncStatus: PlatformTypesFeedbackAPIClientGetBucketSyncStatus;
+  getResumePoints: PlatformTypesFeedbackAPIClientGetResumePoints;
+  getTrackList: PlatformTypesFeedbackAPIClientGetTrackList;
+  getUnplayedEpisodes: PlatformTypesFeedbackAPIClientGetUnplayedEpisodes;
+  isSnoozed: PlatformTypesFeedbackAPIClientIsSnoozed;
+  offlineArtist: PlatformTypesFeedbackAPIClientOfflineArtist;
+  offlineTracks: PlatformTypesFeedbackAPIClientOfflineTracks;
+  options: PlatformTypesListPlatformAPIPlayabilityAPICollectionClientOptions;
+  playArtist: PlatformTypesFeedbackAPIClientPlayArtist;
+  playTracks: PlatformTypesFeedbackAPIClientPlayTracks;
+  remove: PlatformTypesFeedbackAPIClientRemove;
+  removeOfflineArtist: PlatformTypesFeedbackAPIClientRemoveOfflineArtist;
+  removeOfflineTracks: PlatformTypesFeedbackAPIClientRemoveOfflineTracks;
+  removeUnplayed: PlatformTypesFeedbackAPIClientRemoveUnplayed;
+  snooze: PlatformTypesFeedbackAPIClientSnooze;
+  streamArtistTrackList: PlatformTypesFeedbackAPIClientStreamArtistTrackList;
+  streamArtistView: PlatformTypesFeedbackAPIClientStreamArtistView;
+  streamBans: PlatformTypesFeedbackAPIClientStreamBans;
+  streamContains: PlatformTypesFeedbackAPIClientStreamContains;
+  streamDecorate: PlatformTypesFeedbackAPIClientStreamDecorate;
+  streamTagsInfo: PlatformTypesFeedbackAPIClientStreamTagsInfo;
+  streamTrackList: PlatformTypesFeedbackAPIClientStreamTrackList;
+  streamTrackListMetadata: PlatformTypesFeedbackAPIClientStreamTrackListMetadata;
+  streamUnplayedEpisodes: PlatformTypesFeedbackAPIClientStreamUnplayedEpisodes;
+  tracksOfflineStatus: PlatformTypesFeedbackAPIClientTracksOfflineStatus;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+  unban: PlatformTypesFeedbackAPIClientUnban;
+  unbanGlobal: PlatformTypesFeedbackAPIClientUnbanGlobal;
+  unbanInPlayContext: PlatformTypesFeedbackAPIClientUnbanInPlayContext;
+  unsnooze: PlatformTypesFeedbackAPIClientUnsnooze;
+}
+
+export type PlatformTypesListPlatformAPIPlayabilityAPICollectionClientOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesListPlatformAPIPlayabilityAPIGetCachedPlayability = (arg0: any) => unknown;
+
+export type PlatformTypesListPlatformAPIPlayabilityAPISetCachedPlayability = (arg0: any) => unknown;
+
+export type PlatformTypesListPlatformAPIPlayabilityAPISubscribers = Map<unknown, unknown>;
+
+export type PlatformTypesListPlatformAPIPlayabilityAPISubscribeToPlayability = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export interface PlatformTypesListPlatformAPIPlaylistDataClient {
+  find: PlatformTypesLibraryAPIPlaylistDataClientFind;
+  get: PlatformTypesLibraryAPIPlaylistDataClientGet;
+  multiGet: PlatformTypesLibraryAPIPlaylistDataClientMultiGet;
+  options: PlatformTypesListPlatformAPIPlaylistDataClientOptions;
+  subscribe: PlatformTypesLibraryAPIPlaylistDataClientSubscribe;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesListPlatformAPIPlaylistDataClientOptions = Record<string, unknown>;
+
+export type PlatformTypesListPlatformAPIRemove = () => unknown;
+
+export type PlatformTypesListPlatformAPIRemoveAll = () => unknown;
+
+export type PlatformTypesListPlatformAPIRequestLenses = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesListPlatformAPISubscribeList = () => unknown;
+
 export interface PlatformTypesLocalFilesAPI {
   _client: PlatformTypesLocalFilesAPIClient;
   _cosmos: PlatformTypesClipboardAPICosmos;
@@ -6170,49 +9689,32 @@ export interface PlatformTypesLocalFilesAPIEvents {
 }
 
 export interface PlatformTypesLocalFilesAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesLocalFilesAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesLocalFilesAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
-export interface PlatformTypesLocalFilesAPIEventsEmitterListeners {
-  update: PlatformTypesLocalFilesAPIEventsEmitterListenersUpdate;
-}
-
-export type PlatformTypesLocalFilesAPIEventsEmitterListenersUpdate =
-  Array<PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItem>;
-
-export interface PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItem {
-  listener: PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItemListener;
-  options: PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItemOptions;
-}
-
-export type PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItemListener = () => unknown;
-
-export type PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItemOptions = Record<
-  string,
-  unknown
->;
+export type PlatformTypesLocalFilesAPIEventsEmitterListeners = Record<string, unknown>;
 
 export interface PlatformTypesLocalFilesAPIEventsEmitterMetaListeners {
   add: PlatformTypesLocalFilesAPIEventsEmitterMetaListenersAdd;
@@ -6259,6 +9761,183 @@ export interface PlatformTypesLocalStorageAPI {
   setItemInternal: PlatformTypesEqualizerAPILocalStorageAPISetItemInternal;
   toggleItemsTypeAndCleanup: PlatformTypesEqualizerAPILocalStorageAPIToggleItemsTypeAndCleanup;
 }
+
+export interface PlatformTypesMagpieAPI {
+  _client: PlatformTypesMagpieAPIClient;
+  _events: PlatformTypesMagpieAPIEvents;
+  _parseRpcError: PlatformTypesMagpieAPIParseRpcError;
+  _playlistDataClient: PlatformTypesMagpieAPIPlaylistDataClient;
+  _playlistServiceClient: PlatformTypesMagpieAPIPlaylistServiceClient;
+  _userAPI: PlatformTypesUserAPI;
+  _username: null;
+  editPrompt: PlatformTypesMagpieAPIEditPrompt;
+  getEvents: PlatformTypesMagpieAPIGetEvents;
+  getSuggestions: PlatformTypesMagpieAPIGetSuggestions;
+  getUsername: PlatformTypesMagpieAPIGetUsername;
+  onPlaylistOperation: PlatformTypesMagpieAPIOnPlaylistOperation;
+  refreshPlaylist: PlatformTypesMagpieAPIRefreshPlaylist;
+  setRefreshMetadata: PlatformTypesMagpieAPISetRefreshMetadata;
+  writePrompt: PlatformTypesMagpieAPIWritePrompt;
+}
+
+export interface PlatformTypesMagpieAPIClient {
+  createPromptablePlaylist: PlatformTypesMagpieAPIClientCreatePromptablePlaylist;
+  editPromptablePlaylist: PlatformTypesMagpieAPIClientEditPromptablePlaylist;
+  getOrCreatePromptablePlaylistByUri: PlatformTypesMagpieAPIClientGetOrCreatePromptablePlaylistByUri;
+  getPromptablePlaylistMetadata: PlatformTypesMagpieAPIClientGetPromptablePlaylistMetadata;
+  getPromptablePlaylistSuggestions: PlatformTypesMagpieAPIClientGetPromptablePlaylistSuggestions;
+  refreshPromptablePlaylist: PlatformTypesMagpieAPIClientRefreshPromptablePlaylist;
+  restorePromptablePlaylist: PlatformTypesMagpieAPIClientRestorePromptablePlaylist;
+  softDeletePromptablePlaylist: PlatformTypesMagpieAPIClientSoftDeletePromptablePlaylist;
+  updatePromptablePlaylist: PlatformTypesMagpieAPIClientUpdatePromptablePlaylist;
+}
+
+export type PlatformTypesMagpieAPIClientCreatePromptablePlaylist = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIClientEditPromptablePlaylist = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesMagpieAPIClientGetOrCreatePromptablePlaylistByUri = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIClientGetPromptablePlaylistMetadata = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIClientGetPromptablePlaylistSuggestions = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIClientRefreshPromptablePlaylist = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIClientRestorePromptablePlaylist = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIClientSoftDeletePromptablePlaylist = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIClientUpdatePromptablePlaylist = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIEditPrompt = (arg0: any, arg1: any) => unknown;
+
+export interface PlatformTypesMagpieAPIEvents {
+  _emitter: PlatformTypesMagpieAPIEventsEmitter;
+  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
+  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
+  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
+  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
+  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
+  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
+  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
+}
+
+export interface PlatformTypesMagpieAPIEventsEmitter {
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
+  _listeners: PlatformTypesMagpieAPIEventsEmitterListeners;
+  _metaListeners: PlatformTypesMagpieAPIEventsEmitterMetaListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
+}
+
+export type PlatformTypesMagpieAPIEventsEmitterListeners = Record<string, unknown>;
+
+export interface PlatformTypesMagpieAPIEventsEmitterMetaListeners {
+  add: PlatformTypesMagpieAPIEventsEmitterMetaListenersAdd;
+  remove: PlatformTypesMagpieAPIEventsEmitterMetaListenersRemove;
+}
+
+export type PlatformTypesMagpieAPIEventsEmitterMetaListenersAdd = Record<string, unknown>;
+
+export type PlatformTypesMagpieAPIEventsEmitterMetaListenersRemove = Record<string, unknown>;
+
+export type PlatformTypesMagpieAPIGetEvents = () => unknown;
+
+export type PlatformTypesMagpieAPIGetSuggestions = () => unknown;
+
+export type PlatformTypesMagpieAPIGetUsername = () => unknown;
+
+export type PlatformTypesMagpieAPIOnPlaylistOperation = (arg0: any) => unknown;
+
+export type PlatformTypesMagpieAPIParseRpcError = (arg0: any) => unknown;
+
+export interface PlatformTypesMagpieAPIPlaylistDataClient {
+  find: PlatformTypesLibraryAPIPlaylistDataClientFind;
+  get: PlatformTypesLibraryAPIPlaylistDataClientGet;
+  multiGet: PlatformTypesLibraryAPIPlaylistDataClientMultiGet;
+  options: PlatformTypesMagpieAPIPlaylistDataClientOptions;
+  subscribe: PlatformTypesLibraryAPIPlaylistDataClientSubscribe;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesMagpieAPIPlaylistDataClientOptions = Record<string, unknown>;
+
+export interface PlatformTypesMagpieAPIPlaylistServiceClient {
+  clearToken: PlatformTypesLibraryAPIPlaylistServiceClientClearToken;
+  contains: PlatformTypesLibraryAPIPlaylistServiceClientContains;
+  emitItemSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitItemSignals;
+  emitSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitSignals;
+  getMembers: PlatformTypesLibraryAPIPlaylistServiceClientGetMembers;
+  invalidateRevisions: PlatformTypesLibraryAPIPlaylistServiceClientInvalidateRevisions;
+  modify: PlatformTypesLibraryAPIPlaylistServiceClientModify;
+  options: PlatformTypesMagpieAPIPlaylistServiceClientOptions;
+  requestLenses: PlatformTypesLibraryAPIPlaylistServiceClientRequestLenses;
+  resync: PlatformTypesLibraryAPIPlaylistServiceClientResync;
+  setBasePermission: PlatformTypesLibraryAPIPlaylistServiceClientSetBasePermission;
+  setMemberPermission: PlatformTypesLibraryAPIPlaylistServiceClientSetMemberPermission;
+  setOfflineState: PlatformTypesLibraryAPIPlaylistServiceClientSetOfflineState;
+  setToken: PlatformTypesLibraryAPIPlaylistServiceClientSetToken;
+  signal: PlatformTypesLibraryAPIPlaylistServiceClientSignal;
+  signalItem: PlatformTypesLibraryAPIPlaylistServiceClientSignalItem;
+  subscribeToMembers: PlatformTypesLibraryAPIPlaylistServiceClientSubscribeToMembers;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesMagpieAPIPlaylistServiceClientOptions = Record<string, unknown>;
+
+export type PlatformTypesMagpieAPIRefreshPlaylist = (arg0: any) => unknown;
+
+export type PlatformTypesMagpieAPISetRefreshMetadata = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesMagpieAPIWritePrompt = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+  arg3: any,
+) => unknown;
 
 export interface PlatformTypesNativeAPI {
   _updateUiClient: PlatformTypesNativeAPIUpdateUiClient;
@@ -6327,35 +10006,34 @@ export interface PlatformTypesOfflineAPIEvents {
 }
 
 export interface PlatformTypesOfflineAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesOfflineAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesOfflineAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesOfflineAPIEventsEmitterListeners {
   error: PlatformTypesOfflineAPIEventsEmitterListenersError;
   update_capabilities: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilities;
-  update_total_progress: PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgress;
 }
 
 export type PlatformTypesOfflineAPIEventsEmitterListenersError =
@@ -6383,23 +10061,6 @@ export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemL
 ) => unknown;
 
 export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgress =
-  Array<PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItem>;
-
-export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItem {
-  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItemListener;
-  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItemOptions;
-}
-
-export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItemListener = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItemOptions = Record<
   string,
   unknown
 >;
@@ -6860,6 +10521,15 @@ export interface PlatformTypesPlatformDataOsSettings {
   scroller_style: string;
 }
 
+export interface PlatformTypesPlayabilityAPI {
+  _cache: PlatformTypesListPlatformAPIPlayabilityAPICache;
+  _collectionClient: PlatformTypesListPlatformAPIPlayabilityAPICollectionClient;
+  _subscribers: PlatformTypesListPlatformAPIPlayabilityAPISubscribers;
+  getCachedPlayability: PlatformTypesListPlatformAPIPlayabilityAPIGetCachedPlayability;
+  setCachedPlayability: PlatformTypesListPlatformAPIPlayabilityAPISetCachedPlayability;
+  subscribeToPlayability: PlatformTypesListPlatformAPIPlayabilityAPISubscribeToPlayability;
+}
+
 export interface PlatformTypesPlaybackAPI {
   __volume: number;
   _connectServiceClient: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIConnectServiceClient;
@@ -6885,962 +10555,58 @@ export interface PlatformTypesPlaybackAPI {
 }
 
 export interface PlatformTypesPlayerAPI {
-  _collection: PlatformTypesPlayerAPICollection;
-  _contextPlayer: PlatformTypesPlayerAPIContextPlayer;
+  _collection: PlatformTypesAdManagersVtoManagerPlayerAPICollection;
+  _contextPlayer: PlatformTypesAdManagersVtoManagerPlayerAPIContextPlayer;
   _contextualShuffle: PlatformTypesContextualShuffleAPI;
-  _cosmos: PlatformTypesPlayerAPICosmos;
+  _cosmos: PlatformTypesAdManagersVtoManagerPlayerAPICosmos;
   _defaultFeatureVersion: string;
-  _events: PlatformTypesPlayerAPIEvents;
+  _events: PlatformTypesAdManagersVtoManagerPlayerAPIEvents;
   _isCentralizedSmartShuffleEnabled: boolean;
   _isLegacySmartShuffleEnabled: boolean;
+  _isLikedSongsListPlatformEnabled: boolean;
   _isSleepTimerEnabled: boolean;
-  _playlistPlayServiceClient: PlatformTypesPlayerAPIPlaylistPlayServiceClient;
+  _playlistPlayServiceClient: PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistPlayServiceClient;
   _playlistResyncerAPI: PlatformTypesPlaylistResyncAPI;
-  _playlistServiceClient: PlatformTypesPlayerAPIPlaylistServiceClient;
-  _queue: PlatformTypesPlayerAPIQueue;
-  _sleepTimerCore: PlatformTypesPlayerAPISleepTimerCore;
+  _playlistServiceClient: PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistServiceClient;
+  _queue: PlatformTypesAdManagersVtoManagerPlayerAPIQueue;
+  _sleepTimerCore: PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCore;
   _smartShuffleEligibility: PlatformTypesSmartShuffleEligibilityAPI;
-  _state: PlatformTypesPlayerAPIState;
-  addToQueue: PlatformTypesPlayerAPIAddToQueue;
-  canPlayEncryptedContent: PlatformTypesPlayerAPICanPlayEncryptedContent;
-  canSendSignal: PlatformTypesPlayerAPICanSendSignal;
-  clearQueue: PlatformTypesPlayerAPIClearQueue;
-  getCapabilities: PlatformTypesPlayerAPIGetCapabilities;
-  getEvents: PlatformTypesPlayerAPIGetEvents;
-  getQueue: PlatformTypesPlayerAPIGetQueue;
-  getReferrer: PlatformTypesPlayerAPIGetReferrer;
-  getSleepTimerCore: PlatformTypesPlayerAPIGetSleepTimerCore;
-  getState: PlatformTypesPlayerAPIGetState;
-  insertIntoQueue: PlatformTypesPlayerAPIInsertIntoQueue;
-  pause: PlatformTypesPlayerAPIPause;
-  play: PlatformTypesPlayerAPIPlay;
-  playAsNextInQueue: PlatformTypesPlayerAPIPlayAsNextInQueue;
+  _state: PlatformTypesAdManagersVtoManagerPlayerAPIState;
+  addToQueue: PlatformTypesAdManagersVtoManagerPlayerAPIAddToQueue;
+  canPlayEncryptedContent: PlatformTypesAdManagersVtoManagerPlayerAPICanPlayEncryptedContent;
+  canSendSignal: PlatformTypesAdManagersVtoManagerPlayerAPICanSendSignal;
+  clearQueue: PlatformTypesAdManagersVtoManagerPlayerAPIClearQueue;
+  getCapabilities: PlatformTypesAdManagersVtoManagerPlayerAPIGetCapabilities;
+  getEvents: PlatformTypesAdManagersVtoManagerPlayerAPIGetEvents;
+  getQueue: PlatformTypesAdManagersVtoManagerPlayerAPIGetQueue;
+  getReferrer: PlatformTypesAdManagersVtoManagerPlayerAPIGetReferrer;
+  getSleepTimerCore: PlatformTypesAdManagersVtoManagerPlayerAPIGetSleepTimerCore;
+  getState: PlatformTypesAdManagersVtoManagerPlayerAPIGetState;
+  insertIntoQueue: PlatformTypesAdManagersVtoManagerPlayerAPIInsertIntoQueue;
+  pause: PlatformTypesAdManagersVtoManagerPlayerAPIPause;
+  play: PlatformTypesAdManagersVtoManagerPlayerAPIPlay;
+  playAsNextInQueue: PlatformTypesAdManagersVtoManagerPlayerAPIPlayAsNextInQueue;
   referrer: string;
-  refreshCurrentContext: PlatformTypesPlayerAPIRefreshCurrentContext;
-  removeFromQueue: PlatformTypesPlayerAPIRemoveFromQueue;
-  reorderQueue: PlatformTypesPlayerAPIReorderQueue;
-  resume: PlatformTypesPlayerAPIResume;
-  seekBackward: PlatformTypesPlayerAPISeekBackward;
-  seekBy: PlatformTypesPlayerAPISeekBy;
-  seekForward: PlatformTypesPlayerAPISeekForward;
-  seekTo: PlatformTypesPlayerAPISeekTo;
-  sendSignal: PlatformTypesPlayerAPISendSignal;
-  setDefaultFeatureVersion: PlatformTypesPlayerAPISetDefaultFeatureVersion;
-  setReferrer: PlatformTypesPlayerAPISetReferrer;
-  setRepeat: PlatformTypesPlayerAPISetRepeat;
-  setShuffle: PlatformTypesPlayerAPISetShuffle;
-  setSleepTimer: PlatformTypesPlayerAPISetSleepTimer;
-  setSpeed: PlatformTypesPlayerAPISetSpeed;
-  skipTo: PlatformTypesPlayerAPISkipTo;
-  skipToNext: PlatformTypesPlayerAPISkipToNext;
-  skipToPrevious: PlatformTypesPlayerAPISkipToPrevious;
-  updateContext: PlatformTypesPlayerAPIUpdateContext;
+  refreshCurrentContext: PlatformTypesAdManagersVtoManagerPlayerAPIRefreshCurrentContext;
+  removeFromQueue: PlatformTypesAdManagersVtoManagerPlayerAPIRemoveFromQueue;
+  reorderQueue: PlatformTypesAdManagersVtoManagerPlayerAPIReorderQueue;
+  resume: PlatformTypesAdManagersVtoManagerPlayerAPIResume;
+  seekBackward: PlatformTypesAdManagersVtoManagerPlayerAPISeekBackward;
+  seekBy: PlatformTypesAdManagersVtoManagerPlayerAPISeekBy;
+  seekForward: PlatformTypesAdManagersVtoManagerPlayerAPISeekForward;
+  seekTo: PlatformTypesAdManagersVtoManagerPlayerAPISeekTo;
+  sendSignal: PlatformTypesAdManagersVtoManagerPlayerAPISendSignal;
+  setDefaultFeatureVersion: PlatformTypesAdManagersVtoManagerPlayerAPISetDefaultFeatureVersion;
+  setReferrer: PlatformTypesAdManagersVtoManagerPlayerAPISetReferrer;
+  setRepeat: PlatformTypesAdManagersVtoManagerPlayerAPISetRepeat;
+  setShuffle: PlatformTypesAdManagersVtoManagerPlayerAPISetShuffle;
+  setSleepTimer: PlatformTypesAdManagersVtoManagerPlayerAPISetSleepTimer;
+  setSpeed: PlatformTypesAdManagersVtoManagerPlayerAPISetSpeed;
+  skipTo: PlatformTypesAdManagersVtoManagerPlayerAPISkipTo;
+  skipToNext: PlatformTypesAdManagersVtoManagerPlayerAPISkipToNext;
+  skipToPrevious: PlatformTypesAdManagersVtoManagerPlayerAPISkipToPrevious;
+  updateContext: PlatformTypesAdManagersVtoManagerPlayerAPIUpdateContext;
 }
-
-export type PlatformTypesPlayerAPIAddToQueue = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPICanPlayEncryptedContent = () => unknown;
-
-export type PlatformTypesPlayerAPICanSendSignal = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPIClearQueue = () => unknown;
-
-export interface PlatformTypesPlayerAPICollection {
-  add: PlatformTypesFeedbackAPIClientAdd;
-  addUnplayed: PlatformTypesFeedbackAPIClientAddUnplayed;
-  ban: PlatformTypesFeedbackAPIClientBan;
-  banGlobal: PlatformTypesFeedbackAPIClientBanGlobal;
-  banInPlayContext: PlatformTypesFeedbackAPIClientBanInPlayContext;
-  contains: PlatformTypesFeedbackAPIClientContains;
-  decorate: PlatformTypesFeedbackAPIClientDecorate;
-  getArtistTrackList: PlatformTypesFeedbackAPIClientGetArtistTrackList;
-  getArtistView: PlatformTypesFeedbackAPIClientGetArtistView;
-  getBans: PlatformTypesFeedbackAPIClientGetBans;
-  getBucketSyncStatus: PlatformTypesFeedbackAPIClientGetBucketSyncStatus;
-  getResumePoints: PlatformTypesFeedbackAPIClientGetResumePoints;
-  getTrackList: PlatformTypesFeedbackAPIClientGetTrackList;
-  getUnplayedEpisodes: PlatformTypesFeedbackAPIClientGetUnplayedEpisodes;
-  isSnoozed: PlatformTypesFeedbackAPIClientIsSnoozed;
-  offlineArtist: PlatformTypesFeedbackAPIClientOfflineArtist;
-  offlineTracks: PlatformTypesFeedbackAPIClientOfflineTracks;
-  options: PlatformTypesPlayerAPICollectionOptions;
-  playArtist: PlatformTypesFeedbackAPIClientPlayArtist;
-  playTracks: PlatformTypesFeedbackAPIClientPlayTracks;
-  remove: PlatformTypesFeedbackAPIClientRemove;
-  removeOfflineArtist: PlatformTypesFeedbackAPIClientRemoveOfflineArtist;
-  removeOfflineTracks: PlatformTypesFeedbackAPIClientRemoveOfflineTracks;
-  removeUnplayed: PlatformTypesFeedbackAPIClientRemoveUnplayed;
-  snooze: PlatformTypesFeedbackAPIClientSnooze;
-  streamArtistTrackList: PlatformTypesFeedbackAPIClientStreamArtistTrackList;
-  streamArtistView: PlatformTypesFeedbackAPIClientStreamArtistView;
-  streamBans: PlatformTypesFeedbackAPIClientStreamBans;
-  streamContains: PlatformTypesFeedbackAPIClientStreamContains;
-  streamDecorate: PlatformTypesFeedbackAPIClientStreamDecorate;
-  streamTagsInfo: PlatformTypesFeedbackAPIClientStreamTagsInfo;
-  streamTrackList: PlatformTypesFeedbackAPIClientStreamTrackList;
-  streamTrackListMetadata: PlatformTypesFeedbackAPIClientStreamTrackListMetadata;
-  streamUnplayedEpisodes: PlatformTypesFeedbackAPIClientStreamUnplayedEpisodes;
-  tracksOfflineStatus: PlatformTypesFeedbackAPIClientTracksOfflineStatus;
-  transport: PlatformTypesVideoAPIEsperantoTransport;
-  unban: PlatformTypesFeedbackAPIClientUnban;
-  unbanGlobal: PlatformTypesFeedbackAPIClientUnbanGlobal;
-  unbanInPlayContext: PlatformTypesFeedbackAPIClientUnbanInPlayContext;
-  unsnooze: PlatformTypesFeedbackAPIClientUnsnooze;
-}
-
-export type PlatformTypesPlayerAPICollectionOptions = Record<string, unknown>;
-
-export interface PlatformTypesPlayerAPIContextPlayer {
-  addToQueue: PlatformTypesPlayerAPIContextPlayerAddToQueue;
-  deleteSession: PlatformTypesPlayerAPIContextPlayerDeleteSession;
-  getError: PlatformTypesPlayerAPIContextPlayerGetError;
-  getPlayHistory: PlatformTypesPlayerAPIContextPlayerGetPlayHistory;
-  getPositionState: PlatformTypesPlayerAPIContextPlayerGetPositionState;
-  getQueue: PlatformTypesPlayerAPIContextPlayerGetQueue;
-  getState: PlatformTypesPlayerAPIContextPlayerGetState;
-  options: PlatformTypesPlayerAPIContextPlayerOptions;
-  pause: PlatformTypesPlayerAPIContextPlayerPause;
-  play: PlatformTypesPlayerAPIContextPlayerPlay;
-  playAsNextInQueue: PlatformTypesPlayerAPIContextPlayerPlayAsNextInQueue;
-  playPrepared: PlatformTypesPlayerAPIContextPlayerPlayPrepared;
-  preparePlay: PlatformTypesPlayerAPIContextPlayerPreparePlay;
-  resume: PlatformTypesPlayerAPIContextPlayerResume;
-  seekTo: PlatformTypesPlayerAPIContextPlayerSeekTo;
-  setOptions: PlatformTypesPlayerAPIContextPlayerSetOptions;
-  setQueue: PlatformTypesPlayerAPIContextPlayerSetQueue;
-  setRepeatingContext: PlatformTypesPlayerAPIContextPlayerSetRepeatingContext;
-  setRepeatingTrack: PlatformTypesPlayerAPIContextPlayerSetRepeatingTrack;
-  setShufflingContext: PlatformTypesPlayerAPIContextPlayerSetShufflingContext;
-  setSleepTimer: PlatformTypesPlayerAPIContextPlayerSetSleepTimer;
-  signal: PlatformTypesPlayerAPIContextPlayerSignal;
-  skipNext: PlatformTypesPlayerAPIContextPlayerSkipNext;
-  skipPrev: PlatformTypesPlayerAPIContextPlayerSkipPrev;
-  stop: PlatformTypesPlayerAPIContextPlayerStop;
-  transport: PlatformTypesVideoAPIEsperantoTransport;
-  updateContext: PlatformTypesPlayerAPIContextPlayerUpdateContext;
-  updateContextPage: PlatformTypesPlayerAPIContextPlayerUpdateContextPage;
-  updateContextTrack: PlatformTypesPlayerAPIContextPlayerUpdateContextTrack;
-  updateViewUri: PlatformTypesPlayerAPIContextPlayerUpdateViewUri;
-}
-
-export type PlatformTypesPlayerAPIContextPlayerAddToQueue = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerDeleteSession = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerGetError = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerGetPlayHistory = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerGetPositionState = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerGetQueue = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerGetState = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerOptions = Record<string, unknown>;
-
-export type PlatformTypesPlayerAPIContextPlayerPause = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerPlay = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerPlayAsNextInQueue = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerPlayPrepared = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerPreparePlay = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerResume = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerSeekTo = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerSetOptions = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerSetQueue = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerSetRepeatingContext = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerSetRepeatingTrack = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerSetShufflingContext = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerSetSleepTimer = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerSignal = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerSkipNext = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerSkipPrev = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerStop = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerUpdateContext = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerUpdateContextPage = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerUpdateContextTrack = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIContextPlayerUpdateViewUri = (arg0: any, arg1: any) => unknown;
-
-export interface PlatformTypesPlayerAPICosmos {
-  del: PlatformTypesPlayerAPICosmosDel;
-  get: PlatformTypesPlayerAPICosmosGet;
-  head: PlatformTypesPlayerAPICosmosHead;
-  patch: PlatformTypesPlayerAPICosmosPatch;
-  post: PlatformTypesPlayerAPICosmosPost;
-  postSub: PlatformTypesPlayerAPICosmosPostSub;
-  put: PlatformTypesPlayerAPICosmosPut;
-  request: PlatformTypesPlayerAPICosmosRequest;
-  requestFactory: PlatformTypesPlayerAPICosmosRequestFactory;
-  resolve: PlatformTypesPlayerAPICosmosResolve;
-  resolver: PlatformTypesPlayerAPICosmosResolver;
-  sub: PlatformTypesPlayerAPICosmosSub;
-}
-
-export type PlatformTypesPlayerAPICosmosDel = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPICosmosGet = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPICosmosHead = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPICosmosPatch = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPICosmosPost = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPICosmosPostSub = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPICosmosPut = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPICosmosRequest = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPICosmosRequestFactory = () => unknown;
-
-export type PlatformTypesPlayerAPICosmosResolve = (arg0: any, arg1: any) => unknown;
-
-export interface PlatformTypesPlayerAPICosmosResolver {
-  cancel: PlatformTypesRegistryMapValueInstanceResolverCancel;
-  onFailure: PlatformTypesRegistryMapValueInstanceResolverOnFailure;
-  onSuccess: PlatformTypesRegistryMapValueInstanceResolverOnSuccess;
-  resolve: PlatformTypesRegistryMapValueInstanceResolverResolve;
-  send: PlatformTypesRegistryMapValueInstanceResolverSend;
-}
-
-export type PlatformTypesPlayerAPICosmosSub = (arg0: any, arg1: any) => unknown;
-
-export interface PlatformTypesPlayerAPIEvents {
-  _client: PlatformTypesPlayerAPIContextPlayer;
-  _emitter: PlatformTypesPlayerAPIEventsEmitter;
-  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
-  emitPauseSync: PlatformTypesPlayerAPIEventsEmitPauseSync;
-  emitPlaySync: PlatformTypesPlayerAPIEventsEmitPlaySync;
-  emitQueueActionComplete: PlatformTypesPlayerAPIEventsEmitQueueActionComplete;
-  emitQueueActionSync: PlatformTypesPlayerAPIEventsEmitQueueActionSync;
-  emitQueueUpdate: PlatformTypesPlayerAPIEventsEmitQueueUpdate;
-  emitResumeSync: PlatformTypesPlayerAPIEventsEmitResumeSync;
-  emitSkipToNextSync: PlatformTypesPlayerAPIEventsEmitSkipToNextSync;
-  emitSkipToPreviousSync: PlatformTypesPlayerAPIEventsEmitSkipToPreviousSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
-}
-
-export type PlatformTypesPlayerAPIEventsEmitPauseSync = () => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitPlaySync = (arg0: any, arg1: any, arg2: any) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitQueueActionComplete = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitQueueActionSync = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitQueueUpdate = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitResumeSync = () => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitSkipToNextSync = () => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitSkipToPreviousSync = () => unknown;
-
-export interface PlatformTypesPlayerAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
-  _listeners: PlatformTypesPlayerAPIEventsEmitterListeners;
-  _metaListeners: PlatformTypesPlayerAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListeners {
-  action: PlatformTypesPlayerAPIEventsEmitterListenersAction;
-  error: PlatformTypesPlayerAPIEventsEmitterListenersError;
-  ready: PlatformTypesPlayerAPIEventsEmitterListenersReady;
-  update: PlatformTypesPlayerAPIEventsEmitterListenersUpdate;
-}
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersAction = Array<
-  | PlatformTypesPlayerAPIEventsEmitterListenersActionItem
-  | PlatformTypesPlayerAPIEventsEmitterListenersActionItem2
-  | PlatformTypesPlayerAPIEventsEmitterListenersActionItem3
-  | PlatformTypesPlayerAPIEventsEmitterListenersActionItem4
-  | PlatformTypesPlayerAPIEventsEmitterListenersActionItem5
-  | PlatformTypesPlayerAPIEventsEmitterListenersActionItem6
-  | PlatformTypesPlayerAPIEventsEmitterListenersActionItem7
->;
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersActionItem {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersActionItem2 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener2;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions2;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersActionItem3 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener3;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions3;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersActionItem4 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener4;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions4;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersActionItem5 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener5;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions5;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersActionItem6 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener6;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions6;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersActionItem7 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener7;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions7;
-}
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener2 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener3 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener4 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener5 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener6 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemListener7 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions = Record<string, unknown>;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions2 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions3 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions4 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions5 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions6 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersActionItemOptions7 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersError =
-  Array<PlatformTypesPlayerAPIEventsEmitterListenersErrorItem>;
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersErrorItem {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersErrorItemListener;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersErrorItemOptions;
-}
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersErrorItemListener = () => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersErrorItemOptions = Record<string, unknown>;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersReady =
-  Array<PlatformTypesPlayerAPIEventsEmitterListenersReadyItem>;
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersReadyItem {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersReadyItemListener;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersReadyItemOptions;
-}
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersReadyItemListener = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersReadyItemOptions = Record<string, unknown>;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdate = Array<
-  | PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem
-  | PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem10
-  | PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem2
-  | PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem3
-  | PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem4
-  | PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem5
-  | PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem6
-  | PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem7
-  | PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem8
-  | PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem9
->;
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem10 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener10;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions10;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem2 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener2;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions2;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem3 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener3;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions3;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem4 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener4;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions4;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem5 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener5;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions5;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem6 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener6;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions6;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem7 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener7;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions7;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem8 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener8;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions8;
-}
-
-export interface PlatformTypesPlayerAPIEventsEmitterListenersUpdateItem9 {
-  listener: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener9;
-  options: PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions9;
-}
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener10 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener2 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener3 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener4 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener5 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener6 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener7 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener8 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemListener9 = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions = Record<string, unknown>;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions10 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions2 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions3 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions4 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions5 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions6 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions7 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions8 = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPIEventsEmitterListenersUpdateItemOptions9 = Record<
-  string,
-  unknown
->;
-
-export interface PlatformTypesPlayerAPIEventsEmitterMetaListeners {
-  add: PlatformTypesPlayerAPIEventsEmitterMetaListenersAdd;
-  remove: PlatformTypesPlayerAPIEventsEmitterMetaListenersRemove;
-}
-
-export type PlatformTypesPlayerAPIEventsEmitterMetaListenersAdd = Record<string, unknown>;
-
-export type PlatformTypesPlayerAPIEventsEmitterMetaListenersRemove = Record<string, unknown>;
-
-export type PlatformTypesPlayerAPIGetCapabilities = () => unknown;
-
-export type PlatformTypesPlayerAPIGetEvents = () => unknown;
-
-export type PlatformTypesPlayerAPIGetQueue = () => unknown;
-
-export type PlatformTypesPlayerAPIGetReferrer = () => unknown;
-
-export type PlatformTypesPlayerAPIGetSleepTimerCore = () => unknown;
-
-export type PlatformTypesPlayerAPIGetState = () => unknown;
-
-export type PlatformTypesPlayerAPIInsertIntoQueue = (arg0: any, arg1: any, arg2: any) => unknown;
-
-export type PlatformTypesPlayerAPIPause = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPIPlay = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIPlayAsNextInQueue = (arg0: any) => unknown;
-
-export interface PlatformTypesPlayerAPIPlaylistPlayServiceClient {
-  getPlayContext: PlatformTypesPlayerAPIPlaylistPlayServiceClientGetPlayContext;
-  options: PlatformTypesPlayerAPIPlaylistPlayServiceClientOptions;
-  play: PlatformTypesPlayerAPIPlaylistPlayServiceClientPlay;
-  transport: PlatformTypesVideoAPIEsperantoTransport;
-}
-
-export type PlatformTypesPlayerAPIPlaylistPlayServiceClientGetPlayContext = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIPlaylistPlayServiceClientOptions = Record<string, unknown>;
-
-export type PlatformTypesPlayerAPIPlaylistPlayServiceClientPlay = (arg0: any, arg1: any) => unknown;
-
-export interface PlatformTypesPlayerAPIPlaylistServiceClient {
-  clearToken: PlatformTypesLibraryAPIPlaylistServiceClientClearToken;
-  contains: PlatformTypesLibraryAPIPlaylistServiceClientContains;
-  emitItemSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitItemSignals;
-  emitSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitSignals;
-  getMembers: PlatformTypesLibraryAPIPlaylistServiceClientGetMembers;
-  invalidateRevisions: PlatformTypesLibraryAPIPlaylistServiceClientInvalidateRevisions;
-  modify: PlatformTypesLibraryAPIPlaylistServiceClientModify;
-  options: PlatformTypesPlayerAPIPlaylistServiceClientOptions;
-  requestLenses: PlatformTypesLibraryAPIPlaylistServiceClientRequestLenses;
-  resync: PlatformTypesLibraryAPIPlaylistServiceClientResync;
-  setBasePermission: PlatformTypesLibraryAPIPlaylistServiceClientSetBasePermission;
-  setMemberPermission: PlatformTypesLibraryAPIPlaylistServiceClientSetMemberPermission;
-  setOfflineState: PlatformTypesLibraryAPIPlaylistServiceClientSetOfflineState;
-  setToken: PlatformTypesLibraryAPIPlaylistServiceClientSetToken;
-  signal: PlatformTypesLibraryAPIPlaylistServiceClientSignal;
-  signalItem: PlatformTypesLibraryAPIPlaylistServiceClientSignalItem;
-  subscribeToMembers: PlatformTypesLibraryAPIPlaylistServiceClientSubscribeToMembers;
-  transport: PlatformTypesVideoAPIEsperantoTransport;
-}
-
-export type PlatformTypesPlayerAPIPlaylistServiceClientOptions = Record<string, unknown>;
-
-export interface PlatformTypesPlayerAPIQueue {
-  _client: PlatformTypesPlayerAPIContextPlayer;
-  _events: PlatformTypesPlayerAPIEvents;
-  _queue: PlatformTypesPlayerAPIQueue2;
-  _queueState: PlatformTypesPlayerAPIQueueQueueState;
-  addToQueue: PlatformTypesPlayerAPIQueueAddToQueue;
-  clearQueue: PlatformTypesPlayerAPIQueueClearQueue;
-  convertQueueState: PlatformTypesPlayerAPIQueueConvertQueueState;
-  createQueueItem: PlatformTypesPlayerAPIQueueCreateQueueItem;
-  getInternalQueue: PlatformTypesPlayerAPIQueueGetInternalQueue;
-  getQueue: PlatformTypesPlayerAPIQueueGetQueue;
-  insertIntoQueue: PlatformTypesPlayerAPIQueueInsertIntoQueue;
-  isQueued: PlatformTypesPlayerAPIQueueIsQueued;
-  isSameItem: PlatformTypesPlayerAPIQueueIsSameItem;
-  markAsQueued: PlatformTypesPlayerAPIQueueMarkAsQueued;
-  removeFromQueue: PlatformTypesPlayerAPIQueueRemoveFromQueue;
-  reorderQueue: PlatformTypesPlayerAPIQueueReorderQueue;
-  timeoutId: number;
-}
-
-export interface PlatformTypesPlayerAPIQueue2 {
-  nextTracks: PlatformTypesPlayerAPIQueueNextTracks;
-  prevTracks: PlatformTypesPlayerAPIQueuePrevTracks;
-  queueRevision: bigint;
-  track: undefined;
-}
-
-export type PlatformTypesPlayerAPIQueueAddToQueue = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIQueueClearQueue = () => unknown;
-
-export type PlatformTypesPlayerAPIQueueConvertQueueState = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPIQueueCreateQueueItem = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIQueueGetInternalQueue = () => unknown;
-
-export type PlatformTypesPlayerAPIQueueGetQueue = () => unknown;
-
-export type PlatformTypesPlayerAPIQueueInsertIntoQueue = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPIQueueIsQueued = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPIQueueIsSameItem = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIQueueMarkAsQueued = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPIQueueNextTracks = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueuePrevTracks = Array<unknown>;
-
-export interface PlatformTypesPlayerAPIQueueQueueState {
-  current: null;
-  nextUp: PlatformTypesPlayerAPIQueueQueueStateNextUp;
-  queued: PlatformTypesPlayerAPIQueueQueueStateQueued;
-}
-
-export type PlatformTypesPlayerAPIQueueQueueStateNextUp = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueQueueStateQueued = Array<unknown>;
-
-export type PlatformTypesPlayerAPIQueueRemoveFromQueue = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPIQueueReorderQueue = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIRefreshCurrentContext = () => unknown;
-
-export type PlatformTypesPlayerAPIRemoveFromQueue = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPIReorderQueue = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPIResume = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISeekBackward = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISeekBy = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISeekForward = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISeekTo = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISendSignal = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesPlayerAPISetDefaultFeatureVersion = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISetReferrer = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISetRepeat = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISetShuffle = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISetSleepTimer = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISetSpeed = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISkipTo = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISkipToNext = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISkipToPrevious = () => unknown;
-
-export interface PlatformTypesPlayerAPISleepTimerCore {
-  SLEEP_TIMER_ORIGIN: PlatformTypesPlayerAPISleepTimerCoreSLEEPTIMERORIGIN;
-  _contextPlayer: PlatformTypesPlayerAPIContextPlayer;
-  _events: PlatformTypesPlayerAPIEvents;
-  clearSleepTimerTimeout: PlatformTypesPlayerAPISleepTimerCoreClearSleepTimerTimeout;
-  handleEndOfTrackSleepTimer: PlatformTypesPlayerAPISleepTimerCoreHandleEndOfTrackSleepTimer;
-  handleTimestampSleepTimer: PlatformTypesPlayerAPISleepTimerCoreHandleTimestampSleepTimer;
-  monitoredUri: null;
-  onStateUpdate: PlatformTypesPlayerAPISleepTimerCoreOnStateUpdate;
-  sleepTimerEnd: PlatformTypesPlayerAPISleepTimerCoreSleepTimerEnd;
-  timeoutId: null;
-}
-
-export type PlatformTypesPlayerAPISleepTimerCoreClearSleepTimerTimeout = () => unknown;
-
-export type PlatformTypesPlayerAPISleepTimerCoreHandleEndOfTrackSleepTimer = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISleepTimerCoreHandleTimestampSleepTimer = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISleepTimerCoreOnStateUpdate = (arg0: any) => unknown;
-
-export type PlatformTypesPlayerAPISleepTimerCoreSleepTimerEnd = () => unknown;
-
-export interface PlatformTypesPlayerAPISleepTimerCoreSLEEPTIMERORIGIN {
-  featureIdentifier: string;
-}
-
-export type PlatformTypesPlayerAPISmartShuffleEligibilityGetEligibility = (arg0: any) => unknown;
-
-export interface PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClient {
-  expire: PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientExpire;
-  fetch: PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientFetch;
-  observe: PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientObserve;
-  options: PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientOptions;
-  purge: PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientPurge;
-  transport: PlatformTypesVideoAPIEsperantoTransport;
-}
-
-export type PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientExpire = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientFetch = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientObserve = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientOptions = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientPurge = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export interface PlatformTypesPlayerAPIState {
-  context: PlatformTypesPlayerAPIStateContext;
-  duration: null;
-  format: null;
-  hasContext: boolean;
-  index: PlatformTypesPlayerAPIStateIndex;
-  isBuffering: boolean;
-  isPaused: boolean;
-  item: null;
-  nextItems: PlatformTypesPlayerAPIStateNextItems;
-  playbackId: null;
-  playbackQuality: PlatformTypesPlayerAPIStatePlaybackQuality;
-  positionAsOfTimestamp: number;
-  previousItems: PlatformTypesPlayerAPIStatePreviousItems;
-  repeat: number;
-  restrictions: PlatformTypesPlayerAPIStateRestrictions;
-  sessionId: string;
-  shuffle: boolean;
-  signals: PlatformTypesPlayerAPIStateSignals;
-  sleepTimer: PlatformTypesPlayerAPIStateSleepTimer;
-  smartShuffle: boolean;
-  speed: number;
-  speedEsperanto: number;
-  timestamp: number;
-}
-
-export interface PlatformTypesPlayerAPIStateContext {
-  metadata: PlatformTypesPlayerAPIStateContextMetadata;
-  uri: string;
-  url: string;
-}
-
-export interface PlatformTypesPlayerAPIStateContextMetadata {
-  "player.arch": string;
-}
-
-export interface PlatformTypesPlayerAPIStateIndex {
-  itemIndex: null;
-  pageIndex: null;
-  pageURI: null;
-}
-
-export type PlatformTypesPlayerAPIStateNextItems = Array<unknown>;
-
-export interface PlatformTypesPlayerAPIStatePlaybackQuality {
-  bitrateLevel: number;
-  losslessStatus: number;
-  strategy: number;
-  targetBitrateAvailable: boolean;
-  targetBitrateLevel: number;
-}
-
-export type PlatformTypesPlayerAPIStatePreviousItems = Array<unknown>;
-
-export interface PlatformTypesPlayerAPIStateRestrictions {
-  canPause: boolean;
-  canResume: boolean;
-  canSeek: boolean;
-  canSkipNext: boolean;
-  canSkipPrevious: boolean;
-  canToggleRepeatContext: boolean;
-  canToggleRepeatTrack: boolean;
-  canToggleShuffle: boolean;
-  canToggleSmartShuffle: boolean;
-  disallowAddToQueueReasons: PlatformTypesPlayerAPIStateRestrictionsDisallowAddToQueueReasons;
-  disallowPausingReasons: PlatformTypesPlayerAPIStateRestrictionsDisallowPausingReasons;
-  disallowResumingReasons: PlatformTypesPlayerAPIStateRestrictionsDisallowResumingReasons;
-  disallowSeekingReasons: PlatformTypesPlayerAPIStateRestrictionsDisallowSeekingReasons;
-  disallowSetQueueReasons: PlatformTypesPlayerAPIStateRestrictionsDisallowSetQueueReasons;
-  disallowSettingPlaybackSpeedReasons: PlatformTypesPlayerAPIStateRestrictionsDisallowSettingPlaybackSpeedReasons;
-  disallowSignals: PlatformTypesPlayerAPIStateRestrictionsDisallowSignals;
-  disallowSkippingNextReasons: PlatformTypesPlayerAPIStateRestrictionsDisallowSkippingNextReasons;
-  disallowSkippingPreviousReasons: PlatformTypesPlayerAPIStateRestrictionsDisallowSkippingPreviousReasons;
-  disallowTogglingRepeatContextReasons: PlatformTypesPlayerAPIStateRestrictionsDisallowTogglingRepeatContextReasons;
-  disallowTogglingRepeatTrackReasons: PlatformTypesPlayerAPIStateRestrictionsDisallowTogglingRepeatTrackReasons;
-  disallowTogglingShuffleReasons: PlatformTypesPlayerAPIStateRestrictionsDisallowTogglingShuffleReasons;
-  disallowTransferringPlaybackReasons: PlatformTypesPlayerAPIStateRestrictionsDisallowTransferringPlaybackReasons;
-}
-
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowAddToQueueReasons = Array<unknown>;
-
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowPausingReasons = Array<string>;
-
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowResumingReasons = Array<string>;
-
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowSeekingReasons = Array<string>;
-
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowSetQueueReasons = Array<string>;
-
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowSettingPlaybackSpeedReasons =
-  Array<string>;
-
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowSignals = Record<string, unknown>;
-
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowSkippingNextReasons = Array<string>;
-
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowSkippingPreviousReasons = Array<string>;
-
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowTogglingRepeatContextReasons =
-  Array<unknown>;
-
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowTogglingRepeatTrackReasons =
-  Array<unknown>;
-
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowTogglingShuffleReasons = Array<unknown>;
-
-export type PlatformTypesPlayerAPIStateRestrictionsDisallowTransferringPlaybackReasons =
-  Array<unknown>;
-
-export type PlatformTypesPlayerAPIStateSignals = Array<string>;
-
-export interface PlatformTypesPlayerAPIStateSleepTimer {
-  timestamp: null;
-  type: number;
-}
-
-export type PlatformTypesPlayerAPIUpdateContext = (arg0: any, arg1: any, arg2: any) => unknown;
 
 export interface PlatformTypesPlayHistoryAPI {
   _cache: PlatformTypesPlayHistoryAPICache;
@@ -7891,29 +10657,29 @@ export interface PlatformTypesPlayHistoryAPIEvents {
 }
 
 export interface PlatformTypesPlayHistoryAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesPlayHistoryAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesPlayHistoryAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export type PlatformTypesPlayHistoryAPIEventsEmitterListeners = Record<string, unknown>;
@@ -7968,36 +10734,36 @@ export type PlatformTypesPlayHistoryAPIEventsOnListenerAdded = () => unknown;
 export type PlatformTypesPlayHistoryAPIEventsOnListenerRemoved = () => unknown;
 
 export interface PlatformTypesPlayHistoryAPIEventsPlayer {
-  addToQueue: PlatformTypesPlayerAPIContextPlayerAddToQueue;
-  deleteSession: PlatformTypesPlayerAPIContextPlayerDeleteSession;
-  getError: PlatformTypesPlayerAPIContextPlayerGetError;
-  getPlayHistory: PlatformTypesPlayerAPIContextPlayerGetPlayHistory;
-  getPositionState: PlatformTypesPlayerAPIContextPlayerGetPositionState;
-  getQueue: PlatformTypesPlayerAPIContextPlayerGetQueue;
-  getState: PlatformTypesPlayerAPIContextPlayerGetState;
+  addToQueue: PlatformTypesPlayHistoryAPIPlayerAddToQueue;
+  deleteSession: PlatformTypesPlayHistoryAPIPlayerDeleteSession;
+  getError: PlatformTypesPlayHistoryAPIPlayerGetError;
+  getPlayHistory: PlatformTypesPlayHistoryAPIPlayerGetPlayHistory;
+  getPositionState: PlatformTypesPlayHistoryAPIPlayerGetPositionState;
+  getQueue: PlatformTypesPlayHistoryAPIPlayerGetQueue;
+  getState: PlatformTypesPlayHistoryAPIPlayerGetState;
   options: PlatformTypesPlayHistoryAPIEventsPlayerOptions;
-  pause: PlatformTypesPlayerAPIContextPlayerPause;
-  play: PlatformTypesPlayerAPIContextPlayerPlay;
-  playAsNextInQueue: PlatformTypesPlayerAPIContextPlayerPlayAsNextInQueue;
-  playPrepared: PlatformTypesPlayerAPIContextPlayerPlayPrepared;
-  preparePlay: PlatformTypesPlayerAPIContextPlayerPreparePlay;
-  resume: PlatformTypesPlayerAPIContextPlayerResume;
-  seekTo: PlatformTypesPlayerAPIContextPlayerSeekTo;
-  setOptions: PlatformTypesPlayerAPIContextPlayerSetOptions;
-  setQueue: PlatformTypesPlayerAPIContextPlayerSetQueue;
-  setRepeatingContext: PlatformTypesPlayerAPIContextPlayerSetRepeatingContext;
-  setRepeatingTrack: PlatformTypesPlayerAPIContextPlayerSetRepeatingTrack;
-  setShufflingContext: PlatformTypesPlayerAPIContextPlayerSetShufflingContext;
-  setSleepTimer: PlatformTypesPlayerAPIContextPlayerSetSleepTimer;
-  signal: PlatformTypesPlayerAPIContextPlayerSignal;
-  skipNext: PlatformTypesPlayerAPIContextPlayerSkipNext;
-  skipPrev: PlatformTypesPlayerAPIContextPlayerSkipPrev;
-  stop: PlatformTypesPlayerAPIContextPlayerStop;
+  pause: PlatformTypesPlayHistoryAPIPlayerPause;
+  play: PlatformTypesPlayHistoryAPIPlayerPlay;
+  playAsNextInQueue: PlatformTypesPlayHistoryAPIPlayerPlayAsNextInQueue;
+  playPrepared: PlatformTypesPlayHistoryAPIPlayerPlayPrepared;
+  preparePlay: PlatformTypesPlayHistoryAPIPlayerPreparePlay;
+  resume: PlatformTypesPlayHistoryAPIPlayerResume;
+  seekTo: PlatformTypesPlayHistoryAPIPlayerSeekTo;
+  setOptions: PlatformTypesPlayHistoryAPIPlayerSetOptions;
+  setQueue: PlatformTypesPlayHistoryAPIPlayerSetQueue;
+  setRepeatingContext: PlatformTypesPlayHistoryAPIPlayerSetRepeatingContext;
+  setRepeatingTrack: PlatformTypesPlayHistoryAPIPlayerSetRepeatingTrack;
+  setShufflingContext: PlatformTypesPlayHistoryAPIPlayerSetShufflingContext;
+  setSleepTimer: PlatformTypesPlayHistoryAPIPlayerSetSleepTimer;
+  signal: PlatformTypesPlayHistoryAPIPlayerSignal;
+  skipNext: PlatformTypesPlayHistoryAPIPlayerSkipNext;
+  skipPrev: PlatformTypesPlayHistoryAPIPlayerSkipPrev;
+  stop: PlatformTypesPlayHistoryAPIPlayerStop;
   transport: PlatformTypesVideoAPIEsperantoTransport;
-  updateContext: PlatformTypesPlayerAPIContextPlayerUpdateContext;
-  updateContextPage: PlatformTypesPlayerAPIContextPlayerUpdateContextPage;
-  updateContextTrack: PlatformTypesPlayerAPIContextPlayerUpdateContextTrack;
-  updateViewUri: PlatformTypesPlayerAPIContextPlayerUpdateViewUri;
+  updateContext: PlatformTypesPlayHistoryAPIPlayerUpdateContext;
+  updateContextPage: PlatformTypesPlayHistoryAPIPlayerUpdateContextPage;
+  updateContextTrack: PlatformTypesPlayHistoryAPIPlayerUpdateContextTrack;
+  updateViewUri: PlatformTypesPlayHistoryAPIPlayerUpdateViewUri;
 }
 
 export type PlatformTypesPlayHistoryAPIEventsPlayerOptions = Record<string, unknown>;
@@ -8024,57 +10790,119 @@ export type PlatformTypesPlayHistoryAPILoader = (
 ) => unknown;
 
 export interface PlatformTypesPlayHistoryAPIPlayer {
-  addToQueue: PlatformTypesPlayerAPIContextPlayerAddToQueue;
-  deleteSession: PlatformTypesPlayerAPIContextPlayerDeleteSession;
-  getError: PlatformTypesPlayerAPIContextPlayerGetError;
-  getPlayHistory: PlatformTypesPlayerAPIContextPlayerGetPlayHistory;
-  getPositionState: PlatformTypesPlayerAPIContextPlayerGetPositionState;
-  getQueue: PlatformTypesPlayerAPIContextPlayerGetQueue;
-  getState: PlatformTypesPlayerAPIContextPlayerGetState;
+  addToQueue: PlatformTypesPlayHistoryAPIPlayerAddToQueue;
+  deleteSession: PlatformTypesPlayHistoryAPIPlayerDeleteSession;
+  getError: PlatformTypesPlayHistoryAPIPlayerGetError;
+  getPlayHistory: PlatformTypesPlayHistoryAPIPlayerGetPlayHistory;
+  getPositionState: PlatformTypesPlayHistoryAPIPlayerGetPositionState;
+  getQueue: PlatformTypesPlayHistoryAPIPlayerGetQueue;
+  getState: PlatformTypesPlayHistoryAPIPlayerGetState;
   options: PlatformTypesPlayHistoryAPIPlayerOptions;
-  pause: PlatformTypesPlayerAPIContextPlayerPause;
-  play: PlatformTypesPlayerAPIContextPlayerPlay;
-  playAsNextInQueue: PlatformTypesPlayerAPIContextPlayerPlayAsNextInQueue;
-  playPrepared: PlatformTypesPlayerAPIContextPlayerPlayPrepared;
-  preparePlay: PlatformTypesPlayerAPIContextPlayerPreparePlay;
-  resume: PlatformTypesPlayerAPIContextPlayerResume;
-  seekTo: PlatformTypesPlayerAPIContextPlayerSeekTo;
-  setOptions: PlatformTypesPlayerAPIContextPlayerSetOptions;
-  setQueue: PlatformTypesPlayerAPIContextPlayerSetQueue;
-  setRepeatingContext: PlatformTypesPlayerAPIContextPlayerSetRepeatingContext;
-  setRepeatingTrack: PlatformTypesPlayerAPIContextPlayerSetRepeatingTrack;
-  setShufflingContext: PlatformTypesPlayerAPIContextPlayerSetShufflingContext;
-  setSleepTimer: PlatformTypesPlayerAPIContextPlayerSetSleepTimer;
-  signal: PlatformTypesPlayerAPIContextPlayerSignal;
-  skipNext: PlatformTypesPlayerAPIContextPlayerSkipNext;
-  skipPrev: PlatformTypesPlayerAPIContextPlayerSkipPrev;
-  stop: PlatformTypesPlayerAPIContextPlayerStop;
+  pause: PlatformTypesPlayHistoryAPIPlayerPause;
+  play: PlatformTypesPlayHistoryAPIPlayerPlay;
+  playAsNextInQueue: PlatformTypesPlayHistoryAPIPlayerPlayAsNextInQueue;
+  playPrepared: PlatformTypesPlayHistoryAPIPlayerPlayPrepared;
+  preparePlay: PlatformTypesPlayHistoryAPIPlayerPreparePlay;
+  resume: PlatformTypesPlayHistoryAPIPlayerResume;
+  seekTo: PlatformTypesPlayHistoryAPIPlayerSeekTo;
+  setOptions: PlatformTypesPlayHistoryAPIPlayerSetOptions;
+  setQueue: PlatformTypesPlayHistoryAPIPlayerSetQueue;
+  setRepeatingContext: PlatformTypesPlayHistoryAPIPlayerSetRepeatingContext;
+  setRepeatingTrack: PlatformTypesPlayHistoryAPIPlayerSetRepeatingTrack;
+  setShufflingContext: PlatformTypesPlayHistoryAPIPlayerSetShufflingContext;
+  setSleepTimer: PlatformTypesPlayHistoryAPIPlayerSetSleepTimer;
+  signal: PlatformTypesPlayHistoryAPIPlayerSignal;
+  skipNext: PlatformTypesPlayHistoryAPIPlayerSkipNext;
+  skipPrev: PlatformTypesPlayHistoryAPIPlayerSkipPrev;
+  stop: PlatformTypesPlayHistoryAPIPlayerStop;
   transport: PlatformTypesVideoAPIEsperantoTransport;
-  updateContext: PlatformTypesPlayerAPIContextPlayerUpdateContext;
-  updateContextPage: PlatformTypesPlayerAPIContextPlayerUpdateContextPage;
-  updateContextTrack: PlatformTypesPlayerAPIContextPlayerUpdateContextTrack;
-  updateViewUri: PlatformTypesPlayerAPIContextPlayerUpdateViewUri;
+  updateContext: PlatformTypesPlayHistoryAPIPlayerUpdateContext;
+  updateContextPage: PlatformTypesPlayHistoryAPIPlayerUpdateContextPage;
+  updateContextTrack: PlatformTypesPlayHistoryAPIPlayerUpdateContextTrack;
+  updateViewUri: PlatformTypesPlayHistoryAPIPlayerUpdateViewUri;
 }
 
+export type PlatformTypesPlayHistoryAPIPlayerAddToQueue = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerDeleteSession = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerGetError = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerGetPlayHistory = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerGetPositionState = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerGetQueue = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerGetState = (arg0: any, arg1: any) => unknown;
+
 export type PlatformTypesPlayHistoryAPIPlayerOptions = Record<string, unknown>;
+
+export type PlatformTypesPlayHistoryAPIPlayerPause = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerPlay = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerPlayAsNextInQueue = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerPlayPrepared = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerPreparePlay = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerResume = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerSeekTo = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerSetOptions = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerSetQueue = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerSetRepeatingContext = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerSetRepeatingTrack = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerSetShufflingContext = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerSetSleepTimer = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerSignal = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerSkipNext = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerSkipPrev = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerStop = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerUpdateContext = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerUpdateContextPage = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerUpdateContextTrack = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlayHistoryAPIPlayerUpdateViewUri = (arg0: any, arg1: any) => unknown;
 
 export interface PlatformTypesPlaylistAPI {
   _builder: PlatformTypesRequestBuilder;
   _events: PlatformTypesShuffleAPIPlaylistAPIEvents;
-  _getLensedPlaylistUri: PlatformTypesShuffleAPIPlaylistAPIGetLensedPlaylistUri;
   _getPlaylistDecorationPolicies: PlatformTypesShuffleAPIPlaylistAPIGetPlaylistDecorationPolicies;
   _isAuthorPageEnabled: boolean;
-  _isTunaEnabled: boolean;
+  _isPlaylistMixingEnabled: boolean;
   _isWatchFeedEntityPagesEnabled: boolean;
   _playlistDataClient: PlatformTypesShuffleAPIPlaylistAPIPlaylistDataClient;
   _playlistServiceClient: PlatformTypesShuffleAPIPlaylistAPIPlaylistServiceClient;
   _resyncAPI: PlatformTypesPlaylistResyncAPI;
-  _smartShuffleEligibilityAPI: PlatformTypesSmartShuffleEligibilityAPI;
   add: PlatformTypesShuffleAPIPlaylistAPIAdd;
   clearAttributes: PlatformTypesShuffleAPIPlaylistAPIClearAttributes;
+  emitUpdate: PlatformTypesShuffleAPIPlaylistAPIEmitUpdate;
   getCapabilities: PlatformTypesShuffleAPIPlaylistAPIGetCapabilities;
   getContents: PlatformTypesShuffleAPIPlaylistAPIGetContents;
   getEvents: PlatformTypesShuffleAPIPlaylistAPIGetEvents;
+  getItem: PlatformTypesShuffleAPIPlaylistAPIGetItem;
   getMetadata: PlatformTypesShuffleAPIPlaylistAPIGetMetadata;
   getPlaylist: PlatformTypesShuffleAPIPlaylistAPIGetPlaylist;
   getRecommendedBookUris: PlatformTypesShuffleAPIPlaylistAPIGetRecommendedBookUris;
@@ -8089,6 +10917,151 @@ export interface PlatformTypesPlaylistAPI {
   updateDetails: PlatformTypesShuffleAPIPlaylistAPIUpdateDetails;
   uploadImage: PlatformTypesShuffleAPIPlaylistAPIUploadImage;
 }
+
+export interface PlatformTypesPlaylistMixingAPI {
+  _automixClient: PlatformTypesPlaylistMixingAPIAutomixClient;
+  _metadataExtensionsAPI: PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI;
+  _metadataService: PlatformTypesPlaylistMixingAPIMetadataService;
+  _playerAPI: PlatformTypesPlayerAPI;
+  _playlistApi: PlatformTypesPlaylistAPI;
+  _setMixState: PlatformTypesPlaylistMixingAPISetMixState;
+  _setTunaLens: PlatformTypesPlaylistMixingAPISetTunaLens;
+  disablePlaylistMix: PlatformTypesPlaylistMixingAPIDisablePlaylistMix;
+  enablePlaylistMix: PlatformTypesPlaylistMixingAPIEnablePlaylistMix;
+  getAutoTransitionForTrackPair: PlatformTypesPlaylistMixingAPIGetAutoTransitionForTrackPair;
+  getComposedTransitionForTrackPair: PlatformTypesPlaylistMixingAPIGetComposedTransitionForTrackPair;
+  getCustomTransitionForTrackPair: PlatformTypesPlaylistMixingAPIGetCustomTransitionForTrackPair;
+  getEqStylesForEqStyleIds: PlatformTypesPlaylistMixingAPIGetEqStylesForEqStyleIds;
+  getFilterFxStylesForFilterFxStyleIds: PlatformTypesPlaylistMixingAPIGetFilterFxStylesForFilterFxStyleIds;
+  getStylesForPresetIds: PlatformTypesPlaylistMixingAPIGetStylesForPresetIds;
+  getVolumeStylesForVolumeStyleIds: PlatformTypesPlaylistMixingAPIGetVolumeStylesForVolumeStyleIds;
+  maybeAutoApplyMixingLens: PlatformTypesPlaylistMixingAPIMaybeAutoApplyMixingLens;
+  playTransition: PlatformTypesPlaylistMixingAPIPlayTransition;
+  setTransitionForTrack: PlatformTypesPlaylistMixingAPISetTransitionForTrack;
+  turnOffMixingForPlaylist: PlatformTypesPlaylistMixingAPITurnOffMixingForPlaylist;
+  turnOnMixingForPlaylist: PlatformTypesPlaylistMixingAPITurnOnMixingForPlaylist;
+}
+
+export interface PlatformTypesPlaylistMixingAPIAutomixClient {
+  getComputedTransitions: PlatformTypesPlaylistMixingAPIAutomixClientGetComputedTransitions;
+  getEqStylesForEqStyleId: PlatformTypesPlaylistMixingAPIAutomixClientGetEqStylesForEqStyleId;
+  getFilterFxStylesForFilterFxStyleId: PlatformTypesPlaylistMixingAPIAutomixClientGetFilterFxStylesForFilterFxStyleId;
+  getMaxTransitionLength: PlatformTypesPlaylistMixingAPIAutomixClientGetMaxTransitionLength;
+  getStylesForPresetId: PlatformTypesPlaylistMixingAPIAutomixClientGetStylesForPresetId;
+  getVolumeStylesForVolumeStyleId: PlatformTypesPlaylistMixingAPIAutomixClientGetVolumeStylesForVolumeStyleId;
+  options: PlatformTypesPlaylistMixingAPIAutomixClientOptions;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesPlaylistMixingAPIAutomixClientGetComputedTransitions = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIAutomixClientGetEqStylesForEqStyleId = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIAutomixClientGetFilterFxStylesForFilterFxStyleId = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIAutomixClientGetMaxTransitionLength = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIAutomixClientGetStylesForPresetId = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIAutomixClientGetVolumeStylesForVolumeStyleId = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIAutomixClientOptions = Record<string, unknown>;
+
+export type PlatformTypesPlaylistMixingAPIDisablePlaylistMix = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIEnablePlaylistMix = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIGetAutoTransitionForTrackPair = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIGetComposedTransitionForTrackPair = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIGetCustomTransitionForTrackPair = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIGetEqStylesForEqStyleIds = (arg0: any) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIGetFilterFxStylesForFilterFxStyleIds = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIGetStylesForPresetIds = (arg0: any) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIGetVolumeStylesForVolumeStyleIds = (arg0: any) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIMaybeAutoApplyMixingLens = (arg0: any) => unknown;
+
+export interface PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI {
+  _events: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEvents;
+  _metadataServiceClient: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIMetadataServiceClient;
+  _pubSubClient: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIPubSubClient;
+  batchFetcher: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIBatchFetcher;
+  expire: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIExpire;
+  fetch: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIFetch;
+  fetchBatched: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIFetchBatched;
+  getEvents: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIGetEvents;
+  subscribe: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPISubscribe;
+}
+
+export interface PlatformTypesPlaylistMixingAPIMetadataService {
+  _metadataExtensionsAPI: PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI;
+  getShouldApplyAutoLens: PlatformTypesPlaylistMixingAPIMetadataServiceGetShouldApplyAutoLens;
+}
+
+export type PlatformTypesPlaylistMixingAPIMetadataServiceGetShouldApplyAutoLens = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIPlayTransition = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPISetMixState = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPISetTransitionForTrack = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPISetTunaLens = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesPlaylistMixingAPITurnOffMixingForPlaylist = (arg0: any) => unknown;
+
+export type PlatformTypesPlaylistMixingAPITurnOnMixingForPlaylist = (arg0: any) => unknown;
 
 export interface PlatformTypesPlaylistPermissionsAPI {
   _builder: PlatformTypesRequestBuilder;
@@ -8148,29 +11121,29 @@ export type PlatformTypesPlaylistPermissionsAPIEventsEmitOperationComplete = (ar
 export type PlatformTypesPlaylistPermissionsAPIEventsEmitOperationSync = (arg0: any) => unknown;
 
 export interface PlatformTypesPlaylistPermissionsAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesPlaylistPermissionsAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesPlaylistPermissionsAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export type PlatformTypesPlaylistPermissionsAPIEventsEmitterListeners = Record<string, unknown>;
@@ -8220,40 +11193,11 @@ export type PlatformTypesPlaylistPermissionsAPISubscribeToMembers = (
 ) => unknown;
 
 export interface PlatformTypesPlaylistResyncAPI {
-  _playlistServiceClient: PlatformTypesPlaylistResyncAPIPlaylistServiceClient;
-  lastSync: PlatformTypesPlaylistResyncAPILastSync;
-  maybeResync: PlatformTypesPlaylistResyncAPIMaybeResync;
-  resync: PlatformTypesPlaylistResyncAPIResync;
+  _playlistServiceClient: PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPIPlaylistServiceClient;
+  lastSync: PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPILastSync;
+  maybeResync: PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPIMaybeResync;
+  resync: PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPIResync;
 }
-
-export type PlatformTypesPlaylistResyncAPILastSync = Map<unknown, unknown>;
-
-export type PlatformTypesPlaylistResyncAPIMaybeResync = (arg0: any) => unknown;
-
-export interface PlatformTypesPlaylistResyncAPIPlaylistServiceClient {
-  clearToken: PlatformTypesLibraryAPIPlaylistServiceClientClearToken;
-  contains: PlatformTypesLibraryAPIPlaylistServiceClientContains;
-  emitItemSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitItemSignals;
-  emitSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitSignals;
-  getMembers: PlatformTypesLibraryAPIPlaylistServiceClientGetMembers;
-  invalidateRevisions: PlatformTypesLibraryAPIPlaylistServiceClientInvalidateRevisions;
-  modify: PlatformTypesLibraryAPIPlaylistServiceClientModify;
-  options: PlatformTypesPlaylistResyncAPIPlaylistServiceClientOptions;
-  requestLenses: PlatformTypesLibraryAPIPlaylistServiceClientRequestLenses;
-  resync: PlatformTypesLibraryAPIPlaylistServiceClientResync;
-  setBasePermission: PlatformTypesLibraryAPIPlaylistServiceClientSetBasePermission;
-  setMemberPermission: PlatformTypesLibraryAPIPlaylistServiceClientSetMemberPermission;
-  setOfflineState: PlatformTypesLibraryAPIPlaylistServiceClientSetOfflineState;
-  setToken: PlatformTypesLibraryAPIPlaylistServiceClientSetToken;
-  signal: PlatformTypesLibraryAPIPlaylistServiceClientSignal;
-  signalItem: PlatformTypesLibraryAPIPlaylistServiceClientSignalItem;
-  subscribeToMembers: PlatformTypesLibraryAPIPlaylistServiceClientSubscribeToMembers;
-  transport: PlatformTypesVideoAPIEsperantoTransport;
-}
-
-export type PlatformTypesPlaylistResyncAPIPlaylistServiceClientOptions = Record<string, unknown>;
-
-export type PlatformTypesPlaylistResyncAPIResync = (arg0: any) => unknown;
 
 export interface PlatformTypesPrivateSessionAPI {
   _scrobble: PlatformTypesSettingsAPISocialPrivateSessionPrivateSessionAPIScrobble;
@@ -8276,21 +11220,21 @@ export interface PlatformTypesProductStateAPI {
 
 export interface PlatformTypesPubSubAPI {
   _connectionId: Promise<unknown>;
-  _events: PlatformTypesBuddyFeedAPIPresence2PubsubEvents;
+  _events: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEvents;
   _isDeveloperMode: boolean;
-  _messages: PlatformTypesBuddyFeedAPIPresence2PubsubMessages;
-  _subscribeToConnectionId: PlatformTypesBuddyFeedAPIPresence2PubsubSubscribeToConnectionId;
-  _subscribeToMessages: PlatformTypesBuddyFeedAPIPresence2PubsubSubscribeToMessages;
-  _subscriptions: PlatformTypesBuddyFeedAPIPresence2PubsubSubscriptions;
-  cancelSubscription: PlatformTypesBuddyFeedAPIPresence2PubsubCancelSubscription;
-  createSubscription: PlatformTypesBuddyFeedAPIPresence2PubsubCreateSubscription;
-  getConnectionId: PlatformTypesBuddyFeedAPIPresence2PubsubGetConnectionId;
-  getEvents: PlatformTypesBuddyFeedAPIPresence2PubsubGetEvents;
-  getMessages: PlatformTypesBuddyFeedAPIPresence2PubsubGetMessages;
-  getSubscriptions: PlatformTypesBuddyFeedAPIPresence2PubsubGetSubscriptions;
-  onConnectionId: PlatformTypesBuddyFeedAPIPresence2PubsubOnConnectionId;
-  refreshSubscription: PlatformTypesBuddyFeedAPIPresence2PubsubRefreshSubscription;
-  subscribe: PlatformTypesBuddyFeedAPIPresence2PubsubSubscribe;
+  _messages: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIMessages;
+  _subscribeToConnectionId: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscribeToConnectionId;
+  _subscribeToMessages: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscribeToMessages;
+  _subscriptions: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptions;
+  cancelSubscription: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPICancelSubscription;
+  createSubscription: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPICreateSubscription;
+  getConnectionId: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIGetConnectionId;
+  getEvents: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIGetEvents;
+  getMessages: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIGetMessages;
+  getSubscriptions: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIGetSubscriptions;
+  onConnectionId: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIOnConnectionId;
+  refreshSubscription: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIRefreshSubscription;
+  subscribe: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscribe;
 }
 
 export interface PlatformTypesRecentlyPlayedAPI {
@@ -8329,29 +11273,29 @@ export interface PlatformTypesRecentlyPlayedAPIEvents {
 }
 
 export interface PlatformTypesRecentlyPlayedAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesRecentlyPlayedAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesRecentlyPlayedAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export type PlatformTypesRecentlyPlayedAPIEventsEmitterListeners = Record<string, unknown>;
@@ -8391,6 +11335,28 @@ export type PlatformTypesRecentlyPlayedAPIGetContexts = () => unknown;
 export type PlatformTypesRecentlyPlayedAPIGetEvents = () => unknown;
 
 export type PlatformTypesRecentlyPlayedAPIStartListening = () => unknown;
+
+export interface PlatformTypesRecentsAPI {
+  getCapabilities: PlatformTypesRecentsAPIGetCapabilities;
+  getContents: PlatformTypesRecentsAPIGetContents;
+  metadataExtensionsAPI: PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI;
+  playlistDataClient: PlatformTypesRecentsAPIPlaylistDataClient;
+}
+
+export type PlatformTypesRecentsAPIGetCapabilities = () => unknown;
+
+export type PlatformTypesRecentsAPIGetContents = (arg0: any, arg1: any, arg2: any) => unknown;
+
+export interface PlatformTypesRecentsAPIPlaylistDataClient {
+  find: PlatformTypesLibraryAPIPlaylistDataClientFind;
+  get: PlatformTypesLibraryAPIPlaylistDataClientGet;
+  multiGet: PlatformTypesLibraryAPIPlaylistDataClientMultiGet;
+  options: PlatformTypesRecentsAPIPlaylistDataClientOptions;
+  subscribe: PlatformTypesLibraryAPIPlaylistDataClientSubscribe;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesRecentsAPIPlaylistDataClientOptions = Record<string, unknown>;
 
 export type PlatformTypesReduxStoreCleanActions = () => unknown;
 
@@ -8585,7 +11551,6 @@ export interface PlatformTypesRegistryMapValueInstanceCacheValueValue {
   "audio-preview-url-template": string;
   "audio-quality": string;
   "audiobook-onboarding-completed": string;
-  "browse-overview-enabled": string;
   "capping-bar-threshold": string;
   "com.spotify.madprops.delivered.by.ucs": string;
   "com.spotify.madprops.use.ucs.product.state": string;
@@ -8610,24 +11575,26 @@ export interface PlatformTypesRegistryMapValueInstanceCacheValueValue {
   "is-pigeon": string;
   "is-puffin": string;
   "is-standalone-audiobooks": string;
+  "is-thalia": string;
   "is-tuna": string;
+  "jam-social-session": string;
   "key-caching-auto-offline": string;
   "key-caching-max-count": string;
   "key-caching-max-offline-seconds": string;
   "key-memory-cache-mode": string;
-  "license-acceptance-grace-days": string;
   "license-agreements": string;
   "list-private-by-default": string;
+  "loudness-levels": string;
+  "market-portfolio-type": string;
   "metadata-link-lookup-modes": string;
   "mixing-tools": string;
-  "mobile-payment": string;
-  "music-videos": string;
-  "network-operator-premium-activation": string;
   "nft-disabled": string;
   "obfuscate-restricted-tracks": string;
+  "offline-backup": string;
   "on-demand": string;
   "on-demand-trial": string;
   "on-demand-trial-in-progress": string;
+  "payments-initial-campaign": string;
   "payments-locked-state": string;
   "pick-and-shuffle": string;
   "player-license": string;
@@ -8637,6 +11604,7 @@ export interface PlatformTypesRegistryMapValueInstanceCacheValueValue {
   "prefetch-keys": string;
   "prefetch-strategy": string;
   "prefetch-window-max": string;
+  "product-expiry": string;
   "public-toplist": string;
   "publish-activity": string;
   "publish-playlist": string;
@@ -8659,10 +11627,8 @@ export interface PlatformTypesRegistryMapValueInstanceCacheValueValue {
   "streaming-rules": string;
   "ugc-abuse-report": string;
   "ugc-abuse-report-url": string;
-  "user-profile-show-invitation-codes": string;
   "video-cdn-sampling": string;
   "video-device-blacklisted": string;
-  "video-keyframe-url": string;
   "video-manifest-url": string;
   "widevine-license-url": string;
   "yl-kids-restricted-content": string;
@@ -8682,10 +11648,12 @@ export interface PlatformTypesRegistryMapValueInstanceCacheValueValue {
   name: string;
   offline: string;
   parrot: string;
+  partner: string;
   product: string;
   radio: string;
   shuffle: string;
   streaming: string;
+  unrestricted: string;
 }
 
 export type PlatformTypesRegistryMapValueInstanceCall = (
@@ -8752,29 +11720,29 @@ export interface PlatformTypesRegistryMapValueInstanceEvents {
 }
 
 export interface PlatformTypesRegistryMapValueInstanceEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesRegistryMapValueInstanceEventsEmitterListeners;
   _metaListeners: PlatformTypesRegistryMapValueInstanceEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesRegistryMapValueInstanceEventsEmitterListeners {
@@ -8890,6 +11858,8 @@ export type PlatformTypesRegistryMapValueInstanceGetVersion = () => unknown;
 
 export type PlatformTypesRegistryMapValueInstanceHasContext = () => unknown;
 
+export type PlatformTypesRegistryMapValueInstanceHead = (arg0: any, arg1: any) => unknown;
+
 export interface PlatformTypesRegistryMapValueInstanceInFlightCache {
   _cache: PlatformTypesRegistryMapValueInstanceInFlightCacheCache;
   _ttl: null;
@@ -9004,10 +11974,12 @@ export type PlatformTypesRegistryMapValueInstancePatch = (
 
 export type PlatformTypesRegistryMapValueInstancePost = (arg0: any) => unknown;
 
+export type PlatformTypesRegistryMapValueInstancePostSub = (arg0: any) => unknown;
+
 export interface PlatformTypesRegistryMapValueInstanceProductStateApi {
   delOverridesValues: PlatformTypesOfflineAPIProductStateDelOverridesValues;
   getValues: PlatformTypesOfflineAPIProductStateGetValues;
-  options: PlatformTypesRegistryMapValueInstanceProductStateApiOptions;
+  options: PlatformTypesRegistryMapValueInstanceProductStateServiceOptions;
   putOverridesValues: PlatformTypesOfflineAPIProductStatePutOverridesValues;
   putValues: PlatformTypesOfflineAPIProductStatePutValues;
   putValuesSync: PlatformTypesOfflineAPIProductStatePutValuesSync;
@@ -9015,7 +11987,10 @@ export interface PlatformTypesRegistryMapValueInstanceProductStateApi {
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
 
-export type PlatformTypesRegistryMapValueInstanceProductStateApiOptions = Record<string, unknown>;
+export type PlatformTypesRegistryMapValueInstanceProductStateServiceOptions = Record<
+  string,
+  unknown
+>;
 
 export type PlatformTypesRegistryMapValueInstancePut = (arg0: any, arg1: any, arg2: any) => unknown;
 
@@ -9033,6 +12008,20 @@ export type PlatformTypesRegistryMapValueInstanceReporterSend = (arg0: any) => u
 export type PlatformTypesRegistryMapValueInstanceReporterSetAuthenticated = (arg0: any) => unknown;
 
 export type PlatformTypesRegistryMapValueInstanceReporterSetEnabled = (arg0: any) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceRequest = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceRequestFactory = () => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceResolve = (arg0: any, arg1: any) => unknown;
+
+export interface PlatformTypesRegistryMapValueInstanceResolver {
+  cancel: PlatformTypesRegistryMapValueInstanceResolverCancel;
+  onFailure: PlatformTypesRegistryMapValueInstanceResolverOnFailure;
+  onSuccess: PlatformTypesRegistryMapValueInstanceResolverOnSuccess;
+  resolve: PlatformTypesRegistryMapValueInstanceResolverResolve;
+  send: PlatformTypesRegistryMapValueInstanceResolverSend;
+}
 
 export type PlatformTypesRegistryMapValueInstanceResolverCancel = () => unknown;
 
@@ -9322,6 +12311,8 @@ export type PlatformTypesRegistryMapValueInstanceStorageManagerUpdateItemInEvent
 
 export type PlatformTypesRegistryMapValueInstanceStoreEvent = (arg0: any, arg1: any) => unknown;
 
+export type PlatformTypesRegistryMapValueInstanceSub = (arg0: any, arg1: any) => unknown;
+
 export type PlatformTypesRegistryMapValueInstanceSubs = Set<
   | PlatformTypesRegistryMapValueInstanceSubsSetElement
   | PlatformTypesRegistryMapValueInstanceSubsSetElement10
@@ -9388,31 +12379,31 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnect = () => unknow
 export type PlatformTypesRegistryMapValueInstanceTransportConnect2 = () => unknown;
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserver {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverListeners;
   _metaListeners: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverMetaListeners;
   _navigator: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigator;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
   isOnline: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverIsOnline;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverIsOnline =
@@ -9567,11 +12558,11 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavi
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetooth {
   addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
   getAvailability: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothGetAvailability;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
   requestDevice: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothRequestDevice;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
 }
 
 export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener =
@@ -9597,11 +12588,11 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavi
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorClipboard {
   addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
   read: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorClipboardRead;
   readText: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorClipboardReadText;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
   write: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorClipboardWrite;
   writeText: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorClipboardWriteText;
 }
@@ -9620,14 +12611,14 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavi
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorConnection {
   addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
   downlink: number;
   effectiveType: string;
   onchange: null;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
   rtt: number;
   saveData: boolean;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
 }
 
 export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorCreateAuctionNonce =
@@ -9660,11 +12651,11 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavi
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorDevicePosture {
   addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
   onchange: null;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
   type: string;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
 }
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorGeolocation {
@@ -9735,13 +12726,13 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavi
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorHid {
   addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
   getDevices: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorHidGetDevices;
   onconnect: null;
   ondisconnect: null;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
   requestDevice: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorHidRequestDevice;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
 }
 
 export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorHidGetDevices =
@@ -9804,11 +12795,11 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavi
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorManaged {
   addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
   getManagedConfiguration: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorManagedGetManagedConfiguration;
   onmanagedconfigurationchange: null;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
 }
 
 export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorManagedGetManagedConfiguration =
@@ -9827,15 +12818,15 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavi
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorMediaDevices {
   addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
   enumerateDevices: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorMediaDevicesEnumerateDevices;
   getDisplayMedia: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorMediaDevicesGetDisplayMedia;
   getSupportedConstraints: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorMediaDevicesGetSupportedConstraints;
   getUserMedia: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorMediaDevicesGetUserMedia;
   ondevicechange: null;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
   setCaptureHandleConfig: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorMediaDevicesSetCaptureHandleConfig;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
 }
 
 export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorMediaDevicesEnumerateDevices =
@@ -10186,13 +13177,13 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavi
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorSerial {
   addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
   getPorts: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorSerialGetPorts;
   onconnect: null;
   ondisconnect: null;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
   requestPort: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorSerialRequestPort;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
 }
 
 export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorSerialGetPorts =
@@ -10204,7 +13195,7 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavi
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorServiceWorker {
   addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
   controller: null;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
   getRegistration: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorServiceWorkerGetRegistration;
   getRegistrations: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorServiceWorkerGetRegistrations;
   oncontrollerchange: null;
@@ -10212,9 +13203,9 @@ export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserve
   onmessageerror: null;
   ready: Promise<unknown>;
   register: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorServiceWorkerRegister;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
   startMessages: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorServiceWorkerStartMessages;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
 }
 
 export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorServiceWorkerGetRegistration =
@@ -10277,13 +13268,13 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavi
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorUsb {
   addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
   getDevices: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorUsbGetDevices;
   onconnect: null;
   ondisconnect: null;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
   requestDevice: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorUsbRequestDevice;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
 }
 
 export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorUsbGetDevices =
@@ -10334,13 +13325,13 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavi
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorVirtualKeyboard {
   addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
   boundingRect: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorVirtualKeyboardBoundingRect;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
   hide: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorVirtualKeyboardHide;
   ongeometrychange: null;
   overlaysContent: boolean;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
   show: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorVirtualKeyboardShow;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
 }
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorVirtualKeyboardBoundingRect {
@@ -10387,12 +13378,12 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavi
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorWindowControlsOverlay {
   addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
   getTitlebarAreaRect: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorWindowControlsOverlayGetTitlebarAreaRect;
   ongeometrychange: null;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
   visible: boolean;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
 }
 
 export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorWindowControlsOverlayGetTitlebarAreaRect =
@@ -10400,12 +13391,12 @@ export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavi
 
 export interface PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorXr {
   addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
   isSessionSupported: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorXrIsSessionSupported;
   ondevicechange: null;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
   requestSession: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorXrRequestSession;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
 }
 
 export type PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorXrIsSessionSupported =
@@ -10503,7 +13494,9 @@ export interface PlatformTypesRegistryMapValueInstanceTransportListeners {
   access_token: PlatformTypesRegistryMapValueInstanceTransportListenersAccessToken;
   authenticated: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticated;
   authentication_failed: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticationFailed;
+  before_online_disconnect: PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnect;
   connected: PlatformTypesRegistryMapValueInstanceTransportListenersConnected;
+  connection_id: PlatformTypesRegistryMapValueInstanceTransportListenersConnectionId;
   disconnected: PlatformTypesRegistryMapValueInstanceTransportListenersDisconnected;
   endpoints_resolved: PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolved;
   logged_out: PlatformTypesRegistryMapValueInstanceTransportListenersLoggedOut;
@@ -10517,6 +13510,9 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessToken =
   | PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItem
   | PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItem2
   | PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItem3
+  | PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItem4
+  | PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItem5
+  | PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItem6
 >;
 
 export interface PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItem {
@@ -10534,6 +13530,21 @@ export interface PlatformTypesRegistryMapValueInstanceTransportListenersAccessTo
   options: PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemOptions3;
 }
 
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItem4 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemListener4;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemOptions4;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItem5 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemListener5;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemOptions5;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItem6 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemListener6;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemOptions6;
+}
+
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemListener = (
   arg0: any,
 ) => unknown;
@@ -10542,6 +13553,18 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenIt
   () => unknown;
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemListener3 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemListener4 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemListener5 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemListener6 = (
   arg0: any,
 ) => unknown;
 
@@ -10560,12 +13583,28 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenIt
   unknown
 >;
 
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemOptions4 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemOptions5 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemOptions6 = Record<
+  string,
+  unknown
+>;
+
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticated = Array<
   | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem
   | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem2
   | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem3
   | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem4
   | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem5
+  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem6
 >;
 
 export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem {
@@ -10593,6 +13632,11 @@ export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenti
   options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions5;
 }
 
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem6 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener5;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions6;
+}
+
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener =
   () => unknown;
 
@@ -10603,6 +13647,9 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticated
   () => unknown;
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener4 =
+  () => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener5 =
   () => unknown;
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions =
@@ -10621,6 +13668,10 @@ export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenti
 }
 
 export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions5 {
+  once: boolean;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions6 {
   once: boolean;
 }
 
@@ -10646,6 +13697,33 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatio
   Record<string, unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticationFailedItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnect = Array<
+  | PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnectItem
+  | PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnectItem2
+>;
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnectItem {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnectItemListener;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnectItemOptions;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnectItem2 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnectItemListener2;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnectItemOptions2;
+}
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnectItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnectItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnectItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersBeforeOnlineDisconnectItemOptions2 =
   Record<string, unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersConnected = Array<
@@ -10676,6 +13754,37 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersConnectedItem
   unknown
 >;
 
+export type PlatformTypesRegistryMapValueInstanceTransportListenersConnectionId = Array<
+  | PlatformTypesRegistryMapValueInstanceTransportListenersConnectionIdItem
+  | PlatformTypesRegistryMapValueInstanceTransportListenersConnectionIdItem2
+>;
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersConnectionIdItem {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersConnectionIdItemListener;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersConnectionIdItemOptions;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersConnectionIdItem2 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersConnectionIdItemListener2;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersConnectionIdItemOptions2;
+}
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersConnectionIdItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersConnectionIdItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersConnectionIdItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersConnectionIdItemOptions2 =
+  Record<string, unknown>;
+
 export type PlatformTypesRegistryMapValueInstanceTransportListenersDisconnected =
   Array<PlatformTypesRegistryMapValueInstanceTransportListenersDisconnectedItem>;
 
@@ -10692,6 +13801,9 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersDisconnectedI
 export type PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolved = Array<
   | PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItem
   | PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItem2
+  | PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItem3
+  | PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItem4
+  | PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItem5
 >;
 
 export interface PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItem {
@@ -10704,6 +13816,21 @@ export interface PlatformTypesRegistryMapValueInstanceTransportListenersEndpoint
   options: PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemOptions2;
 }
 
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItem3 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemListener3;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemOptions3;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItem4 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemListener4;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemOptions4;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItem5 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemListener5;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemOptions5;
+}
+
 export type PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemListener = (
   arg0: any,
 ) => unknown;
@@ -10711,10 +13838,28 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsReso
 export type PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemListener2 =
   (arg0: any) => unknown;
 
+export type PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemListener3 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemListener4 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemListener5 =
+  (arg0: any) => unknown;
+
 export type PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemOptions =
   Record<string, unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemOptions3 =
+  Record<string, unknown>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemOptions4 =
+  Record<string, unknown>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersEndpointsResolvedItemOptions5 =
   Record<string, unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersLoggedOut =
@@ -10736,6 +13881,9 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersLoggedOutItem
 export type PlatformTypesRegistryMapValueInstanceTransportListenersOffline = Array<
   | PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItem
   | PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItem2
+  | PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItem3
+  | PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItem4
+  | PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItem5
 >;
 
 export interface PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItem {
@@ -10748,11 +13896,38 @@ export interface PlatformTypesRegistryMapValueInstanceTransportListenersOfflineI
   options: PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemOptions2;
 }
 
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItem3 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemListener3;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemOptions3;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItem4 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemListener4;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemOptions4;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItem5 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemListener5;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemOptions5;
+}
+
 export type PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemListener = (
   arg0: any,
 ) => unknown;
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemListener3 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemListener4 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemListener5 = (
   arg0: any,
 ) => unknown;
 
@@ -10766,9 +13941,27 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemOp
   unknown
 >;
 
+export type PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemOptions3 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemOptions4 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersOfflineItemOptions5 = Record<
+  string,
+  unknown
+>;
+
 export type PlatformTypesRegistryMapValueInstanceTransportListenersOnline = Array<
   | PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItem
   | PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItem2
+  | PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItem3
+  | PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItem4
+  | PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItem5
 >;
 
 export interface PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItem {
@@ -10781,11 +13974,38 @@ export interface PlatformTypesRegistryMapValueInstanceTransportListenersOnlineIt
   options: PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemOptions2;
 }
 
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItem3 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemListener3;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemOptions3;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItem4 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemListener4;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemOptions4;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItem5 {
+  listener: PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemListener5;
+  options: PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemOptions5;
+}
+
 export type PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemListener = (
   arg0: any,
 ) => unknown;
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemListener3 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemListener4 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemListener5 = (
   arg0: any,
 ) => unknown;
 
@@ -10795,6 +14015,21 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemOpt
 >;
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemOptions2 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemOptions3 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemOptions4 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportListenersOnlineItemOptions5 = Record<
   string,
   unknown
 >;
@@ -10993,29 +14228,29 @@ export type PlatformTypesRegistryMapValueInstanceTransportPerformDisconnect = (
 ) => unknown;
 
 export interface PlatformTypesRegistryMapValueInstanceTransportPluginMediator {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerMediatorListeners;
   _metaListeners: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerMediatorMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesRegistryMapValueInstanceTransportPlugins {
@@ -11042,11 +14277,11 @@ export interface PlatformTypesRegistryMapValueInstanceTransportPluginsDealer {
 
 export interface PlatformTypesRegistryMapValueInstanceTransportPluginsDealer2 {
   _WebSocket: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerWebSocket;
-  _closeBeforeEventsRejector: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerCloseBeforeEventsRejector;
+  _closeBeforeEventsRejector: null;
   _connected: boolean;
   _connectionId: null;
   _connectionURI: null;
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _endpoint: string;
   _handleClose: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerHandleClose;
   _handleDisconnectBeforeEvents: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerHandleDisconnectBeforeEvents;
@@ -11064,37 +14299,37 @@ export interface PlatformTypesRegistryMapValueInstanceTransportPluginsDealer2 {
   _parseMessage: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerParseMessage;
   _prepareConnectionId: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerPrepareConnectionId;
   _reply: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerReply;
-  _socket: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocket;
+  _socket: null;
   _startHeartbeat: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerStartHeartbeat;
   _stopHeartbeat: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerStopHeartbeat;
   _waitingForConnectionId: boolean;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
   authenticate: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerAuthenticate;
   connect: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerConnect;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
   disconnect: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerDisconnect;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
   getConnectionId: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerGetConnectionId;
   getConnectionInfo: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerGetConnectionInfo;
   hasConnectionId: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerHasConnectionId;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
   ping: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerPing;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerAddTransportAuthenticate =
@@ -11145,9 +14380,6 @@ export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerBeforePro
 
 export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerBeforeSendRequest =
   Array<PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSendRequestItem>;
-
-export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerCloseBeforeEventsRejector =
-  () => unknown;
 
 export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerConnect = (
   arg0: any,
@@ -11456,48 +14688,6 @@ export interface PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSend
   options: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerRequestItemOptions2;
 }
 
-export interface PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocket {
-  CLOSED: number;
-  CLOSING: number;
-  CONNECTING: number;
-  OPEN: number;
-  addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
-  binaryType: string;
-  bufferedAmount: number;
-  close: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketClose;
-  dispatchEvent: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelDispatchEvent;
-  extensions: string;
-  onclose: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnclose;
-  onerror: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnerror;
-  onmessage: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnmessage;
-  onopen: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnopen;
-  protocol: string;
-  readyState: number;
-  removeEventListener: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelRemoveEventListener;
-  send: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketSend;
-  url: string;
-  when: PlatformTypesContextualShuffleAPIIndexedDbAPIChannelWhen;
-}
-
-export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketClose = () => unknown;
-
-export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnclose = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnerror =
-  () => unknown;
-
-export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnmessage = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnopen = () => unknown;
-
-export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketSend = (
-  arg0: any,
-) => unknown;
-
 export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerStartHeartbeat = (
   arg0: any,
 ) => unknown;
@@ -11604,12 +14794,7 @@ export type PlatformTypesRegistryMapValueInstanceTransportStateAwareListenersTra
   Array<unknown>;
 
 export interface PlatformTypesRegistryMapValueInstanceTransportStateAwareOperationMetrics {
-  authenticated: PlatformTypesRegistryMapValueInstanceTransportStateAwareOperationMetricsAuthenticated;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportStateAwareOperationMetricsAuthenticated {
-  end_time: number;
-  start_time: number;
+  authenticated: null;
 }
 
 export interface PlatformTypesRegistryMapValueInstanceTransportStateAwareRunners {
@@ -11661,7 +14846,7 @@ export interface PlatformTypesRegistryMapValueInstanceUploaders {
 export interface PlatformTypesRegistryMapValueInstanceUploadersAuthorized {
   _authorize: boolean;
   _backoff: boolean;
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _endpoint: string;
   _listeners: PlatformTypesRegistryMapValueInstanceUploadersAuthorizedListeners;
   _metaListeners: PlatformTypesRegistryMapValueInstanceUploadersAuthorizedMetaListeners;
@@ -11669,27 +14854,27 @@ export interface PlatformTypesRegistryMapValueInstanceUploadersAuthorized {
   _suppressPersist: boolean;
   _transport: PlatformTypesTransport;
   _uploadBatch: PlatformTypesRegistryMapValueInstanceUploadersAuthorizedUploadBatch;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
   lastUpload: PlatformTypesRegistryMapValueInstanceUploadersAuthorizedLastUpload;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
   shouldBackoff: PlatformTypesRegistryMapValueInstanceUploadersAuthorizedShouldBackoff;
   upload: PlatformTypesRegistryMapValueInstanceUploadersAuthorizedUpload;
 }
@@ -11779,7 +14964,7 @@ export type PlatformTypesRegistryMapValueInstanceUploadersAuthorizedUploadBatch 
 export interface PlatformTypesRegistryMapValueInstanceUploadersUnauthorized {
   _authorize: boolean;
   _backoff: boolean;
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _endpoint: string;
   _listeners: PlatformTypesRegistryMapValueInstanceUploadersUnauthorizedListeners;
   _metaListeners: PlatformTypesRegistryMapValueInstanceUploadersUnauthorizedMetaListeners;
@@ -11787,27 +14972,27 @@ export interface PlatformTypesRegistryMapValueInstanceUploadersUnauthorized {
   _suppressPersist: boolean;
   _transport: PlatformTypesTransport;
   _uploadBatch: PlatformTypesRegistryMapValueInstanceUploadersAuthorizedUploadBatch;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
   lastUpload: PlatformTypesRegistryMapValueInstanceUploadersAuthorizedLastUpload;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
   shouldBackoff: PlatformTypesRegistryMapValueInstanceUploadersAuthorizedShouldBackoff;
   upload: PlatformTypesRegistryMapValueInstanceUploadersAuthorizedUpload;
 }
@@ -12077,29 +15262,29 @@ export interface PlatformTypesRemoteConfigDebugAPIEvents {
 }
 
 export interface PlatformTypesRemoteConfigDebugAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesRemoteConfigDebugAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesRemoteConfigDebugAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesRemoteConfigDebugAPIEventsEmitterListeners {
@@ -12155,7 +15340,10 @@ export interface PlatformTypesRemoteConfigDebugAPILocalConfiguration {
 export type PlatformTypesRemoteConfigDebugAPILocalConfigurationAccessListeners =
   Set<PlatformTypesRemoteConfigurationAccessListenersSetElement>;
 
-export type PlatformTypesRemoteConfigDebugAPILocalConfigurationValues = Map<string, boolean>;
+export type PlatformTypesRemoteConfigDebugAPILocalConfigurationValues = Map<
+  string,
+  boolean | string
+>;
 
 export interface PlatformTypesRemoteConfigDebugAPIOverrides {
   accessListeners: PlatformTypesRemoteConfigDebugAPIOverridesAccessListeners;
@@ -12351,7 +15539,7 @@ export type PlatformTypesRemoteConfigurationToBuilder = () => unknown;
 
 export type PlatformTypesRemoteConfigurationToJSON = () => unknown;
 
-export type PlatformTypesRemoteConfigurationValues = Map<string, boolean>;
+export type PlatformTypesRemoteConfigurationValues = Map<string, boolean | string>;
 
 export interface PlatformTypesRemoteConfigurationWithLocalOverrides {
   accessListeners: PlatformTypesRemoteConfigurationWithLocalOverridesAccessListeners;
@@ -12364,7 +15552,10 @@ export interface PlatformTypesRemoteConfigurationWithLocalOverrides {
 export type PlatformTypesRemoteConfigurationWithLocalOverridesAccessListeners =
   Set<PlatformTypesRemoteConfigurationAccessListenersSetElement>;
 
-export type PlatformTypesRemoteConfigurationWithLocalOverridesValues = Map<string, boolean>;
+export type PlatformTypesRemoteConfigurationWithLocalOverridesValues = Map<
+  string,
+  boolean | string
+>;
 
 export interface PlatformTypesReportAPI {
   _playlistAPI: PlatformTypesPlaylistAPI;
@@ -12394,18 +15585,18 @@ export interface PlatformTypesReportAPIProductState {
 export type PlatformTypesReportAPIProductStateOptions = Record<string, unknown>;
 
 export interface PlatformTypesRequestBuilder {
-  _RequestImplementation: PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportRequestImplementation;
+  _RequestImplementation: PlatformTypesBuddyFeedAPIPresenceViewBuilderRequestImplementation;
   _accessToken: string;
-  _globalRequestHeaders: PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportGlobalRequestHeaders;
+  _globalRequestHeaders: PlatformTypesBuddyFeedAPIPresenceViewBuilderGlobalRequestHeaders;
   _locale: string;
   _market: string;
   accessToken: string;
-  build: PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportBuild;
-  globalRequestHeaders: PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportGlobalRequestHeaders;
+  build: PlatformTypesBuddyFeedAPIPresenceViewBuilderBuild;
+  globalRequestHeaders: PlatformTypesBuddyFeedAPIPresenceViewBuilderGlobalRequestHeaders;
   locale: string;
   market: string;
-  pendingRequests: PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportPendingRequests;
-  resetPendingRequests: PlatformTypesAdManagersHptoHptoApiNativeHptoApiSpotifyTransportResetPendingRequests;
+  pendingRequests: PlatformTypesBuddyFeedAPIPresenceViewBuilderPendingRequests;
+  resetPendingRequests: PlatformTypesBuddyFeedAPIPresenceViewBuilderResetPendingRequests;
 }
 
 export interface PlatformTypesRootlistAPI {
@@ -12561,29 +15752,29 @@ export type PlatformTypesRootlistAPIEventsEmitRemoveComplete = (arg0: any) => un
 export type PlatformTypesRootlistAPIEventsEmitRemoveSync = (arg0: any) => unknown;
 
 export interface PlatformTypesRootlistAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesRootlistAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesRootlistAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesRootlistAPIEventsEmitterListeners {
@@ -12608,31 +15799,17 @@ export type PlatformTypesRootlistAPIEventsEmitterListenersOperationItemOptions =
   unknown
 >;
 
-export type PlatformTypesRootlistAPIEventsEmitterListenersUpdate = Array<
-  | PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem
-  | PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem2
->;
+export type PlatformTypesRootlistAPIEventsEmitterListenersUpdate =
+  Array<PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem>;
 
 export interface PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem {
   listener: PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemListener;
   options: PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemOptions;
 }
 
-export interface PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem2 {
-  listener: PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemListener2;
-  options: PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemOptions2;
-}
-
 export type PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemListener = () => unknown;
 
-export type PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemListener2 = () => unknown;
-
 export type PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemOptions = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemOptions2 = Record<
   string,
   unknown
 >;
@@ -12862,6 +16039,7 @@ export interface PlatformTypesSettingsAPI {
   playback: PlatformTypesSettingsAPIPlayback;
   proxySettings: PlatformTypesSettingsAPIProxySettings;
   quality: PlatformTypesSettingsAPIQuality;
+  shuffle: PlatformTypesSettingsAPIShuffle;
   social: PlatformTypesSettingsAPISocial;
   startupBehaviour: PlatformTypesSettingsAPIStartupBehaviour;
   storage: PlatformTypesSettingsAPIStorage;
@@ -13370,32 +16548,29 @@ export interface PlatformTypesSettingsAPIPlaybackSmartShuffle {
   setValue: PlatformTypesSettingsAPIPlaybackSmartShuffleSetValue;
   subValue: PlatformTypesSettingsAPIPlaybackSmartShuffleSubValue;
   subs: PlatformTypesSettingsAPIPlaybackSmartShuffleSubs;
-  unsubscribeFromDisableSmartShuffle: null;
+  unsubscribeFromStreamSettingChanges: null;
   value: boolean;
 }
 
 export type PlatformTypesSettingsAPIPlaybackSmartShuffleGetValue = () => unknown;
 
 export interface PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPI {
-  disableSmartShuffle: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIDisableSmartShuffle;
-  getDisableSmartShuffle: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetDisableSmartShuffle;
+  getDeviceSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetDeviceSettings;
   getSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetSettings;
   getShuffleState: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetShuffleState;
   options: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIOptions;
-  setDisableSmartShuffle: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetDisableSmartShuffle;
+  setDeviceStreamQuality: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetDeviceStreamQuality;
   setSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetSettings;
   setShuffleState: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetShuffleState;
-  streamSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamSettings;
+  streamDeviceSettingFieldChanges: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamDeviceSettingFieldChanges;
+  streamSettingChanges: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamSettingChanges;
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
 
-export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIDisableSmartShuffle = (
+export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetDeviceSettings = (
   arg0: any,
   arg1: any,
 ) => unknown;
-
-export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetDisableSmartShuffle =
-  (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetSettings = (
   arg0: any,
@@ -13412,7 +16587,7 @@ export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIOptio
   unknown
 >;
 
-export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetDisableSmartShuffle =
+export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetDeviceStreamQuality =
   (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetSettings = (
@@ -13425,7 +16600,10 @@ export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetSh
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamSettings = (
+export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamDeviceSettingFieldChanges =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamSettingChanges = (
   arg0: any,
   arg1: any,
 ) => unknown;
@@ -13670,26 +16848,98 @@ export type PlatformTypesSettingsAPIQualityParrotSetValue = () => unknown;
 export type PlatformTypesSettingsAPIQualityParrotSubValue = () => unknown;
 
 export interface PlatformTypesSettingsAPIQualityPlaybackService {
-  duck: PlatformTypesVideoAPIPlaybackServiceDuck;
-  getFiles: PlatformTypesVideoAPIPlaybackServiceGetFiles;
-  getFormats: PlatformTypesVideoAPIPlaybackServiceGetFormats;
-  getPlaybackInfo: PlatformTypesVideoAPIPlaybackServiceGetPlaybackInfo;
-  getRawVolume: PlatformTypesVideoAPIPlaybackServiceGetRawVolume;
-  getVolume: PlatformTypesVideoAPIPlaybackServiceGetVolume;
-  lowerVolume: PlatformTypesVideoAPIPlaybackServiceLowerVolume;
+  duck: PlatformTypesSettingsAPIQualityPlaybackServiceDuck;
+  getFiles: PlatformTypesSettingsAPIQualityPlaybackServiceGetFiles;
+  getFormats: PlatformTypesSettingsAPIQualityPlaybackServiceGetFormats;
+  getPlaybackInfo: PlatformTypesSettingsAPIQualityPlaybackServiceGetPlaybackInfo;
+  getRawVolume: PlatformTypesSettingsAPIQualityPlaybackServiceGetRawVolume;
+  getVolume: PlatformTypesSettingsAPIQualityPlaybackServiceGetVolume;
+  lowerVolume: PlatformTypesSettingsAPIQualityPlaybackServiceLowerVolume;
   options: PlatformTypesSettingsAPIQualityPlaybackServiceOptions;
-  raiseVolume: PlatformTypesVideoAPIPlaybackServiceRaiseVolume;
-  setRawVolume: PlatformTypesVideoAPIPlaybackServiceSetRawVolume;
-  setVolume: PlatformTypesVideoAPIPlaybackServiceSetVolume;
-  subBufferUnderrun: PlatformTypesVideoAPIPlaybackServiceSubBufferUnderrun;
-  subPlaybackInfo: PlatformTypesVideoAPIPlaybackServiceSubPlaybackInfo;
-  subPosition: PlatformTypesVideoAPIPlaybackServiceSubPosition;
-  subRawVolume: PlatformTypesVideoAPIPlaybackServiceSubRawVolume;
-  subVolume: PlatformTypesVideoAPIPlaybackServiceSubVolume;
+  raiseVolume: PlatformTypesSettingsAPIQualityPlaybackServiceRaiseVolume;
+  setRawVolume: PlatformTypesSettingsAPIQualityPlaybackServiceSetRawVolume;
+  setVolume: PlatformTypesSettingsAPIQualityPlaybackServiceSetVolume;
+  subBufferUnderrun: PlatformTypesSettingsAPIQualityPlaybackServiceSubBufferUnderrun;
+  subPlaybackInfo: PlatformTypesSettingsAPIQualityPlaybackServiceSubPlaybackInfo;
+  subPosition: PlatformTypesSettingsAPIQualityPlaybackServiceSubPosition;
+  subRawVolume: PlatformTypesSettingsAPIQualityPlaybackServiceSubRawVolume;
+  subVolume: PlatformTypesSettingsAPIQualityPlaybackServiceSubVolume;
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
 
+export type PlatformTypesSettingsAPIQualityPlaybackServiceDuck = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceGetFiles = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceGetFormats = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceGetPlaybackInfo = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceGetRawVolume = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceGetVolume = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceLowerVolume = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
 export type PlatformTypesSettingsAPIQualityPlaybackServiceOptions = Record<string, unknown>;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceRaiseVolume = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceSetRawVolume = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceSetVolume = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceSubBufferUnderrun = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceSubPlaybackInfo = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceSubPosition = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceSubRawVolume = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityPlaybackServiceSubVolume = (
+  arg0: any,
+  arg1: any,
+) => unknown;
 
 export interface PlatformTypesSettingsAPIQualityRemoteQuality {
   callbacks: PlatformTypesSettingsAPIQualityRemoteQualityCallbacks;
@@ -13795,8 +17045,39 @@ export type PlatformTypesSettingsAPIQualityVolumeLevelSubs = Set<unknown>;
 
 export type PlatformTypesSettingsAPIQualityVolumeLevelSubValue = (arg0: any) => unknown;
 
+export interface PlatformTypesSettingsAPIShuffle {
+  shuffleAlgorithm: PlatformTypesSettingsAPIShuffleShuffleAlgorithm;
+}
+
+export interface PlatformTypesSettingsAPIShuffleShuffleAlgorithm {
+  deserialize: PlatformTypesSettingsAPIShuffleShuffleAlgorithmDeserialize;
+  getValue: PlatformTypesSettingsAPIShuffleShuffleAlgorithmGetValue;
+  identifier: string;
+  key: string;
+  productStateApi: PlatformTypesProductStateAPI;
+  serialize: PlatformTypesSettingsAPIShuffleShuffleAlgorithmSerialize;
+  setValue: PlatformTypesSettingsAPIShuffleShuffleAlgorithmSetValue;
+  subValue: PlatformTypesSettingsAPIShuffleShuffleAlgorithmSubValue;
+  subs: PlatformTypesSettingsAPIShuffleShuffleAlgorithmSubs;
+  subscription: null;
+  value: null;
+}
+
+export type PlatformTypesSettingsAPIShuffleShuffleAlgorithmDeserialize = (arg0: any) => unknown;
+
+export type PlatformTypesSettingsAPIShuffleShuffleAlgorithmGetValue = () => unknown;
+
+export type PlatformTypesSettingsAPIShuffleShuffleAlgorithmSerialize = (arg0: any) => unknown;
+
+export type PlatformTypesSettingsAPIShuffleShuffleAlgorithmSetValue = (arg0: any) => unknown;
+
+export type PlatformTypesSettingsAPIShuffleShuffleAlgorithmSubs = Set<unknown>;
+
+export type PlatformTypesSettingsAPIShuffleShuffleAlgorithmSubValue = (arg0: any) => unknown;
+
 export interface PlatformTypesSettingsAPISocial {
   autoPublishPlaylist: PlatformTypesSettingsAPISocialAutoPublishPlaylist;
+  listPrivateByDefault: PlatformTypesSettingsAPISocialListPrivateByDefault;
   privateSession: PlatformTypesSettingsAPISocialPrivateSession;
   shareListeningActivity: PlatformTypesSettingsAPISocialShareListeningActivity;
   showMyTopArtists: PlatformTypesSettingsAPISocialShowMyTopArtists;
@@ -13825,6 +17106,30 @@ export type PlatformTypesSettingsAPISocialAutoPublishPlaylistSetValue = (arg0: a
 export type PlatformTypesSettingsAPISocialAutoPublishPlaylistSubs = Set<unknown>;
 
 export type PlatformTypesSettingsAPISocialAutoPublishPlaylistSubValue = (arg0: any) => unknown;
+
+export interface PlatformTypesSettingsAPISocialListPrivateByDefault {
+  deserialize: PlatformTypesSettingsAPISocialListPrivateByDefaultDeserialize;
+  getValue: PlatformTypesSettingsAPISocialListPrivateByDefaultGetValue;
+  identifier: string;
+  key: string;
+  productStateApi: PlatformTypesProductStateAPI;
+  serialize: PlatformTypesSettingsAPIAutoPlaySerialize;
+  setValue: PlatformTypesSettingsAPISocialListPrivateByDefaultSetValue;
+  subValue: PlatformTypesSettingsAPISocialListPrivateByDefaultSubValue;
+  subs: PlatformTypesSettingsAPISocialListPrivateByDefaultSubs;
+  subscription: null;
+  value: null;
+}
+
+export type PlatformTypesSettingsAPISocialListPrivateByDefaultDeserialize = (arg0: any) => unknown;
+
+export type PlatformTypesSettingsAPISocialListPrivateByDefaultGetValue = () => unknown;
+
+export type PlatformTypesSettingsAPISocialListPrivateByDefaultSetValue = (arg0: any) => unknown;
+
+export type PlatformTypesSettingsAPISocialListPrivateByDefaultSubs = Set<unknown>;
+
+export type PlatformTypesSettingsAPISocialListPrivateByDefaultSubValue = (arg0: any) => unknown;
 
 export interface PlatformTypesSettingsAPISocialPrivateSession {
   getValue: PlatformTypesSettingsAPISocialPrivateSessionGetValue;
@@ -14200,29 +17505,29 @@ export type PlatformTypesShowAPIEventsAggregatorOnUpdate = (
 ) => unknown;
 
 export interface PlatformTypesShowAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesShowAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesShowAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export type PlatformTypesShowAPIEventsEmitterListeners = Record<string, unknown>;
@@ -14315,15 +17620,23 @@ export type PlatformTypesShowAPIInvalidateShowMetadataCaches = (arg0: any) => un
 export type PlatformTypesShowAPIMarkShowPlayedLegacy = (arg0: any, arg1: any) => unknown;
 
 export interface PlatformTypesShowAPIMetadataServiceClient {
-  expire: PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientExpire;
-  fetch: PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientFetch;
-  observe: PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientObserve;
+  expire: PlatformTypesShowAPIMetadataServiceClientExpire;
+  fetch: PlatformTypesShowAPIMetadataServiceClientFetch;
+  observe: PlatformTypesShowAPIMetadataServiceClientObserve;
   options: PlatformTypesShowAPIMetadataServiceClientOptions;
-  purge: PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClientPurge;
+  purge: PlatformTypesShowAPIMetadataServiceClientPurge;
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
 
+export type PlatformTypesShowAPIMetadataServiceClientExpire = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesShowAPIMetadataServiceClientFetch = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesShowAPIMetadataServiceClientObserve = (arg0: any, arg1: any) => unknown;
+
 export type PlatformTypesShowAPIMetadataServiceClientOptions = Record<string, unknown>;
+
+export type PlatformTypesShowAPIMetadataServiceClientPurge = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesShowAPIOnShowAccessUpdate = (arg0: any) => unknown;
 
@@ -14406,25 +17719,61 @@ export type PlatformTypesShowAPIShowServiceClientOptions = Record<string, unknow
 export type PlatformTypesShowAPIUpdateUserRating = (arg0: any, arg1: any) => unknown;
 
 export interface PlatformTypesShuffleAPI {
+  _centralizedContextualShuffle: PlatformTypesContextualShuffleAPI;
   _connectDevicesAPI: PlatformTypesConnectDevicesAPI;
-  _contextualShuffle: PlatformTypesContextualShuffleAPI;
+  _contextPlayer: PlatformTypesShuffleAPIContextPlayer;
+  _enableSendManualSmartShuffleResetSignalOnSmartShuffleApplied: boolean;
+  _enableSendManualSmartShuffleResetSignalOnSmartShufflePlayed: boolean;
   _events: PlatformTypesShuffleAPIEvents;
-  _history: PlatformTypesHistory;
+  _getAvailableShuffleModesFromPlayerState: PlatformTypesShuffleAPIGetAvailableShuffleModesFromPlayerState;
+  _isContextUriActiveInPlayerState: PlatformTypesShuffleAPIIsContextUriActiveInPlayerState;
   _isDsaEnabled: boolean;
-  _isUnifiedSmartShuffleSignalsEnabled: boolean;
   _player: PlatformTypesPlayerAPI;
   _playlistAPI: PlatformTypesPlaylistAPI;
-  _playlistDataServiceClient: PlatformTypesShuffleAPIPlaylistDataServiceClient;
-  _playlistServiceClient: PlatformTypesShuffleAPIPlaylistServiceClient;
   _productStateApi: PlatformTypesProductStateAPI;
+  _sessionShuffleStates: PlatformTypesShuffleAPISessionShuffleStates;
   _smartShuffleEligibility: PlatformTypesSmartShuffleEligibilityAPI;
   _syncShuffle: PlatformTypesShuffleAPISyncShuffle;
   getAvailableShuffleModes: PlatformTypesShuffleAPIGetAvailableShuffleModes;
   getEvents: PlatformTypesShuffleAPIGetEvents;
   getShuffle: PlatformTypesShuffleAPIGetShuffle;
-  isSmartShuffleEnabled: boolean;
   setShuffle: PlatformTypesShuffleAPISetShuffle;
 }
+
+export interface PlatformTypesShuffleAPIContextPlayer {
+  addToQueue: PlatformTypesPlayHistoryAPIPlayerAddToQueue;
+  deleteSession: PlatformTypesPlayHistoryAPIPlayerDeleteSession;
+  getError: PlatformTypesPlayHistoryAPIPlayerGetError;
+  getPlayHistory: PlatformTypesPlayHistoryAPIPlayerGetPlayHistory;
+  getPositionState: PlatformTypesPlayHistoryAPIPlayerGetPositionState;
+  getQueue: PlatformTypesPlayHistoryAPIPlayerGetQueue;
+  getState: PlatformTypesPlayHistoryAPIPlayerGetState;
+  options: PlatformTypesShuffleAPIContextPlayerOptions;
+  pause: PlatformTypesPlayHistoryAPIPlayerPause;
+  play: PlatformTypesPlayHistoryAPIPlayerPlay;
+  playAsNextInQueue: PlatformTypesPlayHistoryAPIPlayerPlayAsNextInQueue;
+  playPrepared: PlatformTypesPlayHistoryAPIPlayerPlayPrepared;
+  preparePlay: PlatformTypesPlayHistoryAPIPlayerPreparePlay;
+  resume: PlatformTypesPlayHistoryAPIPlayerResume;
+  seekTo: PlatformTypesPlayHistoryAPIPlayerSeekTo;
+  setOptions: PlatformTypesPlayHistoryAPIPlayerSetOptions;
+  setQueue: PlatformTypesPlayHistoryAPIPlayerSetQueue;
+  setRepeatingContext: PlatformTypesPlayHistoryAPIPlayerSetRepeatingContext;
+  setRepeatingTrack: PlatformTypesPlayHistoryAPIPlayerSetRepeatingTrack;
+  setShufflingContext: PlatformTypesPlayHistoryAPIPlayerSetShufflingContext;
+  setSleepTimer: PlatformTypesPlayHistoryAPIPlayerSetSleepTimer;
+  signal: PlatformTypesPlayHistoryAPIPlayerSignal;
+  skipNext: PlatformTypesPlayHistoryAPIPlayerSkipNext;
+  skipPrev: PlatformTypesPlayHistoryAPIPlayerSkipPrev;
+  stop: PlatformTypesPlayHistoryAPIPlayerStop;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+  updateContext: PlatformTypesPlayHistoryAPIPlayerUpdateContext;
+  updateContextPage: PlatformTypesPlayHistoryAPIPlayerUpdateContextPage;
+  updateContextTrack: PlatformTypesPlayHistoryAPIPlayerUpdateContextTrack;
+  updateViewUri: PlatformTypesPlayHistoryAPIPlayerUpdateViewUri;
+}
+
+export type PlatformTypesShuffleAPIContextPlayerOptions = Record<string, unknown>;
 
 export interface PlatformTypesShuffleAPIEvents {
   _emitter: PlatformTypesShuffleAPIEventsEmitter;
@@ -14444,29 +17793,29 @@ export interface PlatformTypesShuffleAPIEvents {
 export type PlatformTypesShuffleAPIEventsEmitAvailabilityUpdate = (arg0: any) => unknown;
 
 export interface PlatformTypesShuffleAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesShuffleAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesShuffleAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesShuffleAPIEventsEmitterListeners {
@@ -14534,9 +17883,16 @@ export type PlatformTypesShuffleAPIEventsEmitUpdateShuffleModeSync = (
 
 export type PlatformTypesShuffleAPIGetAvailableShuffleModes = (arg0: any) => unknown;
 
+export type PlatformTypesShuffleAPIGetAvailableShuffleModesFromPlayerState = (arg0: any) => unknown;
+
 export type PlatformTypesShuffleAPIGetEvents = () => unknown;
 
 export type PlatformTypesShuffleAPIGetShuffle = (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIIsContextUriActiveInPlayerState = (
+  arg0: any,
+  arg1: any,
+) => unknown;
 
 export type PlatformTypesShuffleAPIPlaylistAPIAdd = (
   arg0: any,
@@ -14546,6 +17902,8 @@ export type PlatformTypesShuffleAPIPlaylistAPIAdd = (
 ) => unknown;
 
 export type PlatformTypesShuffleAPIPlaylistAPIClearAttributes = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEmitUpdate = () => unknown;
 
 export interface PlatformTypesShuffleAPIPlaylistAPIEvents {
   _aggregator: PlatformTypesShuffleAPIPlaylistAPIEventsAggregator;
@@ -14649,29 +18007,29 @@ export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitSendSignalSync = (
 ) => unknown;
 
 export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListeners = Record<string, unknown>;
@@ -14736,7 +18094,11 @@ export type PlatformTypesShuffleAPIPlaylistAPIGetContents = (arg0: any, arg1: an
 
 export type PlatformTypesShuffleAPIPlaylistAPIGetEvents = () => unknown;
 
-export type PlatformTypesShuffleAPIPlaylistAPIGetLensedPlaylistUri = (arg0: any) => unknown;
+export type PlatformTypesShuffleAPIPlaylistAPIGetItem = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
 
 export type PlatformTypesShuffleAPIPlaylistAPIGetMetadata = (arg0: any, arg1: any) => unknown;
 
@@ -14827,41 +18189,9 @@ export type PlatformTypesShuffleAPIPlaylistAPIUpdateDetails = (arg0: any, arg1: 
 
 export type PlatformTypesShuffleAPIPlaylistAPIUploadImage = (arg0: any) => unknown;
 
-export interface PlatformTypesShuffleAPIPlaylistDataServiceClient {
-  find: PlatformTypesLibraryAPIPlaylistDataClientFind;
-  get: PlatformTypesLibraryAPIPlaylistDataClientGet;
-  multiGet: PlatformTypesLibraryAPIPlaylistDataClientMultiGet;
-  options: PlatformTypesShuffleAPIPlaylistDataServiceClientOptions;
-  subscribe: PlatformTypesLibraryAPIPlaylistDataClientSubscribe;
-  transport: PlatformTypesVideoAPIEsperantoTransport;
-}
+export type PlatformTypesShuffleAPISessionShuffleStates = Map<unknown, unknown>;
 
-export type PlatformTypesShuffleAPIPlaylistDataServiceClientOptions = Record<string, unknown>;
-
-export interface PlatformTypesShuffleAPIPlaylistServiceClient {
-  clearToken: PlatformTypesLibraryAPIPlaylistServiceClientClearToken;
-  contains: PlatformTypesLibraryAPIPlaylistServiceClientContains;
-  emitItemSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitItemSignals;
-  emitSignals: PlatformTypesLibraryAPIPlaylistServiceClientEmitSignals;
-  getMembers: PlatformTypesLibraryAPIPlaylistServiceClientGetMembers;
-  invalidateRevisions: PlatformTypesLibraryAPIPlaylistServiceClientInvalidateRevisions;
-  modify: PlatformTypesLibraryAPIPlaylistServiceClientModify;
-  options: PlatformTypesShuffleAPIPlaylistServiceClientOptions;
-  requestLenses: PlatformTypesLibraryAPIPlaylistServiceClientRequestLenses;
-  resync: PlatformTypesLibraryAPIPlaylistServiceClientResync;
-  setBasePermission: PlatformTypesLibraryAPIPlaylistServiceClientSetBasePermission;
-  setMemberPermission: PlatformTypesLibraryAPIPlaylistServiceClientSetMemberPermission;
-  setOfflineState: PlatformTypesLibraryAPIPlaylistServiceClientSetOfflineState;
-  setToken: PlatformTypesLibraryAPIPlaylistServiceClientSetToken;
-  signal: PlatformTypesLibraryAPIPlaylistServiceClientSignal;
-  signalItem: PlatformTypesLibraryAPIPlaylistServiceClientSignalItem;
-  subscribeToMembers: PlatformTypesLibraryAPIPlaylistServiceClientSubscribeToMembers;
-  transport: PlatformTypesVideoAPIEsperantoTransport;
-}
-
-export type PlatformTypesShuffleAPIPlaylistServiceClientOptions = Record<string, unknown>;
-
-export type PlatformTypesShuffleAPISetShuffle = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesShuffleAPISetShuffle = (arg0: any, arg1: any, arg2: any) => unknown;
 
 export type PlatformTypesShuffleAPISyncShuffle = (arg0: any, arg1: any) => unknown;
 
@@ -14913,8 +18243,8 @@ export type PlatformTypesSingAlongAPISetStatus = (arg0: any) => unknown;
 export type PlatformTypesSingAlongAPISetVocalVolume = (arg0: any) => unknown;
 
 export interface PlatformTypesSmartShuffleEligibilityAPI {
-  _metadataServiceClient: PlatformTypesPlayerAPISmartShuffleEligibilityMetadataServiceClient;
-  getEligibility: PlatformTypesPlayerAPISmartShuffleEligibilityGetEligibility;
+  _metadataExtensionsAPI: PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI;
+  getEligibility: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityGetEligibility;
 }
 
 export interface PlatformTypesSocialConnectAPI {
@@ -14987,29 +18317,29 @@ export interface PlatformTypesSocialConnectAPIEvents {
 }
 
 export interface PlatformTypesSocialConnectAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesSocialConnectAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesSocialConnectAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesSocialConnectAPIEventsEmitterListeners {
@@ -15186,29 +18516,29 @@ export interface PlatformTypesSocialConnectAPIServiceEvents {
 }
 
 export interface PlatformTypesSocialConnectAPIServiceEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesSocialConnectAPIServiceEventsEmitterListeners;
   _metaListeners: PlatformTypesSocialConnectAPIServiceEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesSocialConnectAPIServiceEventsEmitterListeners {
@@ -15395,6 +18725,8 @@ export type PlatformTypesSocialConnectAPIShortLinkCachesShortLinkQRCacheCache = 
 
 export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPI {
   _desktop_local_net_session_client: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIDesktopLocalNetSessionClient;
+  _eventSender: PlatformTypesEventSender;
+  _isBLEJamBroadcastingEnabled: boolean;
   _pubSubAPI: PlatformTypesPubSubAPI;
   _socialConnectServiceClient: PlatformTypesSocialConnectAPISocialConnectServiceClient;
   activeDeviceId: null;
@@ -15406,7 +18738,9 @@ export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPI {
   handleBroadcastStatusUpdate: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIHandleBroadcastStatusUpdate;
   latestScanningResponse: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPILatestScanningResponse;
   setBroadcastStatus: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPISetBroadcastStatus;
+  startBroadcastingBluetoothSessionDevice: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIStartBroadcastingBluetoothSessionDevice;
   startScanningForLocalNetSessionDevices: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIStartScanningForLocalNetSessionDevices;
+  stopBroadcastingBluetoothSessionDevice: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIStopBroadcastingBluetoothSessionDevice;
   subscribeToBroadcastStatusUpdates: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPISubscribeToBroadcastStatusUpdates;
 }
 
@@ -15470,29 +18804,29 @@ export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEvents
 }
 
 export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListeners =
@@ -15543,9 +18877,16 @@ export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPILatestScann
 
 export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPISetBroadcastStatus = (
   arg0: any,
+  arg1: any,
 ) => unknown;
 
+export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIStartBroadcastingBluetoothSessionDevice =
+  (arg0: any) => unknown;
+
 export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIStartScanningForLocalNetSessionDevices =
+  () => unknown;
+
+export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIStopBroadcastingBluetoothSessionDevice =
   () => unknown;
 
 export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPISubscribeToBroadcastStatusUpdates =
@@ -15649,13 +18990,11 @@ export interface PlatformTypesStandalonePlayerCoordinatorAPI {
   currentActiveInstance: null;
   currentPlayerVolume: number;
   deleteStandalonePlayerInstance: PlatformTypesStandalonePlayerCoordinatorAPIDeleteStandalonePlayerInstance;
-  eventSender: PlatformTypesEventSender;
   inactivateInstance: PlatformTypesStandalonePlayerCoordinatorAPIInactivateInstance;
   instances: PlatformTypesStandalonePlayerCoordinatorAPIInstances;
-  outroPreviewReportingState: string;
+  outroReporter: null;
   playbackAPI: PlatformTypesPlaybackAPI;
   playerAPI: PlatformTypesPlayerAPI;
-  setupOutroReporter: PlatformTypesStandalonePlayerCoordinatorAPISetupOutroReporter;
   setupPlayerListeners: PlatformTypesStandalonePlayerCoordinatorAPISetupPlayerListeners;
   setupStandalonePlayerListeners: PlatformTypesStandalonePlayerCoordinatorAPISetupStandalonePlayerListeners;
 }
@@ -15732,55 +19071,39 @@ export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEvents {
 }
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListeners {
-  muted_changed: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChanged;
   volume: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolume;
 }
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChanged =
-  Array<PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItem>;
-
-export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItem {
-  listener: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItemListener;
-  options: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItemOptions;
-}
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItemListener =
-  (arg0: any) => unknown;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItemOptions =
-  Record<string, unknown>;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolume =
   Array<
     | PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem
     | PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem2
-    | PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem3
   >;
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem {
@@ -15793,27 +19116,16 @@ export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmi
   options: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions2;
 }
 
-export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem3 {
-  listener: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemListener3;
-  options: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions3;
-}
-
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemListener =
   (arg0: any) => unknown;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemListener2 =
   (arg0: any) => unknown;
 
-export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemListener3 =
-  (arg0: any) => unknown;
-
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions =
   Record<string, unknown>;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions2 =
-  Record<string, unknown>;
-
-export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions3 =
   Record<string, unknown>;
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterMetaListeners {
@@ -15899,22 +19211,22 @@ export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIMuteHelperTogg
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIMuteHelperUnmute = () => unknown;
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIPlaybackService {
-  duck: PlatformTypesVideoAPIPlaybackServiceDuck;
-  getFiles: PlatformTypesVideoAPIPlaybackServiceGetFiles;
-  getFormats: PlatformTypesVideoAPIPlaybackServiceGetFormats;
-  getPlaybackInfo: PlatformTypesVideoAPIPlaybackServiceGetPlaybackInfo;
-  getRawVolume: PlatformTypesVideoAPIPlaybackServiceGetRawVolume;
-  getVolume: PlatformTypesVideoAPIPlaybackServiceGetVolume;
-  lowerVolume: PlatformTypesVideoAPIPlaybackServiceLowerVolume;
+  duck: PlatformTypesSettingsAPIQualityPlaybackServiceDuck;
+  getFiles: PlatformTypesSettingsAPIQualityPlaybackServiceGetFiles;
+  getFormats: PlatformTypesSettingsAPIQualityPlaybackServiceGetFormats;
+  getPlaybackInfo: PlatformTypesSettingsAPIQualityPlaybackServiceGetPlaybackInfo;
+  getRawVolume: PlatformTypesSettingsAPIQualityPlaybackServiceGetRawVolume;
+  getVolume: PlatformTypesSettingsAPIQualityPlaybackServiceGetVolume;
+  lowerVolume: PlatformTypesSettingsAPIQualityPlaybackServiceLowerVolume;
   options: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIPlaybackServiceOptions;
-  raiseVolume: PlatformTypesVideoAPIPlaybackServiceRaiseVolume;
-  setRawVolume: PlatformTypesVideoAPIPlaybackServiceSetRawVolume;
-  setVolume: PlatformTypesVideoAPIPlaybackServiceSetVolume;
-  subBufferUnderrun: PlatformTypesVideoAPIPlaybackServiceSubBufferUnderrun;
-  subPlaybackInfo: PlatformTypesVideoAPIPlaybackServiceSubPlaybackInfo;
-  subPosition: PlatformTypesVideoAPIPlaybackServiceSubPosition;
-  subRawVolume: PlatformTypesVideoAPIPlaybackServiceSubRawVolume;
-  subVolume: PlatformTypesVideoAPIPlaybackServiceSubVolume;
+  raiseVolume: PlatformTypesSettingsAPIQualityPlaybackServiceRaiseVolume;
+  setRawVolume: PlatformTypesSettingsAPIQualityPlaybackServiceSetRawVolume;
+  setVolume: PlatformTypesSettingsAPIQualityPlaybackServiceSetVolume;
+  subBufferUnderrun: PlatformTypesSettingsAPIQualityPlaybackServiceSubBufferUnderrun;
+  subPlaybackInfo: PlatformTypesSettingsAPIQualityPlaybackServiceSubPlaybackInfo;
+  subPosition: PlatformTypesSettingsAPIQualityPlaybackServiceSubPosition;
+  subRawVolume: PlatformTypesSettingsAPIQualityPlaybackServiceSubRawVolume;
+  subVolume: PlatformTypesSettingsAPIQualityPlaybackServiceSubVolume;
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
 
@@ -15945,13 +19257,12 @@ export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIStorageService
   unknown
 >;
 
-export type PlatformTypesStandalonePlayerCoordinatorAPISetupOutroReporter = (arg0: any) => unknown;
-
 export type PlatformTypesStandalonePlayerCoordinatorAPISetupPlayerListeners = () => unknown;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPISetupStandalonePlayerListeners = (
   arg0: any,
   arg1: any,
+  arg2: any,
 ) => unknown;
 
 export interface PlatformTypesTranslations {
@@ -15997,6 +19308,7 @@ export interface PlatformTypesTranslations {
   "ad-formats.ad-feedback.like.relevant": string;
   "ad-formats.ad-feedback.thanks-for-feedback": string;
   "ad-formats.advertisement": string;
+  "ad-formats.advertisement-appended": string;
   "ad-formats.advertisement-break": string;
   "ad-formats.advertisement-break-countdown-minutes-seconds": string;
   "ad-formats.advertisement-break-countdown-seconds": string;
@@ -16197,6 +19509,10 @@ export interface PlatformTypesTranslations {
   "concerts.flag_issue.soldout": string;
   "concerts.flag_issue.success_message": string;
   "concerts.flag_issue.title": string;
+  "concerts.gallery.error.concert.message": string;
+  "concerts.gallery.error.concert.title": string;
+  "concerts.gallery.error.venue.message": string;
+  "concerts.gallery.error.venue.title": string;
   "concerts.genre_all_events": string;
   "concerts.genre_all_events_near_you": string;
   "concerts.genre_for_you": string;
@@ -16246,6 +19562,7 @@ export interface PlatformTypesTranslations {
   "concerts.soldout": string;
   "concerts.ticket_price": string;
   "concerts.unsaved": string;
+  "concerts.user_top_genre": string;
   "concerts.venues": string;
   "concerts.venues_description": string;
   "concerts.venues_for_you": string;
@@ -16269,7 +19586,6 @@ export interface PlatformTypesTranslations {
   "context-menu.episode-page-link": string;
   "contextmenu.add-playlist-to-folder": string;
   "contextmenu.add-playlist-to-other-playlist": string;
-  "contextmenu.add-recommendation-to-this-playlist": string;
   "contextmenu.add-to-another-playlist": string;
   "contextmenu.add-to-library": string;
   "contextmenu.add-to-playlist": string;
@@ -16552,6 +19868,7 @@ export interface PlatformTypesTranslations {
   "country.zm": string;
   "country.zw": string;
   "date.today": string;
+  "date.yesterday": string;
   "desktop-about.copy-version-info-tooltip": string;
   "desktop-about.platform": string;
   "desktop-about.platform-linux": string;
@@ -16586,6 +19903,8 @@ export interface PlatformTypesTranslations {
   "desktop.settings.explicitContentFilterSettingLocked": string;
   "desktop.settings.language": string;
   "desktop.settings.language-override": string;
+  "desktop.settings.listPrivacy": string;
+  "desktop.settings.listPrivacy.subtitle": string;
   "desktop.settings.loudnessEnvironment_with_limiter_details": string;
   "desktop.settings.loudnessLoud": string;
   "desktop.settings.loudnessNormal": string;
@@ -16593,6 +19912,7 @@ export interface PlatformTypesTranslations {
   "desktop.settings.monoDownmixer": string;
   "desktop.settings.musicQuality": string;
   "desktop.settings.newPlaylistsPublic": string;
+  "desktop.settings.newPlaylistsPublic-subtitle": string;
   "desktop.settings.normalize": string;
   "desktop.settings.offlineStorageChangeLocation": string;
   "desktop.settings.offlineStorageLocation": string;
@@ -16620,6 +19940,15 @@ export interface PlatformTypesTranslations {
   "desktop.settings.showChromeToolbar": string;
   "desktop.settings.showFollows": string;
   "desktop.settings.showSystemMediaControls": string;
+  "desktop.settings.shuffle.mode": string;
+  "desktop.settings.shuffle.mode.classic": string;
+  "desktop.settings.shuffle.mode.classic.description": string;
+  "desktop.settings.shuffle.mode.description": string;
+  "desktop.settings.shuffle.mode.description.link": string;
+  "desktop.settings.shuffle.mode.fewer-repeats": string;
+  "desktop.settings.shuffle.mode.fewer-repeats.description": string;
+  "desktop.settings.shuffle.mode.fewer-repeats.dsa-unavailability": string;
+  "desktop.settings.shuffle.title": string;
   "desktop.settings.social": string;
   "desktop.settings.startupAndWindowBehavior": string;
   "desktop.settings.storage": string;
@@ -16656,6 +19985,7 @@ export interface PlatformTypesTranslations {
   "download.progress-global": string;
   "download.remove": string;
   "download.upsell": string;
+  "downloadPage.page-title": string;
   "drop_down.filter_by": string;
   "drop_down.sort_by": string;
   "duplicate.tracks.addAll": string;
@@ -16769,9 +20099,11 @@ export interface PlatformTypesTranslations {
   "feedback.cant-play-track": string;
   "feedback.cant-skip-ads": string;
   "feedback.exclude-playlist-from-recommendations": string;
+  "feedback.exclude-track-from-recommendations": string;
   "feedback.explicit-content-filtered": string;
   "feedback.hide-song": string;
   "feedback.include-playlist-in-recommendations": string;
+  "feedback.include-track-in-recommendations": string;
   "feedback.left-playlist": string;
   "feedback.link-copied": string;
   "feedback.member-made-contributor": string;
@@ -16885,6 +20217,7 @@ export interface PlatformTypesTranslations {
   "leave-playlist.dialog.title": string;
   "library-import.cta": string;
   "library-import.description": string;
+  "library-import.settings.title": string;
   "library-import.title": string;
   "licenses.title": string;
   "live_events.all_events_tab": string;
@@ -17000,8 +20333,8 @@ export interface PlatformTypesTranslations {
   "navbar.install-app": string;
   "navbar.premium": string;
   "navbar.search": string;
-  "npb.collapseCoverArt": string;
   "npb.expandCoverArt": string;
+  "npb.expandVideo": string;
   "npv.full-screen": string;
   "npv.related-videos.title": string;
   "npv.song-videos.switch-to-audio": string;
@@ -17095,8 +20428,15 @@ export interface PlatformTypesTranslations {
   "playlist.edit-details.error.too-big": string;
   "playlist.edit-details.error.too-small": string;
   "playlist.edit-details.error.unsaved-changes": string;
+  "playlist.edit-details.make-private": string;
+  "playlist.edit-details.make-public": string;
   "playlist.edit-details.name-label": string;
   "playlist.edit-details.name-placeholder": string;
+  "playlist.edit-details.private-confirmation.cancel": string;
+  "playlist.edit-details.private-confirmation.confirm": string;
+  "playlist.edit-details.private-confirmation.description": string;
+  "playlist.edit-details.private-confirmation.description-with-prompt": string;
+  "playlist.edit-details.private-confirmation.title": string;
   "playlist.edit-details.remove-photo": string;
   "playlist.edit-details.title": string;
   "playlist.extender.button.add": string;
@@ -17222,7 +20562,6 @@ export interface PlatformTypesTranslations {
   "shared.audiobook-capping.offline-capping-explanation.title": string;
   "shared.library.entity-row.liked-songs.title": string;
   "shared.library.entity-row.local-files.title": string;
-  "shared.library.entity-row.your-episodes.title": string;
   "shared.library.filter.album": string;
   "shared.library.filter.artist": string;
   "shared.library.filter.author": string;
@@ -17232,6 +20571,7 @@ export interface PlatformTypesTranslations {
   "shared.library.filter.downloaded": string;
   "shared.library.filter.events": string;
   "shared.library.filter.in-progress": string;
+  "shared.library.filter.mixed": string;
   "shared.library.filter.playlist": string;
   "shared.library.filter.podcasts-courses": string;
   "shared.library.filter.unplayed": string;
@@ -17481,15 +20821,6 @@ export interface PlatformTypesTranslations {
   "type.showEpisode": string;
   "upgrade.button": string;
   "upgrade.tooltip.title": string;
-  "user-fraud-verification.confirm-dialog.cancel": string;
-  "user-fraud-verification.confirm-dialog.confirm": string;
-  "user-fraud-verification.confirm-dialog.description": string;
-  "user-fraud-verification.confirm-dialog.label": string;
-  "user-fraud-verification.confirm-dialog.title": string;
-  "user-fraud-verification.dialog-alert.describe": string;
-  "user-fraud-verification.dialog-alert.ok": string;
-  "user-fraud-verification.dialog-alert.title": string;
-  "user-fraud-verification.snackbar.message": string;
   "user.account": string;
   "user.edit-details.choose-photo": string;
   "user.edit-details.error.failed-to-save": string;
@@ -17523,7 +20854,23 @@ export interface PlatformTypesTranslations {
   "view.recently-played": string;
   "view.see-all": string;
   "view.web-player-home": string;
+  "web-player.HomeChipsRow.subchips.parentChildAccessibleName": string;
+  "web-player.age-assurance.blocking-modal.description": PlatformTypesTranslationsWebplayerAgeassuranceBlockingmodalDescription;
+  "web-player.age-assurance.blocking-modal.description-less-than-day": string;
+  "web-player.age-assurance.blocking-modal.description-no-timestamp": string;
+  "web-player.age-assurance.blocking-modal.title": string;
+  "web-player.age-assurance.buddy-feed.title": string;
+  "web-player.age-assurance.comments.verify-age": string;
   "web-player.age-assurance.confirm-age-action.title": string;
+  "web-player.age-assurance.modal.scan-qr": string;
+  "web-player.age-assurance.reactivation-blocking-modal.description": PlatformTypesTranslationsWebplayerAgeassuranceReactivationblockingmodalDescription;
+  "web-player.age-assurance.reactivation-blocking-modal.description-less-than-day": string;
+  "web-player.age-assurance.reactivation-blocking-modal.description-no-timestamp": string;
+  "web-player.age-assurance.reactivation-blocking-modal.title": string;
+  "web-player.age-assurance.settings.age-check.title": string;
+  "web-player.age-assurance.settings.content.minor-social-feature-explanation": string;
+  "web-player.age-assurance.user-widget.notification": string;
+  "web-player.age-assurance.verify-modal.title": string;
   "web-player.album.anniversary": PlatformTypesTranslationsWebplayerAlbumAnniversary;
   "web-player.album.open_coverart_modal": string;
   "web-player.album.premium-only-banner-album": string;
@@ -17556,6 +20903,11 @@ export interface PlatformTypesTranslations {
   "web-player.artist.discography.sort-box.view-as": string;
   "web-player.artist.discography.sort-box.view-grid": string;
   "web-player.artist.discography.sort-box.view-list": string;
+  "web-player.artist.saved-tracks.nr-releases": PlatformTypesTranslationsWebplayerArtistSavedtracksNrreleases;
+  "web-player.artist.saved-tracks.nr-tracks": PlatformTypesTranslationsWebplayerArtistSavedtracksNrtracks;
+  "web-player.artist.saved-tracks.title": string;
+  "web-player.artist.saved-tracks.title.releases": string;
+  "web-player.artist.saved-tracks.title.top-bar": string;
   "web-player.artist.upcoming-release": string;
   "web-player.artist.upcoming-release.album": string;
   "web-player.artist.upcoming-release.ep": string;
@@ -17600,9 +20952,6 @@ export interface PlatformTypesTranslations {
   "web-player.clear-filter": string;
   "web-player.connect.bar.connected-state": string;
   "web-player.connect.bar.connecting-state": string;
-  "web-player.connect.context-menu.incarnation-cast": string;
-  "web-player.connect.context-menu.incarnation-connect": string;
-  "web-player.connect.context-menu.incarnation-title": string;
   "web-player.connect.context-menu.log-out-of-device": string;
   "web-player.connect.device-picker.ad-playing": string;
   "web-player.connect.device-picker.auto-invite-jam-toggle": string;
@@ -17634,7 +20983,6 @@ export interface PlatformTypesTranslations {
   "web-player.connect.device-picker.restricted-device-default-title": string;
   "web-player.connect.device-picker.restrictions-modal-ok-button": string;
   "web-player.connect.device-picker.select-another-device": string;
-  "web-player.connect.device-picker.start-jam": string;
   "web-player.connect.device-picker.start-jam-description": string;
   "web-player.connect.device-picker.switch-to-app": string;
   "web-player.connect.device-picker.switch-to-app-subtitle": string;
@@ -17642,6 +20990,7 @@ export interface PlatformTypesTranslations {
   "web-player.connect.device-picker.this-web-browser": string;
   "web-player.connect.device-picker.tts-playing": string;
   "web-player.connect.device-picker.unsupported-uri": string;
+  "web-player.connect.device-picker.unsupported-version": string;
   "web-player.connect.device-picker.update-device": string;
   "web-player.connect.device-picker.wakeup-timeout": string;
   "web-player.connect.device-picker.wakingup-device": string;
@@ -17661,6 +21010,8 @@ export interface PlatformTypesTranslations {
   "web-player.deeplink-intent.add-to-library.episodes-title": string;
   "web-player.deeplink-intent.add-to-library.liked-songs-title": string;
   "web-player.deeplink-intent.add-to-library.title": string;
+  "web-player.download-page.body-text-other-supported-platforms": string;
+  "web-player.download-page.body-text-windows": string;
   "web-player.download-page.direct-download": string;
   "web-player.download-page.download-button": string;
   "web-player.download-page.notification-hide": string;
@@ -17668,6 +21019,9 @@ export interface PlatformTypesTranslations {
   "web-player.download-page.notification-text": string;
   "web-player.download-page.other-platforms-current": string;
   "web-player.download-page.other-platforms-device-name": string;
+  "web-player.download-page.other-platforms-title": string;
+  "web-player.download-page.title": string;
+  "web-player.download-page.unsupported-platforms-title": string;
   "web-player.download-page.upsell-popover.close": string;
   "web-player.download-page.upsell-popover.description-buddy-feed": string;
   "web-player.download-page.upsell-popover.description-download": string;
@@ -17695,6 +21049,7 @@ export interface PlatformTypesTranslations {
   "web-player.episode.description": string;
   "web-player.episode.transcript": string;
   "web-player.episode.transcript.disclaimer": string;
+  "web-player.episode.transcript.disclaimer.creator-provided": string;
   "web-player.feedback.hidden": string;
   "web-player.feedback.hide-song": string;
   "web-player.feedback.track-banned-in-context": string;
@@ -17710,6 +21065,14 @@ export interface PlatformTypesTranslations {
   "web-player.global-nav-bar.playlist-button.subtitle": string;
   "web-player.liked-songs.clear-filter": string;
   "web-player.liked-songs.liked-songs-filter-tags": string;
+  "web-player.list-platform.filter.predicates.video": string;
+  "web-player.listening-stats-modal.dismiss": string;
+  "web-player.listening-stats-modal.not-available-text": string;
+  "web-player.listening-stats-modal.not-available-title": string;
+  "web-player.listening-stats-modal.open-app-text": string;
+  "web-player.listening-stats-modal.open-app-title": string;
+  "web-player.listening-stats-modal.text": string;
+  "web-player.listening-stats-modal.title": string;
   "web-player.locked-purchases-not-allowed-modal.body": string;
   "web-player.locked-purchases-not-allowed-modal.dismiss": string;
   "web-player.locked-purchases-not-allowed-modal.title": string;
@@ -17729,6 +21092,91 @@ export interface PlatformTypesTranslations {
   "web-player.lyrics.translation.none": string;
   "web-player.lyrics.translation.not_available": string;
   "web-player.lyrics.unsynced": string;
+  "web-player.magpie.action-bar.generate-button": string;
+  "web-player.magpie.action-bar.retry-button": string;
+  "web-player.magpie.cadence-picker-menu.daily": string;
+  "web-player.magpie.cadence-picker-menu.daily-description": string;
+  "web-player.magpie.cadence-picker-menu.doesnt-update": string;
+  "web-player.magpie.cadence-picker-menu.heading": string;
+  "web-player.magpie.cadence-picker-menu.never": string;
+  "web-player.magpie.cadence-picker-menu.never-description": string;
+  "web-player.magpie.cadence-picker-menu.set-updates": string;
+  "web-player.magpie.cadence-picker-menu.unknown": string;
+  "web-player.magpie.cadence-picker-menu.updates-daily": string;
+  "web-player.magpie.cadence-picker-menu.updates-weekly": string;
+  "web-player.magpie.cadence-picker-menu.weekly": string;
+  "web-player.magpie.cadence-picker-menu.weekly-description": string;
+  "web-player.magpie.cadence-playlist-text": string;
+  "web-player.magpie.cadence-playlist-text-daily": string;
+  "web-player.magpie.cadence-snackbar-text-daily": string;
+  "web-player.magpie.cadence-snackbar-text-never": string;
+  "web-player.magpie.cadence-snackbar-text-weekly": string;
+  "web-player.magpie.cap-modal.confirm-button": string;
+  "web-player.magpie.cap-modal.description": string;
+  "web-player.magpie.cap-modal.dismiss-button": string;
+  "web-player.magpie.cap-modal.title": string;
+  "web-player.magpie.collapsed-prompt.label": string;
+  "web-player.magpie.create-menu-item.title": string;
+  "web-player.magpie.customize-prompt-button": string;
+  "web-player.magpie.day-of-week.friday": string;
+  "web-player.magpie.day-of-week.monday": string;
+  "web-player.magpie.day-of-week.saturday": string;
+  "web-player.magpie.day-of-week.sunday": string;
+  "web-player.magpie.day-of-week.thursday": string;
+  "web-player.magpie.day-of-week.tuesday": string;
+  "web-player.magpie.day-of-week.wednesday": string;
+  "web-player.magpie.generate-prompt-card.button-aria-label": string;
+  "web-player.magpie.generate-prompt-card.button-text": string;
+  "web-player.magpie.generate-prompt-card.description": string;
+  "web-player.magpie.inline-link.parentheses": string;
+  "web-player.magpie.menu-action.badge": string;
+  "web-player.magpie.menu-action.subtitle": string;
+  "web-player.magpie.menu-action.title": string;
+  "web-player.magpie.metadata-refresh-button.text": string;
+  "web-player.magpie.metadata.progress-details": string;
+  "web-player.magpie.playlist.error-message": string;
+  "web-player.magpie.privacy-menu-picker.private": string;
+  "web-player.magpie.privacy-menu-picker.public": string;
+  "web-player.magpie.privacy-menu.heading": string;
+  "web-player.magpie.privacy-menu.private-subtitle": string;
+  "web-player.magpie.privacy-menu.private-title": string;
+  "web-player.magpie.privacy-menu.public-subtitle": string;
+  "web-player.magpie.privacy-menu.public-title": string;
+  "web-player.magpie.prompt-composer-copy-button.text": string;
+  "web-player.magpie.prompt-composer-disclaimer.link-text": string;
+  "web-player.magpie.prompt-composer-disclaimer.text": string;
+  "web-player.magpie.prompt-composer-header.close-aria-label": string;
+  "web-player.magpie.prompt-composer-header.default-title": string;
+  "web-player.magpie.prompt-composer-modal.content-label": string;
+  "web-player.magpie.prompt-composer-modal.error-message": string;
+  "web-player.magpie.prompt-composer-submit-button.analyzing": string;
+  "web-player.magpie.prompt-composer-submit-button.generate": string;
+  "web-player.magpie.prompt-composer-submit-button.update": string;
+  "web-player.magpie.prompt-composer-submit-button.updating": string;
+  "web-player.magpie.prompt-composer.options-aria-label": string;
+  "web-player.magpie.prompt-editor.placeholder": string;
+  "web-player.magpie.prompt-metadata.made-for-prefix": string;
+  "web-player.magpie.prompt-metadata.prompted-by-prefix": string;
+  "web-player.magpie.prompt-suggestions.ideas-heading": string;
+  "web-player.magpie.rate-limit-reset-time-days": PlatformTypesTranslationsWebplayerMagpieRatelimitresettimedays;
+  "web-player.magpie.rate-limit-reset-time-hours": PlatformTypesTranslationsWebplayerMagpieRatelimitresettimehours;
+  "web-player.magpie.rate-limit-reset-time-soon": string;
+  "web-player.magpie.refresh-prompted-playlist.error": string;
+  "web-player.magpie.suggestions-button.text": string;
+  "web-player.magpie.suggestions-button.tooltip.hide": string;
+  "web-player.magpie.suggestions-button.tooltip.show": string;
+  "web-player.magpie.toolbar.edit-prompt-button": string;
+  "web-player.magpie.toolbar.name-details-button": string;
+  "web-player.magpie.toolbar.notes-button": string;
+  "web-player.magpie.toolbar.view-prompt-button": string;
+  "web-player.magpie.unsaved-confirmation-dialog.aria-label": string;
+  "web-player.magpie.unsaved-confirmation-dialog.cancel-button": string;
+  "web-player.magpie.unsaved-confirmation-dialog.confirm-button": string;
+  "web-player.magpie.unsaved-confirmation-dialog.description": string;
+  "web-player.magpie.unsaved-confirmation-dialog.title": string;
+  "web-player.magpie.update-refresh-metadata.error": string;
+  "web-player.magpie.what-youll-get.prompt-label": string;
+  "web-player.magpie.what-youll-get.title": string;
   "web-player.merch.seeAllUri": string;
   "web-player.merch.title": string;
   "web-player.notification-center.button-label": string;
@@ -17874,19 +21322,24 @@ export interface PlatformTypesTranslations {
   "web-player.pigeon.introduction.step-2.title": string;
   "web-player.pigeon.introduction.step-3.subtitle": string;
   "web-player.pigeon.introduction.step-3.title": string;
+  "web-player.pip-mini-player.settings.background-color": string;
+  "web-player.pip-mini-player.settings.done": string;
+  "web-player.pip-mini-player.settings.queue": string;
+  "web-player.pip-mini-player.settings.settings": string;
   "web-player.pip-mini-player.snackbar.link-opened-in-main-window": string;
+  "web-player.pip-mini-player.upsell.cancel-button": string;
   "web-player.pip-mini-player.upsell.cta-button": string;
   "web-player.pip-mini-player.upsell.subtitle": string;
   "web-player.pip-mini-player.upsell.title": string;
   "web-player.pip-mini-player.window-title": string;
-  "web-player.playlist.booklist-not-supported-title": string;
-  "web-player.playlist.booklist-not-supported.message": string;
   "web-player.playlist.booklist-recommender-dsa-message": string;
   "web-player.playlist.daylist.link-back-banner.link-text": string;
   "web-player.playlist.daylist.link-back-banner.title": string;
   "web-player.playlist.daylist.next-update": string;
   "web-player.playlist.more-like-this.section-header-title": string;
   "web-player.playlist.recommender-dsa-message": string;
+  "web-player.playlist.session-control.retry-snackbar.cta-text": string;
+  "web-player.playlist.session-control.retry-snackbar.title": string;
   "web-player.premium-upsell-page.description": string;
   "web-player.premium-upsell-page.see-latest-offers": string;
   "web-player.premium-upsell-page.title": string;
@@ -17908,6 +21361,27 @@ export interface PlatformTypesTranslations {
   "web-player.queue-history.item-type.track": string;
   "web-player.read-along-transcript.now-playing-view.read-along": string;
   "web-player.read-along-transcript.sync.button": string;
+  "web-player.recents.album-added": string;
+  "web-player.recents.audiobook-added": string;
+  "web-player.recents.collapse-button-label": string;
+  "web-player.recents.collapsed-group": string;
+  "web-player.recents.content-type.audiobooks": string;
+  "web-player.recents.content-type.music": string;
+  "web-player.recents.content-type.podcasts": string;
+  "web-player.recents.day-group-label-numeric-date": string;
+  "web-player.recents.day-group-label-relative-date": string;
+  "web-player.recents.episodes-added": PlatformTypesTranslationsWebplayerRecentsEpisodesadded;
+  "web-player.recents.expand-button-label": string;
+  "web-player.recents.expanded-group": string;
+  "web-player.recents.loading-more-items": string;
+  "web-player.recents.more-items-loaded": string;
+  "web-player.recents.playlist-added": string;
+  "web-player.recents.recent-type.played": string;
+  "web-player.recents.recent-type.saved": string;
+  "web-player.recents.recent-type.shared": string;
+  "web-player.recents.songs-added": PlatformTypesTranslationsWebplayerRecentsSongsadded;
+  "web-player.recents.songs-played": PlatformTypesTranslationsWebplayerRecentsSongsplayed;
+  "web-player.recents.title": string;
   "web-player.remote-downloads.context-menu.this-computer": string;
   "web-player.remote-downloads.feedback.downloading-to-remote-device": string;
   "web-player.report-issue.close": string;
@@ -17951,6 +21425,7 @@ export interface PlatformTypesTranslations {
   "web-player.search-modal.result.user": string;
   "web-player.search-modal.search-entity": string;
   "web-player.search-modal.title": string;
+  "web-player.search.list.a11y.label": string;
   "web-player.search.suggestions.header.down": string;
   "web-player.search.suggestions.header.enter": string;
   "web-player.search.suggestions.header.label": string;
@@ -17994,12 +21469,16 @@ export interface PlatformTypesTranslations {
   "web-player.settings.personalized-recommendations.modal-header": string;
   "web-player.settings.playback.smart-shuffle": string;
   "web-player.settings.playback.smart-shuffle-dsa": string;
+  "web-player.settings.playlists.on-profile-description": string;
   "web-player.settings.quality.download-quality.lossless-snackbar-message": string;
   "web-player.settings.quality.streaming-quality.info-text": string;
   "web-player.settings.quality.streaming-quality.lossless-confirm-dialog.cancel": string;
   "web-player.settings.quality.streaming-quality.lossless-confirm-dialog.confirm": string;
   "web-player.settings.quality.streaming-quality.lossless-confirm-dialog.description": string;
   "web-player.settings.quality.streaming-quality.lossless-confirm-dialog.title": string;
+  "web-player.settings.social.connected-apps.cta": string;
+  "web-player.settings.social.connected-apps.description": string;
+  "web-player.settings.social.connected-apps.title": string;
   "web-player.settings.zoom.balanced-label": string;
   "web-player.settings.zoom.compact-label": string;
   "web-player.settings.zoom.description": string;
@@ -18008,6 +21487,7 @@ export interface PlatformTypesTranslations {
   "web-player.settings.zoom.shortcut-description": string;
   "web-player.settings.zoom.title": string;
   "web-player.settings.zoom.zoom-level-radio-button-label": string;
+  "web-player.show.filterbox.placeholder": string;
   "web-player.show.rating.header": string;
   "web-player.show.rating.listenFirstDescription": string;
   "web-player.show.rating.listenFirstTitle": string;
@@ -18135,6 +21615,20 @@ export interface PlatformTypesTranslations {
   "web-player.social-connect.toast.queue-only-mode.host.enabled": string;
   "web-player.social-connect.toast.two-people-joined": string;
   "web-player.social-connect.toast.two-people-left": string;
+  "web-player.subfeeds.home.subfeed.following.empty-state.all-caught-up.title": string;
+  "web-player.subfeeds.home.subfeed.music-following.empty-state.all-caught-up.description": string;
+  "web-player.subfeeds.home.subfeed.music-following.empty-state.empty.button-label": string;
+  "web-player.subfeeds.home.subfeed.music-following.empty-state.empty.description": string;
+  "web-player.subfeeds.home.subfeed.music-following.empty-state.empty.title": string;
+  "web-player.subfeeds.home.subfeed.music-following.header": string;
+  "web-player.subfeeds.home.subfeed.podcasts-following.empty-state.all-caught-up.description": string;
+  "web-player.subfeeds.home.subfeed.podcasts-following.empty-state.empty.button-label": string;
+  "web-player.subfeeds.home.subfeed.podcasts-following.empty-state.empty.description": string;
+  "web-player.subfeeds.home.subfeed.podcasts-following.empty-state.empty.title": string;
+  "web-player.subfeeds.home.subfeed.podcasts-following.empty-state.filtered.description": string;
+  "web-player.subfeeds.home.subfeed.podcasts-following.empty-state.filtered.title": string;
+  "web-player.subfeeds.home.subfeed.podcasts-following.filter-placeholder": string;
+  "web-player.subfeeds.home.subfeed.podcasts-following.header": string;
   "web-player.tuna.connect-snackbar.text": string;
   "web-player.tuna.custom-sort-order-modal.body": string;
   "web-player.tuna.custom-sort-order-modal.cancel": string;
@@ -18172,6 +21666,8 @@ export interface PlatformTypesTranslations {
   "web-player.tuna.turn_on_mixing": string;
   "web-player.user-comments.collapsed-reply.count": PlatformTypesTranslationsWebplayerUsercommentsCollapsedreplyCount;
   "web-player.user-comments.comment": string;
+  "web-player.user-comments.comment-input.cancel": string;
+  "web-player.user-comments.comment-input.error": string;
   "web-player.user-comments.comment-input.first-comment": string;
   "web-player.user-comments.comment-input.leave-comment": string;
   "web-player.user-comments.comment-input.platform-rules": string;
@@ -18186,8 +21682,34 @@ export interface PlatformTypesTranslations {
   "web-player.user-comments.delete-comment-dialog.title": string;
   "web-player.user-comments.in-review": string;
   "web-player.user-comments.just-now": string;
+  "web-player.user-comments.pinned": string;
+  "web-player.user-comments.reactions.aria-label": string;
+  "web-player.user-comments.reactions.filter.all": string;
+  "web-player.user-comments.reactions.filter.aria-label": string;
+  "web-player.user-comments.reactions.highlighted.tooltip": string;
+  "web-player.user-comments.reactions.list.click-to-remove": string;
+  "web-player.user-comments.reactions.names.heart": string;
+  "web-player.user-comments.reactions.names.laugh": string;
+  "web-player.user-comments.reactions.names.pleading": string;
+  "web-player.user-comments.reactions.names.surprise": string;
+  "web-player.user-comments.reactions.names.thumbs-down": string;
+  "web-player.user-comments.reactions.title": string;
+  "web-player.user-comments.reactions.tooltip.add": string;
+  "web-player.user-comments.reactions.tooltip.show-all": string;
+  "web-player.user-comments.replies.count": PlatformTypesTranslationsWebplayerUsercommentsRepliesCount;
+  "web-player.user-comments.replies.toggle.hide": string;
+  "web-player.user-comments.replies.toggle.show": string;
+  "web-player.user-comments.replies.toggle.show-less": string;
+  "web-player.user-comments.replies.toggle.show-more": string;
+  "web-player.user-comments.reply-input.error": string;
+  "web-player.user-comments.reply-limit.confirm": string;
+  "web-player.user-comments.reply-limit.description": string;
+  "web-player.user-comments.reply-limit.title": string;
+  "web-player.user-comments.reply.button": string;
+  "web-player.user-comments.replying-to": string;
   "web-player.user-comments.see-more": string;
   "web-player.user-comments.sensitive.disclaimer": string;
+  "web-player.user-comments.sensitive.hide": string;
   "web-player.user-comments.sensitive.show-all": string;
   "web-player.user-comments.sensitive.showing-all": string;
   "web-player.user-comments.top-comment-card-header.count": string;
@@ -18204,9 +21726,11 @@ export interface PlatformTypesTranslations {
   "web-player.user-comments.trust-safety-modal.terms-conditions.platform-rules": string;
   "web-player.user-comments.trust-safety-modal.terms-conditions.terms-of-use": string;
   "web-player.user-comments.trust-safety-modal.title": string;
+  "web-player.user-page.empty-state-title": string;
   "web-player.user-page.following.filter-all": string;
   "web-player.user-page.following.filter-artists": string;
   "web-player.user-page.following.filter-friends": string;
+  "web-player.user-page.settings-link": string;
   "web-player.venues.error.generic.title": string;
   "web-player.venues.error.not_found.message": string;
   "web-player.venues.error.not_found.title": string;
@@ -18229,6 +21753,8 @@ export interface PlatformTypesTranslations {
   "web-player.watch-feed.view.shortcuts.next": string;
   "web-player.watch-feed.view.shortcuts.previous": string;
   "web-player.watch-feed.view.shortcuts.title": string;
+  "web-player.whats-new-feed.banner.title": string;
+  "web-player.whats-new-feed.banner.title.no-shows": string;
   "web-player.whats-new-feed.button-label": string;
   "web-player.whats-new-feed.earlier-section-title": string;
   "web-player.whats-new-feed.filters.episodes": string;
@@ -18246,6 +21772,7 @@ export interface PlatformTypesTranslations {
   "web-player.whats-new-feed.panel.error.button": string;
   "web-player.whats-new-feed.panel.subtitle": string;
   "web-player.whats-new-feed.panel.title": string;
+  "web-player.wrapped.top-songs.listen-count": PlatformTypesTranslationsWebplayerWrappedTopsongsListencount;
   "web-player.your-dj.jumpbutton.tooltip.desc": string;
   "web-player.your-dj.jumpbutton.tooltip.hover": string;
   "web-player.your-dj.jumpbutton.tooltip.title": string;
@@ -18304,6 +21831,8 @@ export interface PlatformTypesTranslations {
   "web-player.your-library-x.feedback-remove-from-library-dialog-description-show": string;
   "web-player.your-library-x.feedback-remove-from-library-dialog-title": string;
   "web-player.your-library-x.filter_options": string;
+  "web-player.your-library-x.generating-subtitle": string;
+  "web-player.your-library-x.made-for-subtitle": string;
   "web-player.your-library-x.minimize-your-library-fullscreen": string;
   "web-player.your-library-x.navigate-back-folder": string;
   "web-player.your-library-x.new-release": string;
@@ -18315,6 +21844,7 @@ export interface PlatformTypesTranslations {
   "web-player.your-library-x.pin-error.title": string;
   "web-player.your-library-x.pinned": string;
   "web-player.your-library-x.playlist-unavailable": string;
+  "web-player.your-library-x.prompted-by-subtitle": string;
   "web-player.your-library-x.reduce-your-library": string;
   "web-player.your-library-x.rename-folder": string;
   "web-player.your-library-x.rename-folder-error-name-required": string;
@@ -18353,6 +21883,7 @@ export interface PlatformTypesTranslations {
   "web-player.your-library-x.type-playlist": string;
   "web-player.your-library-x.type-prerelease-album": string;
   "web-player.your-library-x.type-prerelease-audiobook": string;
+  "web-player.your-library-x.type-prompted-playlist": string;
   "web-player.your-library-x.type-show": string;
   "web-player.your-library-x.unpin-confirmation-dialog.cancel-button-text": string;
   "web-player.your-library-x.unpin-confirmation-dialog.confirm-button-label-folder": string;
@@ -18558,7 +22089,27 @@ export interface PlatformTypesTranslationsUserPublicplaylists {
   other: string;
 }
 
+export interface PlatformTypesTranslationsWebplayerAgeassuranceBlockingmodalDescription {
+  one: string;
+  other: string;
+}
+
+export interface PlatformTypesTranslationsWebplayerAgeassuranceReactivationblockingmodalDescription {
+  one: string;
+  other: string;
+}
+
 export interface PlatformTypesTranslationsWebplayerAlbumAnniversary {
+  one: string;
+  other: string;
+}
+
+export interface PlatformTypesTranslationsWebplayerArtistSavedtracksNrreleases {
+  one: string;
+  other: string;
+}
+
+export interface PlatformTypesTranslationsWebplayerArtistSavedtracksNrtracks {
   one: string;
   other: string;
 }
@@ -18574,6 +22125,16 @@ export interface PlatformTypesTranslationsWebplayerAudiobooksRatingRatingButtonS
 }
 
 export interface PlatformTypesTranslationsWebplayerAudiobooksRatingStarAriaLabel {
+  one: string;
+  other: string;
+}
+
+export interface PlatformTypesTranslationsWebplayerMagpieRatelimitresettimedays {
+  one: string;
+  other: string;
+}
+
+export interface PlatformTypesTranslationsWebplayerMagpieRatelimitresettimehours {
   one: string;
   other: string;
 }
@@ -18594,6 +22155,21 @@ export interface PlatformTypesTranslationsWebplayerPrereleaseMinutes {
 }
 
 export interface PlatformTypesTranslationsWebplayerPrereleaseSeconds {
+  one: string;
+  other: string;
+}
+
+export interface PlatformTypesTranslationsWebplayerRecentsEpisodesadded {
+  one: string;
+  other: string;
+}
+
+export interface PlatformTypesTranslationsWebplayerRecentsSongsadded {
+  one: string;
+  other: string;
+}
+
+export interface PlatformTypesTranslationsWebplayerRecentsSongsplayed {
   one: string;
   other: string;
 }
@@ -18623,7 +22199,17 @@ export interface PlatformTypesTranslationsWebplayerUsercommentsCollapsedreplyCou
   other: string;
 }
 
+export interface PlatformTypesTranslationsWebplayerUsercommentsRepliesCount {
+  one: string;
+  other: string;
+}
+
 export interface PlatformTypesTranslationsWebplayerVenuesFollowers {
+  one: string;
+  other: string;
+}
+
+export interface PlatformTypesTranslationsWebplayerWrappedTopsongsListencount {
   one: string;
   other: string;
 }
@@ -18654,7 +22240,7 @@ export interface PlatformTypesTransport {
   _authenticate: PlatformTypesRegistryMapValueInstanceTransportAuthenticate2;
   _authenticateCalled: boolean;
   _authenticateWithToken: PlatformTypesRegistryMapValueInstanceTransportAuthenticateWithToken;
-  _authenticationPromise: null;
+  _authenticationPromise: Promise<unknown>;
   _connect: PlatformTypesRegistryMapValueInstanceTransportConnect;
   _connectCalled: boolean;
   _connectToEndpoints: PlatformTypesRegistryMapValueInstanceTransportConnectToEndpoints;
@@ -18664,7 +22250,7 @@ export interface PlatformTypesTransport {
   _disableAutoLogout: boolean;
   _disconnect: PlatformTypesRegistryMapValueInstanceTransportDisconnect;
   _disconnectBeforeUnload: boolean;
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _endpoints: PlatformTypesRegistryMapValueInstanceTransportEndpoints;
   _endpointsProvider: PlatformTypesRegistryMapValueInstanceTransportEndpointsProvider;
   _forcePolyfillTypes: PlatformTypesRegistryMapValueInstanceTransportForcePolyfillTypes;
@@ -18712,21 +22298,21 @@ export interface PlatformTypesTransport {
   _tokenProvider: PlatformTypesRegistryMapValueInstanceTransportTokenProvider;
   _tryExpandSpecialURL: PlatformTypesRegistryMapValueInstanceTransportTryExpandSpecialURL;
   _tryToReconnect: PlatformTypesRegistryMapValueInstanceTransportTryToReconnect;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
   addPlugin: PlatformTypesRegistryMapValueInstanceTransportAddPlugin;
   appendLastTokenQuery: PlatformTypesRegistryMapValueInstanceTransportAppendLastTokenQuery;
   appendTokenQuery: PlatformTypesRegistryMapValueInstanceTransportAppendTokenQuery;
   authenticate: PlatformTypesRegistryMapValueInstanceTransportAuthenticate;
   connect: PlatformTypesRegistryMapValueInstanceTransportConnect2;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
   disconnect: PlatformTypesRegistryMapValueInstanceTransportDisconnect2;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
   forceDisconnect: PlatformTypesRegistryMapValueInstanceTransportForceDisconnect;
   forceTokenRefresh: PlatformTypesRegistryMapValueInstanceTransportForceTokenRefresh;
   getConnectionId: PlatformTypesRegistryMapValueInstanceTransportGetConnectionId;
@@ -18742,17 +22328,17 @@ export interface PlatformTypesTransport {
   isOnline: PlatformTypesRegistryMapValueInstanceTransportIsOnline;
   isReconnecting: PlatformTypesRegistryMapValueInstanceTransportIsReconnecting;
   matchMessages: PlatformTypesRegistryMapValueInstanceTransportMatchMessages;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
   removeAllListeners: PlatformTypesRegistryMapValueInstanceTransportRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
   removePlugin: PlatformTypesRegistryMapValueInstanceTransportRemovePlugin;
   request: PlatformTypesRegistryMapValueInstanceTransportRequest;
   toPublic: PlatformTypesRegistryMapValueInstanceTransportToPublic;
@@ -18760,46 +22346,27 @@ export interface PlatformTypesTransport {
   unmatchMessages: PlatformTypesRegistryMapValueInstanceTransportUnmatchMessages;
 }
 
-export interface PlatformTypesTunaAPI {
-  disableTunaForPlaylist: PlatformTypesTunaAPIDisableTunaForPlaylist;
-  enableTunaForPlaylist: PlatformTypesTunaAPIEnableTunaForPlaylist;
-  maybeApplyAutoTuna: PlatformTypesTunaAPIMaybeApplyAutoTuna;
-  playTransition: PlatformTypesTunaAPIPlayTransition;
-  setTunaDetailsForTracks: PlatformTypesTunaAPISetTunaDetailsForTracks;
-  turnOffTunaForPlaylist: PlatformTypesTunaAPITurnOffTunaForPlaylist;
-  turnOnTunaForPlaylist: PlatformTypesTunaAPITurnOnTunaForPlaylist;
-}
-
-export type PlatformTypesTunaAPIDisableTunaForPlaylist = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesTunaAPIEnableTunaForPlaylist = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesTunaAPIMaybeApplyAutoTuna = (arg0: any) => unknown;
-
-export type PlatformTypesTunaAPIPlayTransition = (arg0: any, arg1: any, arg2: any) => unknown;
-
-export type PlatformTypesTunaAPISetTunaDetailsForTracks = (
-  arg0: any,
-  arg1: any,
-  arg2: any,
-) => unknown;
-
-export type PlatformTypesTunaAPITurnOffTunaForPlaylist = (arg0: any) => unknown;
-
-export type PlatformTypesTunaAPITurnOnTunaForPlaylist = (arg0: any) => unknown;
-
 export interface PlatformTypesUBILogger {
   _events: PlatformTypesUBILoggerEvents;
+  emitEvent: PlatformTypesUBILoggerEmitEvent;
   formatUiNavigateEvent: PlatformTypesUBILoggerFormatUiNavigateEvent;
   getEvents: PlatformTypesUBILoggerGetEvents;
   getInteractionId: PlatformTypesUBILoggerGetInteractionId;
-  logClientStarted: PlatformTypesUBILoggerLogClientStarted;
+  getLastLoggedLocation: PlatformTypesUBILoggerGetLastLoggedLocation;
+  getNavigationDirection: PlatformTypesUBILoggerGetNavigationDirection;
+  getPageTransitionLogger: PlatformTypesUBILoggerGetPageTransitionLogger;
+  lastLocationKey: string;
+  locationKeys: PlatformTypesUBILoggerLocationKeys;
   logImpression: PlatformTypesUBILoggerLogImpression;
+  logImpressionSegment: PlatformTypesUBILoggerLogImpressionSegment;
+  logImpressionV2: PlatformTypesUBILoggerLogImpressionV2;
   logInteraction: PlatformTypesUBILoggerLogInteraction;
-  logNavigation: PlatformTypesUBILoggerLogNavigation;
+  logPageTransition: PlatformTypesUBILoggerLogPageTransition;
   pageTransitionLogger: PlatformTypesUBILoggerPageTransitionLogger;
   ubiLogger: PlatformTypesUBILoggerUbiLogger;
 }
+
+export type PlatformTypesUBILoggerEmitEvent = (arg0: any) => unknown;
 
 export interface PlatformTypesUBILoggerEvents {
   _emitter: PlatformTypesUBILoggerEventsEmitter;
@@ -18813,29 +22380,29 @@ export interface PlatformTypesUBILoggerEvents {
 }
 
 export interface PlatformTypesUBILoggerEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesUBILoggerEventsEmitterListeners;
   _metaListeners: PlatformTypesUBILoggerEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export type PlatformTypesUBILoggerEventsEmitterListeners = Record<string, unknown>;
@@ -18855,16 +22422,36 @@ export type PlatformTypesUBILoggerGetEvents = () => unknown;
 
 export type PlatformTypesUBILoggerGetInteractionId = (arg0: any) => unknown;
 
-export type PlatformTypesUBILoggerLogClientStarted = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesUBILoggerGetLastLoggedLocation = () => unknown;
+
+export type PlatformTypesUBILoggerGetNavigationDirection = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesUBILoggerGetPageTransitionLogger = () => unknown;
+
+export type PlatformTypesUBILoggerLocationKeys = Array<unknown>;
 
 export type PlatformTypesUBILoggerLogImpression = (arg0: any) => unknown;
 
+export type PlatformTypesUBILoggerLogImpressionSegment = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+  arg3: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerLogImpressionV2 = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+  arg3: any,
+) => unknown;
+
 export type PlatformTypesUBILoggerLogInteraction = (arg0: any) => unknown;
 
-export type PlatformTypesUBILoggerLogNavigation = (arg0: any) => unknown;
+export type PlatformTypesUBILoggerLogPageTransition = (arg0: any) => unknown;
 
 export interface PlatformTypesUBILoggerPageTransitionLogger {
-  backgroundMonitor: PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitor;
+  backgroundMonitor: null;
   currentLocationProvider: PlatformTypesUBILoggerPageTransitionLoggerCurrentLocationProvider;
   handleBackgroundTransition: PlatformTypesUBILoggerPageTransitionLoggerHandleBackgroundTransition;
   handleForegroundTransition: PlatformTypesUBILoggerPageTransitionLoggerHandleForegroundTransition;
@@ -18877,31 +22464,6 @@ export interface PlatformTypesUBILoggerPageTransitionLogger {
   logPageView: PlatformTypesUBILoggerPageTransitionLoggerLogPageView;
   pageTransitionManager: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManager;
   toPrevPageInfo: PlatformTypesUBILoggerPageTransitionLoggerToPrevPageInfo;
-}
-
-export interface PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitor {
-  handleWindowStateChange: PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorHandleWindowStateChange;
-  isForeground: PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorIsForeground;
-  onBackgroundTransition: PlatformTypesUBILoggerPageTransitionLoggerHandleBackgroundTransition;
-  onForegroundTransition: PlatformTypesUBILoggerPageTransitionLoggerHandleForegroundTransition;
-  registerEventListeners: PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorRegisterEventListeners;
-  windowState: PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorWindowState;
-}
-
-export type PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorHandleWindowStateChange = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorIsForeground = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorRegisterEventListeners =
-  () => unknown;
-
-export interface PlatformTypesUBILoggerPageTransitionLoggerBackgroundMonitorWindowState {
-  focused: boolean;
-  visible: boolean;
 }
 
 export interface PlatformTypesUBILoggerPageTransitionLoggerCurrentLocationProvider {
@@ -19198,6 +22760,7 @@ export type PlatformTypesUrlDispenserServiceClientGetShortUrl = (arg0: any, arg1
 
 export interface PlatformTypesUserAPI {
   _cosmos: PlatformTypesClipboardAPICosmos;
+  _product_state_service: PlatformTypesRegistryMapValueInstanceProductStateApi;
   getUser: PlatformTypesRegistryMapValueInstanceGetUser;
 }
 
@@ -19208,6 +22771,9 @@ export interface PlatformTypesUserCommentsAPI {
   addCommentReply: PlatformTypesUserCommentsAPIAddCommentReply;
   deleteComment: PlatformTypesUserCommentsAPIDeleteComment;
   deleteCommentReaction: PlatformTypesUserCommentsAPIDeleteCommentReaction;
+  deleteCommentReply: PlatformTypesUserCommentsAPIDeleteCommentReply;
+  getCommentReactions: PlatformTypesUserCommentsAPIGetCommentReactions;
+  getCommentReplies: PlatformTypesUserCommentsAPIGetCommentReplies;
   getComments: PlatformTypesUserCommentsAPIGetComments;
   getTopComments: PlatformTypesUserCommentsAPIGetTopComments;
 }
@@ -19221,6 +22787,12 @@ export type PlatformTypesUserCommentsAPIAddCommentReply = (arg0: any, arg1: any)
 export type PlatformTypesUserCommentsAPIDeleteComment = (arg0: any) => unknown;
 
 export type PlatformTypesUserCommentsAPIDeleteCommentReaction = (arg0: any) => unknown;
+
+export type PlatformTypesUserCommentsAPIDeleteCommentReply = (arg0: any) => unknown;
+
+export type PlatformTypesUserCommentsAPIGetCommentReactions = (arg0: any) => unknown;
+
+export type PlatformTypesUserCommentsAPIGetCommentReplies = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesUserCommentsAPIGetComments = (arg0: any, arg1: any) => unknown;
 
@@ -19249,8 +22821,9 @@ export interface PlatformTypesVideoAPI {
   _showService: PlatformTypesVideoAPIShowService;
   _subtitleLanguages: PlatformTypesVideoAPISubtitleLanguages;
   _tokenProvider: PlatformTypesVideoAPITokenProvider;
-  _videoCoordinator: null;
+  _videoCoordinator: PlatformTypesVideoAPIVideoCoordinator;
   createCoreExtensionVideoCoordinator: PlatformTypesVideoAPICreateCoreExtensionVideoCoordinator;
+  createLogging: PlatformTypesVideoAPICreateLogging;
   createOfflineCoordinator: PlatformTypesVideoAPICreateOfflineCoordinator;
   createPlayerConfiguration: PlatformTypesVideoAPICreatePlayerConfiguration;
   createVideoCoordinator: PlatformTypesVideoAPICreateVideoCoordinator;
@@ -19275,6 +22848,8 @@ export interface PlatformTypesVideoAPI {
 }
 
 export type PlatformTypesVideoAPICreateCoreExtensionVideoCoordinator = () => unknown;
+
+export type PlatformTypesVideoAPICreateLogging = () => unknown;
 
 export type PlatformTypesVideoAPICreateOfflineCoordinator = (arg0: any) => unknown;
 
@@ -19302,53 +22877,35 @@ export interface PlatformTypesVideoAPIEvents {
 }
 
 export interface PlatformTypesVideoAPIEventsEmitter {
-  _dispatchFromStore: PlatformTypesAudiobookCappingAPIEventsEmitterDispatchFromStore;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _listeners: PlatformTypesVideoAPIEventsEmitterListeners;
   _metaListeners: PlatformTypesVideoAPIEventsEmitterMetaListeners;
-  addListener: PlatformTypesAudiobookCappingAPIEventsEmitterAddListener;
-  addListeners: PlatformTypesAudiobookCappingAPIEventsEmitterAddListeners;
-  createEvent: PlatformTypesAudiobookCappingAPIEventsEmitterCreateEvent;
-  emit: PlatformTypesAudiobookCappingAPIEventsEmitterEmit;
-  emitAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitAndWait;
-  emitEvent: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEvent;
-  emitEventAndWait: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventAndWait;
-  emitEventSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitEventSync;
-  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitterEmitSync;
-  on: PlatformTypesAudiobookCappingAPIEventsEmitterOn;
-  onAddListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnAddListener;
-  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsEmitterOnRemoveListener;
-  once: PlatformTypesAudiobookCappingAPIEventsEmitterOnce;
-  proxyEmit: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmit;
-  proxyEmitAll: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAll;
-  proxyEmitAllSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitAllSync;
-  proxyEmitSync: PlatformTypesAudiobookCappingAPIEventsEmitterProxyEmitSync;
-  removeAllListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveAllListeners;
-  removeListener: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListener;
-  removeListeners: PlatformTypesAudiobookCappingAPIEventsEmitterRemoveListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
 export interface PlatformTypesVideoAPIEventsEmitterListeners {
-  picture_in_picture_changed: PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChanged;
   subtitle_languages_changed: PlatformTypesVideoAPIEventsEmitterListenersSubtitleLanguagesChanged;
   subtitle_preferred_language_changed: PlatformTypesVideoAPIEventsEmitterListenersSubtitlePreferredLanguageChanged;
 }
-
-export type PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChanged =
-  Array<PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItem>;
-
-export interface PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItem {
-  listener: PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItemListener;
-  options: PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItemOptions;
-}
-
-export type PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItemListener = (
-  arg0: any,
-) => unknown;
-
-export type PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItemOptions = Record<
-  string,
-  unknown
->;
 
 export type PlatformTypesVideoAPIEventsEmitterListenersSubtitleLanguagesChanged =
   Array<PlatformTypesVideoAPIEventsEmitterListenersSubtitleLanguagesChangedItem>;
@@ -19413,84 +22970,32 @@ export type PlatformTypesVideoAPIOnManifestLoaded = (arg0: any) => unknown;
 export type PlatformTypesVideoAPIOnPictureInPictureChanged = (arg0: any) => unknown;
 
 export interface PlatformTypesVideoAPIPendingEventsService {
-  addPendingEvent: PlatformTypesVideoAPIPendingEventsServiceAddPendingEvent;
-  commitPendingEvent: PlatformTypesVideoAPIPendingEventsServiceCommitPendingEvent;
-  options: PlatformTypesVideoAPIPendingEventsServiceOptions;
-  replacePendingEvent: PlatformTypesVideoAPIPendingEventsServiceReplacePendingEvent;
+  addPendingEvent: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingBetamaxPlaybackSessionPendingEventsServiceAddPendingEvent;
+  commitPendingEvent: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingBetamaxPlaybackSessionPendingEventsServiceCommitPendingEvent;
+  options: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingBetamaxPlaybackSessionPendingEventsServiceOptions;
+  replacePendingEvent: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingBetamaxPlaybackSessionPendingEventsServiceReplacePendingEvent;
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
-
-export type PlatformTypesVideoAPIPendingEventsServiceAddPendingEvent = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesVideoAPIPendingEventsServiceCommitPendingEvent = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesVideoAPIPendingEventsServiceOptions = Record<string, unknown>;
-
-export type PlatformTypesVideoAPIPendingEventsServiceReplacePendingEvent = (
-  arg0: any,
-  arg1: any,
-) => unknown;
 
 export interface PlatformTypesVideoAPIPlaybackService {
-  duck: PlatformTypesVideoAPIPlaybackServiceDuck;
-  getFiles: PlatformTypesVideoAPIPlaybackServiceGetFiles;
-  getFormats: PlatformTypesVideoAPIPlaybackServiceGetFormats;
-  getPlaybackInfo: PlatformTypesVideoAPIPlaybackServiceGetPlaybackInfo;
-  getRawVolume: PlatformTypesVideoAPIPlaybackServiceGetRawVolume;
-  getVolume: PlatformTypesVideoAPIPlaybackServiceGetVolume;
-  lowerVolume: PlatformTypesVideoAPIPlaybackServiceLowerVolume;
-  options: PlatformTypesVideoAPIPlaybackServiceOptions;
-  raiseVolume: PlatformTypesVideoAPIPlaybackServiceRaiseVolume;
-  setRawVolume: PlatformTypesVideoAPIPlaybackServiceSetRawVolume;
-  setVolume: PlatformTypesVideoAPIPlaybackServiceSetVolume;
-  subBufferUnderrun: PlatformTypesVideoAPIPlaybackServiceSubBufferUnderrun;
-  subPlaybackInfo: PlatformTypesVideoAPIPlaybackServiceSubPlaybackInfo;
-  subPosition: PlatformTypesVideoAPIPlaybackServiceSubPosition;
-  subRawVolume: PlatformTypesVideoAPIPlaybackServiceSubRawVolume;
-  subVolume: PlatformTypesVideoAPIPlaybackServiceSubVolume;
+  duck: PlatformTypesSettingsAPIQualityPlaybackServiceDuck;
+  getFiles: PlatformTypesSettingsAPIQualityPlaybackServiceGetFiles;
+  getFormats: PlatformTypesSettingsAPIQualityPlaybackServiceGetFormats;
+  getPlaybackInfo: PlatformTypesSettingsAPIQualityPlaybackServiceGetPlaybackInfo;
+  getRawVolume: PlatformTypesSettingsAPIQualityPlaybackServiceGetRawVolume;
+  getVolume: PlatformTypesSettingsAPIQualityPlaybackServiceGetVolume;
+  lowerVolume: PlatformTypesSettingsAPIQualityPlaybackServiceLowerVolume;
+  options: PlatformTypesVideoAPIVideoCoordinatorConfigEsperantoEndpointsPlaybackServiceOptions;
+  raiseVolume: PlatformTypesSettingsAPIQualityPlaybackServiceRaiseVolume;
+  setRawVolume: PlatformTypesSettingsAPIQualityPlaybackServiceSetRawVolume;
+  setVolume: PlatformTypesSettingsAPIQualityPlaybackServiceSetVolume;
+  subBufferUnderrun: PlatformTypesSettingsAPIQualityPlaybackServiceSubBufferUnderrun;
+  subPlaybackInfo: PlatformTypesSettingsAPIQualityPlaybackServiceSubPlaybackInfo;
+  subPosition: PlatformTypesSettingsAPIQualityPlaybackServiceSubPosition;
+  subRawVolume: PlatformTypesSettingsAPIQualityPlaybackServiceSubRawVolume;
+  subVolume: PlatformTypesSettingsAPIQualityPlaybackServiceSubVolume;
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
-
-export type PlatformTypesVideoAPIPlaybackServiceDuck = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceGetFiles = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceGetFormats = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceGetPlaybackInfo = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceGetRawVolume = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceGetVolume = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceLowerVolume = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceOptions = Record<string, unknown>;
-
-export type PlatformTypesVideoAPIPlaybackServiceRaiseVolume = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceSetRawVolume = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceSetVolume = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceSubBufferUnderrun = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceSubPlaybackInfo = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceSubPosition = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceSubRawVolume = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesVideoAPIPlaybackServiceSubVolume = (arg0: any, arg1: any) => unknown;
 
 export interface PlatformTypesVideoAPIPrefsClient {
   create: PlatformTypesEqualizerAPIPrefsCreate;
@@ -19613,6 +23118,4085 @@ export interface PlatformTypesVideoAPITokenProvider {
   getToken: PlatformTypesRegistryMapValueInstanceGetToken;
   loadToken: PlatformTypesRegistryMapValueInstanceLoadToken;
 }
+
+export interface PlatformTypesVideoAPIVideoCoordinator {
+  _config: PlatformTypesVideoAPIVideoCoordinatorConfig;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
+  _isSeekPastStopPosition: PlatformTypesVideoAPIVideoCoordinatorIsSeekPastStopPosition;
+  _listeners: PlatformTypesVideoAPIVideoCoordinatorListeners;
+  _metaListeners: PlatformTypesVideoAPIVideoCoordinatorMetaListeners;
+  _onProgress: PlatformTypesVideoAPIVideoCoordinatorOnProgress;
+  _playerInterrupter: PlatformTypesVideoAPIVideoCoordinatorPlayerInterrupter;
+  _playerRouter: PlatformTypesVideoAPIVideoCoordinatorPlayerRouter;
+  _startPlayback: PlatformTypesVideoAPIVideoCoordinatorStartPlayback;
+  _subVolumeSub: PlatformTypesVideoAPIVideoCoordinatorSubVolumeSub;
+  _videoContextPlayerSub: PlatformTypesVideoAPIVideoCoordinatorVideoContextPlayerSub;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  getTrackMetadata: PlatformTypesVideoAPIVideoCoordinatorGetTrackMetadata;
+  initialize: PlatformTypesVideoAPIVideoCoordinatorInitialize;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onCommandReceived: PlatformTypesVideoAPIVideoCoordinatorOnCommandReceived;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  release: PlatformTypesVideoAPIVideoCoordinatorRelease;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
+  reportSurface: PlatformTypesVideoAPIVideoCoordinatorReportSurface;
+  sendContextPlayerError: PlatformTypesVideoAPIVideoCoordinatorSendContextPlayerError;
+  setFullscreen: PlatformTypesVideoAPIVideoCoordinatorSetFullscreen;
+  setMinimizeBitrate: PlatformTypesVideoAPIVideoCoordinatorSetMinimizeBitrate;
+  setPip: PlatformTypesVideoAPIVideoCoordinatorSetPip;
+  setWindow: PlatformTypesVideoAPIVideoCoordinatorSetWindow;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorAddListener = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorAddListeners = (arg0: any) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfig {
+  ads: PlatformTypesVideoAPIVideoCoordinatorConfigAds;
+  cosmos: PlatformTypesClipboardAPICosmos;
+  createPlayerOptions: PlatformTypesVideoAPIVideoCoordinatorConfigCreatePlayerOptions;
+  esperantoEndpoints: PlatformTypesVideoAPIVideoCoordinatorConfigEsperantoEndpoints;
+  experimental: PlatformTypesVideoAPIVideoCoordinatorConfigExperimental;
+  logging: PlatformTypesVideoAPIVideoCoordinatorConfigLogging;
+  observerFactories: PlatformTypesVideoAPIVideoCoordinatorConfigObserverFactories;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigAds {
+  videoOnVideoSaiEnabled: boolean;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigCreatePlayerOptions {
+  config: PlatformTypesVideoAPIVideoCoordinatorConfigCreatePlayerOptionsConfig;
+  platform_identifier: string;
+  transport: PlatformTypesTransport;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigCreatePlayerOptionsConfig {
+  mux: PlatformTypesVideoAPIVideoCoordinatorConfigCreatePlayerOptionsConfigMux;
+  videoPlayerContainer: string;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigCreatePlayerOptionsConfigMux {
+  disable: boolean;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigEsperantoEndpoints {
+  playbackService: PlatformTypesVideoAPIPlaybackService;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigEsperantoEndpointsPlaybackServiceOptions =
+  Record<string, unknown>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigExperimental {
+  seekToAd: boolean;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLogging {
+  betamaxPlaybackSession: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingBetamaxPlaybackSession;
+  endVideo: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideo;
+  rawCoreStream: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStream;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingBetamaxPlaybackSession {
+  eventSender: PlatformTypesEventSender;
+  pendingEventsService: PlatformTypesVideoAPIPendingEventsService;
+  usePendingLogger: boolean;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingBetamaxPlaybackSessionPendingEventsServiceAddPendingEvent =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingBetamaxPlaybackSessionPendingEventsServiceCommitPendingEvent =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingBetamaxPlaybackSessionPendingEventsServiceOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingBetamaxPlaybackSessionPendingEventsServiceReplacePendingEvent =
+  (arg0: any, arg1: any) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideo {
+  endVideoEndpoint: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpoint;
+  productStateProvider: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoProductStateProvider;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpoint {
+  create: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointCreate;
+  schema: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchema;
+  send: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSend;
+  update: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointUpdate;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointCreate = (
+  arg0: any,
+) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchema {
+  doc: string;
+  fields: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFields;
+  name: string;
+  namespace: string;
+  schema_version: number;
+  type: string;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFields =
+  Array<
+    | PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem
+    | PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem10
+    | PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem2
+    | PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem3
+    | PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem4
+    | PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem5
+    | PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem6
+    | PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem7
+    | PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem8
+    | PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem9
+  >;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem {
+  name: string;
+  type: string;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem10 {
+  default: null;
+  doc: string;
+  name: string;
+  type: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType8;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem2 {
+  name: string;
+  type: string;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem3 {
+  default: null;
+  doc: string;
+  name: string;
+  type: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem4 {
+  default: null;
+  doc: string;
+  name: string;
+  type: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType2;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem5 {
+  default: null;
+  doc: string;
+  name: string;
+  type: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType3;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem6 {
+  default: null;
+  doc: string;
+  name: string;
+  type: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType4;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem7 {
+  default: null;
+  doc: string;
+  name: string;
+  type: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType5;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem8 {
+  default: null;
+  doc: string;
+  name: string;
+  type: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType6;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItem9 {
+  default: null;
+  doc: string;
+  name: string;
+  type: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType7;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType =
+  Array<string>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType2 =
+  Array<string>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType3 =
+  Array<string>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType4 =
+  Array<string>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType5 =
+  Array<string>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType6 =
+  Array<string>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType7 =
+  Array<string>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSchemaFieldsItemType8 =
+  Array<string>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointSend = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoEndVideoEndpointUpdate = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoProductStateProvider {
+  isIncognito: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamProductStateProviderIsIncognito;
+  streamingRules: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamProductStateProviderStreamingRules;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStream {
+  eventSender: PlatformTypesEventSender;
+  failPlaybackOnError: boolean;
+  fromPartials: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamFromPartials;
+  productStateProvider: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingEndVideoProductStateProvider;
+  streamReportingServiceClient: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClient;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamFromPartials {
+  streamEndRequest: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamFromPartialsStreamEndRequest;
+  streamProgressRequest: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamFromPartialsStreamProgressRequest;
+  streamSeekRequest: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamFromPartialsStreamSeekRequest;
+  streamStartRequest: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamFromPartialsStreamStartRequest;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamFromPartialsStreamEndRequest =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamFromPartialsStreamProgressRequest =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamFromPartialsStreamSeekRequest =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamFromPartialsStreamStartRequest =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamProductStateProviderIsIncognito =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamProductStateProviderStreamingRules =
+  () => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClient {
+  currentTimestamp: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientCurrentTimestamp;
+  options: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientOptions;
+  streamEnd: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientStreamEnd;
+  streamInitiate: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientStreamInitiate;
+  streamProgress: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientStreamProgress;
+  streamSeek: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientStreamSeek;
+  streamStart: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientStreamStart;
+  streamStartV2: PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientStreamStartV2;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientCurrentTimestamp =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientStreamEnd =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientStreamInitiate =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientStreamProgress =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientStreamSeek =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientStreamStart =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigLoggingRawCoreStreamStreamReportingServiceClientStreamStartV2 =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigObserverFactories = Array<
+  | PlatformTypesAdManagersVtoFactoriesItem
+  | PlatformTypesVideoAPIVideoCoordinatorConfigObserverFactoriesItem
+>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorConfigObserverFactoriesItem = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorCreateEvent = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorEmit = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorEmitAndWait = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorEmitEvent = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorEmitEventSync = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorEmitSync = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorGetTrackMetadata = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorInitialize = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorIsSeekPastStopPosition = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorListeners = Record<string, unknown>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorMetaListeners {
+  add: PlatformTypesVideoAPIVideoCoordinatorMetaListenersAdd;
+  remove: PlatformTypesVideoAPIVideoCoordinatorMetaListenersRemove;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorMetaListenersAdd = Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorMetaListenersRemove = Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorOn = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorOnAddListener = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorOnce = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorOnCommandReceived = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorOnProgress = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerInterrupter {
+  _cosmos: PlatformTypesClipboardAPICosmos;
+  checkForInterruption: PlatformTypesVideoAPIVideoCoordinatorPlayerInterrupterCheckForInterruption;
+  clear: PlatformTypesVideoAPIVideoCoordinatorPlayerInterrupterClear;
+  getStopPosition: PlatformTypesVideoAPIVideoCoordinatorPlayerInterrupterGetStopPosition;
+  setStopPosition: PlatformTypesVideoAPIVideoCoordinatorPlayerInterrupterSetStopPosition;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerInterrupterCheckForInterruption = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerInterrupterClear = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerInterrupterGetStopPosition = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerInterrupterSetStopPosition = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouter {
+  _adPlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayer;
+  _mainPlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayer;
+  _playNewTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterPlayNewTrack;
+  _resumeCurrentTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterResumeCurrentTrack;
+  _switchPlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSwitchPlayer;
+  addPlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAddPlayer;
+  getNonMatchingPlayerByPlaybackId: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterGetNonMatchingPlayerByPlaybackId;
+  getPlayerByPlaybackId: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterGetPlayerByPlaybackId;
+  hideSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterHideSubtitles;
+  pause: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterPause;
+  play: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterPlay;
+  release: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterRelease;
+  resume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterResume;
+  seek: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSeek;
+  setPlaybackSpeed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSetPlaybackSpeed;
+  setPlayerVisibility: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSetPlayerVisibility;
+  setSubtitleLanguage: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSetSubtitleLanguage;
+  setVideoSurface: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSetVideoSurface;
+  setVolume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSetVolume;
+  setWindow: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSetWindow;
+  showSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterShowSubtitles;
+  stop: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterStop;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAddPlayer = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayer {
+  _config: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerConfig;
+  _coreVideoPlayerReporter: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporter;
+  _createMarkerPlaybackObserver: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCreateMarkerPlaybackObserver;
+  _createStandalonePlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCreateStandalonePlayer;
+  _failPlayback: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerFailPlayback;
+  _generatePlaybackObservers: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGeneratePlaybackObservers;
+  _hasValidRoyaltyReporting: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerHasValidRoyaltyReporting;
+  _initEventBridge: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerInitEventBridge;
+  _onPlayerInitializationDone: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerOnPlayerInitializationDone;
+  _onPlayerInitializationFailed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerOnPlayerInitializationFailed;
+  _onStateChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerOnStateChanged;
+  _parseMarker: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerParseMarker;
+  _playerAvailable: boolean;
+  _standalonePlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayer;
+  getCurrentState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetCurrentState;
+  getEventBridge: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetEventBridge;
+  getMediaElement: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetMediaElement;
+  getPlaybackId: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetPlaybackId;
+  getStandalonePlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetStandalonePlayer;
+  handleRoyaltyReportingFailure: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerHandleRoyaltyReportingFailure;
+  hideNode: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerHideNode;
+  hideSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerHideSubtitles;
+  pause: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerPause;
+  playTracks: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerPlayTracks;
+  rebuildMarkers: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerRebuildMarkers;
+  release: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerRelease;
+  resume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerResume;
+  seek: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSeek;
+  setPlaybackSpeed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetPlaybackSpeed;
+  setPlayerVisibility: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetPlayerVisibility;
+  setSubtitleLanguage: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetSubtitleLanguage;
+  setVideoSurface: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetVideoSurface;
+  setVolume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetVolume;
+  setWindow: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetWindow;
+  showNode: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerShowNode;
+  showSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerShowSubtitles;
+  stop: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStop;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerConfig {
+  ads: PlatformTypesVideoAPIVideoCoordinatorConfigAds;
+  cosmos: PlatformTypesClipboardAPICosmos;
+  createPlayerOptions: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerConfigCreatePlayerOptions;
+  esperantoEndpoints: PlatformTypesVideoAPIVideoCoordinatorConfigEsperantoEndpoints;
+  experimental: PlatformTypesVideoAPIVideoCoordinatorConfigExperimental;
+  logging: PlatformTypesVideoAPIVideoCoordinatorConfigLogging;
+  observerFactories: PlatformTypesVideoAPIVideoCoordinatorConfigObserverFactories;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerConfigCreatePlayerOptions {
+  config: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerConfigCreatePlayerOptionsConfig;
+  platform_identifier: string;
+  transport: PlatformTypesTransport;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerConfigCreatePlayerOptionsConfig {
+  disallowProtectedTracks: boolean;
+  mux: PlatformTypesVideoAPIVideoCoordinatorConfigCreatePlayerOptionsConfigMux;
+  videoPlayerContainer: string;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporter {
+  _convertPlayerStateToUpdatePayload: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterConvertPlayerStateToUpdatePayload;
+  _cosmos: PlatformTypesClipboardAPICosmos;
+  _listeners: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListeners;
+  _onBeforePlayerLoad: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnBeforePlayerLoad;
+  _onError: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnError;
+  _onMarkerReached: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnMarkerReached;
+  _onPaused: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnPaused;
+  _onPlaying: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnPlaying;
+  _onStateChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnStateChanged;
+  _onTrackEnded: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnTrackEnded;
+  _onVideoSurfaceChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnVideoSurfaceChanged;
+  _playbackStack: string;
+  _sendAdvance: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendAdvance;
+  _sendPlaybackError: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendPlaybackError;
+  _sendPlaybackState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendPlaybackState;
+  _sendPlaybackStatePayload: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendPlaybackStatePayload;
+  _standalonePlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayer;
+  _streamingType: string;
+  release: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterRelease;
+  sendContextPlayerError: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendContextPlayerError;
+  sendCurrentPlaybackState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendCurrentPlaybackState;
+  setMarkerEventSource: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSetMarkerEventSource;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterConvertPlayerStateToUpdatePayload =
+  (arg0: any) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListeners {
+  BEFORE_PLAYER_LOAD: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersBEFOREPLAYERLOAD;
+  ERROR: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersERROR;
+  PAUSED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersPAUSED;
+  PLAYING: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersPLAYING;
+  STATE_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersSTATECHANGED;
+  TRACK_ENDED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersTRACKENDED;
+  VIDEO_SURFACE_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersVIDEOSURFACECHANGED;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersBEFOREPLAYERLOAD =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersERROR =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersPAUSED =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersPLAYING =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersSTATECHANGED =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersTRACKENDED =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersVIDEOSURFACECHANGED =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnBeforePlayerLoad =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnError =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnMarkerReached =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnPaused =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnPlaying =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnStateChanged =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnTrackEnded =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnVideoSurfaceChanged =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterRelease =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendAdvance =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendContextPlayerError =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendCurrentPlaybackState =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendPlaybackError =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendPlaybackState =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendPlaybackStatePayload =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSetMarkerEventSource =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCreateMarkerPlaybackObserver =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCreateStandalonePlayer =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerFailPlayback = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGeneratePlaybackObservers = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetCurrentState =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetEventBridge = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetMediaElement =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetPlaybackId = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetStandalonePlayer =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerHandleRoyaltyReportingFailure =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerHasValidRoyaltyReporting = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerHideNode = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerHideSubtitles = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerInitEventBridge = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerOnPlayerInitializationDone =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerOnPlayerInitializationFailed =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerOnStateChanged = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerParseMarker = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerPause = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerPlayTracks = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerRebuildMarkers = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerRelease = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerResume = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSeek = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetPlaybackSpeed = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetPlayerVisibility = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetSubtitleLanguage = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetVideoSurface = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetVolume = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetWindow = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerShowNode = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerShowSubtitles = () => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayer {
+  _autoActivateElement: boolean;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
+  _emitStateChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  _init: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerInit;
+  _listPlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayer;
+  _listeners: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListeners;
+  _metaListeners: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerMetaListeners;
+  _playerPromise: Promise<unknown>;
+  _transport: PlatformTypesTransport;
+  activateElement: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerActivateElement;
+  activateSubtitleEvents: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerActivateSubtitleEvents;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  areSubtitlesShown: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerAreSubtitlesShown;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  deactivateSubtitleEvents: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerDeactivateSubtitleEvents;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  getActiveSubtitleLanguage: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetActiveSubtitleLanguage;
+  getCurrentState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetCurrentState;
+  getMediaConfig: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetMediaConfig;
+  getPlayerVisibility: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetPlayerVisibility;
+  getSeekPanels: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetSeekPanels;
+  getState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetState;
+  getSubtitleLanguages: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetSubtitleLanguages;
+  getVideoProfiles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetVideoProfiles;
+  getVolume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetVolume;
+  hideSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerHideSubtitles;
+  nextTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerNextTrack;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  pause: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPause;
+  playList: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPlayList;
+  playTracks: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPlayTracks;
+  preloadTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPreloadTrack;
+  previousTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPreviousTrack;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
+  resolveTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerResolveTrack;
+  resume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerResume;
+  seek: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSeek;
+  setIsVideoVisible: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetIsVideoVisible;
+  setMediaPlaybackMode: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetMediaPlaybackMode;
+  setMuted: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetMuted;
+  setPlaybackSpeed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetPlaybackSpeed;
+  setPlayerVisibility: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetPlayerVisibility;
+  setSubtitleLanguage: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetSubtitleLanguage;
+  setVideoResolution: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetVideoResolution;
+  setVideoSurface: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetVideoSurface;
+  setVolume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetVolume;
+  showSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerShowSubtitles;
+  stop: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerStop;
+  togglePlay: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerTogglePlay;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerActivateElement =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerActivateSubtitleEvents =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerAreSubtitlesShown =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerDeactivateSubtitleEvents =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetActiveSubtitleLanguage =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetCurrentState =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetMediaConfig =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetPlayerVisibility =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetSeekPanels =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetState =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetSubtitleLanguages =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetVideoProfiles =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetVolume =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerHideSubtitles =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerInit =
+  () => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListeners {
+  BEFORE_PLAYER_LOAD: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersBEFOREPLAYERLOAD;
+  CLEARED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersCLEARED;
+  DURATION_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersDURATIONCHANGED;
+  ERROR: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersERROR;
+  LIST_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersLISTCHANGED;
+  MUTED_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersMUTEDCHANGED;
+  PAUSED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPAUSED;
+  PLAYER_INITIALIZATION_DONE: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONE;
+  PLAYER_INITIALIZATION_FAILED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILED;
+  PLAYING: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYING;
+  POSITION_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPOSITIONCHANGED;
+  PROGRESS: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPROGRESS;
+  REBUFFERING_END: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersREBUFFERINGEND;
+  REBUFFERING_START: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersREBUFFERINGSTART;
+  SPEED_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSPEEDCHANGED;
+  STATE_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTATECHANGED;
+  STOPPED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTOPPED;
+  TRACK_ENDED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersTRACKENDED;
+  TRACK_LOADED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersTRACKLOADED;
+  VIDEO_SURFACE_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersVIDEOSURFACECHANGED;
+  VOLUME_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersVOLUMECHANGED;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersBEFOREPLAYERLOAD =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersBEFOREPLAYERLOADItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersBEFOREPLAYERLOADItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersBEFOREPLAYERLOAD;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersBEFOREPLAYERLOADItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersBEFOREPLAYERLOADItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersCLEARED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersCLEAREDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersCLEAREDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersCLEAREDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersCLEAREDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersDURATIONCHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersDURATIONCHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersDURATIONCHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersDURATIONCHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersDURATIONCHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersERROR =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersERRORItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersERRORItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersERROR;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersERRORItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersERRORItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersLISTCHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersLISTCHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersLISTCHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersLISTCHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersLISTCHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersMUTEDCHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersMUTEDCHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersMUTEDCHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersMUTEDCHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersMUTEDCHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPAUSED =
+  Array<
+    | PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPAUSEDItem
+    | PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPAUSEDItem2
+  >;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPAUSEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPAUSEDItemOptions;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPAUSEDItem2 {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersPAUSED;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPAUSEDItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPAUSEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPAUSEDItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONE =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONEItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONEItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONEItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONEItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONEItemListener =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONEItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILEDItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILEDItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYING =
+  Array<
+    | PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYINGItem
+    | PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYINGItem2
+  >;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYINGItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYINGItemOptions;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYINGItem2 {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersPLAYING;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYINGItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYINGItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPLAYINGItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPOSITIONCHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPOSITIONCHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPOSITIONCHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPOSITIONCHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPOSITIONCHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPROGRESS =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPROGRESSItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPROGRESSItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPROGRESSItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPROGRESSItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPROGRESSItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPROGRESSItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersREBUFFERINGEND =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersREBUFFERINGENDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersREBUFFERINGENDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersREBUFFERINGENDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersREBUFFERINGENDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersREBUFFERINGSTART =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersREBUFFERINGSTARTItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersREBUFFERINGSTARTItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersREBUFFERINGSTARTItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersREBUFFERINGSTARTItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSPEEDCHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSPEEDCHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSPEEDCHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSPEEDCHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSPEEDCHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTATECHANGED =
+  Array<
+    | PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTATECHANGEDItem
+    | PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTATECHANGEDItem2
+  >;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTATECHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTATECHANGEDItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTATECHANGEDItemOptions;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTATECHANGEDItem2 {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersSTATECHANGED;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTATECHANGEDItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTATECHANGEDItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTATECHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTATECHANGEDItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTOPPED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTOPPEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTOPPEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTOPPEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersSTOPPEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersTRACKENDED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersTRACKENDEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersTRACKENDEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersTRACKENDED;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersTRACKENDEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersTRACKENDEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersTRACKLOADED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersTRACKLOADEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersTRACKLOADEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersTRACKLOADEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersTRACKLOADEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersVIDEOSURFACECHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersVIDEOSURFACECHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersVIDEOSURFACECHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterListenersVIDEOSURFACECHANGED;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersVIDEOSURFACECHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersVIDEOSURFACECHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersVOLUMECHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersVOLUMECHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersVOLUMECHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersVOLUMECHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersVOLUMECHANGEDItemOptions =
+  Record<string, unknown>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayer {
+  _attachPlayerEvents: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerAttachPlayerEvents;
+  _changeTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerChangeTrack;
+  _currentSeqId: number;
+  _currentTrack: null;
+  _currentTrackOptions: null;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
+  _getTrackPlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetTrackPlayer;
+  _handleBeforeLoad: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleBeforeLoad;
+  _handleCanPreload: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleCanPreload;
+  _handleCapped: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleCapped;
+  _handleDurationChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleDurationChanged;
+  _handleEnded: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleEnded;
+  _handleError: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleError;
+  _handlePauseFulfilled: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandlePauseFulfilled;
+  _handlePaused: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandlePaused;
+  _handlePlayedThresholdReached: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandlePlayedThresholdReached;
+  _handlePlayerInitError: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandlePlayerInitError;
+  _handlePlaying: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandlePlaying;
+  _handlePositionChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandlePositionChanged;
+  _handleProgress: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleProgress;
+  _handleResumeFulfilled: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleResumeFulfilled;
+  _handleSpeedChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleSpeedChanged;
+  _handleTimeout: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleTimeout;
+  _handleTrackLoaded: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleTrackLoaded;
+  _incrementSeqId: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerIncrementSeqId;
+  _init: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerInit;
+  _listErrorCount: number;
+  _listPlayCount: number;
+  _listeners: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListeners;
+  _loadedList: null;
+  _loadedOptions: null;
+  _maxListErrors: number;
+  _metaListeners: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerMetaListeners;
+  _preloadUpcomingTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPreloadUpcomingTrack;
+  _repeatMode: string;
+  _replaceCurrentList: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerReplaceCurrentList;
+  _setListIndex: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetListIndex;
+  _setListOptions: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetListOptions;
+  _shuffled: boolean;
+  _trackPlayerPromise: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTrackPlayerPromise;
+  _translateDuration: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTranslateDuration;
+  _translatePosition: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTranslatePosition;
+  _uid: number;
+  activateCueEvents: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerActivateCueEvents;
+  activateElement: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerActivateElement;
+  adaptToElementSize: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerAdaptToElementSize;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  areSubtitlesShown: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerAreSubtitlesShown;
+  canChangeTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerCanChangeTrack;
+  clear: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerClear;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  deactivateCueEvents: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerDeactivateCueEvents;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  getActiveSubtitleLanguage: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetActiveSubtitleLanguage;
+  getAudioProcessor: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetAudioProcessor;
+  getCurrentBandwidth: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetCurrentBandwidth;
+  getListConstants: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetListConstants;
+  getLoadedList: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetLoadedList;
+  getLoadedOptions: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetLoadedOptions;
+  getMediaConfig: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetMediaConfig;
+  getPlayerState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetPlayerState;
+  getSeekPanels: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetSeekPanels;
+  getState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetState;
+  getStatistics: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetStatistics;
+  getSubtitleLanguages: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetSubtitleLanguages;
+  getVideoSurface: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetVideoSurface;
+  getVideoVariants: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetVideoVariants;
+  getVolume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetVolume;
+  hideSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHideSubtitles;
+  load: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerLoad;
+  next: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerNext;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  pause: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPause;
+  play: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPlay;
+  preloadTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPreloadTrack;
+  previous: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPrevious;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
+  resume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerResume;
+  seek: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSeek;
+  setIsVideoVisible: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetIsVideoVisible;
+  setMediaPlaybackMode: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetMediaPlaybackMode;
+  setMuted: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetMuted;
+  setPlaybackSpeed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetPlaybackSpeed;
+  setRepeatMode: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetRepeatMode;
+  setShuffle: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetShuffle;
+  setSubtitleLanguage: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetSubtitleLanguage;
+  setVideoResolution: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetVideoResolution;
+  setVideoSurface: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetVideoSurface;
+  setVolume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetVolume;
+  showSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerShowSubtitles;
+  stop: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerStop;
+  togglePlay: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTogglePlay;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerActivateCueEvents =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerActivateElement =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerAdaptToElementSize =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerAreSubtitlesShown =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerAttachPlayerEvents =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerCanChangeTrack =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerChangeTrack =
+  (arg0: any, arg1: any, arg2: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerClear =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerDeactivateCueEvents =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetActiveSubtitleLanguage =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetAudioProcessor =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetCurrentBandwidth =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetListConstants =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetLoadedList =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetLoadedOptions =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetMediaConfig =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetPlayerState =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetSeekPanels =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetState =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetStatistics =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetSubtitleLanguages =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetTrackPlayer =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetVideoSurface =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetVideoVariants =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetVolume =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleBeforeLoad =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleCanPreload =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleCapped =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleDurationChanged =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleEnded =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleError =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandlePaused =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandlePauseFulfilled =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandlePlayedThresholdReached =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandlePlayerInitError =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandlePlaying =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandlePositionChanged =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleProgress =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleResumeFulfilled =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleSpeedChanged =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleTimeout =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleTrackLoaded =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHideSubtitles =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerIncrementSeqId =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerInit =
+  (arg0: any) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListeners {
+  before_list_change: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeListChange;
+  before_next: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeNext;
+  before_player_load: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforePlayerLoad;
+  before_previous: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforePrevious;
+  before_stop: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeStop;
+  before_track_load: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeTrackLoad;
+  buffering_end: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingEnd;
+  buffering_start: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingStart;
+  cleared: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersCleared;
+  displayed_cues_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersDisplayedCuesChanged;
+  duration_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersDurationChanged;
+  error: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersError;
+  error_sync: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorSync;
+  first_bytes: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFirstBytes;
+  list_change: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListChange;
+  list_ended: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListEnded;
+  list_player_pause_fulfilled: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListPlayerPauseFulfilled;
+  list_player_resume_fulfilled: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListPlayerResumeFulfilled;
+  max_list_errors_reached: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersMaxListErrorsReached;
+  media_playback_mode_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersMediaPlaybackModeChanged;
+  muted_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersMutedChanged;
+  paused: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPaused;
+  playback_speed_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlaybackSpeedChanged;
+  played_threshold_reached: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayedThresholdReached;
+  player_autoplay_failed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayerAutoplayFailed;
+  playing: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlaying;
+  playing_profile_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayingProfileChanged;
+  position_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPositionChanged;
+  progress: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersProgress;
+  rebuffering_end: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingEnd;
+  rebuffering_start: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingStart;
+  repeat_mode_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRepeatModeChanged;
+  reporting_complete: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingComplete;
+  reporting_creative_view: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingCreativeView;
+  reporting_error: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingError;
+  reporting_first_quartile: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingFirstQuartile;
+  reporting_midpoint: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingMidpoint;
+  reporting_pause: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingPause;
+  reporting_resume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingResume;
+  reporting_start: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingStart;
+  reporting_third_quartile: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingThirdQuartile;
+  seek_panels_loaded: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSeekPanelsLoaded;
+  seeking: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSeeking;
+  shuffle_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersShuffleChanged;
+  stalled: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStalled;
+  stopped: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStopped;
+  subtitle_languages_loaded: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSubtitleLanguagesLoaded;
+  track_ended: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackEnded;
+  track_loaded: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackLoaded;
+  track_timeout: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackTimeout;
+  track_unplayable: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackUnplayable;
+  tracking_data_created: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackingDataCreated;
+  tracking_data_finalized: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackingDataFinalized;
+  video_element_appended: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoElementAppended;
+  video_element_removed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoElementRemoved;
+  video_surface_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoSurfaceChanged;
+  video_visibility_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoVisibilityChanged;
+  volume_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVolumeChanged;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersAppendedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersAppendedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeListChange =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeListChangeItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeListChangeItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangeItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangeItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeNext =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeNextItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeNextItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeNextItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeNextItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeNextItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeNextItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforePlayerLoad =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforePlayerLoadItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforePlayerLoadItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforePrevious =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforePreviousItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforePreviousItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforePreviousItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforePreviousItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforePreviousItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforePreviousItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeStop =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeStopItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeStopItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeStopItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeStopItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeStopItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeStopItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeTrackLoad =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeTrackLoadItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBeforeTrackLoadItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadItemListener2;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingEnd =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingEndItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingEndItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingEndItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingEndItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingEndItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingEndItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingStart =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingStartItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingStartItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingStartItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingStartItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingStartItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersBufferingStartItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener3 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener4 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener5 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener6 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener7 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions3 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions4 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions5 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions6 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions7 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangeItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangeItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersCleared =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersClearedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersClearedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersClearedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersClearedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersClearedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersClearedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersCreatedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersCreatedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersDisplayedCuesChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersDisplayedCuesChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersDisplayedCuesChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener2;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersDurationChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersDurationChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersDurationChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersDurationChangedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersDurationChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersDurationChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersDurationChangedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersError =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorItemOptions =
+  Record<string, unknown>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorsReachedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReachedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReachedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorSync =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorSyncItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorSyncItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorSyncItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorSyncItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorSyncItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorSyncItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFailedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFailedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFinalizedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFinalizedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFirstBytes =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFirstBytesItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFirstBytesItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFirstBytesItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFirstBytesItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFirstBytesItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFirstBytesItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFulfilledItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFulfilledItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFulfilledItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFulfilledItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListChange =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListChangeItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListChangeItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListChangeItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListChangeItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListChangeItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListChangeItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListEnded =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListEndedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListEndedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListEndedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListEndedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListEndedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListEndedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListPlayerPauseFulfilled =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPauseFulfilledItem>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersListPlayerResumeFulfilled =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersResumeFulfilledItem>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadedItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadedItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersMaxListErrorsReached =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersErrorsReachedItem>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersMediaPlaybackModeChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersModeChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersModeChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener5;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions5;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersMutedChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersMutedChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersMutedChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersMutedChangedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersMutedChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersMutedChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersMutedChangedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPaused =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPausedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPausedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPausedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPausedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPausedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPausedItemOptions =
+  Record<string, unknown>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPauseFulfilledItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFulfilledItemListener2;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFulfilledItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlaybackSpeedChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlaybackSpeedChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlaybackSpeedChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener3;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions3;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayedThresholdReached =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayedThresholdReachedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayedThresholdReachedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReachedItemListener2;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReachedItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayerAutoplayFailed =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayerAutoplayFailedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayerAutoplayFailedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFailedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFailedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlaying =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayingItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayingItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayingItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayingItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayingItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayingItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayingProfileChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayingProfileChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPlayingProfileChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener4;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions4;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPositionChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPositionChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPositionChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPositionChangedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPositionChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPositionChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersPositionChangedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersProgress =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersProgressItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersProgressItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersProgressItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersProgressItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersProgressItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersProgressItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersQuartileItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersQuartileItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersQuartileItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersQuartileItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReachedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReachedItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReachedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReachedItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingEnd =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingEndItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingEndItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingEndItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingEndItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingEndItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingEndItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingStart =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingStartItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingStartItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingStartItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingStartItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingStartItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRebufferingStartItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRemovedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRemovedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRepeatModeChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRepeatModeChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRepeatModeChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingComplete =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingCompleteItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingCompleteItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingCompleteItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingCompleteItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingCompleteItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingCompleteItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingCreativeView =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingCreativeViewItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingCreativeViewItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersViewItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersViewItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingError =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingErrorItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingErrorItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingErrorItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingErrorItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingErrorItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingErrorItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingFirstQuartile =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingFirstQuartileItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingFirstQuartileItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersQuartileItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersQuartileItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingMidpoint =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingMidpointItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingMidpointItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingMidpointItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingMidpointItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingMidpointItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingMidpointItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingPause =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingPauseItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingPauseItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingPauseItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingPauseItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingPauseItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingPauseItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingResume =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingResumeItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingResumeItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingResumeItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingResumeItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingResumeItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingResumeItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingStart =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingStartItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingStartItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingStartItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingStartItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingStartItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingStartItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingThirdQuartile =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingThirdQuartileItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersReportingThirdQuartileItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersQuartileItemListener2;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersQuartileItemOptions2;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersResumeFulfilledItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFulfilledItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFulfilledItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSeeking =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSeekingItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSeekingItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSeekingItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSeekingItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSeekingItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSeekingItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSeekPanelsLoaded =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSeekPanelsLoadedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSeekPanelsLoadedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadedItemListener2;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadedItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersShuffleChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersShuffleChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersShuffleChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersShuffleChangedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersShuffleChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersShuffleChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersShuffleChangedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStalled =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStalledItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStalledItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStalledItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStalledItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStalledItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStalledItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStopped =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStoppedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStoppedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStoppedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStoppedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStoppedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersStoppedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSubtitleLanguagesLoaded =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSubtitleLanguagesLoadedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersSubtitleLanguagesLoadedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersLoadedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackEnded =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackEndedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackEndedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackEndedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackEndedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackEndedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackEndedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackingDataCreated =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackingDataCreatedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackingDataCreatedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersCreatedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersCreatedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackingDataFinalized =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackingDataFinalizedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackingDataFinalizedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFinalizedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersFinalizedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackLoaded =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackLoadedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackLoadedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackLoadedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackLoadedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackLoadedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackLoadedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackTimeout =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackTimeoutItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackTimeoutItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackTimeoutItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackTimeoutItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackTimeoutItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackTimeoutItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackUnplayable =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackUnplayableItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackUnplayableItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackUnplayableItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackUnplayableItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackUnplayableItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersTrackUnplayableItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoElementAppended =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoElementAppendedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoElementAppendedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersAppendedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersAppendedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoElementRemoved =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoElementRemovedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoElementRemovedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRemovedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersRemovedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoSurfaceChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoSurfaceChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoSurfaceChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener7;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions7;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoVisibilityChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoVisibilityChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVideoVisibilityChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemListener6;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersChangedItemOptions6;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersViewItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersViewItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVolumeChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVolumeChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVolumeChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVolumeChangedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVolumeChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVolumeChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerListenersVolumeChangedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerLoad =
+  (arg0: any, arg1: any) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerMetaListeners {
+  add: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerMetaListenersAdd;
+  remove: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerMetaListenersRemove;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerMetaListenersAdd =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerMetaListenersRemove =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerNext =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPause =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPlay =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPreloadTrack =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPreloadUpcomingTrack =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPrevious =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerReplaceCurrentList =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerResume =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSeek =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetIsVideoVisible =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetListIndex =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetListOptions =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetMediaPlaybackMode =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetMuted =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetPlaybackSpeed =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetRepeatMode =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetShuffle =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetSubtitleLanguage =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetVideoResolution =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetVideoSurface =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetVolume =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerShowSubtitles =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerStop =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTogglePlay =
+  () => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTrackPlayerPromise {
+  promise: Promise<unknown>;
+  reject: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTrackPlayerPromiseReject;
+  resolve: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTrackPlayerPromiseResolve;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTrackPlayerPromiseReject =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTrackPlayerPromiseResolve =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTranslateDuration =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTranslatePosition =
+  (arg0: any) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerMetaListeners {
+  add: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerMetaListenersAdd;
+  remove: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerMetaListenersRemove;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerMetaListenersAdd =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerMetaListenersRemove =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerNextTrack =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPause =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPlayList = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPlayTracks = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPreloadTrack =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPreviousTrack =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerResolveTrack =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerResume =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSeek = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetIsVideoVisible =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetMediaPlaybackMode =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetMuted = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetPlaybackSpeed =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetPlayerVisibility =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetSubtitleLanguage =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetVideoResolution =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetVideoSurface =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetVolume = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerShowSubtitles =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerStop =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerTogglePlay =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStop = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterGetNonMatchingPlayerByPlaybackId = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterGetPlayerByPlaybackId = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterHideSubtitles = () => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayer {
+  _config: PlatformTypesVideoAPIVideoCoordinatorConfig;
+  _coreVideoPlayerReporter: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporter;
+  _createMarkerPlaybackObserver: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCreateMarkerPlaybackObserver;
+  _createStandalonePlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCreateStandalonePlayer;
+  _failPlayback: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerFailPlayback;
+  _generatePlaybackObservers: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGeneratePlaybackObservers;
+  _hasValidRoyaltyReporting: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerHasValidRoyaltyReporting;
+  _initEventBridge: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerInitEventBridge;
+  _onPlayerInitializationDone: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerOnPlayerInitializationDone;
+  _onPlayerInitializationFailed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerOnPlayerInitializationFailed;
+  _onStateChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerOnStateChanged;
+  _parseMarker: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerParseMarker;
+  _playerAvailable: boolean;
+  _standalonePlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayer;
+  getCurrentState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetCurrentState;
+  getEventBridge: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetEventBridge;
+  getMediaElement: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetMediaElement;
+  getPlaybackId: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetPlaybackId;
+  getStandalonePlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerGetStandalonePlayer;
+  handleRoyaltyReportingFailure: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerHandleRoyaltyReportingFailure;
+  hideNode: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerHideNode;
+  hideSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerHideSubtitles;
+  pause: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerPause;
+  playTracks: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerPlayTracks;
+  rebuildMarkers: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerRebuildMarkers;
+  release: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerRelease;
+  resume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerResume;
+  seek: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSeek;
+  setPlaybackSpeed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetPlaybackSpeed;
+  setPlayerVisibility: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetPlayerVisibility;
+  setSubtitleLanguage: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetSubtitleLanguage;
+  setVideoSurface: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetVideoSurface;
+  setVolume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetVolume;
+  setWindow: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerSetWindow;
+  showNode: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerShowNode;
+  showSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerShowSubtitles;
+  stop: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStop;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporter {
+  _convertPlayerStateToUpdatePayload: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterConvertPlayerStateToUpdatePayload;
+  _cosmos: PlatformTypesClipboardAPICosmos;
+  _listeners: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListeners;
+  _onBeforePlayerLoad: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnBeforePlayerLoad;
+  _onError: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnError;
+  _onMarkerReached: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnMarkerReached;
+  _onPaused: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnPaused;
+  _onPlaying: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnPlaying;
+  _onStateChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnStateChanged;
+  _onTrackEnded: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnTrackEnded;
+  _onVideoSurfaceChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterOnVideoSurfaceChanged;
+  _playbackStack: string;
+  _sendAdvance: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendAdvance;
+  _sendPlaybackError: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendPlaybackError;
+  _sendPlaybackState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendPlaybackState;
+  _sendPlaybackStatePayload: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendPlaybackStatePayload;
+  _standalonePlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayer;
+  _streamingType: string;
+  release: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterRelease;
+  sendContextPlayerError: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendContextPlayerError;
+  sendCurrentPlaybackState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSendCurrentPlaybackState;
+  setMarkerEventSource: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerCoreVideoPlayerReporterSetMarkerEventSource;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListeners {
+  BEFORE_PLAYER_LOAD: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersBEFOREPLAYERLOAD;
+  ERROR: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersERROR;
+  PAUSED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersPAUSED;
+  PLAYING: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersPLAYING;
+  STATE_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersSTATECHANGED;
+  TRACK_ENDED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersTRACKENDED;
+  VIDEO_SURFACE_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersVIDEOSURFACECHANGED;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersBEFOREPLAYERLOAD =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersERROR =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersPAUSED =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersPLAYING =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersSTATECHANGED =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersTRACKENDED =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersVIDEOSURFACECHANGED =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCreateStandalonePlayer =
+  () => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayer {
+  _autoActivateElement: boolean;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
+  _emitStateChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  _init: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerInit;
+  _listPlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayer;
+  _listeners: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListeners;
+  _metaListeners: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerMetaListeners;
+  _playerPromise: Promise<unknown>;
+  _transport: PlatformTypesTransport;
+  activateElement: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerActivateElement;
+  activateSubtitleEvents: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerActivateSubtitleEvents;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  areSubtitlesShown: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerAreSubtitlesShown;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  deactivateSubtitleEvents: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerDeactivateSubtitleEvents;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  getActiveSubtitleLanguage: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetActiveSubtitleLanguage;
+  getCurrentState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetCurrentState;
+  getMediaConfig: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetMediaConfig;
+  getPlayerVisibility: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetPlayerVisibility;
+  getSeekPanels: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetSeekPanels;
+  getState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetState;
+  getSubtitleLanguages: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetSubtitleLanguages;
+  getVideoProfiles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetVideoProfiles;
+  getVolume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerGetVolume;
+  hideSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerHideSubtitles;
+  nextTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerNextTrack;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  pause: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPause;
+  playList: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPlayList;
+  playTracks: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPlayTracks;
+  preloadTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPreloadTrack;
+  previousTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerPreviousTrack;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
+  resolveTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerResolveTrack;
+  resume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerResume;
+  seek: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSeek;
+  setIsVideoVisible: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetIsVideoVisible;
+  setMediaPlaybackMode: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetMediaPlaybackMode;
+  setMuted: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetMuted;
+  setPlaybackSpeed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetPlaybackSpeed;
+  setPlayerVisibility: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetPlayerVisibility;
+  setSubtitleLanguage: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetSubtitleLanguage;
+  setVideoResolution: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetVideoResolution;
+  setVideoSurface: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetVideoSurface;
+  setVolume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerSetVolume;
+  showSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerShowSubtitles;
+  stop: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerStop;
+  togglePlay: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerTogglePlay;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged =
+  () => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListeners {
+  BEFORE_PLAYER_LOAD: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersBEFOREPLAYERLOAD;
+  CLEARED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersCLEARED;
+  DURATION_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersDURATIONCHANGED;
+  ERROR: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersERROR;
+  LIST_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersLISTCHANGED;
+  MUTED_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersMUTEDCHANGED;
+  PAUSED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPAUSED;
+  PLAYER_INITIALIZATION_DONE: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONE;
+  PLAYER_INITIALIZATION_FAILED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILED;
+  PLAYING: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYING;
+  POSITION_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPOSITIONCHANGED;
+  PROGRESS: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPROGRESS;
+  REBUFFERING_END: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersREBUFFERINGEND;
+  REBUFFERING_START: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersREBUFFERINGSTART;
+  SPEED_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSPEEDCHANGED;
+  STATE_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTATECHANGED;
+  STOPPED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTOPPED;
+  TRACK_ENDED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersTRACKENDED;
+  TRACK_LOADED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersTRACKLOADED;
+  VIDEO_SURFACE_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersVIDEOSURFACECHANGED;
+  VOLUME_CHANGED: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersVOLUMECHANGED;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersBEFOREPLAYERLOAD =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersBEFOREPLAYERLOADItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersBEFOREPLAYERLOADItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersBEFOREPLAYERLOAD;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersBEFOREPLAYERLOADItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersBEFOREPLAYERLOADItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersCLEARED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersCLEAREDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersCLEAREDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersCLEAREDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersCLEAREDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersDURATIONCHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersDURATIONCHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersDURATIONCHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersDURATIONCHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersDURATIONCHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersERROR =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersERRORItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersERRORItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersERROR;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersERRORItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersERRORItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersLISTCHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersLISTCHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersLISTCHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersLISTCHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersLISTCHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersMUTEDCHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersMUTEDCHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersMUTEDCHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersMUTEDCHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersMUTEDCHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPAUSED =
+  Array<
+    | PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPAUSEDItem
+    | PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPAUSEDItem2
+  >;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPAUSEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPAUSEDItemOptions;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPAUSEDItem2 {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersPAUSED;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPAUSEDItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPAUSEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPAUSEDItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONE =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONEItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONEItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONEItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONEItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONEItemListener =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONDONEItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILEDItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILEDItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYERINITIALIZATIONFAILEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYING =
+  Array<
+    | PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYINGItem
+    | PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYINGItem2
+  >;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYINGItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYINGItemOptions;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYINGItem2 {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersPLAYING;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYINGItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYINGItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPLAYINGItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPOSITIONCHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPOSITIONCHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPOSITIONCHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPOSITIONCHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPOSITIONCHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPROGRESS =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPROGRESSItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPROGRESSItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListenersPROGRESSItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPROGRESSItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersPROGRESSItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersREBUFFERINGEND =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersREBUFFERINGENDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersREBUFFERINGENDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersREBUFFERINGENDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersREBUFFERINGENDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersREBUFFERINGSTART =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersREBUFFERINGSTARTItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersREBUFFERINGSTARTItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersREBUFFERINGSTARTItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersREBUFFERINGSTARTItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSPEEDCHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSPEEDCHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSPEEDCHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSPEEDCHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSPEEDCHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTATECHANGED =
+  Array<
+    | PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTATECHANGEDItem
+    | PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTATECHANGEDItem2
+  >;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTATECHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTATECHANGEDItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTATECHANGEDItemOptions;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTATECHANGEDItem2 {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersSTATECHANGED;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTATECHANGEDItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTATECHANGEDItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTATECHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTATECHANGEDItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTOPPED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTOPPEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTOPPEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTOPPEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersSTOPPEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersTRACKENDED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersTRACKENDEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersTRACKENDEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersTRACKENDED;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersTRACKENDEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersTRACKENDEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersTRACKLOADED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersTRACKLOADEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersTRACKLOADEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersTRACKLOADEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersTRACKLOADEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersVIDEOSURFACECHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersVIDEOSURFACECHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersVIDEOSURFACECHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerCoreVideoPlayerReporterListenersVIDEOSURFACECHANGED;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersVIDEOSURFACECHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersVIDEOSURFACECHANGEDItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersVOLUMECHANGED =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersVOLUMECHANGEDItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersVOLUMECHANGEDItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerEmitStateChanged;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersVOLUMECHANGEDItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListenersVOLUMECHANGEDItemOptions =
+  Record<string, unknown>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayer {
+  _attachPlayerEvents: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerAttachPlayerEvents;
+  _changeTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerChangeTrack;
+  _currentSeqId: number;
+  _currentTrack: null;
+  _currentTrackOptions: null;
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
+  _getTrackPlayer: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetTrackPlayer;
+  _handleBeforeLoad: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleBeforeLoad;
+  _handleCanPreload: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleCanPreload;
+  _handleCapped: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleCapped;
+  _handleDurationChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleDurationChanged;
+  _handleEnded: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleEnded;
+  _handleError: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleError;
+  _handlePauseFulfilled: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandlePauseFulfilled;
+  _handlePaused: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandlePaused;
+  _handlePlayedThresholdReached: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandlePlayedThresholdReached;
+  _handlePlayerInitError: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandlePlayerInitError;
+  _handlePlaying: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandlePlaying;
+  _handlePositionChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandlePositionChanged;
+  _handleProgress: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleProgress;
+  _handleResumeFulfilled: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleResumeFulfilled;
+  _handleSpeedChanged: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleSpeedChanged;
+  _handleTimeout: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleTimeout;
+  _handleTrackLoaded: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHandleTrackLoaded;
+  _incrementSeqId: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerIncrementSeqId;
+  _init: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerInit;
+  _listErrorCount: number;
+  _listPlayCount: number;
+  _listeners: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListeners;
+  _loadedList: null;
+  _loadedOptions: null;
+  _maxListErrors: number;
+  _metaListeners: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerMetaListeners;
+  _preloadUpcomingTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPreloadUpcomingTrack;
+  _repeatMode: string;
+  _replaceCurrentList: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerReplaceCurrentList;
+  _setListIndex: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetListIndex;
+  _setListOptions: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerSetListOptions;
+  _shuffled: boolean;
+  _trackPlayerPromise: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerTrackPlayerPromise;
+  _translateDuration: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTranslateDuration;
+  _translatePosition: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTranslatePosition;
+  _uid: number;
+  activateCueEvents: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerActivateCueEvents;
+  activateElement: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerActivateElement;
+  adaptToElementSize: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerAdaptToElementSize;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  areSubtitlesShown: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerAreSubtitlesShown;
+  canChangeTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerCanChangeTrack;
+  clear: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerClear;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  deactivateCueEvents: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerDeactivateCueEvents;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  getActiveSubtitleLanguage: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetActiveSubtitleLanguage;
+  getAudioProcessor: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetAudioProcessor;
+  getCurrentBandwidth: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetCurrentBandwidth;
+  getListConstants: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetListConstants;
+  getLoadedList: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetLoadedList;
+  getLoadedOptions: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetLoadedOptions;
+  getMediaConfig: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetMediaConfig;
+  getPlayerState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetPlayerState;
+  getSeekPanels: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetSeekPanels;
+  getState: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetState;
+  getStatistics: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetStatistics;
+  getSubtitleLanguages: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetSubtitleLanguages;
+  getVideoSurface: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetVideoSurface;
+  getVideoVariants: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetVideoVariants;
+  getVolume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerGetVolume;
+  hideSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerHideSubtitles;
+  load: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerLoad;
+  next: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerNext;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  pause: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPause;
+  play: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPlay;
+  preloadTrack: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPreloadTrack;
+  previous: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerPrevious;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
+  resume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerResume;
+  seek: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSeek;
+  setIsVideoVisible: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetIsVideoVisible;
+  setMediaPlaybackMode: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetMediaPlaybackMode;
+  setMuted: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetMuted;
+  setPlaybackSpeed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetPlaybackSpeed;
+  setRepeatMode: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetRepeatMode;
+  setShuffle: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetShuffle;
+  setSubtitleLanguage: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetSubtitleLanguage;
+  setVideoResolution: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetVideoResolution;
+  setVideoSurface: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetVideoSurface;
+  setVolume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerSetVolume;
+  showSubtitles: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerShowSubtitles;
+  stop: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerStop;
+  togglePlay: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterAdPlayerStandalonePlayerListPlayerTogglePlay;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleBeforeLoad =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleCanPreload =
+  () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleCapped =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleDurationChanged =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleEnded =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleError =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandlePaused =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandlePauseFulfilled =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandlePlayedThresholdReached =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandlePlayerInitError =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandlePlaying =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandlePositionChanged =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleProgress =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleResumeFulfilled =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleSpeedChanged =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerHandleTimeout =
+  (arg0: any) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListeners {
+  before_list_change: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeListChange;
+  before_next: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeNext;
+  before_player_load: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforePlayerLoad;
+  before_previous: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforePrevious;
+  before_stop: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeStop;
+  before_track_load: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeTrackLoad;
+  buffering_end: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingEnd;
+  buffering_start: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingStart;
+  cleared: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersCleared;
+  displayed_cues_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersDisplayedCuesChanged;
+  duration_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersDurationChanged;
+  error: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersError;
+  error_sync: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorSync;
+  first_bytes: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFirstBytes;
+  list_change: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListChange;
+  list_ended: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListEnded;
+  list_player_pause_fulfilled: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListPlayerPauseFulfilled;
+  list_player_resume_fulfilled: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListPlayerResumeFulfilled;
+  max_list_errors_reached: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersMaxListErrorsReached;
+  media_playback_mode_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersMediaPlaybackModeChanged;
+  muted_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersMutedChanged;
+  paused: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPaused;
+  playback_speed_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlaybackSpeedChanged;
+  played_threshold_reached: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayedThresholdReached;
+  player_autoplay_failed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayerAutoplayFailed;
+  playing: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlaying;
+  playing_profile_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayingProfileChanged;
+  position_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPositionChanged;
+  progress: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersProgress;
+  rebuffering_end: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingEnd;
+  rebuffering_start: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingStart;
+  repeat_mode_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRepeatModeChanged;
+  reporting_complete: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingComplete;
+  reporting_creative_view: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingCreativeView;
+  reporting_error: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingError;
+  reporting_first_quartile: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingFirstQuartile;
+  reporting_midpoint: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingMidpoint;
+  reporting_pause: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingPause;
+  reporting_resume: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingResume;
+  reporting_start: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingStart;
+  reporting_third_quartile: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingThirdQuartile;
+  seek_panels_loaded: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSeekPanelsLoaded;
+  seeking: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSeeking;
+  shuffle_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersShuffleChanged;
+  stalled: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStalled;
+  stopped: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStopped;
+  subtitle_languages_loaded: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSubtitleLanguagesLoaded;
+  track_ended: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackEnded;
+  track_loaded: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackLoaded;
+  track_timeout: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackTimeout;
+  track_unplayable: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackUnplayable;
+  tracking_data_created: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackingDataCreated;
+  tracking_data_finalized: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackingDataFinalized;
+  video_element_appended: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoElementAppended;
+  video_element_removed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoElementRemoved;
+  video_surface_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoSurfaceChanged;
+  video_visibility_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoVisibilityChanged;
+  volume_changed: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVolumeChanged;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersAppendedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersAppendedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeListChange =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeListChangeItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeListChangeItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangeItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangeItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeNext =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeNextItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeNextItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeNextItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeNextItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeNextItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeNextItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforePlayerLoad =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforePlayerLoadItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforePlayerLoadItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforePrevious =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforePreviousItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforePreviousItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforePreviousItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforePreviousItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforePreviousItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforePreviousItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeStop =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeStopItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeStopItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeStopItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeStopItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeStopItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeStopItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeTrackLoad =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeTrackLoadItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBeforeTrackLoadItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadItemListener2;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingEnd =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingEndItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingEndItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingEndItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingEndItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingEndItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingEndItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingStart =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingStartItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingStartItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingStartItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingStartItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingStartItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersBufferingStartItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener3 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener4 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener5 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener6 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener7 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions3 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions4 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions5 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions6 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions7 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangeItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangeItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersCleared =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersClearedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersClearedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersClearedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersClearedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersClearedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersClearedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersCreatedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersCreatedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersDisplayedCuesChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersDisplayedCuesChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersDisplayedCuesChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener2;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersDurationChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersDurationChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersDurationChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersDurationChangedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersDurationChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersDurationChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersDurationChangedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersError =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorItemOptions =
+  Record<string, unknown>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorsReachedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReachedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReachedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorSync =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorSyncItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorSyncItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorSyncItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorSyncItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorSyncItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorSyncItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFailedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFailedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFinalizedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFinalizedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFirstBytes =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFirstBytesItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFirstBytesItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFirstBytesItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFirstBytesItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFirstBytesItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFirstBytesItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFulfilledItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFulfilledItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFulfilledItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFulfilledItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListChange =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListChangeItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListChangeItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListChangeItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListChangeItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListChangeItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListChangeItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListEnded =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListEndedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListEndedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListEndedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListEndedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListEndedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListEndedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListPlayerPauseFulfilled =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPauseFulfilledItem>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersListPlayerResumeFulfilled =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersResumeFulfilledItem>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadedItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadedItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersMaxListErrorsReached =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersErrorsReachedItem>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersMediaPlaybackModeChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersModeChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersModeChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener5;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions5;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersMutedChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersMutedChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersMutedChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersMutedChangedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersMutedChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersMutedChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersMutedChangedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPaused =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPausedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPausedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPausedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPausedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPausedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPausedItemOptions =
+  Record<string, unknown>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPauseFulfilledItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFulfilledItemListener2;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFulfilledItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlaybackSpeedChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlaybackSpeedChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlaybackSpeedChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener3;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions3;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayedThresholdReached =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayedThresholdReachedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayedThresholdReachedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReachedItemListener2;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReachedItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayerAutoplayFailed =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayerAutoplayFailedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayerAutoplayFailedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFailedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFailedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlaying =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayingItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayingItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayingItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayingItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayingItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayingItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayingProfileChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayingProfileChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPlayingProfileChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener4;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions4;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPositionChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPositionChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPositionChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPositionChangedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPositionChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPositionChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersPositionChangedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersProgress =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersProgressItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersProgressItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersProgressItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersProgressItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersProgressItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersProgressItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersQuartileItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersQuartileItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersQuartileItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersQuartileItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReachedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReachedItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReachedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReachedItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingEnd =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingEndItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingEndItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingEndItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingEndItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingEndItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingEndItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingStart =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingStartItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingStartItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingStartItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingStartItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingStartItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRebufferingStartItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRemovedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRemovedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRepeatModeChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRepeatModeChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRepeatModeChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingComplete =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingCompleteItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingCompleteItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingCompleteItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingCompleteItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingCompleteItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingCompleteItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingCreativeView =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingCreativeViewItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingCreativeViewItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersViewItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersViewItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingError =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingErrorItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingErrorItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingErrorItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingErrorItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingErrorItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingErrorItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingFirstQuartile =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingFirstQuartileItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingFirstQuartileItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersQuartileItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersQuartileItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingMidpoint =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingMidpointItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingMidpointItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingMidpointItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingMidpointItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingMidpointItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingMidpointItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingPause =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingPauseItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingPauseItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingPauseItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingPauseItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingPauseItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingPauseItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingResume =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingResumeItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingResumeItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingResumeItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingResumeItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingResumeItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingResumeItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingStart =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingStartItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingStartItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingStartItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingStartItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingStartItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingStartItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingThirdQuartile =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingThirdQuartileItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersReportingThirdQuartileItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersQuartileItemListener2;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersQuartileItemOptions2;
+}
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersResumeFulfilledItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFulfilledItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFulfilledItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSeeking =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSeekingItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSeekingItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSeekingItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSeekingItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSeekingItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSeekingItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSeekPanelsLoaded =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSeekPanelsLoadedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSeekPanelsLoadedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadedItemListener2;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadedItemOptions2;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersShuffleChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersShuffleChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersShuffleChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersShuffleChangedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersShuffleChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersShuffleChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersShuffleChangedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStalled =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStalledItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStalledItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStalledItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStalledItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStalledItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStalledItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStopped =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStoppedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStoppedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStoppedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStoppedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStoppedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersStoppedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSubtitleLanguagesLoaded =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSubtitleLanguagesLoadedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersSubtitleLanguagesLoadedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersLoadedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackEnded =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackEndedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackEndedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackEndedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackEndedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackEndedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackEndedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackingDataCreated =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackingDataCreatedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackingDataCreatedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersCreatedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersCreatedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackingDataFinalized =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackingDataFinalizedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackingDataFinalizedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFinalizedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersFinalizedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackLoaded =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackLoadedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackLoadedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackLoadedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackLoadedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackLoadedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackLoadedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackTimeout =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackTimeoutItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackTimeoutItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackTimeoutItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackTimeoutItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackTimeoutItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackTimeoutItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackUnplayable =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackUnplayableItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackUnplayableItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackUnplayableItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackUnplayableItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackUnplayableItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersTrackUnplayableItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoElementAppended =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoElementAppendedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoElementAppendedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersAppendedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersAppendedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoElementRemoved =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoElementRemovedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoElementRemovedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRemovedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersRemovedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoSurfaceChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoSurfaceChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoSurfaceChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener7;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions7;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoVisibilityChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoVisibilityChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVideoVisibilityChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemListener6;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersChangedItemOptions6;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersViewItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersViewItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVolumeChanged =
+  Array<PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVolumeChangedItem>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVolumeChangedItem {
+  listener: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVolumeChangedItemListener;
+  options: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVolumeChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVolumeChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerListenersVolumeChangedItemOptions =
+  Record<string, unknown>;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerMetaListeners {
+  add: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerMetaListenersAdd;
+  remove: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerMetaListenersRemove;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerMetaListenersAdd =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerMetaListenersRemove =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerReplaceCurrentList =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerSetListOptions =
+  (arg0: any) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerTrackPlayerPromise {
+  promise: Promise<unknown>;
+  reject: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerTrackPlayerPromiseReject;
+  resolve: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerTrackPlayerPromiseResolve;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerTrackPlayerPromiseReject =
+  (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerListPlayerTrackPlayerPromiseResolve =
+  (arg0: any) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerMetaListeners {
+  add: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerMetaListenersAdd;
+  remove: PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerMetaListenersRemove;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerMetaListenersAdd =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterMainPlayerStandalonePlayerMetaListenersRemove =
+  Record<string, unknown>;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterPause = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterPlay = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterPlayNewTrack = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterRelease = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterResume = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterResumeCurrentTrack = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSeek = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSetPlaybackSpeed = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSetPlayerVisibility = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSetSubtitleLanguage = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSetVideoSurface = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSetVolume = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSetWindow = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterShowSubtitles = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterStop = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorPlayerRouterSwitchPlayer = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorProxyEmit = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorRelease = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorRemoveListener = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorRemoveListeners = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorReportSurface = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorSendContextPlayerError = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorSetFullscreen = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorSetMinimizeBitrate = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorSetPip = () => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorSetWindow = (arg0: any) => unknown;
+
+export type PlatformTypesVideoAPIVideoCoordinatorStartPlayback = (arg0: any) => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorSubVolumeSub {
+  cancel: PlatformTypesVideoAPIVideoCoordinatorSubVolumeSubCancel;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorSubVolumeSubCancel = () => unknown;
+
+export interface PlatformTypesVideoAPIVideoCoordinatorVideoContextPlayerSub {
+  cancel: PlatformTypesVideoAPIVideoCoordinatorVideoContextPlayerSubCancel;
+}
+
+export type PlatformTypesVideoAPIVideoCoordinatorVideoContextPlayerSubCancel = () => unknown;
 
 export type PlatformTypesVideoAPIVideoModeToSurface = (arg0: any) => unknown;
 
