@@ -1,13 +1,12 @@
-export async function fetchGraphQLForAlbumTracks(
-  albumURIs: Set<string>,
+export async function fetchGraphQLForTracks(
+  albumURIs: Array<string>,
 ): Promise<Map<string, object>> {
   const dataMap = new Map<string, object>();
+  const BATCH_SIZE = 50;
+  const uniqueAlbums = [...new Set(albumURIs)];
 
-  const BATCH_SIZE = 250;
-  const albumArray = Array.from(albumURIs);
-
-  for (let i = 0; i < albumArray.length; i += BATCH_SIZE) {
-    const batch = albumArray.slice(i, i + BATCH_SIZE);
+  for (let i = 0; i < uniqueAlbums.length; i += BATCH_SIZE) {
+    const batch = uniqueAlbums.slice(i, i + BATCH_SIZE);
 
     const batchPromises = batch.map(async (albumUri: string): Promise<void> => {
       const response = (await Spicetify.Platform.GraphQLLoader(

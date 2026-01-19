@@ -1,37 +1,32 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@luca/esbuild-deno-loader@0.11.1": "0.11.1",
     "jsr:@oazmi/esbuild-plugin-deno@0.4.5": "0.4.5",
+    "jsr:@oazmi/esbuild-types@0.27.0": "0.27.0",
     "jsr:@oazmi/kitchensink@0.9.15": "0.9.15",
-    "jsr:@std/bytes@^1.0.2": "1.0.6",
     "jsr:@std/bytes@^1.0.6": "1.0.6",
-    "jsr:@std/encoding@^1.0.5": "1.0.10",
     "jsr:@std/internal@^1.0.12": "1.0.12",
-    "jsr:@std/path@1.1.3": "1.1.3",
-    "jsr:@std/path@^1.0.6": "1.1.3",
-    "jsr:@std/streams@1.0.14": "1.0.14",
+    "jsr:@std/path@1.1.4": "1.1.4",
+    "jsr:@std/streams@1.0.16": "1.0.16",
     "npm:@babel/preset-react@7.28.5": "7.28.5_@babel+core@7.28.4",
     "npm:@babel/preset-typescript@7.28.5": "7.28.5_@babel+core@7.28.4",
-    "npm:@biomejs/biome@^2.3.10": "2.3.10",
+    "npm:@biomejs/biome@2.3.11": "2.3.11",
+    "npm:@js-temporal/polyfill@~0.5.1": "0.5.1",
     "npm:babel-plugin-react-compiler@19.1.0-rc.3": "19.1.0-rc.3",
     "npm:esbuild-plugin-babel@0.2.3": "0.2.3_@babel+core@7.28.4",
-    "npm:react-compiler-runtime@19.1.0-rc.3": "19.1.0-rc.3_react@19.1.1"
+    "npm:react-compiler-runtime@19.1.0-rc.3": "19.1.0-rc.3_react@19.1.1",
+    "npm:react-window@^2.2.5": "2.2.5_react@19.1.1_react-dom@19.2.3__react@19.1.1"
   },
   "jsr": {
-    "@luca/esbuild-deno-loader@0.11.1": {
-      "integrity": "dc020d16d75b591f679f6b9288b10f38bdb4f24345edb2f5732affa1d9885267",
-      "dependencies": [
-        "jsr:@std/bytes@^1.0.2",
-        "jsr:@std/encoding",
-        "jsr:@std/path@^1.0.6"
-      ]
-    },
     "@oazmi/esbuild-plugin-deno@0.4.5": {
       "integrity": "e3171fdb4194f38fe824a3cf24535942e6a4bb36ac597a721949301faff033bb",
       "dependencies": [
+        "jsr:@oazmi/esbuild-types",
         "jsr:@oazmi/kitchensink"
       ]
+    },
+    "@oazmi/esbuild-types@0.27.0": {
+      "integrity": "322850b450f06acae5b59b74258865e01e4663caf1d2637f3471cd828f0f376d"
     },
     "@oazmi/kitchensink@0.9.15": {
       "integrity": "01fce611fb67dfe100aaf0e98ac3a039c47b84cf01dd299c0b3647bff88c3d86"
@@ -39,22 +34,19 @@
     "@std/bytes@1.0.6": {
       "integrity": "f6ac6adbd8ccd99314045f5703e23af0a68d7f7e58364b47d2c7f408aeb5820a"
     },
-    "@std/encoding@1.0.10": {
-      "integrity": "8783c6384a2d13abd5e9e87a7ae0520a30e9f56aeeaa3bdf910a3eaaf5c811a1"
-    },
     "@std/internal@1.0.12": {
       "integrity": "972a634fd5bc34b242024402972cd5143eac68d8dffaca5eaa4dba30ce17b027"
     },
-    "@std/path@1.1.3": {
-      "integrity": "b015962d82a5e6daea980c32b82d2c40142149639968549c649031a230b1afb3",
+    "@std/path@1.1.4": {
+      "integrity": "1d2d43f39efb1b42f0b1882a25486647cb851481862dc7313390b2bb044314b5",
       "dependencies": [
         "jsr:@std/internal"
       ]
     },
-    "@std/streams@1.0.14": {
-      "integrity": "c0df6cdd73bd4bbcbe4baa89e323b88418c90ceb2d926f95aa99bdcdbfca2411",
+    "@std/streams@1.0.16": {
+      "integrity": "85030627befb1767c60d4f65cb30fa2f94af1d6ee6e5b2515b76157a542e89c4",
       "dependencies": [
-        "jsr:@std/bytes@^1.0.6"
+        "jsr:@std/bytes"
       ]
     }
   },
@@ -326,8 +318,8 @@
         "@babel/helper-validator-identifier"
       ]
     },
-    "@biomejs/biome@2.3.10": {
-      "integrity": "sha512-/uWSUd1MHX2fjqNLHNL6zLYWBbrJeG412/8H7ESuK8ewoRoMPUgHDebqKrPTx/5n6f17Xzqc9hdg3MEqA5hXnQ==",
+    "@biomejs/biome@2.3.11": {
+      "integrity": "sha512-/zt+6qazBWguPG6+eWmiELqO+9jRsMZ/DBU3lfuU2ngtIQYzymocHhKiZRyrbra4aCOoyTg/BmY+6WH5mv9xmQ==",
       "optionalDependencies": [
         "@biomejs/cli-darwin-arm64",
         "@biomejs/cli-darwin-x64",
@@ -340,43 +332,43 @@
       ],
       "bin": true
     },
-    "@biomejs/cli-darwin-arm64@2.3.10": {
-      "integrity": "sha512-M6xUjtCVnNGFfK7HMNKa593nb7fwNm43fq1Mt71kpLpb+4mE7odO8W/oWVDyBVO4ackhresy1ZYO7OJcVo/B7w==",
+    "@biomejs/cli-darwin-arm64@2.3.11": {
+      "integrity": "sha512-/uXXkBcPKVQY7rc9Ys2CrlirBJYbpESEDme7RKiBD6MmqR2w3j0+ZZXRIL2xiaNPsIMMNhP1YnA+jRRxoOAFrA==",
       "os": ["darwin"],
       "cpu": ["arm64"]
     },
-    "@biomejs/cli-darwin-x64@2.3.10": {
-      "integrity": "sha512-Vae7+V6t/Avr8tVbFNjnFSTKZogZHFYl7MMH62P/J1kZtr0tyRQ9Fe0onjqjS2Ek9lmNLmZc/VR5uSekh+p1fg==",
+    "@biomejs/cli-darwin-x64@2.3.11": {
+      "integrity": "sha512-fh7nnvbweDPm2xEmFjfmq7zSUiox88plgdHF9OIW4i99WnXrAC3o2P3ag9judoUMv8FCSUnlwJCM1B64nO5Fbg==",
       "os": ["darwin"],
       "cpu": ["x64"]
     },
-    "@biomejs/cli-linux-arm64-musl@2.3.10": {
-      "integrity": "sha512-B9DszIHkuKtOH2IFeeVkQmSMVUjss9KtHaNXquYYWCjH8IstNgXgx5B0aSBQNr6mn4RcKKRQZXn9Zu1rM3O0/A==",
+    "@biomejs/cli-linux-arm64-musl@2.3.11": {
+      "integrity": "sha512-XPSQ+XIPZMLaZ6zveQdwNjbX+QdROEd1zPgMwD47zvHV+tCGB88VH+aynyGxAHdzL+Tm/+DtKST5SECs4iwCLg==",
       "os": ["linux"],
       "cpu": ["arm64"]
     },
-    "@biomejs/cli-linux-arm64@2.3.10": {
-      "integrity": "sha512-hhPw2V3/EpHKsileVOFynuWiKRgFEV48cLe0eA+G2wO4SzlwEhLEB9LhlSrVeu2mtSn205W283LkX7Fh48CaxA==",
+    "@biomejs/cli-linux-arm64@2.3.11": {
+      "integrity": "sha512-l4xkGa9E7Uc0/05qU2lMYfN1H+fzzkHgaJoy98wO+b/7Gl78srbCRRgwYSW+BTLixTBrM6Ede5NSBwt7rd/i6g==",
       "os": ["linux"],
       "cpu": ["arm64"]
     },
-    "@biomejs/cli-linux-x64-musl@2.3.10": {
-      "integrity": "sha512-QTfHZQh62SDFdYc2nfmZFuTm5yYb4eO1zwfB+90YxUumRCR171tS1GoTX5OD0wrv4UsziMPmrePMtkTnNyYG3g==",
+    "@biomejs/cli-linux-x64-musl@2.3.11": {
+      "integrity": "sha512-vU7a8wLs5C9yJ4CB8a44r12aXYb8yYgBn+WeyzbMjaCMklzCv1oXr8x+VEyWodgJt9bDmhiaW/I0RHbn7rsNmw==",
       "os": ["linux"],
       "cpu": ["x64"]
     },
-    "@biomejs/cli-linux-x64@2.3.10": {
-      "integrity": "sha512-wwAkWD1MR95u+J4LkWP74/vGz+tRrIQvr8kfMMJY8KOQ8+HMVleREOcPYsQX82S7uueco60L58Wc6M1I9WA9Dw==",
+    "@biomejs/cli-linux-x64@2.3.11": {
+      "integrity": "sha512-/1s9V/H3cSe0r0Mv/Z8JryF5x9ywRxywomqZVLHAoa/uN0eY7F8gEngWKNS5vbbN/BsfpCG5yeBT5ENh50Frxg==",
       "os": ["linux"],
       "cpu": ["x64"]
     },
-    "@biomejs/cli-win32-arm64@2.3.10": {
-      "integrity": "sha512-o7lYc9n+CfRbHvkjPhm8s9FgbKdYZu5HCcGVMItLjz93EhgJ8AM44W+QckDqLA9MKDNFrR8nPbO4b73VC5kGGQ==",
+    "@biomejs/cli-win32-arm64@2.3.11": {
+      "integrity": "sha512-PZQ6ElCOnkYapSsysiTy0+fYX+agXPlWugh6+eQ6uPKI3vKAqNp6TnMhoM3oY2NltSB89hz59o8xIfOdyhi9Iw==",
       "os": ["win32"],
       "cpu": ["arm64"]
     },
-    "@biomejs/cli-win32-x64@2.3.10": {
-      "integrity": "sha512-pHEFgq7dUEsKnqG9mx9bXihxGI49X+ar+UBrEIj3Wqj3UCZp1rNgV+OoyjFgcXsjCWpuEAF4VJdkZr3TrWdCbQ==",
+    "@biomejs/cli-win32-x64@2.3.11": {
+      "integrity": "sha512-43VrG813EW+b5+YbDbz31uUsheX+qFKCpXeY9kfdAx+ww3naKxeVkTD9zLIWxUPfJquANMHrmW3wbe/037G0Qg==",
       "os": ["win32"],
       "cpu": ["x64"]
     },
@@ -405,6 +397,12 @@
       "dependencies": [
         "@jridgewell/resolve-uri",
         "@jridgewell/sourcemap-codec"
+      ]
+    },
+    "@js-temporal/polyfill@0.5.1": {
+      "integrity": "sha512-hloP58zRVCRSpgDxmqCWJNlizAlUgJFqG2ypq79DCvyv9tHjRYMDOcPFjzfl/A1/YxDvRCZz8wvZvmapQnKwFQ==",
+      "dependencies": [
+        "jsbi"
       ]
     },
     "babel-plugin-react-compiler@19.1.0-rc.3": {
@@ -458,6 +456,9 @@
     "js-tokens@4.0.0": {
       "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
     },
+    "jsbi@4.3.2": {
+      "integrity": "sha512-9fqMSQbhJykSeii05nxKl4m6Eqn2P6rOlYiS+C5Dr/HPIU/7yZxu5qzbs40tgaFORiw2Amd0mirjxatXYMkIew=="
+    },
     "jsesc@3.1.0": {
       "integrity": "sha512-/sM3dO2FOzXjKQhJuo0Q173wf2KOo8t4I8vHy6lF9poUp7bKT0/NHE8fPX23PwfhnykfqnC2xRxOnVw5XuGIaA==",
       "bin": true
@@ -487,8 +488,25 @@
         "react"
       ]
     },
+    "react-dom@19.2.3_react@19.1.1": {
+      "integrity": "sha512-yELu4WmLPw5Mr/lmeEpox5rw3RETacE++JgHqQzd2dg+YbJuat3jH4ingc+WPZhxaoFzdv9y33G+F7Nl5O0GBg==",
+      "dependencies": [
+        "react",
+        "scheduler"
+      ]
+    },
+    "react-window@2.2.5_react@19.1.1_react-dom@19.2.3__react@19.1.1": {
+      "integrity": "sha512-6viWvPSZvVuMIe9hrl4IIZoVfO/npiqOb03m4Z9w+VihmVzBbiudUrtUqDpsWdKvd/Ai31TCR25CBcFFAUm28w==",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ]
+    },
     "react@19.1.1": {
       "integrity": "sha512-w8nqGImo45dmMIfljjMwOGtbmC/mk4CMYhWIicdSflH91J9TyCyczcPFXJzrZ/ZXcgGRFeP6BU0BEJTw6tZdfQ=="
+    },
+    "scheduler@0.27.0": {
+      "integrity": "sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q=="
     },
     "semver@6.3.1": {
       "integrity": "sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==",
@@ -510,11 +528,16 @@
   "redirects": {
     "https://esm.sh/@types/react-dom@~19.1.11/client.d.ts": "https://esm.sh/@types/react-dom@19.1.11/client.d.ts",
     "https://esm.sh/@types/react-dom@~19.1.11/index.d.ts": "https://esm.sh/@types/react-dom@19.1.11/index.d.ts",
+    "https://esm.sh/@types/react-dom@~19.2.3/client.d.ts": "https://esm.sh/@types/react-dom@19.2.3/client.d.ts",
+    "https://esm.sh/@types/react-dom@~19.2.3/index.d.ts": "https://esm.sh/@types/react-dom@19.2.3/index.d.ts",
     "https://esm.sh/@types/react@~19.0.12/jsx-runtime.d.ts": "https://esm.sh/@types/react@19.0.14/jsx-runtime.d.ts",
     "https://esm.sh/@types/react@~19.1.17/index.d.ts": "https://esm.sh/@types/react@19.1.17/index.d.ts",
     "https://esm.sh/@types/react@~19.1.17/jsx-runtime.d.ts": "https://esm.sh/@types/react@19.1.17/jsx-runtime.d.ts",
+    "https://esm.sh/@types/react@~19.2.7/index.d.ts": "https://esm.sh/@types/react@19.2.7/index.d.ts",
+    "https://esm.sh/@types/react@~19.2.7/jsx-runtime.d.ts": "https://esm.sh/@types/react@19.2.7/jsx-runtime.d.ts",
     "https://esm.sh/@types/scheduler@~0.26.0/index.d.ts": "https://esm.sh/@types/scheduler@0.26.0/index.d.ts",
-    "https://esm.sh/scheduler@^0.26.0?target=denonext": "https://esm.sh/scheduler@0.26.0?target=denonext"
+    "https://esm.sh/scheduler@^0.26.0?target=denonext": "https://esm.sh/scheduler@0.26.0?target=denonext",
+    "https://esm.sh/scheduler@^0.27.0?target=denonext": "https://esm.sh/scheduler@0.27.0?target=denonext"
   },
   "remote": {
     "https://deno.land/x/denoflate@1.2.1/mod.ts": "f5628e44b80b3d80ed525afa2ba0f12408e3849db817d47a883b801f9ce69dd6",
@@ -524,29 +547,42 @@
     "https://deno.land/x/esbuild@v0.27.2/mod.js": "c9acd48c94887809e8690c3cad2865816a000e441e696323d4760ff2c9b15724",
     "https://esm.sh/dexie@4.0.11": "9adecb83911543ac0032b1786fea6cf9a2ce6b4844c59a608e564c33bebb8de8",
     "https://esm.sh/dexie@4.0.11/denonext/dexie.mjs": "0b4199f8c72ff4b986b3c0f48fed0228595675c3003a6c3001223ab95c535a11",
+    "https://esm.sh/dexie@4.2.1": "67e532ecde76aa863b97b249e8eb58aeb6b218f222fa87d68bc59554e99c6c02",
+    "https://esm.sh/dexie@4.2.1/denonext/dexie.mjs": "3129be0baaf425e32dbed23fdf2214f5d03a3f956bfe00fecf6de357262cec4e",
     "https://esm.sh/react-dom@19.1.0": "0af10bc13bc7ef60cd74313dc427d357184e28c86cc878340add5cde7ba00120",
     "https://esm.sh/react-dom@19.1.0/client": "a84db2e3e86b71bf712d55f37603df8be4a624d7e93b63795524ec0554b1a6af",
     "https://esm.sh/react-dom@19.1.0/denonext/client.mjs": "9568d5484e41d9b0b8b717f4ddb990b74e8158ded3772ad51c737dc7899b42f8",
     "https://esm.sh/react-dom@19.1.0/denonext/react-dom.mjs": "34f13de407660b571cc98e6902abc6aded524314c56c77a1ee7527b4f501f727",
+    "https://esm.sh/react-dom@19.2.3": "dccbc3e6f1c607f87c18fda31d0c0e4266667aa78dc339aea4032ffff3d3a9b7",
+    "https://esm.sh/react-dom@19.2.3/client": "f2b77cf049cc8c5b42a7849902b30436ebdd212add46fa82b0d5ee0de0e8b45a",
+    "https://esm.sh/react-dom@19.2.3/denonext/client.mjs": "275250bf5f413fb6d20f5e8d4eff624d825b8b81b343da76712d1823097316dc",
+    "https://esm.sh/react-dom@19.2.3/denonext/react-dom.mjs": "508d989e51c30c129f628c8bf95a5c57590bd33225c5cb3a7cdda7d9696b6c6f",
     "https://esm.sh/react@19.1.0": "8cb1e2ba1aeb012dc6807c8b3cf6ae90579b448317c9debc9d888dcabc246e66",
     "https://esm.sh/react@19.1.0/denonext/jsx-runtime.mjs": "fbd3137c02ae8733d3bfaf434884aada41253c9074bdd3baf598879de24fe70b",
     "https://esm.sh/react@19.1.0/denonext/react.mjs": "b43f435068776ab7a40daea8854ab1f8eca6252e86a9ac8b716bb9110ffeb76e",
     "https://esm.sh/react@19.1.0/jsx-runtime": "8c80348342f0448fbf5499e9f357ab3f678db3b7fbf782f8899fc88bb0a182c3",
+    "https://esm.sh/react@19.2.3": "622c0c887061c69d03591435705145bd4f6246ac0ab5a8bd272e6a727c1091ac",
+    "https://esm.sh/react@19.2.3/denonext/jsx-runtime.mjs": "d985d0dca84e236472b3026a338c6163b1221a6198a4de3bc5b17e49636c8432",
+    "https://esm.sh/react@19.2.3/denonext/react.mjs": "8f4fd01715d7101297f85f0acef35b95bf85ace4f146b98705b408997ced226b",
+    "https://esm.sh/react@19.2.3/jsx-runtime": "c0039921a5203c9df737ed08a51fa3f22e7e5048e36e97e6f72b2ae83813e64b",
     "https://esm.sh/scheduler@0.26.0/denonext/scheduler.mjs": "b62267951094a7c42b7170c51e31f57198981b08ebfae60be0d076101a4c6f91",
-    "https://esm.sh/scheduler@0.26.0?target=denonext": "102f3b685ea5271452bd93de89ab0d99668aecb08f7706e3b9c6629699dd92e0"
+    "https://esm.sh/scheduler@0.26.0?target=denonext": "102f3b685ea5271452bd93de89ab0d99668aecb08f7706e3b9c6629699dd92e0",
+    "https://esm.sh/scheduler@0.27.0/denonext/scheduler.mjs": "b1ba1723bf253d62b0aa1c3c0603d0d025010642158b0e746ae1fd6f7500deeb",
+    "https://esm.sh/scheduler@0.27.0?target=denonext": "d5e7a8b3ddf1c77fdd56083413b9ed29648e017b1000b85b3d3059a226627742"
   },
   "workspace": {
     "dependencies": [
-      "jsr:@luca/esbuild-deno-loader@0.11.1",
       "jsr:@oazmi/esbuild-plugin-deno@0.4.5",
-      "jsr:@std/path@1.1.3",
-      "jsr:@std/streams@1.0.14",
+      "jsr:@std/path@1.1.4",
+      "jsr:@std/streams@1.0.16",
       "npm:@babel/preset-react@7.28.5",
       "npm:@babel/preset-typescript@7.28.5",
-      "npm:@biomejs/biome@^2.3.10",
+      "npm:@biomejs/biome@2.3.11",
+      "npm:@js-temporal/polyfill@~0.5.1",
       "npm:babel-plugin-react-compiler@19.1.0-rc.3",
       "npm:esbuild-plugin-babel@0.2.3",
-      "npm:react-compiler-runtime@19.1.0-rc.3"
+      "npm:react-compiler-runtime@19.1.0-rc.3",
+      "npm:react-window@^2.2.5"
     ]
   }
 }

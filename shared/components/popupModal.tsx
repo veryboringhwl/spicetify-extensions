@@ -7,11 +7,12 @@ import { Icons } from "./icons.tsx";
 document.adoptedStyleSheets.push(styles);
 
 export interface PopupModalProps {
-  title: string;
+  title?: string;
   content: ReactNode | ComponentType<any>;
   isLarge?: boolean;
   buttons?: ReactNode;
   icon?: ReactNode;
+  template?: boolean;
 }
 
 interface ModalComponentProps extends PopupModalProps {
@@ -34,7 +35,7 @@ const closeModal = (): void => {
 };
 
 const ModalComponent: FC<ModalComponentProps> = memo(
-  ({ title, content, isLarge, buttons, icon, onClose }) => {
+  ({ title, content, isLarge, buttons, icon, template, onClose }) => {
     const modalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -75,24 +76,34 @@ const ModalComponent: FC<ModalComponentProps> = memo(
       return content;
     };
 
+    if (template === true) {
+      return (
+        <div className="modal" onClick={handleBackdropClick} ref={modalRef}>
+          <div className={`modal__container${isLarge ? " modal__container--large" : ""}`}>
+            <div className="modal__header">
+              <div className="modal__titleContainer">
+                {icon && <div className="modal__icon">{icon}</div>}
+                {title && <h1 className="modal__title">{title}</h1>}
+              </div>
+              <div className="modal__buttonContainer">
+                {buttons}
+                <Spicetify.ReactComponent.TooltipWrapper label="Close" placement="top">
+                  <button className="modal__button modal__button--close" onClick={handleClose}>
+                    <Icons.React.close size={18} />
+                  </button>
+                </Spicetify.ReactComponent.TooltipWrapper>
+              </div>
+            </div>
+            <div className="modal__content">{renderContent()}</div>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="modal" onClick={handleBackdropClick} ref={modalRef}>
         <div className={`modal__container${isLarge ? " modal__container--large" : ""}`}>
-          <div className="modal__header">
-            <div className="modal__titleContainer">
-              {icon && <div className="modal__icon">{icon}</div>}
-              <h1 className="modal__title">{title}</h1>
-            </div>
-            <div className="modal__buttonContainer">
-              {buttons}
-              <Spicetify.ReactComponent.TooltipWrapper label="Close" placement="top">
-                <button className="modal__button modal__button--close" onClick={handleClose}>
-                  <Icons.React.close size={18} />
-                </button>
-              </Spicetify.ReactComponent.TooltipWrapper>
-            </div>
-          </div>
-          <div className="modal__content">{renderContent()}</div>
+          {renderContent()}
         </div>
       </div>
     );
