@@ -1,5 +1,5 @@
 import Dexie, { type Table } from "dexie";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { fetchAllLibraryContents } from "../../../shared/api/fetchAllLibraryContents.ts";
 import { fetchAllPlaylistTracks } from "../../../shared/api/fetchAllPlaylistTracks.ts";
 import { fetchGraphQLForTracks } from "../../../shared/api/fetchGraphQLForTracks.ts";
@@ -14,6 +14,24 @@ import { spotifyComponents } from "../../../shared/components/spotifyComponents.
 import { usePlayer } from "../../../shared/hooks/usePlayer.ts";
 
 spotifyComponents();
+
+class DebugTimer {
+  private starts: Map<string, number> = new Map();
+
+  start(label: string) {
+    this.starts.set(label, performance.now());
+  }
+
+  end(label: string) {
+    const startTime = this.starts.get(label);
+    if (startTime) {
+      const duration = performance.now() - startTime;
+      console.debug(`[Debug] ${label}: ${duration.toFixed(2)}ms`);
+      this.starts.delete(label);
+    }
+  }
+}
+const perf = new DebugTimer();
 
 const DUPLICATE_CATEGORIES = ["exact", "isrc", "probable", "likely", "possible", "maybe"] as const;
 type DuplicateCategory = (typeof DUPLICATE_CATEGORIES)[number];
@@ -44,15 +62,17 @@ interface TrackMetadata {
   readonly playCounts: ReadonlyMap<string, number>;
   readonly durations: ReadonlyMap<string, number>;
   readonly isrcs: ReadonlyMap<string, string>;
+  readonly releaseDates: ReadonlyMap<string, string>;
 }
 
 interface DbTrack {
   trackUri: string;
   trackName: string;
   trackDuration: number | null;
-  albumUri: string;
   trackPlayCount: number | null;
   trackIsrc: string | null;
+  albumUri: string;
+  albumReleaseDate: string | null;
   ignoreDuplicates?: string;
 }
 
@@ -63,7 +83,7 @@ class FindDupeTracks extends Dexie {
     super("findDupeTracks");
     this.version(0.1).stores({
       tracks:
-        "&trackUri, trackName, trackDuration, albumUri, trackPlayCount, trackIsrc, ignoreDuplicates",
+        "&trackUri, trackName, trackDuration, trackPlayCount, trackIsrc, albumUri, albumReleaseDate, ignoreDuplicates, lastUpdated",
     });
   }
 }
@@ -209,7 +229,9 @@ const useOwnedPlaylists = () => {
 
   useEffect(() => {
     const fetchPlaylists = async () => {
+      perf.start("Fetch: All Playlists");
       const items = await fetchAllLibraryContents();
+      perf.end("Fetch: All Playlists");
       setPlaylists((items as PlaylistSummary[]).filter((i) => i.type === "playlist" && i.canAddTo));
       setLoading(false);
     };
@@ -225,6 +247,7 @@ const usePlaylistTracks = (playlistUri: string | undefined) => {
     playCounts: new Map(),
     durations: new Map(),
     isrcs: new Map(),
+    releaseDates: new Map(),
   });
   const [loading, setLoading] = useState(false);
 
@@ -239,14 +262,20 @@ const usePlaylistTracks = (playlistUri: string | undefined) => {
 
     const loadData = async () => {
       try {
+        perf.start("LOAD ALL DATA");
+
+        perf.start("Fetch: All Playlist tracks");
         const { items } = await fetchAllPlaylistTracks(playlistUri);
+        perf.end("Fetch: All Playlist tracks");
 
         if (abortController.signal.aborted) return;
 
         const castItems = items as Track[];
         setTracks(castItems);
 
+        perf.start("Dexie: Read from IndexedDB");
         const dbTracks = await db.tracks.bulkGet(castItems.map((t) => t.uri));
+        perf.end("Dexie: Read from IndexedDB");
 
         const cached = new Map(
           dbTracks.filter((t): t is DbTrack => t != null).map((t) => [t.trackUri, t]),
@@ -254,24 +283,34 @@ const usePlaylistTracks = (playlistUri: string | undefined) => {
 
         const needsUpdate = castItems.filter((t) => {
           const c = cached.get(t.uri);
-          return !c || c.trackPlayCount == null || c.trackDuration == null || c.trackIsrc == null;
+          return (
+            !c ||
+            c.trackPlayCount == null ||
+            c.trackDuration == null ||
+            c.trackIsrc == null ||
+            c.albumReleaseDate == null
+          );
         });
 
         const playCounts = new Map<string, number>();
         const durations = new Map<string, number>();
         const isrcs = new Map<string, string>();
+        const albumReleaseDates = new Map<string, string>();
 
         cached.forEach((c) => {
           if (c.trackPlayCount != null) playCounts.set(c.trackUri, c.trackPlayCount);
           if (c.trackDuration != null) durations.set(c.trackUri, c.trackDuration);
           if (c.trackIsrc != null) isrcs.set(c.trackUri, c.trackIsrc);
+          if (c.albumReleaseDate != null) albumReleaseDates.set(c.trackUri, c.albumReleaseDate);
         });
 
         if (needsUpdate.length > 0) {
+          perf.start("Fetch: GraphQL + WebAPI");
           const [graphQLData, webAPIData] = await Promise.all([
             fetchGraphQLForTracks(needsUpdate.map((t) => t.album.uri)),
             fetchWebAPIForTracks(needsUpdate.map((t) => t.uri)),
           ]);
+          perf.end("Fetch: GraphQL + WebAPI");
 
           if (abortController.signal.aborted) return;
 
@@ -282,33 +321,55 @@ const usePlaylistTracks = (playlistUri: string | undefined) => {
             const webAPIMeta = webAPIData.get(t.uri) as any;
 
             const duration = graphQLMeta?.duration?.totalMilliseconds ?? null;
-            const count = graphQLMeta?.playcount ? Number(graphQLMeta.playcount) : null;
+            const playcount = graphQLMeta?.playcount ? Number(graphQLMeta.playcount) : null;
             const isrc =
               webAPIMeta?.external_ids?.isrc ??
               webAPIMeta?.external_id?.find(
                 (e: Record<string, any>) => (e?.type || "").toLowerCase() === "isrc",
               )?.id;
 
-            if (count != null) playCounts.set(t.uri, count);
+            const rawDate = webAPIMeta?.album?.date;
+            let albumReleaseDate: string | null = null;
+
+            if (typeof rawDate === "string") {
+              albumReleaseDate = rawDate;
+            } else if (rawDate && typeof rawDate === "object") {
+              const { year, month, day } = rawDate;
+              if (year) {
+                albumReleaseDate = String(year);
+                if (month) {
+                  albumReleaseDate += `-${String(month).padStart(2, "0")}`;
+                  if (day) {
+                    albumReleaseDate += `-${String(day).padStart(2, "0")}`;
+                  }
+                }
+              }
+            }
+            if (playcount != null) playCounts.set(t.uri, playcount);
             if (duration != null) durations.set(t.uri, duration);
             if (isrc != null) isrcs.set(t.uri, isrc);
+            if (albumReleaseDate != null) albumReleaseDates.set(t.uri, albumReleaseDate);
 
             dbUpdates.push({
               trackUri: t.uri,
               trackName: t.name,
-              albumUri: t.album.uri,
               trackDuration: duration,
-              trackPlayCount: count,
+              trackPlayCount: playcount,
               trackIsrc: isrc,
+              albumUri: t.album.uri,
+              albumReleaseDate: albumReleaseDate,
             });
           });
 
+          perf.start("Dexie:Write to IndexedDB");
           await db.tracks.bulkPut(dbUpdates);
+          perf.end("Dexie:Write to IndexedDB");
         }
 
         if (!abortController.signal.aborted) {
-          setMetadata({ playCounts, durations, isrcs });
+          setMetadata({ playCounts, durations, isrcs, releaseDates: albumReleaseDates });
           setLoading(false);
+          perf.end("LOAD ALL DATA");
         }
       } catch (e) {
         console.error("Failed to load tracks", e);
@@ -328,171 +389,227 @@ const useDuplicateFinder = (
   metadata: TrackMetadata,
   settings: Settings,
 ): DuplicateGroups => {
-  const { playCounts, durations, isrcs } = metadata;
+  const { playCounts, durations, isrcs, releaseDates } = metadata;
   const { defaultNormalizeWords, customNormalizeWords, groupSettings } = settings;
 
-  const sortAndFormat = (rawGroups: Record<string, Track[]>): ReadonlyArray<DuplicateGroup> => {
-    const results: DuplicateGroup[] = [];
-    Object.values(rawGroups).forEach((group) => {
-      if (group.length > 1) {
-        const sorted = [...group].sort(
-          (a, b) => (playCounts.get(b.uri) ?? 0) - (playCounts.get(a.uri) ?? 0),
-        );
-        results.push({ mainTrack: sorted[0], duplicates: sorted.slice(1) });
-      }
-    });
-    return results;
+  perf.start("Dupe Algorithm: Compute");
+
+  const results: Record<DuplicateCategory, DuplicateGroup[]> = {
+    exact: [],
+    isrc: [],
+    probable: [],
+    likely: [],
+    possible: [],
+    maybe: [],
   };
 
-  const rawGroups = useMemo(() => {
-    if (tracks.length === 0) {
-      return { exact: {}, isrc: {}, probable: {}, likely: {}, possible: {}, maybe: {} };
+  if (tracks.length === 0) return results;
+
+  const allNormWords = [...defaultNormalizeWords, ...customNormalizeWords];
+  const regex = createNormalizationRegex(allNormWords);
+
+  let pool = tracks.map((t) => ({
+    track: t,
+    normName: t.name.toLowerCase().trim(),
+    normFuzzy: normalizeStringOptimized(t.name, regex),
+    artists: new Set(t.artists.map((a) => a.name.toLowerCase())),
+    isrc: isrcs.get(t.uri),
+    duration: durations.get(t.uri),
+    uid: t.uid,
+  }));
+
+  const usedUids = new Set<string>();
+
+  const processGroup = (group: typeof pool, category: DuplicateCategory) => {
+    if (group.length < 2) return;
+
+    const sorted = [...group].sort((a, b) => {
+      const dateA = String(releaseDates.get(a.track.uri) || "9999");
+      const dateB = String(releaseDates.get(b.track.uri) || "9999");
+      if (dateA !== dateB) return dateA.localeCompare(dateB);
+
+      const playsA = playCounts.get(a.track.uri) ?? 0;
+      const playsB = playCounts.get(b.track.uri) ?? 0;
+      return playsB - playsA;
+    });
+
+    const main = sorted[0];
+    const duplicates = sorted.slice(1);
+
+    results[category].push({
+      mainTrack: main.track,
+      duplicates: duplicates.map((d) => d.track),
+    });
+
+    for (const item of group) {
+      usedUids.add(item.uid);
+    }
+  };
+
+  if (groupSettings.exact) {
+    const byUri = new Map<string, typeof pool>();
+    for (const p of pool) {
+      const list = byUri.get(p.track.uri) || [];
+      list.push(p);
+      byUri.set(p.track.uri, list);
+    }
+    for (const group of byUri.values()) {
+      processGroup(group, "exact");
+    }
+    pool = pool.filter((p) => !usedUids.has(p.uid));
+  }
+
+  if (groupSettings.isrc) {
+    const byIsrc = new Map<string, typeof pool>();
+    for (const p of pool) {
+      if (!p.isrc) continue;
+      const list = byIsrc.get(p.isrc) || [];
+      list.push(p);
+      byIsrc.set(p.isrc, list);
+    }
+    for (const group of byIsrc.values()) {
+      processGroup(group, "isrc");
+    }
+    pool = pool.filter((p) => !usedUids.has(p.uid));
+  }
+
+  if (groupSettings.probable) {
+    const byName = new Map<string, typeof pool>();
+    for (const p of pool) {
+      const list = byName.get(p.normName) || [];
+      list.push(p);
+      byName.set(p.normName, list);
     }
 
-    const allNormWords = [...defaultNormalizeWords, ...customNormalizeWords];
-    const regex = createNormalizationRegex(allNormWords);
-
-    const exact = groupSettings.exact
-      ? (Object.groupBy(tracks, (t) => t.uri) as Record<string, Track[]>)
-      : {};
-
-    const isrc = groupSettings.isrc
-      ? (Object.groupBy(
-          tracks.filter((t) => isrcs.has(t.uri)),
-          (t) => isrcs.get(t.uri) ?? "",
-        ) as Record<string, Track[]>)
-      : {};
-
-    const candidates = tracks.map((t) => ({
-      track: t,
-      normName: t.name.toLowerCase().trim(),
-      normFuzzy: normalizeStringOptimized(t.name, regex),
-      artists: new Set(t.artists.map((a) => a.name.toLowerCase())),
-      uid: t.uid,
-    }));
-
-    const filterByDuration = (
-      inputCandidates: typeof candidates,
-      keySelector: (c: (typeof candidates)[0]) => string,
-    ) => {
-      const groups: Record<string, Track[]> = {};
-      const byKey = Object.groupBy(inputCandidates, keySelector);
-
-      Object.values(byKey).forEach((group) => {
-        if (!group || group.length < 2) return;
-        const used = new Set<string>();
+    byName.forEach((group) => {
+      if (group.length >= 2) {
+        const tempUsed = new Set<string>();
         for (const c1 of group) {
-          if (used.has(c1.uid)) continue;
-          const d1 = durations.get(c1.track.uri);
-          if (!d1) continue;
-
-          const match = [c1.track];
-          for (const c2 of group) {
-            if (c1 === c2 || used.has(c2.uid)) continue;
-            const d2 = durations.get(c2.track.uri);
-            if (d2 && Math.abs(d1 - d2) <= 5000) {
-              match.push(c2.track);
-              used.add(c2.uid);
-            }
-          }
+          if (tempUsed.has(c1.uid)) continue;
+          const match = group.filter(
+            (c2) =>
+              c1.uid === c2.uid ||
+              (!tempUsed.has(c2.uid) &&
+                c2.track.artists.some((a) => c1.artists.has(a.name.toLowerCase()))),
+          );
           if (match.length > 1) {
-            used.add(c1.uid);
-            groups[c1.uid] = match;
+            processGroup(match, "probable");
+            for (const m of match) tempUsed.add(m.uid);
           }
-        }
-      });
-      return groups;
-    };
-
-    const probable = groupSettings.probable
-      ? (() => {
-          const groups: Record<string, Track[]> = {};
-          const byName = Object.groupBy(candidates, (c) => c.normName);
-          Object.values(byName).forEach((list) => {
-            if (!list || list.length < 2) return;
-            const used = new Set<string>();
-            list.forEach((c1) => {
-              if (used.has(c1.uid)) return;
-              const match = [c1.track];
-              list.forEach((c2) => {
-                if (c1 === c2 || used.has(c2.uid)) return;
-                if (c2.track.artists.some((a) => c1.artists.has(a.name.toLowerCase()))) {
-                  match.push(c2.track);
-                  used.add(c2.uid);
-                }
-              });
-              if (match.length > 1) {
-                used.add(c1.uid);
-                groups[c1.uid] = match;
-              }
-            });
-          });
-          return groups;
-        })()
-      : {};
-
-    const likely = groupSettings.likely ? filterByDuration(candidates, (c) => c.normName) : {};
-
-    const possible = groupSettings.possible ? filterByDuration(candidates, (c) => c.normFuzzy) : {};
-
-    const maybe = (() => {
-      if (!groupSettings.maybe) return {};
-
-      const fuzzyList = candidates.filter((c) => c.normFuzzy.length >= 3);
-      fuzzyList.sort((a, b) => a.normFuzzy.localeCompare(b.normFuzzy));
-
-      const groups: Record<string, Track[]> = {};
-      const usedFuzzy = new Set<string>();
-      const LOOKAHEAD = 50;
-
-      for (let i = 0; i < fuzzyList.length; i++) {
-        const c1 = fuzzyList[i];
-        if (usedFuzzy.has(c1.uid)) continue;
-        const match = [c1.track];
-        const maxJ = Math.min(i + LOOKAHEAD, fuzzyList.length);
-
-        for (let j = i + 1; j < maxJ; j++) {
-          const c2 = fuzzyList[j];
-          if (usedFuzzy.has(c2.uid)) continue;
-          if (c1.normFuzzy[0] !== c2.normFuzzy[0]) break;
-          const sim = calculateSimilarity(c1.normFuzzy, c2.normFuzzy);
-          if (sim >= 0.7) {
-            match.push(c2.track);
-          }
-        }
-
-        if (match.length > 1) {
-          match.forEach((m) => {
-            usedFuzzy.add(m.uid);
-          });
-          groups[c1.uid] = match;
         }
       }
-      return groups;
-    })();
+    });
+    pool = pool.filter((p) => !usedUids.has(p.uid));
+  }
 
-    return { exact, isrc, probable, likely, possible, maybe };
-  }, [tracks, groupSettings, defaultNormalizeWords, customNormalizeWords, durations, isrcs]);
+  if (groupSettings.likely) {
+    const byName = new Map<string, typeof pool>();
+    for (const p of pool) {
+      const list = byName.get(p.normName) || [];
+      list.push(p);
+      byName.set(p.normName, list);
+    }
 
-  const res: DuplicateGroups = {
-    exact: sortAndFormat(rawGroups.exact),
-    isrc: sortAndFormat(rawGroups.isrc),
-    probable: sortAndFormat(rawGroups.probable),
-    likely: sortAndFormat(rawGroups.likely),
-    possible: sortAndFormat(rawGroups.possible),
-    maybe: sortAndFormat(rawGroups.maybe),
-  };
-  return res;
+    byName.forEach((group) => {
+      if (group.length >= 2) {
+        const tempUsed = new Set<string>();
+        for (const c1 of group) {
+          if (tempUsed.has(c1.uid)) continue;
+          const c1Duration = c1.duration;
+          if (c1Duration == null) continue;
+
+          const match = group.filter(
+            (c2) =>
+              c1.uid === c2.uid ||
+              (!tempUsed.has(c2.uid) &&
+                c2.duration != null &&
+                Math.abs(c1Duration - c2.duration) <= 5000),
+          );
+          if (match.length > 1) {
+            processGroup(match, "likely");
+            for (const m of match) tempUsed.add(m.uid);
+          }
+        }
+      }
+    });
+    pool = pool.filter((p) => !usedUids.has(p.uid));
+  }
+
+  if (groupSettings.possible) {
+    const byFuzzy = new Map<string, typeof pool>();
+    for (const p of pool) {
+      const list = byFuzzy.get(p.normFuzzy) || [];
+      list.push(p);
+      byFuzzy.set(p.normFuzzy, list);
+    }
+
+    byFuzzy.forEach((group) => {
+      if (group.length >= 2) {
+        const tempUsed = new Set<string>();
+        for (const c1 of group) {
+          if (tempUsed.has(c1.uid)) continue;
+          const c1Duration = c1.duration;
+          if (c1Duration == null) continue;
+
+          const match = group.filter(
+            (c2) =>
+              c1.uid === c2.uid ||
+              (!tempUsed.has(c2.uid) &&
+                c2.duration != null &&
+                Math.abs(c1Duration - c2.duration) <= 5000),
+          );
+          if (match.length > 1) {
+            processGroup(match, "possible");
+            for (const m of match) tempUsed.add(m.uid);
+          }
+        }
+      }
+    });
+    pool = pool.filter((p) => !usedUids.has(p.uid));
+  }
+
+  if (groupSettings.maybe) {
+    pool.sort((a, b) => a.normFuzzy.localeCompare(b.normFuzzy));
+    const LOOKAHEAD = 30;
+
+    for (let i = 0; i < pool.length; i++) {
+      const c1 = pool[i];
+      if (usedUids.has(c1.uid)) continue;
+
+      const match = [c1];
+      const maxJ = Math.min(i + LOOKAHEAD, pool.length);
+
+      for (let j = i + 1; j < maxJ; j++) {
+        const c2 = pool[j];
+        if (usedUids.has(c2.uid)) continue;
+        if (c1.normFuzzy[0] !== c2.normFuzzy[0]) break;
+
+        if (calculateSimilarity(c1.normFuzzy, c2.normFuzzy) >= 0.8) {
+          match.push(c2);
+        }
+      }
+
+      if (match.length > 1) {
+        processGroup(match, "maybe");
+      }
+    }
+  }
+
+  perf.end("Dupe Algorithm: Compute");
+  return results;
 };
 
 function TrackDetails({
   track,
   playCounts,
+  releaseDates,
 }: {
   track: Track;
   playCounts: ReadonlyMap<string, number>;
+  releaseDates: ReadonlyMap<string, string>;
 }) {
   const count = playCounts.get(track.uri);
+  const date = releaseDates.get(track.uri);
   return (
     <div className="track-details">
       <div className="track-details__line">
@@ -505,6 +622,7 @@ function TrackDetails({
         <span className="track-details__playcount">
           Plays: {count != null ? count.toLocaleString() : "N/A"}
         </span>
+        <span className="track-details__playcount">Released: {date || "Unknown"} </span>
       </div>
     </div>
   );
@@ -540,12 +658,12 @@ function TrackControls({
         step={1}
         value={position || 0}
       />
-      <span className="slider-time">{formatTime(duration)}</span>)
+      <span className="slider-time">{formatTime(duration)}</span>
     </div>
   );
 }
 
-const DuplicateItem = function DuplicateItem({
+function DuplicateItem({
   track,
   category,
   onDelete,
@@ -566,7 +684,11 @@ const DuplicateItem = function DuplicateItem({
             {isSource && "Source: "}
             {track.name}
           </span>
-          <TrackDetails playCounts={metadata.playCounts} track={track} />
+          <TrackDetails
+            playCounts={metadata.playCounts}
+            releaseDates={metadata.releaseDates}
+            track={track}
+          />
         </div>
         <button
           className="duplicate-group__delete-button"
@@ -581,7 +703,7 @@ const DuplicateItem = function DuplicateItem({
       </div>
     </div>
   );
-};
+}
 
 function SettingsMenu() {
   const settings = useSettings();
@@ -664,11 +786,19 @@ export function PlaylistDuplicateFinder({
   } = usePlaylistTracks(selectedPlaylist?.uri);
   const duplicateGroups = useDuplicateFinder(tracks, metadata, settings);
 
+  const renderStartTime = useRef(performance.now());
+  useEffect(() => {
+    const elapsed = performance.now() - renderStartTime.current;
+    if (elapsed > 10) {
+      console.log(`Render:React took ${elapsed.toFixed(2)}ms to render`);
+    }
+  });
+
   const handleDelete = async (category: DuplicateCategory, track: Track) => {
     const doDelete = async () => {
       if (selectedPlaylist) {
-        await Spicetify.Platform.PlaylistAPI.remove(selectedPlaylist.uri, [{ uid: track.uid }]);
         setTracks((prev) => prev.filter((t) => t.uid !== track.uid));
+        await Spicetify.Platform.PlaylistAPI.remove(selectedPlaylist.uri, [{ uid: track.uid }]);
       }
     };
 
