@@ -1,3 +1,4 @@
+import { Temporal } from "@js-temporal/polyfill";
 import Dexie, { type Table } from "dexie";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { fetchAllLibraryContents } from "../../../shared/api/fetchAllLibraryContents.ts";
@@ -73,6 +74,7 @@ interface DbTrack {
   trackIsrc: string | null;
   albumUri: string;
   albumReleaseDate: string | null;
+  lastUpdated: string;
   ignoreDuplicates?: string;
 }
 
@@ -89,6 +91,8 @@ class FindDupeTracks extends Dexie {
 }
 
 const db = new FindDupeTracks();
+
+(globalThis as any).FindDupeTracks = db;
 
 type ToggleSettings = Record<DuplicateCategory, boolean>;
 
@@ -264,32 +268,37 @@ const usePlaylistTracks = (playlistUri: string | undefined) => {
       try {
         perf.start("LOAD ALL DATA");
 
-        perf.start("Fetch: All Playlist tracks");
         const { items } = await fetchAllPlaylistTracks(playlistUri);
-        perf.end("Fetch: All Playlist tracks");
-
         if (abortController.signal.aborted) return;
 
         const castItems = items as Track[];
         setTracks(castItems);
 
-        perf.start("Dexie: Read from IndexedDB");
         const dbTracks = await db.tracks.bulkGet(castItems.map((t) => t.uri));
-        perf.end("Dexie: Read from IndexedDB");
-
         const cached = new Map(
           dbTracks.filter((t): t is DbTrack => t != null).map((t) => [t.trackUri, t]),
         );
 
+        const now = Temporal.Now.plainDateTimeISO();
+
         const needsUpdate = castItems.filter((t) => {
           const c = cached.get(t.uri);
-          return (
-            !c ||
-            c.trackPlayCount == null ||
-            c.trackDuration == null ||
-            c.trackIsrc == null ||
-            c.albumReleaseDate == null
-          );
+          if (!c) return true;
+
+          const hasMissingData =
+            c.trackPlayCount == null || c.trackDuration == null || c.trackIsrc == null;
+          if (hasMissingData) return true;
+
+          if (!c.lastUpdated) return true;
+          try {
+            const lastUpdate = Temporal.PlainDateTime.from(c.lastUpdated);
+            const durationSince = now.since(lastUpdate);
+            if (durationSince.total({ unit: "days" }) >= 30) return true;
+          } catch (_e) {
+            return true;
+          }
+
+          return false;
         });
 
         const playCounts = new Map<string, number>();
@@ -305,16 +314,15 @@ const usePlaylistTracks = (playlistUri: string | undefined) => {
         });
 
         if (needsUpdate.length > 0) {
-          perf.start("Fetch: GraphQL + WebAPI");
           const [graphQLData, webAPIData] = await Promise.all([
             fetchGraphQLForTracks(needsUpdate.map((t) => t.album.uri)),
             fetchWebAPIForTracks(needsUpdate.map((t) => t.uri)),
           ]);
-          perf.end("Fetch: GraphQL + WebAPI");
 
           if (abortController.signal.aborted) return;
 
           const dbUpdates: DbTrack[] = [];
+          const currentTimestamp = now.toString();
 
           needsUpdate.forEach((t) => {
             const graphQLMeta = graphQLData.get(t.uri) as any;
@@ -324,9 +332,7 @@ const usePlaylistTracks = (playlistUri: string | undefined) => {
             const playcount = graphQLMeta?.playcount ? Number(graphQLMeta.playcount) : null;
             const isrc =
               webAPIMeta?.external_ids?.isrc ??
-              webAPIMeta?.external_id?.find(
-                (e: Record<string, any>) => (e?.type || "").toLowerCase() === "isrc",
-              )?.id;
+              webAPIMeta?.external_id?.find((e: any) => e?.type === "isrc")?.id;
 
             const rawDate = webAPIMeta?.album?.date;
             let albumReleaseDate: string | null = null;
@@ -345,6 +351,7 @@ const usePlaylistTracks = (playlistUri: string | undefined) => {
                 }
               }
             }
+
             if (playcount != null) playCounts.set(t.uri, playcount);
             if (duration != null) durations.set(t.uri, duration);
             if (isrc != null) isrcs.set(t.uri, isrc);
@@ -358,12 +365,11 @@ const usePlaylistTracks = (playlistUri: string | undefined) => {
               trackIsrc: isrc,
               albumUri: t.album.uri,
               albumReleaseDate: albumReleaseDate,
+              lastUpdated: currentTimestamp, // Save readable timestamp
             });
           });
 
-          perf.start("Dexie:Write to IndexedDB");
           await db.tracks.bulkPut(dbUpdates);
-          perf.end("Dexie:Write to IndexedDB");
         }
 
         if (!abortController.signal.aborted) {
