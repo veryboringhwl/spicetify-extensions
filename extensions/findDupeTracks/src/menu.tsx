@@ -102,15 +102,18 @@ class FindDupeTracks extends Dexie {
 
   constructor() {
     super("findDupeTracks");
-    this.version(0.1).stores({
-      tracks:
-        "&trackUri, trackName, trackDuration, trackPlayCount, trackIsrc, albumUri, albumReleaseDate, lastUpdated, ignoreDuplicates",
-    });
+    this.version(0.2)
+      .stores({
+        tracks:
+          "&trackUri, trackName, trackDuration, trackPlayCount, trackIsrc, albumUri, albumReleaseDate, lastUpdated, ignoreDuplicates",
+      })
+      .upgrade((trans) => {
+        return trans.table("tracks").clear();
+      });
   }
 }
 
 const db = new FindDupeTracks();
-(globalThis as any).findDupeTracks = db;
 
 const DEFAULT_SETTINGS: Settings = {
   groupSettings: {
@@ -241,7 +244,7 @@ function useOwnedPlaylists() {
   useEffect(() => {
     let active = true;
 
-    const load = async () => {
+    const fetchPlaylists = async () => {
       perf.start("Fetch: All Playlists");
       const items = await fetchAllLibraryContents();
       if (!active) return;
@@ -254,7 +257,7 @@ function useOwnedPlaylists() {
       }
     };
 
-    void load();
+    void fetchPlaylists();
     return () => {
       active = false;
     };
