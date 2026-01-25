@@ -25,7 +25,6 @@
     "react-compiler-runtime": "npm:react-compiler-runtime@19.1.0-rc.3",
     "react-dom": "https://esm.sh/react-dom@19.2.3",
     "react-dom/client": "https://esm.sh/react-dom@19.2.3/client",
-    "react-window": "npm:react-window@^2.2.5",
     "react/jsx-runtime": "https://esm.sh/react@19.2.3/jsx-runtime"
   },
   "compilerOptions": {

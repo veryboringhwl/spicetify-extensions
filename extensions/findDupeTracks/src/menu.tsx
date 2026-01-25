@@ -1,6 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import Dexie, { type Table } from "dexie";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { fetchAllLibraryContents } from "../../../shared/api/fetchAllLibraryContents.ts";
 import { fetchAllPlaylistTracks } from "../../../shared/api/fetchAllPlaylistTracks.ts";
 import { fetchGraphQLForTracks } from "../../../shared/api/fetchGraphQLForTracks.ts";
@@ -34,8 +34,15 @@ class DebugTimer {
 }
 const perf = new DebugTimer();
 
-const DUPLICATE_CATEGORIES = ["exact", "isrc", "probable", "likely", "possible", "maybe"] as const;
-type DuplicateCategory = (typeof DUPLICATE_CATEGORIES)[number];
+type DuplicateCategory = "exact" | "isrc" | "probable" | "likely" | "possible" | "maybe";
+const CATEGORIES: ReadonlyArray<DuplicateCategory> = [
+  "exact",
+  "isrc",
+  "probable",
+  "likely",
+  "possible",
+  "maybe",
+];
 
 interface Track {
   readonly uri: string;
@@ -45,25 +52,37 @@ interface Track {
   readonly uid: string;
 }
 
+interface TrackDetails {
+  readonly playCount: number | null;
+  readonly duration: number | null;
+  readonly isrc: string | null;
+  readonly releaseDate: string | null;
+}
+
+interface DetailedTrack extends Track, TrackDetails {
+  readonly normalisedName: string;
+  readonly normalisedFuzzy: string;
+}
+
 interface PlaylistSummary {
   readonly uri: string;
   readonly name: string;
-  readonly type: "playlist" | string;
+  readonly type: string;
   readonly canAddTo?: boolean;
 }
 
 interface DuplicateGroup {
-  readonly mainTrack: Track;
-  readonly duplicates: ReadonlyArray<Track>;
+  readonly mainTrack: DetailedTrack;
+  readonly duplicates: ReadonlyArray<DetailedTrack>;
 }
 
-type DuplicateGroups = Record<DuplicateCategory, ReadonlyArray<DuplicateGroup>>;
+type DuplicateResults = Record<DuplicateCategory, ReadonlyArray<DuplicateGroup>>;
 
-interface TrackMetadata {
-  readonly playCounts: ReadonlyMap<string, number>;
-  readonly durations: ReadonlyMap<string, number>;
-  readonly isrcs: ReadonlyMap<string, string>;
-  readonly releaseDates: ReadonlyMap<string, string>;
+interface Settings {
+  readonly groupSettings: Record<DuplicateCategory, boolean>;
+  readonly confirmSettings: Record<DuplicateCategory, boolean>;
+  readonly defaultNormaliseWords: ReadonlyArray<string>;
+  readonly customNormaliseWords: ReadonlyArray<string>;
 }
 
 interface DbTrack {
@@ -85,23 +104,13 @@ class FindDupeTracks extends Dexie {
     super("findDupeTracks");
     this.version(0.1).stores({
       tracks:
-        "&trackUri, trackName, trackDuration, trackPlayCount, trackIsrc, albumUri, albumReleaseDate, ignoreDuplicates, lastUpdated",
+        "&trackUri, trackName, trackDuration, trackPlayCount, trackIsrc, albumUri, albumReleaseDate, lastUpdated, ignoreDuplicates",
     });
   }
 }
 
 const db = new FindDupeTracks();
-
-(globalThis as any).FindDupeTracks = db;
-
-type ToggleSettings = Record<DuplicateCategory, boolean>;
-
-interface Settings {
-  readonly groupSettings: ToggleSettings;
-  readonly confirmSettings: ToggleSettings;
-  readonly defaultNormalizeWords: ReadonlyArray<string>;
-  readonly customNormalizeWords: ReadonlyArray<string>;
-}
+(globalThis as any).findDupeTracks = db;
 
 const DEFAULT_SETTINGS: Settings = {
   groupSettings: {
@@ -120,7 +129,7 @@ const DEFAULT_SETTINGS: Settings = {
     possible: true,
     maybe: true,
   },
-  defaultNormalizeWords: [
+  defaultNormaliseWords: [
     "live",
     "remix",
     "mix",
@@ -153,32 +162,32 @@ const DEFAULT_SETTINGS: Settings = {
     "album",
     "single",
   ],
-  customNormalizeWords: [],
+  customNormaliseWords: [],
 };
 
 const SETTINGS_KEY = "findDupeTracks:settings";
 
-let currentSettingsSnapshot: Settings = (() => {
-  try {
-    const raw = localStorage.getItem(SETTINGS_KEY);
-    return raw ? { ...DEFAULT_SETTINGS, ...JSON.parse(raw) } : DEFAULT_SETTINGS;
-  } catch {
-    return DEFAULT_SETTINGS;
-  }
-})();
-
-const settingsListeners = new Set<() => void>();
-
 const settingsStore = {
-  getSnapshot: () => currentSettingsSnapshot,
-  subscribe: (listener: () => void) => {
-    settingsListeners.add(listener);
-    return () => settingsListeners.delete(listener);
+  listeners: new Set<() => void>(),
+  snapshot: (() => {
+    try {
+      const stored = localStorage.getItem(SETTINGS_KEY);
+      return stored ? { ...DEFAULT_SETTINGS, ...JSON.parse(stored) } : DEFAULT_SETTINGS;
+    } catch {
+      return DEFAULT_SETTINGS;
+    }
+  })(),
+  subscribe(listener: () => void) {
+    settingsStore.listeners.add(listener);
+    return () => settingsStore.listeners.delete(listener);
   },
-  update: (newSettings: Settings) => {
-    currentSettingsSnapshot = newSettings;
+  getSnapshot() {
+    return settingsStore.snapshot;
+  },
+  update(newSettings: Settings) {
+    settingsStore.snapshot = newSettings;
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(newSettings));
-    settingsListeners.forEach((l) => {
+    settingsStore.listeners.forEach((l) => {
       l();
     });
   },
@@ -186,11 +195,9 @@ const settingsStore = {
 
 const useSettings = () => useSyncExternalStore(settingsStore.subscribe, settingsStore.getSnapshot);
 
-const createNormalizationRegex = (ignoredWords: ReadonlyArray<string>) => {
-  return new RegExp(`\\b(${ignoredWords.join("|")})\\b`, "gi");
-};
+const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-const normalizeStringOptimized = (name: string, regex: RegExp): string => {
+const normaliseString = (name: string, regex: RegExp): string => {
   return name
     .toLowerCase()
     .replace(/\(.*?\)|\[.*?\]/g, "")
@@ -210,49 +217,54 @@ const calculateSimilarity = (str1: string, str2: string): number => {
 
   const bigrams = new Map<string, number>();
   for (let i = 0; i < s1.length - 1; i++) {
-    const bigram = s1.substring(i, i + 2);
-    bigrams.set(bigram, (bigrams.get(bigram) || 0) + 1);
+    const bg = s1.substring(i, i + 2);
+    bigrams.set(bg, (bigrams.get(bg) || 0) + 1);
   }
 
-  let intersectionSize = 0;
+  let intersection = 0;
   for (let i = 0; i < s2.length - 1; i++) {
-    const bigram = s2.substring(i, i + 2);
-    const count = bigrams.get(bigram) || 0;
+    const bg = s2.substring(i, i + 2);
+    const count = bigrams.get(bg) || 0;
     if (count > 0) {
-      bigrams.set(bigram, count - 1);
-      intersectionSize++;
+      bigrams.set(bg, count - 1);
+      intersection++;
     }
   }
 
-  return (2.0 * intersectionSize) / (s1.length + s2.length - 2);
+  return (2.0 * intersection) / (s1.length + s2.length - 2);
 };
 
-const useOwnedPlaylists = () => {
+function useOwnedPlaylists() {
   const [playlists, setPlaylists] = useState<ReadonlyArray<PlaylistSummary>>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchPlaylists = async () => {
+    let active = true;
+
+    const load = async () => {
       perf.start("Fetch: All Playlists");
       const items = await fetchAllLibraryContents();
-      perf.end("Fetch: All Playlists");
-      setPlaylists((items as PlaylistSummary[]).filter((i) => i.type === "playlist" && i.canAddTo));
-      setLoading(false);
+      if (!active) return;
+
+      const valid = (items as PlaylistSummary[]).filter((i) => i.type === "playlist" && i.canAddTo);
+      setPlaylists(valid);
+      if (active) {
+        setLoading(false);
+        perf.end("Fetch: All Playlists");
+      }
     };
-    void fetchPlaylists();
+
+    void load();
+    return () => {
+      active = false;
+    };
   }, []);
 
   return { playlists, loading };
-};
+}
 
-const usePlaylistTracks = (playlistUri: string | undefined) => {
-  const [tracks, setTracks] = useState<ReadonlyArray<Track>>([]);
-  const [metadata, setMetadata] = useState<TrackMetadata>({
-    playCounts: new Map(),
-    durations: new Map(),
-    isrcs: new Map(),
-    releaseDates: new Map(),
-  });
+function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) {
+  const [tracks, setTracks] = useState<ReadonlyArray<DetailedTrack>>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -265,465 +277,331 @@ const usePlaylistTracks = (playlistUri: string | undefined) => {
     setLoading(true);
 
     const loadData = async () => {
-      try {
-        perf.start("LOAD ALL DATA");
+      perf.start("LOAD ALL DATA");
 
-        const { items } = await fetchAllPlaylistTracks(playlistUri);
-        if (abortController.signal.aborted) return;
+      const { items } = await fetchAllPlaylistTracks(playlistUri);
+      if (abortController.signal.aborted) return;
 
-        const castItems = items as Track[];
-        setTracks(castItems);
+      const rawTracks = items as Track[];
+      const trackUris = rawTracks.map((t) => t.uri);
 
-        const dbTracks = await db.tracks.bulkGet(castItems.map((t) => t.uri));
-        const cached = new Map(
-          dbTracks.filter((t): t is DbTrack => t != null).map((t) => [t.trackUri, t]),
-        );
+      const dbRecords = await db.tracks.bulkGet(trackUris);
+      const cacheMap = new Map(
+        dbRecords.filter((t): t is DbTrack => !!t).map((t) => [t.trackUri, t]),
+      );
 
-        const now = Temporal.Now.plainDateTimeISO();
+      const now = Temporal.Now.instant();
+      const needsUpdate: Track[] = [];
+      const detailedTracks: DetailedTrack[] = [];
 
-        const needsUpdate = castItems.filter((t) => {
-          const c = cached.get(t.uri);
-          if (!c) return true;
+      const regex = new RegExp(
+        `\\b(${[...settings.defaultNormaliseWords, ...settings.customNormaliseWords]
+          .map(escapeRegExp)
+          .join("|")})\\b`,
+        "gi",
+      );
 
-          const hasMissingData =
-            c.trackPlayCount == null || c.trackDuration == null || c.trackIsrc == null;
-          if (hasMissingData) return true;
+      for (const track of rawTracks) {
+        const cached = cacheMap.get(track.uri);
+        let isStale = false;
 
-          if (!c.lastUpdated) return true;
+        if (!cached) {
+          isStale = true;
+        } else if (cached.lastUpdated) {
           try {
-            const lastUpdate = Temporal.PlainDateTime.from(c.lastUpdated);
-            const durationSince = now.since(lastUpdate);
-            if (durationSince.total({ unit: "days" }) >= 30) return true;
-          } catch (_e) {
-            return true;
+            const lastUpdate = Temporal.Instant.from(cached.lastUpdated);
+            if (now.since(lastUpdate).total("days") >= 30) isStale = true;
+          } catch {
+            isStale = true;
           }
-
-          return false;
-        });
-
-        const playCounts = new Map<string, number>();
-        const durations = new Map<string, number>();
-        const isrcs = new Map<string, string>();
-        const albumReleaseDates = new Map<string, string>();
-
-        cached.forEach((c) => {
-          if (c.trackPlayCount != null) playCounts.set(c.trackUri, c.trackPlayCount);
-          if (c.trackDuration != null) durations.set(c.trackUri, c.trackDuration);
-          if (c.trackIsrc != null) isrcs.set(c.trackUri, c.trackIsrc);
-          if (c.albumReleaseDate != null) albumReleaseDates.set(c.trackUri, c.albumReleaseDate);
-        });
-
-        if (needsUpdate.length > 0) {
-          const [graphQLData, webAPIData] = await Promise.all([
-            fetchGraphQLForTracks(needsUpdate.map((t) => t.album.uri)),
-            fetchWebAPIForTracks(needsUpdate.map((t) => t.uri)),
-          ]);
-
-          if (abortController.signal.aborted) return;
-
-          const dbUpdates: DbTrack[] = [];
-          const currentTimestamp = now.toString();
-
-          needsUpdate.forEach((t) => {
-            const graphQLMeta = graphQLData.get(t.uri) as any;
-            const webAPIMeta = webAPIData.get(t.uri) as any;
-
-            const duration = graphQLMeta?.duration?.totalMilliseconds ?? null;
-            const playcount = graphQLMeta?.playcount ? Number(graphQLMeta.playcount) : null;
-            const isrc =
-              webAPIMeta?.external_ids?.isrc ??
-              webAPIMeta?.external_id?.find((e: any) => e?.type === "isrc")?.id;
-
-            const rawDate = webAPIMeta?.album?.date;
-            let albumReleaseDate: string | null = null;
-
-            if (typeof rawDate === "string") {
-              albumReleaseDate = rawDate;
-            } else if (rawDate && typeof rawDate === "object") {
-              const { year, month, day } = rawDate;
-              if (year) {
-                albumReleaseDate = String(year);
-                if (month) {
-                  albumReleaseDate += `-${String(month).padStart(2, "0")}`;
-                  if (day) {
-                    albumReleaseDate += `-${String(day).padStart(2, "0")}`;
-                  }
-                }
-              }
-            }
-
-            if (playcount != null) playCounts.set(t.uri, playcount);
-            if (duration != null) durations.set(t.uri, duration);
-            if (isrc != null) isrcs.set(t.uri, isrc);
-            if (albumReleaseDate != null) albumReleaseDates.set(t.uri, albumReleaseDate);
-
-            dbUpdates.push({
-              trackUri: t.uri,
-              trackName: t.name,
-              trackDuration: duration,
-              trackPlayCount: playcount,
-              trackIsrc: isrc,
-              albumUri: t.album.uri,
-              albumReleaseDate: albumReleaseDate,
-              lastUpdated: currentTimestamp, // Save readable timestamp
-            });
-          });
-
-          await db.tracks.bulkPut(dbUpdates);
+        } else {
+          isStale = true;
         }
 
-        if (!abortController.signal.aborted) {
-          setMetadata({ playCounts, durations, isrcs, releaseDates: albumReleaseDates });
-          setLoading(false);
-          perf.end("LOAD ALL DATA");
-        }
-      } catch (e) {
-        console.error("Failed to load tracks", e);
-        if (!abortController.signal.aborted) setLoading(false);
+        if (isStale) needsUpdate.push(track);
+
+        detailedTracks.push({
+          ...track,
+          playCount: cached?.trackPlayCount ?? null,
+          duration: cached?.trackDuration ?? null,
+          isrc: cached?.trackIsrc ?? null,
+          releaseDate: cached?.albumReleaseDate ?? null,
+          normalisedName: track.name.toLowerCase().trim(),
+          normalisedFuzzy: normaliseString(track.name, regex),
+        });
       }
+
+      if (abortController.signal.aborted) return;
+
+      setTracks(detailedTracks);
+
+      if (needsUpdate.length === 0) {
+        setLoading(false);
+        perf.end("LOAD ALL DATA");
+        return;
+      }
+
+      const [graphQLResult, webAPIResult] = await Promise.allSettled([
+        fetchGraphQLForTracks(needsUpdate.map((t) => t.album.uri)),
+        fetchWebAPIForTracks(needsUpdate.map((t) => t.uri)),
+      ]);
+
+      if (abortController.signal.aborted) return;
+
+      const graphQLData = graphQLResult.status === "fulfilled" ? graphQLResult.value : null;
+      const webAPIData = webAPIResult.status === "fulfilled" ? webAPIResult.value : null;
+
+      const updates: DbTrack[] = [];
+      const lastUpdated = now.toString();
+      const updatedDetailedTracks = [...detailedTracks];
+
+      needsUpdate.forEach((track) => {
+        const graphQLTrack = graphQLData?.get(track.uri) as any;
+        const webAPITrack = webAPIData?.get(track.uri) as any;
+
+        const duration = graphQLTrack?.duration?.totalMilliseconds ?? null;
+        const playCount = graphQLTrack?.playcount ? Number(graphQLTrack.playcount) : null;
+        const isrc =
+          webAPITrack?.external_ids?.isrc ??
+          webAPITrack?.external_id?.find((e: any) => e?.type === "isrc")?.id ??
+          null;
+
+        const rawDate = webAPITrack?.album?.date;
+        let releaseDate: string | null = null;
+        if (typeof rawDate === "string") releaseDate = rawDate;
+        else if (rawDate?.year) {
+          releaseDate = `${rawDate.year}`;
+          if (rawDate.month) releaseDate += `-${String(rawDate.month).padStart(2, "0")}`;
+          if (rawDate.day) releaseDate += `-${String(rawDate.day).padStart(2, "0")}`;
+        }
+
+        updates.push({
+          trackUri: track.uri,
+          trackName: track.name,
+          trackDuration: duration,
+          trackPlayCount: playCount,
+          trackIsrc: isrc,
+          albumUri: track.album.uri,
+          albumReleaseDate: releaseDate,
+          lastUpdated,
+        });
+
+        const index = updatedDetailedTracks.findIndex((t) => t.uid === track.uid);
+        if (index !== -1) {
+          updatedDetailedTracks[index] = {
+            ...updatedDetailedTracks[index],
+            playCount,
+            duration,
+            isrc,
+            releaseDate,
+          };
+        }
+      });
+
+      await db.tracks.bulkPut(updates);
+      if (!abortController.signal.aborted) {
+        setTracks(updatedDetailedTracks);
+        perf.end("LOAD ALL DATA");
+      }
+
+      if (!abortController.signal.aborted) setLoading(false);
     };
 
     void loadData();
     return () => abortController.abort();
-  }, [playlistUri]);
+  }, [playlistUri, settings]);
 
-  return { tracks, metadata, loading, setTracks };
-};
+  return { tracks, loading, setTracks };
+}
 
-const useDuplicateFinder = (
-  tracks: ReadonlyArray<Track>,
-  metadata: TrackMetadata,
+function useDuplicateFinder(
+  tracks: ReadonlyArray<DetailedTrack>,
   settings: Settings,
-): DuplicateGroups => {
-  const { playCounts, durations, isrcs, releaseDates } = metadata;
-  const { defaultNormalizeWords, customNormalizeWords, groupSettings } = settings;
+): DuplicateResults {
+  return useMemo(() => {
+    perf.start("Dupe Algorithm: Compute");
+    const results: DuplicateResults = {
+      exact: [],
+      isrc: [],
+      probable: [],
+      likely: [],
+      possible: [],
+      maybe: [],
+    };
 
-  perf.start("Dupe Algorithm: Compute");
-
-  const results: Record<DuplicateCategory, DuplicateGroup[]> = {
-    exact: [],
-    isrc: [],
-    probable: [],
-    likely: [],
-    possible: [],
-    maybe: [],
-  };
-
-  if (tracks.length === 0) return results;
-
-  const allNormWords = [...defaultNormalizeWords, ...customNormalizeWords];
-  const regex = createNormalizationRegex(allNormWords);
-
-  let pool = tracks.map((t) => ({
-    track: t,
-    normName: t.name.toLowerCase().trim(),
-    normFuzzy: normalizeStringOptimized(t.name, regex),
-    artists: new Set(t.artists.map((a) => a.name.toLowerCase())),
-    isrc: isrcs.get(t.uri),
-    duration: durations.get(t.uri),
-    uid: t.uid,
-  }));
-
-  const usedUids = new Set<string>();
-
-  const processGroup = (group: typeof pool, category: DuplicateCategory) => {
-    if (group.length < 2) return;
-
-    const sorted = [...group].sort((a, b) => {
-      const dateA = String(releaseDates.get(a.track.uri) || "9999");
-      const dateB = String(releaseDates.get(b.track.uri) || "9999");
-      if (dateA !== dateB) return dateA.localeCompare(dateB);
-
-      const playsA = playCounts.get(a.track.uri) ?? 0;
-      const playsB = playCounts.get(b.track.uri) ?? 0;
-      return playsB - playsA;
-    });
-
-    const main = sorted[0];
-    const duplicates = sorted.slice(1);
-
-    results[category].push({
-      mainTrack: main.track,
-      duplicates: duplicates.map((d) => d.track),
-    });
-
-    for (const item of group) {
-      usedUids.add(item.uid);
-    }
-  };
-
-  if (groupSettings.exact) {
-    const byUri = new Map<string, typeof pool>();
-    for (const p of pool) {
-      const list = byUri.get(p.track.uri) || [];
-      list.push(p);
-      byUri.set(p.track.uri, list);
-    }
-    for (const group of byUri.values()) {
-      processGroup(group, "exact");
-    }
-    pool = pool.filter((p) => !usedUids.has(p.uid));
-  }
-
-  if (groupSettings.isrc) {
-    const byIsrc = new Map<string, typeof pool>();
-    for (const p of pool) {
-      if (!p.isrc) continue;
-      const list = byIsrc.get(p.isrc) || [];
-      list.push(p);
-      byIsrc.set(p.isrc, list);
-    }
-    for (const group of byIsrc.values()) {
-      processGroup(group, "isrc");
-    }
-    pool = pool.filter((p) => !usedUids.has(p.uid));
-  }
-
-  if (groupSettings.probable) {
-    const byName = new Map<string, typeof pool>();
-    for (const p of pool) {
-      const list = byName.get(p.normName) || [];
-      list.push(p);
-      byName.set(p.normName, list);
+    if (tracks.length < 2) {
+      perf.end("Dupe Algorithm: Compute");
+      return results;
     }
 
-    byName.forEach((group) => {
-      if (group.length >= 2) {
-        const tempUsed = new Set<string>();
-        for (const c1 of group) {
-          if (tempUsed.has(c1.uid)) continue;
-          const match = group.filter(
-            (c2) =>
-              c1.uid === c2.uid ||
-              (!tempUsed.has(c2.uid) &&
-                c2.track.artists.some((a) => c1.artists.has(a.name.toLowerCase()))),
+    const { groupSettings } = settings;
+    let pool = [...tracks];
+    const consumedUids = new Set<string>();
+
+    const addGroup = (candidates: DetailedTrack[], category: DuplicateCategory) => {
+      if (candidates.length < 2) return;
+
+      const sorted = candidates.sort((a, b) => {
+        const pDiff = (b.playCount ?? 0) - (a.playCount ?? 0);
+        if (pDiff !== 0) return pDiff;
+        const dA = a.releaseDate ?? "9999";
+        const dB = b.releaseDate ?? "9999";
+        return dA.localeCompare(dB);
+      });
+
+      (results[category] as DuplicateGroup[]).push({
+        mainTrack: sorted[0],
+        duplicates: sorted.slice(1),
+      });
+
+      candidates.forEach((c) => {
+        consumedUids.add(c.uid);
+      });
+    };
+
+    const flushConsumed = (hardFlush = true) => {
+      pool = pool.filter((t) => !consumedUids.has(t.uid));
+      if (hardFlush) consumedUids.clear();
+    };
+
+    if (groupSettings.exact) {
+      const groups = Object.groupBy(pool, (t) => t.uri);
+      for (const uri in groups) {
+        const group = groups[uri];
+        if (group) addGroup(group, "exact");
+      }
+      flushConsumed();
+    }
+
+    if (groupSettings.isrc) {
+      const groups = Object.groupBy(pool, (t) => t.isrc || "");
+      for (const isrc in groups) {
+        const group = groups[isrc];
+        if (isrc && group) addGroup(group, "isrc");
+      }
+      flushConsumed();
+    }
+
+    const shareArtist = (a: DetailedTrack, b: DetailedTrack) => {
+      const aNames = new Set(a.artists.map((ar) => ar.name.toLowerCase()));
+      return b.artists.some((ar) => aNames.has(ar.name.toLowerCase()));
+    };
+
+    const similarDuration = (a: DetailedTrack, b: DetailedTrack) => {
+      if (a.duration == null || b.duration == null) return false;
+      return Math.abs(a.duration - b.duration) <= 5000;
+    };
+
+    if (groupSettings.probable) {
+      const groups = Object.groupBy(pool, (t) => t.normalisedName);
+      for (const name in groups) {
+        const cluster = groups[name];
+        if (!cluster) continue;
+        if (cluster.length < 2) continue;
+
+        const processed = new Set<string>();
+        for (const base of cluster) {
+          if (processed.has(base.uid)) continue;
+          const matches = cluster.filter(
+            (t) => base.uid === t.uid || (!processed.has(t.uid) && shareArtist(base, t)),
           );
-          if (match.length > 1) {
-            processGroup(match, "probable");
-            for (const m of match) tempUsed.add(m.uid);
+          if (matches.length > 1) {
+            addGroup(matches, "probable");
+            matches.forEach((m) => {
+              processed.add(m.uid);
+            });
           }
         }
       }
-    });
-    pool = pool.filter((p) => !usedUids.has(p.uid));
-  }
-
-  if (groupSettings.likely) {
-    const byName = new Map<string, typeof pool>();
-    for (const p of pool) {
-      const list = byName.get(p.normName) || [];
-      list.push(p);
-      byName.set(p.normName, list);
+      flushConsumed();
     }
 
-    byName.forEach((group) => {
-      if (group.length >= 2) {
-        const tempUsed = new Set<string>();
-        for (const c1 of group) {
-          if (tempUsed.has(c1.uid)) continue;
-          const c1Duration = c1.duration;
-          if (c1Duration == null) continue;
+    if (groupSettings.likely) {
+      const groups = Object.groupBy(pool, (t) => t.normalisedName);
+      for (const name in groups) {
+        const cluster = groups[name];
+        if (!cluster) continue;
+        if (cluster.length < 2) continue;
 
-          const match = group.filter(
-            (c2) =>
-              c1.uid === c2.uid ||
-              (!tempUsed.has(c2.uid) &&
-                c2.duration != null &&
-                Math.abs(c1Duration - c2.duration) <= 5000),
+        const processed = new Set<string>();
+        for (const base of cluster) {
+          if (processed.has(base.uid)) continue;
+          const matches = cluster.filter(
+            (t) => base.uid === t.uid || (!processed.has(t.uid) && similarDuration(base, t)),
           );
-          if (match.length > 1) {
-            processGroup(match, "likely");
-            for (const m of match) tempUsed.add(m.uid);
+          if (matches.length > 1) {
+            addGroup(matches, "likely");
+            matches.forEach((m) => {
+              processed.add(m.uid);
+            });
           }
         }
       }
-    });
-    pool = pool.filter((p) => !usedUids.has(p.uid));
-  }
-
-  if (groupSettings.possible) {
-    const byFuzzy = new Map<string, typeof pool>();
-    for (const p of pool) {
-      const list = byFuzzy.get(p.normFuzzy) || [];
-      list.push(p);
-      byFuzzy.set(p.normFuzzy, list);
+      flushConsumed();
     }
 
-    byFuzzy.forEach((group) => {
-      if (group.length >= 2) {
-        const tempUsed = new Set<string>();
-        for (const c1 of group) {
-          if (tempUsed.has(c1.uid)) continue;
-          const c1Duration = c1.duration;
-          if (c1Duration == null) continue;
+    if (groupSettings.possible) {
+      const groups = Object.groupBy(pool, (t) => t.normalisedFuzzy);
+      for (const name in groups) {
+        const cluster = groups[name];
+        if (!cluster) continue;
+        if (cluster.length < 2) continue;
 
-          const match = group.filter(
-            (c2) =>
-              c1.uid === c2.uid ||
-              (!tempUsed.has(c2.uid) &&
-                c2.duration != null &&
-                Math.abs(c1Duration - c2.duration) <= 5000),
+        const processed = new Set<string>();
+        for (const base of cluster) {
+          if (processed.has(base.uid)) continue;
+          const matches = cluster.filter(
+            (t) => base.uid === t.uid || (!processed.has(t.uid) && similarDuration(base, t)),
           );
-          if (match.length > 1) {
-            processGroup(match, "possible");
-            for (const m of match) tempUsed.add(m.uid);
+          if (matches.length > 1) {
+            addGroup(matches, "possible");
+            matches.forEach((m) => {
+              processed.add(m.uid);
+            });
           }
         }
       }
-    });
-    pool = pool.filter((p) => !usedUids.has(p.uid));
-  }
+      flushConsumed();
+    }
 
-  if (groupSettings.maybe) {
-    pool.sort((a, b) => a.normFuzzy.localeCompare(b.normFuzzy));
-    const LOOKAHEAD = 30;
+    if (groupSettings.maybe) {
+      pool.sort((a, b) => a.normalisedFuzzy.localeCompare(b.normalisedFuzzy));
 
-    for (let i = 0; i < pool.length; i++) {
-      const c1 = pool[i];
-      if (usedUids.has(c1.uid)) continue;
+      for (let i = 0; i < pool.length; i++) {
+        const base = pool[i];
+        if (consumedUids.has(base.uid)) continue;
 
-      const match = [c1];
-      const maxJ = Math.min(i + LOOKAHEAD, pool.length);
+        const matches = [base];
 
-      for (let j = i + 1; j < maxJ; j++) {
-        const c2 = pool[j];
-        if (usedUids.has(c2.uid)) continue;
-        if (c1.normFuzzy[0] !== c2.normFuzzy[0]) break;
+        for (let j = i + 1; j < Math.min(i + 30, pool.length); j++) {
+          const candidate = pool[j];
+          if (consumedUids.has(candidate.uid)) continue;
 
-        if (calculateSimilarity(c1.normFuzzy, c2.normFuzzy) >= 0.8) {
-          match.push(c2);
+          if (base.normalisedFuzzy[0] !== candidate.normalisedFuzzy[0]) break;
+
+          if (calculateSimilarity(base.normalisedFuzzy, candidate.normalisedFuzzy) >= 0.8) {
+            matches.push(candidate);
+          }
         }
-      }
 
-      if (match.length > 1) {
-        processGroup(match, "maybe");
+        if (matches.length > 1) addGroup(matches, "maybe");
       }
     }
-  }
 
-  perf.end("Dupe Algorithm: Compute");
-  return results;
-};
-
-function TrackDetails({
-  track,
-  playCounts,
-  releaseDates,
-}: {
-  track: Track;
-  playCounts: ReadonlyMap<string, number>;
-  releaseDates: ReadonlyMap<string, string>;
-}) {
-  const count = playCounts.get(track.uri);
-  const date = releaseDates.get(track.uri);
-  return (
-    <div className="track-details">
-      <div className="track-details__line">
-        <span className="track-details__artists">
-          Artists: {track.artists.map((a) => a.name).join(", ") || "N/A"}
-        </span>
-        <span className="track-details__album">Album: {track.album.name || "N/A"}</span>
-      </div>
-      <div className="track-details__line">
-        <span className="track-details__playcount">
-          Plays: {count != null ? count.toLocaleString() : "N/A"}
-        </span>
-        <span className="track-details__playcount">Released: {date || "Unknown"} </span>
-      </div>
-    </div>
-  );
+    perf.end("Dupe Algorithm: Compute");
+    return results;
+  }, [tracks, settings]);
 }
 
-function TrackControls({
-  trackUri,
-  duration: trackDuration,
-}: {
-  trackUri: string;
-  duration?: number;
-}) {
-  const { position, duration, isPlaying, togglePlay, handleSliderChange, handleSliderRelease } =
-    usePlayer(trackUri, trackDuration ?? 0);
-
-  const formatTime = (ms?: number) => {
-    if (ms == null || ms < 0) return "N/A";
-    const secs = Math.floor(ms / 1000);
-    return `${Math.floor(secs / 60)}:${(secs % 60).toString().padStart(2, "0")}`;
-  };
-
-  return (
-    <div className="duplicate-group__playback-controls">
-      <button className="duplicate-group__playback-button" onClick={togglePlay} type="button">
-        {isPlaying ? <Icons.React.pause /> : <Icons.React.play />}
-      </button>
-      <span className="slider-time">{formatTime(position)}</span>
-      <Slider
-        max={duration || 0}
-        min={0}
-        onChange={handleSliderChange}
-        onRelease={handleSliderRelease}
-        step={1}
-        value={position || 0}
-      />
-      <span className="slider-time">{formatTime(duration)}</span>
-    </div>
-  );
-}
-
-function DuplicateItem({
-  track,
-  category,
-  onDelete,
-  isSource,
-  metadata,
-}: {
-  track: Track;
-  category: DuplicateCategory;
-  onDelete: (c: DuplicateCategory, t: Track) => void;
-  isSource?: boolean;
-  metadata: TrackMetadata;
-}) {
-  return (
-    <div className={`duplicate-group__duplicate-item duplicate-group__item--${category}`}>
-      <div className="duplicate-group__duplicate-info">
-        <div className="duplicate-group__duplicate-content">
-          <span className="duplicate-group__duplicate-name">
-            {isSource && "Source: "}
-            {track.name}
-          </span>
-          <TrackDetails
-            playCounts={metadata.playCounts}
-            releaseDates={metadata.releaseDates}
-            track={track}
-          />
-        </div>
-        <button
-          className="duplicate-group__delete-button"
-          onClick={() => onDelete(category, track)}
-          type="button"
-        >
-          Delete
-        </button>
-      </div>
-      <div className="duplicate-group__actions">
-        <TrackControls duration={metadata.durations.get(track.uri)} trackUri={track.uri} />
-      </div>
-    </div>
-  );
-}
-
-function SettingsMenu() {
+const SettingsMenu = () => {
   const settings = useSettings();
 
-  const updateSetting = <K extends keyof Settings>(key: K, value: Settings[K]) =>
-    settingsStore.update({ ...settings, [key]: value });
+  const update = <T extends keyof Settings>(section: T, key: keyof Settings[T], val: boolean) => {
+    const next = { ...settings, [section]: { ...settings[section], [key]: val } };
+    settingsStore.update(next);
+  };
 
-  const updateToggle = (
-    section: "groupSettings" | "confirmSettings",
-    key: DuplicateCategory,
-    value: boolean,
-  ) => updateSetting(section, { ...settings[section], [key]: value });
-
-  const renderToggles = (
+  const renderSection = (
     title: string,
     section: "groupSettings" | "confirmSettings",
     labels: Record<DuplicateCategory, string>,
@@ -731,21 +609,21 @@ function SettingsMenu() {
     <section className="duplicate-settings__section">
       <h3 className="duplicate-settings__section-title">{title}</h3>
       <div className="duplicate-settings__options">
-        {DUPLICATE_CATEGORIES.map((key) => (
+        {CATEGORIES.map((cat) => (
           <OptionRow
-            desc={labels[key]}
-            key={key}
-            name={`${key}-${section}`}
-            onChange={(val) => updateToggle(section, key, Boolean(val))}
+            desc={labels[cat]}
+            key={cat}
+            name={`${section}-${cat}`}
+            onChange={(v) => update(section, cat, !!v)}
             option={
               {
                 type: "toggle",
-                name: key,
-                desc: labels[key],
-                defaultVal: DEFAULT_SETTINGS[section][key],
+                name: cat,
+                desc: labels[cat],
+                defaultVal: DEFAULT_SETTINGS[section][cat],
               } as Option
             }
-            value={settings[section][key]}
+            value={settings[section][cat]}
           />
         ))}
       </div>
@@ -754,7 +632,7 @@ function SettingsMenu() {
 
   return (
     <div className="duplicate-settings">
-      {renderToggles("Display Groups", "groupSettings", {
+      {renderSection("Display Groups", "groupSettings", {
         exact: "Exact Duplicates",
         isrc: "ISRC Match",
         probable: "Same Title & Artist",
@@ -762,7 +640,7 @@ function SettingsMenu() {
         possible: "Similar Title & Duration",
         maybe: "Fuzzy Matches",
       })}
-      {renderToggles("Confirm Delete", "confirmSettings", {
+      {renderSection("Confirm Delete", "confirmSettings", {
         exact: "Exact",
         isrc: "ISRC",
         probable: "Probable",
@@ -772,83 +650,122 @@ function SettingsMenu() {
       })}
     </div>
   );
-}
+};
 
-export function PlaylistDuplicateFinder({
-  selectedPlaylist: initialPlaylist,
-}: {
-  selectedPlaylist?: PlaylistSummary;
-}) {
-  const settings = useSettings();
-  const { playlists, loading: loadingPlaylists } = useOwnedPlaylists();
-  const [selectedPlaylist, setSelectedPlaylist] = useState(initialPlaylist);
-  const [view, setView] = useState<"finder" | "settings">("finder");
-
+const TrackPlaybackControl = ({ uri, duration }: { uri: string; duration: number | null }) => {
   const {
-    tracks,
-    metadata,
-    loading: loadingTracks,
-    setTracks,
-  } = usePlaylistTracks(selectedPlaylist?.uri);
-  const duplicateGroups = useDuplicateFinder(tracks, metadata, settings);
+    position,
+    duration: playerDuration,
+    isPlaying,
+    togglePlay,
+    handleSliderChange,
+    handleSliderRelease,
+  } = usePlayer(uri, duration ?? 0);
 
-  const renderStartTime = useRef(performance.now());
-  useEffect(() => {
-    const elapsed = performance.now() - renderStartTime.current;
-    if (elapsed > 10) {
-      console.log(`Render:React took ${elapsed.toFixed(2)}ms to render`);
-    }
-  });
-
-  const handleDelete = async (category: DuplicateCategory, track: Track) => {
-    const doDelete = async () => {
-      if (selectedPlaylist) {
-        setTracks((prev) => prev.filter((t) => t.uid !== track.uid));
-        await Spicetify.Platform.PlaylistAPI.remove(selectedPlaylist.uri, [{ uid: track.uid }]);
-      }
-    };
-
-    if (settings.confirmSettings[category]) {
-      ConfirmDialog({
-        titleText: "Remove Track",
-        descriptionText: `Remove "${track.name}"?`,
-        confirmText: "Remove",
-        onConfirm: () => void doDelete(),
-      });
-    } else {
-      await doDelete();
-    }
+  const formatTime = (ms: number | undefined) => {
+    if (ms == null || ms < 0) return "--:--";
+    const s = Math.floor(ms / 1000);
+    return `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
   };
 
-  const renderGroupList = (category: DuplicateCategory, title: string) => {
-    if (!settings.groupSettings[category]) return null;
-    const groups = duplicateGroups[category];
-    return (
-      <div className="duplicate-group">
-        <div className="duplicate-group__heading">
-          <div className="duplicate-group__heading-title">{title}</div>
-          <div className="duplicate-group__heading-length">{groups.length} found</div>
+  return (
+    <div className="duplicate-group__playback-controls">
+      <button className="duplicate-group__playback-button" onClick={togglePlay}>
+        {isPlaying ? <Icons.React.pause /> : <Icons.React.play />}
+      </button>
+      <span className="slider-time">{formatTime(position)}</span>
+      <Slider
+        max={playerDuration || 0}
+        min={0}
+        onChange={handleSliderChange}
+        onRelease={handleSliderRelease}
+        step={1}
+        value={position || 0}
+      />
+      <span className="slider-time">{formatTime(playerDuration)}</span>
+    </div>
+  );
+};
+
+const DuplicateRow = ({
+  track,
+  category,
+  onDelete,
+  isSource,
+}: {
+  track: DetailedTrack;
+  category: DuplicateCategory;
+  onDelete: (track: DetailedTrack) => void;
+  isSource?: boolean;
+}) => (
+  <div className={`duplicate-group__duplicate-item duplicate-group__item--${category}`}>
+    <div className="duplicate-group__duplicate-info">
+      <div className="duplicate-group__duplicate-content">
+        <span className="duplicate-group__duplicate-name">
+          {isSource && <strong>Source: </strong>}
+          {track.name}
+        </span>
+        <div className="track-details">
+          <div className="track-details__line">
+            <span className="track-details__artists">
+              Artists: {track.artists.map((a) => a.name).join(", ")}
+            </span>
+            <span className="track-details__album">Album: {track.album.name}</span>
+          </div>
+          <div className="track-details__line">
+            <span className="track-details__playcount">
+              Plays: {track.playCount?.toLocaleString() ?? "N/A"}
+            </span>
+            <span className="track-details__date">Released: {track.releaseDate ?? "Unknown"}</span>
+          </div>
         </div>
+      </div>
+      <button className="duplicate-group__delete-button" onClick={() => onDelete(track)}>
+        Delete
+      </button>
+    </div>
+    <div className="duplicate-group__actions">
+      <TrackPlaybackControl duration={track.duration} uri={track.uri} />
+    </div>
+  </div>
+);
+
+const GroupSection = ({
+  title,
+  category,
+  groups,
+  onDelete,
+}: {
+  title: string;
+  category: DuplicateCategory;
+  groups: ReadonlyArray<DuplicateGroup>;
+  onDelete: (cat: DuplicateCategory, t: DetailedTrack) => void;
+}) => {
+  return (
+    <div className="duplicate-group">
+      <div className="duplicate-group__heading">
+        <div className="duplicate-group__heading-title">{title}</div>
+        <div className="duplicate-group__heading-length">{groups.length} found</div>
+      </div>
+      {groups.length > 0 && (
         <div className="duplicate-group__list">
           {groups.map((g) => (
             <div
               className={`duplicate-group__item duplicate-group__item--${category}`}
               key={g.mainTrack.uid}
             >
-              <DuplicateItem
+              <DuplicateRow
                 category={category}
                 isSource
-                metadata={metadata}
-                onDelete={handleDelete}
+                onDelete={(t) => onDelete(category, t)}
                 track={g.mainTrack}
               />
               <div className="duplicate-group__duplicates-list">
                 {g.duplicates.map((dup) => (
-                  <DuplicateItem
+                  <DuplicateRow
                     category={category}
                     key={dup.uid}
-                    metadata={metadata}
-                    onDelete={handleDelete}
+                    onDelete={(t) => onDelete(category, t)}
                     track={dup}
                   />
                 ))}
@@ -856,8 +773,68 @@ export function PlaylistDuplicateFinder({
             </div>
           ))}
         </div>
-      </div>
-    );
+      )}
+    </div>
+  );
+};
+
+export function PlaylistDuplicateFinder({
+  selectedPlaylist: initialPlaylist,
+}: {
+  selectedPlaylist?: PlaylistSummary;
+}) {
+  const [view, setView] = useState<"finder" | "settings">("finder");
+  const [selectedUri, setSelectedUri] = useState<string | undefined>(initialPlaylist?.uri);
+
+  const settings = useSettings();
+  const { playlists, loading: playlistsLoading } = useOwnedPlaylists();
+
+  const currentPlaylist = useMemo(
+    () =>
+      playlists.find((p) => p.uri === selectedUri) ??
+      (selectedUri ? { uri: selectedUri, name: "Selected Playlist", type: "playlist" } : undefined),
+    [playlists, selectedUri],
+  );
+
+  const { tracks, loading: tracksLoading, setTracks } = usePlaylistTracks(selectedUri, settings);
+  const results = useDuplicateFinder(tracks, settings);
+
+  const renderStartTime = useRef(performance.now());
+  renderStartTime.current = performance.now();
+
+  useEffect(() => {
+    const elapsed = performance.now() - renderStartTime.current;
+    if (elapsed > 10) {
+      console.debug(`[DEBUG] Render:React took ${elapsed.toFixed(2)}ms to render`);
+    }
+  });
+
+  const handleDelete = async (category: DuplicateCategory, track: DetailedTrack) => {
+    const execute = async () => {
+      if (!currentPlaylist) return;
+      await Spicetify.Platform.PlaylistAPI.remove(currentPlaylist.uri, [{ uid: track.uid }]);
+      setTracks((prev) => prev.filter((t) => t.uid !== track.uid));
+    };
+
+    if (settings.confirmSettings[category]) {
+      ConfirmDialog({
+        titleText: "Remove Track",
+        descriptionText: `Are you sure you want to remove "${track.name}"? This cannot be undone`,
+        confirmText: "Remove",
+        onConfirm: () => void execute(),
+      });
+    } else {
+      void execute();
+    }
+  };
+
+  const labels: Record<DuplicateCategory, string> = {
+    exact: "Exact URI Matches",
+    isrc: "Same ISRC",
+    probable: "Same Title + Shared Artist",
+    likely: "Same Title + Duration (±5s)",
+    possible: "Similar Title + Duration (±5s)",
+    maybe: "Maybe Duplicates (Fuzzy)",
   };
 
   return (
@@ -869,16 +846,16 @@ export function PlaylistDuplicateFinder({
         <div className="modal__buttonContainer">
           <button
             className="modal__button"
-            onClick={() => setView(view === "finder" ? "settings" : "finder")}
-            type="button"
+            onClick={() => setView((v) => (v === "finder" ? "settings" : "finder"))}
           >
             <Icons.React.settings />
           </button>
-          <button className="modal__button" onClick={() => PopupModal.hide()} type="button">
+          <button className="modal__button" onClick={() => PopupModal.hide()}>
             <Icons.React.close size={18} />
           </button>
         </div>
       </div>
+
       <div className="find-duplicates__content">
         {view === "settings" ? (
           <SettingsMenu />
@@ -887,28 +864,32 @@ export function PlaylistDuplicateFinder({
             <div className="find-duplicates__header">
               <span className="find-duplicates__header-label">Select Playlist:</span>
               <Dropdown
-                disabled={loadingPlaylists || loadingTracks}
-                onChange={(uri) =>
-                  setSelectedPlaylist(playlists.find((p) => p.uri === uri) ?? undefined)
-                }
+                disabled={playlistsLoading || tracksLoading}
+                onChange={setSelectedUri}
                 options={playlists.map((p) => ({ value: p.uri, label: p.name }))}
-                value={selectedPlaylist?.uri ?? ""}
+                value={selectedUri ?? ""}
               />
             </div>
-            {loadingTracks ? (
+
+            {tracksLoading ? (
               <div className="find-duplicates__loading">
-                {/*@ts-expect-error*/}
-                <UI.ProgressDots size={"medium"} />
+                {/* @ts-expect-error Spotiofy thingy */}
+                <UI.ProgressDots size="medium" />
               </div>
             ) : (
-              <>
-                {renderGroupList("exact", "Exact URI Matches")}
-                {renderGroupList("isrc", "Same ISRC")}
-                {renderGroupList("probable", "Same Title + Shared Artist")}
-                {renderGroupList("likely", "Same Title + Same Duration (±5s)")}
-                {renderGroupList("possible", "Similar Title + Same Duration (±5s)")}
-                {renderGroupList("maybe", "Maybe Duplicates (Very likely incorrect)")}
-              </>
+              CATEGORIES.map((cat) => {
+                if (!settings.groupSettings[cat]) return null;
+
+                return (
+                  <GroupSection
+                    category={cat}
+                    groups={results[cat]}
+                    key={cat}
+                    onDelete={handleDelete}
+                    title={labels[cat]}
+                  />
+                );
+              })
             )}
           </>
         )}
