@@ -58,7 +58,7 @@ export function ConfirmDialog({
 
     useEffect(() => {
       onOpen?.();
-    }, [onOpen]);
+    }, []);
 
     useEffect(() => {
       if (isOpen) {

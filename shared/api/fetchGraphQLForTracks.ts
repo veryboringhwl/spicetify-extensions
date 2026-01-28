@@ -1,3 +1,5 @@
+//maybe there is internal album endpoint i can use
+
 export async function fetchGraphQLForTracks(
   albumURIs: Array<string>,
 ): Promise<Map<string, object>> {

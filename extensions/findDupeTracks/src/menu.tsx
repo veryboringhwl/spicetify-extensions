@@ -1,11 +1,10 @@
 import { Temporal } from "@js-temporal/polyfill";
-import Dexie, { type Table } from "dexie";
+import { Dexie, type Table } from "dexie";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { fetchAllLibraryContents } from "../../../shared/api/fetchAllLibraryContents.ts";
 import { fetchAllPlaylistTracks } from "../../../shared/api/fetchAllPlaylistTracks.ts";
 import { fetchGraphQLForTracks } from "../../../shared/api/fetchGraphQLForTracks.ts";
 import { fetchWebAPIForTracks } from "../../../shared/api/fetchWebAPIForTracks.ts";
-import { ConfirmDialog } from "../../../shared/components/confirmDialog.tsx";
 import { Dropdown } from "../../../shared/components/dropdown.tsx";
 import { Icons } from "../../../shared/components/icons.tsx";
 import { type Option, OptionRow } from "../../../shared/components/optionRow.tsx";
@@ -310,19 +309,28 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
 
         if (!cached) {
           isStale = true;
-        } else if (cached.lastUpdated) {
-          try {
-            const lastUpdate = Temporal.Instant.from(cached.lastUpdated);
-            if (now.since(lastUpdate).total("days") >= 30) isStale = true;
-          } catch {
+        } else {
+          const hasMissingData =
+            cached.trackPlayCount === null ||
+            cached.trackDuration === null ||
+            cached.trackIsrc === null ||
+            cached.albumReleaseDate === null;
+
+          if (hasMissingData) {
+            isStale = true;
+          } else if (cached.lastUpdated) {
+            try {
+              const lastUpdate = Temporal.Instant.from(cached.lastUpdated);
+              if (now.since(lastUpdate).total("days") >= 30) isStale = true;
+            } catch {
+              isStale = true;
+            }
+          } else {
             isStale = true;
           }
-        } else {
-          isStale = true;
         }
 
         if (isStale) needsUpdate.push(track);
-
         detailedTracks.push({
           ...track,
           playCount: cached?.trackPlayCount ?? null,
@@ -344,9 +352,23 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
         return;
       }
 
+      const tracksNeedingGraphQL = needsUpdate.filter((t) => {
+        const c = cacheMap.get(t.uri);
+        return !c || c.trackDuration === null || c.trackPlayCount === null;
+      });
+
+      const tracksNeedingWebAPI = needsUpdate.filter((t) => {
+        const c = cacheMap.get(t.uri);
+        return !c || c.trackIsrc === null || c.albumReleaseDate === null;
+      });
+
       const [graphQLResult, webAPIResult] = await Promise.allSettled([
-        fetchGraphQLForTracks(needsUpdate.map((t) => t.album.uri)),
-        fetchWebAPIForTracks(needsUpdate.map((t) => t.uri)),
+        tracksNeedingGraphQL.length > 0
+          ? fetchGraphQLForTracks(tracksNeedingGraphQL.map((t) => t.album.uri))
+          : Promise.resolve(new Map()),
+        tracksNeedingWebAPI.length > 0
+          ? fetchWebAPIForTracks(tracksNeedingWebAPI.map((t) => t.uri))
+          : Promise.resolve(new Map()),
       ]);
 
       if (abortController.signal.aborted) return;
@@ -359,24 +381,36 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
       const updatedDetailedTracks = [...detailedTracks];
 
       needsUpdate.forEach((track) => {
+        const cached = cacheMap.get(track.uri);
         const graphQLTrack = graphQLData?.get(track.uri) as any;
         const webAPITrack = webAPIData?.get(track.uri) as any;
 
-        const duration = graphQLTrack?.duration?.totalMilliseconds ?? null;
-        const playCount = graphQLTrack?.playcount ? Number(graphQLTrack.playcount) : null;
-        const isrc =
-          webAPITrack?.external_ids?.isrc ??
-          webAPITrack?.external_id?.find((e: any) => e?.type === "isrc")?.id ??
-          null;
+        const fetchedDuration = graphQLTrack?.duration?.totalMilliseconds ?? null;
+        const duration = fetchedDuration ?? cached?.trackDuration ?? null;
 
-        const rawDate = webAPITrack?.album?.date;
-        let releaseDate: string | null = null;
-        if (typeof rawDate === "string") releaseDate = rawDate;
-        else if (rawDate?.year) {
-          releaseDate = `${rawDate.year}`;
-          if (rawDate.month) releaseDate += `-${String(rawDate.month).padStart(2, "0")}`;
-          if (rawDate.day) releaseDate += `-${String(rawDate.day).padStart(2, "0")}`;
+        const fetchedPlayCount = graphQLTrack?.playcount ? Number(graphQLTrack.playcount) : null;
+        const playCount = fetchedPlayCount ?? cached?.trackPlayCount ?? null;
+
+        let fetchedIsrc = null;
+        if (webAPITrack) {
+          fetchedIsrc =
+            webAPITrack?.external_ids?.isrc ??
+            webAPITrack?.external_id?.find((e: any) => e?.type === "isrc")?.id ??
+            null;
         }
+        const isrc = fetchedIsrc ?? cached?.trackIsrc ?? null;
+
+        let fetchedReleaseDate: string | null = null;
+        if (webAPITrack) {
+          const rawDate = webAPITrack?.album?.date;
+          if (typeof rawDate === "string") fetchedReleaseDate = rawDate;
+          else if (rawDate?.year) {
+            fetchedReleaseDate = `${rawDate.year}`;
+            if (rawDate.month) fetchedReleaseDate += `-${String(rawDate.month).padStart(2, "0")}`;
+            if (rawDate.day) fetchedReleaseDate += `-${String(rawDate.day).padStart(2, "0")}`;
+          }
+        }
+        const releaseDate = fetchedReleaseDate ?? cached?.albumReleaseDate ?? null;
 
         updates.push({
           trackUri: track.uri,
@@ -462,9 +496,9 @@ function useDuplicateFinder(
       });
     };
 
-    const flushConsumed = (hardFlush = true) => {
+    const flushConsumed = () => {
       pool = pool.filter((t) => !consumedUids.has(t.uid));
-      if (hardFlush) consumedUids.clear();
+      consumedUids.clear();
     };
 
     if (groupSettings.exact) {
@@ -788,6 +822,10 @@ export function PlaylistDuplicateFinder({
 }) {
   const [view, setView] = useState<"finder" | "settings">("finder");
   const [selectedUri, setSelectedUri] = useState<string | undefined>(initialPlaylist?.uri);
+  const [pendingDelete, setPendingDelete] = useState<{
+    track: DetailedTrack;
+    category: DuplicateCategory;
+  } | null>(null);
 
   const settings = useSettings();
   const { playlists, loading: playlistsLoading } = useOwnedPlaylists();
@@ -812,23 +850,25 @@ export function PlaylistDuplicateFinder({
     }
   });
 
-  const handleDelete = async (category: DuplicateCategory, track: DetailedTrack) => {
-    const execute = async () => {
-      if (!currentPlaylist) return;
-      await Spicetify.Platform.PlaylistAPI.remove(currentPlaylist.uri, [{ uid: track.uid }]);
-      setTracks((prev) => prev.filter((t) => t.uid !== track.uid));
-    };
+  const executeDelete = async (track: DetailedTrack) => {
+    if (!currentPlaylist) return;
+    await Spicetify.Platform.PlaylistAPI.remove(currentPlaylist.uri, [{ uid: track.uid }]);
+    setTracks((prev) => prev.filter((t) => t.uid !== track.uid));
+  };
 
+  const handleDelete = (category: DuplicateCategory, track: DetailedTrack) => {
     if (settings.confirmSettings[category]) {
-      ConfirmDialog({
-        titleText: "Remove Track",
-        descriptionText: `Are you sure you want to remove "${track.name}"? This cannot be undone`,
-        confirmText: "Remove",
-        onConfirm: () => void execute(),
-      });
+      setPendingDelete({ track, category });
     } else {
-      void execute();
+      void executeDelete(track);
     }
+  };
+
+  const handleConfirmDelete = () => {
+    if (pendingDelete) {
+      void executeDelete(pendingDelete.track);
+    }
+    setPendingDelete(null);
   };
 
   const labels: Record<DuplicateCategory, string> = {
@@ -841,62 +881,78 @@ export function PlaylistDuplicateFinder({
   };
 
   return (
-    <div className="find-duplicates">
-      <div className="modal__header">
-        <h1 className="modal__title">
-          {view === "finder" ? "Playlist Duplicate Finder" : "Settings"}
-        </h1>
-        <div className="modal__buttonContainer">
-          <button
-            className="modal__button"
-            onClick={() => setView((v) => (v === "finder" ? "settings" : "finder"))}
-          >
-            <Icons.React.settings />
-          </button>
-          <button className="modal__button" onClick={() => PopupModal.hide()}>
-            <Icons.React.close size={18} />
-          </button>
+    <>
+      <Spicetify.ReactComponent.ConfirmDialog
+        cancelText="Cancel"
+        confirmText="Remove"
+        descriptionText={
+          pendingDelete
+            ? `Are you sure you want to remove "${pendingDelete.track.name}"? This cannot be undone.`
+            : ""
+        }
+        isOpen={pendingDelete !== null}
+        onClose={() => setPendingDelete(null)}
+        onConfirm={handleConfirmDelete}
+        onOutside={() => setPendingDelete(null)}
+        titleText="Remove Track"
+      />
+      <div className="find-duplicates">
+        <div className="modal__header">
+          <h1 className="modal__title">
+            {view === "finder" ? "Playlist Duplicate Finder" : "Settings"}
+          </h1>
+          <div className="modal__buttonContainer">
+            <button
+              className="modal__button"
+              onClick={() => setView((v) => (v === "finder" ? "settings" : "finder"))}
+            >
+              <Icons.React.settings />
+            </button>
+            <button className="modal__button" onClick={() => PopupModal.hide()}>
+              <Icons.React.close size={18} />
+            </button>
+          </div>
+        </div>
+
+        <div className="find-duplicates__content">
+          {view === "settings" ? (
+            <SettingsMenu />
+          ) : (
+            <>
+              <div className="find-duplicates__header">
+                <span className="find-duplicates__header-label">Select Playlist:</span>
+                <Dropdown
+                  disabled={playlistsLoading || tracksLoading}
+                  onChange={setSelectedUri}
+                  options={playlists.map((p) => ({ value: p.uri, label: p.name }))}
+                  value={selectedUri ?? ""}
+                />
+              </div>
+
+              {tracksLoading ? (
+                <div className="find-duplicates__loading">
+                  {/* @ts-expect-error Spotiofy thingy */}
+                  <UI.ProgressDots size="medium" />
+                </div>
+              ) : (
+                CATEGORIES.map((cat) => {
+                  if (!settings.groupSettings[cat]) return null;
+
+                  return (
+                    <GroupSection
+                      category={cat}
+                      groups={results[cat]}
+                      key={cat}
+                      onDelete={handleDelete}
+                      title={labels[cat]}
+                    />
+                  );
+                })
+              )}
+            </>
+          )}
         </div>
       </div>
-
-      <div className="find-duplicates__content">
-        {view === "settings" ? (
-          <SettingsMenu />
-        ) : (
-          <>
-            <div className="find-duplicates__header">
-              <span className="find-duplicates__header-label">Select Playlist:</span>
-              <Dropdown
-                disabled={playlistsLoading || tracksLoading}
-                onChange={setSelectedUri}
-                options={playlists.map((p) => ({ value: p.uri, label: p.name }))}
-                value={selectedUri ?? ""}
-              />
-            </div>
-
-            {tracksLoading ? (
-              <div className="find-duplicates__loading">
-                {/* @ts-expect-error Spotiofy thingy */}
-                <UI.ProgressDots size="medium" />
-              </div>
-            ) : (
-              CATEGORIES.map((cat) => {
-                if (!settings.groupSettings[cat]) return null;
-
-                return (
-                  <GroupSection
-                    category={cat}
-                    groups={results[cat]}
-                    key={cat}
-                    onDelete={handleDelete}
-                    title={labels[cat]}
-                  />
-                );
-              })
-            )}
-          </>
-        )}
-      </div>
-    </div>
+    </>
   );
 }
