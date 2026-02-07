@@ -20,9 +20,10 @@ type BaseNodeInfo = {
   occurrences: Set<string>;
 };
 
+// 1. UPDATED: Added isAsync to the function kind
 type NodeInfo =
   | (BaseNodeInfo & { kind: "object"; props: Map<string, string> })
-  | (BaseNodeInfo & { kind: "function"; arity: number })
+  | (BaseNodeInfo & { kind: "function"; arity: number; isAsync: boolean })
   | (BaseNodeInfo & { kind: "array"; elements: string[] })
   | (BaseNodeInfo & { kind: "map"; mapEntries: Array<[string, string]> })
   | (BaseNodeInfo & { kind: "set"; elements: string[] });
@@ -33,6 +34,7 @@ export const generateTypes = (rootObject: any, rootTypeName: string): string => 
 
   const runtimeUsername: string | null = (() => {
     try {
+      // @ts-expect-error
       return typeof Spicetify?.Platform?.username !== "undefined"
         ? String(Spicetify.Platform.username)
         : null;
@@ -128,7 +130,7 @@ export const generateTypes = (rootObject: any, rootTypeName: string): string => 
         info = { ...baseInfo, kind, props: new Map() };
         break;
       case "function":
-        info = { ...baseInfo, kind, arity: 0 };
+        info = { ...baseInfo, kind, arity: 0, isAsync: false };
         break;
       case "array":
         info = { ...baseInfo, kind, elements: [] };
@@ -197,7 +199,20 @@ export const generateTypes = (rootObject: any, rootTypeName: string): string => 
 
     if (typeof value === "function") {
       const { id, info, isNew } = getNodeFor(value, path, "function");
-      if (isNew) info.arity = value.length;
+      if (isNew) {
+        info.arity = value.length;
+        try {
+          const funcStr = value.toString();
+          if (
+            value.constructor.name === "AsyncFunction" ||
+            funcStr.startsWith("async") ||
+            funcStr.includes("__awaiter") ||
+            funcStr.includes("return new Promise")
+          ) {
+            info.isAsync = true;
+          }
+        } catch {}
+      }
       return id;
     }
 
@@ -213,13 +228,13 @@ export const generateTypes = (rootObject: any, rootTypeName: string): string => 
             continue;
           }
           seenKeys.add(key);
-          const propPath = `${path}.${key}`;
+          const propPath = `${path}.${String(key)}`;
           try {
             const propVal = value[key as keyof typeof value];
             const token = generateTypeToken(propVal, propPath);
-            info.props.set(key, token);
+            info.props.set(String(key), token);
           } catch {
-            info.props.set(key, "any /* inaccessible */");
+            info.props.set(String(key), "any /* inaccessible */");
           }
         }
         currentProto = Object.getPrototypeOf(currentProto);
@@ -269,7 +284,8 @@ export const generateTypes = (rootObject: any, rootTypeName: string): string => 
     switch (node.kind) {
       case "function": {
         const args = Array.from({ length: node.arity }, (_, i) => `arg${i}: any`).join(", ");
-        return `export type ${finalName} = (${args}) => unknown;`;
+        const returnType = node.isAsync ? "Promise<unknown>" : "unknown";
+        return `export type ${finalName} = (${args}) => ${returnType};`;
       }
       case "array":
       case "set": {

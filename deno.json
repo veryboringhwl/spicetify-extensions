@@ -21,7 +21,6 @@
     "babel-plugin-react-compiler": "npm:babel-plugin-react-compiler@19.1.0-rc.3",
     "esbuild-plugin-babel": "npm:esbuild-plugin-babel@0.2.3",
     "dexie": "npm:dexie@^4.2.1",
-    "esbuild-plugin-swc": "npm:esbuild-plugin-swc@^1.0.1",
     "react": "https://esm.sh/react@19.2.3",
     "react-compiler-runtime": "npm:react-compiler-runtime@19.1.0-rc.3",
     "react-dom": "https://esm.sh/react-dom@19.2.3",

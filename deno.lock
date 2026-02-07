@@ -16,7 +16,6 @@
     "npm:babel-plugin-react-compiler@19.1.0-rc.3": "19.1.0-rc.3",
     "npm:dexie@^4.2.1": "4.2.1",
     "npm:esbuild-plugin-babel@0.2.3": "0.2.3_@babel+core@7.28.4",
-    "npm:esbuild-plugin-swc@^1.0.1": "1.0.1",
     "npm:react-compiler-runtime@19.1.0-rc.3": "19.1.0-rc.3_react@19.1.1"
   },
   "jsr": {
@@ -400,85 +399,6 @@
         "jsbi"
       ]
     },
-    "@swc/core-darwin-arm64@1.15.10": {
-      "integrity": "sha512-U72pGqmJYbjrLhMndIemZ7u9Q9owcJczGxwtfJlz/WwMaGYAV/g4nkGiUVk/+QSX8sFCAjanovcU1IUsP2YulA==",
-      "os": ["darwin"],
-      "cpu": ["arm64"]
-    },
-    "@swc/core-darwin-x64@1.15.10": {
-      "integrity": "sha512-NZpDXtwHH083L40xdyj1sY31MIwLgOxKfZEAGCI8xHXdHa+GWvEiVdGiu4qhkJctoHFzAEc7ZX3GN5phuJcPuQ==",
-      "os": ["darwin"],
-      "cpu": ["x64"]
-    },
-    "@swc/core-linux-arm-gnueabihf@1.15.10": {
-      "integrity": "sha512-ioieF5iuRziUF1HkH1gg1r93e055dAdeBAPGAk40VjqpL5/igPJ/WxFHGvc6WMLhUubSJI4S0AiZAAhEAp1jDg==",
-      "os": ["linux"],
-      "cpu": ["arm"]
-    },
-    "@swc/core-linux-arm64-gnu@1.15.10": {
-      "integrity": "sha512-tD6BClOrxSsNus9cJL7Gxdv7z7Y2hlyvZd9l0NQz+YXzmTWqnfzLpg16ovEI7gknH2AgDBB5ywOsqu8hUgSeEQ==",
-      "os": ["linux"],
-      "cpu": ["arm64"]
-    },
-    "@swc/core-linux-arm64-musl@1.15.10": {
-      "integrity": "sha512-4uAHO3nbfbrTcmO/9YcVweTQdx5fN3l7ewwl5AEK4yoC4wXmoBTEPHAVdKNe4r9+xrTgd4BgyPsy0409OjjlMw==",
-      "os": ["linux"],
-      "cpu": ["arm64"]
-    },
-    "@swc/core-linux-x64-gnu@1.15.10": {
-      "integrity": "sha512-W0h9ONNw1pVIA0cN7wtboOSTl4Jk3tHq+w2cMPQudu9/+3xoCxpFb9ZdehwCAk29IsvdWzGzY6P7dDVTyFwoqg==",
-      "os": ["linux"],
-      "cpu": ["x64"]
-    },
-    "@swc/core-linux-x64-musl@1.15.10": {
-      "integrity": "sha512-XQNZlLZB62S8nAbw7pqoqwy91Ldy2RpaMRqdRN3T+tAg6Xg6FywXRKCsLh6IQOadr4p1+lGnqM/Wn35z5a/0Vw==",
-      "os": ["linux"],
-      "cpu": ["x64"]
-    },
-    "@swc/core-win32-arm64-msvc@1.15.10": {
-      "integrity": "sha512-qnAGrRv5Nj/DATxAmCnJQRXXQqnJwR0trxLndhoHoxGci9MuguNIjWahS0gw8YZFjgTinbTxOwzatkoySihnmw==",
-      "os": ["win32"],
-      "cpu": ["arm64"]
-    },
-    "@swc/core-win32-ia32-msvc@1.15.10": {
-      "integrity": "sha512-i4X/q8QSvzVlaRtv1xfnfl+hVKpCfiJ+9th484rh937fiEZKxZGf51C+uO0lfKDP1FfnT6C1yBYwHy7FLBVXFw==",
-      "os": ["win32"],
-      "cpu": ["ia32"]
-    },
-    "@swc/core-win32-x64-msvc@1.15.10": {
-      "integrity": "sha512-HvY8XUFuoTXn6lSccDLYFlXv1SU/PzYi4PyUqGT++WfTnbw/68N/7BdUZqglGRwiSqr0qhYt/EhmBpULj0J9rA==",
-      "os": ["win32"],
-      "cpu": ["x64"]
-    },
-    "@swc/core@1.15.10": {
-      "integrity": "sha512-udNofxftduMUEv7nqahl2nvodCiCDQ4Ge0ebzsEm6P8s0RC2tBM0Hqx0nNF5J/6t9uagFJyWIDjXy3IIWMHDJw==",
-      "dependencies": [
-        "@swc/counter",
-        "@swc/types"
-      ],
-      "optionalDependencies": [
-        "@swc/core-darwin-arm64",
-        "@swc/core-darwin-x64",
-        "@swc/core-linux-arm-gnueabihf",
-        "@swc/core-linux-arm64-gnu",
-        "@swc/core-linux-arm64-musl",
-        "@swc/core-linux-x64-gnu",
-        "@swc/core-linux-x64-musl",
-        "@swc/core-win32-arm64-msvc",
-        "@swc/core-win32-ia32-msvc",
-        "@swc/core-win32-x64-msvc"
-      ],
-      "scripts": true
-    },
-    "@swc/counter@0.1.3": {
-      "integrity": "sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ=="
-    },
-    "@swc/types@0.1.25": {
-      "integrity": "sha512-iAoY/qRhNH8a/hBvm3zKj9qQ4oc2+3w1unPJa2XvTK3XjeLXtzcCingVPw/9e5mn1+0yPqxcBGp9Jf0pkfMb1g==",
-      "dependencies": [
-        "@swc/counter"
-      ]
-    },
     "babel-plugin-react-compiler@19.1.0-rc.3": {
       "integrity": "sha512-mjRn69WuTz4adL0bXGx8Rsyk1086zFJeKmes6aK0xPuK3aaXmDJdLHqwKKMrpm6KAI1MCoUK72d2VeqQbu8YIA==",
       "dependencies": [
@@ -512,9 +432,6 @@
         "ms"
       ]
     },
-    "deepmerge@4.3.1": {
-      "integrity": "sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A=="
-    },
     "dexie@4.2.1": {
       "integrity": "sha512-Ckej0NS6jxQ4Po3OrSQBFddayRhTCic2DoCAG5zacOfOVB9P2Q5Xc5uL/nVa7ZVs+HdMnvUPzLFCB/JwpB6Csg=="
     },
@@ -525,13 +442,6 @@
       "integrity": "sha512-hGLL31n+GvBhkHUpPCt1sU4ynzOH7I1IUkKhera66jigi4mHFPL6dfJo44L6/1rfcZudXx+wGdf9VOifzDPqYQ==",
       "dependencies": [
         "@babel/core"
-      ]
-    },
-    "esbuild-plugin-swc@1.0.1": {
-      "integrity": "sha512-K/basZARuDSHH7Krr7FdzwZF4WRLTcZa4c0R2FPuXCyYdh2nZMDdi6SYuuDv0MzKQY+jm0Afl4gltLsBzPesiQ==",
-      "dependencies": [
-        "@swc/core",
-        "deepmerge"
       ]
     },
     "escalade@3.2.0": {
@@ -652,7 +562,6 @@
       "npm:babel-plugin-react-compiler@19.1.0-rc.3",
       "npm:dexie@^4.2.1",
       "npm:esbuild-plugin-babel@0.2.3",
-      "npm:esbuild-plugin-swc@^1.0.1",
       "npm:react-compiler-runtime@19.1.0-rc.3"
     ]
   }

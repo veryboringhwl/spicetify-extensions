@@ -1,8 +1,9 @@
-// Auto-generated at 2026-01-10T16:18:36.586Z on Spotify Version: 1.2.80.354
+// Auto-generated at 2026-01-28T15:46:16.162Z on Spotify Version: 1.2.82.428
 
 export interface PlatformTypes {
   ActionStoreAPI: PlatformTypesActionStoreAPI;
   AdManagers: PlatformTypesAdManagers;
+  AssistedCurationAPI: PlatformTypesAssistedCurationAPI;
   AudioOutputDevicesAPI: PlatformTypesAudioOutputDevicesAPI;
   AudiobookCappingAPI: PlatformTypesAudiobookCappingAPI;
   AuthorizationAPI: PlatformTypesAuthorizationAPI;
@@ -26,6 +27,7 @@ export interface PlatformTypes {
   ExternalAccessoryAPI: PlatformTypesExternalAccessoryAPI;
   FeatureFlags: PlatformTypesFeatureFlags;
   FeedbackAPI: PlatformTypesFeedbackAPI;
+  FocusMainWindowAPI: PlatformTypesFocusMainWindowAPI;
   FollowAPI: PlatformTypesFollowAPI;
   GraphQLLoader: PlatformTypesGraphQLLoader;
   History: PlatformTypesHistory;
@@ -38,6 +40,7 @@ export interface PlatformTypes {
   LocalStorageAPI: PlatformTypesLocalStorageAPI;
   MagpieAPI: PlatformTypesMagpieAPI;
   NativeAPI: PlatformTypesNativeAPI;
+  OSNotificationsAPI: PlatformTypesOSNotificationsAPI;
   OfflineAPI: PlatformTypesOfflineAPI;
   PlatformData: PlatformTypesPlatformData;
   PlayHistoryAPI: PlatformTypesPlayHistoryAPI;
@@ -181,13 +184,13 @@ export interface PlatformTypesAdManagersAudioAudioApi {
   postEvent: PlatformTypesAdManagersAudioAudioApiPostEvent;
 }
 
-export type PlatformTypesAdManagersAudioAudioApiPostEvent = (arg0: any) => unknown;
+export type PlatformTypesAdManagersAudioAudioApiPostEvent = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersAudioDisable = () => unknown;
 
 export type PlatformTypesAdManagersAudioEnable = (arg0: any) => unknown;
 
-export type PlatformTypesAdManagersAudioGetContextAdInfo = () => unknown;
+export type PlatformTypesAdManagersAudioGetContextAdInfo = () => Promise<unknown>;
 
 export type PlatformTypesAdManagersAudioGetEnabled = () => unknown;
 
@@ -244,7 +247,7 @@ export type PlatformTypesAdManagersAudioInStreamApiAdsCoreConnectorFetchSlot = (
 export type PlatformTypesAdManagersAudioInStreamApiAdsCoreConnectorGetAds = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersAudioInStreamApiAdsCoreConnectorGetAdState = () => unknown;
 
@@ -351,7 +354,7 @@ export type PlatformTypesAdManagersAudioInStreamApiSkipToNext = () => unknown;
 
 export type PlatformTypesAdManagersAudioInStreamApiSubscribeToInStreamAds = () => unknown;
 
-export type PlatformTypesAdManagersAudioLogClick = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesAdManagersAudioLogClick = (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersAudioOnAdMessage = (arg0: any) => unknown;
 
@@ -404,28 +407,28 @@ export interface PlatformTypesAdManagersBillboardBillboardApi {
 export type PlatformTypesAdManagersBillboardBillboardApiCreateSlot = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersBillboardBillboardApiGetSlotConfiguration = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersBillboardBillboardApiPatchTargeting = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersBillboardBillboardApiPostEvent = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersBillboardBillboardApiPostToSlot = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersBillboardBillboardApiSubscribeToSlotType = (
   arg0: any,
@@ -434,15 +437,15 @@ export type PlatformTypesAdManagersBillboardBillboardApiSubscribeToSlotType = (
 
 export type PlatformTypesAdManagersBillboardBillboardApiTriggerSlotClearAll = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersBillboardClearSlot = () => unknown;
 
-export type PlatformTypesAdManagersBillboardDisable = () => unknown;
+export type PlatformTypesAdManagersBillboardDisable = () => Promise<unknown>;
 
-export type PlatformTypesAdManagersBillboardDisplayBillboard = () => unknown;
+export type PlatformTypesAdManagersBillboardDisplayBillboard = () => Promise<unknown>;
 
-export type PlatformTypesAdManagersBillboardEnable = (arg0: any) => unknown;
+export type PlatformTypesAdManagersBillboardEnable = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersBillboardEnsureImpressionLogged = () => unknown;
 
@@ -460,11 +463,11 @@ export interface PlatformTypesAdManagersBillboardFocusState {
 
 export type PlatformTypesAdManagersBillboardFocusStateListeners = Array<unknown>;
 
-export type PlatformTypesAdManagersBillboardGetFocusTimeoutMs = () => unknown;
+export type PlatformTypesAdManagersBillboardGetFocusTimeoutMs = () => Promise<unknown>;
 
-export type PlatformTypesAdManagersBillboardHandleApplicationGainedFocus = () => unknown;
+export type PlatformTypesAdManagersBillboardHandleApplicationGainedFocus = () => Promise<unknown>;
 
-export type PlatformTypesAdManagersBillboardHandleApplicationLostFocus = () => unknown;
+export type PlatformTypesAdManagersBillboardHandleApplicationLostFocus = () => Promise<unknown>;
 
 export type PlatformTypesAdManagersBillboardHandleDiscard = () => unknown;
 
@@ -478,7 +481,7 @@ export type PlatformTypesAdManagersBillboardMapBillboardData = (arg0: any) => un
 
 export type PlatformTypesAdManagersBillboardMinimize = () => unknown;
 
-export type PlatformTypesAdManagersBillboardOnActivity = (arg0: any) => unknown;
+export type PlatformTypesAdManagersBillboardOnActivity = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersBillboardOnAdMessage = (arg0: any) => unknown;
 
@@ -498,7 +501,7 @@ export interface PlatformTypesAdManagersConfig {
   getAdsSlotConfig: PlatformTypesAdManagersConfigGetAdsSlotConfig;
 }
 
-export type PlatformTypesAdManagersConfigGetAdsSlotConfig = () => unknown;
+export type PlatformTypesAdManagersConfigGetAdsSlotConfig = () => Promise<unknown>;
 
 export interface PlatformTypesAdManagersEmbeddedAd {
   adEventLogger: PlatformTypesAdManagersEmbeddedAdAdEventLogger;
@@ -510,8 +513,46 @@ export interface PlatformTypesAdManagersEmbeddedAd {
 export interface PlatformTypesAdManagersEmbeddedAdAdEventLogger {
   appStartupId: string;
   eventSender: PlatformTypesEventSender;
+  eventsClient: PlatformTypesAdManagersEmbeddedAdAdEventLoggerEventsClient;
   fireTrackingEvent: PlatformTypesAdManagersEmbeddedAdAdEventLoggerFireTrackingEvent;
   log: PlatformTypesAdManagersEmbeddedAdAdEventLoggerLog;
+  logItemEvent: PlatformTypesAdManagersEmbeddedAdAdEventLoggerLogItemEvent;
+}
+
+export interface PlatformTypesAdManagersEmbeddedAdAdEventLoggerEventsClient {
+  options: PlatformTypesAdManagersEmbeddedAdAdEventLoggerEventsClientOptions;
+  postEvent: PlatformTypesAdManagersEmbeddedAdAdEventLoggerEventsClientPostEvent;
+  postUnmanagedEvent: PlatformTypesAdManagersEmbeddedAdAdEventLoggerEventsClientPostUnmanagedEvent;
+  subEvent: PlatformTypesAdManagersEmbeddedAdAdEventLoggerEventsClientSubEvent;
+  transport: PlatformTypesAdManagersEmbeddedAdAdEventLoggerEventsClientTransport;
+}
+
+export type PlatformTypesAdManagersEmbeddedAdAdEventLoggerEventsClientOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesAdManagersEmbeddedAdAdEventLoggerEventsClientPostEvent = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesAdManagersEmbeddedAdAdEventLoggerEventsClientPostUnmanagedEvent = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesAdManagersEmbeddedAdAdEventLoggerEventsClientSubEvent = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export interface PlatformTypesAdManagersEmbeddedAdAdEventLoggerEventsClientTransport {
+  _onCancel: PlatformTypesRegistryMapValueInstanceOnCancel;
+  _onSend: PlatformTypesRegistryMapValueInstanceOnSend;
+  call: PlatformTypesRegistryMapValueInstanceCall;
+  callSingle: PlatformTypesRegistryMapValueInstanceCallSingle;
+  callStream: PlatformTypesRegistryMapValueInstanceCallStream;
 }
 
 export type PlatformTypesAdManagersEmbeddedAdAdEventLoggerFireTrackingEvent = (
@@ -523,6 +564,12 @@ export type PlatformTypesAdManagersEmbeddedAdAdEventLoggerLog = (
   arg1: any,
   arg2: any,
 ) => unknown;
+
+export type PlatformTypesAdManagersEmbeddedAdAdEventLoggerLogItemEvent = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => Promise<unknown>;
 
 export interface PlatformTypesAdManagersEmbeddedAdEmbeddedAdErrorLogger {
   eventSender: PlatformTypesEventSender;
@@ -562,7 +609,7 @@ export type PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerEmbeddedAdsApiFetc
   () => unknown;
 
 export type PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerEmbeddedAdsApiGetSlotSettings =
-  () => unknown;
+  () => Promise<unknown>;
 
 export type PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerEmbeddedAdsApiOverrideSlotServerEndpoint =
   (arg0: any) => unknown;
@@ -577,7 +624,7 @@ export type PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerEmbeddedAdsApiTrig
 export type PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerEnable = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersEmbeddedAdEmbeddedAdManagerFetchSlot = () => unknown;
 
@@ -600,7 +647,7 @@ export interface PlatformTypesAdManagersHome {
   logger: PlatformTypesAdManagersHomeLogger;
 }
 
-export type PlatformTypesAdManagersHomeFetchHomeAd = () => unknown;
+export type PlatformTypesAdManagersHomeFetchHomeAd = () => Promise<unknown>;
 
 export interface PlatformTypesAdManagersHomeLogger {
   appStartupId: string;
@@ -652,7 +699,7 @@ export type PlatformTypesAdManagersHptoCreateTrackingList = (arg0: any) => unkno
 
 export type PlatformTypesAdManagersHptoCreateTrackingPixelImage = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesAdManagersHptoFetchCreative = (arg0: any) => unknown;
+export type PlatformTypesAdManagersHptoFetchCreative = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersHptoFetchTemplate = () => unknown;
 
@@ -716,11 +763,11 @@ export type PlatformTypesAdManagersHptoHptoApiEsperantoPreviewParserRenameImageB
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesAdManagersHptoHptoApiGetAlgoPlaylistInfo = (arg0: any) => unknown;
+export type PlatformTypesAdManagersHptoHptoApiGetAlgoPlaylistInfo = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesAdManagersHptoHptoApiGetSlot = (arg0: any) => unknown;
+export type PlatformTypesAdManagersHptoHptoApiGetSlot = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesAdManagersHptoHptoApiLogEvent = (arg0: any) => unknown;
+export type PlatformTypesAdManagersHptoHptoApiLogEvent = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersHptoHptoApiLookupEntity = (arg0: any) => unknown;
 
@@ -729,7 +776,9 @@ export interface PlatformTypesAdManagersHptoHptoApiNativeHptoApi {
   lookupEntity: PlatformTypesAdManagersHptoHptoApiNativeHptoApiLookupEntity;
 }
 
-export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiLookupEntity = (arg0: any) => unknown;
+export type PlatformTypesAdManagersHptoHptoApiNativeHptoApiLookupEntity = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersHptoHptoApiSubscribeToPreview = (arg0: any) => unknown;
 
@@ -743,7 +792,7 @@ export type PlatformTypesAdManagersHptoLogEvent = (arg0: any) => unknown;
 
 export type PlatformTypesAdManagersHptoLogViewed = () => unknown;
 
-export type PlatformTypesAdManagersHptoMapData = (arg0: any) => unknown;
+export type PlatformTypesAdManagersHptoMapData = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersHptoMaybeModifyUrl = (arg0: any, arg1: any) => unknown;
 
@@ -764,7 +813,7 @@ export type PlatformTypesAdManagersHptoOnVisibilityChanged = (arg0: any) => unkn
 
 export type PlatformTypesAdManagersHptoParseHptoMessageType = (arg0: any) => unknown;
 
-export type PlatformTypesAdManagersHptoRefreshCallback = () => unknown;
+export type PlatformTypesAdManagersHptoRefreshCallback = () => Promise<unknown>;
 
 export type PlatformTypesAdManagersHptoSubscribeToPreview = (arg0: any) => unknown;
 
@@ -894,7 +943,7 @@ export type PlatformTypesAdManagersLeaderboardEnableLeaderboard = () => unknown;
 
 export type PlatformTypesAdManagersLeaderboardEnableLeaderboardMessageHandler = () => unknown;
 
-export type PlatformTypesAdManagersLeaderboardFetchAndDisplayLeaderboard = () => unknown;
+export type PlatformTypesAdManagersLeaderboardFetchAndDisplayLeaderboard = () => Promise<unknown>;
 
 export interface PlatformTypesAdManagersLeaderboardFocusState {
   addFocusListener: PlatformTypesAdManagersAdStateReporterFocusStateAddFocusListener;
@@ -933,16 +982,18 @@ export type PlatformTypesAdManagersLeaderboardLeaderboardApiCoerceDisplayTimeInt
 
 export type PlatformTypesAdManagersLeaderboardLeaderboardApiCreateAndEnableSlot = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesAdManagersLeaderboardLeaderboardApiGetConfig = () => unknown;
+export type PlatformTypesAdManagersLeaderboardLeaderboardApiGetConfig = () => Promise<unknown>;
 
-export type PlatformTypesAdManagersLeaderboardLeaderboardApiGetSlot = (arg0: any) => unknown;
+export type PlatformTypesAdManagersLeaderboardLeaderboardApiGetSlot = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersLeaderboardLeaderboardApiLogEvent = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersLeaderboardLeaderboardApiNormalizeConfig = (
   arg0: any,
@@ -989,7 +1040,7 @@ export interface PlatformTypesAdManagersLeaderboardRefreshDecisioner {
 export type PlatformTypesAdManagersLeaderboardRefreshDecisionerIsPastViewThreshold = () => unknown;
 
 export type PlatformTypesAdManagersLeaderboardRefreshDecisionerNotifyRefreshIfPossible =
-  () => unknown;
+  () => Promise<unknown>;
 
 export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnFocusChanged = (
   arg0: any,
@@ -1006,7 +1057,8 @@ export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnlineStateChange
 
 export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnNavigationChanged = () => unknown;
 
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnViewLoaded = () => unknown;
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnViewLoaded =
+  () => Promise<unknown>;
 
 export type PlatformTypesAdManagersLeaderboardRefreshDecisionerOnViewUnloaded = () => unknown;
 
@@ -1018,7 +1070,8 @@ export type PlatformTypesAdManagersLeaderboardRefreshDecisionerStartRefreshTimer
 
 export type PlatformTypesAdManagersLeaderboardRefreshDecisionerTriggerRefresh = () => unknown;
 
-export type PlatformTypesAdManagersLeaderboardRefreshDecisionerUpdateViewTimer = () => unknown;
+export type PlatformTypesAdManagersLeaderboardRefreshDecisionerUpdateViewTimer =
+  () => Promise<unknown>;
 
 export type PlatformTypesAdManagersLeaderboardRefreshLeaderboard = () => unknown;
 
@@ -1028,7 +1081,7 @@ export type PlatformTypesAdManagersLeaderboardRenderLeaderboard = (
   arg2: any,
 ) => unknown;
 
-export type PlatformTypesAdManagersLeaderboardRequestConfig = () => unknown;
+export type PlatformTypesAdManagersLeaderboardRequestConfig = () => Promise<unknown>;
 
 export type PlatformTypesAdManagersLeaderboardRequestSlot = (arg0: any) => unknown;
 
@@ -1050,15 +1103,16 @@ export interface PlatformTypesAdManagersSponsoredPlaylist {
 
 export type PlatformTypesAdManagersSponsoredPlaylistDisable = () => unknown;
 
-export type PlatformTypesAdManagersSponsoredPlaylistEnable = (arg0: any) => unknown;
+export type PlatformTypesAdManagersSponsoredPlaylistEnable = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesAdManagersSponsoredPlaylistLogEvent = (arg0: any) => unknown;
+export type PlatformTypesAdManagersSponsoredPlaylistLogEvent = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersSponsoredPlaylistRequestSponsoredPlaylistAd = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesAdManagersSponsoredPlaylistRequestSponsoredPlaylists = () => unknown;
+export type PlatformTypesAdManagersSponsoredPlaylistRequestSponsoredPlaylists =
+  () => Promise<unknown>;
 
 export interface PlatformTypesAdManagersSponsoredPlaylistSponsoredPlaylistApi {
   adsCoreConnector: PlatformTypesAdManagersAudioInStreamApiAdsCoreConnector;
@@ -1070,19 +1124,19 @@ export interface PlatformTypesAdManagersSponsoredPlaylistSponsoredPlaylistApi {
 }
 
 export type PlatformTypesAdManagersSponsoredPlaylistSponsoredPlaylistApiGetSponsoredUris =
-  () => unknown;
+  () => Promise<unknown>;
 
 export type PlatformTypesAdManagersSponsoredPlaylistSponsoredPlaylistApiGetSponsorshipAd = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersSponsoredPlaylistSponsoredPlaylistApiLogEvent = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersSponsoredPlaylistSponsoredPlaylistApiSubscribeToPreview = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export interface PlatformTypesAdManagersSurvey {
   logger: PlatformTypesAdManagersSurveyLogger;
@@ -1166,9 +1220,9 @@ export type PlatformTypesAdManagersVtoManagerFocusStateListeners = Array<unknown
 
 export type PlatformTypesAdManagersVtoManagerGetEnabled = () => unknown;
 
-export type PlatformTypesAdManagersVtoManagerHandleApplicationGainedFocus = () => unknown;
+export type PlatformTypesAdManagersVtoManagerHandleApplicationGainedFocus = () => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerHandleApplicationLostFocus = () => unknown;
+export type PlatformTypesAdManagersVtoManagerHandleApplicationLostFocus = () => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerLog = (arg0: any, arg1: any, arg2: any) => unknown;
 
@@ -1199,13 +1253,14 @@ export type PlatformTypesAdManagersVtoManagerParseInfo = (arg0: any) => unknown;
 export type PlatformTypesAdManagersVtoManagerPlayerAPIAddToQueue = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPICanPlayEncryptedContent = () => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPICanPlayEncryptedContent =
+  () => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPICanSendSignal = (arg0: any) => unknown;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIClearQueue = () => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIClearQueue = () => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPICollection {
   add: PlatformTypesFeedbackAPIClientAdd;
@@ -1217,32 +1272,26 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPICollection {
   decorate: PlatformTypesFeedbackAPIClientDecorate;
   getArtistTrackList: PlatformTypesFeedbackAPIClientGetArtistTrackList;
   getArtistView: PlatformTypesFeedbackAPIClientGetArtistView;
-  getBans: PlatformTypesFeedbackAPIClientGetBans;
   getBucketSyncStatus: PlatformTypesFeedbackAPIClientGetBucketSyncStatus;
-  getResumePoints: PlatformTypesFeedbackAPIClientGetResumePoints;
   getTrackList: PlatformTypesFeedbackAPIClientGetTrackList;
   getUnplayedEpisodes: PlatformTypesFeedbackAPIClientGetUnplayedEpisodes;
   isSnoozed: PlatformTypesFeedbackAPIClientIsSnoozed;
   offlineArtist: PlatformTypesFeedbackAPIClientOfflineArtist;
-  offlineTracks: PlatformTypesFeedbackAPIClientOfflineTracks;
   options: PlatformTypesAdManagersVtoManagerPlayerAPICollectionOptions;
   playArtist: PlatformTypesFeedbackAPIClientPlayArtist;
   playTracks: PlatformTypesFeedbackAPIClientPlayTracks;
   remove: PlatformTypesFeedbackAPIClientRemove;
   removeOfflineArtist: PlatformTypesFeedbackAPIClientRemoveOfflineArtist;
-  removeOfflineTracks: PlatformTypesFeedbackAPIClientRemoveOfflineTracks;
   removeUnplayed: PlatformTypesFeedbackAPIClientRemoveUnplayed;
   snooze: PlatformTypesFeedbackAPIClientSnooze;
   streamArtistTrackList: PlatformTypesFeedbackAPIClientStreamArtistTrackList;
   streamArtistView: PlatformTypesFeedbackAPIClientStreamArtistView;
-  streamBans: PlatformTypesFeedbackAPIClientStreamBans;
   streamContains: PlatformTypesFeedbackAPIClientStreamContains;
   streamDecorate: PlatformTypesFeedbackAPIClientStreamDecorate;
   streamTagsInfo: PlatformTypesFeedbackAPIClientStreamTagsInfo;
   streamTrackList: PlatformTypesFeedbackAPIClientStreamTrackList;
   streamTrackListMetadata: PlatformTypesFeedbackAPIClientStreamTrackListMetadata;
   streamUnplayedEpisodes: PlatformTypesFeedbackAPIClientStreamUnplayedEpisodes;
-  tracksOfflineStatus: PlatformTypesFeedbackAPIClientTracksOfflineStatus;
   transport: PlatformTypesVideoAPIEsperantoTransport;
   unban: PlatformTypesFeedbackAPIClientUnban;
   unbanGlobal: PlatformTypesFeedbackAPIClientUnbanGlobal;
@@ -1389,7 +1438,7 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEventsEmi
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleGetContextualShuffleMode = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleGetEvents = () => unknown;
 
@@ -1461,7 +1510,7 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalCont
   Record<string, unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleGetContextualShuffleMode =
-  (arg0: any) => unknown;
+  (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleGetEvents =
   () => unknown;
@@ -1500,7 +1549,7 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalCont
   (arg0: any) => unknown;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIDeleteItem =
-  (arg0: any, arg1: any) => unknown;
+  (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIDeleteItemListener =
   (arg0: any) => unknown;
@@ -1571,7 +1620,7 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalCont
   () => unknown;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIGetItem =
-  (arg0: any, arg1: any) => unknown;
+  (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIListenersDeleteItem {
   listener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIDeleteItemListener;
@@ -1584,10 +1633,10 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLoca
 }
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIOpenDb =
-  () => unknown;
+  () => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPISetItem =
-  (arg0: any, arg1: any, arg2: any) => unknown;
+  (arg0: any, arg1: any, arg2: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIUpdateItemListener =
   (arg0: any) => unknown;
@@ -1596,18 +1645,18 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalCont
   Record<string, unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleSetContextualShuffleMode =
-  (arg0: any, arg1: any) => unknown;
+  (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePlaybackSettingsClient {
-  getDeviceSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetDeviceSettings;
-  getSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetSettings;
-  getShuffleState: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetShuffleState;
+  getDeviceSettings: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceGetDeviceSettings;
+  getSettings: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceGetSettings;
+  getShuffleState: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceGetShuffleState;
   options: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePlaybackSettingsClientOptions;
-  setDeviceStreamQuality: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetDeviceStreamQuality;
-  setSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetSettings;
-  setShuffleState: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetShuffleState;
-  streamDeviceSettingFieldChanges: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamDeviceSettingFieldChanges;
-  streamSettingChanges: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamSettingChanges;
+  setDeviceStreamQuality: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceSetDeviceStreamQuality;
+  setSettings: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceSetSettings;
+  setShuffleState: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceSetShuffleState;
+  streamDeviceSettingFieldChanges: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceStreamDeviceSettingFieldChanges;
+  streamSettingChanges: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceStreamSettingChanges;
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
 
@@ -1615,10 +1664,10 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePlaybackS
   Record<string, unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPICancelSubscription =
-  (arg0: any) => unknown;
+  (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPICreateSubscription =
-  (arg0: any, arg1: any, arg2: any) => unknown;
+  (arg0: any, arg1: any, arg2: any) => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEvents {
   _emitter: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIEventsEmitter;
@@ -1691,7 +1740,7 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPI
 ) => unknown;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPIRefreshSubscription =
-  (arg0: any, arg1: any) => unknown;
+  (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscribe = (
   arg0: any,
@@ -1713,6 +1762,7 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPI
   | PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue6
   | PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue7
   | PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue8
+  | PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue9
 >;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue {
@@ -1762,8 +1812,20 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubS
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue8 {
   connectionId: string;
   ident: string;
+  isPrefix: boolean;
+  onCancel: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnCancel;
   onMessage: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage8;
+  onSubscribe: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnSubscribe;
 }
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValue9 {
+  connectionId: string;
+  ident: string;
+  onMessage: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage9;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnCancel =
+  (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage =
   () => unknown;
@@ -1772,7 +1834,7 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPI
   (arg0: any) => unknown;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage3 =
-  () => unknown;
+  () => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage4 =
   () => unknown;
@@ -1789,10 +1851,16 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPI
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage8 =
   (arg0: any) => unknown;
 
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnMessage9 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShufflePubSubAPISubscriptionsValueOnSubscribe =
+  (arg0: any) => Promise<unknown>;
+
 export type PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleSetContextualShuffleMode = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPICosmos {
   del: PlatformTypesAdManagersVtoManagerPlayerAPICosmosDel;
@@ -1809,21 +1877,30 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPICosmos {
   sub: PlatformTypesRegistryMapValueInstanceSub;
 }
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPICosmosDel = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPICosmosDel = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPICosmosGet = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPICosmosGet = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPICosmosPatch = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPICosmosPost = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPICosmosPut = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPICosmosPut = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIEvents {
   _client: PlatformTypesAdManagersVtoManagerPlayerAPIContextPlayer;
@@ -1901,6 +1978,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitter {
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListeners {
   action: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersAction;
   error: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersError;
+  queue_action_complete: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersQueueActionComplete;
   ready: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersReady;
   update: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdate;
 }
@@ -1911,6 +1989,7 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActi
   | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem3
   | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem4
   | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem5
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem6
 >;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem {
@@ -1938,6 +2017,11 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListener
   options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions5;
 }
 
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItem6 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemListener6;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions6;
+}
+
 export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemListener = (
   arg0: any,
 ) => unknown;
@@ -1958,6 +2042,10 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActi
   arg0: any,
 ) => unknown;
 
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemListener6 = (
+  arg0: any,
+) => unknown;
+
 export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions =
   Record<string, unknown>;
 
@@ -1973,19 +2061,51 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActi
 export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions5 =
   Record<string, unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersError =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItem>;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersActionItemOptions6 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersCompleteItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersCompleteItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersError = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItem2
+>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItem {
   listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItemListener;
   options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItemOptions;
 }
 
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItem2 {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItemListener2;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItemOptions2;
+}
+
 export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItemListener =
-  () => unknown;
+  () => Promise<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItemListener2 = (
+  arg0: any,
+) => unknown;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItemOptions =
   Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersErrorItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersQueueActionComplete =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersQueueActionCompleteItem>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersQueueActionCompleteItem {
+  listener: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersCompleteItemListener;
+  options: PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersCompleteItemOptions;
+}
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersReady =
   Array<PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersReadyItem>;
@@ -2079,7 +2199,7 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpda
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener3 = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIEventsEmitterListenersUpdateItemListener4 = (
   arg0: any,
@@ -2168,13 +2288,18 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIInsertIntoQueue = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIPause = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPause = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIPlay = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPlay = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIPlayAsNextInQueue = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIPlayAsNextInQueue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistPlayServiceClient {
   getPlayContext: PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistPlayServiceClientGetPlayContext;
@@ -2205,7 +2330,7 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPILastSyn
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPIMaybeResync = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPIPlaylistServiceClient {
   clearToken: PlatformTypesLibraryAPIPlaylistServiceClientClearToken;
@@ -2233,7 +2358,7 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPIPlaylis
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistResyncerAPIResync = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIPlaylistServiceClient {
   clearToken: PlatformTypesLibraryAPIPlaylistServiceClientClearToken;
@@ -2291,9 +2416,9 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueue2 {
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueAddToQueue = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueClearQueue = () => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueClearQueue = () => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueConvertQueueState = (
   arg0: any,
@@ -2312,7 +2437,7 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueInsertIntoQueue = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueIsQueued = (arg0: any) => unknown;
 
@@ -2489,10 +2614,21 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata {
   "actions.skipping_next_past_track": string;
   "actions.skipping_prev_past_track": string;
-  "artist_name:1": string;
-  "artist_name:2": string;
-  "artist_uri:1": string;
-  "artist_uri:2": string;
+  "audio.automix_mode": string;
+  "audio.fade_in_curves": string;
+  "audio.fade_in_duration": string;
+  "audio.fade_in_start_time": string;
+  "audio.fade_out_curves": string;
+  "audio.fade_out_duration": string;
+  "audio.fade_out_start_time": string;
+  "audio.fade_overlap": string;
+  "audio.only_allow_fade_on_advance": string;
+  "automix.fade_in_cuepoint.origin": string;
+  "automix.fade_in_cuepoint.position": string;
+  "automix.fade_in_cuepoint.tempo": string;
+  "automix.fade_out_cuepoint.origin": string;
+  "automix.fade_out_cuepoint.position": string;
+  "automix.fade_out_cuepoint.tempo": string;
   "canvas.artist.avatar": string;
   "canvas.artist.name": string;
   "canvas.artist.uri": string;
@@ -2504,6 +2640,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   "canvas.type": string;
   "canvas.uploadedBy": string;
   "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -2514,6 +2651,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
@@ -2521,25 +2659,28 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
-  is_explicit: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   title: string;
   track_player: string;
-  video_association: string;
-  video_association_image: string;
-  video_association_image_height: string;
-  video_association_image_height_large: string;
-  video_association_image_height_xxlarge: string;
-  video_association_image_large: string;
-  video_association_image_width: string;
-  video_association_image_width_large: string;
-  video_association_image_width_xxlarge: string;
-  video_association_image_xxlarge: string;
   view_index: string;
 }
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata10 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -2550,25 +2691,18 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
   image_small_url: string;
   image_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   title: string;
   track_player: string;
-  video_association: string;
-  video_association_image: string;
-  video_association_image_height: string;
-  video_association_image_height_large: string;
-  video_association_image_height_xxlarge: string;
-  video_association_image_large: string;
-  video_association_image_width: string;
-  video_association_image_width_large: string;
-  video_association_image_width_xxlarge: string;
-  video_association_image_xxlarge: string;
   view_index: string;
 }
 
@@ -2584,6 +2718,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   "canvas.type": string;
   "canvas.uploadedBy": string;
   "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -2594,13 +2729,16 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
   image_small_url: string;
   image_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   title: string;
   track_player: string;
   video_association: string;
@@ -2617,8 +2755,18 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
 }
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata3 {
-  "artist_name:1": string;
-  "artist_uri:1": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -2629,14 +2777,56 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
   image_small_url: string;
   image_url: string;
-  is_explicit: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
+  title: string;
+  track_player: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata4 {
+  "artist_name:1": string;
+  "artist_uri:1": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.artist.is_banned": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  decision_id: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_small_url: string;
+  image_url: string;
+  interaction_id: string;
+  iteration: string;
+  marked_for_download: string;
+  page_instance_id: string;
   title: string;
   track_player: string;
   video_association: string;
@@ -2652,35 +2842,6 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   view_index: string;
 }
 
-export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata4 {
-  "artist_name:1": string;
-  "artist_name:2": string;
-  "artist_name:3": string;
-  "artist_uri:1": string;
-  "artist_uri:2": string;
-  "artist_uri:3": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_title: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_small_url: string;
-  image_url: string;
-  iteration: string;
-  marked_for_download: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata5 {
   "canvas.artist.avatar": string;
   "canvas.artist.name": string;
@@ -2693,6 +2854,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   "canvas.type": string;
   "canvas.uploadedBy": string;
   "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -2703,13 +2865,16 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
   image_small_url: string;
   image_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   title: string;
   track_player: string;
   video_association: string;
@@ -2726,6 +2891,18 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
 }
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata6 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -2736,13 +2913,16 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
   image_small_url: string;
   image_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   title: string;
   track_player: string;
   video_association: string;
@@ -2770,6 +2950,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   "canvas.type": string;
   "canvas.uploadedBy": string;
   "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -2780,13 +2961,16 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
   image_small_url: string;
   image_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   title: string;
   track_player: string;
   video_association: string;
@@ -2803,6 +2987,18 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
 }
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemContextTrackMetadata8 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -2813,15 +3009,28 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
   image_small_url: string;
   image_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   title: string;
   track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
   view_index: string;
 }
 
@@ -2837,6 +3046,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   "canvas.type": string;
   "canvas.uploadedBy": string;
   "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -2847,13 +3057,16 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemCo
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
   image_small_url: string;
   image_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   title: string;
   track_player: string;
   video_association: string;
@@ -2889,7 +3102,196 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueNextTracksItemRemoved9 = Array<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracks = Array<unknown>;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracks = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItem2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItem3
+>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItem {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemBlocked;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemContextTrack;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemRemoved;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItem2 {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemBlocked2;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemContextTrack2;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemRemoved2;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItem3 {
+  blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemBlocked3;
+  contextTrack: PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemContextTrack3;
+  provider: string;
+  removed: PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemRemoved3;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemBlocked = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemBlocked2 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemBlocked3 = Array<unknown>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemContextTrack {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemContextTrackMetadata;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemContextTrack2 {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemContextTrackMetadata2;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemContextTrack3 {
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemContextTrackMetadata3;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemContextTrackMetadata {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.artist.is_banned": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  "shuffle.distribution": string;
+  "shuffle.partition_shuffle": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  decision_id: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_small_url: string;
+  image_url: string;
+  interaction_id: string;
+  iteration: string;
+  marked_for_download: string;
+  page_instance_id: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemContextTrackMetadata2 {
+  "collection.artist.is_banned": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  "shuffle.distribution": string;
+  "shuffle.partition_shuffle": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  decision_id: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_small_url: string;
+  image_url: string;
+  interaction_id: string;
+  iteration: string;
+  marked_for_download: string;
+  page_instance_id: string;
+  title: string;
+  track_player: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemContextTrackMetadata3 {
+  "actions.skipping_next_past_track": string;
+  "actions.skipping_prev_past_track": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.artist.is_banned": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  "media.start_position": string;
+  "shuffle.distribution": string;
+  "shuffle.partition_shuffle": string;
+  album_artist_name: string;
+  album_title: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  decision_id: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  interaction_id: string;
+  iteration: string;
+  marked_for_download: string;
+  page_instance_id: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemRemoved = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemRemoved2 = Array<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueuePrevTracksItemRemoved3 = Array<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueState {
   current: PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateCurrent;
@@ -3335,44 +3737,37 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUp
   url: string;
 }
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists = Array<
-  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem
-  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem2
-  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem3
->;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists10 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem16>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem11>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists2 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem4>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem2>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists3 = Array<
-  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem5
-  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem6
->;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists3 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem3>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists4 = Array<
-  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem10
-  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem7
-  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem8
-  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem9
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem4
+  | PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem5
 >;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists5 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem11>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem6>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists6 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem12>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem7>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists7 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem13>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem8>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists8 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem14>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem9>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtists9 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem15>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem10>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem {
   name: string;
@@ -3387,36 +3782,6 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUp
 }
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem11 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem12 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem13 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem14 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem15 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemArtistsItem16 {
   name: string;
   type: string;
   uri: string;
@@ -3564,12 +3929,14 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateNextUpItemI
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueQueueStateQueued = Array<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueRemoveFromQueue = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueRemoveFromQueue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueReorderQueue = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrack {
   blocked: PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackBlocked;
@@ -3589,19 +3956,36 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackContextTrac
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackContextTrackMetadata {
   "actions.skipping_next_past_track": string;
   "actions.skipping_prev_past_track": string;
+  "audio.automix_mode": string;
+  "audio.fade_in_curves": string;
+  "audio.fade_in_duration": string;
+  "audio.fade_in_start_time": string;
+  "audio.fade_out_curves": string;
+  "audio.fade_out_duration": string;
+  "audio.fade_out_start_time": string;
+  "audio.fade_overlap": string;
+  "audio.only_allow_fade_on_advance": string;
+  "automix.fade_in_cuepoint.origin": string;
+  "automix.fade_in_cuepoint.position": string;
+  "automix.fade_in_cuepoint.tempo": string;
+  "automix.fade_out_cuepoint.origin": string;
+  "automix.fade_out_cuepoint.position": string;
+  "automix.fade_out_cuepoint.tempo": string;
+  "automix.mode": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
   "collection.is_banned": string;
   "media.start_position": string;
-  "shuffle.distribution": string;
-  "shuffle.partition_shuffle": string;
   album_artist_name: string;
   album_title: string;
   album_uri: string;
   artist_name: string;
   artist_uri: string;
+  associated_video_id: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
@@ -3609,38 +3993,55 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackContextTrac
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   title: string;
   track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
   view_index: string;
 }
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIQueueTrackRemoved = Array<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIRefreshCurrentContext = () => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIRefreshCurrentContext =
+  () => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIRemoveFromQueue = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIRemoveFromQueue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIReorderQueue = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIResume = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIResume = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPISeekBackward = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPISeekBackward = (
+  arg0: any,
+) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPISeekBy = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPISeekBy = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPISeekForward = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPISeekForward = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPISeekTo = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPISeekTo = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPISendSignal = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPISetDefaultFeatureVersion = (
   arg0: any,
@@ -3648,19 +4049,21 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPISetDefaultFeatureVersion =
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPISetReferrer = (arg0: any) => unknown;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPISetRepeat = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPISetRepeat = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPISetShuffle = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPISetShuffle = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPISetSleepTimer = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPISetSleepTimer = (
+  arg0: any,
+) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPISetSpeed = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPISetSpeed = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPISkipTo = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPISkipTo = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPISkipToNext = (arg0: any) => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPISkipToNext = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPISkipToPrevious = () => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPISkipToPrevious = () => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCore {
   SLEEP_TIMER_ORIGIN: PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreSLEEPTIMERORIGIN;
@@ -3690,7 +4093,8 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreOnStateUpdat
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreSleepTimerEnd = () => unknown;
+export type PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreSleepTimerEnd =
+  () => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreSLEEPTIMERORIGIN {
   featureIdentifier: string;
@@ -3698,7 +4102,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPISleepTimerCoreSLEEPTI
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityGetEligibility = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIBatchFetcher {
   batchFetcher: null;
@@ -3711,10 +4115,10 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMet
   (arg0: any, arg1: any, arg2: any) => unknown;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIBatchFetcherFetch =
-  () => unknown;
+  () => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIBatchFetcherFetchBatched =
-  (arg0: any, arg1: any) => unknown;
+  (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEvents {
   _emitter: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEventsEmitter;
@@ -3768,13 +4172,13 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMet
   Record<string, unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIExpire =
-  (arg0: any, arg1: any) => unknown;
+  (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIFetch =
-  () => unknown;
+  () => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIFetchBatched =
-  (arg0: any, arg1: any) => unknown;
+  (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIGetEvents =
   () => unknown;
@@ -3847,20 +4251,34 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateContext {
 }
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateContextMetadata {
+  "correlation-id": string;
+  "filtering.predicate": string;
   "player.arch": string;
+  "recs.hasArtists": string;
+  autoplay: string;
   context_description: string;
   context_owner: string;
   enhanced_context: string;
+  episode_description: string;
+  format_list_type: string;
+  header_image_url_desktop: string;
   ignore_enhance_lens: string;
   image_url: string;
+  isAlgotorial: string;
+  is_video_first: string;
+  moveFollowersJobId: string;
   playlist_number_of_episodes: string;
   playlist_number_of_tracks: string;
   playlist_volatile_context_id: string;
+  primary_color: string;
+  request_id: string;
+  status: string;
+  uri: string;
 }
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateIndex {
-  itemIndex: number;
-  pageIndex: number;
+  itemIndex: null;
+  pageIndex: null;
   pageURI: null;
 }
 
@@ -3932,13 +4350,28 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIStateItemImages = Array<
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateItemMetadata {
   "actions.skipping_next_past_track": string;
   "actions.skipping_prev_past_track": string;
+  "audio.automix_mode": string;
+  "audio.fade_in_curves": string;
+  "audio.fade_in_duration": string;
+  "audio.fade_in_start_time": string;
+  "audio.fade_out_curves": string;
+  "audio.fade_out_duration": string;
+  "audio.fade_out_start_time": string;
+  "audio.fade_overlap": string;
+  "audio.only_allow_fade_on_advance": string;
+  "automix.fade_in_cuepoint.origin": string;
+  "automix.fade_in_cuepoint.position": string;
+  "automix.fade_in_cuepoint.tempo": string;
+  "automix.fade_out_cuepoint.origin": string;
+  "automix.fade_out_cuepoint.position": string;
+  "automix.fade_out_cuepoint.tempo": string;
+  "automix.mode": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
   "collection.is_banned": string;
   "media.start_position": string;
-  "shuffle.distribution": string;
-  "shuffle.partition_shuffle": string;
   album_artist_name: string;
   album_disc_count: string;
   album_disc_number: string;
@@ -3948,7 +4381,9 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateItemMetadata {
   album_uri: string;
   artist_name: string;
   artist_uri: string;
+  associated_video_id: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
@@ -3956,11 +4391,23 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateItemMetadata {
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   popularity: string;
   title: string;
   track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
   view_index: string;
 }
 
@@ -4427,44 +4874,37 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemAlb
   url: string;
 }
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists = Array<
-  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem
-  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem2
-  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem3
->;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists10 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem16>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem11>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists2 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem4>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem2>;
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists3 = Array<
-  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem5
-  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem6
->;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists3 =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem3>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists4 = Array<
-  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem10
-  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem7
-  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem8
-  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem9
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem4
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem5
 >;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists5 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem11>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem6>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists6 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem12>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem7>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists7 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem13>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem8>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists8 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem14>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem9>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtists9 =
-  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem15>;
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem10>;
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem {
   name: string;
@@ -4479,36 +4919,6 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArt
 }
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem11 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem12 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem13 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem14 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem15 {
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemArtistsItem16 {
   name: string;
   type: string;
   uri: string;
@@ -4675,10 +5085,21 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemImages9 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata {
   "actions.skipping_next_past_track": string;
   "actions.skipping_prev_past_track": string;
-  "artist_name:1": string;
-  "artist_name:2": string;
-  "artist_uri:1": string;
-  "artist_uri:2": string;
+  "audio.automix_mode": string;
+  "audio.fade_in_curves": string;
+  "audio.fade_in_duration": string;
+  "audio.fade_in_start_time": string;
+  "audio.fade_out_curves": string;
+  "audio.fade_out_duration": string;
+  "audio.fade_out_start_time": string;
+  "audio.fade_overlap": string;
+  "audio.only_allow_fade_on_advance": string;
+  "automix.fade_in_cuepoint.origin": string;
+  "automix.fade_in_cuepoint.position": string;
+  "automix.fade_in_cuepoint.tempo": string;
+  "automix.fade_out_cuepoint.origin": string;
+  "automix.fade_out_cuepoint.position": string;
+  "automix.fade_out_cuepoint.tempo": string;
   "canvas.artist.avatar": string;
   "canvas.artist.name": string;
   "canvas.artist.uri": string;
@@ -4690,6 +5111,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   "canvas.type": string;
   "canvas.uploadedBy": string;
   "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -4704,6 +5126,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
@@ -4711,26 +5134,29 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
-  is_explicit: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   popularity: string;
   title: string;
   track_player: string;
-  video_association: string;
-  video_association_image: string;
-  video_association_image_height: string;
-  video_association_image_height_large: string;
-  video_association_image_height_xxlarge: string;
-  video_association_image_large: string;
-  video_association_image_width: string;
-  video_association_image_width_large: string;
-  video_association_image_width_xxlarge: string;
-  video_association_image_xxlarge: string;
   view_index: string;
 }
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata10 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -4745,6 +5171,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
@@ -4752,21 +5179,13 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   popularity: string;
   title: string;
   track_player: string;
-  video_association: string;
-  video_association_image: string;
-  video_association_image_height: string;
-  video_association_image_height_large: string;
-  video_association_image_height_xxlarge: string;
-  video_association_image_large: string;
-  video_association_image_width: string;
-  video_association_image_width_large: string;
-  video_association_image_width_xxlarge: string;
-  video_association_image_xxlarge: string;
   view_index: string;
 }
 
@@ -4782,6 +5201,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   "canvas.type": string;
   "canvas.uploadedBy": string;
   "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -4796,6 +5216,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
@@ -4803,8 +5224,10 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   popularity: string;
   title: string;
   track_player: string;
@@ -4822,8 +5245,18 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
 }
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata3 {
-  "artist_name:1": string;
-  "artist_uri:1": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -4838,6 +5271,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
@@ -4845,9 +5279,57 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
-  is_explicit: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
+  popularity: string;
+  title: string;
+  track_player: string;
+  view_index: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata4 {
+  "artist_name:1": string;
+  "artist_uri:1": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.artist.is_banned": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  album_artist_name: string;
+  album_disc_count: string;
+  album_disc_number: string;
+  album_title: string;
+  album_track_count: string;
+  album_track_number: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  decision_id: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  interaction_id: string;
+  iteration: string;
+  marked_for_download: string;
+  page_instance_id: string;
   popularity: string;
   title: string;
   track_player: string;
@@ -4864,42 +5346,6 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   view_index: string;
 }
 
-export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata4 {
-  "artist_name:1": string;
-  "artist_name:2": string;
-  "artist_name:3": string;
-  "artist_uri:1": string;
-  "artist_uri:2": string;
-  "artist_uri:3": string;
-  "collection.can_add": string;
-  "collection.can_ban": string;
-  "collection.in_collection": string;
-  "collection.is_banned": string;
-  album_artist_name: string;
-  album_disc_count: string;
-  album_disc_number: string;
-  album_title: string;
-  album_track_count: string;
-  album_track_number: string;
-  album_uri: string;
-  artist_name: string;
-  artist_uri: string;
-  context_uri: string;
-  duration: string;
-  entity_uri: string;
-  has_lyrics: string;
-  image_large_url: string;
-  image_small_url: string;
-  image_url: string;
-  image_xlarge_url: string;
-  iteration: string;
-  marked_for_download: string;
-  popularity: string;
-  title: string;
-  track_player: string;
-  view_index: string;
-}
-
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata5 {
   "canvas.artist.avatar": string;
   "canvas.artist.name": string;
@@ -4912,6 +5358,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   "canvas.type": string;
   "canvas.uploadedBy": string;
   "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -4926,6 +5373,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
@@ -4933,8 +5381,10 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   popularity: string;
   title: string;
   track_player: string;
@@ -4952,6 +5402,18 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
 }
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata6 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -4966,6 +5428,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
@@ -4973,8 +5436,10 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   popularity: string;
   title: string;
   track_player: string;
@@ -5003,6 +5468,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   "canvas.type": string;
   "canvas.uploadedBy": string;
   "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -5017,6 +5483,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
@@ -5024,8 +5491,10 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   popularity: string;
   title: string;
   track_player: string;
@@ -5043,6 +5512,18 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
 }
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMetadata8 {
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -5057,6 +5538,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
@@ -5064,11 +5546,23 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   popularity: string;
   title: string;
   track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
   view_index: string;
 }
 
@@ -5084,6 +5578,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   "canvas.type": string;
   "canvas.uploadedBy": string;
   "canvas.url": string;
+  "collection.artist.is_banned": string;
   "collection.can_add": string;
   "collection.can_ban": string;
   "collection.in_collection": string;
@@ -5098,6 +5593,7 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   artist_name: string;
   artist_uri: string;
   context_uri: string;
+  decision_id: string;
   duration: string;
   entity_uri: string;
   has_lyrics: string;
@@ -5105,8 +5601,10 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateNextItemsItemMet
   image_small_url: string;
   image_url: string;
   image_xlarge_url: string;
+  interaction_id: string;
   iteration: string;
   marked_for_download: string;
+  page_instance_id: string;
   popularity: string;
   title: string;
   track_player: string;
@@ -5131,7 +5629,133 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStatePlaybackQuality 
   targetBitrateLevel: number;
 }
 
-export type PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItems = Array<unknown>;
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItems =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItem>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItem {
+  album: PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemAlbum;
+  artists: PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemArtists;
+  duration: PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemDuration;
+  hasAssociatedVideo: boolean;
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemImages;
+  is19PlusOnly: boolean;
+  isExplicit: boolean;
+  isLocal: boolean;
+  mediaType: string;
+  metadata: PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemMetadata;
+  name: string;
+  provider: string;
+  type: string;
+  uid: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemAlbum {
+  images: PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemImages;
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemAlbumImagesItem {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemAlbumImagesItem2 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemAlbumImagesItem3 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemAlbumImagesItem4 {
+  label: string;
+  url: string;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemArtists =
+  Array<PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemArtistsItem>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemArtistsItem {
+  name: string;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemDuration {
+  milliseconds: number;
+}
+
+export type PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemImages = Array<
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemAlbumImagesItem
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemAlbumImagesItem2
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemAlbumImagesItem3
+  | PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemAlbumImagesItem4
+>;
+
+export interface PlatformTypesAdManagersVtoManagerPlayerAPIStatePreviousItemsItemMetadata {
+  "actions.skipping_next_past_track": string;
+  "actions.skipping_prev_past_track": string;
+  "canvas.artist.avatar": string;
+  "canvas.artist.name": string;
+  "canvas.artist.uri": string;
+  "canvas.canvasUri": string;
+  "canvas.entityUri": string;
+  "canvas.explicit": string;
+  "canvas.fileId": string;
+  "canvas.id": string;
+  "canvas.type": string;
+  "canvas.uploadedBy": string;
+  "canvas.url": string;
+  "collection.artist.is_banned": string;
+  "collection.can_add": string;
+  "collection.can_ban": string;
+  "collection.in_collection": string;
+  "collection.is_banned": string;
+  "media.start_position": string;
+  "shuffle.distribution": string;
+  "shuffle.partition_shuffle": string;
+  album_artist_name: string;
+  album_disc_count: string;
+  album_disc_number: string;
+  album_title: string;
+  album_track_count: string;
+  album_track_number: string;
+  album_uri: string;
+  artist_name: string;
+  artist_uri: string;
+  context_uri: string;
+  decision_id: string;
+  duration: string;
+  entity_uri: string;
+  has_lyrics: string;
+  image_large_url: string;
+  image_small_url: string;
+  image_url: string;
+  image_xlarge_url: string;
+  interaction_id: string;
+  iteration: string;
+  marked_for_download: string;
+  page_instance_id: string;
+  popularity: string;
+  title: string;
+  track_player: string;
+  video_association: string;
+  video_association_image: string;
+  video_association_image_height: string;
+  video_association_image_height_large: string;
+  video_association_image_height_xxlarge: string;
+  video_association_image_large: string;
+  video_association_image_width: string;
+  video_association_image_width_large: string;
+  video_association_image_width_xxlarge: string;
+  video_association_image_xxlarge: string;
+  view_index: string;
+}
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictions {
   canPause: boolean;
@@ -5178,7 +5802,6 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowS
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignals {
   "switch-to-audio": PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtoaudio;
-  "switch-to-video": PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtovideo;
 }
 
 export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtoaudio {
@@ -5188,18 +5811,11 @@ export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisa
 export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtoaudioReasons =
   Array<string>;
 
-export interface PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtovideo {
-  reasons: PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtovideoReasons;
-}
-
-export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSignalsSwitchtovideoReasons =
-  Array<string>;
-
 export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSkippingNextReasons =
   Array<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowSkippingPreviousReasons =
-  Array<string>;
+  Array<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerPlayerAPIStateRestrictionsDisallowTogglingRepeatContextReasons =
   Array<unknown>;
@@ -5224,7 +5840,7 @@ export type PlatformTypesAdManagersVtoManagerPlayerAPIUpdateContext = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesAdManagersVtoManagerResetState = () => unknown;
 
@@ -5239,9 +5855,55 @@ export interface PlatformTypesAdManagersVtoManagerVideoTakeoverApi {
 export type PlatformTypesAdManagersVtoManagerVideoTakeoverApiPatchTargeting = (
   arg0: any,
   arg1: any,
+) => Promise<unknown>;
+
+export type PlatformTypesAdManagersVtoManagerVideoTakeoverApiPostEvent = (
+  arg0: any,
+) => Promise<unknown>;
+
+export interface PlatformTypesAssistedCurationAPI {
+  _getLikedSongsTracks: PlatformTypesAssistedCurationAPIGetLikedSongsTracks;
+  _getPlaylistRecommendations: PlatformTypesAssistedCurationAPIGetPlaylistRecommendations;
+  _getRecentlyPlayedTracks: PlatformTypesAssistedCurationAPIGetRecentlyPlayedTracks;
+  _libraryAPI: PlatformTypesLibraryAPI;
+  _playlistAPI: PlatformTypesPlaylistAPI;
+  _recentlyPlayedClient: PlatformTypesAssistedCurationAPIRecentlyPlayedClient;
+  getRecommendations: PlatformTypesAssistedCurationAPIGetRecommendations;
+}
+
+export type PlatformTypesAssistedCurationAPIGetLikedSongsTracks = (arg0: any) => Promise<unknown>;
+
+export type PlatformTypesAssistedCurationAPIGetPlaylistRecommendations = (
+  arg0: any,
+) => Promise<unknown>;
+
+export type PlatformTypesAssistedCurationAPIGetRecentlyPlayedTracks = (
+  arg0: any,
+) => Promise<unknown>;
+
+export type PlatformTypesAssistedCurationAPIGetRecommendations = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
+
+export interface PlatformTypesAssistedCurationAPIRecentlyPlayedClient {
+  options: PlatformTypesAssistedCurationAPIRecentlyPlayedClientOptions;
+  stream: PlatformTypesAssistedCurationAPIRecentlyPlayedClientStream;
+  tracks: PlatformTypesAssistedCurationAPIRecentlyPlayedClientTracks;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesAssistedCurationAPIRecentlyPlayedClientOptions = Record<string, unknown>;
+
+export type PlatformTypesAssistedCurationAPIRecentlyPlayedClientStream = (
+  arg0: any,
+  arg1: any,
 ) => unknown;
 
-export type PlatformTypesAdManagersVtoManagerVideoTakeoverApiPostEvent = (arg0: any) => unknown;
+export type PlatformTypesAssistedCurationAPIRecentlyPlayedClientTracks = (
+  arg0: any,
+  arg1: any,
+) => unknown;
 
 export interface PlatformTypesAudiobookCappingAPI {
   _events: PlatformTypesAudiobookCappingAPIEvents;
@@ -5301,7 +5963,25 @@ export interface PlatformTypesAudiobookCappingAPIEventsEmitter {
   removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
-export type PlatformTypesAudiobookCappingAPIEventsEmitterListeners = Record<string, unknown>;
+export interface PlatformTypesAudiobookCappingAPIEventsEmitterListeners {
+  update_capping: PlatformTypesAudiobookCappingAPIEventsEmitterListenersUpdateCapping;
+}
+
+export type PlatformTypesAudiobookCappingAPIEventsEmitterListenersUpdateCapping =
+  Array<PlatformTypesAudiobookCappingAPIEventsEmitterListenersUpdateCappingItem>;
+
+export interface PlatformTypesAudiobookCappingAPIEventsEmitterListenersUpdateCappingItem {
+  listener: PlatformTypesAudiobookCappingAPIEventsEmitterListenersUpdateCappingItemListener;
+  options: PlatformTypesAudiobookCappingAPIEventsEmitterListenersUpdateCappingItemOptions;
+}
+
+export type PlatformTypesAudiobookCappingAPIEventsEmitterListenersUpdateCappingItemListener =
+  () => unknown;
+
+export type PlatformTypesAudiobookCappingAPIEventsEmitterListenersUpdateCappingItemOptions = Record<
+  string,
+  unknown
+>;
 
 export interface PlatformTypesAudiobookCappingAPIEventsEmitterMetaListeners {
   add: PlatformTypesAudiobookCappingAPIEventsEmitterMetaListenersAdd;
@@ -5334,9 +6014,9 @@ export interface PlatformTypesAudiobookCappingAPIFetcher {
   fetch: PlatformTypesAudiobookCappingAPIFetcherFetch;
 }
 
-export type PlatformTypesAudiobookCappingAPIFetcherFetch = () => unknown;
+export type PlatformTypesAudiobookCappingAPIFetcherFetch = () => Promise<unknown>;
 
-export type PlatformTypesAudiobookCappingAPIGetCappingStatus = () => unknown;
+export type PlatformTypesAudiobookCappingAPIGetCappingStatus = () => Promise<unknown>;
 
 export type PlatformTypesAudiobookCappingAPIGetEvents = () => unknown;
 
@@ -5427,19 +6107,110 @@ export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListeners {
   deviceConnected: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnected;
 }
 
-export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnected =
-  Array<PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem>;
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnected = Array<
+  | PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem
+  | PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem2
+  | PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem3
+  | PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem4
+  | PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem5
+  | PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem6
+  | PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem7
+  | PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem8
+>;
 
 export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem {
   listener: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener;
   options: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions;
 }
 
+export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem2 {
+  listener: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener2;
+  options: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions2;
+}
+
+export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem3 {
+  listener: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener3;
+  options: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions3;
+}
+
+export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem4 {
+  listener: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener4;
+  options: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions4;
+}
+
+export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem5 {
+  listener: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener5;
+  options: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions5;
+}
+
+export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem6 {
+  listener: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener6;
+  options: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions6;
+}
+
+export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem7 {
+  listener: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener7;
+  options: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions7;
+}
+
+export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItem8 {
+  listener: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener8;
+  options: PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions8;
+}
+
 export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener = (
   arg0: any,
 ) => unknown;
 
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener3 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener4 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener5 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener6 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener7 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemListener8 =
+  () => Promise<unknown>;
+
 export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions3 =
+  Record<string, unknown>;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions4 =
+  Record<string, unknown>;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions5 =
+  Record<string, unknown>;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions6 =
+  Record<string, unknown>;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions7 =
+  Record<string, unknown>;
+
+export type PlatformTypesAudioOutputDevicesAPIEventsEmitterListenersDeviceConnectedItemOptions8 =
   Record<string, unknown>;
 
 export interface PlatformTypesAudioOutputDevicesAPIEventsEmitterMetaListeners {
@@ -5520,11 +6291,13 @@ export type PlatformTypesBuddyFeedAPIBatchAPISubscribe = (
 
 export type PlatformTypesBuddyFeedAPIBatchAPISubscription = Set<unknown>;
 
-export type PlatformTypesBuddyFeedAPIBatchAPIUnsubscribe = (arg0: any) => unknown;
+export type PlatformTypesBuddyFeedAPIBatchAPIUnsubscribe = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesBuddyFeedAPIFetchFriendActivity = (arg0: any) => unknown;
+export type PlatformTypesBuddyFeedAPIFetchFriendActivity = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesBuddyFeedAPIFetchFriendActivityByUsername = (arg0: any) => unknown;
+export type PlatformTypesBuddyFeedAPIFetchFriendActivityByUsername = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesBuddyFeedAPIFetchFriendActivityWithSubscriptions = (
   arg0: any,
@@ -5549,7 +6322,7 @@ export type PlatformTypesBuddyFeedAPIPresence2SubscribeToBuddyActivity = (
 export type PlatformTypesBuddyFeedAPIPresence2UnsubscribeFromBuddiesActivity = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export interface PlatformTypesBuddyFeedAPIPresenceView {
   builder: PlatformTypesRequestBuilder;
@@ -5569,7 +6342,7 @@ export type PlatformTypesBuddyFeedAPIPresenceViewBuilderGlobalRequestHeadersItem
 
 export type PlatformTypesBuddyFeedAPIPresenceViewBuilderGlobalRequestHeadersItem2 = Array<string>;
 
-export type PlatformTypesBuddyFeedAPIPresenceViewBuilderPendingRequests = Set<string>;
+export type PlatformTypesBuddyFeedAPIPresenceViewBuilderPendingRequests = Set<unknown>;
 
 export type PlatformTypesBuddyFeedAPIPresenceViewBuilderRequestImplementation = (
   arg0: any,
@@ -5579,13 +6352,13 @@ export type PlatformTypesBuddyFeedAPIPresenceViewBuilderRequestImplementation = 
 
 export type PlatformTypesBuddyFeedAPIPresenceViewBuilderResetPendingRequests = () => unknown;
 
-export type PlatformTypesBuddyFeedAPIPresenceViewGetBuddyActivity = (arg0: any) => unknown;
+export type PlatformTypesBuddyFeedAPIPresenceViewGetBuddyActivity = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesBuddyFeedAPIPresenceViewGetBuddyFeed = () => unknown;
 
 export type PlatformTypesBuddyFeedAPIPresenceViewGetBuddyFeedWithSubscribing = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesBuddyFeedAPISubscribeToBuddyActivity = (arg0: any, arg1: any) => unknown;
 
@@ -5595,7 +6368,7 @@ export interface PlatformTypesClipboardAPI {
   paste: PlatformTypesClipboardAPIPaste;
 }
 
-export type PlatformTypesClipboardAPICopy = (arg0: any) => unknown;
+export type PlatformTypesClipboardAPICopy = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesClipboardAPICosmos {
   del: PlatformTypesRegistryMapValueInstanceDel;
@@ -5612,7 +6385,7 @@ export interface PlatformTypesClipboardAPICosmos {
   sub: PlatformTypesRegistryMapValueInstanceSub;
 }
 
-export type PlatformTypesClipboardAPIPaste = () => unknown;
+export type PlatformTypesClipboardAPIPaste = () => Promise<unknown>;
 
 export interface PlatformTypesCollectionPlatformAPI {
   _service: PlatformTypesCollectionPlatformAPIService;
@@ -5628,7 +6401,7 @@ export interface PlatformTypesCollectionPlatformAPI {
   subscribeContains: PlatformTypesCollectionPlatformAPISubscribeContains;
 }
 
-export type PlatformTypesCollectionPlatformAPIAdd = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesCollectionPlatformAPIAdd = (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesCollectionPlatformAPICacheBySet {
   artistban: PlatformTypesCollectionPlatformAPICacheBySetArtistban;
@@ -5810,7 +6583,7 @@ export interface PlatformTypesCollectionPlatformAPICacheBySetTags {
 
 export type PlatformTypesCollectionPlatformAPICacheBySetTagsCache = Map<unknown, unknown>;
 
-export type PlatformTypesCollectionPlatformAPIContains = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesCollectionPlatformAPIContains = (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesCollectionPlatformAPIContainsSync = (arg0: any, arg1: any) => unknown;
 
@@ -5878,7 +6651,7 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetAr
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistbanOnBatch = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetArtistbanOnRemove = (
   arg0: any,
@@ -5926,7 +6699,7 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetCo
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsOnBatch = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetConcertsOnRemove = (
   arg0: any,
@@ -5974,7 +6747,7 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetEn
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetEnhancedOnBatch = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetEnhancedOnRemove = (
   arg0: any,
@@ -6019,7 +6792,7 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetIg
 ) => unknown;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetIgnoreinrecsOnBatch =
-  (arg0: any) => unknown;
+  (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetIgnoreinrecsOnRemove =
   (arg0: any, arg1: any) => unknown;
@@ -6057,7 +6830,7 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetMa
   (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetMarkedasfinishedOnBatch =
-  (arg0: any) => unknown;
+  (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetMarkedasfinishedOnRemove =
   (arg0: any, arg1: any) => unknown;
@@ -6097,7 +6870,7 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetNo
 ) => unknown;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetNotinterestedOnBatch =
-  (arg0: any) => unknown;
+  (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetNotinterestedOnRemove =
   (arg0: any, arg1: any) => unknown;
@@ -6135,7 +6908,7 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPl
   (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansOnBatch =
-  (arg0: any) => unknown;
+  (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPlaycontextbansOnRemove =
   (arg0: any, arg1: any) => unknown;
@@ -6178,7 +6951,7 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPr
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPrereleaseOnBatch = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetPrereleaseOnRemove = (
   arg0: any,
@@ -6230,7 +7003,7 @@ export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetTa
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetTagsOnBatch = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesCollectionPlatformAPIEventsAggregatorByCollection2SetTagsOnRemove = (
   arg0: any,
@@ -6274,7 +7047,72 @@ export interface PlatformTypesCollectionPlatformAPIEventsEmitter {
   removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
-export type PlatformTypesCollectionPlatformAPIEventsEmitterListeners = Record<string, unknown>;
+export interface PlatformTypesCollectionPlatformAPIEventsEmitterListeners {
+  added: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAdded;
+  removed: PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemoved;
+}
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersAdded = Array<
+  | PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItem
+  | PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItem2
+>;
+
+export interface PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItem {
+  listener: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemListener;
+  options: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemOptions;
+}
+
+export interface PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItem2 {
+  listener: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemListener2;
+  options: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemOptions2;
+}
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemOptions2 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemoved = Array<
+  | PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItem
+  | PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItem2
+>;
+
+export interface PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItem {
+  listener: PlatformTypesCollectionPlatformAPIEventsEmitterListenersAddedItemListener;
+  options: PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItemOptions;
+}
+
+export interface PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItem2 {
+  listener: PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItemListener;
+  options: PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItemOptions2;
+}
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesCollectionPlatformAPIEventsEmitterListenersRemovedItemOptions2 = Record<
+  string,
+  unknown
+>;
 
 export interface PlatformTypesCollectionPlatformAPIEventsEmitterMetaListeners {
   add: PlatformTypesCollectionPlatformAPIEventsEmitterMetaListenersAdd;
@@ -6326,7 +7164,7 @@ export type PlatformTypesCollectionPlatformAPIEventsEmitUpdateItems = (
 export type PlatformTypesCollectionPlatformAPIEventsOnBatchChanged = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesCollectionPlatformAPIEventsSubscribeContains = (
   arg0: any,
@@ -6334,11 +7172,11 @@ export type PlatformTypesCollectionPlatformAPIEventsSubscribeContains = (
   arg2: any,
 ) => unknown;
 
-export type PlatformTypesCollectionPlatformAPIGet = (arg0: any) => unknown;
+export type PlatformTypesCollectionPlatformAPIGet = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesCollectionPlatformAPIGetEvents = () => unknown;
 
-export type PlatformTypesCollectionPlatformAPIRemove = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesCollectionPlatformAPIRemove = (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesCollectionPlatformAPIService {
   add: PlatformTypesCollectionPlatformAPIServiceAdd;
@@ -6423,7 +7261,7 @@ export interface PlatformTypesConnectAPI {
   initiateLocalDiscovery: PlatformTypesConnectAPIInitiateLocalDiscovery;
   logout: PlatformTypesConnectAPILogout;
   pullToLocal: PlatformTypesConnectAPIPullToLocal;
-  state: PlatformTypesConnectAPIState;
+  state: null;
   transferPlayback: PlatformTypesConnectAPITransferPlayback;
   transferToRemote: PlatformTypesConnectAPITransferToRemote;
   updateListOfDevices: PlatformTypesConnectAPIUpdateListOfDevices;
@@ -6432,31 +7270,36 @@ export interface PlatformTypesConnectAPI {
 export type PlatformTypesConnectAPICheckDeviceId = (arg0: any) => unknown;
 
 export interface PlatformTypesConnectAPIConnectServiceClient {
+  addDeviceToGroup: PlatformTypesConnectAPIConnectServiceClientAddDeviceToGroup;
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
   clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
-  forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
+  createStaticGroup: PlatformTypesConnectAPIConnectServiceClientCreateStaticGroup;
+  deleteGroup: PlatformTypesConnectAPIConnectServiceClientDeleteGroup;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
-  getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
   installSpotify: PlatformTypesConnectAPIConnectServiceClientInstallSpotify;
   logout: PlatformTypesConnectAPIConnectServiceClientLogout;
   notifyAudioRouteChanged: PlatformTypesConnectAPIConnectServiceClientNotifyAudioRouteChanged;
   options: PlatformTypesConnectAPIConnectServiceClientOptions;
   performDiscovery: PlatformTypesConnectAPIConnectServiceClientPerformDiscovery;
-  pickerOpened: PlatformTypesConnectAPIConnectServiceClientPickerOpened;
   pull: PlatformTypesConnectAPIConnectServiceClientPull;
   refreshCluster: PlatformTypesConnectAPIConnectServiceClientRefreshCluster;
+  removeDeviceFromGroup: PlatformTypesConnectAPIConnectServiceClientRemoveDeviceFromGroup;
   rename: PlatformTypesConnectAPIConnectServiceClientRename;
+  renameGroup: PlatformTypesConnectAPIConnectServiceClientRenameGroup;
   sendCommand: PlatformTypesConnectAPIConnectServiceClientSendCommand;
   setDebugLevel: PlatformTypesConnectAPIConnectServiceClientSetDebugLevel;
-  setDeviceStreamQuality: PlatformTypesConnectAPIConnectServiceClientSetDeviceStreamQuality;
-  setPreferredZeroconf: PlatformTypesConnectAPIConnectServiceClientSetPreferredZeroconf;
-  startDiscovery: PlatformTypesConnectAPIConnectServiceClientStartDiscovery;
   state: PlatformTypesConnectAPIConnectServiceClientState;
+  stopScanning: PlatformTypesConnectAPIConnectServiceClientStopScanning;
   transfer: PlatformTypesConnectAPIConnectServiceClientTransfer;
   transport: PlatformTypesVideoAPIEsperantoTransport;
   wakeSleepingClusterDevices: PlatformTypesConnectAPIConnectServiceClientWakeSleepingClusterDevices;
 }
+
+export type PlatformTypesConnectAPIConnectServiceClientAddDeviceToGroup = (
+  arg0: any,
+  arg1: any,
+) => unknown;
 
 export type PlatformTypesConnectAPIConnectServiceClientBecomeInactive = (
   arg0: any,
@@ -6473,17 +7316,17 @@ export type PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackend
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesConnectAPIConnectServiceClientForceDiscover = (
+export type PlatformTypesConnectAPIConnectServiceClientCreateStaticGroup = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesConnectAPIConnectServiceClientDeleteGroup = (
   arg0: any,
   arg1: any,
 ) => unknown;
 
 export type PlatformTypesConnectAPIConnectServiceClientGetDebugLevel = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings = (
   arg0: any,
   arg1: any,
 ) => unknown;
@@ -6507,11 +7350,6 @@ export type PlatformTypesConnectAPIConnectServiceClientPerformDiscovery = (
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesConnectAPIConnectServiceClientPickerOpened = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
 export type PlatformTypesConnectAPIConnectServiceClientPull = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesConnectAPIConnectServiceClientRefreshCluster = (
@@ -6519,7 +7357,17 @@ export type PlatformTypesConnectAPIConnectServiceClientRefreshCluster = (
   arg1: any,
 ) => unknown;
 
+export type PlatformTypesConnectAPIConnectServiceClientRemoveDeviceFromGroup = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
 export type PlatformTypesConnectAPIConnectServiceClientRename = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesConnectAPIConnectServiceClientRenameGroup = (
+  arg0: any,
+  arg1: any,
+) => unknown;
 
 export type PlatformTypesConnectAPIConnectServiceClientSendCommand = (
   arg0: any,
@@ -6531,22 +7379,12 @@ export type PlatformTypesConnectAPIConnectServiceClientSetDebugLevel = (
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesConnectAPIConnectServiceClientSetDeviceStreamQuality = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesConnectAPIConnectServiceClientSetPreferredZeroconf = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesConnectAPIConnectServiceClientStartDiscovery = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
 export type PlatformTypesConnectAPIConnectServiceClientState = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesConnectAPIConnectServiceClientStopScanning = (
+  arg0: any,
+  arg1: any,
+) => unknown;
 
 export type PlatformTypesConnectAPIConnectServiceClientTransfer = (arg0: any, arg1: any) => unknown;
 
@@ -6631,62 +7469,17 @@ export type PlatformTypesConnectAPIGetEvents = () => unknown;
 
 export type PlatformTypesConnectAPIGetState = () => unknown;
 
-export type PlatformTypesConnectAPIInitiateLocalDiscovery = () => unknown;
+export type PlatformTypesConnectAPIInitiateLocalDiscovery = () => Promise<unknown>;
 
-export type PlatformTypesConnectAPILogout = (arg0: any) => unknown;
+export type PlatformTypesConnectAPILogout = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesConnectAPIPullToLocal = (arg0: any) => unknown;
+export type PlatformTypesConnectAPIPullToLocal = (arg0: any) => Promise<unknown>;
 
-export interface PlatformTypesConnectAPIState {
-  activeDevice: PlatformTypesConnectAPIStateActiveDevice;
-  connectingDevice: null;
-  connectionStatus: string;
-  devices: PlatformTypesConnectAPIStateDevices;
-}
+export type PlatformTypesConnectAPITransferPlayback = (arg0: any, arg1: any) => Promise<unknown>;
 
-export interface PlatformTypesConnectAPIStateActiveDevice {
-  brandDisplayName: string;
-  connectStateId: string;
-  currentState: string;
-  disabledReason: undefined;
-  id: string;
-  isActive: boolean;
-  isConnecting: boolean;
-  isDisabled: boolean;
-  isGroup: boolean;
-  isLocal: boolean;
-  isLocalNetwork: boolean;
-  isWebApp: boolean;
-  isZeroconf: boolean;
-  libraryVersion: string;
-  license: string;
-  losslessSupport: PlatformTypesConnectAPIStateActiveDeviceLosslessSupport;
-  modelDisplayName: string;
-  name: string;
-  supportedMediaTypes: PlatformTypesConnectAPIStateActiveDeviceSupportedMediaTypes;
-  supportsDJNarration: boolean;
-  supportsLogout: boolean;
-  supportsPlaylistMixing: boolean;
-  supportsRemoteSleepTimer: boolean;
-  type: string;
-  volume: number;
-}
+export type PlatformTypesConnectAPITransferToRemote = (arg0: any, arg1: any) => Promise<unknown>;
 
-export interface PlatformTypesConnectAPIStateActiveDeviceLosslessSupport {
-  deviceSupported: boolean;
-  fullySupported: boolean;
-  userEligible: boolean;
-}
-
-export type PlatformTypesConnectAPIStateActiveDeviceSupportedMediaTypes = Set<string>;
-
-export type PlatformTypesConnectAPIStateDevices = Array<PlatformTypesConnectAPIStateActiveDevice>;
-
-export type PlatformTypesConnectAPITransferPlayback = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesConnectAPITransferToRemote = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesConnectAPIUpdateListOfDevices = () => unknown;
+export type PlatformTypesConnectAPIUpdateListOfDevices = () => Promise<unknown>;
 
 export interface PlatformTypesConnectDeviceManagementAPI {
   checkDeviceId: PlatformTypesConnectDeviceManagementAPICheckDeviceId;
@@ -6697,27 +7490,27 @@ export interface PlatformTypesConnectDeviceManagementAPI {
 export type PlatformTypesConnectDeviceManagementAPICheckDeviceId = (arg0: any) => unknown;
 
 export interface PlatformTypesConnectDeviceManagementAPIConnectServiceClient {
+  addDeviceToGroup: PlatformTypesConnectAPIConnectServiceClientAddDeviceToGroup;
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
   clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
-  forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
+  createStaticGroup: PlatformTypesConnectAPIConnectServiceClientCreateStaticGroup;
+  deleteGroup: PlatformTypesConnectAPIConnectServiceClientDeleteGroup;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
-  getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
   installSpotify: PlatformTypesConnectAPIConnectServiceClientInstallSpotify;
   logout: PlatformTypesConnectAPIConnectServiceClientLogout;
   notifyAudioRouteChanged: PlatformTypesConnectAPIConnectServiceClientNotifyAudioRouteChanged;
   options: PlatformTypesConnectDeviceManagementAPIConnectServiceClientOptions;
   performDiscovery: PlatformTypesConnectAPIConnectServiceClientPerformDiscovery;
-  pickerOpened: PlatformTypesConnectAPIConnectServiceClientPickerOpened;
   pull: PlatformTypesConnectAPIConnectServiceClientPull;
   refreshCluster: PlatformTypesConnectAPIConnectServiceClientRefreshCluster;
+  removeDeviceFromGroup: PlatformTypesConnectAPIConnectServiceClientRemoveDeviceFromGroup;
   rename: PlatformTypesConnectAPIConnectServiceClientRename;
+  renameGroup: PlatformTypesConnectAPIConnectServiceClientRenameGroup;
   sendCommand: PlatformTypesConnectAPIConnectServiceClientSendCommand;
   setDebugLevel: PlatformTypesConnectAPIConnectServiceClientSetDebugLevel;
-  setDeviceStreamQuality: PlatformTypesConnectAPIConnectServiceClientSetDeviceStreamQuality;
-  setPreferredZeroconf: PlatformTypesConnectAPIConnectServiceClientSetPreferredZeroconf;
-  startDiscovery: PlatformTypesConnectAPIConnectServiceClientStartDiscovery;
   state: PlatformTypesConnectAPIConnectServiceClientState;
+  stopScanning: PlatformTypesConnectAPIConnectServiceClientStopScanning;
   transfer: PlatformTypesConnectAPIConnectServiceClientTransfer;
   transport: PlatformTypesVideoAPIEsperantoTransport;
   wakeSleepingClusterDevices: PlatformTypesConnectAPIConnectServiceClientWakeSleepingClusterDevices;
@@ -6728,7 +7521,7 @@ export type PlatformTypesConnectDeviceManagementAPIConnectServiceClientOptions =
   unknown
 >;
 
-export type PlatformTypesConnectDeviceManagementAPILogout = (arg0: any) => unknown;
+export type PlatformTypesConnectDeviceManagementAPILogout = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesConnectDevicesAPI {
   connectRestrictor: PlatformTypesConnectDevicesAPIConnectRestrictor;
@@ -6762,27 +7555,27 @@ export interface PlatformTypesConnectDevicesAPIEvents {
 }
 
 export interface PlatformTypesConnectDevicesAPIEventsConnectServiceClient {
+  addDeviceToGroup: PlatformTypesConnectAPIConnectServiceClientAddDeviceToGroup;
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
   clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
-  forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
+  createStaticGroup: PlatformTypesConnectAPIConnectServiceClientCreateStaticGroup;
+  deleteGroup: PlatformTypesConnectAPIConnectServiceClientDeleteGroup;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
-  getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
   installSpotify: PlatformTypesConnectAPIConnectServiceClientInstallSpotify;
   logout: PlatformTypesConnectAPIConnectServiceClientLogout;
   notifyAudioRouteChanged: PlatformTypesConnectAPIConnectServiceClientNotifyAudioRouteChanged;
   options: PlatformTypesConnectDevicesAPIEventsConnectServiceClientOptions;
   performDiscovery: PlatformTypesConnectAPIConnectServiceClientPerformDiscovery;
-  pickerOpened: PlatformTypesConnectAPIConnectServiceClientPickerOpened;
   pull: PlatformTypesConnectAPIConnectServiceClientPull;
   refreshCluster: PlatformTypesConnectAPIConnectServiceClientRefreshCluster;
+  removeDeviceFromGroup: PlatformTypesConnectAPIConnectServiceClientRemoveDeviceFromGroup;
   rename: PlatformTypesConnectAPIConnectServiceClientRename;
+  renameGroup: PlatformTypesConnectAPIConnectServiceClientRenameGroup;
   sendCommand: PlatformTypesConnectAPIConnectServiceClientSendCommand;
   setDebugLevel: PlatformTypesConnectAPIConnectServiceClientSetDebugLevel;
-  setDeviceStreamQuality: PlatformTypesConnectAPIConnectServiceClientSetDeviceStreamQuality;
-  setPreferredZeroconf: PlatformTypesConnectAPIConnectServiceClientSetPreferredZeroconf;
-  startDiscovery: PlatformTypesConnectAPIConnectServiceClientStartDiscovery;
   state: PlatformTypesConnectAPIConnectServiceClientState;
+  stopScanning: PlatformTypesConnectAPIConnectServiceClientStopScanning;
   transfer: PlatformTypesConnectAPIConnectServiceClientTransfer;
   transport: PlatformTypesVideoAPIEsperantoTransport;
   wakeSleepingClusterDevices: PlatformTypesConnectAPIConnectServiceClientWakeSleepingClusterDevices;
@@ -7039,8 +7832,45 @@ export interface PlatformTypesConnectDevicesAPIStateActiveDeviceLosslessSupport 
 
 export type PlatformTypesConnectDevicesAPIStateActiveDeviceSupportedMediaTypes = Set<string>;
 
-export type PlatformTypesConnectDevicesAPIStateDevices =
-  Array<PlatformTypesConnectDevicesAPIStateActiveDevice>;
+export type PlatformTypesConnectDevicesAPIStateDevices = Array<
+  PlatformTypesConnectDevicesAPIStateActiveDevice | PlatformTypesConnectDevicesAPIStateDevicesItem
+>;
+
+export interface PlatformTypesConnectDevicesAPIStateDevicesItem {
+  brandDisplayName: string;
+  connectStateId: string;
+  currentState: string;
+  disabledReason: undefined;
+  id: string;
+  isActive: boolean;
+  isConnecting: boolean;
+  isDisabled: boolean;
+  isGroup: boolean;
+  isLocal: boolean;
+  isLocalNetwork: boolean;
+  isWebApp: boolean;
+  isZeroconf: boolean;
+  libraryVersion: string;
+  license: string;
+  losslessSupport: PlatformTypesConnectDevicesAPIStateDevicesItemLosslessSupport;
+  modelDisplayName: string;
+  name: string;
+  supportedMediaTypes: PlatformTypesConnectDevicesAPIStateDevicesItemSupportedMediaTypes;
+  supportsDJNarration: boolean;
+  supportsLogout: boolean;
+  supportsPlaylistMixing: boolean;
+  supportsRemoteSleepTimer: boolean;
+  type: string;
+  volume: number;
+}
+
+export interface PlatformTypesConnectDevicesAPIStateDevicesItemLosslessSupport {
+  deviceSupported: boolean;
+  fullySupported: boolean;
+  userEligible: boolean;
+}
+
+export type PlatformTypesConnectDevicesAPIStateDevicesItemSupportedMediaTypes = Set<string>;
 
 export interface PlatformTypesConnectDiscoveryAPI {
   connectServiceClient: PlatformTypesConnectDiscoveryAPIConnectServiceClient;
@@ -7048,27 +7878,27 @@ export interface PlatformTypesConnectDiscoveryAPI {
 }
 
 export interface PlatformTypesConnectDiscoveryAPIConnectServiceClient {
+  addDeviceToGroup: PlatformTypesConnectAPIConnectServiceClientAddDeviceToGroup;
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
   clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
-  forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
+  createStaticGroup: PlatformTypesConnectAPIConnectServiceClientCreateStaticGroup;
+  deleteGroup: PlatformTypesConnectAPIConnectServiceClientDeleteGroup;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
-  getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
   installSpotify: PlatformTypesConnectAPIConnectServiceClientInstallSpotify;
   logout: PlatformTypesConnectAPIConnectServiceClientLogout;
   notifyAudioRouteChanged: PlatformTypesConnectAPIConnectServiceClientNotifyAudioRouteChanged;
   options: PlatformTypesConnectDiscoveryAPIConnectServiceClientOptions;
   performDiscovery: PlatformTypesConnectAPIConnectServiceClientPerformDiscovery;
-  pickerOpened: PlatformTypesConnectAPIConnectServiceClientPickerOpened;
   pull: PlatformTypesConnectAPIConnectServiceClientPull;
   refreshCluster: PlatformTypesConnectAPIConnectServiceClientRefreshCluster;
+  removeDeviceFromGroup: PlatformTypesConnectAPIConnectServiceClientRemoveDeviceFromGroup;
   rename: PlatformTypesConnectAPIConnectServiceClientRename;
+  renameGroup: PlatformTypesConnectAPIConnectServiceClientRenameGroup;
   sendCommand: PlatformTypesConnectAPIConnectServiceClientSendCommand;
   setDebugLevel: PlatformTypesConnectAPIConnectServiceClientSetDebugLevel;
-  setDeviceStreamQuality: PlatformTypesConnectAPIConnectServiceClientSetDeviceStreamQuality;
-  setPreferredZeroconf: PlatformTypesConnectAPIConnectServiceClientSetPreferredZeroconf;
-  startDiscovery: PlatformTypesConnectAPIConnectServiceClientStartDiscovery;
   state: PlatformTypesConnectAPIConnectServiceClientState;
+  stopScanning: PlatformTypesConnectAPIConnectServiceClientStopScanning;
   transfer: PlatformTypesConnectAPIConnectServiceClientTransfer;
   transport: PlatformTypesVideoAPIEsperantoTransport;
   wakeSleepingClusterDevices: PlatformTypesConnectAPIConnectServiceClientWakeSleepingClusterDevices;
@@ -7076,7 +7906,7 @@ export interface PlatformTypesConnectDiscoveryAPIConnectServiceClient {
 
 export type PlatformTypesConnectDiscoveryAPIConnectServiceClientOptions = Record<string, unknown>;
 
-export type PlatformTypesConnectDiscoveryAPIStartActiveDiscovery = () => unknown;
+export type PlatformTypesConnectDiscoveryAPIStartActiveDiscovery = () => Promise<unknown>;
 
 export interface PlatformTypesConnectRestrictionsAPI {
   getRestrictionState: PlatformTypesConnectRestrictionsAPIGetRestrictionState;
@@ -7097,27 +7927,27 @@ export interface PlatformTypesConnectTransferAPI {
 }
 
 export interface PlatformTypesConnectTransferAPIConnectServiceClient {
+  addDeviceToGroup: PlatformTypesConnectAPIConnectServiceClientAddDeviceToGroup;
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
   clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
-  forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
+  createStaticGroup: PlatformTypesConnectAPIConnectServiceClientCreateStaticGroup;
+  deleteGroup: PlatformTypesConnectAPIConnectServiceClientDeleteGroup;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
-  getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
   installSpotify: PlatformTypesConnectAPIConnectServiceClientInstallSpotify;
   logout: PlatformTypesConnectAPIConnectServiceClientLogout;
   notifyAudioRouteChanged: PlatformTypesConnectAPIConnectServiceClientNotifyAudioRouteChanged;
   options: PlatformTypesConnectTransferAPIConnectServiceClientOptions;
   performDiscovery: PlatformTypesConnectAPIConnectServiceClientPerformDiscovery;
-  pickerOpened: PlatformTypesConnectAPIConnectServiceClientPickerOpened;
   pull: PlatformTypesConnectAPIConnectServiceClientPull;
   refreshCluster: PlatformTypesConnectAPIConnectServiceClientRefreshCluster;
+  removeDeviceFromGroup: PlatformTypesConnectAPIConnectServiceClientRemoveDeviceFromGroup;
   rename: PlatformTypesConnectAPIConnectServiceClientRename;
+  renameGroup: PlatformTypesConnectAPIConnectServiceClientRenameGroup;
   sendCommand: PlatformTypesConnectAPIConnectServiceClientSendCommand;
   setDebugLevel: PlatformTypesConnectAPIConnectServiceClientSetDebugLevel;
-  setDeviceStreamQuality: PlatformTypesConnectAPIConnectServiceClientSetDeviceStreamQuality;
-  setPreferredZeroconf: PlatformTypesConnectAPIConnectServiceClientSetPreferredZeroconf;
-  startDiscovery: PlatformTypesConnectAPIConnectServiceClientStartDiscovery;
   state: PlatformTypesConnectAPIConnectServiceClientState;
+  stopScanning: PlatformTypesConnectAPIConnectServiceClientStopScanning;
   transfer: PlatformTypesConnectAPIConnectServiceClientTransfer;
   transport: PlatformTypesVideoAPIEsperantoTransport;
   wakeSleepingClusterDevices: PlatformTypesConnectAPIConnectServiceClientWakeSleepingClusterDevices;
@@ -7127,11 +7957,17 @@ export type PlatformTypesConnectTransferAPIConnectServiceClientOptions = Record<
 
 export type PlatformTypesConnectTransferAPICreateLoggingParams = (arg0: any) => unknown;
 
-export type PlatformTypesConnectTransferAPIPullToLocalDevice = (arg0: any) => unknown;
+export type PlatformTypesConnectTransferAPIPullToLocalDevice = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesConnectTransferAPITransferPlayback = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesConnectTransferAPITransferPlayback = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
-export type PlatformTypesConnectTransferAPITransferToRemote = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesConnectTransferAPITransferToRemote = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export interface PlatformTypesContextualShuffleAPI {
   _events: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleEvents;
@@ -7160,17 +7996,19 @@ export interface PlatformTypesControlMessageAPI {
   setTitlebarHeight: PlatformTypesControlMessageAPISetTitlebarHeight;
 }
 
-export type PlatformTypesControlMessageAPIDisableMenuItem = (arg0: any) => unknown;
+export type PlatformTypesControlMessageAPIDisableMenuItem = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesControlMessageAPIEnableMenuItem = (arg0: any) => unknown;
+export type PlatformTypesControlMessageAPIEnableMenuItem = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesControlMessageAPIGetEvents = () => unknown;
 
-export type PlatformTypesControlMessageAPINotifyReadyStateReached = () => unknown;
+export type PlatformTypesControlMessageAPINotifyReadyStateReached = () => Promise<unknown>;
 
-export type PlatformTypesControlMessageAPINotifyUsableStateReached = (arg0: any) => unknown;
+export type PlatformTypesControlMessageAPINotifyUsableStateReached = (
+  arg0: any,
+) => Promise<unknown>;
 
-export type PlatformTypesControlMessageAPINotifyViewLoaded = (arg0: any) => unknown;
+export type PlatformTypesControlMessageAPINotifyViewLoaded = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesControlMessageAPIPartnerApiClient {
   enablePartnerApiEndpoint: PlatformTypesControlMessageAPIPartnerApiClientEnablePartnerApiEndpoint;
@@ -7201,9 +8039,9 @@ export type PlatformTypesControlMessageAPISetPLEPorts = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesControlMessageAPISetTitlebarHeight = (arg0: any) => unknown;
+export type PlatformTypesControlMessageAPISetTitlebarHeight = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesControlMessageAPIUpdateUiClient {
   options: PlatformTypesControlMessageAPIUpdateUiClientOptions;
@@ -7231,6 +8069,7 @@ export type PlatformTypesControlMessageAPIUpdateUiClientUpdateTitlebarHeight = (
 ) => unknown;
 
 export interface PlatformTypesCurationAPI {
+  _isPodcastChaptersSavingEnabled: boolean;
   _libraryAPI: PlatformTypesLibraryAPI;
   _playlistAPI: PlatformTypesPlaylistAPI;
   _your_library: PlatformTypesCurationAPIYourLibrary;
@@ -7287,9 +8126,13 @@ export type PlatformTypesCurationAPICachePeek = (arg0: any) => unknown;
 
 export type PlatformTypesCurationAPICacheSet = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesCurationAPICurateDefault = (arg0: any) => unknown;
+export type PlatformTypesCurationAPICurateDefault = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesCurationAPICurateItems = (arg0: any, arg1: any, arg2: any) => unknown;
+export type PlatformTypesCurationAPICurateItems = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => Promise<unknown>;
 
 export interface PlatformTypesCurationAPIEvents {
   _emitter: PlatformTypesCurationAPIEventsEmitter;
@@ -7307,7 +8150,7 @@ export interface PlatformTypesCurationAPIEvents {
   onCuratedBatchChanged: PlatformTypesCurationAPIEventsOnCuratedBatchChanged;
   onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
   removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
-  streamIsCuratedCancellable: null;
+  streamIsCuratedCancellable: PlatformTypesCurationAPIEventsStreamIsCuratedCancellable;
 }
 
 export interface PlatformTypesCurationAPIEventsAggregator {
@@ -7329,7 +8172,7 @@ export interface PlatformTypesCurationAPIEventsAggregator {
 
 export type PlatformTypesCurationAPIEventsAggregatorAdditions = Map<unknown, unknown>;
 
-export type PlatformTypesCurationAPIEventsAggregatorBatch = Map<unknown, unknown>;
+export type PlatformTypesCurationAPIEventsAggregatorBatch = Map<string, number>;
 
 export type PlatformTypesCurationAPIEventsAggregatorDeletions = Map<unknown, unknown>;
 
@@ -7337,7 +8180,7 @@ export type PlatformTypesCurationAPIEventsAggregatorGetBatch = () => unknown;
 
 export type PlatformTypesCurationAPIEventsAggregatorOnAdd = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesCurationAPIEventsAggregatorOnBatch = (arg0: any) => unknown;
+export type PlatformTypesCurationAPIEventsAggregatorOnBatch = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesCurationAPIEventsAggregatorOnRemove = (arg0: any, arg1: any) => unknown;
 
@@ -7395,7 +8238,40 @@ export interface PlatformTypesCurationAPIEventsEmitter {
   removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
-export type PlatformTypesCurationAPIEventsEmitterListeners = Record<string, unknown>;
+export interface PlatformTypesCurationAPIEventsEmitterListeners {
+  update_curated_item: PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItem;
+}
+
+export type PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItem = Array<
+  | PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItem
+  | PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItem2
+>;
+
+export interface PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItem {
+  listener: PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemListener;
+  options: PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemOptions;
+}
+
+export interface PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItem2 {
+  listener: PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemListener2;
+  options: PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemOptions2;
+}
+
+export type PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export interface PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemOptions {
+  uri: string;
+}
+
+export interface PlatformTypesCurationAPIEventsEmitterListenersUpdateCuratedItemItemOptions2 {
+  uri: string;
+}
 
 export interface PlatformTypesCurationAPIEventsEmitterMetaListeners {
   add: PlatformTypesCurationAPIEventsEmitterMetaListenersAdd;
@@ -7444,19 +8320,25 @@ export type PlatformTypesCurationAPIEventsEmitUpdateCuratedItems = (
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesCurationAPIEventsOnCuratedBatchChanged = (arg0: any) => unknown;
+export type PlatformTypesCurationAPIEventsOnCuratedBatchChanged = (arg0: any) => Promise<unknown>;
+
+export interface PlatformTypesCurationAPIEventsStreamIsCuratedCancellable {
+  cancel: PlatformTypesCurationAPIEventsStreamIsCuratedCancellableCancel;
+}
+
+export type PlatformTypesCurationAPIEventsStreamIsCuratedCancellableCancel = () => unknown;
 
 export type PlatformTypesCurationAPIGetAvailableSortOrders = () => unknown;
 
 export type PlatformTypesCurationAPIGetCapabilities = () => unknown;
 
-export type PlatformTypesCurationAPIGetCurationContexts = (arg0: any) => unknown;
+export type PlatformTypesCurationAPIGetCurationContexts = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesCurationAPIGetDefaultCurationContextUri = (arg0: any) => unknown;
 
 export type PlatformTypesCurationAPIGetEvents = () => unknown;
 
-export type PlatformTypesCurationAPIIsCurated = () => unknown;
+export type PlatformTypesCurationAPIIsCurated = () => Promise<unknown>;
 
 export type PlatformTypesCurationAPIIsCuratedSync = (arg0: any) => unknown;
 
@@ -7486,9 +8368,9 @@ export interface PlatformTypesDesktopLogsAPI {
   openFolder: PlatformTypesDesktopLogsAPIOpenFolder;
 }
 
-export type PlatformTypesDesktopLogsAPIGetLogFolder = () => unknown;
+export type PlatformTypesDesktopLogsAPIGetLogFolder = () => Promise<unknown>;
 
-export type PlatformTypesDesktopLogsAPIOpenFolder = (arg0: any) => unknown;
+export type PlatformTypesDesktopLogsAPIOpenFolder = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesDesktopLogsAPIService {
   copyLogsToTempFolder: PlatformTypesDesktopLogsAPIServiceCopyLogsToTempFolder;
@@ -7573,7 +8455,7 @@ export interface PlatformTypesEqualizerAPIFiltersItem6 {
 
 export type PlatformTypesEqualizerAPIGetActivePreset = () => unknown;
 
-export type PlatformTypesEqualizerAPIGetFilters = () => unknown;
+export type PlatformTypesEqualizerAPIGetFilters = () => Promise<unknown>;
 
 export type PlatformTypesEqualizerAPIIsSupported = () => unknown;
 
@@ -7776,8 +8658,10 @@ export type PlatformTypesEqualizerAPILocalStorageAPIGetItem = (arg0: any) => unk
 
 export interface PlatformTypesEqualizerAPILocalStorageAPIItems {
   "USERNAME:cinema-media-preference": string;
-  "USERNAME:fusionSearchHistory": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEfusionSearchHistory;
+  "USERNAME:connect-nudge-triggered-at": string;
+  "USERNAME:connect-picker-recent-transfers": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEconnectpickerrecenttransfers;
   "USERNAME:homePins": string;
+  "USERNAME:isPlaybackBarRemainingTimeToggled": boolean;
   "USERNAME:items-view": number;
   "USERNAME:items-view-fullscreen": number;
   "USERNAME:lastVisitedLocation": string;
@@ -7785,20 +8669,38 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItems {
   "USERNAME:left-sidebar-expanded-state-width": number;
   "USERNAME:left-sidebar-state": number;
   "USERNAME:library-row-mode": null;
+  "USERNAME:lintHtmlWithCss": boolean;
+  "USERNAME:messagebox-usage-store": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEmessageboxusagestore;
+  "USERNAME:mixing-not-available-for-device-notifications": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEmixingnotavailablefordevicenotifications;
   "USERNAME:onboarding-checklist": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEonboardingchecklist;
   "USERNAME:onboarding-checklist-completed-at": null;
+  "USERNAME:opened-folder-uri": string;
   "USERNAME:panel-width": number;
   "USERNAME:playbackSpeed": number;
   "USERNAME:queue-view": string;
   "USERNAME:remote-config-overrides": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconfigoverrides;
+  "USERNAME:smart-shuffle-menu": number;
+  "USERNAME:sortedState": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEsortedState;
   "USERNAME:toggleNowPlayingView": boolean;
   "USERNAME:ui.right_sidebar_content": string;
+  "USERNAME:ylx-active-filter-ids": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivefilterids;
+  "USERNAME:ylx-active-sort-order-by-filter-id": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivesortorderbyfilterid;
   "USERNAME:ylx-default-state-nav-bar-width": number;
+  "USERNAME:ylx-expanded-folders": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxexpandedfolders;
   "USERNAME:ylx-expanded-state-nav-bar-width": number;
+  "USERNAME:ylx-sort-order-and-direction-by-filter-id": PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxsortorderanddirectionbyfilterid;
 }
 
-export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEfusionSearchHistory =
-  Array<unknown>;
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEconnectpickerrecenttransfers =
+  Record<string, unknown>;
+
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEmessageboxusagestore = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEmixingnotavailablefordevicenotifications =
+  Record<string, unknown>;
 
 export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEonboardingchecklist {
   completed: PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEonboardingchecklistCompleted;
@@ -7825,14 +8727,11 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconf
   enableBuyOptionInAudiobookContextMenu: boolean;
   enableCanvasAds: boolean;
   enableCentralisedSmartShuffle: boolean;
-  enableCheetara: boolean;
-  enableCommentThreadsReactionsForEpisodes: boolean;
   enableConcertDistanceRadius: boolean;
   enableConcertsNearYou: boolean;
   enableConcertsNotInterested: boolean;
   enableConcertsReportIssue: boolean;
   enableContextualTrackBans: boolean;
-  enableCreateButton: string;
   enableDebugTools: boolean;
   enableDynamicLiveEventsFeed: boolean;
   enableEqualizer: boolean;
@@ -7843,15 +8742,10 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconf
   enableFullscreenLibrary: boolean;
   enableFullscreenMode: boolean;
   enableHomeFollowingSubfeeds: boolean;
-  enableHybridHome: boolean;
-  enableHybridHomeLowDensity: boolean;
   enableImprovedCinemaModeCanvas: boolean;
   enableInAppMessaging: boolean;
   enableJamNearbyJoining: boolean;
-  enableLauncherAutoStartToggle: boolean;
   enableLibraryAlbumNewReleaseSignifier: boolean;
-  enableLibraryImportCTAForInactiveUsers: string;
-  enableLibraryImportSettings: string;
   enableLikedSongsFilterTags: boolean;
   enableMagpie: boolean;
   enableMandalorianEasterEgg: string;
@@ -7860,23 +8754,25 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconf
   enableNavigateToGalleryFromConceptPill: boolean;
   enableNearbyJams: boolean;
   enableNewShuffleModeOrder: boolean;
+  enableNewVideoAdSkipLogic: boolean;
   enableNotificationCenter: boolean;
   enableNowPlayingBarVideo: boolean;
   enableNpvAboutPodcast: boolean;
   enableNpvCreditsImpressions: boolean;
-  enableParrot: boolean;
   enablePeekNpv: boolean;
   enablePiPMiniPlayer: boolean;
   enablePiPMiniPlayerQueue: boolean;
   enablePiPMiniPlayerSettings: boolean;
   enablePiPMiniPlayerVideo: boolean;
   enablePlaybackBarAnimation: boolean;
-  enablePlaylistMixingBranding: boolean;
   enablePlaylistSessionControlChips: boolean;
   enablePrefetching: boolean;
   enablePremiumFlagForLyrics: boolean;
   enablePremiumPage: boolean;
+  enablePremiumPageKorea: boolean;
+  enablePremiumPagePrepaid: boolean;
   enablePremiumUserForMiniPlayer: boolean;
+  enableProfileVisibilityControls: boolean;
   enableProgressBarRefactorWithChapters: boolean;
   enablePushCinemaModeStateToHistory: boolean;
   enableReactQueryPersistence: boolean;
@@ -7885,14 +8781,11 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconf
   enableSearchSuggestions: boolean;
   enableShowLeavebehindConsolidation: boolean;
   enableShuffleSettings: boolean;
-  enableSingAlong: boolean;
   enableSleepTimer: boolean;
   enableSmartShuffle: boolean;
   enableStructuredDescriptionHtml: boolean;
   enableSyncingSearchHistoryToBackend: boolean;
   enableTheStageDesktop: boolean;
-  enableTrackCreditsModalV2: boolean;
-  enableTuna: boolean;
   enableUnderAgeBlockingModal: boolean;
   enableUnmappedVideos: boolean;
   enableUserCommentsForEpisodes: boolean;
@@ -7912,6 +8805,25 @@ export interface PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEremoteconf
   transitionRowInteractionVariant: string;
   useHarmonyCoreExtension: boolean;
 }
+
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEsortedState = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivefilterids = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxactivesortorderbyfilterid =
+  Record<string, unknown>;
+
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxexpandedfolders =
+  Array<unknown>;
+
+export type PlatformTypesEqualizerAPILocalStorageAPIItemsUSERNAMEylxsortorderanddirectionbyfilterid =
+  Record<string, unknown>;
 
 export type PlatformTypesEqualizerAPILocalStorageAPIListenToStorageEvents = () => unknown;
 
@@ -7959,7 +8871,7 @@ export type PlatformTypesEqualizerAPISetActivePreset = (arg0: any) => unknown;
 
 export type PlatformTypesEqualizerAPISetEnabledState = (arg0: any) => unknown;
 
-export type PlatformTypesEqualizerAPISetFilterGain = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesEqualizerAPISetFilterGain = (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesEqualizerAPISubscribeToEnabledState = (arg0: any) => unknown;
 
@@ -8030,12 +8942,108 @@ export interface PlatformTypesEventSender {
 }
 
 export interface PlatformTypesExclusiveModeAPI {
+  audioDevices: PlatformTypesExclusiveModeAPIAudioDevices;
+  audioOutputDeviceEvents: PlatformTypesAudioOutputDevicesAPIEvents;
+  deviceList: PlatformTypesExclusiveModeAPIDeviceList;
+  events: PlatformTypesExclusiveModeAPIEvents;
+  exclusiveModeEnabled: PlatformTypesExclusiveModeAPIExclusiveModeEnabled;
   exclusiveModeService: PlatformTypesExclusiveModeAPIExclusiveModeService;
+  fetchDeviceList: PlatformTypesExclusiveModeAPIFetchDeviceList;
+  getEvents: PlatformTypesExclusiveModeAPIGetEvents;
   getExclusiveModeEnabled: PlatformTypesExclusiveModeAPIGetExclusiveModeEnabled;
+  getPersistedExclusiveModeForDevice: PlatformTypesExclusiveModeAPIGetPersistedExclusiveModeForDevice;
   getSelectedAudioOutputDevice: PlatformTypesExclusiveModeAPIGetSelectedAudioOutputDevice;
+  getStorageKeyForDevice: PlatformTypesExclusiveModeAPIGetStorageKeyForDevice;
+  handleDeviceChange: PlatformTypesExclusiveModeAPIHandleDeviceChange;
+  intendedAudioDevice: PlatformTypesExclusiveModeAPIIntendedAudioDevice;
+  localStorageAPI: PlatformTypesLocalStorageAPI;
+  selectedAudioDevice: PlatformTypesExclusiveModeAPISelectedAudioDevice;
   setExclusiveModeEnabled: PlatformTypesExclusiveModeAPISetExclusiveModeEnabled;
+  setPersistedExclusiveModeForDevice: PlatformTypesExclusiveModeAPISetPersistedExclusiveModeForDevice;
   setSelectedAudioOutputDevice: PlatformTypesExclusiveModeAPISetSelectedAudioOutputDevice;
 }
+
+export type PlatformTypesExclusiveModeAPIAudioDevices = () => unknown;
+
+export type PlatformTypesExclusiveModeAPIDeviceList = Array<
+  | PlatformTypesExclusiveModeAPIDeviceListItem
+  | PlatformTypesExclusiveModeAPIDeviceListItem2
+  | PlatformTypesExclusiveModeAPIDeviceListItem3
+>;
+
+export interface PlatformTypesExclusiveModeAPIDeviceListItem {
+  description: string;
+  exclusive: boolean;
+  id: string;
+  interface: string;
+  present: boolean;
+}
+
+export interface PlatformTypesExclusiveModeAPIDeviceListItem2 {
+  description: string;
+  exclusive: boolean;
+  id: string;
+  interface: string;
+  present: boolean;
+}
+
+export interface PlatformTypesExclusiveModeAPIDeviceListItem3 {
+  description: string;
+  exclusive: boolean;
+  id: string;
+  interface: string;
+  present: boolean;
+}
+
+export interface PlatformTypesExclusiveModeAPIEvents {
+  _emitter: PlatformTypesExclusiveModeAPIEventsEmitter;
+  addListener: PlatformTypesAudiobookCappingAPIEventsAddListener;
+  createEvent: PlatformTypesAudiobookCappingAPIEventsCreateEvent;
+  emit: PlatformTypesAudiobookCappingAPIEventsEmit;
+  emitSync: PlatformTypesAudiobookCappingAPIEventsEmitSync;
+  onAddListener: PlatformTypesAudiobookCappingAPIEventsOnAddListener;
+  onRemoveListener: PlatformTypesAudiobookCappingAPIEventsOnRemoveListener;
+  removeListener: PlatformTypesAudiobookCappingAPIEventsRemoveListener;
+}
+
+export interface PlatformTypesExclusiveModeAPIEventsEmitter {
+  _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
+  _listeners: PlatformTypesExclusiveModeAPIEventsEmitterListeners;
+  _metaListeners: PlatformTypesExclusiveModeAPIEventsEmitterMetaListeners;
+  addListener: PlatformTypesVideoAPIVideoCoordinatorAddListener;
+  addListeners: PlatformTypesVideoAPIVideoCoordinatorAddListeners;
+  createEvent: PlatformTypesVideoAPIVideoCoordinatorCreateEvent;
+  emit: PlatformTypesVideoAPIVideoCoordinatorEmit;
+  emitAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitAndWait;
+  emitEvent: PlatformTypesVideoAPIVideoCoordinatorEmitEvent;
+  emitEventAndWait: PlatformTypesVideoAPIVideoCoordinatorEmitEventAndWait;
+  emitEventSync: PlatformTypesVideoAPIVideoCoordinatorEmitEventSync;
+  emitSync: PlatformTypesVideoAPIVideoCoordinatorEmitSync;
+  on: PlatformTypesVideoAPIVideoCoordinatorOn;
+  onAddListener: PlatformTypesVideoAPIVideoCoordinatorOnAddListener;
+  onRemoveListener: PlatformTypesVideoAPIVideoCoordinatorOnRemoveListener;
+  once: PlatformTypesVideoAPIVideoCoordinatorOnce;
+  proxyEmit: PlatformTypesVideoAPIVideoCoordinatorProxyEmit;
+  proxyEmitAll: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAll;
+  proxyEmitAllSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitAllSync;
+  proxyEmitSync: PlatformTypesVideoAPIVideoCoordinatorProxyEmitSync;
+  removeAllListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveAllListeners;
+  removeListener: PlatformTypesVideoAPIVideoCoordinatorRemoveListener;
+  removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
+}
+
+export type PlatformTypesExclusiveModeAPIEventsEmitterListeners = Record<string, unknown>;
+
+export interface PlatformTypesExclusiveModeAPIEventsEmitterMetaListeners {
+  add: PlatformTypesExclusiveModeAPIEventsEmitterMetaListenersAdd;
+  remove: PlatformTypesExclusiveModeAPIEventsEmitterMetaListenersRemove;
+}
+
+export type PlatformTypesExclusiveModeAPIEventsEmitterMetaListenersAdd = Record<string, unknown>;
+
+export type PlatformTypesExclusiveModeAPIEventsEmitterMetaListenersRemove = Record<string, unknown>;
+
+export type PlatformTypesExclusiveModeAPIExclusiveModeEnabled = () => unknown;
 
 export interface PlatformTypesExclusiveModeAPIExclusiveModeService {
   enumerateDevices: PlatformTypesExclusiveModeAPIExclusiveModeServiceEnumerateDevices;
@@ -8074,13 +9082,37 @@ export type PlatformTypesExclusiveModeAPIExclusiveModeServiceSetEnable = (
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesExclusiveModeAPIGetExclusiveModeEnabled = () => unknown;
+export type PlatformTypesExclusiveModeAPIFetchDeviceList = () => Promise<unknown>;
 
-export type PlatformTypesExclusiveModeAPIGetSelectedAudioOutputDevice = () => unknown;
+export type PlatformTypesExclusiveModeAPIGetEvents = () => unknown;
 
-export type PlatformTypesExclusiveModeAPISetExclusiveModeEnabled = (arg0: any) => unknown;
+export type PlatformTypesExclusiveModeAPIGetExclusiveModeEnabled = () => Promise<unknown>;
 
-export type PlatformTypesExclusiveModeAPISetSelectedAudioOutputDevice = (arg0: any) => unknown;
+export type PlatformTypesExclusiveModeAPIGetPersistedExclusiveModeForDevice = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesExclusiveModeAPIGetSelectedAudioOutputDevice = () => Promise<unknown>;
+
+export type PlatformTypesExclusiveModeAPIGetStorageKeyForDevice = (arg0: any) => unknown;
+
+export type PlatformTypesExclusiveModeAPIHandleDeviceChange = () => Promise<unknown>;
+
+export type PlatformTypesExclusiveModeAPIIntendedAudioDevice = () => unknown;
+
+export type PlatformTypesExclusiveModeAPISelectedAudioDevice = () => unknown;
+
+export type PlatformTypesExclusiveModeAPISetExclusiveModeEnabled = (arg0: any) => Promise<unknown>;
+
+export type PlatformTypesExclusiveModeAPISetPersistedExclusiveModeForDevice = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesExclusiveModeAPISetSelectedAudioOutputDevice = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export interface PlatformTypesExternalAccessoryAPI {
   _builder: PlatformTypesRequestBuilder;
@@ -8107,9 +9139,9 @@ export interface PlatformTypesExternalAccessoryAPICache {
 
 export type PlatformTypesExternalAccessoryAPICache2 = Map<unknown, unknown>;
 
-export type PlatformTypesExternalAccessoryAPILookup = (arg0: any) => unknown;
+export type PlatformTypesExternalAccessoryAPILookup = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesExternalAccessoryAPISendLookupRequest = (arg0: any) => unknown;
+export type PlatformTypesExternalAccessoryAPISendLookupRequest = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesFeatureFlags {
   enableShows: boolean;
@@ -8129,7 +9161,7 @@ export type PlatformTypesFeedbackAPIAddContextTrackBan = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
 export interface PlatformTypesFeedbackAPIClient {
   add: PlatformTypesFeedbackAPIClientAdd;
@@ -8141,32 +9173,26 @@ export interface PlatformTypesFeedbackAPIClient {
   decorate: PlatformTypesFeedbackAPIClientDecorate;
   getArtistTrackList: PlatformTypesFeedbackAPIClientGetArtistTrackList;
   getArtistView: PlatformTypesFeedbackAPIClientGetArtistView;
-  getBans: PlatformTypesFeedbackAPIClientGetBans;
   getBucketSyncStatus: PlatformTypesFeedbackAPIClientGetBucketSyncStatus;
-  getResumePoints: PlatformTypesFeedbackAPIClientGetResumePoints;
   getTrackList: PlatformTypesFeedbackAPIClientGetTrackList;
   getUnplayedEpisodes: PlatformTypesFeedbackAPIClientGetUnplayedEpisodes;
   isSnoozed: PlatformTypesFeedbackAPIClientIsSnoozed;
   offlineArtist: PlatformTypesFeedbackAPIClientOfflineArtist;
-  offlineTracks: PlatformTypesFeedbackAPIClientOfflineTracks;
   options: PlatformTypesFeedbackAPIClientOptions;
   playArtist: PlatformTypesFeedbackAPIClientPlayArtist;
   playTracks: PlatformTypesFeedbackAPIClientPlayTracks;
   remove: PlatformTypesFeedbackAPIClientRemove;
   removeOfflineArtist: PlatformTypesFeedbackAPIClientRemoveOfflineArtist;
-  removeOfflineTracks: PlatformTypesFeedbackAPIClientRemoveOfflineTracks;
   removeUnplayed: PlatformTypesFeedbackAPIClientRemoveUnplayed;
   snooze: PlatformTypesFeedbackAPIClientSnooze;
   streamArtistTrackList: PlatformTypesFeedbackAPIClientStreamArtistTrackList;
   streamArtistView: PlatformTypesFeedbackAPIClientStreamArtistView;
-  streamBans: PlatformTypesFeedbackAPIClientStreamBans;
   streamContains: PlatformTypesFeedbackAPIClientStreamContains;
   streamDecorate: PlatformTypesFeedbackAPIClientStreamDecorate;
   streamTagsInfo: PlatformTypesFeedbackAPIClientStreamTagsInfo;
   streamTrackList: PlatformTypesFeedbackAPIClientStreamTrackList;
   streamTrackListMetadata: PlatformTypesFeedbackAPIClientStreamTrackListMetadata;
   streamUnplayedEpisodes: PlatformTypesFeedbackAPIClientStreamUnplayedEpisodes;
-  tracksOfflineStatus: PlatformTypesFeedbackAPIClientTracksOfflineStatus;
   transport: PlatformTypesVideoAPIEsperantoTransport;
   unban: PlatformTypesFeedbackAPIClientUnban;
   unbanGlobal: PlatformTypesFeedbackAPIClientUnbanGlobal;
@@ -8192,11 +9218,7 @@ export type PlatformTypesFeedbackAPIClientGetArtistTrackList = (arg0: any, arg1:
 
 export type PlatformTypesFeedbackAPIClientGetArtistView = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesFeedbackAPIClientGetBans = (arg0: any, arg1: any) => unknown;
-
 export type PlatformTypesFeedbackAPIClientGetBucketSyncStatus = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesFeedbackAPIClientGetResumePoints = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientGetTrackList = (arg0: any, arg1: any) => unknown;
 
@@ -8205,8 +9227,6 @@ export type PlatformTypesFeedbackAPIClientGetUnplayedEpisodes = (arg0: any, arg1
 export type PlatformTypesFeedbackAPIClientIsSnoozed = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientOfflineArtist = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesFeedbackAPIClientOfflineTracks = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientOptions = Record<string, unknown>;
 
@@ -8218,8 +9238,6 @@ export type PlatformTypesFeedbackAPIClientRemove = (arg0: any, arg1: any) => unk
 
 export type PlatformTypesFeedbackAPIClientRemoveOfflineArtist = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesFeedbackAPIClientRemoveOfflineTracks = (arg0: any, arg1: any) => unknown;
-
 export type PlatformTypesFeedbackAPIClientRemoveUnplayed = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientSnooze = (arg0: any, arg1: any) => unknown;
@@ -8227,8 +9245,6 @@ export type PlatformTypesFeedbackAPIClientSnooze = (arg0: any, arg1: any) => unk
 export type PlatformTypesFeedbackAPIClientStreamArtistTrackList = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientStreamArtistView = (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesFeedbackAPIClientStreamBans = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientStreamContains = (arg0: any, arg1: any) => unknown;
 
@@ -8247,8 +9263,6 @@ export type PlatformTypesFeedbackAPIClientStreamUnplayedEpisodes = (
   arg0: any,
   arg1: any,
 ) => unknown;
-
-export type PlatformTypesFeedbackAPIClientTracksOfflineStatus = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesFeedbackAPIClientUnban = (arg0: any, arg1: any) => unknown;
 
@@ -8360,7 +9374,10 @@ export type PlatformTypesFeedbackAPIEventsEmitUpdateContextualBan = (
   arg2: any,
 ) => unknown;
 
-export type PlatformTypesFeedbackAPIEventsOnBatchChanged = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesFeedbackAPIEventsOnBatchChanged = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export type PlatformTypesFeedbackAPIEventsSubscribeContextualBans = (
   arg0: any,
@@ -8372,13 +9389,26 @@ export type PlatformTypesFeedbackAPIGetCapabilities = () => unknown;
 
 export type PlatformTypesFeedbackAPIGetEvents = () => unknown;
 
-export type PlatformTypesFeedbackAPIRemoveContextTrackBan = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesFeedbackAPIRemoveContextTrackBan = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export type PlatformTypesFeedbackAPISubscribeContextualBans = (
   arg0: any,
   arg1: any,
   arg2: any,
 ) => unknown;
+
+export interface PlatformTypesFocusMainWindowAPI {
+  _cosmos: PlatformTypesClipboardAPICosmos;
+  canFocusMainWindow: PlatformTypesFocusMainWindowAPICanFocusMainWindow;
+  focusMainWindow: PlatformTypesFocusMainWindowAPIFocusMainWindow;
+}
+
+export type PlatformTypesFocusMainWindowAPICanFocusMainWindow = () => unknown;
+
+export type PlatformTypesFocusMainWindowAPIFocusMainWindow = () => unknown;
 
 export interface PlatformTypesFollowAPI {
   _cache: PlatformTypesFollowAPICache;
@@ -8483,19 +9513,23 @@ export type PlatformTypesFollowAPIEventsEmitterMetaListenersAdd = Record<string,
 
 export type PlatformTypesFollowAPIEventsEmitterMetaListenersRemove = Record<string, unknown>;
 
-export type PlatformTypesFollowAPIExecuteOperation = (arg0: any, arg1: any, arg2: any) => unknown;
+export type PlatformTypesFollowAPIExecuteOperation = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => Promise<unknown>;
 
-export type PlatformTypesFollowAPIFollowUsers = (arg0: any) => unknown;
+export type PlatformTypesFollowAPIFollowUsers = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesFollowAPIGetEvents = () => unknown;
 
-export type PlatformTypesFollowAPIIsFollowing = (arg0: any) => unknown;
+export type PlatformTypesFollowAPIIsFollowing = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesFollowAPIUnfollowUsers = (arg0: any) => unknown;
+export type PlatformTypesFollowAPIUnfollowUsers = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesFollowAPIValidateURIs = (arg0: any) => unknown;
 
-export type PlatformTypesGraphQLLoader = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesGraphQLLoader = (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesHistory {
   action: string;
@@ -8606,7 +9640,6 @@ export interface PlatformTypesInitialProductState {
   "mixing-tools": string;
   "nft-disabled": string;
   "obfuscate-restricted-tracks": string;
-  "offline-backup": string;
   "on-demand": string;
   "on-demand-trial": string;
   "on-demand-trial-in-progress": string;
@@ -8614,7 +9647,6 @@ export interface PlatformTypesInitialProductState {
   "payments-locked-state": string;
   "pick-and-shuffle": string;
   "player-license": string;
-  "player-license-v2": string;
   "playlist-annotations-markup": string;
   "preferred-locale": string;
   "prefetch-keys": string;
@@ -8641,6 +9673,7 @@ export interface PlatformTypesInitialProductState {
   "storage-size-config": string;
   "streaming-only-premium": string;
   "streaming-rules": string;
+  "subscription-enddate": string;
   "ugc-abuse-report": string;
   "ugc-abuse-report-url": string;
   "video-cdn-sampling": string;
@@ -8664,7 +9697,6 @@ export interface PlatformTypesInitialProductState {
   name: string;
   offline: string;
   parrot: string;
-  partner: string;
   product: string;
   radio: string;
   shuffle: string;
@@ -8721,7 +9753,7 @@ export type PlatformTypesJamDevicesAPICombineJamsWithEntities = (
 
 export type PlatformTypesJamDevicesAPICreateNearbyJamRowEntities = (arg0: any) => unknown;
 
-export type PlatformTypesJamDevicesAPIGetJamDevices = () => unknown;
+export type PlatformTypesJamDevicesAPIGetJamDevices = () => Promise<unknown>;
 
 export type PlatformTypesJamDevicesAPIMergeJamsWithEntities = (arg0: any, arg1: any) => unknown;
 
@@ -8772,7 +9804,7 @@ export interface PlatformTypesLibraryAPI {
   unpin: PlatformTypesLibraryAPIUnpin;
 }
 
-export type PlatformTypesLibraryAPIAdd = (arg0: any) => unknown;
+export type PlatformTypesLibraryAPIAdd = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesLibraryAPICache = Map<unknown, unknown>;
 
@@ -8786,32 +9818,26 @@ export interface PlatformTypesLibraryAPICollection {
   decorate: PlatformTypesFeedbackAPIClientDecorate;
   getArtistTrackList: PlatformTypesFeedbackAPIClientGetArtistTrackList;
   getArtistView: PlatformTypesFeedbackAPIClientGetArtistView;
-  getBans: PlatformTypesFeedbackAPIClientGetBans;
   getBucketSyncStatus: PlatformTypesFeedbackAPIClientGetBucketSyncStatus;
-  getResumePoints: PlatformTypesFeedbackAPIClientGetResumePoints;
   getTrackList: PlatformTypesFeedbackAPIClientGetTrackList;
   getUnplayedEpisodes: PlatformTypesFeedbackAPIClientGetUnplayedEpisodes;
   isSnoozed: PlatformTypesFeedbackAPIClientIsSnoozed;
   offlineArtist: PlatformTypesFeedbackAPIClientOfflineArtist;
-  offlineTracks: PlatformTypesFeedbackAPIClientOfflineTracks;
   options: PlatformTypesLibraryAPICollectionOptions;
   playArtist: PlatformTypesFeedbackAPIClientPlayArtist;
   playTracks: PlatformTypesFeedbackAPIClientPlayTracks;
   remove: PlatformTypesFeedbackAPIClientRemove;
   removeOfflineArtist: PlatformTypesFeedbackAPIClientRemoveOfflineArtist;
-  removeOfflineTracks: PlatformTypesFeedbackAPIClientRemoveOfflineTracks;
   removeUnplayed: PlatformTypesFeedbackAPIClientRemoveUnplayed;
   snooze: PlatformTypesFeedbackAPIClientSnooze;
   streamArtistTrackList: PlatformTypesFeedbackAPIClientStreamArtistTrackList;
   streamArtistView: PlatformTypesFeedbackAPIClientStreamArtistView;
-  streamBans: PlatformTypesFeedbackAPIClientStreamBans;
   streamContains: PlatformTypesFeedbackAPIClientStreamContains;
   streamDecorate: PlatformTypesFeedbackAPIClientStreamDecorate;
   streamTagsInfo: PlatformTypesFeedbackAPIClientStreamTagsInfo;
   streamTrackList: PlatformTypesFeedbackAPIClientStreamTrackList;
   streamTrackListMetadata: PlatformTypesFeedbackAPIClientStreamTrackListMetadata;
   streamUnplayedEpisodes: PlatformTypesFeedbackAPIClientStreamUnplayedEpisodes;
-  tracksOfflineStatus: PlatformTypesFeedbackAPIClientTracksOfflineStatus;
   transport: PlatformTypesVideoAPIEsperantoTransport;
   unban: PlatformTypesFeedbackAPIClientUnban;
   unbanGlobal: PlatformTypesFeedbackAPIClientUnbanGlobal;
@@ -8821,7 +9847,7 @@ export interface PlatformTypesLibraryAPICollection {
 
 export type PlatformTypesLibraryAPICollectionOptions = Record<string, unknown>;
 
-export type PlatformTypesLibraryAPIContains = () => unknown;
+export type PlatformTypesLibraryAPIContains = () => Promise<unknown>;
 
 export type PlatformTypesLibraryAPIContainsSync = (arg0: any) => unknown;
 
@@ -8882,7 +9908,7 @@ export type PlatformTypesLibraryAPIEventsAggregatorDeletions = Map<unknown, unkn
 
 export type PlatformTypesLibraryAPIEventsAggregatorOnAdd = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesLibraryAPIEventsAggregatorOnBatch = (arg0: any) => unknown;
+export type PlatformTypesLibraryAPIEventsAggregatorOnBatch = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesLibraryAPIEventsAggregatorOnRemove = (arg0: any, arg1: any) => unknown;
 
@@ -8920,7 +9946,9 @@ export type PlatformTypesLibraryAPIEventsArtistViewAggregatorOnAdd = (
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesLibraryAPIEventsArtistViewAggregatorOnBatch = (arg0: any) => unknown;
+export type PlatformTypesLibraryAPIEventsArtistViewAggregatorOnBatch = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesLibraryAPIEventsArtistViewAggregatorOnRemove = (
   arg0: any,
@@ -9036,11 +10064,168 @@ export interface PlatformTypesLibraryAPIEventsEmitter {
 
 export interface PlatformTypesLibraryAPIEventsEmitterListeners {
   operation: PlatformTypesLibraryAPIEventsEmitterListenersOperation;
+  operation_complete: PlatformTypesLibraryAPIEventsEmitterListenersOperationComplete;
+  update: PlatformTypesLibraryAPIEventsEmitterListenersUpdate;
   update_item: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem;
+  update_pin: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePin;
+  update_pin_error: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinError;
 }
 
 export type PlatformTypesLibraryAPIEventsEmitterListenersOperation =
   Array<PlatformTypesLibraryAPIEventsEmitterListenersOperationItem>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationComplete = Array<
+  | PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem
+  | PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem10
+  | PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem2
+  | PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem3
+  | PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem4
+  | PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem5
+  | PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem6
+  | PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem7
+  | PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem8
+  | PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem9
+>;
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions;
+}
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem10 {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener10;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions10;
+}
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem2 {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener2;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions2;
+}
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem3 {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener3;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions3;
+}
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem4 {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener4;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions4;
+}
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem5 {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener5;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions5;
+}
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem6 {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener6;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions6;
+}
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem7 {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener7;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions7;
+}
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem8 {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener8;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions8;
+}
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItem9 {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener9;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions9;
+}
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener10 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener3 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener4 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener5 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener6 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener7 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener8 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemListener9 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions10 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions2 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions3 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions4 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions5 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions6 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions7 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions8 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersOperationCompleteItemOptions9 = Record<
+  string,
+  unknown
+>;
 
 export interface PlatformTypesLibraryAPIEventsEmitterListenersOperationItem {
   listener: PlatformTypesLibraryAPIEventsEmitterListenersOperationItemListener;
@@ -9056,8 +10241,16 @@ export type PlatformTypesLibraryAPIEventsEmitterListenersOperationItemOptions = 
   unknown
 >;
 
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdate =
+  Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem2>;
+
 export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem =
   Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItem>;
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItem2 {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemListener;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemOptions;
+}
 
 export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItem {
   listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemListener;
@@ -9071,6 +10264,49 @@ export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemListener 
 export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemItemOptions {
   uri: string;
 }
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdateItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePin =
+  Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItem>;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinError =
+  Array<PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItem>;
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItem {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItemListener;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItemOptions;
+}
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinErrorItemOptions = Record<
+  string,
+  unknown
+>;
+
+export interface PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItem {
+  listener: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItemListener;
+  options: PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItemOptions;
+}
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesLibraryAPIEventsEmitterListenersUpdatePinItemOptions = Record<
+  string,
+  unknown
+>;
 
 export interface PlatformTypesLibraryAPIEventsEmitterMetaListeners {
   add: PlatformTypesLibraryAPIEventsEmitterMetaListenersAdd;
@@ -9193,19 +10429,19 @@ export type PlatformTypesLibraryAPIEventsEmitUpdatePinErrorTooManyPins = (
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesLibraryAPIEventsOnArtistViewBatchChanged = (arg0: any) => unknown;
+export type PlatformTypesLibraryAPIEventsOnArtistViewBatchChanged = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesLibraryAPIEventsOnBatchChanged = (arg0: any) => unknown;
+export type PlatformTypesLibraryAPIEventsOnBatchChanged = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesLibraryAPIEventsSubscribeToUpdates = () => unknown;
 
 export type PlatformTypesLibraryAPIEventsUnsubscribeFromUpdates = () => unknown;
 
-export type PlatformTypesLibraryAPIGetArtistView = (arg0: any) => unknown;
+export type PlatformTypesLibraryAPIGetArtistView = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesLibraryAPIGetCapabilities = () => unknown;
 
-export type PlatformTypesLibraryAPIGetContents = (arg0: any) => unknown;
+export type PlatformTypesLibraryAPIGetContents = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesLibraryAPIGetContentsPrimaryFilterId = (arg0: any) => unknown;
 
@@ -9215,7 +10451,7 @@ export type PlatformTypesLibraryAPIGetEvents = () => unknown;
 
 export type PlatformTypesLibraryAPIGetFilterLabel = (arg0: any) => unknown;
 
-export type PlatformTypesLibraryAPIGetIsPinned = () => unknown;
+export type PlatformTypesLibraryAPIGetIsPinned = () => Promise<unknown>;
 
 export type PlatformTypesLibraryAPIGetRecentsSortOrderId = () => unknown;
 
@@ -9223,17 +10459,17 @@ export type PlatformTypesLibraryAPIGetSortOrderLabel = (arg0: any) => unknown;
 
 export type PlatformTypesLibraryAPIGetStaticallyKnownFilters = () => unknown;
 
-export type PlatformTypesLibraryAPIGetTracks = () => unknown;
+export type PlatformTypesLibraryAPIGetTracks = () => Promise<unknown>;
 
-export type PlatformTypesLibraryAPIGetTracksFilterTags = () => unknown;
+export type PlatformTypesLibraryAPIGetTracksFilterTags = () => Promise<unknown>;
 
-export type PlatformTypesLibraryAPIIsTagsInfoSynced = () => unknown;
+export type PlatformTypesLibraryAPIIsTagsInfoSynced = () => Promise<unknown>;
 
-export type PlatformTypesLibraryAPIMarkAsPlayed = (arg0: any) => unknown;
+export type PlatformTypesLibraryAPIMarkAsPlayed = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesLibraryAPIMarkAsUnPlayed = (arg0: any) => unknown;
+export type PlatformTypesLibraryAPIMarkAsUnPlayed = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesLibraryAPIPin = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesLibraryAPIPin = (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesLibraryAPIPlaylistDataClient {
   find: PlatformTypesLibraryAPIPlaylistDataClientFind;
@@ -9348,9 +10584,9 @@ export type PlatformTypesLibraryAPIPlaylistServiceClientSubscribeToMembers = (
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesLibraryAPIRemove = (arg0: any) => unknown;
+export type PlatformTypesLibraryAPIRemove = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesLibraryAPIUnpin = (arg0: any) => unknown;
+export type PlatformTypesLibraryAPIUnpin = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesLibraryAPIYourLibrary {
   all: PlatformTypesOfflineAPIYourLibraryAll;
@@ -9391,9 +10627,9 @@ export type PlatformTypesLifecycleAPIClientRestart = (arg0: any, arg1: any) => u
 
 export type PlatformTypesLifecycleAPIClientShutdown = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesLifecycleAPIRestart = () => unknown;
+export type PlatformTypesLifecycleAPIRestart = () => Promise<unknown>;
 
-export type PlatformTypesLifecycleAPIShutdown = () => unknown;
+export type PlatformTypesLifecycleAPIShutdown = () => Promise<unknown>;
 
 export interface PlatformTypesListPlatformAPI {
   _listPlatformFetchAPI: PlatformTypesListPlatformAPIListPlatformFetchAPI;
@@ -9416,19 +10652,19 @@ export interface PlatformTypesListPlatformAPI {
   subscribeList: PlatformTypesListPlatformAPISubscribeList;
 }
 
-export type PlatformTypesListPlatformAPIAdd = () => unknown;
+export type PlatformTypesListPlatformAPIAdd = () => Promise<unknown>;
 
-export type PlatformTypesListPlatformAPIEmitItemSignals = () => unknown;
+export type PlatformTypesListPlatformAPIEmitItemSignals = () => Promise<unknown>;
 
-export type PlatformTypesListPlatformAPIEmitSignals = () => unknown;
+export type PlatformTypesListPlatformAPIEmitSignals = () => Promise<unknown>;
 
 export type PlatformTypesListPlatformAPIGetCapabilities = () => unknown;
 
 export type PlatformTypesListPlatformAPIGetEvents = () => unknown;
 
-export type PlatformTypesListPlatformAPIGetList = () => unknown;
+export type PlatformTypesListPlatformAPIGetList = () => Promise<unknown>;
 
-export type PlatformTypesListPlatformAPIGetListContents = () => unknown;
+export type PlatformTypesListPlatformAPIGetListContents = () => Promise<unknown>;
 
 export interface PlatformTypesListPlatformAPIListPlatformFetchAPI {
   _playabilityAPI: PlatformTypesPlayabilityAPI;
@@ -9445,7 +10681,7 @@ export type PlatformTypesListPlatformAPIListPlatformFetchAPIGetList = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesListPlatformAPIListPlatformFetchAPIGetListContents = (
   arg0: any,
@@ -9486,22 +10722,24 @@ export type PlatformTypesListPlatformAPIListPlatformMutationAPIAdd = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesListPlatformAPIListPlatformMutationAPIMove = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesListPlatformAPIListPlatformMutationAPIRemove = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesListPlatformAPIListPlatformMutationAPIRemoveAll = (arg0: any) => unknown;
+export type PlatformTypesListPlatformAPIListPlatformMutationAPIRemoveAll = (
+  arg0: any,
+) => Promise<unknown>;
 
-export type PlatformTypesListPlatformAPIMove = () => unknown;
+export type PlatformTypesListPlatformAPIMove = () => Promise<unknown>;
 
 export type PlatformTypesListPlatformAPIOnListUpdate = () => unknown;
 
@@ -9533,32 +10771,26 @@ export interface PlatformTypesListPlatformAPIPlayabilityAPICollectionClient {
   decorate: PlatformTypesFeedbackAPIClientDecorate;
   getArtistTrackList: PlatformTypesFeedbackAPIClientGetArtistTrackList;
   getArtistView: PlatformTypesFeedbackAPIClientGetArtistView;
-  getBans: PlatformTypesFeedbackAPIClientGetBans;
   getBucketSyncStatus: PlatformTypesFeedbackAPIClientGetBucketSyncStatus;
-  getResumePoints: PlatformTypesFeedbackAPIClientGetResumePoints;
   getTrackList: PlatformTypesFeedbackAPIClientGetTrackList;
   getUnplayedEpisodes: PlatformTypesFeedbackAPIClientGetUnplayedEpisodes;
   isSnoozed: PlatformTypesFeedbackAPIClientIsSnoozed;
   offlineArtist: PlatformTypesFeedbackAPIClientOfflineArtist;
-  offlineTracks: PlatformTypesFeedbackAPIClientOfflineTracks;
   options: PlatformTypesListPlatformAPIPlayabilityAPICollectionClientOptions;
   playArtist: PlatformTypesFeedbackAPIClientPlayArtist;
   playTracks: PlatformTypesFeedbackAPIClientPlayTracks;
   remove: PlatformTypesFeedbackAPIClientRemove;
   removeOfflineArtist: PlatformTypesFeedbackAPIClientRemoveOfflineArtist;
-  removeOfflineTracks: PlatformTypesFeedbackAPIClientRemoveOfflineTracks;
   removeUnplayed: PlatformTypesFeedbackAPIClientRemoveUnplayed;
   snooze: PlatformTypesFeedbackAPIClientSnooze;
   streamArtistTrackList: PlatformTypesFeedbackAPIClientStreamArtistTrackList;
   streamArtistView: PlatformTypesFeedbackAPIClientStreamArtistView;
-  streamBans: PlatformTypesFeedbackAPIClientStreamBans;
   streamContains: PlatformTypesFeedbackAPIClientStreamContains;
   streamDecorate: PlatformTypesFeedbackAPIClientStreamDecorate;
   streamTagsInfo: PlatformTypesFeedbackAPIClientStreamTagsInfo;
   streamTrackList: PlatformTypesFeedbackAPIClientStreamTrackList;
   streamTrackListMetadata: PlatformTypesFeedbackAPIClientStreamTrackListMetadata;
   streamUnplayedEpisodes: PlatformTypesFeedbackAPIClientStreamUnplayedEpisodes;
-  tracksOfflineStatus: PlatformTypesFeedbackAPIClientTracksOfflineStatus;
   transport: PlatformTypesVideoAPIEsperantoTransport;
   unban: PlatformTypesFeedbackAPIClientUnban;
   unbanGlobal: PlatformTypesFeedbackAPIClientUnbanGlobal;
@@ -9593,11 +10825,11 @@ export interface PlatformTypesListPlatformAPIPlaylistDataClient {
 
 export type PlatformTypesListPlatformAPIPlaylistDataClientOptions = Record<string, unknown>;
 
-export type PlatformTypesListPlatformAPIRemove = () => unknown;
+export type PlatformTypesListPlatformAPIRemove = () => Promise<unknown>;
 
-export type PlatformTypesListPlatformAPIRemoveAll = () => unknown;
+export type PlatformTypesListPlatformAPIRemoveAll = () => Promise<unknown>;
 
-export type PlatformTypesListPlatformAPIRequestLenses = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesListPlatformAPIRequestLenses = (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesListPlatformAPISubscribeList = () => unknown;
 
@@ -9622,9 +10854,9 @@ export interface PlatformTypesLocalFilesAPI {
   subscribeIsEnabled: PlatformTypesLocalFilesAPISubscribeIsEnabled;
 }
 
-export type PlatformTypesLocalFilesAPIAddFolder = (arg0: any) => unknown;
+export type PlatformTypesLocalFilesAPIAddFolder = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesLocalFilesAPIBrowseForFolder = () => unknown;
+export type PlatformTypesLocalFilesAPIBrowseForFolder = () => Promise<unknown>;
 
 export interface PlatformTypesLocalFilesAPIClient {
   addFolder: PlatformTypesLocalFilesAPIClientAddFolder;
@@ -9714,7 +10946,24 @@ export interface PlatformTypesLocalFilesAPIEventsEmitter {
   removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
-export type PlatformTypesLocalFilesAPIEventsEmitterListeners = Record<string, unknown>;
+export interface PlatformTypesLocalFilesAPIEventsEmitterListeners {
+  update: PlatformTypesLocalFilesAPIEventsEmitterListenersUpdate;
+}
+
+export type PlatformTypesLocalFilesAPIEventsEmitterListenersUpdate =
+  Array<PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItem>;
+
+export interface PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItem {
+  listener: PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItemListener;
+  options: PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItemOptions;
+}
+
+export type PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItemListener = () => unknown;
+
+export type PlatformTypesLocalFilesAPIEventsEmitterListenersUpdateItemOptions = Record<
+  string,
+  unknown
+>;
 
 export interface PlatformTypesLocalFilesAPIEventsEmitterMetaListeners {
   add: PlatformTypesLocalFilesAPIEventsEmitterMetaListenersAdd;
@@ -9731,13 +10980,13 @@ export type PlatformTypesLocalFilesAPIGetEvents = () => unknown;
 
 export type PlatformTypesLocalFilesAPIGetIsEnabled = () => unknown;
 
-export type PlatformTypesLocalFilesAPIGetSources = () => unknown;
+export type PlatformTypesLocalFilesAPIGetSources = () => Promise<unknown>;
 
-export type PlatformTypesLocalFilesAPIGetTracks = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesLocalFilesAPIGetTracks = (arg0: any, arg1: any) => Promise<unknown>;
 
-export type PlatformTypesLocalFilesAPIMutateDefaultSource = (arg0: any) => unknown;
+export type PlatformTypesLocalFilesAPIMutateDefaultSource = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesLocalFilesAPIRemoveFolder = (arg0: any) => unknown;
+export type PlatformTypesLocalFilesAPIRemoveFolder = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesLocalFilesAPISetIsEnabled = (arg0: any) => unknown;
 
@@ -9834,7 +11083,7 @@ export type PlatformTypesMagpieAPIClientUpdatePromptablePlaylist = (
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesMagpieAPIEditPrompt = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesMagpieAPIEditPrompt = (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesMagpieAPIEvents {
   _emitter: PlatformTypesMagpieAPIEventsEmitter;
@@ -9873,7 +11122,157 @@ export interface PlatformTypesMagpieAPIEventsEmitter {
   removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
-export type PlatformTypesMagpieAPIEventsEmitterListeners = Record<string, unknown>;
+export interface PlatformTypesMagpieAPIEventsEmitterListeners {
+  update: PlatformTypesMagpieAPIEventsEmitterListenersUpdate;
+}
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdate = Array<
+  | PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem
+  | PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem10
+  | PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem2
+  | PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem3
+  | PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem4
+  | PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem5
+  | PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem6
+  | PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem7
+  | PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem8
+  | PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem9
+>;
+
+export interface PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem {
+  listener: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener;
+  options: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions;
+}
+
+export interface PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem10 {
+  listener: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener10;
+  options: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions10;
+}
+
+export interface PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem2 {
+  listener: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener2;
+  options: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions2;
+}
+
+export interface PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem3 {
+  listener: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener3;
+  options: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions3;
+}
+
+export interface PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem4 {
+  listener: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener4;
+  options: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions4;
+}
+
+export interface PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem5 {
+  listener: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener5;
+  options: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions5;
+}
+
+export interface PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem6 {
+  listener: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener6;
+  options: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions6;
+}
+
+export interface PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem7 {
+  listener: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener7;
+  options: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions7;
+}
+
+export interface PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem8 {
+  listener: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener8;
+  options: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions8;
+}
+
+export interface PlatformTypesMagpieAPIEventsEmitterListenersUpdateItem9 {
+  listener: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener9;
+  options: PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions9;
+}
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener = (arg0: any) => unknown;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener10 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener3 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener4 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener5 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener6 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener7 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener8 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemListener9 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions = Record<string, unknown>;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions10 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions2 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions3 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions4 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions5 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions6 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions7 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions8 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesMagpieAPIEventsEmitterListenersUpdateItemOptions9 = Record<
+  string,
+  unknown
+>;
 
 export interface PlatformTypesMagpieAPIEventsEmitterMetaListeners {
   add: PlatformTypesMagpieAPIEventsEmitterMetaListenersAdd;
@@ -9886,9 +11285,9 @@ export type PlatformTypesMagpieAPIEventsEmitterMetaListenersRemove = Record<stri
 
 export type PlatformTypesMagpieAPIGetEvents = () => unknown;
 
-export type PlatformTypesMagpieAPIGetSuggestions = () => unknown;
+export type PlatformTypesMagpieAPIGetSuggestions = () => Promise<unknown>;
 
-export type PlatformTypesMagpieAPIGetUsername = () => unknown;
+export type PlatformTypesMagpieAPIGetUsername = () => Promise<unknown>;
 
 export type PlatformTypesMagpieAPIOnPlaylistOperation = (arg0: any) => unknown;
 
@@ -9928,23 +11327,23 @@ export interface PlatformTypesMagpieAPIPlaylistServiceClient {
 
 export type PlatformTypesMagpieAPIPlaylistServiceClientOptions = Record<string, unknown>;
 
-export type PlatformTypesMagpieAPIRefreshPlaylist = (arg0: any) => unknown;
+export type PlatformTypesMagpieAPIRefreshPlaylist = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesMagpieAPISetRefreshMetadata = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesMagpieAPISetRefreshMetadata = (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesMagpieAPIWritePrompt = (
   arg0: any,
   arg1: any,
   arg2: any,
   arg3: any,
-) => unknown;
+) => Promise<unknown>;
 
 export interface PlatformTypesNativeAPI {
   _updateUiClient: PlatformTypesNativeAPIUpdateUiClient;
   setWindowButtonsVisibility: PlatformTypesNativeAPISetWindowButtonsVisibility;
 }
 
-export type PlatformTypesNativeAPISetWindowButtonsVisibility = (arg0: any) => unknown;
+export type PlatformTypesNativeAPISetWindowButtonsVisibility = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesNativeAPIUpdateUiClient {
   options: PlatformTypesNativeAPIUpdateUiClientOptions;
@@ -9977,7 +11376,7 @@ export interface PlatformTypesOfflineAPI {
   removeDownload: PlatformTypesOfflineAPIRemoveDownload;
 }
 
-export type PlatformTypesOfflineAPIAddDownload = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesOfflineAPIAddDownload = (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesOfflineAPICache = Map<unknown, unknown>;
 
@@ -10033,7 +11432,10 @@ export interface PlatformTypesOfflineAPIEventsEmitter {
 
 export interface PlatformTypesOfflineAPIEventsEmitterListeners {
   error: PlatformTypesOfflineAPIEventsEmitterListenersError;
+  update_availability: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailability;
   update_capabilities: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilities;
+  update_context_progress: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgress;
+  update_total_progress: PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgress;
 }
 
 export type PlatformTypesOfflineAPIEventsEmitterListenersError =
@@ -10048,19 +11450,458 @@ export type PlatformTypesOfflineAPIEventsEmitterListenersErrorItemListener = (ar
 
 export type PlatformTypesOfflineAPIEventsEmitterListenersErrorItemOptions = Record<string, unknown>;
 
-export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilities =
-  Array<PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem>;
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailability = Array<
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem10
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem2
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem3
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem4
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem5
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem6
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem7
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem8
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem9
+>;
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem10 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener10;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions10;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem2 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener2;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions2;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem3 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener3;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions3;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem4 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener4;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions4;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem5 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener5;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions5;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem6 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener6;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions6;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem7 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener7;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions7;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem8 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener8;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions8;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItem9 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener9;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions9;
+}
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener10 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener3 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener4 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener5 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener6 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener7 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener8 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemListener9 = (
+  arg0: any,
+) => unknown;
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions10 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions2 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions3 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions4 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions5 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions6 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions7 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions8 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateAvailabilityItemOptions9 {
+  uri: string;
+}
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilities = Array<
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem10
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem2
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem3
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem4
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem5
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem6
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem7
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem8
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem9
+>;
 
 export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem {
   listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener;
   options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions;
 }
 
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem10 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener10;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions10;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem2 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener2;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions2;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem3 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener3;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions3;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem4 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener4;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions4;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem5 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener5;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions5;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem6 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener6;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions6;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem7 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener7;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions7;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem8 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener8;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions8;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItem9 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener9;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions9;
+}
+
 export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener = (
   arg0: any,
 ) => unknown;
 
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener10 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener3 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener4 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener5 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener6 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener7 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener8 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemListener9 = (
+  arg0: any,
+) => unknown;
+
 export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions10 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions2 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions3 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions4 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions5 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions6 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions7 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions8 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateCapabilitiesItemOptions9 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgress = Array<
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem10
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem2
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem3
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem4
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem5
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem6
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem7
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem8
+  | PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem9
+>;
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem10 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener10;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions10;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem2 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener2;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions2;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem3 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener3;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions3;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem4 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener4;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions4;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem5 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener5;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions5;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem6 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener6;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions6;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem7 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener7;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions7;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem8 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener8;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions8;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItem9 {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener9;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions9;
+}
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener10 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener3 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener4 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener5 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener6 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener7 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener8 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemListener9 = (
+  arg0: any,
+) => unknown;
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions10 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions2 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions3 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions4 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions5 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions6 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions7 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions8 {
+  uri: string;
+}
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateContextProgressItemOptions9 {
+  uri: string;
+}
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgress =
+  Array<PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItem>;
+
+export interface PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItem {
+  listener: PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItemListener;
+  options: PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItemOptions;
+}
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesOfflineAPIEventsEmitterListenersUpdateTotalProgressItemOptions = Record<
   string,
   unknown
 >;
@@ -10276,13 +12117,13 @@ export type PlatformTypesOfflineAPIGetAvailabilitySync = (arg0: any) => unknown;
 
 export type PlatformTypesOfflineAPIGetCapabilities = () => unknown;
 
-export type PlatformTypesOfflineAPIGetContextForDevices = (arg0: any) => unknown;
+export type PlatformTypesOfflineAPIGetContextForDevices = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesOfflineAPIGetDownloads = () => unknown;
+export type PlatformTypesOfflineAPIGetDownloads = () => Promise<unknown>;
 
 export type PlatformTypesOfflineAPIGetEvents = () => unknown;
 
-export type PlatformTypesOfflineAPIGetStatistics = () => unknown;
+export type PlatformTypesOfflineAPIGetStatistics = () => Promise<unknown>;
 
 export interface PlatformTypesOfflineAPIOffline {
   addDownload: PlatformTypesOfflineAPIOfflineAddDownload;
@@ -10291,10 +12132,12 @@ export interface PlatformTypesOfflineAPIOffline {
   getDevices: PlatformTypesOfflineAPIOfflineGetDevices;
   getEstimatedStorageIncrease: PlatformTypesOfflineAPIOfflineGetEstimatedStorageIncrease;
   getItems: PlatformTypesOfflineAPIOfflineGetItems;
+  getListsContainingItem: PlatformTypesOfflineAPIOfflineGetListsContainingItem;
   getLocalDevice: PlatformTypesOfflineAPIOfflineGetLocalDevice;
   getOfflineLicenseInfo: PlatformTypesOfflineAPIOfflineGetOfflineLicenseInfo;
   getOfflinePlaybackStatus: PlatformTypesOfflineAPIOfflineGetOfflinePlaybackStatus;
   getTotalProgress: PlatformTypesOfflineAPIOfflineGetTotalProgress;
+  licenseStatus: PlatformTypesOfflineAPIOfflineLicenseStatus;
   options: PlatformTypesOfflineAPIOfflineOptions;
   removeAllDownloads: PlatformTypesOfflineAPIOfflineRemoveAllDownloads;
   removeDownload: PlatformTypesOfflineAPIOfflineRemoveDownload;
@@ -10324,6 +12167,11 @@ export type PlatformTypesOfflineAPIOfflineGetEstimatedStorageIncrease = (
 
 export type PlatformTypesOfflineAPIOfflineGetItems = (arg0: any, arg1: any) => unknown;
 
+export type PlatformTypesOfflineAPIOfflineGetListsContainingItem = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
 export type PlatformTypesOfflineAPIOfflineGetLocalDevice = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesOfflineAPIOfflineGetOfflineLicenseInfo = (arg0: any, arg1: any) => unknown;
@@ -10334,6 +12182,8 @@ export type PlatformTypesOfflineAPIOfflineGetOfflinePlaybackStatus = (
 ) => unknown;
 
 export type PlatformTypesOfflineAPIOfflineGetTotalProgress = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesOfflineAPIOfflineLicenseStatus = (arg0: any, arg1: any) => unknown;
 
 export type PlatformTypesOfflineAPIOfflineOptions = Record<string, unknown>;
 
@@ -10403,11 +12253,11 @@ export type PlatformTypesOfflineAPIProductStatePutValuesSync = (arg0: any, arg1:
 
 export type PlatformTypesOfflineAPIProductStateSubValues = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesOfflineAPIRemoveAllDownloads = () => unknown;
+export type PlatformTypesOfflineAPIRemoveAllDownloads = () => Promise<unknown>;
 
-export type PlatformTypesOfflineAPIRemoveCache = () => unknown;
+export type PlatformTypesOfflineAPIRemoveCache = () => Promise<unknown>;
 
-export type PlatformTypesOfflineAPIRemoveDownload = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesOfflineAPIRemoveDownload = (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesOfflineAPIStorage {
   deleteExpiredItems: PlatformTypesOfflineAPIStorageDeleteExpiredItems;
@@ -10480,6 +12330,32 @@ export type PlatformTypesOfflineAPIYourLibraryStreamIsCurated = (arg0: any, arg1
 
 export type PlatformTypesOfflineAPIYourLibraryUnPin = (arg0: any, arg1: any) => unknown;
 
+export interface PlatformTypesOSNotificationsAPI {
+  _client: PlatformTypesOSNotificationsAPIClient;
+  getAvailability: PlatformTypesOSNotificationsAPIGetAvailability;
+  showToast: PlatformTypesOSNotificationsAPIShowToast;
+}
+
+export interface PlatformTypesOSNotificationsAPIClient {
+  getAvailability: PlatformTypesOSNotificationsAPIClientGetAvailability;
+  options: PlatformTypesOSNotificationsAPIClientOptions;
+  showToast: PlatformTypesOSNotificationsAPIClientShowToast;
+  transport: PlatformTypesVideoAPIEsperantoTransport;
+}
+
+export type PlatformTypesOSNotificationsAPIClientGetAvailability = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesOSNotificationsAPIClientOptions = Record<string, unknown>;
+
+export type PlatformTypesOSNotificationsAPIClientShowToast = (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesOSNotificationsAPIGetAvailability = () => Promise<unknown>;
+
+export type PlatformTypesOSNotificationsAPIShowToast = (arg0: any, arg1: any) => unknown;
+
 export interface PlatformTypesPlatformData {
   app_platform: string;
   client_capabilities: PlatformTypesPlatformDataClientCapabilities;
@@ -10501,7 +12377,6 @@ export interface PlatformTypesPlatformDataClientCapabilities {
   can_minimize_or_exit_on_close: boolean;
   can_restart: boolean;
   can_show_system_media_controls: boolean;
-  can_show_track_notifications: boolean;
 }
 
 export interface PlatformTypesPlatformDataEventSenderContextInformation {
@@ -10778,7 +12653,7 @@ export interface PlatformTypesPlayHistoryAPIEventsSubscriptions {
 
 export type PlatformTypesPlayHistoryAPIGetCapabilities = () => unknown;
 
-export type PlatformTypesPlayHistoryAPIGetContents = () => unknown;
+export type PlatformTypesPlayHistoryAPIGetContents = () => Promise<unknown>;
 
 export type PlatformTypesPlayHistoryAPIGetEvents = () => unknown;
 
@@ -10787,7 +12662,7 @@ export type PlatformTypesPlayHistoryAPILoader = (
   arg1: any,
   arg2: any,
   arg3: any,
-) => unknown;
+) => Promise<unknown>;
 
 export interface PlatformTypesPlayHistoryAPIPlayer {
   addToQueue: PlatformTypesPlayHistoryAPIPlayerAddToQueue;
@@ -10891,8 +12766,9 @@ export interface PlatformTypesPlaylistAPI {
   _events: PlatformTypesShuffleAPIPlaylistAPIEvents;
   _getPlaylistDecorationPolicies: PlatformTypesShuffleAPIPlaylistAPIGetPlaylistDecorationPolicies;
   _isAuthorPageEnabled: boolean;
-  _isPlaylistMixingEnabled: boolean;
+  _isPodcastChaptersSavingEnabled: boolean;
   _isWatchFeedEntityPagesEnabled: boolean;
+  _metadataExtensionsAPI: PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI;
   _playlistDataClient: PlatformTypesShuffleAPIPlaylistAPIPlaylistDataClient;
   _playlistServiceClient: PlatformTypesShuffleAPIPlaylistAPIPlaylistServiceClient;
   _resyncAPI: PlatformTypesPlaylistResyncAPI;
@@ -10921,11 +12797,12 @@ export interface PlatformTypesPlaylistAPI {
 export interface PlatformTypesPlaylistMixingAPI {
   _automixClient: PlatformTypesPlaylistMixingAPIAutomixClient;
   _metadataExtensionsAPI: PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI;
-  _metadataService: PlatformTypesPlaylistMixingAPIMetadataService;
   _playerAPI: PlatformTypesPlayerAPI;
   _playlistApi: PlatformTypesPlaylistAPI;
-  _setMixState: PlatformTypesPlaylistMixingAPISetMixState;
-  _setTunaLens: PlatformTypesPlaylistMixingAPISetTunaLens;
+  _stateAPI: PlatformTypesPlaylistMixingAPIStateAPI;
+  _styleAPI: PlatformTypesPlaylistMixingAPIStyleAPI;
+  _transitionAPI: PlatformTypesPlaylistMixingAPITransitionAPI;
+  cleanupTransitionPreview: PlatformTypesPlaylistMixingAPICleanupTransitionPreview;
   disablePlaylistMix: PlatformTypesPlaylistMixingAPIDisablePlaylistMix;
   enablePlaylistMix: PlatformTypesPlaylistMixingAPIEnablePlaylistMix;
   getAutoTransitionForTrackPair: PlatformTypesPlaylistMixingAPIGetAutoTransitionForTrackPair;
@@ -10934,10 +12811,16 @@ export interface PlatformTypesPlaylistMixingAPI {
   getEqStylesForEqStyleIds: PlatformTypesPlaylistMixingAPIGetEqStylesForEqStyleIds;
   getFilterFxStylesForFilterFxStyleIds: PlatformTypesPlaylistMixingAPIGetFilterFxStylesForFilterFxStyleIds;
   getStylesForPresetIds: PlatformTypesPlaylistMixingAPIGetStylesForPresetIds;
+  getTransitionPreviewProgress: PlatformTypesPlaylistMixingAPIGetTransitionPreviewProgress;
+  getTransitionPreviewState: PlatformTypesPlaylistMixingAPIGetTransitionPreviewState;
   getVolumeStylesForVolumeStyleIds: PlatformTypesPlaylistMixingAPIGetVolumeStylesForVolumeStyleIds;
+  isTransitionPreviewActive: PlatformTypesPlaylistMixingAPIIsTransitionPreviewActive;
   maybeAutoApplyMixingLens: PlatformTypesPlaylistMixingAPIMaybeAutoApplyMixingLens;
   playTransition: PlatformTypesPlaylistMixingAPIPlayTransition;
+  playTransitionPreview: PlatformTypesPlaylistMixingAPIPlayTransitionPreview;
   setTransitionForTrack: PlatformTypesPlaylistMixingAPISetTransitionForTrack;
+  stopTransitionPreview: PlatformTypesPlaylistMixingAPIStopTransitionPreview;
+  subscribeToPreviewState: PlatformTypesPlaylistMixingAPISubscribeToPreviewState;
   turnOffMixingForPlaylist: PlatformTypesPlaylistMixingAPITurnOffMixingForPlaylist;
   turnOnMixingForPlaylist: PlatformTypesPlaylistMixingAPITurnOnMixingForPlaylist;
 }
@@ -10985,38 +12868,61 @@ export type PlatformTypesPlaylistMixingAPIAutomixClientGetVolumeStylesForVolumeS
 
 export type PlatformTypesPlaylistMixingAPIAutomixClientOptions = Record<string, unknown>;
 
-export type PlatformTypesPlaylistMixingAPIDisablePlaylistMix = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesPlaylistMixingAPICleanupTransitionPreview = () => Promise<unknown>;
 
-export type PlatformTypesPlaylistMixingAPIEnablePlaylistMix = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesPlaylistMixingAPIDisablePlaylistMix = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIEnablePlaylistMix = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export type PlatformTypesPlaylistMixingAPIGetAutoTransitionForTrackPair = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesPlaylistMixingAPIGetComposedTransitionForTrackPair = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesPlaylistMixingAPIGetCustomTransitionForTrackPair = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesPlaylistMixingAPIGetEqStylesForEqStyleIds = (arg0: any) => unknown;
+export type PlatformTypesPlaylistMixingAPIGetEqStylesForEqStyleIds = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export type PlatformTypesPlaylistMixingAPIGetFilterFxStylesForFilterFxStyleIds = (
   arg0: any,
-) => unknown;
+  arg1: any,
+) => Promise<unknown>;
 
-export type PlatformTypesPlaylistMixingAPIGetStylesForPresetIds = (arg0: any) => unknown;
+export type PlatformTypesPlaylistMixingAPIGetStylesForPresetIds = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesPlaylistMixingAPIGetVolumeStylesForVolumeStyleIds = (arg0: any) => unknown;
+export type PlatformTypesPlaylistMixingAPIGetTransitionPreviewProgress = () => unknown;
 
-export type PlatformTypesPlaylistMixingAPIMaybeAutoApplyMixingLens = (arg0: any) => unknown;
+export type PlatformTypesPlaylistMixingAPIGetTransitionPreviewState = () => unknown;
+
+export type PlatformTypesPlaylistMixingAPIGetVolumeStylesForVolumeStyleIds = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIIsTransitionPreviewActive = () => unknown;
+
+export type PlatformTypesPlaylistMixingAPIMaybeAutoApplyMixingLens = (
+  arg0: any,
+) => Promise<unknown>;
 
 export interface PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI {
   _events: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPIEvents;
@@ -11030,38 +12936,9756 @@ export interface PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI {
   subscribe: PlatformTypesAdManagersVtoManagerPlayerAPISmartShuffleEligibilityMetadataExtensionsAPISubscribe;
 }
 
-export interface PlatformTypesPlaylistMixingAPIMetadataService {
-  _metadataExtensionsAPI: PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI;
-  getShouldApplyAutoLens: PlatformTypesPlaylistMixingAPIMetadataServiceGetShouldApplyAutoLens;
-}
-
-export type PlatformTypesPlaylistMixingAPIMetadataServiceGetShouldApplyAutoLens = (
-  arg0: any,
-) => unknown;
-
 export type PlatformTypesPlaylistMixingAPIPlayTransition = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesPlaylistMixingAPISetMixState = (
+export type PlatformTypesPlaylistMixingAPIPlayTransitionPreview = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+  arg3: any,
+) => Promise<unknown>;
 
 export type PlatformTypesPlaylistMixingAPISetTransitionForTrack = (
   arg0: any,
   arg1: any,
   arg2: any,
+) => Promise<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStateAPI {
+  _metadataExtensionsAPI: PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI;
+  _metadataService: PlatformTypesPlaylistMixingAPIStateAPIMetadataService;
+  _playlistApi: PlatformTypesPlaylistAPI;
+  _setMixState: PlatformTypesPlaylistMixingAPIStateAPISetMixState;
+  _setTunaLens: PlatformTypesPlaylistMixingAPIStateAPISetTunaLens;
+  disablePlaylistMix: PlatformTypesPlaylistMixingAPIStateAPIDisablePlaylistMix;
+  enablePlaylistMix: PlatformTypesPlaylistMixingAPIStateAPIEnablePlaylistMix;
+  maybeAutoApplyMixingLens: PlatformTypesPlaylistMixingAPIStateAPIMaybeAutoApplyMixingLens;
+  turnOffMixingForPlaylist: PlatformTypesPlaylistMixingAPIStateAPITurnOffMixingForPlaylist;
+  turnOnMixingForPlaylist: PlatformTypesPlaylistMixingAPIStateAPITurnOnMixingForPlaylist;
+}
+
+export type PlatformTypesPlaylistMixingAPIStateAPIDisablePlaylistMix = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStateAPIEnablePlaylistMix = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStateAPIMaybeAutoApplyMixingLens = (
+  arg0: any,
+) => Promise<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStateAPIMetadataService {
+  _metadataExtensionsAPI: PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI;
+  getShouldApplyAutoLens: PlatformTypesPlaylistMixingAPIStateAPIMetadataServiceGetShouldApplyAutoLens;
+}
+
+export type PlatformTypesPlaylistMixingAPIStateAPIMetadataServiceGetShouldApplyAutoLens = (
+  arg0: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStateAPISetMixState = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStateAPISetTunaLens = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStateAPITurnOffMixingForPlaylist = (
+  arg0: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStateAPITurnOnMixingForPlaylist = (
+  arg0: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStopTransitionPreview = () => Promise<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPI {
+  _automixClient: PlatformTypesPlaylistMixingAPIAutomixClient;
+  _eqStylesCache: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCache;
+  _filterFxStylesCache: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCache;
+  _getValidEnumValues: PlatformTypesPlaylistMixingAPIStyleAPIGetValidEnumValues;
+  _prefetchAllStyles: PlatformTypesPlaylistMixingAPIStyleAPIPrefetchAllStyles;
+  _presetStylesCache: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCache;
+  _volumeStylesCache: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCache;
+  getEqStylesForEqStyleIds: PlatformTypesPlaylistMixingAPIStyleAPIGetEqStylesForEqStyleIds;
+  getFilterFxStylesForFilterFxStyleIds: PlatformTypesPlaylistMixingAPIStyleAPIGetFilterFxStylesForFilterFxStyleIds;
+  getStylesForPresetIds: PlatformTypesPlaylistMixingAPIStyleAPIGetStylesForPresetIds;
+  getVolumeStylesForVolumeStyleIds: PlatformTypesPlaylistMixingAPIStyleAPIGetVolumeStylesForVolumeStyleIds;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCache {
+  _cache: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCache;
+  _ttl: null;
+  cleanup: PlatformTypesCurationAPICacheCleanup;
+  clear: PlatformTypesCurationAPICacheClear;
+  create: PlatformTypesCurationAPICacheCreate;
+  delete: PlatformTypesCurationAPICacheDelete;
+  entries: PlatformTypesCurationAPICacheEntries;
+  get: PlatformTypesCurationAPICacheGet;
+  getExpiry: PlatformTypesCurationAPICacheGetExpiry;
+  has: PlatformTypesCurationAPICacheHas;
+  isExpired: PlatformTypesCurationAPICacheIsExpired;
+  peek: PlatformTypesCurationAPICachePeek;
+  set: PlatformTypesCurationAPICacheSet;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCache = Map<
+  number,
+  | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue
+  | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue10
+  | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue2
+  | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue3
+  | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue4
+  | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue5
+  | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue6
+  | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue7
+  | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue8
+  | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue9
+>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue10 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue2 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue3 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue4 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue5 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue6 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue7 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue8 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValue9 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue9;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue {
+  highEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves;
+  highEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves;
+  lowEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves;
+  lowEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves;
+  midEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves;
+  midEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue10 {
+  highEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves10;
+  highEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves10;
+  lowEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves10;
+  lowEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves10;
+  midEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves10;
+  midEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves10;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue2 {
+  highEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves2;
+  highEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves2;
+  lowEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves2;
+  lowEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves2;
+  midEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves2;
+  midEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves2;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue3 {
+  highEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves3;
+  highEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves3;
+  lowEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves3;
+  lowEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves3;
+  midEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves3;
+  midEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves3;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue4 {
+  highEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves4;
+  highEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves4;
+  lowEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves4;
+  lowEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves4;
+  midEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves4;
+  midEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves4;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue5 {
+  highEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves5;
+  highEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves5;
+  lowEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves5;
+  lowEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves5;
+  midEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves5;
+  midEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves5;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue6 {
+  highEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves6;
+  highEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves6;
+  lowEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves6;
+  lowEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves6;
+  midEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves6;
+  midEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves6;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue7 {
+  highEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves7;
+  highEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves7;
+  lowEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves7;
+  lowEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves7;
+  midEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves7;
+  midEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves7;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue8 {
+  highEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves8;
+  highEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves8;
+  lowEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves8;
+  lowEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves8;
+  midEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves8;
+  midEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves8;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValue9 {
+  highEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves9;
+  highEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves9;
+  lowEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves9;
+  lowEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves9;
+  midEqInCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves9;
+  midEqOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves9;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle9;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves10 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves10;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves2 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves2;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves3 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves3;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves4 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves4;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves5 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves5;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves6 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves6;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves7 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves7;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves8 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves8;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurves9 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves9;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints9;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItem2
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves10 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves5 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves6 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItem5
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurves9 =
+  Array<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItem {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPoints;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItem2 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPoints2;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItem3 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPoints3;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItem4 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPoints4;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItem5 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPoints5;
+  start: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem4
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem6
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem8
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem14
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesCurvesItemPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints10 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints5 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints6 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPoints9 =
+  Array<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqInCurvesPolygonPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves10 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves10;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves2 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves2;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves3 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves3;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves4 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves4;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves5 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves5;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves6 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves6;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves7 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves7;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves8 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves8;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurves9 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves9;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints9;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItem2
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves10 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves5 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves6 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItem5
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurves9 =
+  Array<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItem {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPoints;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItem2 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPoints2;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItem3 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPoints3;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItem4 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPoints4;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItem5 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPoints5;
+  start: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem4
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem6
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem8
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem14
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesCurvesItemPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints10 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints5 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints6 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPoints9 =
+  Array<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueHighEqOutCurvesPolygonPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves10 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves10;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves2 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves2;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves3 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves3;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves4 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves4;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves5 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves5;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves6 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves6;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves7 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves7;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves8 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves8;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurves9 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves9;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints9;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem3
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem17
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves2 =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem4>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves3 =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem5>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem8
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves6 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves7 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves8 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem13
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurves9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem15
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem10 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints10;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem11 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints11;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem12 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints12;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem13 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints13;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem14 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints14;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem15 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints15;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem16 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints16;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem17 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints17;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem2 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints2;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem3 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints3;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem4 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints4;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem5 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints5;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem6 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints6;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem7 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints7;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem8 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints8;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItem9 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints9;
+  start: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem2
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem24
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem26
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints11 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem28
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints12 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem30
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints13 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem31
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem32
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem33
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem34
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints14 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem35
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem36
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem37
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem38
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints15 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem39
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem40
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints16 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem41
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem42
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints17 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem43
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem44
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem45
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem46
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem6
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem8
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem12
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem14
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem18
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints8 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPoints9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem22
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem31 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem32 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem33 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem34 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem35 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem36 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem37 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem38 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem39 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem40 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem41 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem42 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem43 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem44 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem45 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem46 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesCurvesItemPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem71
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem72
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem73
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem74
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem75
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem76
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem77
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem78
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem79
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem80
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem22
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem24
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem26
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem28
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem30
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem31
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem32
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem33
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem34
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem35
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem36
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem37
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem38
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem39
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem40
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem41
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem42
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem43
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem44
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem45
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem46
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem47
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem48
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem49
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem50
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints6 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints7 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints8 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem51
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem52
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem53
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem54
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem55
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem56
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem57
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem58
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem59
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem60
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPoints9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem61
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem62
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem63
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem64
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem65
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem66
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem67
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem68
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem69
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem70
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem31 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem32 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem33 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem34 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem35 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem36 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem37 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem38 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem39 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem40 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem41 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem42 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem43 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem44 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem45 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem46 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem47 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem48 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem49 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem50 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem51 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem52 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem53 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem54 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem55 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem56 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem57 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem58 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem59 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem60 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem61 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem62 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem63 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem64 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem65 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem66 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem67 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem68 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem69 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem70 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem71 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem72 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem73 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem74 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem75 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem76 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem77 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem78 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem79 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem80 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqInCurvesPolygonPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves10 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves10;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves2 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves2;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves3 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves3;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves4 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves4;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves5 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves5;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves6 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves6;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves7 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves7;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves8 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves8;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurves9 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves9;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints9;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem3
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem17
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves3 =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem4>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem7
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves6 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves7 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves8 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem12
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurves9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem14
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem10 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints10;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem11 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints11;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem12 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints12;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem13 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints13;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem14 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints14;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem15 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints15;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem16 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints16;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem17 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints17;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem2 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints2;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem3 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints3;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem4 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints4;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem5 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints5;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem6 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints6;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem7 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints7;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem8 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints8;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItem9 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints9;
+  start: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem2
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem26
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints11 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem28
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints12 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem30
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem31
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem32
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints13 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem33
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem34
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem35
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem36
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints14 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem37
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem38
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints15 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem39
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem40
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints16 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem41
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem42
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem43
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem44
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints17 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem45
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem46
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem6
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem8
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem12
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem16
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem18
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints8 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPoints9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem22
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem24
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem31 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem32 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem33 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem34 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem35 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem36 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem37 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem38 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem39 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem40 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem41 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem42 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem43 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem44 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem45 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem46 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesCurvesItemPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem61
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem62
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem63
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem64
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem65
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem66
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem67
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem68
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem69
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem70
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem22
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem24
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem26
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem28
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem30
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem31
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem32
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem33
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem34
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem35
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem36
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem37
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem38
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem39
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem40
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints6 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints7 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints8 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem41
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem42
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem43
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem44
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem45
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem46
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem47
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem48
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem49
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem50
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPoints9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem51
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem52
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem53
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem54
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem55
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem56
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem57
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem58
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem59
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem60
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem31 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem32 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem33 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem34 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem35 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem36 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem37 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem38 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem39 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem40 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem41 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem42 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem43 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem44 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem45 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem46 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem47 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem48 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem49 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem50 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem51 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem52 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem53 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem54 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem55 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem56 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem57 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem58 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem59 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem60 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem61 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem62 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem63 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem64 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem65 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem66 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem67 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem68 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem69 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem70 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueLowEqOutCurvesPolygonPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves10 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves10;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves2 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves2;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves3 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves3;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves4 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves4;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves5 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves5;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves6 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves6;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves7 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves7;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves8 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves8;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurves9 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves9;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints9;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves10 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem4
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem7
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves7 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurves9 =
+  Array<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem2 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints2;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem3 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints3;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem4 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints4;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem5 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints5;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem6 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints6;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItem7 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints7;
+  start: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem4
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem6
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem12
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem14
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem18
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem20
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesCurvesItemPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints10 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem22
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem24
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem26
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem28
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem30
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints7 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPoints9 =
+  Array<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqInCurvesPolygonPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves10 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves10;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves2 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves2;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves3 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves3;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves4 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves4;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves5 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves5;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves6 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves6;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves7 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves7;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves8 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves8;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurves9 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves9;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints9;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves10 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem4
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem7
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves7 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurves9 =
+  Array<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem2 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints2;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem3 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints3;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem4 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints4;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem5 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints5;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem6 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints6;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItem7 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints7;
+  start: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem4
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem6
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem12
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem14
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem18
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem20
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesCurvesItemPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints10 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem22
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem24
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem26
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem28
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem30
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints7 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPoints9 =
+  Array<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueMidEqOutCurvesPolygonPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle10 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle2 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle3 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle4 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle5 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle6 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle7 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle8 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIEqStylesCacheCacheValueValueStyle9 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCache {
+  _cache: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCache;
+  _ttl: null;
+  cleanup: PlatformTypesCurationAPICacheCleanup;
+  clear: PlatformTypesCurationAPICacheClear;
+  create: PlatformTypesCurationAPICacheCreate;
+  delete: PlatformTypesCurationAPICacheDelete;
+  entries: PlatformTypesCurationAPICacheEntries;
+  get: PlatformTypesCurationAPICacheGet;
+  getExpiry: PlatformTypesCurationAPICacheGetExpiry;
+  has: PlatformTypesCurationAPICacheHas;
+  isExpired: PlatformTypesCurationAPICacheIsExpired;
+  peek: PlatformTypesCurationAPICachePeek;
+  set: PlatformTypesCurationAPICacheSet;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCache = Map<
+  number,
+  | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue
+  | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue10
+  | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue2
+  | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue3
+  | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue4
+  | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue5
+  | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue6
+  | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue7
+  | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue8
+  | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue9
+>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue10 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue2 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue3 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue4 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue5 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue6 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue7 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue8 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValue9 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue9;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue {
+  echoEnableInCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves;
+  echoEnableOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves;
+  echoInputInCurves: undefined;
+  echoInputOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves;
+  echoMixInCurves: undefined;
+  echoMixOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves;
+  filterCutoffInCurves: undefined;
+  filterCutoffOutCurves: undefined;
+  filterResonanceInCurves: undefined;
+  filterResonanceOutCurves: undefined;
+  reverbInputInCurves: undefined;
+  reverbInputOutCurves: undefined;
+  reverbMixInCurves: undefined;
+  reverbMixOutCurves: undefined;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue10 {
+  echoEnableInCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves10;
+  echoEnableOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves10;
+  echoInputInCurves: undefined;
+  echoInputOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves10;
+  echoMixInCurves: undefined;
+  echoMixOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves10;
+  filterCutoffInCurves: undefined;
+  filterCutoffOutCurves: undefined;
+  filterResonanceInCurves: undefined;
+  filterResonanceOutCurves: undefined;
+  reverbInputInCurves: undefined;
+  reverbInputOutCurves: undefined;
+  reverbMixInCurves: undefined;
+  reverbMixOutCurves: undefined;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue2 {
+  echoEnableInCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves2;
+  echoEnableOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves2;
+  echoInputInCurves: undefined;
+  echoInputOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves2;
+  echoMixInCurves: undefined;
+  echoMixOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves2;
+  filterCutoffInCurves: undefined;
+  filterCutoffOutCurves: undefined;
+  filterResonanceInCurves: undefined;
+  filterResonanceOutCurves: undefined;
+  reverbInputInCurves: undefined;
+  reverbInputOutCurves: undefined;
+  reverbMixInCurves: undefined;
+  reverbMixOutCurves: undefined;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue3 {
+  echoEnableInCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves3;
+  echoEnableOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves3;
+  echoInputInCurves: undefined;
+  echoInputOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves3;
+  echoMixInCurves: undefined;
+  echoMixOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves3;
+  filterCutoffInCurves: undefined;
+  filterCutoffOutCurves: undefined;
+  filterResonanceInCurves: undefined;
+  filterResonanceOutCurves: undefined;
+  reverbInputInCurves: undefined;
+  reverbInputOutCurves: undefined;
+  reverbMixInCurves: undefined;
+  reverbMixOutCurves: undefined;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue4 {
+  echoEnableInCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves4;
+  echoEnableOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves4;
+  echoInputInCurves: undefined;
+  echoInputOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves4;
+  echoMixInCurves: undefined;
+  echoMixOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves4;
+  filterCutoffInCurves: undefined;
+  filterCutoffOutCurves: undefined;
+  filterResonanceInCurves: undefined;
+  filterResonanceOutCurves: undefined;
+  reverbInputInCurves: undefined;
+  reverbInputOutCurves: undefined;
+  reverbMixInCurves: undefined;
+  reverbMixOutCurves: undefined;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue5 {
+  echoEnableInCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves5;
+  echoEnableOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves5;
+  echoInputInCurves: undefined;
+  echoInputOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves5;
+  echoMixInCurves: undefined;
+  echoMixOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves5;
+  filterCutoffInCurves: undefined;
+  filterCutoffOutCurves: undefined;
+  filterResonanceInCurves: undefined;
+  filterResonanceOutCurves: undefined;
+  reverbInputInCurves: undefined;
+  reverbInputOutCurves: undefined;
+  reverbMixInCurves: undefined;
+  reverbMixOutCurves: undefined;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue6 {
+  echoEnableInCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves6;
+  echoEnableOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves6;
+  echoInputInCurves: undefined;
+  echoInputOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves6;
+  echoMixInCurves: undefined;
+  echoMixOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves6;
+  filterCutoffInCurves: undefined;
+  filterCutoffOutCurves: undefined;
+  filterResonanceInCurves: undefined;
+  filterResonanceOutCurves: undefined;
+  reverbInputInCurves: undefined;
+  reverbInputOutCurves: undefined;
+  reverbMixInCurves: undefined;
+  reverbMixOutCurves: undefined;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue7 {
+  echoEnableInCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves7;
+  echoEnableOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves7;
+  echoInputInCurves: undefined;
+  echoInputOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves7;
+  echoMixInCurves: undefined;
+  echoMixOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves7;
+  filterCutoffInCurves: undefined;
+  filterCutoffOutCurves: undefined;
+  filterResonanceInCurves: undefined;
+  filterResonanceOutCurves: undefined;
+  reverbInputInCurves: undefined;
+  reverbInputOutCurves: undefined;
+  reverbMixInCurves: undefined;
+  reverbMixOutCurves: undefined;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue8 {
+  echoEnableInCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves8;
+  echoEnableOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves8;
+  echoInputInCurves: undefined;
+  echoInputOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves8;
+  echoMixInCurves: undefined;
+  echoMixOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves8;
+  filterCutoffInCurves: undefined;
+  filterCutoffOutCurves: undefined;
+  filterResonanceInCurves: undefined;
+  filterResonanceOutCurves: undefined;
+  reverbInputInCurves: undefined;
+  reverbInputOutCurves: undefined;
+  reverbMixInCurves: undefined;
+  reverbMixOutCurves: undefined;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValue9 {
+  echoEnableInCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves9;
+  echoEnableOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves9;
+  echoInputInCurves: undefined;
+  echoInputOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves9;
+  echoMixInCurves: undefined;
+  echoMixOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves9;
+  filterCutoffInCurves: undefined;
+  filterCutoffOutCurves: undefined;
+  filterResonanceInCurves: undefined;
+  filterResonanceOutCurves: undefined;
+  reverbInputInCurves: undefined;
+  reverbInputOutCurves: undefined;
+  reverbMixInCurves: undefined;
+  reverbMixOutCurves: undefined;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle9;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves10 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves10;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves2 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves2;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves3 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves3;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves4 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves4;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves5 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves5;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves6 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves6;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves7 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves7;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves8 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves8;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurves9 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves9;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints9;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves10 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves5 =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItem>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves6 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves7 =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItem2>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurves9 =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItem3>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItem {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPoints;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItem2 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPoints2;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItem3 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPoints3;
+  start: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPointsItem2
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPointsItem4
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPointsItem6
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesCurvesItemPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints10 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints6 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPoints9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem22
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem24
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem26
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem28
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem30
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableInCurvesPolygonPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves10 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves10;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves2 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves2;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves3 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves3;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves4 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves4;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves5 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves5;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves6 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves6;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves7 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves7;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves8 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves8;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurves9 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves9;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints9;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItem6
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves5 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItem2
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItem4
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurves9 =
+  Array<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItem {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPoints;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItem2 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPoints2;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItem3 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPoints3;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItem4 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPoints4;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItem5 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPoints5;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItem6 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPoints6;
+  start: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem2
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem6
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem8
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem14
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem18
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesCurvesItemPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem22
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem24
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem26
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem28
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem30
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints5 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPoints9 =
+  Array<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoEnableOutCurvesPolygonPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves10 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves10;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves2 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves2;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves3 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves3;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves4 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves4;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves5 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves5;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves6 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves6;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves7 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves7;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves8 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves8;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurves9 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves9;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints9;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves10 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItem2
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves6 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItem4
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurves9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItem6
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItem {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPoints;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItem2 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPoints2;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItem3 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPoints3;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItem4 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPoints4;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItem5 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPoints5;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItem6 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPoints6;
+  start: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem4
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem6
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem12
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem16
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem18
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesCurvesItemPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints10 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints6 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPoints9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem22
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem24
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem26
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem28
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem30
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoInputOutCurvesPolygonPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves10 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves10;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves2 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves2;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves3 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves3;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves4 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves4;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves5 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves5;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves6 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves6;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves7 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves7;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves8 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves8;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurves9 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves9;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints9;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves10 =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItem3>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves5 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves6 =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItem>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves7 =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItem2>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurves9 =
+  Array<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItem {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPoints;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItem2 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPoints2;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItem3 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPoints3;
+  start: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPointsItem2
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPointsItem4
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPointsItem6
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesCurvesItemPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem22
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem24
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem26
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem28
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem30
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints2 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints3 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints4 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints5 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints8 =
+  Array<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPoints9 =
+  Array<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueEchoMixOutCurvesPolygonPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle10 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle2 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle3 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle4 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle5 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle6 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle7 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle8 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIFilterFxStylesCacheCacheValueValueStyle9 {
+  id: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIGetEqStylesForEqStyleIds = (
+  arg0: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIGetFilterFxStylesForFilterFxStyleIds = (
+  arg0: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIGetStylesForPresetIds = (
+  arg0: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIGetValidEnumValues = (arg0: any) => unknown;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIGetVolumeStylesForVolumeStyleIds = (
+  arg0: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIPrefetchAllStyles = () => Promise<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCache {
+  _cache: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCache;
+  _ttl: null;
+  cleanup: PlatformTypesCurationAPICacheCleanup;
+  clear: PlatformTypesCurationAPICacheClear;
+  create: PlatformTypesCurationAPICacheCreate;
+  delete: PlatformTypesCurationAPICacheDelete;
+  entries: PlatformTypesCurationAPICacheEntries;
+  get: PlatformTypesCurationAPICacheGet;
+  getExpiry: PlatformTypesCurationAPICacheGetExpiry;
+  has: PlatformTypesCurationAPICacheHas;
+  isExpired: PlatformTypesCurationAPICacheIsExpired;
+  peek: PlatformTypesCurationAPICachePeek;
+  set: PlatformTypesCurationAPICacheSet;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCache = Map<
+  number,
+  | PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue
+  | PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue10
+  | PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue2
+  | PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue3
+  | PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue4
+  | PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue5
+  | PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue6
+  | PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue7
+  | PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue8
+  | PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue9
+>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue10 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue2 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue3 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue4 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue5 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue6 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue7 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue8 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValue9 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue9;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue {
+  eqStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle;
+  filterFxStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle;
+  presetId: number;
+  volumeStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue10 {
+  eqStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle10;
+  filterFxStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle10;
+  presetId: number;
+  volumeStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue2 {
+  eqStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle2;
+  filterFxStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle2;
+  presetId: number;
+  volumeStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue3 {
+  eqStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle3;
+  filterFxStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle3;
+  presetId: number;
+  volumeStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue4 {
+  eqStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle4;
+  filterFxStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle4;
+  presetId: number;
+  volumeStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue5 {
+  eqStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle5;
+  filterFxStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle5;
+  presetId: number;
+  volumeStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue6 {
+  eqStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle6;
+  filterFxStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle6;
+  presetId: number;
+  volumeStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue7 {
+  eqStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle7;
+  filterFxStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle7;
+  presetId: number;
+  volumeStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue8 {
+  eqStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle8;
+  filterFxStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle8;
+  presetId: number;
+  volumeStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValue9 {
+  eqStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle9;
+  filterFxStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle9;
+  presetId: number;
+  volumeStyle: PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle9;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle10 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle2 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle3 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle4 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle5 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle6 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle7 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle8 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueEqStyle9 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle10 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle2 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle3 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle4 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle5 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle6 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle7 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle8 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueFilterFxStyle9 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle10 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle2 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle3 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle4 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle5 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle6 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle7 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle8 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIPresetStylesCacheCacheValueValueVolumeStyle9 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCache {
+  _cache: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCache;
+  _ttl: null;
+  cleanup: PlatformTypesCurationAPICacheCleanup;
+  clear: PlatformTypesCurationAPICacheClear;
+  create: PlatformTypesCurationAPICacheCreate;
+  delete: PlatformTypesCurationAPICacheDelete;
+  entries: PlatformTypesCurationAPICacheEntries;
+  get: PlatformTypesCurationAPICacheGet;
+  getExpiry: PlatformTypesCurationAPICacheGetExpiry;
+  has: PlatformTypesCurationAPICacheHas;
+  isExpired: PlatformTypesCurationAPICacheIsExpired;
+  peek: PlatformTypesCurationAPICachePeek;
+  set: PlatformTypesCurationAPICacheSet;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCache = Map<
+  number,
+  | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue
+  | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue10
+  | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue2
+  | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue3
+  | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue4
+  | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue5
+  | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue6
+  | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue7
+  | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue8
+  | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue9
+>;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue10 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue2 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue3 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue4 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue5 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue6 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue7 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue8 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValue9 {
+  expiry: null;
+  value: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue9;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue {
+  fadeInCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves;
+  fadeOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue10 {
+  fadeInCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves10;
+  fadeOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves10;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue2 {
+  fadeInCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves2;
+  fadeOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves2;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue3 {
+  fadeInCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves3;
+  fadeOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves3;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue4 {
+  fadeInCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves4;
+  fadeOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves4;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue5 {
+  fadeInCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves5;
+  fadeOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves5;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue6 {
+  fadeInCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves6;
+  fadeOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves6;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue7 {
+  fadeInCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves7;
+  fadeOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves7;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue8 {
+  fadeInCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves8;
+  fadeOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves8;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValue9 {
+  fadeInCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves9;
+  fadeOutCurves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves9;
+  style: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle9;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves10 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves10;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves2 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves2;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves3 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves3;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves4 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves4;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves5 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves5;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves6 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves6;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves7 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves7;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves8 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves8;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurves9 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves9;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints9;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem3
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem28
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves2 =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem4>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem6
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem11
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves6 =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem12>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem14
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves8 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem20
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem22
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem24
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurves9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem26
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem10 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints10;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem11 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints11;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem12 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints12;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem13 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints13;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem14 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints14;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem15 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints15;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem16 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints16;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem17 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints17;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem18 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints18;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem19 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints19;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem2 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints2;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem20 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints20;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem21 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints21;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem22 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints22;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem23 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints23;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem24 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints24;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem25 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints25;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem26 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints26;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem27 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints27;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem28 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints28;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem3 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints3;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem4 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints4;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem5 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints5;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem6 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints6;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem7 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints7;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem8 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints8;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItem9 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints9;
+  start: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem2
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints11 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem22
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints12 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem24
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem26
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints13 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem28
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem30
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints14 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem31
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem32
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints15 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem33
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem34
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints16 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem35
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem36
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints17 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem37
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem38
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints18 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem39
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem40
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints19 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem41
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem42
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem4
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints20 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem43
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem44
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints21 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem45
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem46
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints22 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem47
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem48
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints23 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem49
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem50
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints24 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem51
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem52
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints25 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem53
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem54
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints26 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem55
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem56
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints27 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem57
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem58
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem59
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem60
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints28 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem61
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem62
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem6
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem8
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem12
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem14
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints8 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem16
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPoints9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem18
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem31 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem32 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem33 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem34 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem35 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem36 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem37 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem38 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem39 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem40 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem41 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem42 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem43 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem44 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem45 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem46 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem47 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem48 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem49 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem50 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem51 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem52 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem53 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem54 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem55 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem56 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem57 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem58 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem59 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem60 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem61 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem62 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesCurvesItemPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem100
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem91
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem92
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem93
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem94
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem95
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem96
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem97
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem98
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem99
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem22
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem24
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem26
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem28
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem30
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem31
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem32
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem33
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem34
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem35
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem36
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem37
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem38
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem39
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem40
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem41
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem42
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem43
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem44
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem45
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem46
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem47
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem48
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem49
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem50
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem51
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem52
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem53
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem54
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem55
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem56
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem57
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem58
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem59
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem60
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem61
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem62
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem63
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem64
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem65
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem66
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem67
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem68
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem69
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem70
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints8 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem71
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem72
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem73
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem74
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem75
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem76
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem77
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem78
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem79
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem80
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPoints9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem81
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem82
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem83
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem84
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem85
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem86
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem87
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem88
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem89
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem90
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem100 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem31 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem32 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem33 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem34 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem35 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem36 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem37 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem38 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem39 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem40 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem41 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem42 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem43 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem44 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem45 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem46 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem47 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem48 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem49 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem50 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem51 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem52 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem53 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem54 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem55 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem56 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem57 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem58 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem59 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem60 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem61 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem62 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem63 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem64 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem65 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem66 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem67 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem68 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem69 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem70 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem71 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem72 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem73 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem74 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem75 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem76 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem77 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem78 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem79 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem80 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem81 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem82 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem83 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem84 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem85 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem86 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem87 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem88 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem89 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem90 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem91 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem92 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem93 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem94 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem95 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem96 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem97 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem98 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeInCurvesPolygonPointsItem99 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves10 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves10;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints10;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves2 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves2;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints2;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves3 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves3;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints3;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves4 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves4;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints4;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves5 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves5;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints5;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves6 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves6;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints6;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves7 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves7;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints7;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves8 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves8;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints8;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurves9 {
+  curves: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves9;
+  maximum: number;
+  minimum: number;
+  polygonPoints: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints9;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem3
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem28
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves2 =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem4>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem7
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem11
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves6 =
+  Array<PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem12>;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem14
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves8 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem20
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem22
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem24
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurves9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem26
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem10 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints10;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem11 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints11;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem12 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints12;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem13 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints13;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem14 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints14;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem15 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints15;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem16 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints16;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem17 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints17;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem18 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints18;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem19 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints19;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem2 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints2;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem20 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints20;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem21 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints21;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem22 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints22;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem23 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints23;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem24 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints24;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem25 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints25;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem26 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints26;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem27 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints27;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem28 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints28;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem3 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints3;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem4 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints4;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem5 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints5;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem6 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints6;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem7 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints7;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem8 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints8;
+  start: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItem9 {
+  end: number;
+  points: PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints9;
+  start: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem2
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints11 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem22
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints12 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem24
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem26
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints13 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem28
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints14 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem30
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem31
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem32
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints15 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem33
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem34
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints16 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem35
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem36
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints17 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem37
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem38
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints18 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem39
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem40
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints19 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem41
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem42
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem4
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints20 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem43
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem44
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints21 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem45
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem46
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints22 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem47
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem48
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints23 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem49
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem50
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints24 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem51
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem52
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints25 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem53
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem54
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints26 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem55
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem56
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem57
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem58
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints27 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem59
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem60
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints28 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem61
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem62
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem6
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem8
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem12
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem14
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints8 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem16
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPoints9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem18
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem31 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem32 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem33 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem34 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem35 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem36 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem37 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem38 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem39 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem40 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem41 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem42 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem43 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem44 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem45 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem46 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem47 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem48 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem49 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem50 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem51 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem52 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem53 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem54 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem55 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem56 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem57 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem58 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem59 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem60 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem61 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem62 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesCurvesItemPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem10
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem2
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem3
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem4
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem5
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem6
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem7
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem8
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem9
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints10 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem100
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem91
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem92
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem93
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem94
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem95
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem96
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem97
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem98
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem99
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints2 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem11
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem12
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem13
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem14
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem15
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem16
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem17
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem18
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem19
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem20
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints3 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem21
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem22
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem23
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem24
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem25
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem26
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem27
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem28
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem29
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem30
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints4 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem31
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem32
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem33
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem34
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem35
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem36
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem37
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem38
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem39
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem40
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints5 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem41
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem42
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem43
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem44
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem45
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem46
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem47
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem48
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem49
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem50
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints6 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem51
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem52
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem53
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem54
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem55
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem56
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem57
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem58
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem59
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem60
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints7 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem61
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem62
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem63
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem64
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem65
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem66
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem67
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem68
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem69
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem70
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints8 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem71
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem72
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem73
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem74
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem75
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem76
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem77
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem78
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem79
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem80
+  >;
+
+export type PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPoints9 =
+  Array<
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem81
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem82
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem83
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem84
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem85
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem86
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem87
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem88
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem89
+    | PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem90
+  >;
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem10 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem100 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem11 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem12 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem13 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem14 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem15 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem16 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem17 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem18 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem19 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem2 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem20 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem21 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem22 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem23 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem24 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem25 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem26 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem27 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem28 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem29 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem3 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem30 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem31 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem32 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem33 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem34 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem35 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem36 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem37 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem38 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem39 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem4 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem40 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem41 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem42 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem43 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem44 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem45 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem46 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem47 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem48 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem49 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem5 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem50 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem51 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem52 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem53 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem54 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem55 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem56 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem57 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem58 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem59 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem6 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem60 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem61 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem62 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem63 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem64 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem65 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem66 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem67 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem68 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem69 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem7 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem70 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem71 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem72 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem73 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem74 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem75 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem76 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem77 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem78 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem79 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem8 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem80 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem81 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem82 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem83 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem84 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem85 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem86 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem87 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem88 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem89 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem9 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem90 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem91 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem92 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem93 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem94 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem95 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem96 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem97 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem98 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueFadeOutCurvesPolygonPointsItem99 {
+  x: number;
+  y: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle10 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle2 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle3 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle4 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle5 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle6 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle7 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle8 {
+  id: number;
+}
+
+export interface PlatformTypesPlaylistMixingAPIStyleAPIVolumeStylesCacheCacheValueValueStyle9 {
+  id: number;
+}
+
+export type PlatformTypesPlaylistMixingAPISubscribeToPreviewState = (arg0: any) => unknown;
+
+export interface PlatformTypesPlaylistMixingAPITransitionAPI {
+  _automixClient: PlatformTypesPlaylistMixingAPIAutomixClient;
+  _playerAPI: PlatformTypesPlayerAPI;
+  _playlistApi: PlatformTypesPlaylistAPI;
+  _previewPlayer: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayer;
+  cleanupTransitionPreview: PlatformTypesPlaylistMixingAPITransitionAPICleanupTransitionPreview;
+  getAutoTransitionForTrackPair: PlatformTypesPlaylistMixingAPITransitionAPIGetAutoTransitionForTrackPair;
+  getComposedTransitionForTrackPair: PlatformTypesPlaylistMixingAPITransitionAPIGetComposedTransitionForTrackPair;
+  getCustomTransitionForTrackPair: PlatformTypesPlaylistMixingAPITransitionAPIGetCustomTransitionForTrackPair;
+  getTransitionPreviewProgress: PlatformTypesPlaylistMixingAPITransitionAPIGetTransitionPreviewProgress;
+  getTransitionPreviewState: PlatformTypesPlaylistMixingAPITransitionAPIGetTransitionPreviewState;
+  isTransitionPreviewActive: PlatformTypesPlaylistMixingAPITransitionAPIIsTransitionPreviewActive;
+  playTransition: PlatformTypesPlaylistMixingAPITransitionAPIPlayTransition;
+  playTransitionPreview: PlatformTypesPlaylistMixingAPITransitionAPIPlayTransitionPreview;
+  setTransitionForTrack: PlatformTypesPlaylistMixingAPITransitionAPISetTransitionForTrack;
+  stopTransitionPreview: PlatformTypesPlaylistMixingAPITransitionAPIStopTransitionPreview;
+  subscribeToPreviewState: PlatformTypesPlaylistMixingAPITransitionAPISubscribeToPreviewState;
+}
+
+export type PlatformTypesPlaylistMixingAPITransitionAPICleanupTransitionPreview =
+  () => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIGetAutoTransitionForTrackPair = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIGetComposedTransitionForTrackPair = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIGetCustomTransitionForTrackPair = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIGetTransitionPreviewProgress = () => unknown;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIGetTransitionPreviewState = () => unknown;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIIsTransitionPreviewActive = () => unknown;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPlayTransition = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPlayTransitionPreview = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+  arg3: any,
+) => Promise<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayer {
+  _capturePrePreviewState: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerCapturePrePreviewState;
+  _currentOverlap: null;
+  _currentTrackAUri: string;
+  _currentTrackBUri: string;
+  _handlePlayerStateUpdate: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerHandlePlayerStateUpdate;
+  _playerAPI: PlatformTypesPlayerAPI;
+  _playerEventUnsubscribe: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerPlayerEventUnsubscribe;
+  _prePreviewState: null;
+  _prepareContext: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerPrepareContext;
+  _previewState: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerPreviewState;
+  _processPlayerState: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerProcessPlayerState;
+  _setupPlayerEventListener: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerSetupPlayerEventListener;
+  _stateCallbacks: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerStateCallbacks;
+  _stateDebounceTimer: null;
+  _updateState: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerUpdateState;
+  cleanupTransitionPreview: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerCleanupTransitionPreview;
+  dispose: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerDispose;
+  getTransitionPreviewProgress: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerGetTransitionPreviewProgress;
+  getTransitionPreviewState: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerGetTransitionPreviewState;
+  isTransitionPreviewActive: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerIsTransitionPreviewActive;
+  playTransitionPreview: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerPlayTransitionPreview;
+  stopTransitionPreview: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerStopTransitionPreview;
+  subscribeToPreviewState: PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerSubscribeToPreviewState;
+}
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerCapturePrePreviewState =
+  () => unknown;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerCleanupTransitionPreview =
+  () => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerDispose = () => unknown;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerGetTransitionPreviewProgress =
+  () => unknown;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerGetTransitionPreviewState =
+  () => unknown;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerHandlePlayerStateUpdate = (
+  arg0: any,
 ) => unknown;
 
-export type PlatformTypesPlaylistMixingAPISetTunaLens = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerIsTransitionPreviewActive =
+  () => unknown;
 
-export type PlatformTypesPlaylistMixingAPITurnOffMixingForPlaylist = (arg0: any) => unknown;
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerPlayerEventUnsubscribe =
+  () => unknown;
 
-export type PlatformTypesPlaylistMixingAPITurnOnMixingForPlaylist = (arg0: any) => unknown;
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerPlayTransitionPreview = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+  arg3: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerPrepareContext =
+  () => Promise<unknown>;
+
+export interface PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerPreviewState {
+  status: string;
+}
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerProcessPlayerState = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerSetupPlayerEventListener =
+  () => unknown;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerStateCallbacks = Set<unknown>;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerStopTransitionPreview =
+  () => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerSubscribeToPreviewState = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIPreviewPlayerUpdateState = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPISetTransitionForTrack = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPIStopTransitionPreview =
+  () => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPITransitionAPISubscribeToPreviewState = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesPlaylistMixingAPITurnOffMixingForPlaylist = (
+  arg0: any,
+) => Promise<unknown>;
+
+export type PlatformTypesPlaylistMixingAPITurnOnMixingForPlaylist = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesPlaylistPermissionsAPI {
   _builder: PlatformTypesRequestBuilder;
@@ -11078,7 +22702,10 @@ export interface PlatformTypesPlaylistPermissionsAPI {
   subscribeToMembers: PlatformTypesPlaylistPermissionsAPISubscribeToMembers;
 }
 
-export type PlatformTypesPlaylistPermissionsAPIClaimPermissions = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesPlaylistPermissionsAPIClaimPermissions = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export interface PlatformTypesPlaylistPermissionsAPIClient {
   clearToken: PlatformTypesLibraryAPIPlaylistServiceClientClearToken;
@@ -11146,7 +22773,23 @@ export interface PlatformTypesPlaylistPermissionsAPIEventsEmitter {
   removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
-export type PlatformTypesPlaylistPermissionsAPIEventsEmitterListeners = Record<string, unknown>;
+export interface PlatformTypesPlaylistPermissionsAPIEventsEmitterListeners {
+  operation_complete: PlatformTypesPlaylistPermissionsAPIEventsEmitterListenersOperationComplete;
+}
+
+export type PlatformTypesPlaylistPermissionsAPIEventsEmitterListenersOperationComplete =
+  Array<PlatformTypesPlaylistPermissionsAPIEventsEmitterListenersOperationCompleteItem>;
+
+export interface PlatformTypesPlaylistPermissionsAPIEventsEmitterListenersOperationCompleteItem {
+  listener: PlatformTypesPlaylistPermissionsAPIEventsEmitterListenersOperationCompleteItemListener;
+  options: PlatformTypesPlaylistPermissionsAPIEventsEmitterListenersOperationCompleteItemOptions;
+}
+
+export type PlatformTypesPlaylistPermissionsAPIEventsEmitterListenersOperationCompleteItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesPlaylistPermissionsAPIEventsEmitterListenersOperationCompleteItemOptions =
+  Record<string, unknown>;
 
 export interface PlatformTypesPlaylistPermissionsAPIEventsEmitterMetaListeners {
   add: PlatformTypesPlaylistPermissionsAPIEventsEmitterMetaListenersAdd;
@@ -11167,25 +22810,28 @@ export type PlatformTypesPlaylistPermissionsAPIGetCapabilities = () => unknown;
 
 export type PlatformTypesPlaylistPermissionsAPIGetEvents = () => unknown;
 
-export type PlatformTypesPlaylistPermissionsAPIGetMembers = (arg0: any) => unknown;
+export type PlatformTypesPlaylistPermissionsAPIGetMembers = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesPlaylistPermissionsAPIGetPermissionGrant = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesPlaylistPermissionsAPIRemoveMember = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesPlaylistPermissionsAPIRemoveMember = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export type PlatformTypesPlaylistPermissionsAPISetBasePermission = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesPlaylistPermissionsAPISetMemberPermission = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesPlaylistPermissionsAPISubscribeToMembers = (
   arg0: any,
@@ -11238,9 +22884,9 @@ export interface PlatformTypesPubSubAPI {
 }
 
 export interface PlatformTypesRecentlyPlayedAPI {
-  _cancellable: null;
+  _cancellable: PlatformTypesRecentlyPlayedAPICancellable;
   _client: PlatformTypesRecentlyPlayedAPIClient;
-  _contexts: null;
+  _contexts: PlatformTypesRecentlyPlayedAPIContexts;
   _events: PlatformTypesRecentlyPlayedAPIEvents;
   _isAuthorPageEnabled: boolean;
   getContexts: PlatformTypesRecentlyPlayedAPIGetContexts;
@@ -11248,18 +22894,253 @@ export interface PlatformTypesRecentlyPlayedAPI {
   startListening: PlatformTypesRecentlyPlayedAPIStartListening;
 }
 
+export interface PlatformTypesRecentlyPlayedAPICancellable {
+  cancel: PlatformTypesRecentlyPlayedAPICancellableCancel;
+}
+
+export type PlatformTypesRecentlyPlayedAPICancellableCancel = () => unknown;
+
 export interface PlatformTypesRecentlyPlayedAPIClient {
   options: PlatformTypesRecentlyPlayedAPIClientOptions;
-  stream: PlatformTypesRecentlyPlayedAPIClientStream;
-  tracks: PlatformTypesRecentlyPlayedAPIClientTracks;
+  stream: PlatformTypesAssistedCurationAPIRecentlyPlayedClientStream;
+  tracks: PlatformTypesAssistedCurationAPIRecentlyPlayedClientTracks;
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
 
 export type PlatformTypesRecentlyPlayedAPIClientOptions = Record<string, unknown>;
 
-export type PlatformTypesRecentlyPlayedAPIClientStream = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesRecentlyPlayedAPIContexts = Array<
+  | PlatformTypesRecentlyPlayedAPIContextsItem
+  | PlatformTypesRecentlyPlayedAPIContextsItem10
+  | PlatformTypesRecentlyPlayedAPIContextsItem2
+  | PlatformTypesRecentlyPlayedAPIContextsItem3
+  | PlatformTypesRecentlyPlayedAPIContextsItem4
+  | PlatformTypesRecentlyPlayedAPIContextsItem5
+  | PlatformTypesRecentlyPlayedAPIContextsItem6
+  | PlatformTypesRecentlyPlayedAPIContextsItem7
+  | PlatformTypesRecentlyPlayedAPIContextsItem8
+  | PlatformTypesRecentlyPlayedAPIContextsItem9
+>;
 
-export type PlatformTypesRecentlyPlayedAPIClientTracks = (arg0: any, arg1: any) => unknown;
+export interface PlatformTypesRecentlyPlayedAPIContextsItem {
+  attributes: PlatformTypesRecentlyPlayedAPIContextsItemAttributes;
+  description: string;
+  images: PlatformTypesRecentlyPlayedAPIContextsItemImages;
+  name: string;
+  owner: PlatformTypesRecentlyPlayedAPIContextsItemOwner;
+  timestampMs: number;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItem10 {
+  images: PlatformTypesRecentlyPlayedAPIContextsItemImages10;
+  name: string;
+  timestampMs: number;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItem2 {
+  attributes: PlatformTypesRecentlyPlayedAPIContextsItemAttributes2;
+  description: string;
+  images: PlatformTypesRecentlyPlayedAPIContextsItemImages2;
+  name: string;
+  owner: PlatformTypesRecentlyPlayedAPIContextsItemOwner2;
+  timestampMs: number;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItem3 {
+  attributes: PlatformTypesRecentlyPlayedAPIContextsItemAttributes3;
+  description: string;
+  images: PlatformTypesRecentlyPlayedAPIContextsItemImages3;
+  name: string;
+  owner: PlatformTypesRecentlyPlayedAPIContextsItemOwner3;
+  timestampMs: number;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItem4 {
+  attributes: PlatformTypesRecentlyPlayedAPIContextsItemAttributes4;
+  description: string;
+  images: PlatformTypesRecentlyPlayedAPIContextsItemImages4;
+  name: string;
+  owner: PlatformTypesRecentlyPlayedAPIContextsItemOwner4;
+  timestampMs: number;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItem5 {
+  images: PlatformTypesRecentlyPlayedAPIContextsItemImages5;
+  name: string;
+  timestampMs: number;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItem6 {
+  attributes: PlatformTypesRecentlyPlayedAPIContextsItemAttributes5;
+  description: string;
+  images: PlatformTypesRecentlyPlayedAPIContextsItemImages6;
+  name: string;
+  owner: PlatformTypesRecentlyPlayedAPIContextsItemOwner5;
+  timestampMs: number;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItem7 {
+  images: PlatformTypesRecentlyPlayedAPIContextsItemImages7;
+  name: string;
+  timestampMs: number;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItem8 {
+  images: PlatformTypesRecentlyPlayedAPIContextsItemImages8;
+  name: string;
+  timestampMs: number;
+  type: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItem9 {
+  attributes: PlatformTypesRecentlyPlayedAPIContextsItemAttributes6;
+  description: string;
+  images: PlatformTypesRecentlyPlayedAPIContextsItemImages9;
+  name: string;
+  owner: PlatformTypesRecentlyPlayedAPIContextsItemOwner6;
+  timestampMs: number;
+  type: string;
+  uri: string;
+}
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemAttributes = Array<unknown>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemAttributes2 = Array<unknown>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemAttributes3 = Array<unknown>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemAttributes4 = Array<unknown>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemAttributes5 = Array<unknown>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemAttributes6 = Array<unknown>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemImages =
+  Array<PlatformTypesRecentlyPlayedAPIContextsItemImagesItem>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemImages10 =
+  Array<PlatformTypesRecentlyPlayedAPIContextsItemImagesItem10>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemImages2 =
+  Array<PlatformTypesRecentlyPlayedAPIContextsItemImagesItem2>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemImages3 =
+  Array<PlatformTypesRecentlyPlayedAPIContextsItemImagesItem3>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemImages4 =
+  Array<PlatformTypesRecentlyPlayedAPIContextsItemImagesItem4>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemImages5 =
+  Array<PlatformTypesRecentlyPlayedAPIContextsItemImagesItem5>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemImages6 =
+  Array<PlatformTypesRecentlyPlayedAPIContextsItemImagesItem6>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemImages7 =
+  Array<PlatformTypesRecentlyPlayedAPIContextsItemImagesItem7>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemImages8 =
+  Array<PlatformTypesRecentlyPlayedAPIContextsItemImagesItem8>;
+
+export type PlatformTypesRecentlyPlayedAPIContextsItemImages9 =
+  Array<PlatformTypesRecentlyPlayedAPIContextsItemImagesItem9>;
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemImagesItem {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemImagesItem10 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemImagesItem2 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemImagesItem3 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemImagesItem4 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemImagesItem5 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemImagesItem6 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemImagesItem7 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemImagesItem8 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemImagesItem9 {
+  label: string;
+  url: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemOwner {
+  displayName: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemOwner2 {
+  displayName: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemOwner3 {
+  displayName: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemOwner4 {
+  displayName: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemOwner5 {
+  displayName: string;
+  uri: string;
+}
+
+export interface PlatformTypesRecentlyPlayedAPIContextsItemOwner6 {
+  displayName: string;
+  uri: string;
+}
 
 export interface PlatformTypesRecentlyPlayedAPIEvents {
   _emitter: PlatformTypesRecentlyPlayedAPIEventsEmitter;
@@ -11298,7 +23179,24 @@ export interface PlatformTypesRecentlyPlayedAPIEventsEmitter {
   removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
-export type PlatformTypesRecentlyPlayedAPIEventsEmitterListeners = Record<string, unknown>;
+export interface PlatformTypesRecentlyPlayedAPIEventsEmitterListeners {
+  update: PlatformTypesRecentlyPlayedAPIEventsEmitterListenersUpdate;
+}
+
+export type PlatformTypesRecentlyPlayedAPIEventsEmitterListenersUpdate =
+  Array<PlatformTypesRecentlyPlayedAPIEventsEmitterListenersUpdateItem>;
+
+export interface PlatformTypesRecentlyPlayedAPIEventsEmitterListenersUpdateItem {
+  listener: PlatformTypesRecentlyPlayedAPIEventsEmitterListenersUpdateItemListener;
+  options: PlatformTypesRecentlyPlayedAPIEventsEmitterListenersUpdateItemOptions;
+}
+
+export type PlatformTypesRecentlyPlayedAPIEventsEmitterListenersUpdateItemListener = () => unknown;
+
+export type PlatformTypesRecentlyPlayedAPIEventsEmitterListenersUpdateItemOptions = Record<
+  string,
+  unknown
+>;
 
 export interface PlatformTypesRecentlyPlayedAPIEventsEmitterMetaListeners {
   add: PlatformTypesRecentlyPlayedAPIEventsEmitterMetaListenersAdd;
@@ -11345,7 +23243,11 @@ export interface PlatformTypesRecentsAPI {
 
 export type PlatformTypesRecentsAPIGetCapabilities = () => unknown;
 
-export type PlatformTypesRecentsAPIGetContents = (arg0: any, arg1: any, arg2: any) => unknown;
+export type PlatformTypesRecentsAPIGetContents = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => Promise<unknown>;
 
 export interface PlatformTypesRecentsAPIPlaylistDataClient {
   find: PlatformTypesLibraryAPIPlaylistDataClientFind;
@@ -11590,7 +23492,6 @@ export interface PlatformTypesRegistryMapValueInstanceCacheValueValue {
   "mixing-tools": string;
   "nft-disabled": string;
   "obfuscate-restricted-tracks": string;
-  "offline-backup": string;
   "on-demand": string;
   "on-demand-trial": string;
   "on-demand-trial-in-progress": string;
@@ -11598,7 +23499,6 @@ export interface PlatformTypesRegistryMapValueInstanceCacheValueValue {
   "payments-locked-state": string;
   "pick-and-shuffle": string;
   "player-license": string;
-  "player-license-v2": string;
   "playlist-annotations-markup": string;
   "preferred-locale": string;
   "prefetch-keys": string;
@@ -11625,6 +23525,7 @@ export interface PlatformTypesRegistryMapValueInstanceCacheValueValue {
   "storage-size-config": string;
   "streaming-only-premium": string;
   "streaming-rules": string;
+  "subscription-enddate": string;
   "ugc-abuse-report": string;
   "ugc-abuse-report-url": string;
   "video-cdn-sampling": string;
@@ -11648,7 +23549,6 @@ export interface PlatformTypesRegistryMapValueInstanceCacheValueValue {
   name: string;
   offline: string;
   parrot: string;
-  partner: string;
   product: string;
   radio: string;
   shuffle: string;
@@ -11668,7 +23568,7 @@ export type PlatformTypesRegistryMapValueInstanceCallbackResponses = Array<unkno
 export type PlatformTypesRegistryMapValueInstanceCallbacks =
   Array<PlatformTypesRegistryMapValueInstanceOnTokenChanged>;
 
-export type PlatformTypesRegistryMapValueInstanceCallSingle = (arg0: any) => unknown;
+export type PlatformTypesRegistryMapValueInstanceCallSingle = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceCallStream = (arg0: any, arg1: any) => unknown;
 
@@ -11838,7 +23738,9 @@ export type PlatformTypesRegistryMapValueInstanceGetMeasurementBuilderByCategory
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesRegistryMapValueInstanceGetSessionTransferURL = (arg0: any) => unknown;
+export type PlatformTypesRegistryMapValueInstanceGetSessionTransferURL = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceGetSpecificContext = (arg0: any) => unknown;
 
@@ -11848,11 +23750,11 @@ export type PlatformTypesRegistryMapValueInstanceGetStorageId = () => unknown;
 
 export type PlatformTypesRegistryMapValueInstanceGetStorageType = () => unknown;
 
-export type PlatformTypesRegistryMapValueInstanceGetToken = () => unknown;
+export type PlatformTypesRegistryMapValueInstanceGetToken = () => Promise<unknown>;
 
-export type PlatformTypesRegistryMapValueInstanceGetUser = () => unknown;
+export type PlatformTypesRegistryMapValueInstanceGetUser = () => Promise<unknown>;
 
-export type PlatformTypesRegistryMapValueInstanceGetValues = () => unknown;
+export type PlatformTypesRegistryMapValueInstanceGetValues = () => Promise<unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceGetVersion = () => unknown;
 
@@ -11913,11 +23815,11 @@ export interface PlatformTypesRegistryMapValueInstanceInstanceContextsContextIns
 
 export type PlatformTypesRegistryMapValueInstanceIsUsingESS2NAOptimization = () => unknown;
 
-export type PlatformTypesRegistryMapValueInstanceLastFlush = () => unknown;
+export type PlatformTypesRegistryMapValueInstanceLastFlush = () => Promise<unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceListeners = Record<string, unknown>;
 
-export type PlatformTypesRegistryMapValueInstanceLoadToken = () => unknown;
+export type PlatformTypesRegistryMapValueInstanceLoadToken = () => Promise<unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceMakeTimeMeasurementBuilder = (
   arg0: any,
@@ -12013,7 +23915,10 @@ export type PlatformTypesRegistryMapValueInstanceRequest = (arg0: any, arg1: any
 
 export type PlatformTypesRegistryMapValueInstanceRequestFactory = () => unknown;
 
-export type PlatformTypesRegistryMapValueInstanceResolve = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesRegistryMapValueInstanceResolve = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export interface PlatformTypesRegistryMapValueInstanceResolver {
   cancel: PlatformTypesRegistryMapValueInstanceResolverCancel;
@@ -12060,7 +23965,7 @@ export type PlatformTypesRegistryMapValueInstanceSendESS2NAWithOptimization = (
 
 export type PlatformTypesRegistryMapValueInstanceSendESStats = () => unknown;
 
-export type PlatformTypesRegistryMapValueInstanceSendEvents = (arg0: any) => unknown;
+export type PlatformTypesRegistryMapValueInstanceSendEvents = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceSendToGabito = (arg0: any, arg1: any) => unknown;
 
@@ -12119,7 +24024,7 @@ export type PlatformTypesRegistryMapValueInstanceSetTimeReporter = (arg0: any) =
 
 export type PlatformTypesRegistryMapValueInstanceSetupInstallationId = () => unknown;
 
-export type PlatformTypesRegistryMapValueInstanceSetValues = (arg0: any) => unknown;
+export type PlatformTypesRegistryMapValueInstanceSetValues = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesRegistryMapValueInstanceState {
   isAuthorized: boolean;
@@ -12326,11 +24231,11 @@ export type PlatformTypesRegistryMapValueInstanceSubs = Set<
   | PlatformTypesRegistryMapValueInstanceSubsSetElement9
 >;
 
-export type PlatformTypesRegistryMapValueInstanceSubsSetElement = () => unknown;
+export type PlatformTypesRegistryMapValueInstanceSubsSetElement = (arg0: any) => unknown;
 
 export type PlatformTypesRegistryMapValueInstanceSubsSetElement10 = () => unknown;
 
-export type PlatformTypesRegistryMapValueInstanceSubsSetElement2 = (arg0: any) => unknown;
+export type PlatformTypesRegistryMapValueInstanceSubsSetElement2 = () => unknown;
 
 export type PlatformTypesRegistryMapValueInstanceSubsSetElement3 = () => unknown;
 
@@ -13433,7 +25338,7 @@ export interface PlatformTypesRegistryMapValueInstanceTransportEndpoints {
 
 export type PlatformTypesRegistryMapValueInstanceTransportEndpointsProvider = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export interface PlatformTypesRegistryMapValueInstanceTransportFetch {
   __esModule: boolean;
@@ -13550,7 +25455,7 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenIt
 ) => unknown;
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemListener2 =
-  () => unknown;
+  () => Promise<unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenItemListener3 = (
   arg0: any,
@@ -13598,82 +25503,16 @@ export type PlatformTypesRegistryMapValueInstanceTransportListenersAccessTokenIt
   unknown
 >;
 
-export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticated = Array<
-  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem
-  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem2
-  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem3
-  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem4
-  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem5
-  | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem6
->;
+export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticated =
+  Array<PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem>;
 
 export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem {
   listener: PlatformTypesRegistryMapValueInstanceOnAuthenticated;
   options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions;
 }
 
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem2 {
-  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener;
-  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions2;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem3 {
-  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener2;
-  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions3;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem4 {
-  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener3;
-  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions4;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem5 {
-  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener4;
-  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions5;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItem6 {
-  listener: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener5;
-  options: PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions6;
-}
-
-export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener =
-  () => unknown;
-
-export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener2 =
-  () => unknown;
-
-export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener3 =
-  () => unknown;
-
-export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener4 =
-  () => unknown;
-
-export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemListener5 =
-  () => unknown;
-
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions =
   Record<string, unknown>;
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions2 {
-  once: boolean;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions3 {
-  once: boolean;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions4 {
-  once: boolean;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions5 {
-  once: boolean;
-}
-
-export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticatedItemOptions6 {
-  once: boolean;
-}
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticationFailed = Array<
   | PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticationFailedItem
@@ -13691,7 +25530,7 @@ export interface PlatformTypesRegistryMapValueInstanceTransportListenersAuthenti
 }
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticationFailedItemListener =
-  () => unknown;
+  () => Promise<unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceTransportListenersAuthenticationFailedItemOptions =
   Record<string, unknown>;
@@ -14221,7 +26060,7 @@ export type PlatformTypesRegistryMapValueInstanceTransportParseProvidedToken = (
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesRegistryMapValueInstanceTransportPerformConnect = () => unknown;
+export type PlatformTypesRegistryMapValueInstanceTransportPerformConnect = () => Promise<unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceTransportPerformDisconnect = (
   arg0: any,
@@ -14277,10 +26116,10 @@ export interface PlatformTypesRegistryMapValueInstanceTransportPluginsDealer {
 
 export interface PlatformTypesRegistryMapValueInstanceTransportPluginsDealer2 {
   _WebSocket: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerWebSocket;
-  _closeBeforeEventsRejector: null;
+  _closeBeforeEventsRejector: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerCloseBeforeEventsRejector;
   _connected: boolean;
-  _connectionId: null;
-  _connectionURI: null;
+  _connectionId: string;
+  _connectionURI: string;
   _dispatchFromStore: PlatformTypesVideoAPIVideoCoordinatorDispatchFromStore;
   _endpoint: string;
   _handleClose: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerHandleClose;
@@ -14299,7 +26138,7 @@ export interface PlatformTypesRegistryMapValueInstanceTransportPluginsDealer2 {
   _parseMessage: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerParseMessage;
   _prepareConnectionId: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerPrepareConnectionId;
   _reply: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerReply;
-  _socket: null;
+  _socket: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocket;
   _startHeartbeat: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerStartHeartbeat;
   _stopHeartbeat: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerStopHeartbeat;
   _waitingForConnectionId: boolean;
@@ -14380,6 +26219,9 @@ export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerBeforePro
 
 export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerBeforeSendRequest =
   Array<PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSendRequestItem>;
+
+export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerCloseBeforeEventsRejector =
+  () => unknown;
 
 export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerConnect = (
   arg0: any,
@@ -14688,6 +26530,48 @@ export interface PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSend
   options: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerRequestItemOptions2;
 }
 
+export interface PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocket {
+  CLOSED: number;
+  CLOSING: number;
+  CONNECTING: number;
+  OPEN: number;
+  addEventListener: PlatformTypesRegistryMapValueInstanceTransportConnectionObserverNavigatorBluetoothAddEventListener;
+  binaryType: string;
+  bufferedAmount: number;
+  close: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketClose;
+  dispatchEvent: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelDispatchEvent;
+  extensions: string;
+  onclose: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnclose;
+  onerror: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnerror;
+  onmessage: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnmessage;
+  onopen: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnopen;
+  protocol: string;
+  readyState: number;
+  removeEventListener: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelRemoveEventListener;
+  send: PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketSend;
+  url: string;
+  when: PlatformTypesAdManagersVtoManagerPlayerAPIContextualShuffleLocalContextualShuffleIndexedDbAPIChannelWhen;
+}
+
+export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketClose = () => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnclose = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnerror =
+  () => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnmessage = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketOnopen = () => unknown;
+
+export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerSocketSend = (
+  arg0: any,
+) => unknown;
+
 export type PlatformTypesRegistryMapValueInstanceTransportPluginsDealerStartHeartbeat = (
   arg0: any,
 ) => unknown;
@@ -14794,7 +26678,12 @@ export type PlatformTypesRegistryMapValueInstanceTransportStateAwareListenersTra
   Array<unknown>;
 
 export interface PlatformTypesRegistryMapValueInstanceTransportStateAwareOperationMetrics {
-  authenticated: null;
+  authenticated: PlatformTypesRegistryMapValueInstanceTransportStateAwareOperationMetricsAuthenticated;
+}
+
+export interface PlatformTypesRegistryMapValueInstanceTransportStateAwareOperationMetricsAuthenticated {
+  end_time: number;
+  start_time: number;
 }
 
 export interface PlatformTypesRegistryMapValueInstanceTransportStateAwareRunners {
@@ -14805,7 +26694,7 @@ export interface PlatformTypesRegistryMapValueInstanceTransportStateAwareRunners
   transport_connect: null;
 }
 
-export type PlatformTypesRegistryMapValueInstanceTransportTokenProvider = () => unknown;
+export type PlatformTypesRegistryMapValueInstanceTransportTokenProvider = () => Promise<unknown>;
 
 export type PlatformTypesRegistryMapValueInstanceTransportToPublic = (arg0: any) => unknown;
 
@@ -15128,7 +27017,7 @@ export interface PlatformTypesRemoteConfigDebugAPI {
   update: PlatformTypesRemoteConfigDebugAPIUpdate;
 }
 
-export type PlatformTypesRemoteConfigDebugAPIClearOverrides = () => unknown;
+export type PlatformTypesRemoteConfigDebugAPIClearOverrides = () => Promise<unknown>;
 
 export interface PlatformTypesRemoteConfigDebugAPIClient {
   clearOverrides: PlatformTypesRemoteConfigDebugAPIClientClearOverrides;
@@ -15327,7 +27216,7 @@ export type PlatformTypesRemoteConfigDebugAPIGetEvents = () => unknown;
 
 export type PlatformTypesRemoteConfigDebugAPIGetLocalConfiguration = () => unknown;
 
-export type PlatformTypesRemoteConfigDebugAPIGetProperties = () => unknown;
+export type PlatformTypesRemoteConfigDebugAPIGetProperties = () => Promise<unknown>;
 
 export interface PlatformTypesRemoteConfigDebugAPILocalConfiguration {
   accessListeners: PlatformTypesRemoteConfigDebugAPILocalConfigurationAccessListeners;
@@ -15340,10 +27229,7 @@ export interface PlatformTypesRemoteConfigDebugAPILocalConfiguration {
 export type PlatformTypesRemoteConfigDebugAPILocalConfigurationAccessListeners =
   Set<PlatformTypesRemoteConfigurationAccessListenersSetElement>;
 
-export type PlatformTypesRemoteConfigDebugAPILocalConfigurationValues = Map<
-  string,
-  boolean | string
->;
+export type PlatformTypesRemoteConfigDebugAPILocalConfigurationValues = Map<string, boolean>;
 
 export interface PlatformTypesRemoteConfigDebugAPIOverrides {
   accessListeners: PlatformTypesRemoteConfigDebugAPIOverridesAccessListeners;
@@ -15516,9 +27402,12 @@ export interface PlatformTypesRemoteConfigDebugAPIPropertiesItemSpec9 {
   upper: number;
 }
 
-export type PlatformTypesRemoteConfigDebugAPISetOverride = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesRemoteConfigDebugAPISetOverride = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
-export type PlatformTypesRemoteConfigDebugAPIUpdate = (arg0: any) => unknown;
+export type PlatformTypesRemoteConfigDebugAPIUpdate = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesRemoteConfiguration {
   accessListeners: PlatformTypesRemoteConfigurationAccessListeners;
@@ -15539,7 +27428,7 @@ export type PlatformTypesRemoteConfigurationToBuilder = () => unknown;
 
 export type PlatformTypesRemoteConfigurationToJSON = () => unknown;
 
-export type PlatformTypesRemoteConfigurationValues = Map<string, boolean | string>;
+export type PlatformTypesRemoteConfigurationValues = Map<string, boolean>;
 
 export interface PlatformTypesRemoteConfigurationWithLocalOverrides {
   accessListeners: PlatformTypesRemoteConfigurationWithLocalOverridesAccessListeners;
@@ -15552,10 +27441,7 @@ export interface PlatformTypesRemoteConfigurationWithLocalOverrides {
 export type PlatformTypesRemoteConfigurationWithLocalOverridesAccessListeners =
   Set<PlatformTypesRemoteConfigurationAccessListenersSetElement>;
 
-export type PlatformTypesRemoteConfigurationWithLocalOverridesValues = Map<
-  string,
-  boolean | string
->;
+export type PlatformTypesRemoteConfigurationWithLocalOverridesValues = Map<string, boolean>;
 
 export interface PlatformTypesReportAPI {
   _playlistAPI: PlatformTypesPlaylistAPI;
@@ -15567,7 +27453,7 @@ export interface PlatformTypesReportAPI {
 
 export type PlatformTypesReportAPICanReportPlaylist = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesReportAPIGetReportURL = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesReportAPIGetReportURL = (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesReportAPIIsURIReportable = (arg0: any) => unknown;
 
@@ -15628,17 +27514,21 @@ export interface PlatformTypesRootlistAPI {
   setPublishedState: PlatformTypesRootlistAPISetPublishedState;
 }
 
-export type PlatformTypesRootlistAPIAdd = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesRootlistAPIAdd = (arg0: any, arg1: any) => Promise<unknown>;
 
-export type PlatformTypesRootlistAPIApplyModification = (arg0: any) => unknown;
+export type PlatformTypesRootlistAPIApplyModification = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesRootlistAPIContains = (arg0: any) => unknown;
+export type PlatformTypesRootlistAPIContains = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesRootlistAPIContainsSync = (arg0: any) => unknown;
 
-export type PlatformTypesRootlistAPICreateFolder = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesRootlistAPICreateFolder = (arg0: any, arg1: any) => Promise<unknown>;
 
-export type PlatformTypesRootlistAPICreatePlaylist = (arg0: any, arg1: any, arg2: any) => unknown;
+export type PlatformTypesRootlistAPICreatePlaylist = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => Promise<unknown>;
 
 export interface PlatformTypesRootlistAPIDecorationCache {
   _cache: PlatformTypesRootlistAPIDecorationCacheCache;
@@ -15712,7 +27602,7 @@ export type PlatformTypesRootlistAPIEventsAggregatorDeletions = Map<unknown, unk
 
 export type PlatformTypesRootlistAPIEventsAggregatorOnAdd = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesRootlistAPIEventsAggregatorOnBatch = (arg0: any) => unknown;
+export type PlatformTypesRootlistAPIEventsAggregatorOnBatch = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesRootlistAPIEventsAggregatorOnRemove = (arg0: any, arg1: any) => unknown;
 
@@ -15722,7 +27612,7 @@ export type PlatformTypesRootlistAPIEventsAggregatorOnUpdate = (
   arg2: any,
 ) => unknown;
 
-export type PlatformTypesRootlistAPIEventsContains = (arg0: any) => unknown;
+export type PlatformTypesRootlistAPIEventsContains = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesRootlistAPIEventsEmitAddComplete = (arg0: any, arg1: any) => unknown;
 
@@ -15779,11 +27669,165 @@ export interface PlatformTypesRootlistAPIEventsEmitter {
 
 export interface PlatformTypesRootlistAPIEventsEmitterListeners {
   operation: PlatformTypesRootlistAPIEventsEmitterListenersOperation;
+  operation_complete: PlatformTypesRootlistAPIEventsEmitterListenersOperationComplete;
   update: PlatformTypesRootlistAPIEventsEmitterListenersUpdate;
 }
 
 export type PlatformTypesRootlistAPIEventsEmitterListenersOperation =
   Array<PlatformTypesRootlistAPIEventsEmitterListenersOperationItem>;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationComplete = Array<
+  | PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem
+  | PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem10
+  | PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem2
+  | PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem3
+  | PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem4
+  | PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem5
+  | PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem6
+  | PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem7
+  | PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem8
+  | PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem9
+>;
+
+export interface PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem {
+  listener: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener;
+  options: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions;
+}
+
+export interface PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem10 {
+  listener: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener10;
+  options: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions10;
+}
+
+export interface PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem2 {
+  listener: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener2;
+  options: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions2;
+}
+
+export interface PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem3 {
+  listener: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener3;
+  options: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions3;
+}
+
+export interface PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem4 {
+  listener: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener4;
+  options: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions4;
+}
+
+export interface PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem5 {
+  listener: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener5;
+  options: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions5;
+}
+
+export interface PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem6 {
+  listener: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener6;
+  options: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions6;
+}
+
+export interface PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem7 {
+  listener: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener7;
+  options: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions7;
+}
+
+export interface PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem8 {
+  listener: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener8;
+  options: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions8;
+}
+
+export interface PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItem9 {
+  listener: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener9;
+  options: PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions9;
+}
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener10 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener2 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener3 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener4 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener5 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener6 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener7 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener8 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemListener9 = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions10 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions2 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions3 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions4 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions5 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions6 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions7 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions8 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersOperationCompleteItemOptions9 = Record<
+  string,
+  unknown
+>;
 
 export interface PlatformTypesRootlistAPIEventsEmitterListenersOperationItem {
   listener: PlatformTypesRootlistAPIEventsEmitterListenersOperationItemListener;
@@ -15799,17 +27843,31 @@ export type PlatformTypesRootlistAPIEventsEmitterListenersOperationItemOptions =
   unknown
 >;
 
-export type PlatformTypesRootlistAPIEventsEmitterListenersUpdate =
-  Array<PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem>;
+export type PlatformTypesRootlistAPIEventsEmitterListenersUpdate = Array<
+  | PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem
+  | PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem2
+>;
 
 export interface PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem {
   listener: PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemListener;
   options: PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemOptions;
 }
 
+export interface PlatformTypesRootlistAPIEventsEmitterListenersUpdateItem2 {
+  listener: PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemListener2;
+  options: PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemOptions2;
+}
+
 export type PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemListener = () => unknown;
 
+export type PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemListener2 = () => unknown;
+
 export type PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesRootlistAPIEventsEmitterListenersUpdateItemOptions2 = Record<
   string,
   unknown
 >;
@@ -15896,9 +27954,9 @@ export type PlatformTypesRootlistAPIEventsEmitterMetaListenersRemoveUpdateItemOp
 
 export type PlatformTypesRootlistAPIEventsEmitUpdateItems = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesRootlistAPIEventsOnContainsItems = (arg0: any) => unknown;
+export type PlatformTypesRootlistAPIEventsOnContainsItems = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesRootlistAPIEventsOnUpdate = () => unknown;
+export type PlatformTypesRootlistAPIEventsOnUpdate = () => Promise<unknown>;
 
 export type PlatformTypesRootlistAPIEventsSubscribeToUpdates = () => unknown;
 
@@ -15906,17 +27964,17 @@ export type PlatformTypesRootlistAPIEventsUnsubscribeFromUpdates = () => unknown
 
 export type PlatformTypesRootlistAPIGetCapabilities = () => unknown;
 
-export type PlatformTypesRootlistAPIGetContents = (arg0: any) => unknown;
+export type PlatformTypesRootlistAPIGetContents = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesRootlistAPIGetEvents = () => unknown;
 
-export type PlatformTypesRootlistAPIGetMetadata = () => unknown;
+export type PlatformTypesRootlistAPIGetMetadata = () => Promise<unknown>;
 
-export type PlatformTypesRootlistAPIGetPublishedState = (arg0: any) => unknown;
+export type PlatformTypesRootlistAPIGetPublishedState = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesRootlistAPIMove = (arg0: any, arg1: any, arg2: any) => unknown;
+export type PlatformTypesRootlistAPIMove = (arg0: any, arg1: any, arg2: any) => Promise<unknown>;
 
-export type PlatformTypesRootlistAPIMoveFolder = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesRootlistAPIMoveFolder = (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesRootlistAPIOnUpdateItems = (arg0: any, arg1: any) => unknown;
 
@@ -15931,11 +27989,11 @@ export interface PlatformTypesRootlistAPIPlaylistDataClient {
 
 export type PlatformTypesRootlistAPIPlaylistDataClientOptions = Record<string, unknown>;
 
-export type PlatformTypesRootlistAPIRemove = (arg0: any) => unknown;
+export type PlatformTypesRootlistAPIRemove = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesRootlistAPIRemoveFolder = (arg0: any) => unknown;
+export type PlatformTypesRootlistAPIRemoveFolder = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesRootlistAPIRenameFolder = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesRootlistAPIRenameFolder = (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesRootlistAPIRootlistDataClient {
   contains: PlatformTypesRootlistAPIRootlistDataClientContains;
@@ -15972,7 +28030,7 @@ export type PlatformTypesRootlistAPIRootlistModificationClientModify = (
 
 export type PlatformTypesRootlistAPIRootlistModificationClientOptions = Record<string, unknown>;
 
-export type PlatformTypesRootlistAPISetPublishedState = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesRootlistAPISetPublishedState = (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesRootlistAPIYourLibraryClient {
   all: PlatformTypesOfflineAPIYourLibraryAll;
@@ -16011,11 +28069,15 @@ export type PlatformTypesSegmentsAPIClientGetDisplaySegments = (arg0: any, arg1:
 
 export type PlatformTypesSegmentsAPIClientOptions = Record<string, unknown>;
 
-export type PlatformTypesSegmentsAPIGetArtists = () => unknown;
+export type PlatformTypesSegmentsAPIGetArtists = () => Promise<unknown>;
 
 export type PlatformTypesSegmentsAPIGetCapabilities = () => unknown;
 
-export type PlatformTypesSegmentsAPIGetSegments = (arg0: any, arg1: any, arg2: any) => unknown;
+export type PlatformTypesSegmentsAPIGetSegments = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSEOExperiments = Record<string, unknown>;
 
@@ -16076,7 +28138,7 @@ export type PlatformTypesSettingsAPIAutoPlayAutoPlaySupportedDeserializeValue = 
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIAutoPlayAutoPlaySupportedGetValue = () => unknown;
+export type PlatformTypesSettingsAPIAutoPlayAutoPlaySupportedGetValue = () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIAutoPlayAutoPlaySupportedSubs = Set<unknown>;
 
@@ -16084,11 +28146,11 @@ export type PlatformTypesSettingsAPIAutoPlayAutoPlaySupportedSubValue = (arg0: a
 
 export type PlatformTypesSettingsAPIAutoPlayDeserialize = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIAutoPlayGetValue = () => unknown;
+export type PlatformTypesSettingsAPIAutoPlayGetValue = () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIAutoPlaySerialize = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIAutoPlaySetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIAutoPlaySetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIAutoPlaySubs = Set<unknown>;
 
@@ -16117,7 +28179,8 @@ export type PlatformTypesSettingsAPIContentPreferencesAllowExplicitContentDeseri
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIContentPreferencesAllowExplicitContentGetValue = () => unknown;
+export type PlatformTypesSettingsAPIContentPreferencesAllowExplicitContentGetValue =
+  () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIContentPreferencesAllowExplicitContentSerialize = (
   arg0: any,
@@ -16125,7 +28188,7 @@ export type PlatformTypesSettingsAPIContentPreferencesAllowExplicitContentSerial
 
 export type PlatformTypesSettingsAPIContentPreferencesAllowExplicitContentSetValue = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIContentPreferencesAllowExplicitContentSubs = Set<unknown>;
 
@@ -16150,7 +28213,7 @@ export type PlatformTypesSettingsAPIContentPreferencesExplicitContentForceDisall
 ) => unknown;
 
 export type PlatformTypesSettingsAPIContentPreferencesExplicitContentForceDisallowedGetValue =
-  () => unknown;
+  () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIContentPreferencesExplicitContentForceDisallowedSubs =
   Set<unknown>;
@@ -16184,11 +28247,11 @@ export type PlatformTypesSettingsAPIDisplayNativeNotificationOnPlayerTransitionD
 ) => unknown;
 
 export type PlatformTypesSettingsAPIDisplayNativeNotificationOnPlayerTransitionGetValue =
-  () => unknown;
+  () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIDisplayNativeNotificationOnPlayerTransitionSetValue = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIDisplayNativeNotificationOnPlayerTransitionSubs = Set<unknown>;
 
@@ -16214,11 +28277,12 @@ export type PlatformTypesSettingsAPIDisplayNativeOverlayOnMediaKeysDeserializeVa
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIDisplayNativeOverlayOnMediaKeysGetValue = () => unknown;
+export type PlatformTypesSettingsAPIDisplayNativeOverlayOnMediaKeysGetValue =
+  () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIDisplayNativeOverlayOnMediaKeysSetValue = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIDisplayNativeOverlayOnMediaKeysSubs = Set<unknown>;
 
@@ -16244,13 +28308,15 @@ export type PlatformTypesSettingsAPIDisplayNewReleasesAnnoucementsDeserializeVal
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIDisplayNewReleasesAnnoucementsGetValue = () => unknown;
+export type PlatformTypesSettingsAPIDisplayNewReleasesAnnoucementsGetValue = () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIDisplayNewReleasesAnnoucementsSerializeValue = (
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIDisplayNewReleasesAnnoucementsSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIDisplayNewReleasesAnnoucementsSetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIDisplayNewReleasesAnnoucementsSubs = Set<unknown>;
 
@@ -16278,9 +28344,9 @@ export interface PlatformTypesSettingsAPIEmployeeDeveloperMode {
 
 export type PlatformTypesSettingsAPIEmployeeDeveloperModeDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIEmployeeDeveloperModeGetValue = () => unknown;
+export type PlatformTypesSettingsAPIEmployeeDeveloperModeGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIEmployeeDeveloperModeSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIEmployeeDeveloperModeSetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIEmployeeDeveloperModeSubs = Set<unknown>;
 
@@ -16300,7 +28366,7 @@ export interface PlatformTypesSettingsAPIEmployeeIsEmployee {
 
 export type PlatformTypesSettingsAPIEmployeeIsEmployeeDeserialize = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIEmployeeIsEmployeeGetValue = () => unknown;
+export type PlatformTypesSettingsAPIEmployeeIsEmployeeGetValue = () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIEmployeeIsEmployeeSubs =
   Set<PlatformTypesSettingsAPIEmployeeIsEmployeeSubsSetElement>;
@@ -16329,9 +28395,11 @@ export type PlatformTypesSettingsAPIEmployeeShowChromeToolbarDeserializeValue = 
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIEmployeeShowChromeToolbarGetValue = () => unknown;
+export type PlatformTypesSettingsAPIEmployeeShowChromeToolbarGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIEmployeeShowChromeToolbarSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIEmployeeShowChromeToolbarSetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIEmployeeShowChromeToolbarSubs = Set<unknown>;
 
@@ -16353,7 +28421,7 @@ export interface PlatformTypesSettingsAPIHardwareAcceleration {
 
 export type PlatformTypesSettingsAPIHardwareAccelerationDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIHardwareAccelerationGetValue = () => unknown;
+export type PlatformTypesSettingsAPIHardwareAccelerationGetValue = () => Promise<unknown>;
 
 export interface PlatformTypesSettingsAPIHardwareAccelerationPrefsApi {
   create: PlatformTypesEqualizerAPIPrefsCreate;
@@ -16368,7 +28436,7 @@ export interface PlatformTypesSettingsAPIHardwareAccelerationPrefsApi {
 
 export type PlatformTypesSettingsAPIHardwareAccelerationSerializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIHardwareAccelerationSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIHardwareAccelerationSetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIHardwareAccelerationSubs = Set<unknown>;
 
@@ -16390,13 +28458,13 @@ export interface PlatformTypesSettingsAPILanguage {
 
 export type PlatformTypesSettingsAPILanguageDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPILanguageGetValue = () => unknown;
+export type PlatformTypesSettingsAPILanguageGetValue = () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPILanguagePrefsApiOptions = Record<string, unknown>;
 
 export type PlatformTypesSettingsAPILanguageSerializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPILanguageSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPILanguageSetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPILanguageSubs = Set<unknown>;
 
@@ -16427,7 +28495,7 @@ export interface PlatformTypesSettingsAPIPlaybackAudioCrossfade {
 
 export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeGetValue = () => unknown;
+export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeGetValue = () => Promise<unknown>;
 
 export interface PlatformTypesSettingsAPIPlaybackAudioCrossfadeMs {
   deserializeValue: PlatformTypesSettingsAPIPlaybackAudioCrossfadeMsDeserializeValue;
@@ -16447,17 +28515,21 @@ export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeMsDeserializeValue = (
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeMsGetValue = () => unknown;
+export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeMsGetValue = () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeMsSerializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeMsSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeMsSetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeMsSubs = Set<unknown>;
 
 export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeMsSubValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeSetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIPlaybackAudioCrossfadeSubs = Set<unknown>;
 
@@ -16479,9 +28551,9 @@ export interface PlatformTypesSettingsAPIPlaybackAutoMix {
 
 export type PlatformTypesSettingsAPIPlaybackAutoMixDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIPlaybackAutoMixGetValue = () => unknown;
+export type PlatformTypesSettingsAPIPlaybackAutoMixGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIPlaybackAutoMixSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIPlaybackAutoMixSetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIPlaybackAutoMixSubs = Set<unknown>;
 
@@ -16505,11 +28577,12 @@ export type PlatformTypesSettingsAPIPlaybackLoudnessBalancePodcastsDeserializeVa
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIPlaybackLoudnessBalancePodcastsGetValue = () => unknown;
+export type PlatformTypesSettingsAPIPlaybackLoudnessBalancePodcastsGetValue =
+  () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIPlaybackLoudnessBalancePodcastsSetValue = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIPlaybackLoudnessBalancePodcastsSubs = Set<unknown>;
 
@@ -16533,9 +28606,9 @@ export interface PlatformTypesSettingsAPIPlaybackMonoAudio {
 
 export type PlatformTypesSettingsAPIPlaybackMonoAudioDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIPlaybackMonoAudioGetValue = () => unknown;
+export type PlatformTypesSettingsAPIPlaybackMonoAudioGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIPlaybackMonoAudioSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIPlaybackMonoAudioSetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIPlaybackMonoAudioSubs = Set<unknown>;
 
@@ -16552,63 +28625,22 @@ export interface PlatformTypesSettingsAPIPlaybackSmartShuffle {
   value: boolean;
 }
 
-export type PlatformTypesSettingsAPIPlaybackSmartShuffleGetValue = () => unknown;
+export type PlatformTypesSettingsAPIPlaybackSmartShuffleGetValue = () => Promise<unknown>;
 
 export interface PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPI {
-  getDeviceSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetDeviceSettings;
-  getSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetSettings;
-  getShuffleState: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetShuffleState;
-  options: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIOptions;
-  setDeviceStreamQuality: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetDeviceStreamQuality;
-  setSettings: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetSettings;
-  setShuffleState: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetShuffleState;
-  streamDeviceSettingFieldChanges: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamDeviceSettingFieldChanges;
-  streamSettingChanges: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamSettingChanges;
+  getDeviceSettings: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceGetDeviceSettings;
+  getSettings: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceGetSettings;
+  getShuffleState: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceGetShuffleState;
+  options: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceOptions;
+  setDeviceStreamQuality: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceSetDeviceStreamQuality;
+  setSettings: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceSetSettings;
+  setShuffleState: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceSetShuffleState;
+  streamDeviceSettingFieldChanges: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceStreamDeviceSettingFieldChanges;
+  streamSettingChanges: PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceStreamSettingChanges;
   transport: PlatformTypesVideoAPIEsperantoTransport;
 }
 
-export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetDeviceSettings = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetSettings = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIGetShuffleState = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIOptions = Record<
-  string,
-  unknown
->;
-
-export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetDeviceStreamQuality =
-  (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetSettings = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPISetShuffleState = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamDeviceSettingFieldChanges =
-  (arg0: any, arg1: any) => unknown;
-
-export type PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPIStreamSettingChanges = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesSettingsAPIPlaybackSmartShuffleSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIPlaybackSmartShuffleSetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIPlaybackSmartShuffleSubs = Set<unknown>;
 
@@ -16637,9 +28669,9 @@ export interface PlatformTypesSettingsAPIProxySettingsAddress {
 
 export type PlatformTypesSettingsAPIProxySettingsAddressDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIProxySettingsAddressGetValue = () => unknown;
+export type PlatformTypesSettingsAPIProxySettingsAddressGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIProxySettingsAddressSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIProxySettingsAddressSetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIProxySettingsAddressSubs = Set<unknown>;
 
@@ -16661,9 +28693,9 @@ export interface PlatformTypesSettingsAPIProxySettingsMode {
 
 export type PlatformTypesSettingsAPIProxySettingsModeDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIProxySettingsModeGetValue = () => unknown;
+export type PlatformTypesSettingsAPIProxySettingsModeGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIProxySettingsModeSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIProxySettingsModeSetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIProxySettingsModeSubs = Set<unknown>;
 
@@ -16685,9 +28717,9 @@ export interface PlatformTypesSettingsAPIProxySettingsPassword {
 
 export type PlatformTypesSettingsAPIProxySettingsPasswordDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIProxySettingsPasswordGetValue = () => unknown;
+export type PlatformTypesSettingsAPIProxySettingsPasswordGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIProxySettingsPasswordSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIProxySettingsPasswordSetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIProxySettingsPasswordSubs = Set<unknown>;
 
@@ -16709,9 +28741,9 @@ export interface PlatformTypesSettingsAPIProxySettingsUsername {
 
 export type PlatformTypesSettingsAPIProxySettingsUsernameDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIProxySettingsUsernameGetValue = () => unknown;
+export type PlatformTypesSettingsAPIProxySettingsUsernameGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIProxySettingsUsernameSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIProxySettingsUsernameSetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIProxySettingsUsernameSubs = Set<unknown>;
 
@@ -16748,9 +28780,11 @@ export type PlatformTypesSettingsAPIQualityAutoAdjustQualityDeserializeValue = (
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIQualityAutoAdjustQualityGetValue = () => unknown;
+export type PlatformTypesSettingsAPIQualityAutoAdjustQualityGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIQualityAutoAdjustQualitySetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIQualityAutoAdjustQualitySetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIQualityAutoAdjustQualitySubs = Set<unknown>;
 
@@ -16775,15 +28809,17 @@ export type PlatformTypesSettingsAPIQualityDownloadAudioQualityDeserializeValue 
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIQualityDownloadAudioQualityGetValue = () => unknown;
+export type PlatformTypesSettingsAPIQualityDownloadAudioQualityGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIQualityDownloadAudioQualitySetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIQualityDownloadAudioQualitySetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIQualityDownloadAudioQualitySubs = Set<unknown>;
 
 export type PlatformTypesSettingsAPIQualityDownloadAudioQualitySubValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIQualityGetFormats = () => unknown;
+export type PlatformTypesSettingsAPIQualityGetFormats = () => Promise<unknown>;
 
 export interface PlatformTypesSettingsAPIQualityMaxSupportedQuality {
   clampAudioQuality: PlatformTypesSettingsAPIQualityMaxSupportedQualityClampAudioQuality;
@@ -16800,11 +28836,11 @@ export interface PlatformTypesSettingsAPIQualityMaxSupportedQuality {
 
 export type PlatformTypesSettingsAPIQualityMaxSupportedQualityClampAudioQuality = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIQualityMaxSupportedQualityDeserialize = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIQualityMaxSupportedQualityGetValue = () => unknown;
+export type PlatformTypesSettingsAPIQualityMaxSupportedQualityGetValue = () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIQualityMaxSupportedQualitySubs = Set<unknown>;
 
@@ -16826,9 +28862,11 @@ export interface PlatformTypesSettingsAPIQualityNormalizeVolume {
 
 export type PlatformTypesSettingsAPIQualityNormalizeVolumeDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIQualityNormalizeVolumeGetValue = () => unknown;
+export type PlatformTypesSettingsAPIQualityNormalizeVolumeGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIQualityNormalizeVolumeSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIQualityNormalizeVolumeSetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIQualityNormalizeVolumeSubs = Set<unknown>;
 
@@ -16841,9 +28879,9 @@ export interface PlatformTypesSettingsAPIQualityParrot {
   subValue: PlatformTypesSettingsAPIQualityParrotSubValue;
 }
 
-export type PlatformTypesSettingsAPIQualityParrotGetValue = () => unknown;
+export type PlatformTypesSettingsAPIQualityParrotGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIQualityParrotSetValue = () => unknown;
+export type PlatformTypesSettingsAPIQualityParrotSetValue = () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIQualityParrotSubValue = () => unknown;
 
@@ -16947,6 +28985,7 @@ export interface PlatformTypesSettingsAPIQualityRemoteQuality {
   getActiveDeviceId: PlatformTypesSettingsAPIQualityRemoteQualityGetActiveDeviceId;
   getValue: PlatformTypesSettingsAPIQualityRemoteQualityGetValue;
   key: string;
+  playbackSettingsService: PlatformTypesSettingsAPIPlaybackSmartShufflePlaybackSettingsAPI;
   setValue: PlatformTypesSettingsAPIQualityRemoteQualitySetValue;
   stateSubscription: null;
   subValue: PlatformTypesSettingsAPIQualityRemoteQualitySubValue;
@@ -16955,27 +28994,27 @@ export interface PlatformTypesSettingsAPIQualityRemoteQuality {
 export type PlatformTypesSettingsAPIQualityRemoteQualityCallbacks = Set<unknown>;
 
 export interface PlatformTypesSettingsAPIQualityRemoteQualityConnectService {
+  addDeviceToGroup: PlatformTypesConnectAPIConnectServiceClientAddDeviceToGroup;
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
   clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
-  forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
+  createStaticGroup: PlatformTypesConnectAPIConnectServiceClientCreateStaticGroup;
+  deleteGroup: PlatformTypesConnectAPIConnectServiceClientDeleteGroup;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
-  getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
   installSpotify: PlatformTypesConnectAPIConnectServiceClientInstallSpotify;
   logout: PlatformTypesConnectAPIConnectServiceClientLogout;
   notifyAudioRouteChanged: PlatformTypesConnectAPIConnectServiceClientNotifyAudioRouteChanged;
   options: PlatformTypesSettingsAPIQualityRemoteQualityConnectServiceOptions;
   performDiscovery: PlatformTypesConnectAPIConnectServiceClientPerformDiscovery;
-  pickerOpened: PlatformTypesConnectAPIConnectServiceClientPickerOpened;
   pull: PlatformTypesConnectAPIConnectServiceClientPull;
   refreshCluster: PlatformTypesConnectAPIConnectServiceClientRefreshCluster;
+  removeDeviceFromGroup: PlatformTypesConnectAPIConnectServiceClientRemoveDeviceFromGroup;
   rename: PlatformTypesConnectAPIConnectServiceClientRename;
+  renameGroup: PlatformTypesConnectAPIConnectServiceClientRenameGroup;
   sendCommand: PlatformTypesConnectAPIConnectServiceClientSendCommand;
   setDebugLevel: PlatformTypesConnectAPIConnectServiceClientSetDebugLevel;
-  setDeviceStreamQuality: PlatformTypesConnectAPIConnectServiceClientSetDeviceStreamQuality;
-  setPreferredZeroconf: PlatformTypesConnectAPIConnectServiceClientSetPreferredZeroconf;
-  startDiscovery: PlatformTypesConnectAPIConnectServiceClientStartDiscovery;
   state: PlatformTypesConnectAPIConnectServiceClientState;
+  stopScanning: PlatformTypesConnectAPIConnectServiceClientStopScanning;
   transfer: PlatformTypesConnectAPIConnectServiceClientTransfer;
   transport: PlatformTypesVideoAPIEsperantoTransport;
   wakeSleepingClusterDevices: PlatformTypesConnectAPIConnectServiceClientWakeSleepingClusterDevices;
@@ -16986,11 +29025,50 @@ export type PlatformTypesSettingsAPIQualityRemoteQualityConnectServiceOptions = 
   unknown
 >;
 
-export type PlatformTypesSettingsAPIQualityRemoteQualityGetActiveDeviceId = () => unknown;
+export type PlatformTypesSettingsAPIQualityRemoteQualityGetActiveDeviceId = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIQualityRemoteQualityGetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIQualityRemoteQualityGetValue = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIQualityRemoteQualitySetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceGetDeviceSettings = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceGetSettings = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceGetShuffleState = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceSetDeviceStreamQuality =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceSetSettings = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceSetShuffleState = (
+  arg0: any,
+  arg1: any,
+) => unknown;
+
+export type PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceStreamDeviceSettingFieldChanges =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesSettingsAPIQualityRemoteQualityPlaybackSettingsServiceStreamSettingChanges =
+  (arg0: any, arg1: any) => unknown;
+
+export type PlatformTypesSettingsAPIQualityRemoteQualitySetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIQualityRemoteQualitySubValue = (arg0: any) => unknown;
 
@@ -17013,9 +29091,11 @@ export type PlatformTypesSettingsAPIQualityStreamingQualityDeserializeValue = (
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIQualityStreamingQualityGetValue = () => unknown;
+export type PlatformTypesSettingsAPIQualityStreamingQualityGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIQualityStreamingQualitySetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIQualityStreamingQualitySetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIQualityStreamingQualitySubs = Set<unknown>;
 
@@ -17037,9 +29117,9 @@ export interface PlatformTypesSettingsAPIQualityVolumeLevel {
 
 export type PlatformTypesSettingsAPIQualityVolumeLevelDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIQualityVolumeLevelGetValue = () => unknown;
+export type PlatformTypesSettingsAPIQualityVolumeLevelGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIQualityVolumeLevelSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIQualityVolumeLevelSetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIQualityVolumeLevelSubs = Set<unknown>;
 
@@ -17065,11 +29145,13 @@ export interface PlatformTypesSettingsAPIShuffleShuffleAlgorithm {
 
 export type PlatformTypesSettingsAPIShuffleShuffleAlgorithmDeserialize = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIShuffleShuffleAlgorithmGetValue = () => unknown;
+export type PlatformTypesSettingsAPIShuffleShuffleAlgorithmGetValue = () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIShuffleShuffleAlgorithmSerialize = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIShuffleShuffleAlgorithmSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIShuffleShuffleAlgorithmSetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIShuffleShuffleAlgorithmSubs = Set<unknown>;
 
@@ -17099,9 +29181,11 @@ export interface PlatformTypesSettingsAPISocialAutoPublishPlaylist {
 
 export type PlatformTypesSettingsAPISocialAutoPublishPlaylistDeserialize = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPISocialAutoPublishPlaylistGetValue = () => unknown;
+export type PlatformTypesSettingsAPISocialAutoPublishPlaylistGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPISocialAutoPublishPlaylistSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPISocialAutoPublishPlaylistSetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPISocialAutoPublishPlaylistSubs = Set<unknown>;
 
@@ -17123,9 +29207,11 @@ export interface PlatformTypesSettingsAPISocialListPrivateByDefault {
 
 export type PlatformTypesSettingsAPISocialListPrivateByDefaultDeserialize = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPISocialListPrivateByDefaultGetValue = () => unknown;
+export type PlatformTypesSettingsAPISocialListPrivateByDefaultGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPISocialListPrivateByDefaultSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPISocialListPrivateByDefaultSetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPISocialListPrivateByDefaultSubs = Set<unknown>;
 
@@ -17142,7 +29228,7 @@ export interface PlatformTypesSettingsAPISocialPrivateSession {
   value: boolean;
 }
 
-export type PlatformTypesSettingsAPISocialPrivateSessionGetValue = () => unknown;
+export type PlatformTypesSettingsAPISocialPrivateSessionGetValue = () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPISocialPrivateSessionPrivateSessionAPIGetCapabilities =
   () => unknown;
@@ -17162,7 +29248,7 @@ export type PlatformTypesSettingsAPISocialPrivateSessionPrivateSessionAPIScrobbl
 
 export type PlatformTypesSettingsAPISocialPrivateSessionPrivateSessionAPISetPrivateSession = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPISocialPrivateSessionPrivateSessionAPISubscribeToPrivateSession =
   (arg0: any) => unknown;
@@ -17191,9 +29277,11 @@ export type PlatformTypesSettingsAPISocialShareListeningActivityDeserialize = (
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPISocialShareListeningActivityGetValue = () => unknown;
+export type PlatformTypesSettingsAPISocialShareListeningActivityGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPISocialShareListeningActivitySetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPISocialShareListeningActivitySetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPISocialShareListeningActivitySubs = Set<unknown>;
 
@@ -17215,9 +29303,11 @@ export interface PlatformTypesSettingsAPISocialShowMyTopArtists {
 
 export type PlatformTypesSettingsAPISocialShowMyTopArtistsDeserialize = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPISocialShowMyTopArtistsGetValue = () => unknown;
+export type PlatformTypesSettingsAPISocialShowMyTopArtistsGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPISocialShowMyTopArtistsSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPISocialShowMyTopArtistsSetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPISocialShowMyTopArtistsSubs = Set<unknown>;
 
@@ -17247,13 +29337,15 @@ export type PlatformTypesSettingsAPIStartupBehaviourAutoStartModeDeserializeValu
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIStartupBehaviourAutoStartModeGetValue = () => unknown;
+export type PlatformTypesSettingsAPIStartupBehaviourAutoStartModeGetValue = () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIStartupBehaviourAutoStartModeSerializeValue = (
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIStartupBehaviourAutoStartModeSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIStartupBehaviourAutoStartModeSetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIStartupBehaviourAutoStartModeSubs = Set<unknown>;
 
@@ -17277,9 +29369,11 @@ export type PlatformTypesSettingsAPIStartupBehaviourCloseToTrayDeserializeValue 
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIStartupBehaviourCloseToTrayGetValue = () => unknown;
+export type PlatformTypesSettingsAPIStartupBehaviourCloseToTrayGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIStartupBehaviourCloseToTraySetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIStartupBehaviourCloseToTraySetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIStartupBehaviourCloseToTraySubs = Set<unknown>;
 
@@ -17303,9 +29397,11 @@ export type PlatformTypesSettingsAPIStartupBehaviourEnableLauncherDeserializeVal
   arg0: any,
 ) => unknown;
 
-export type PlatformTypesSettingsAPIStartupBehaviourEnableLauncherGetValue = () => unknown;
+export type PlatformTypesSettingsAPIStartupBehaviourEnableLauncherGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIStartupBehaviourEnableLauncherSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIStartupBehaviourEnableLauncherSetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIStartupBehaviourEnableLauncherSubs = Set<unknown>;
 
@@ -17331,9 +29427,11 @@ export interface PlatformTypesSettingsAPIStorageStorageLocation {
 
 export type PlatformTypesSettingsAPIStorageStorageLocationDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIStorageStorageLocationGetValue = () => unknown;
+export type PlatformTypesSettingsAPIStorageStorageLocationGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIStorageStorageLocationSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIStorageStorageLocationSetValue = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIStorageStorageLocationSubs = Set<unknown>;
 
@@ -17355,9 +29453,9 @@ export interface PlatformTypesSettingsAPIViewportZoom {
 
 export type PlatformTypesSettingsAPIViewportZoomDeserializeValue = (arg0: any) => unknown;
 
-export type PlatformTypesSettingsAPIViewportZoomGetValue = () => unknown;
+export type PlatformTypesSettingsAPIViewportZoomGetValue = () => Promise<unknown>;
 
-export type PlatformTypesSettingsAPIViewportZoomSetValue = (arg0: any) => unknown;
+export type PlatformTypesSettingsAPIViewportZoomSetValue = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIViewportZoomSubs = Set<
   | PlatformTypesSettingsAPIViewportZoomSubsSetElement
@@ -17378,7 +29476,7 @@ export type PlatformTypesSettingsAPIViewportZoomSubValue = (arg0: any) => unknow
 
 export type PlatformTypesSettingsAPIViewportZoomZoomApiGetCapabilities = () => unknown;
 
-export type PlatformTypesSettingsAPIViewportZoomZoomApiGetZoomLevel = () => unknown;
+export type PlatformTypesSettingsAPIViewportZoomZoomApiGetZoomLevel = () => Promise<unknown>;
 
 export type PlatformTypesSettingsAPIViewportZoomZoomApiSetZoomLevel = (arg0: any) => unknown;
 
@@ -17426,6 +29524,7 @@ export interface PlatformTypesShowAPI {
   _fetchItemDetails: PlatformTypesShowAPIFetchItemDetails;
   _fetchItemsDetailsProgressResumptionFromShowResponse: PlatformTypesShowAPIFetchItemsDetailsProgressResumptionFromShowResponse;
   _isAuthorPageEnabled: boolean;
+  _metadataExtensionsAPI: PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI;
   _metadata_service_client: PlatformTypesShowAPIMetadataServiceClient;
   _onShowAccessUpdate: PlatformTypesShowAPIOnShowAccessUpdate;
   _podcast_paywalls_client: PlatformTypesShowAPIPodcastPaywallsClient;
@@ -17591,33 +29690,33 @@ export interface PlatformTypesShowAPIEventsShowClient {
 
 export type PlatformTypesShowAPIEventsSubscriptions = Map<unknown, unknown>;
 
-export type PlatformTypesShowAPIFetchItemDetails = (arg0: any) => unknown;
+export type PlatformTypesShowAPIFetchItemDetails = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesShowAPIFetchItemsDetailsProgressResumptionFromShowResponse = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesShowAPIGetAccessInfo = (arg0: any) => unknown;
+export type PlatformTypesShowAPIGetAccessInfo = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesShowAPIGetBookContents = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesShowAPIGetBookContents = (arg0: any, arg1: any) => Promise<unknown>;
 
-export type PlatformTypesShowAPIGetContents = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesShowAPIGetContents = (arg0: any, arg1: any) => Promise<unknown>;
 
-export type PlatformTypesShowAPIGetEpisodeOrChapter = (arg0: any) => unknown;
+export type PlatformTypesShowAPIGetEpisodeOrChapter = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesShowAPIGetEvents = () => unknown;
 
-export type PlatformTypesShowAPIGetMetadata = (arg0: any) => unknown;
+export type PlatformTypesShowAPIGetMetadata = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesShowAPIGetPlayerFilter = () => unknown;
 
 export type PlatformTypesShowAPIGetPlayerSort = (arg0: any) => unknown;
 
-export type PlatformTypesShowAPIGetShowPlayedState = (arg0: any) => unknown;
+export type PlatformTypesShowAPIGetShowPlayedState = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesShowAPIInvalidateShowMetadataCaches = (arg0: any) => unknown;
+export type PlatformTypesShowAPIInvalidateShowMetadataCaches = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesShowAPIMarkShowPlayedLegacy = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesShowAPIMarkShowPlayedLegacy = (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesShowAPIMetadataServiceClient {
   expire: PlatformTypesShowAPIMetadataServiceClientExpire;
@@ -17638,7 +29737,7 @@ export type PlatformTypesShowAPIMetadataServiceClientOptions = Record<string, un
 
 export type PlatformTypesShowAPIMetadataServiceClientPurge = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesShowAPIOnShowAccessUpdate = (arg0: any) => unknown;
+export type PlatformTypesShowAPIOnShowAccessUpdate = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesShowAPIPodcastPaywallsClient {
   options: PlatformTypesShowAPIPodcastPaywallsClientOptions;
@@ -17716,7 +29815,7 @@ export type PlatformTypesShowAPIResumptionProgressClientSubState = (
 
 export type PlatformTypesShowAPIShowServiceClientOptions = Record<string, unknown>;
 
-export type PlatformTypesShowAPIUpdateUserRating = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesShowAPIUpdateUserRating = (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesShuffleAPI {
   _centralizedContextualShuffle: PlatformTypesContextualShuffleAPI;
@@ -17820,7 +29919,9 @@ export interface PlatformTypesShuffleAPIEventsEmitter {
 
 export interface PlatformTypesShuffleAPIEventsEmitterListeners {
   availability_update: PlatformTypesShuffleAPIEventsEmitterListenersAvailabilityUpdate;
+  update: PlatformTypesShuffleAPIEventsEmitterListenersUpdate;
   update_complete: PlatformTypesShuffleAPIEventsEmitterListenersUpdateComplete;
+  update_error: PlatformTypesShuffleAPIEventsEmitterListenersUpdateError;
 }
 
 export type PlatformTypesShuffleAPIEventsEmitterListenersAvailabilityUpdate =
@@ -17840,19 +29941,67 @@ export type PlatformTypesShuffleAPIEventsEmitterListenersAvailabilityUpdateItemO
   unknown
 >;
 
-export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateComplete =
-  Array<PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem>;
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdate =
+  Array<PlatformTypesShuffleAPIEventsEmitterListenersUpdateItem>;
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateComplete = Array<
+  | PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem
+  | PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem2
+>;
 
 export interface PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem {
   listener: PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemListener;
   options: PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions;
 }
 
+export interface PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItem2 {
+  listener: PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemListener2;
+  options: PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions2;
+}
+
 export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemListener = (
+  arg0: any,
+) => Promise<unknown>;
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemListener2 = (
   arg0: any,
 ) => unknown;
 
 export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateCompleteItemOptions2 = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateError =
+  Array<PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItem>;
+
+export interface PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItem {
+  listener: PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItemListener;
+  options: PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItemOptions;
+}
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItemListener = () => unknown;
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateErrorItemOptions = Record<
+  string,
+  unknown
+>;
+
+export interface PlatformTypesShuffleAPIEventsEmitterListenersUpdateItem {
+  listener: PlatformTypesShuffleAPIEventsEmitterListenersUpdateItemListener;
+  options: PlatformTypesShuffleAPIEventsEmitterListenersUpdateItemOptions;
+}
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesShuffleAPIEventsEmitterListenersUpdateItemOptions = Record<
   string,
   unknown
 >;
@@ -17881,13 +30030,15 @@ export type PlatformTypesShuffleAPIEventsEmitUpdateShuffleModeSync = (
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesShuffleAPIGetAvailableShuffleModes = (arg0: any) => unknown;
+export type PlatformTypesShuffleAPIGetAvailableShuffleModes = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesShuffleAPIGetAvailableShuffleModesFromPlayerState = (arg0: any) => unknown;
+export type PlatformTypesShuffleAPIGetAvailableShuffleModesFromPlayerState = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesShuffleAPIGetEvents = () => unknown;
 
-export type PlatformTypesShuffleAPIGetShuffle = (arg0: any) => unknown;
+export type PlatformTypesShuffleAPIGetShuffle = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesShuffleAPIIsContextUriActiveInPlayerState = (
   arg0: any,
@@ -17899,9 +30050,12 @@ export type PlatformTypesShuffleAPIPlaylistAPIAdd = (
   arg1: any,
   arg2: any,
   arg3: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesShuffleAPIPlaylistAPIClearAttributes = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesShuffleAPIPlaylistAPIClearAttributes = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export type PlatformTypesShuffleAPIPlaylistAPIEmitUpdate = () => unknown;
 
@@ -17949,7 +30103,7 @@ export interface PlatformTypesShuffleAPIPlaylistAPIEventsAggregator {
 
 export type PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorAdditions = Map<unknown, unknown>;
 
-export type PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorBatch = Map<unknown, unknown>;
+export type PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorBatch = Map<string, number>;
 
 export type PlatformTypesShuffleAPIPlaylistAPIEventsAggregatorDeletions = Map<unknown, unknown>;
 
@@ -18032,7 +30186,149 @@ export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitter {
   removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
-export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListeners = Record<string, unknown>;
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListeners {
+  operation_complete: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationComplete;
+  update: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersUpdate;
+}
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationComplete = Array<
+  | PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem
+  | PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem10
+  | PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem2
+  | PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem3
+  | PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem4
+  | PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem5
+  | PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem6
+  | PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem7
+  | PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem8
+  | PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem9
+>;
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem {
+  listener: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener;
+  options: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions;
+}
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem10 {
+  listener: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener10;
+  options: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions10;
+}
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem2 {
+  listener: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener2;
+  options: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions2;
+}
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem3 {
+  listener: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener3;
+  options: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions3;
+}
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem4 {
+  listener: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener4;
+  options: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions4;
+}
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem5 {
+  listener: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener5;
+  options: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions5;
+}
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem6 {
+  listener: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener6;
+  options: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions6;
+}
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem7 {
+  listener: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener7;
+  options: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions7;
+}
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem8 {
+  listener: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener8;
+  options: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions8;
+}
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItem9 {
+  listener: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener9;
+  options: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions9;
+}
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener10 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener3 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener4 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener5 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener6 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener7 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener8 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemListener9 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions10 =
+  Record<string, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions3 =
+  Record<string, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions4 =
+  Record<string, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions5 =
+  Record<string, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions6 =
+  Record<string, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions7 =
+  Record<string, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions8 =
+  Record<string, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersOperationCompleteItemOptions9 =
+  Record<string, unknown>;
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersUpdate =
+  Array<PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersUpdateItem>;
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersUpdateItem {
+  listener: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersUpdateItemListener;
+  options: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersUpdateItemOptions;
+}
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersUpdateItemListener = (
+  arg0: any,
+) => unknown;
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterListenersUpdateItemOptions {
+  uri: string;
+}
 
 export interface PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListeners {
   add: PlatformTypesShuffleAPIPlaylistAPIEventsEmitterMetaListenersAdd;
@@ -18086,11 +30382,23 @@ export type PlatformTypesShuffleAPIPlaylistAPIEventsEmitUpdateSync = (
 
 export type PlatformTypesShuffleAPIPlaylistAPIEventsOnBatchChanged = (arg0: any) => unknown;
 
-export type PlatformTypesShuffleAPIPlaylistAPIEventsSubscriptions = Map<unknown, unknown>;
+export type PlatformTypesShuffleAPIPlaylistAPIEventsSubscriptions = Map<
+  string,
+  PlatformTypesShuffleAPIPlaylistAPIEventsSubscriptionsValue
+>;
+
+export interface PlatformTypesShuffleAPIPlaylistAPIEventsSubscriptionsValue {
+  cancel: PlatformTypesShuffleAPIPlaylistAPIEventsSubscriptionsValueCancel;
+}
+
+export type PlatformTypesShuffleAPIPlaylistAPIEventsSubscriptionsValueCancel = () => unknown;
 
 export type PlatformTypesShuffleAPIPlaylistAPIGetCapabilities = () => unknown;
 
-export type PlatformTypesShuffleAPIPlaylistAPIGetContents = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesShuffleAPIPlaylistAPIGetContents = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export type PlatformTypesShuffleAPIPlaylistAPIGetEvents = () => unknown;
 
@@ -18098,15 +30406,18 @@ export type PlatformTypesShuffleAPIPlaylistAPIGetItem = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesShuffleAPIPlaylistAPIGetMetadata = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesShuffleAPIPlaylistAPIGetMetadata = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export type PlatformTypesShuffleAPIPlaylistAPIGetPlaylist = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesShuffleAPIPlaylistAPIGetPlaylistDecorationPolicies = (
   arg0: any,
@@ -18117,15 +30428,20 @@ export type PlatformTypesShuffleAPIPlaylistAPIGetRecommendedBookUris = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesShuffleAPIPlaylistAPIGetRecommendedTracks = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+  arg3: any,
+) => Promise<unknown>;
 
-export type PlatformTypesShuffleAPIPlaylistAPIMove = (arg0: any, arg1: any, arg2: any) => unknown;
+export type PlatformTypesShuffleAPIPlaylistAPIMove = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => Promise<unknown>;
 
 export interface PlatformTypesShuffleAPIPlaylistAPIPlaylistDataClient {
   find: PlatformTypesLibraryAPIPlaylistDataClientFind;
@@ -18164,36 +30480,48 @@ export type PlatformTypesShuffleAPIPlaylistAPIPlaylistServiceClientOptions = Rec
   unknown
 >;
 
-export type PlatformTypesShuffleAPIPlaylistAPIRemove = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesShuffleAPIPlaylistAPIRemove = (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesShuffleAPIPlaylistAPIRequestLenses = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesShuffleAPIPlaylistAPIResolvePlaylistFormatURI = (arg0: any) => unknown;
+export type PlatformTypesShuffleAPIPlaylistAPIResolvePlaylistFormatURI = (
+  arg0: any,
+) => Promise<unknown>;
 
-export type PlatformTypesShuffleAPIPlaylistAPIResync = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesShuffleAPIPlaylistAPIResync = (arg0: any, arg1: any) => Promise<unknown>;
 
 export type PlatformTypesShuffleAPIPlaylistAPISendSignal = (
   arg0: any,
   arg1: any,
   arg2: any,
   arg3: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesShuffleAPIPlaylistAPISetAttributes = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesShuffleAPIPlaylistAPISetAttributes = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
-export type PlatformTypesShuffleAPIPlaylistAPIUpdateDetails = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesShuffleAPIPlaylistAPIUpdateDetails = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
-export type PlatformTypesShuffleAPIPlaylistAPIUploadImage = (arg0: any) => unknown;
+export type PlatformTypesShuffleAPIPlaylistAPIUploadImage = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesShuffleAPISessionShuffleStates = Map<unknown, unknown>;
 
-export type PlatformTypesShuffleAPISetShuffle = (arg0: any, arg1: any, arg2: any) => unknown;
+export type PlatformTypesShuffleAPISetShuffle = (
+  arg0: any,
+  arg1: any,
+  arg2: any,
+) => Promise<unknown>;
 
-export type PlatformTypesShuffleAPISyncShuffle = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesShuffleAPISyncShuffle = (arg0: any, arg1: any) => Promise<unknown>;
 
 export interface PlatformTypesSingAlongAPI {
   getCapabilities: PlatformTypesSingAlongAPIGetCapabilities;
@@ -18205,7 +30533,7 @@ export interface PlatformTypesSingAlongAPI {
 
 export type PlatformTypesSingAlongAPIGetCapabilities = () => unknown;
 
-export type PlatformTypesSingAlongAPIGetStatus = () => unknown;
+export type PlatformTypesSingAlongAPIGetStatus = () => Promise<unknown>;
 
 export interface PlatformTypesSingAlongAPIKaraokeServiceClient {
   getStatus: PlatformTypesSingAlongAPIKaraokeServiceClientGetStatus;
@@ -18238,9 +30566,9 @@ export type PlatformTypesSingAlongAPIKaraokeServiceClientSubscribeToEvents = (
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesSingAlongAPISetStatus = (arg0: any) => unknown;
+export type PlatformTypesSingAlongAPISetStatus = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesSingAlongAPISetVocalVolume = (arg0: any) => unknown;
+export type PlatformTypesSingAlongAPISetVocalVolume = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesSmartShuffleEligibilityAPI {
   _metadataExtensionsAPI: PlatformTypesPlaylistMixingAPIMetadataExtensionsAPI;
@@ -18299,9 +30627,9 @@ export type PlatformTypesSocialConnectAPIAddJamExperienceListener = (arg0: any) 
 
 export type PlatformTypesSocialConnectAPICleanupSession = () => unknown;
 
-export type PlatformTypesSocialConnectAPICreateSession = () => unknown;
+export type PlatformTypesSocialConnectAPICreateSession = () => Promise<unknown>;
 
-export type PlatformTypesSocialConnectAPIDeleteSession = () => unknown;
+export type PlatformTypesSocialConnectAPIDeleteSession = () => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPIEmitSessionEnded = (arg0: any) => unknown;
 
@@ -18343,22 +30671,110 @@ export interface PlatformTypesSocialConnectAPIEventsEmitter {
 }
 
 export interface PlatformTypesSocialConnectAPIEventsEmitterListeners {
+  joined: PlatformTypesSocialConnectAPIEventsEmitterListenersJoined;
+  left: PlatformTypesSocialConnectAPIEventsEmitterListenersLeft;
+  session_ended: PlatformTypesSocialConnectAPIEventsEmitterListenersSessionEnded;
+  session_message: PlatformTypesSocialConnectAPIEventsEmitterListenersSessionMessage;
   update: PlatformTypesSocialConnectAPIEventsEmitterListenersUpdate;
 }
 
-export type PlatformTypesSocialConnectAPIEventsEmitterListenersUpdate =
-  Array<PlatformTypesSocialConnectAPIEventsEmitterListenersUpdateItem>;
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersJoined =
+  Array<PlatformTypesSocialConnectAPIEventsEmitterListenersJoinedItem>;
+
+export interface PlatformTypesSocialConnectAPIEventsEmitterListenersJoinedItem {
+  listener: PlatformTypesSocialConnectAPIEventsEmitterListenersJoinedItemListener;
+  options: PlatformTypesSocialConnectAPIEventsEmitterListenersJoinedItemOptions;
+}
+
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersJoinedItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersJoinedItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersLeft =
+  Array<PlatformTypesSocialConnectAPIEventsEmitterListenersLeftItem>;
+
+export interface PlatformTypesSocialConnectAPIEventsEmitterListenersLeftItem {
+  listener: PlatformTypesSocialConnectAPIEventsEmitterListenersLeftItemListener;
+  options: PlatformTypesSocialConnectAPIEventsEmitterListenersLeftItemOptions;
+}
+
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersLeftItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersLeftItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersSessionEnded =
+  Array<PlatformTypesSocialConnectAPIEventsEmitterListenersSessionEndedItem>;
+
+export interface PlatformTypesSocialConnectAPIEventsEmitterListenersSessionEndedItem {
+  listener: PlatformTypesSocialConnectAPIEventsEmitterListenersSessionEndedItemListener;
+  options: PlatformTypesSocialConnectAPIEventsEmitterListenersSessionEndedItemOptions;
+}
+
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersSessionEndedItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersSessionEndedItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersSessionMessage =
+  Array<PlatformTypesSocialConnectAPIEventsEmitterListenersSessionMessageItem>;
+
+export interface PlatformTypesSocialConnectAPIEventsEmitterListenersSessionMessageItem {
+  listener: PlatformTypesSocialConnectAPIEventsEmitterListenersSessionMessageItemListener;
+  options: PlatformTypesSocialConnectAPIEventsEmitterListenersSessionMessageItemOptions;
+}
+
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersSessionMessageItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersSessionMessageItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersUpdate = Array<
+  | PlatformTypesSocialConnectAPIEventsEmitterListenersUpdateItem
+  | PlatformTypesSocialConnectAPIEventsEmitterListenersUpdateItem2
+>;
 
 export interface PlatformTypesSocialConnectAPIEventsEmitterListenersUpdateItem {
   listener: PlatformTypesSocialConnectAPIEventsEmitterListenersUpdateItemListener;
   options: PlatformTypesSocialConnectAPIEventsEmitterListenersUpdateItemOptions;
 }
 
+export interface PlatformTypesSocialConnectAPIEventsEmitterListenersUpdateItem2 {
+  listener: PlatformTypesSocialConnectAPIEventsEmitterListenersUpdateItemListener2;
+  options: PlatformTypesSocialConnectAPIEventsEmitterListenersUpdateItemOptions2;
+}
+
 export type PlatformTypesSocialConnectAPIEventsEmitterListenersUpdateItemListener = (
   arg0: any,
 ) => unknown;
 
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersUpdateItemListener2 = (
+  arg0: any,
+) => unknown;
+
 export type PlatformTypesSocialConnectAPIEventsEmitterListenersUpdateItemOptions = Record<
+  string,
+  unknown
+>;
+
+export type PlatformTypesSocialConnectAPIEventsEmitterListenersUpdateItemOptions2 = Record<
   string,
   unknown
 >;
@@ -18372,9 +30788,9 @@ export type PlatformTypesSocialConnectAPIEventsEmitterMetaListenersAdd = Record<
 
 export type PlatformTypesSocialConnectAPIEventsEmitterMetaListenersRemove = Record<string, unknown>;
 
-export type PlatformTypesSocialConnectAPIFetchBroadcastStatus = () => unknown;
+export type PlatformTypesSocialConnectAPIFetchBroadcastStatus = () => Promise<unknown>;
 
-export type PlatformTypesSocialConnectAPIFetchCurrentSession = () => unknown;
+export type PlatformTypesSocialConnectAPIFetchCurrentSession = () => Promise<unknown>;
 
 export interface PlatformTypesSocialConnectAPIFetchCurrentSessionInFlightCache {
   _cache: PlatformTypesSocialConnectAPIFetchCurrentSessionInFlightCacheCache;
@@ -18394,14 +30810,9 @@ export interface PlatformTypesSocialConnectAPIFetchCurrentSessionInFlightCache {
 }
 
 export type PlatformTypesSocialConnectAPIFetchCurrentSessionInFlightCacheCache = Map<
-  string,
-  PlatformTypesSocialConnectAPIFetchCurrentSessionInFlightCacheCacheValue
+  unknown,
+  unknown
 >;
-
-export interface PlatformTypesSocialConnectAPIFetchCurrentSessionInFlightCacheCacheValue {
-  expiry: null;
-  value: Promise<unknown>;
-}
 
 export type PlatformTypesSocialConnectAPIFetchCurrentSessionInFlightCacheCreate = (
   arg0: any,
@@ -18418,7 +30829,7 @@ export type PlatformTypesSocialConnectAPIFetchCurrentSessionInFlightCacheSet = (
   arg1: any,
 ) => unknown;
 
-export type PlatformTypesSocialConnectAPIFetchCurrentSessionWithCache = () => unknown;
+export type PlatformTypesSocialConnectAPIFetchCurrentSessionWithCache = () => Promise<unknown>;
 
 export interface PlatformTypesSocialConnectAPIFetchShortLinkInFlightCache {
   _cache: PlatformTypesSocialConnectAPIFetchShortLinkInFlightCacheCache;
@@ -18456,25 +30867,30 @@ export type PlatformTypesSocialConnectAPIGetJamExperience = () => unknown;
 
 export type PlatformTypesSocialConnectAPIGetJamJoinInfo = () => unknown;
 
-export type PlatformTypesSocialConnectAPIGetJoinTokenFromConnectDeviceId = (arg0: any) => unknown;
+export type PlatformTypesSocialConnectAPIGetJoinTokenFromConnectDeviceId = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPIGetLocalNetSessionDevices = () => unknown;
 
-export type PlatformTypesSocialConnectAPIGetSessionInfo = (arg0: any) => unknown;
+export type PlatformTypesSocialConnectAPIGetSessionInfo = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPIGetShortInviteLink = (
   arg0: any,
   arg1: any,
   arg2: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesSocialConnectAPIGetShortInviteLinks = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesSocialConnectAPIGetShortInviteLinks = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
-export type PlatformTypesSocialConnectAPIHandleJamSessionResponse = (arg0: any) => unknown;
+export type PlatformTypesSocialConnectAPIHandleJamSessionResponse = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPIHandleSessionMessage = (arg0: any) => unknown;
 
-export type PlatformTypesSocialConnectAPIHandleSessionUpdate = (arg0: any) => unknown;
+export type PlatformTypesSocialConnectAPIHandleSessionUpdate = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPIIsSessionNewer = (arg0: any) => unknown;
 
@@ -18483,15 +30899,15 @@ export type PlatformTypesSocialConnectAPIJoinSession = (
   arg1: any,
   arg2: any,
   arg3: any,
-) => unknown;
+) => Promise<unknown>;
 
-export type PlatformTypesSocialConnectAPIKickAllParticipants = (arg0: any) => unknown;
+export type PlatformTypesSocialConnectAPIKickAllParticipants = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesSocialConnectAPILeaveSession = () => unknown;
+export type PlatformTypesSocialConnectAPILeaveSession = () => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPIMaybeEmitLeaveOrJoin = (arg0: any, arg1: any) => unknown;
 
-export type PlatformTypesSocialConnectAPIRemoveSessionMember = (arg0: any) => unknown;
+export type PlatformTypesSocialConnectAPIRemoveSessionMember = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesSocialConnectAPIServiceEvents {
   _emitter: PlatformTypesSocialConnectAPIServiceEventsEmitter;
@@ -18571,7 +30987,7 @@ export interface PlatformTypesSocialConnectAPIServiceEventsEmitterListenersSESSI
 
 export type PlatformTypesSocialConnectAPIServiceEventsEmitterListenersSESSIONUPDATEItemListener = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPIServiceEventsEmitterListenersSESSIONUPDATEItemOptions =
   Record<string, unknown>;
@@ -18671,13 +31087,15 @@ export interface PlatformTypesSocialConnectAPIServiceEventsUpdateSubscription {
 
 export type PlatformTypesSocialConnectAPIServiceEventsUpdateSubscriptionCancel = () => unknown;
 
-export type PlatformTypesSocialConnectAPISetBroadcastStatus = (arg0: any) => unknown;
+export type PlatformTypesSocialConnectAPISetBroadcastStatus = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISetCurrentSession = (arg0: any) => unknown;
 
-export type PlatformTypesSocialConnectAPISetParticipantVolumeControl = (arg0: any) => unknown;
+export type PlatformTypesSocialConnectAPISetParticipantVolumeControl = (
+  arg0: any,
+) => Promise<unknown>;
 
-export type PlatformTypesSocialConnectAPISetQueueOnlyMode = (arg0: any) => unknown;
+export type PlatformTypesSocialConnectAPISetQueueOnlyMode = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesSocialConnectAPIShortLinkCaches {
   shortLinkCache: PlatformTypesSocialConnectAPIShortLinkCachesShortLinkCache;
@@ -18745,7 +31163,7 @@ export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPI {
 }
 
 export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIBroadcastStatus {
-  current: null;
+  current: number;
 }
 
 export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIBroadcastStatusUpdatesSubscription {
@@ -18829,7 +31247,51 @@ export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEvents
   removeListeners: PlatformTypesVideoAPIVideoCoordinatorRemoveListeners;
 }
 
-export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListeners =
+export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListeners {
+  broadcast_status_update: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersBroadcastStatusUpdate;
+  scan_update: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdate;
+}
+
+export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersBroadcastStatusUpdate =
+  Array<PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersBroadcastStatusUpdateItem>;
+
+export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersBroadcastStatusUpdateItem {
+  listener: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersBroadcastStatusUpdateItemListener;
+  options: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersBroadcastStatusUpdateItemOptions;
+}
+
+export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersBroadcastStatusUpdateItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersBroadcastStatusUpdateItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdate =
+  Array<
+    | PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdateItem
+    | PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdateItem2
+  >;
+
+export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdateItem {
+  listener: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdateItemListener;
+  options: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdateItemOptions;
+}
+
+export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdateItem2 {
+  listener: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdateItemListener2;
+  options: PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdateItemOptions2;
+}
+
+export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdateItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdateItemListener2 =
+  (arg0: any) => unknown;
+
+export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdateItemOptions =
+  Record<string, unknown>;
+
+export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterListenersScanUpdateItemOptions2 =
   Record<string, unknown>;
 
 export interface PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIEventsEmitterMetaListeners {
@@ -18878,16 +31340,16 @@ export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPILatestScann
 export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPISetBroadcastStatus = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIStartBroadcastingBluetoothSessionDevice =
-  (arg0: any) => unknown;
+  (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIStartScanningForLocalNetSessionDevices =
   () => unknown;
 
 export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPIStopBroadcastingBluetoothSessionDevice =
-  () => unknown;
+  () => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISocialConnectBroadcastingAPISubscribeToBroadcastStatusUpdates =
   () => unknown;
@@ -18907,10 +31369,16 @@ export type PlatformTypesSocialConnectAPISocialConnectProductStateAddListener = 
 
 export type PlatformTypesSocialConnectAPISocialConnectProductStateGetJamExperience = () => unknown;
 
-export type PlatformTypesSocialConnectAPISocialConnectProductStateListeners =
-  Set<PlatformTypesSocialConnectAPISocialConnectProductStateListenersSetElement>;
+export type PlatformTypesSocialConnectAPISocialConnectProductStateListeners = Set<
+  | PlatformTypesSocialConnectAPISocialConnectProductStateListenersSetElement
+  | PlatformTypesSocialConnectAPISocialConnectProductStateListenersSetElement2
+>;
 
 export type PlatformTypesSocialConnectAPISocialConnectProductStateListenersSetElement = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesSocialConnectAPISocialConnectProductStateListenersSetElement2 = (
   arg0: any,
 ) => unknown;
 
@@ -18931,34 +31399,35 @@ export interface PlatformTypesSocialConnectAPISocialConnectServiceClient {
   setQueueOnlyMode: PlatformTypesSocialConnectAPISocialConnectServiceClientSetQueueOnlyMode;
 }
 
-export type PlatformTypesSocialConnectAPISocialConnectServiceClientCreateSession = () => unknown;
+export type PlatformTypesSocialConnectAPISocialConnectServiceClientCreateSession =
+  () => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISocialConnectServiceClientDeleteSession = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISocialConnectServiceClientFetchCurrentSession = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISocialConnectServiceClientGetSessionInfo = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISocialConnectServiceClientJoinSession = (
   arg0: any,
   arg1: any,
   arg2: any,
   arg3: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISocialConnectServiceClientKickAllParticipants = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISocialConnectServiceClientLeaveSession = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISocialConnectServiceClientOnConnected = (
   arg0: any,
@@ -18967,20 +31436,20 @@ export type PlatformTypesSocialConnectAPISocialConnectServiceClientOnConnected =
 export type PlatformTypesSocialConnectAPISocialConnectServiceClientRemoveSessionMember = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISocialConnectServiceClientSetBroadcastStatus = (
   arg0: any,
   arg1: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISocialConnectServiceClientSetParticipantVolumeControl = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPISocialConnectServiceClientSetQueueOnlyMode = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export type PlatformTypesSocialConnectAPIWaitForActiveOrLocalDeviceId = () => unknown;
 
@@ -19028,27 +31497,27 @@ export type PlatformTypesStandalonePlayerCoordinatorAPIInstancesSet = (
 ) => unknown;
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIConnectServiceClient {
+  addDeviceToGroup: PlatformTypesConnectAPIConnectServiceClientAddDeviceToGroup;
   becomeInactive: PlatformTypesConnectAPIConnectServiceClientBecomeInactive;
   cancelTransfer: PlatformTypesConnectAPIConnectServiceClientCancelTransfer;
   clusterUpdateAfterBackendConnection: PlatformTypesConnectAPIConnectServiceClientClusterUpdateAfterBackendConnection;
-  forceDiscover: PlatformTypesConnectAPIConnectServiceClientForceDiscover;
+  createStaticGroup: PlatformTypesConnectAPIConnectServiceClientCreateStaticGroup;
+  deleteGroup: PlatformTypesConnectAPIConnectServiceClientDeleteGroup;
   getDebugLevel: PlatformTypesConnectAPIConnectServiceClientGetDebugLevel;
-  getDeviceSettings: PlatformTypesConnectAPIConnectServiceClientGetDeviceSettings;
   installSpotify: PlatformTypesConnectAPIConnectServiceClientInstallSpotify;
   logout: PlatformTypesConnectAPIConnectServiceClientLogout;
   notifyAudioRouteChanged: PlatformTypesConnectAPIConnectServiceClientNotifyAudioRouteChanged;
   options: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIConnectServiceClientOptions;
   performDiscovery: PlatformTypesConnectAPIConnectServiceClientPerformDiscovery;
-  pickerOpened: PlatformTypesConnectAPIConnectServiceClientPickerOpened;
   pull: PlatformTypesConnectAPIConnectServiceClientPull;
   refreshCluster: PlatformTypesConnectAPIConnectServiceClientRefreshCluster;
+  removeDeviceFromGroup: PlatformTypesConnectAPIConnectServiceClientRemoveDeviceFromGroup;
   rename: PlatformTypesConnectAPIConnectServiceClientRename;
+  renameGroup: PlatformTypesConnectAPIConnectServiceClientRenameGroup;
   sendCommand: PlatformTypesConnectAPIConnectServiceClientSendCommand;
   setDebugLevel: PlatformTypesConnectAPIConnectServiceClientSetDebugLevel;
-  setDeviceStreamQuality: PlatformTypesConnectAPIConnectServiceClientSetDeviceStreamQuality;
-  setPreferredZeroconf: PlatformTypesConnectAPIConnectServiceClientSetPreferredZeroconf;
-  startDiscovery: PlatformTypesConnectAPIConnectServiceClientStartDiscovery;
   state: PlatformTypesConnectAPIConnectServiceClientState;
+  stopScanning: PlatformTypesConnectAPIConnectServiceClientStopScanning;
   transfer: PlatformTypesConnectAPIConnectServiceClientTransfer;
   transport: PlatformTypesVideoAPIEsperantoTransport;
   wakeSleepingClusterDevices: PlatformTypesConnectAPIConnectServiceClientWakeSleepingClusterDevices;
@@ -19097,13 +31566,29 @@ export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmi
 }
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListeners {
+  muted_changed: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChanged;
   volume: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolume;
 }
+
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChanged =
+  Array<PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItem>;
+
+export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItem {
+  listener: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItemListener;
+  options: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItemOptions;
+}
+
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItemListener =
+  (arg0: any) => unknown;
+
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersMutedChangedItemOptions =
+  Record<string, unknown>;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolume =
   Array<
     | PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem
     | PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem2
+    | PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem3
   >;
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem {
@@ -19116,16 +31601,27 @@ export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmi
   options: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions2;
 }
 
+export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItem3 {
+  listener: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemListener3;
+  options: PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions3;
+}
+
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemListener =
   (arg0: any) => unknown;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemListener2 =
   (arg0: any) => unknown;
 
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemListener3 =
+  (arg0: any) => unknown;
+
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions =
   Record<string, unknown>;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions2 =
+  Record<string, unknown>;
+
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterListenersVolumeItemOptions3 =
   Record<string, unknown>;
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIEventsEmitterMetaListeners {
@@ -19143,13 +31639,17 @@ export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIGetCapabilitie
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIGetEvents = () => unknown;
 
-export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIGetFiles = (arg0: any) => unknown;
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIGetFiles = (
+  arg0: any,
+) => Promise<unknown>;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIGetMuteHelper = () => unknown;
 
-export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIGetPlaybackInfo = () => unknown;
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIGetPlaybackInfo =
+  () => Promise<unknown>;
 
-export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIGetVolume = () => unknown;
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIGetVolume =
+  () => Promise<unknown>;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIGetVolumeInternal = () => unknown;
 
@@ -19175,7 +31675,8 @@ export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIInfo {
   targetFileAvailable: boolean;
 }
 
-export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPILowerVolume = () => unknown;
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPILowerVolume =
+  () => Promise<unknown>;
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIMuteHelper {
   _isMuted: boolean;
@@ -19195,7 +31696,8 @@ export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIMuteHelperEmit
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIMuteHelperIsMuted = () => unknown;
 
-export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIMuteHelperMute = () => unknown;
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIMuteHelperMute =
+  () => Promise<unknown>;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIMuteHelperOnVolumeChange = (
   arg0: any,
@@ -19206,9 +31708,10 @@ export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIMuteHelperSetM
 ) => unknown;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIMuteHelperToggleMute =
-  () => unknown;
+  () => Promise<unknown>;
 
-export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIMuteHelperUnmute = () => unknown;
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIMuteHelperUnmute =
+  () => Promise<unknown>;
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIPlaybackService {
   duck: PlatformTypesSettingsAPIQualityPlaybackServiceDuck;
@@ -19235,11 +31738,12 @@ export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIPlaybackServic
   unknown
 >;
 
-export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIRaiseVolume = () => unknown;
+export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIRaiseVolume =
+  () => Promise<unknown>;
 
 export type PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPISetVolume = (
   arg0: any,
-) => unknown;
+) => Promise<unknown>;
 
 export interface PlatformTypesStandalonePlayerCoordinatorAPIPlaybackAPIStorageService {
   deleteExpiredItems: PlatformTypesOfflineAPIStorageDeleteExpiredItems;
@@ -19313,6 +31817,9 @@ export interface PlatformTypesTranslations {
   "ad-formats.advertisement-break-countdown-minutes-seconds": string;
   "ad-formats.advertisement-break-countdown-seconds": string;
   "ad-formats.advertisement-break-no-title": string;
+  "ad-formats.carousel-indicator-label": string;
+  "ad-formats.carousel-next-item": string;
+  "ad-formats.carousel-previous-item": string;
   "ad-formats.context-menu.not-interested": string;
   "ad-formats.dismissAd": string;
   "ad-formats.dsa.aboutThisAd": string;
@@ -19521,6 +32028,7 @@ export interface PlatformTypesTranslations {
   "concerts.genres.genres": string;
   "concerts.genres.show_events": string;
   "concerts.genres.top_genres": string;
+  "concerts.header.nearby": string;
   "concerts.header.other": string;
   "concerts.load_more": string;
   "concerts.location.change": string;
@@ -19567,6 +32075,7 @@ export interface PlatformTypesTranslations {
   "concerts.venues_description": string;
   "concerts.venues_for_you": string;
   "concerts.venues_other": string;
+  "concerts.venues_title_more": string;
   "concerts.view_all_upcoming_concerts_count": string;
   "concerts_added-to-your-saved-events": string;
   "concerts_near_you.multiple_locations": string;
@@ -20158,6 +32667,7 @@ export interface PlatformTypesTranslations {
   "i18n.meta.author.title.author-bibliography": string;
   "i18n.meta.author.title.author-overview": string;
   "i18n.meta.home.title": string;
+  "i18n.meta.prerelease.title": string;
   "i18n.meta.track-lyrics.title": string;
   "i18n.meta.track.title": string;
   "image-upload.legal-disclaimer": string;
@@ -20903,6 +33413,8 @@ export interface PlatformTypesTranslations {
   "web-player.artist.discography.sort-box.view-as": string;
   "web-player.artist.discography.sort-box.view-grid": string;
   "web-player.artist.discography.sort-box.view-list": string;
+  "web-player.artist.registered-artist-banner.body": string;
+  "web-player.artist.registered-artist-banner.title": string;
   "web-player.artist.saved-tracks.nr-releases": PlatformTypesTranslationsWebplayerArtistSavedtracksNrreleases;
   "web-player.artist.saved-tracks.nr-tracks": PlatformTypesTranslationsWebplayerArtistSavedtracksNrtracks;
   "web-player.artist.saved-tracks.title": string;
@@ -21047,6 +33559,7 @@ export interface PlatformTypesTranslations {
   "web-player.download.remove-download-confirmation-dialog.message-remote": string;
   "web-player.download.remove-download-confirmation-dialog.title": string;
   "web-player.episode.description": string;
+  "web-player.episode.open_coverart_modal": string;
   "web-player.episode.transcript": string;
   "web-player.episode.transcript.disclaimer": string;
   "web-player.episode.transcript.disclaimer.creator-provided": string;
@@ -21113,10 +33626,8 @@ export interface PlatformTypesTranslations {
   "web-player.magpie.cadence-snackbar-text-weekly": string;
   "web-player.magpie.cap-modal.confirm-button": string;
   "web-player.magpie.cap-modal.description": string;
-  "web-player.magpie.cap-modal.dismiss-button": string;
   "web-player.magpie.cap-modal.title": string;
   "web-player.magpie.collapsed-prompt.label": string;
-  "web-player.magpie.create-menu-item.title": string;
   "web-player.magpie.customize-prompt-button": string;
   "web-player.magpie.day-of-week.friday": string;
   "web-player.magpie.day-of-week.monday": string;
@@ -21145,6 +33656,7 @@ export interface PlatformTypesTranslations {
   "web-player.magpie.prompt-composer-copy-button.text": string;
   "web-player.magpie.prompt-composer-disclaimer.link-text": string;
   "web-player.magpie.prompt-composer-disclaimer.text": string;
+  "web-player.magpie.prompt-composer-disclaimer.usage-limits-link-text": string;
   "web-player.magpie.prompt-composer-header.close-aria-label": string;
   "web-player.magpie.prompt-composer-header.default-title": string;
   "web-player.magpie.prompt-composer-modal.content-label": string;
@@ -21162,6 +33674,11 @@ export interface PlatformTypesTranslations {
   "web-player.magpie.rate-limit-reset-time-hours": PlatformTypesTranslationsWebplayerMagpieRatelimitresettimehours;
   "web-player.magpie.rate-limit-reset-time-soon": string;
   "web-player.magpie.refresh-prompted-playlist.error": string;
+  "web-player.magpie.scheduling-warning-dialog.continue-button": string;
+  "web-player.magpie.scheduling-warning-dialog.description-daily": string;
+  "web-player.magpie.scheduling-warning-dialog.description-weekly": string;
+  "web-player.magpie.scheduling-warning-dialog.title": string;
+  "web-player.magpie.scheduling-warning-dialog.turn-off-button": string;
   "web-player.magpie.suggestions-button.text": string;
   "web-player.magpie.suggestions-button.tooltip.hide": string;
   "web-player.magpie.suggestions-button.tooltip.show": string;
@@ -21322,6 +33839,10 @@ export interface PlatformTypesTranslations {
   "web-player.pigeon.introduction.step-2.title": string;
   "web-player.pigeon.introduction.step-3.subtitle": string;
   "web-player.pigeon.introduction.step-3.title": string;
+  "web-player.pigeon.playback-failure-in-exclusive-mode-modal.cancel-button": string;
+  "web-player.pigeon.playback-failure-in-exclusive-mode-modal.confirm-button": string;
+  "web-player.pigeon.playback-failure-in-exclusive-mode-modal.description": string;
+  "web-player.pigeon.playback-failure-in-exclusive-mode-modal.title": string;
   "web-player.pip-mini-player.settings.background-color": string;
   "web-player.pip-mini-player.settings.done": string;
   "web-player.pip-mini-player.settings.queue": string;
@@ -21332,6 +33853,69 @@ export interface PlatformTypesTranslations {
   "web-player.pip-mini-player.upsell.subtitle": string;
   "web-player.pip-mini-player.upsell.title": string;
   "web-player.pip-mini-player.window-title": string;
+  "web-player.playlist-mixing.connect-snackbar.text": string;
+  "web-player.playlist-mixing.custom-sort-order-modal.body": string;
+  "web-player.playlist-mixing.custom-sort-order-modal.cancel": string;
+  "web-player.playlist-mixing.custom-sort-order-modal.confirm": string;
+  "web-player.playlist-mixing.custom-sort-order-modal.title": string;
+  "web-player.playlist-mixing.custom-sort-order-snackbar.title": string;
+  "web-player.playlist-mixing.custom-sort-order-tooltip.turn-off-mixing": string;
+  "web-player.playlist-mixing.edit-on-mobile-dialog.body": string;
+  "web-player.playlist-mixing.edit-on-mobile-dialog.confirm": string;
+  "web-player.playlist-mixing.edit-on-mobile-dialog.title": string;
+  "web-player.playlist-mixing.eq_style.bass_fade_out": string;
+  "web-player.playlist-mixing.eq_style.center_bass_swap": string;
+  "web-player.playlist-mixing.eq_style.end_bass_swap": string;
+  "web-player.playlist-mixing.eq_style.long_bass_cut": string;
+  "web-player.playlist-mixing.eq_style.none": string;
+  "web-player.playlist-mixing.eq_style.quick_bass_cut": string;
+  "web-player.playlist-mixing.eq_style.start_bass_swap": string;
+  "web-player.playlist-mixing.eq_style.three_band_fade": string;
+  "web-player.playlist-mixing.fx_style.echo": string;
+  "web-player.playlist-mixing.fx_style.hp-fi": string;
+  "web-player.playlist-mixing.fx_style.hp-fi_hp-fo": string;
+  "web-player.playlist-mixing.fx_style.hp-fi_lp-fo": string;
+  "web-player.playlist-mixing.fx_style.hp-fo": string;
+  "web-player.playlist-mixing.fx_style.lp-fi": string;
+  "web-player.playlist-mixing.fx_style.lp-fi_hp-fo": string;
+  "web-player.playlist-mixing.fx_style.lp-fi_lp-fo": string;
+  "web-player.playlist-mixing.fx_style.lp-fo": string;
+  "web-player.playlist-mixing.fx_style.none": string;
+  "web-player.playlist-mixing.fx_style.reverb": string;
+  "web-player.playlist-mixing.mix": string;
+  "web-player.playlist-mixing.mixed_by": string;
+  "web-player.playlist-mixing.mixed_playlist": string;
+  "web-player.playlist-mixing.playlist-viewer-dialog.body": string;
+  "web-player.playlist-mixing.playlist-viewer-dialog.confirm": string;
+  "web-player.playlist-mixing.playlist-viewer-dialog.title": string;
+  "web-player.playlist-mixing.tracklist-column.bpm": string;
+  "web-player.playlist-mixing.tracklist-column.key": string;
+  "web-player.playlist-mixing.transition.auto": string;
+  "web-player.playlist-mixing.transition.blend": string;
+  "web-player.playlist-mixing.transition.custom": string;
+  "web-player.playlist-mixing.transition.fade": string;
+  "web-player.playlist-mixing.transition.melt": string;
+  "web-player.playlist-mixing.transition.no_transition": string;
+  "web-player.playlist-mixing.transition.rise": string;
+  "web-player.playlist-mixing.transition.slam": string;
+  "web-player.playlist-mixing.transition.wave": string;
+  "web-player.playlist-mixing.turn-on-shuffle-modal.body": string;
+  "web-player.playlist-mixing.turn-on-shuffle-modal.cancel": string;
+  "web-player.playlist-mixing.turn-on-shuffle-modal.confirm": string;
+  "web-player.playlist-mixing.turn-on-shuffle-modal.title": string;
+  "web-player.playlist-mixing.turn_off_mix": string;
+  "web-player.playlist-mixing.turn_off_mixing": string;
+  "web-player.playlist-mixing.turn_on_mix": string;
+  "web-player.playlist-mixing.turn_on_mixing": string;
+  "web-player.playlist-mixing.volume_style.center_cut": string;
+  "web-player.playlist-mixing.volume_style.crossfade": string;
+  "web-player.playlist-mixing.volume_style.cut_in_fade_out": string;
+  "web-player.playlist-mixing.volume_style.fade_in_cut_out": string;
+  "web-player.playlist-mixing.volume_style.fade_in_fade_out": string;
+  "web-player.playlist-mixing.volume_style.fade_in_fast_out": string;
+  "web-player.playlist-mixing.volume_style.fast_in_slow_out": string;
+  "web-player.playlist-mixing.volume_style.overlap": string;
+  "web-player.playlist-mixing.volume_style.smooth_crossfade": string;
   "web-player.playlist.booklist-recommender-dsa-message": string;
   "web-player.playlist.daylist.link-back-banner.link-text": string;
   "web-player.playlist.daylist.link-back-banner.title": string;
@@ -21438,6 +34022,14 @@ export interface PlatformTypesTranslations {
   "web-player.settings.account": string;
   "web-player.settings.autoplay-dsa-enabled": string;
   "web-player.settings.content-preferences": string;
+  "web-player.settings.desktop.advanced.beta-badge": string;
+  "web-player.settings.desktop.advanced.device-label": string;
+  "web-player.settings.desktop.advanced.exclusive-mode.explanation": string;
+  "web-player.settings.desktop.advanced.exclusive-mode.link": string;
+  "web-player.settings.desktop.advanced.exclusive-mode.toggle-label": string;
+  "web-player.settings.desktop.advanced.force-volume.explanation": string;
+  "web-player.settings.desktop.advanced.force-volume.toggle-label": string;
+  "web-player.settings.desktop.advanced.output-device-section-label": string;
   "web-player.settings.edit-login-methods": string;
   "web-player.settings.edit-login-methods-button": string;
   "web-player.settings.equalizer.custom-presets": string;
@@ -21479,6 +34071,7 @@ export interface PlatformTypesTranslations {
   "web-player.settings.social.connected-apps.cta": string;
   "web-player.settings.social.connected-apps.description": string;
   "web-player.settings.social.connected-apps.title": string;
+  "web-player.settings.trackNotifications.permission-prompt": string;
   "web-player.settings.zoom.balanced-label": string;
   "web-player.settings.zoom.compact-label": string;
   "web-player.settings.zoom.description": string;
@@ -21629,42 +34222,6 @@ export interface PlatformTypesTranslations {
   "web-player.subfeeds.home.subfeed.podcasts-following.empty-state.filtered.title": string;
   "web-player.subfeeds.home.subfeed.podcasts-following.filter-placeholder": string;
   "web-player.subfeeds.home.subfeed.podcasts-following.header": string;
-  "web-player.tuna.connect-snackbar.text": string;
-  "web-player.tuna.custom-sort-order-modal.body": string;
-  "web-player.tuna.custom-sort-order-modal.cancel": string;
-  "web-player.tuna.custom-sort-order-modal.confirm": string;
-  "web-player.tuna.custom-sort-order-modal.title": string;
-  "web-player.tuna.custom-sort-order-snackbar.title": string;
-  "web-player.tuna.custom-sort-order-tooltip.turn-off-mixing": string;
-  "web-player.tuna.edit-on-mobile-dialog.body": string;
-  "web-player.tuna.edit-on-mobile-dialog.confirm": string;
-  "web-player.tuna.edit-on-mobile-dialog.title": string;
-  "web-player.tuna.mix": string;
-  "web-player.tuna.mixed_by": string;
-  "web-player.tuna.mixed_playlist": string;
-  "web-player.tuna.playlist-viewer-dialog.body": string;
-  "web-player.tuna.playlist-viewer-dialog.confirm": string;
-  "web-player.tuna.playlist-viewer-dialog.title": string;
-  "web-player.tuna.tracklist-column.bpm": string;
-  "web-player.tuna.tracklist-column.key": string;
-  "web-player.tuna.transition.auto": string;
-  "web-player.tuna.transition.blend": string;
-  "web-player.tuna.transition.custom": string;
-  "web-player.tuna.transition.fade": string;
-  "web-player.tuna.transition.melt": string;
-  "web-player.tuna.transition.no_transition": string;
-  "web-player.tuna.transition.rise": string;
-  "web-player.tuna.transition.slam": string;
-  "web-player.tuna.transition.wave": string;
-  "web-player.tuna.turn-on-shuffle-modal.body": string;
-  "web-player.tuna.turn-on-shuffle-modal.cancel": string;
-  "web-player.tuna.turn-on-shuffle-modal.confirm": string;
-  "web-player.tuna.turn-on-shuffle-modal.title": string;
-  "web-player.tuna.turn_off_mix": string;
-  "web-player.tuna.turn_off_mixing": string;
-  "web-player.tuna.turn_on_mix": string;
-  "web-player.tuna.turn_on_mixing": string;
-  "web-player.user-comments.collapsed-reply.count": PlatformTypesTranslationsWebplayerUsercommentsCollapsedreplyCount;
   "web-player.user-comments.comment": string;
   "web-player.user-comments.comment-input.cancel": string;
   "web-player.user-comments.comment-input.error": string;
@@ -21676,7 +34233,6 @@ export interface PlatformTypesTranslations {
   "web-player.user-comments.commenting-restrictions.disabled": string;
   "web-player.user-comments.commenting-restrictions.new-user-account": string;
   "web-player.user-comments.comments": string;
-  "web-player.user-comments.creator-reaction-liked-comment": string;
   "web-player.user-comments.delete-comment-dialog.subtitle": string;
   "web-player.user-comments.delete-comment-dialog.success": string;
   "web-player.user-comments.delete-comment-dialog.title": string;
@@ -21792,10 +34348,6 @@ export interface PlatformTypesTranslations {
   "web-player.your-library-x.clear_filters": string;
   "web-player.your-library-x.collapse-folder": string;
   "web-player.your-library-x.collapse-your-library": string;
-  "web-player.your-library-x.create.button-label": string;
-  "web-player.your-library-x.create.create-a-new-playlist": string;
-  "web-player.your-library-x.create.create-a-playlist-folder": string;
-  "web-player.your-library-x.default_folder_name": string;
   "web-player.your-library-x.download-progress-count-out-of-total": string;
   "web-player.your-library-x.download-progress-title": string;
   "web-player.your-library-x.dsa-message": string;
@@ -22194,11 +34746,6 @@ export interface PlatformTypesTranslationsWebplayerSocialconnectFacepileAndother
   other: string;
 }
 
-export interface PlatformTypesTranslationsWebplayerUsercommentsCollapsedreplyCount {
-  one: string;
-  other: string;
-}
-
 export interface PlatformTypesTranslationsWebplayerUsercommentsRepliesCount {
   one: string;
   other: string;
@@ -22240,7 +34787,7 @@ export interface PlatformTypesTransport {
   _authenticate: PlatformTypesRegistryMapValueInstanceTransportAuthenticate2;
   _authenticateCalled: boolean;
   _authenticateWithToken: PlatformTypesRegistryMapValueInstanceTransportAuthenticateWithToken;
-  _authenticationPromise: Promise<unknown>;
+  _authenticationPromise: null;
   _connect: PlatformTypesRegistryMapValueInstanceTransportConnect;
   _connectCalled: boolean;
   _connectToEndpoints: PlatformTypesRegistryMapValueInstanceTransportConnectToEndpoints;
@@ -22355,7 +34902,10 @@ export interface PlatformTypesUBILogger {
   getLastLoggedLocation: PlatformTypesUBILoggerGetLastLoggedLocation;
   getNavigationDirection: PlatformTypesUBILoggerGetNavigationDirection;
   getPageTransitionLogger: PlatformTypesUBILoggerGetPageTransitionLogger;
+  getUBIContextToken: PlatformTypesUBILoggerGetUBIContextToken;
+  interaction: undefined;
   lastLocationKey: string;
+  lastLoggedLocation: PlatformTypesUBILoggerLastLoggedLocation;
   locationKeys: PlatformTypesUBILoggerLocationKeys;
   logImpression: PlatformTypesUBILoggerLogImpression;
   logImpressionSegment: PlatformTypesUBILoggerLogImpressionSegment;
@@ -22428,7 +34978,20 @@ export type PlatformTypesUBILoggerGetNavigationDirection = (arg0: any, arg1: any
 
 export type PlatformTypesUBILoggerGetPageTransitionLogger = () => unknown;
 
-export type PlatformTypesUBILoggerLocationKeys = Array<unknown>;
+export type PlatformTypesUBILoggerGetUBIContextToken = (arg0: any, arg1: any) => unknown;
+
+export interface PlatformTypesUBILoggerLastLoggedLocation {
+  isInForeground: boolean;
+  navigationReason: string;
+  navigationalRoot: null;
+  pageId: string;
+  pageInstanceId: string;
+  pageUri: string;
+  pathName: string;
+  referrerId: string;
+}
+
+export type PlatformTypesUBILoggerLocationKeys = Array<string>;
 
 export type PlatformTypesUBILoggerLogImpression = (arg0: any) => unknown;
 
@@ -22452,7 +35015,10 @@ export type PlatformTypesUBILoggerLogPageTransition = (arg0: any) => unknown;
 
 export interface PlatformTypesUBILoggerPageTransitionLogger {
   backgroundMonitor: null;
+  clearUBIContext: PlatformTypesUBILoggerPageTransitionLoggerClearUBIContext;
   currentLocationProvider: PlatformTypesUBILoggerPageTransitionLoggerCurrentLocationProvider;
+  generatePageInstanceId: PlatformTypesUBILoggerPageTransitionLoggerGeneratePageInstanceId;
+  getUBIContextToken: PlatformTypesUBILoggerPageTransitionLoggerGetUBIContextToken;
   handleBackgroundTransition: PlatformTypesUBILoggerPageTransitionLoggerHandleBackgroundTransition;
   handleForegroundTransition: PlatformTypesUBILoggerPageTransitionLoggerHandleForegroundTransition;
   lastLocation: null;
@@ -22463,8 +35029,12 @@ export interface PlatformTypesUBILoggerPageTransitionLogger {
   logPageTransitionTriggeredByReason: PlatformTypesUBILoggerPageTransitionLoggerLogPageTransitionTriggeredByReason;
   logPageView: PlatformTypesUBILoggerPageTransitionLoggerLogPageView;
   pageTransitionManager: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManager;
+  pendingUbiContext: null;
+  setUBIContextFromToken: PlatformTypesUBILoggerPageTransitionLoggerSetUBIContextFromToken;
   toPrevPageInfo: PlatformTypesUBILoggerPageTransitionLoggerToPrevPageInfo;
 }
+
+export type PlatformTypesUBILoggerPageTransitionLoggerClearUBIContext = () => unknown;
 
 export interface PlatformTypesUBILoggerPageTransitionLoggerCurrentLocationProvider {
   getLocation: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderGetLocation;
@@ -22478,6 +35048,13 @@ export interface PlatformTypesUBILoggerPageTransitionLoggerCurrentLocationProvid
   setPageInstanceId: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderSetPageInstanceId;
   storageManager: PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManager;
 }
+
+export type PlatformTypesUBILoggerPageTransitionLoggerGeneratePageInstanceId = () => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerGetUBIContextToken = (
+  arg0: any,
+  arg1: any,
+) => unknown;
 
 export type PlatformTypesUBILoggerPageTransitionLoggerHandleBackgroundTransition = () => unknown;
 
@@ -22513,8 +35090,6 @@ export interface PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManager
   authenticationProvider: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerAuthenticationProvider;
   eventSender: PlatformTypesEventSender;
   flowIdProvider: undefined;
-  logClientGainedFocus: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogClientGainedFocus;
-  logClientLostFocus: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogClientLostFocus;
   logClientStarted: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogClientStarted;
   logNavigation: PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogNavigation;
 }
@@ -22526,25 +35101,18 @@ export interface PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManager
 export type PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerAuthenticationProviderIsAuthenticated =
   () => unknown;
 
-export type PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogClientGainedFocus = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
-export type PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogClientLostFocus = (
-  arg0: any,
-  arg1: any,
-) => unknown;
-
 export type PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogClientStarted = (
   arg0: any,
-  arg1: any,
 ) => unknown;
 
 export type PlatformTypesUBILoggerPageTransitionLoggerPageTransitionManagerLogNavigation = (
   arg0: any,
   arg1: any,
   arg2: any,
+) => unknown;
+
+export type PlatformTypesUBILoggerPageTransitionLoggerSetUBIContextFromToken = (
+  arg0: any,
 ) => unknown;
 
 export type PlatformTypesUBILoggerPageTransitionLoggerToPrevPageInfo = (arg0: any) => unknown;
@@ -22655,7 +35223,7 @@ export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManager
   (arg0: any) => unknown;
 
 export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapterItems =
-  Map<unknown, unknown>;
+  Map<string, string>;
 
 export type PlatformTypesUBILoggerUbiLoggerCurrentLocationProviderStorageManagerStorageAdapterRemoveItem =
   (arg0: any) => unknown;
@@ -22717,11 +35285,11 @@ export interface PlatformTypesUpdateAPI {
   subscribe: PlatformTypesUpdateAPISubscribe;
 }
 
-export type PlatformTypesUpdateAPIApplyUpdate = () => unknown;
+export type PlatformTypesUpdateAPIApplyUpdate = () => Promise<unknown>;
 
-export type PlatformTypesUpdateAPIGetVersionInfo = () => unknown;
+export type PlatformTypesUpdateAPIGetVersionInfo = () => Promise<unknown>;
 
-export type PlatformTypesUpdateAPIPrepareUpdate = () => unknown;
+export type PlatformTypesUpdateAPIPrepareUpdate = () => Promise<unknown>;
 
 export type PlatformTypesUpdateAPISubscribe = (arg0: any) => unknown;
 
@@ -22756,7 +35324,10 @@ export interface PlatformTypesUrlDispenserServiceClient {
   getShortUrl: PlatformTypesUrlDispenserServiceClientGetShortUrl;
 }
 
-export type PlatformTypesUrlDispenserServiceClientGetShortUrl = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesUrlDispenserServiceClientGetShortUrl = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
 export interface PlatformTypesUserAPI {
   _cosmos: PlatformTypesClipboardAPICosmos;
@@ -22778,25 +35349,34 @@ export interface PlatformTypesUserCommentsAPI {
   getTopComments: PlatformTypesUserCommentsAPIGetTopComments;
 }
 
-export type PlatformTypesUserCommentsAPIAddComment = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesUserCommentsAPIAddComment = (arg0: any, arg1: any) => Promise<unknown>;
 
-export type PlatformTypesUserCommentsAPIAddCommentReaction = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesUserCommentsAPIAddCommentReaction = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
-export type PlatformTypesUserCommentsAPIAddCommentReply = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesUserCommentsAPIAddCommentReply = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
-export type PlatformTypesUserCommentsAPIDeleteComment = (arg0: any) => unknown;
+export type PlatformTypesUserCommentsAPIDeleteComment = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesUserCommentsAPIDeleteCommentReaction = (arg0: any) => unknown;
+export type PlatformTypesUserCommentsAPIDeleteCommentReaction = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesUserCommentsAPIDeleteCommentReply = (arg0: any) => unknown;
+export type PlatformTypesUserCommentsAPIDeleteCommentReply = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesUserCommentsAPIGetCommentReactions = (arg0: any) => unknown;
+export type PlatformTypesUserCommentsAPIGetCommentReactions = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesUserCommentsAPIGetCommentReplies = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesUserCommentsAPIGetCommentReplies = (
+  arg0: any,
+  arg1: any,
+) => Promise<unknown>;
 
-export type PlatformTypesUserCommentsAPIGetComments = (arg0: any, arg1: any) => unknown;
+export type PlatformTypesUserCommentsAPIGetComments = (arg0: any, arg1: any) => Promise<unknown>;
 
-export type PlatformTypesUserCommentsAPIGetTopComments = (arg0: any) => unknown;
+export type PlatformTypesUserCommentsAPIGetTopComments = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesVideoAPI {
   _cosmos: PlatformTypesClipboardAPICosmos;
@@ -22847,15 +35427,15 @@ export interface PlatformTypesVideoAPI {
   videoModeToSurface: PlatformTypesVideoAPIVideoModeToSurface;
 }
 
-export type PlatformTypesVideoAPICreateCoreExtensionVideoCoordinator = () => unknown;
+export type PlatformTypesVideoAPICreateCoreExtensionVideoCoordinator = () => Promise<unknown>;
 
-export type PlatformTypesVideoAPICreateLogging = () => unknown;
+export type PlatformTypesVideoAPICreateLogging = () => Promise<unknown>;
 
-export type PlatformTypesVideoAPICreateOfflineCoordinator = (arg0: any) => unknown;
+export type PlatformTypesVideoAPICreateOfflineCoordinator = (arg0: any) => Promise<unknown>;
 
-export type PlatformTypesVideoAPICreatePlayerConfiguration = () => unknown;
+export type PlatformTypesVideoAPICreatePlayerConfiguration = () => Promise<unknown>;
 
-export type PlatformTypesVideoAPICreateVideoCoordinator = (arg0: any) => unknown;
+export type PlatformTypesVideoAPICreateVideoCoordinator = (arg0: any) => Promise<unknown>;
 
 export interface PlatformTypesVideoAPIEsperantoTransport {
   _onCancel: PlatformTypesRegistryMapValueInstanceOnCancel;
@@ -22903,9 +35483,27 @@ export interface PlatformTypesVideoAPIEventsEmitter {
 }
 
 export interface PlatformTypesVideoAPIEventsEmitterListeners {
+  picture_in_picture_changed: PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChanged;
   subtitle_languages_changed: PlatformTypesVideoAPIEventsEmitterListenersSubtitleLanguagesChanged;
   subtitle_preferred_language_changed: PlatformTypesVideoAPIEventsEmitterListenersSubtitlePreferredLanguageChanged;
 }
+
+export type PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChanged =
+  Array<PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItem>;
+
+export interface PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItem {
+  listener: PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItemListener;
+  options: PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItemOptions;
+}
+
+export type PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItemListener = (
+  arg0: any,
+) => unknown;
+
+export type PlatformTypesVideoAPIEventsEmitterListenersPictureInPictureChangedItemOptions = Record<
+  string,
+  unknown
+>;
 
 export type PlatformTypesVideoAPIEventsEmitterListenersSubtitleLanguagesChanged =
   Array<PlatformTypesVideoAPIEventsEmitterListenersSubtitleLanguagesChangedItem>;
@@ -22949,7 +35547,7 @@ export type PlatformTypesVideoAPIEventsEmitterMetaListenersRemove = Record<strin
 
 export type PlatformTypesVideoAPIFactories = Array<PlatformTypesAdManagersVtoFactoriesItem>;
 
-export type PlatformTypesVideoAPIGetAccessToken = () => unknown;
+export type PlatformTypesVideoAPIGetAccessToken = () => Promise<unknown>;
 
 export type PlatformTypesVideoAPIGetCapabilities = () => unknown;
 
@@ -22957,13 +35555,13 @@ export type PlatformTypesVideoAPIGetEvents = () => unknown;
 
 export type PlatformTypesVideoAPIGetPictureInPictureState = () => unknown;
 
-export type PlatformTypesVideoAPIGetPreferredSubtitleLanguage = () => unknown;
+export type PlatformTypesVideoAPIGetPreferredSubtitleLanguage = () => Promise<unknown>;
 
-export type PlatformTypesVideoAPIGetProductState = () => unknown;
+export type PlatformTypesVideoAPIGetProductState = () => Promise<unknown>;
 
-export type PlatformTypesVideoAPIGetSubtitleLanguages = () => unknown;
+export type PlatformTypesVideoAPIGetSubtitleLanguages = () => Promise<unknown>;
 
-export type PlatformTypesVideoAPIInitialize = () => unknown;
+export type PlatformTypesVideoAPIInitialize = () => Promise<unknown>;
 
 export type PlatformTypesVideoAPIOnManifestLoaded = (arg0: any) => unknown;
 
@@ -23056,7 +35654,7 @@ export type PlatformTypesVideoAPISetIsVideoVisible = (arg0: any) => unknown;
 
 export type PlatformTypesVideoAPISetPip = (arg0: any) => unknown;
 
-export type PlatformTypesVideoAPISetPreferredSubtitleLanguage = (arg0: any) => unknown;
+export type PlatformTypesVideoAPISetPreferredSubtitleLanguage = (arg0: any) => Promise<unknown>;
 
 export type PlatformTypesVideoAPISetSubtitleLanguages = (arg0: any) => unknown;
 
