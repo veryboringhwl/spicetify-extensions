@@ -13,19 +13,16 @@
 
   display: flex;
   flex-direction: column;
-  gap: var(--fdp-gap);
   overflow: hidden;
-  animation: fdp-fade-in 200ms ease-out both;
 }
 
-.find-duplicates__header {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  padding: 12px 14px;
-  background: var(--fdp-surface);
-  border: 1px solid var(--fdp-border);
-  border-radius: var(--fdp-radius);
+.find-duplicates__title {
+  font-size: 30px;
+  color: var(--spice-text);
+}
+
+.find-duplicates__dropdown {
+  align-content: center;
 }
 
 .find-duplicates__header-label {
@@ -44,7 +41,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 0px 32px;
+  padding: 8px 28px;
   overflow: scroll;
 }
 
@@ -66,6 +63,11 @@
   color: var(--fdp-text);
 }
 
+.duplicate-group__heading-info {
+  display: flex;
+  gap: 8px;
+}
+
 .duplicate-group__heading-length {
   padding: 2px 8px;
   font-size: 12px;
@@ -80,11 +82,17 @@
   gap: 10px;
 }
 
+.duplicate-group__duplicate-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .duplicate-group__item {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 14px;
+  padding: 12px 10px;
   border: 1px solid var(--fdp-border);
   border-left: 3px solid;
   border-radius: var(--fdp-radius);
@@ -124,14 +132,22 @@
   justify-content: space-between;
 }
 
-.duplicate-group__duplicate-content {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
+.details-grid {
+  display: grid;
+  grid-template-columns: 40px auto auto 85px;
+  gap: 8px;
+  width: 100%;
+  font-size: 0.9rem;
+  color: var(--fdp-subtext);
 }
 
-.duplicate-group__duplicate-name {
+.details-grid__image {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.details-grid__name {
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 600;
@@ -139,21 +155,27 @@
   white-space: nowrap;
 }
 
-.track-details {
-  font-size: 0.9rem;
-  color: var(--fdp-subtext);
+.details-grid__date {
+  text-align: right;
 }
 
-.track-details__line {
+.details-grid__main-info,
+.details-grid__second-info {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column;
+}
+
+.duplicate-group__actions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
 }
 
 .duplicate-group__playback-controls {
   display: flex;
-  gap: 10px;
+  gap: 4px;
   align-items: center;
+  width: 100%;
 }
 
 .duplicate-group__playback-button {
@@ -214,15 +236,4 @@
   outline: none;
   border-color: var(--fdp-accent);
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--fdp-accent), transparent 60%);
-}
-
-@keyframes fdp-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(3px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
 }

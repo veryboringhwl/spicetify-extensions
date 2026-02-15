@@ -1,6 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { Dexie, type Table } from "dexie";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { fetchAllLibraryContents } from "../../../shared/api/fetchAllLibraryContents.ts";
 import { fetchAllPlaylistTracks } from "../../../shared/api/fetchAllPlaylistTracks.ts";
 import { fetchGraphQLForTracks } from "../../../shared/api/fetchGraphQLForTracks.ts";
@@ -10,8 +10,7 @@ import { Icons } from "../../../shared/components/icons.tsx";
 import { type Option, OptionRow } from "../../../shared/components/optionRow.tsx";
 import { PopupModal } from "../../../shared/components/popupModal.tsx";
 import { Slider } from "../../../shared/components/slider.tsx";
-import { spotifyComponents } from "../../../shared/components/spotifyComponents.tsx";
-import { usePlayer } from "../../../shared/hooks/usePlayer.ts";
+import { spotifyComponents } from "../../../shared/components/spotifyComponents.js";
 
 spotifyComponents();
 
@@ -43,12 +42,44 @@ const CATEGORIES: ReadonlyArray<DuplicateCategory> = [
   "maybe",
 ];
 
+const CATEGORY_INFO: Record<DuplicateCategory, { label: string; tooltip: string }> = {
+  exact: {
+    label: "Identical Tracks",
+    tooltip: "The exact same Spotify track added multiple times to the playlist",
+  },
+  isrc: {
+    label: "Same Recording",
+    tooltip:
+      "Different Spotify entries for the same recording (e.g., from different albums but identical audio)",
+  },
+  probable: {
+    label: "Same Title & Artist",
+    tooltip: "Tracks with the same title and at least one shared artist",
+  },
+  likely: {
+    label: "Title & Length Match",
+    tooltip: "Tracks with the same title and similar duration (within 5 seconds)",
+  },
+  possible: {
+    label: "Similar Songs",
+    tooltip: "Tracks with similar titles and durations - may include remixes or covers",
+  },
+  maybe: {
+    label: "Possible Matches",
+    tooltip: "Tracks that may be duplicates based on name similarity - review VERY CAREFULLY!!",
+  },
+};
+
 interface Track {
   readonly uri: string;
-  readonly name: string;
-  readonly album: { readonly uri: string; readonly name: string };
-  readonly artists: ReadonlyArray<{ readonly name: string }>;
   readonly uid: string;
+  readonly name: string;
+  readonly album: {
+    readonly uri: string;
+    readonly name: string;
+    readonly images: ReadonlyArray<{ readonly url: string; readonly label: string }>;
+  };
+  readonly artists: ReadonlyArray<{ readonly name: string }>;
 }
 
 interface TrackDetails {
@@ -56,6 +87,7 @@ interface TrackDetails {
   readonly duration: number | null;
   readonly isrc: string | null;
   readonly releaseDate: string | null;
+  readonly coverArt: string | null;
 }
 
 interface DetailedTrack extends Track, TrackDetails {
@@ -87,6 +119,7 @@ interface Settings {
 interface DbTrack {
   trackUri: string;
   trackName: string;
+  trackCoverArt: string;
   trackDuration: number | null;
   trackPlayCount: number | null;
   trackIsrc: string | null;
@@ -101,10 +134,10 @@ class FindDupeTracks extends Dexie {
 
   constructor() {
     super("findDupeTracks");
-    this.version(0.2)
+    this.version(0.3)
       .stores({
         tracks:
-          "&trackUri, trackName, trackDuration, trackPlayCount, trackIsrc, albumUri, albumReleaseDate, lastUpdated, ignoreDuplicates",
+          "&trackUri, trackName, trackCoverArt, trackDuration, trackPlayCount, trackIsrc, albumUri, albumReleaseDate, lastUpdated, ignoreDuplicates",
       })
       .upgrade((trans) => {
         return trans.table("tracks").clear();
@@ -198,6 +231,13 @@ const settingsStore = {
 const useSettings = () => useSyncExternalStore(settingsStore.subscribe, settingsStore.getSnapshot);
 
 const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const formatReleaseDate = (dateStr: string | null): string => {
+  if (!dateStr) return "Unknown";
+  const date = new Date(dateStr);
+  if (Number.isNaN(date.getTime())) return dateStr;
+  return Spicetify.Locale.formatDate(date, { year: "numeric", month: "short", day: "numeric" });
+};
 
 const normaliseString = (name: string, regex: RegExp): string => {
   return name
@@ -337,6 +377,7 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
           duration: cached?.trackDuration ?? null,
           isrc: cached?.trackIsrc ?? null,
           releaseDate: cached?.albumReleaseDate ?? null,
+          coverArt: cached?.trackCoverArt ?? null,
           normalisedName: track.name.toLowerCase().trim(),
           normalisedFuzzy: normaliseString(track.name, regex),
         });
@@ -412,9 +453,16 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
         }
         const releaseDate = fetchedReleaseDate ?? cached?.albumReleaseDate ?? null;
 
+        const coverArt =
+          track.album.images.find((img: { label: string }) => img.label === "xlarge")?.url ??
+          track.album.images.find((img: { label: string }) => img.label === "large")?.url ??
+          track.album.images[0]?.url ??
+          "";
+
         updates.push({
           trackUri: track.uri,
           trackName: track.name,
+          trackCoverArt: coverArt,
           trackDuration: duration,
           trackPlayCount: playCount,
           trackIsrc: isrc,
@@ -431,6 +479,7 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
             duration,
             isrc,
             releaseDate,
+            coverArt,
           };
         }
       });
@@ -667,37 +716,105 @@ const SettingsMenu = () => {
     </section>
   );
 
+  const settingsLabels = Object.fromEntries(
+    CATEGORIES.map((cat) => [cat, CATEGORY_INFO[cat].label]),
+  ) as Record<DuplicateCategory, string>;
+
   return (
     <div className="duplicate-settings">
-      {renderSection("Display Groups", "groupSettings", {
-        exact: "Exact Duplicates",
-        isrc: "ISRC Match",
-        probable: "Same Title & Artist",
-        likely: "Same Title & Duration",
-        possible: "Similar Title & Duration",
-        maybe: "Fuzzy Matches",
-      })}
-      {renderSection("Confirm Delete", "confirmSettings", {
-        exact: "Exact",
-        isrc: "ISRC",
-        probable: "Probable",
-        likely: "Likely",
-        possible: "Possible",
-        maybe: "Maybe",
-      })}
+      {renderSection("Display Groups", "groupSettings", settingsLabels)}
+      {renderSection("Confirm Delete", "confirmSettings", settingsLabels)}
     </div>
   );
 };
 
+const PlayerAPI = Spicetify.Platform.PlayerAPI;
+
+const playerStore = {
+  subscribe: (callback: () => void) => {
+    const listener = () => callback();
+    Spicetify.Platform.PlayerAPI._events.addListener("update", listener, {});
+    return () => {
+      Spicetify.Platform.PlayerAPI._events.removeListener("update", listener, {});
+    };
+  },
+  getSnapshot: () => {
+    return Spicetify.Platform.PlayerAPI._state;
+  },
+};
+
 const TrackPlaybackControl = ({ uri, duration }: { uri: string; duration: number | null }) => {
-  const {
-    position,
-    duration: playerDuration,
-    isPlaying,
-    togglePlay,
-    handleSliderChange,
-    handleSliderRelease,
-  } = usePlayer(uri, duration ?? 0);
+  const trackUri = uri;
+  const trackDuration = duration ?? 0;
+
+  const playerState = useSyncExternalStore(playerStore.subscribe, playerStore.getSnapshot);
+
+  const isActiveTrack = playerState.item?.uri === trackUri;
+  const isPaused = playerState.isPaused;
+  const isPlaying = isActiveTrack && !isPaused;
+
+  const [position, setPosition] = useState(0);
+  const [playerDuration, setPlayerDuration] = useState(trackDuration);
+
+  const isSliderDragging = useRef(false);
+  const seekPositionRef = useRef(0);
+
+  useEffect(() => {
+    if (!isActiveTrack) {
+      setPosition(0);
+      setPlayerDuration(trackDuration);
+      return;
+    }
+
+    setPlayerDuration(playerState.duration);
+
+    if (isSliderDragging.current) return;
+
+    if (isPaused) {
+      setPosition(playerState.positionAsOfTimestamp);
+      return;
+    }
+
+    const intervalId = setInterval(() => {
+      const now = Date.now();
+      const statedPos = PlayerAPI._state.positionAsOfTimestamp;
+      const statedTime = PlayerAPI._state.timestamp;
+      const currentPos = now - statedTime + statedPos;
+
+      setPosition(Math.min(currentPos, playerState.duration));
+    }, 100);
+
+    return () => clearInterval(intervalId);
+  }, [
+    isActiveTrack,
+    isPaused,
+    playerState.duration,
+    playerState.positionAsOfTimestamp,
+    trackDuration,
+  ]);
+
+  const togglePlay = useCallback(() => {
+    if (isActiveTrack) {
+      isPaused ? PlayerAPI.resume({}) : PlayerAPI.pause({});
+    } else {
+      PlayerAPI.play({ uri: trackUri }, {});
+    }
+  }, [isActiveTrack, isPaused, trackUri]);
+
+  const handleSliderChange = useCallback((newPosition: number) => {
+    isSliderDragging.current = true;
+    setPosition(newPosition);
+    seekPositionRef.current = newPosition;
+  }, []);
+
+  const handleSliderRelease = useCallback(() => {
+    isSliderDragging.current = false;
+    if (isActiveTrack) {
+      PlayerAPI.seekTo(seekPositionRef.current);
+    } else {
+      PlayerAPI.play({ uri: trackUri }, {});
+    }
+  }, [isActiveTrack, trackUri]);
 
   const formatTime = (ms: number | undefined) => {
     if (ms == null || ms < 0) return "--:--";
@@ -708,7 +825,7 @@ const TrackPlaybackControl = ({ uri, duration }: { uri: string; duration: number
   return (
     <div className="duplicate-group__playback-controls">
       <button className="duplicate-group__playback-button" onClick={togglePlay}>
-        {isPlaying ? <Icons.React.pause /> : <Icons.React.play />}
+        {isPlaying ? <Icons.React.pause size={20} /> : <Icons.React.play size={20} />}
       </button>
       <span className="slider-time">{formatTime(position)}</span>
       <Slider
@@ -728,41 +845,35 @@ const DuplicateRow = ({
   track,
   category,
   onDelete,
-  isSource,
 }: {
   track: DetailedTrack;
   category: DuplicateCategory;
   onDelete: (track: DetailedTrack) => void;
-  isSource?: boolean;
 }) => (
   <div className={`duplicate-group__duplicate-item duplicate-group__item--${category}`}>
     <div className="duplicate-group__duplicate-info">
-      <div className="duplicate-group__duplicate-content">
-        <span className="duplicate-group__duplicate-name">
-          {isSource && <strong>Source: </strong>}
-          {track.name}
-        </span>
-        <div className="track-details">
-          <div className="track-details__line">
-            <span className="track-details__artists">
-              Artists: {track.artists.map((a) => a.name).join(", ")}
-            </span>
-            <span className="track-details__album">Album: {track.album.name}</span>
-          </div>
-          <div className="track-details__line">
-            <span className="track-details__playcount">
-              Plays: {track.playCount?.toLocaleString() ?? "N/A"}
-            </span>
-            <span className="track-details__date">Released: {track.releaseDate ?? "Unknown"}</span>
-          </div>
+      <div className="details-grid">
+        <img className="details-grid__image" src={track.coverArt ?? ""} />
+        <div className="details-grid__main-info">
+          <span className="details-grid__name">{track.name}</span>
+          <span className="details-grid__playcount">
+            Play Count: {track.playCount?.toLocaleString()}
+          </span>
         </div>
+        <div className="details-grid__second-info">
+          <span className="details-grid__artists">
+            {track.artists.map((a) => a.name).join(", ")}
+          </span>
+          <span className="details-grid__album">{track.album.name}</span>
+        </div>
+        <span className="details-grid__date">{formatReleaseDate(track.releaseDate)}</span>
       </div>
-      <button className="duplicate-group__delete-button" onClick={() => onDelete(track)}>
-        Delete
-      </button>
     </div>
     <div className="duplicate-group__actions">
       <TrackPlaybackControl duration={track.duration} uri={track.uri} />
+      <button className="duplicate-group__delete-button" onClick={() => onDelete(track)}>
+        Delete
+      </button>
     </div>
   </div>
 );
@@ -773,7 +884,7 @@ const GroupSection = ({
   groups,
   onDelete,
 }: {
-  title: string;
+  title: { label: string; tooltip: string };
   category: DuplicateCategory;
   groups: ReadonlyArray<DuplicateGroup>;
   onDelete: (cat: DuplicateCategory, t: DetailedTrack) => void;
@@ -781,7 +892,14 @@ const GroupSection = ({
   return (
     <div className="duplicate-group">
       <div className="duplicate-group__heading">
-        <div className="duplicate-group__heading-title">{title}</div>
+        <div className="duplicate-group__heading-info">
+          <div className="duplicate-group__heading-title">{title.label}</div>
+          <Spicetify.ReactComponent.TooltipWrapper label={title.tooltip} placement="top">
+            <div className="info-tippy">
+              <Icons.React.questionMark fill="var(--spice-subtext)" size={20} />
+            </div>
+          </Spicetify.ReactComponent.TooltipWrapper>
+        </div>
         <div className="duplicate-group__heading-length">{groups.length} found</div>
       </div>
       {groups.length > 0 && (
@@ -793,18 +911,20 @@ const GroupSection = ({
             >
               <DuplicateRow
                 category={category}
-                isSource
                 onDelete={(t) => onDelete(category, t)}
                 track={g.mainTrack}
               />
               <div className="duplicate-group__duplicates-list">
                 {g.duplicates.map((dup) => (
-                  <DuplicateRow
-                    category={category}
-                    key={dup.uid}
-                    onDelete={(t) => onDelete(category, t)}
-                    track={dup}
-                  />
+                  <>
+                    <div className="duplicate-group__duplicate-thread"></div>
+                    <DuplicateRow
+                      category={category}
+                      key={dup.uid}
+                      onDelete={(t) => onDelete(category, t)}
+                      track={dup}
+                    />
+                  </>
                 ))}
               </div>
             </div>
@@ -871,15 +991,6 @@ export function PlaylistDuplicateFinder({
     setPendingDelete(null);
   };
 
-  const labels: Record<DuplicateCategory, string> = {
-    exact: "Exact URI Matches",
-    isrc: "Same ISRC",
-    probable: "Same Title + Shared Artist",
-    likely: "Same Title + Duration (±5s)",
-    possible: "Similar Title + Duration (±5s)",
-    maybe: "Maybe Duplicates (Fuzzy)",
-  };
-
   return (
     <>
       <Spicetify.ReactComponent.ConfirmDialog
@@ -898,9 +1009,17 @@ export function PlaylistDuplicateFinder({
       />
       <div className="find-duplicates">
         <div className="modal__header">
-          <h1 className="modal__title">
+          <h1 className="find-duplicates__title">
             {view === "finder" ? "Playlist Duplicate Finder" : "Settings"}
           </h1>
+          <div className="find-duplicates__dropdown">
+            <Dropdown
+              disabled={playlistsLoading || tracksLoading}
+              onChange={setSelectedUri}
+              options={playlists.map((p) => ({ value: p.uri, label: p.name }))}
+              value={selectedUri ?? ""}
+            />
+          </div>
           <div className="modal__buttonContainer">
             <button
               className="modal__button"
@@ -917,39 +1036,25 @@ export function PlaylistDuplicateFinder({
         <div className="find-duplicates__content">
           {view === "settings" ? (
             <SettingsMenu />
+          ) : tracksLoading ? (
+            <div className="find-duplicates__loading">
+              {/* @ts-expect-error Spotiofy thingy */}
+              <UI.ProgressDots size="medium" />
+            </div>
           ) : (
-            <>
-              <div className="find-duplicates__header">
-                <span className="find-duplicates__header-label">Select Playlist:</span>
-                <Dropdown
-                  disabled={playlistsLoading || tracksLoading}
-                  onChange={setSelectedUri}
-                  options={playlists.map((p) => ({ value: p.uri, label: p.name }))}
-                  value={selectedUri ?? ""}
+            CATEGORIES.map((cat) => {
+              if (!settings.groupSettings[cat]) return null;
+
+              return (
+                <GroupSection
+                  category={cat}
+                  groups={results[cat]}
+                  key={cat}
+                  onDelete={handleDelete}
+                  title={CATEGORY_INFO[cat]}
                 />
-              </div>
-
-              {tracksLoading ? (
-                <div className="find-duplicates__loading">
-                  {/* @ts-expect-error Spotiofy thingy */}
-                  <UI.ProgressDots size="medium" />
-                </div>
-              ) : (
-                CATEGORIES.map((cat) => {
-                  if (!settings.groupSettings[cat]) return null;
-
-                  return (
-                    <GroupSection
-                      category={cat}
-                      groups={results[cat]}
-                      key={cat}
-                      onDelete={handleDelete}
-                      title={labels[cat]}
-                    />
-                  );
-                })
-              )}
-            </>
+              );
+            })
           )}
         </div>
       </div>
