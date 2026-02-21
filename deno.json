@@ -14,7 +14,6 @@
     "@babel/preset-typescript": "npm:@babel/preset-typescript@7.28.5",
     "@biomejs/biome": "npm:@biomejs/biome@2.3.13",
     "@esbuild/": "https://deno.land/x/esbuild@v0.27.2/",
-    "@js-temporal/polyfill": "npm:@js-temporal/polyfill@^0.5.1",
     "@oazmi/esbuild-plugin-deno": "jsr:@oazmi/esbuild-plugin-deno@0.4.5",
     "@std/path": "jsr:@std/path@1.1.4",
     "@std/streams": "jsr:@std/streams@1.0.17",

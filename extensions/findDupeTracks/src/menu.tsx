@@ -1,4 +1,3 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { Dexie, type Table } from "dexie";
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { fetchAllLibraryContents } from "../../../shared/api/fetchAllLibraryContents.ts";

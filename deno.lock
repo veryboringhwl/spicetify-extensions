@@ -12,7 +12,6 @@
     "npm:@babel/preset-react@7.28.5": "7.28.5_@babel+core@7.28.4",
     "npm:@babel/preset-typescript@7.28.5": "7.28.5_@babel+core@7.28.4",
     "npm:@biomejs/biome@2.3.13": "2.3.13",
-    "npm:@js-temporal/polyfill@~0.5.1": "0.5.1",
     "npm:babel-plugin-react-compiler@19.1.0-rc.3": "19.1.0-rc.3",
     "npm:dexie@^4.2.1": "4.2.1",
     "npm:esbuild-plugin-babel@0.2.3": "0.2.3_@babel+core@7.28.4",
@@ -393,12 +392,6 @@
         "@jridgewell/sourcemap-codec"
       ]
     },
-    "@js-temporal/polyfill@0.5.1": {
-      "integrity": "sha512-hloP58zRVCRSpgDxmqCWJNlizAlUgJFqG2ypq79DCvyv9tHjRYMDOcPFjzfl/A1/YxDvRCZz8wvZvmapQnKwFQ==",
-      "dependencies": [
-        "jsbi"
-      ]
-    },
     "babel-plugin-react-compiler@19.1.0-rc.3": {
       "integrity": "sha512-mjRn69WuTz4adL0bXGx8Rsyk1086zFJeKmes6aK0xPuK3aaXmDJdLHqwKKMrpm6KAI1MCoUK72d2VeqQbu8YIA==",
       "dependencies": [
@@ -452,9 +445,6 @@
     },
     "js-tokens@4.0.0": {
       "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
-    },
-    "jsbi@4.3.2": {
-      "integrity": "sha512-9fqMSQbhJykSeii05nxKl4m6Eqn2P6rOlYiS+C5Dr/HPIU/7yZxu5qzbs40tgaFORiw2Amd0mirjxatXYMkIew=="
     },
     "jsesc@3.1.0": {
       "integrity": "sha512-/sM3dO2FOzXjKQhJuo0Q173wf2KOo8t4I8vHy6lF9poUp7bKT0/NHE8fPX23PwfhnykfqnC2xRxOnVw5XuGIaA==",
@@ -558,7 +548,6 @@
       "npm:@babel/preset-react@7.28.5",
       "npm:@babel/preset-typescript@7.28.5",
       "npm:@biomejs/biome@2.3.13",
-      "npm:@js-temporal/polyfill@~0.5.1",
       "npm:babel-plugin-react-compiler@19.1.0-rc.3",
       "npm:dexie@^4.2.1",
       "npm:esbuild-plugin-babel@0.2.3",
