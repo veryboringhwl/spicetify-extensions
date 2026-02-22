@@ -2,8 +2,8 @@ import { Dexie, type Table } from "dexie";
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { fetchAllLibraryContents } from "../../../shared/api/fetchAllLibraryContents.ts";
 import { fetchAllPlaylistTracks } from "../../../shared/api/fetchAllPlaylistTracks.ts";
-import { fetchGraphQLForTracks } from "../../../shared/api/fetchGraphQLForTracks.ts";
-import { fetchWebAPIForTracks } from "../../../shared/api/fetchWebAPIForTracks.ts";
+import { fetchPlayCountForTracks } from "../../../shared/api/fetchPlayCountForTracks.ts";
+import { fetchSpClientForTracks } from "../../../shared/api/fetchSpClientForTracks.ts";
 import { Dropdown } from "../../../shared/components/dropdown.tsx";
 import { Icons } from "../../../shared/components/icons.tsx";
 import { type Option, OptionRow } from "../../../shared/components/optionRow.tsx";
@@ -79,11 +79,13 @@ interface Track {
     readonly images: ReadonlyArray<{ readonly url: string; readonly label: string }>;
   };
   readonly artists: ReadonlyArray<{ readonly name: string }>;
+  readonly duration: {
+    readonly milliseconds: number;
+  };
 }
 
 interface TrackDetails {
   readonly playCount: number | null;
-  readonly duration: number | null;
   readonly isrc: string | null;
   readonly releaseDate: string | null;
   readonly coverArt: string | null;
@@ -133,7 +135,7 @@ class FindDupeTracks extends Dexie {
 
   constructor() {
     super("findDupeTracks");
-    this.version(0.3)
+    this.version(0.4)
       .stores({
         tracks:
           "&trackUri, trackName, trackCoverArt, trackDuration, trackPlayCount, trackIsrc, albumUri, albumReleaseDate, lastUpdated, ignoreDuplicates",
@@ -351,7 +353,6 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
         } else {
           const hasMissingData =
             cached.trackPlayCount === null ||
-            cached.trackDuration === null ||
             cached.trackIsrc === null ||
             cached.albumReleaseDate === null;
 
@@ -373,7 +374,6 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
         detailedTracks.push({
           ...track,
           playCount: cached?.trackPlayCount ?? null,
-          duration: cached?.trackDuration ?? null,
           isrc: cached?.trackIsrc ?? null,
           releaseDate: cached?.albumReleaseDate ?? null,
           coverArt: cached?.trackCoverArt ?? null,
@@ -392,29 +392,29 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
         return;
       }
 
-      const tracksNeedingGraphQL = needsUpdate.filter((t) => {
+      const tracksNeedingPlayCount = needsUpdate.filter((t) => {
         const c = cacheMap.get(t.uri);
-        return !c || c.trackDuration === null || c.trackPlayCount === null;
+        return !c || c.trackPlayCount === null;
       });
 
-      const tracksNeedingWebAPI = needsUpdate.filter((t) => {
+      const tracksNeedingSpClient = needsUpdate.filter((t) => {
         const c = cacheMap.get(t.uri);
         return !c || c.trackIsrc === null || c.albumReleaseDate === null;
       });
 
-      const [graphQLResult, webAPIResult] = await Promise.allSettled([
-        tracksNeedingGraphQL.length > 0
-          ? fetchGraphQLForTracks(tracksNeedingGraphQL.map((t) => t.album.uri))
+      const [spclientResult, esperantoResult] = await Promise.allSettled([
+        tracksNeedingSpClient.length > 0
+          ? fetchSpClientForTracks(tracksNeedingSpClient.map((t) => t.uri))
           : Promise.resolve(new Map()),
-        tracksNeedingWebAPI.length > 0
-          ? fetchWebAPIForTracks(tracksNeedingWebAPI.map((t) => t.uri))
+        tracksNeedingPlayCount.length > 0
+          ? fetchPlayCountForTracks(tracksNeedingPlayCount.map((t) => t.uri))
           : Promise.resolve(new Map()),
       ]);
 
       if (abortController.signal.aborted) return;
 
-      const graphQLData = graphQLResult.status === "fulfilled" ? graphQLResult.value : null;
-      const webAPIData = webAPIResult.status === "fulfilled" ? webAPIResult.value : null;
+      const webAPIData = spclientResult.status === "fulfilled" ? spclientResult.value : null;
+      const esperantoData = esperantoResult.status === "fulfilled" ? esperantoResult.value : null;
 
       const updates: DbTrack[] = [];
       const lastUpdated = now.toString();
@@ -422,27 +422,23 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
 
       needsUpdate.forEach((track) => {
         const cached = cacheMap.get(track.uri);
-        const graphQLTrack = graphQLData?.get(track.uri) as any;
-        const webAPITrack = webAPIData?.get(track.uri) as any;
+        const spClientTrack = webAPIData?.get(track.uri);
 
-        const fetchedDuration = graphQLTrack?.duration?.totalMilliseconds ?? null;
-        const duration = fetchedDuration ?? cached?.trackDuration ?? null;
-
-        const fetchedPlayCount = graphQLTrack?.playcount ? Number(graphQLTrack.playcount) : null;
-        const playCount = fetchedPlayCount ?? cached?.trackPlayCount ?? null;
+        const esperantoTrack = esperantoData?.get(track.uri) ?? null;
+        const playCount = esperantoTrack ?? cached?.trackPlayCount ?? null;
 
         let fetchedIsrc = null;
-        if (webAPITrack) {
+        if (spClientTrack) {
           fetchedIsrc =
-            webAPITrack?.external_ids?.isrc ??
-            webAPITrack?.external_id?.find((e: any) => e?.type === "isrc")?.id ??
+            spClientTrack?.external_ids?.isrc ??
+            spClientTrack?.external_id?.find((e: any) => e?.type === "isrc")?.id ??
             null;
         }
         const isrc = fetchedIsrc ?? cached?.trackIsrc ?? null;
 
         let fetchedReleaseDate: string | null = null;
-        if (webAPITrack) {
-          const rawDate = webAPITrack?.album?.date;
+        if (spClientTrack) {
+          const rawDate = spClientTrack?.album?.date;
           if (typeof rawDate === "string") fetchedReleaseDate = rawDate;
           else if (rawDate?.year) {
             fetchedReleaseDate = `${rawDate.year}`;
@@ -462,7 +458,7 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
           trackUri: track.uri,
           trackName: track.name,
           trackCoverArt: coverArt,
-          trackDuration: duration,
+          trackDuration: track.duration.milliseconds,
           trackPlayCount: playCount,
           trackIsrc: isrc,
           albumUri: track.album.uri,
@@ -475,7 +471,6 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
           updatedDetailedTracks[index] = {
             ...updatedDetailedTracks[index],
             playCount,
-            duration,
             isrc,
             releaseDate,
             coverArt,
@@ -573,8 +568,8 @@ function useDuplicateFinder(
     };
 
     const similarDuration = (a: DetailedTrack, b: DetailedTrack) => {
-      if (a.duration == null || b.duration == null) return false;
-      return Math.abs(a.duration - b.duration) <= 5000;
+      if (a.duration.milliseconds == null || b.duration.milliseconds == null) return false;
+      return Math.abs(a.duration.milliseconds - b.duration.milliseconds) <= 5000;
     };
 
     if (groupSettings.probable) {
@@ -869,7 +864,7 @@ const DuplicateRow = ({
       </div>
     </div>
     <div className="duplicate-group__actions">
-      <TrackPlaybackControl duration={track.duration} uri={track.uri} />
+      <TrackPlaybackControl duration={track.duration.milliseconds} uri={track.uri} />
       <button className="duplicate-group__delete-button" onClick={() => onDelete(track)}>
         Delete
       </button>
@@ -1037,7 +1032,7 @@ export function PlaylistDuplicateFinder({
             <SettingsMenu />
           ) : tracksLoading ? (
             <div className="find-duplicates__loading">
-              {/* @ts-expect-error Spotiofy thingy */}
+              {/* @ts-expect-error Spotify thingy */}
               <UI.ProgressDots size="medium" />
             </div>
           ) : (
