@@ -1,3 +1,7 @@
+body {
+  overflow: hidden !important;
+}
+
 .modal {
   position: absolute;
   top: 0;

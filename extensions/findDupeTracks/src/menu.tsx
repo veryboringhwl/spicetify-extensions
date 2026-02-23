@@ -1,15 +1,16 @@
 import { Dexie, type Table } from "dexie";
-import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { fetchAllLibraryContents } from "../../../shared/api/fetchAllLibraryContents.ts";
 import { fetchAllPlaylistTracks } from "../../../shared/api/fetchAllPlaylistTracks.ts";
+import { fetchMetadataForTracks } from "../../../shared/api/fetchMetadataForTracks.ts";
 import { fetchPlayCountForTracks } from "../../../shared/api/fetchPlayCountForTracks.ts";
-import { fetchSpClientForTracks } from "../../../shared/api/fetchSpClientForTracks.ts";
 import { Dropdown } from "../../../shared/components/dropdown.tsx";
 import { Icons } from "../../../shared/components/icons.tsx";
 import { type Option, OptionRow } from "../../../shared/components/optionRow.tsx";
 import { PopupModal } from "../../../shared/components/popupModal.tsx";
 import { Slider } from "../../../shared/components/slider.tsx";
 import { spotifyComponents } from "../../../shared/components/spotifyComponents.js";
+import { usePlayer } from "../../../shared/hooks/usePlayer.ts";
 
 spotifyComponents();
 
@@ -79,12 +80,10 @@ interface Track {
     readonly images: ReadonlyArray<{ readonly url: string; readonly label: string }>;
   };
   readonly artists: ReadonlyArray<{ readonly name: string }>;
-  readonly duration: {
-    readonly milliseconds: number;
-  };
 }
 
 interface TrackDetails {
+  readonly duration: number | null;
   readonly playCount: number | null;
   readonly isrc: string | null;
   readonly releaseDate: string | null;
@@ -308,11 +307,12 @@ function useOwnedPlaylists() {
 
 function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) {
   const [tracks, setTracks] = useState<ReadonlyArray<DetailedTrack>>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(!!playlistUri); // Change false to !!playlistUri
 
   useEffect(() => {
     if (!playlistUri) {
       setTracks([]);
+      setLoading(false);
       return;
     }
 
@@ -352,6 +352,7 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
           isStale = true;
         } else {
           const hasMissingData =
+            cached.trackDuration === null ||
             cached.trackPlayCount === null ||
             cached.trackIsrc === null ||
             cached.albumReleaseDate === null;
@@ -373,6 +374,7 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
         if (isStale) needsUpdate.push(track);
         detailedTracks.push({
           ...track,
+          duration: cached?.trackDuration ?? null,
           playCount: cached?.trackPlayCount ?? null,
           isrc: cached?.trackIsrc ?? null,
           releaseDate: cached?.albumReleaseDate ?? null,
@@ -397,23 +399,27 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
         return !c || c.trackPlayCount === null;
       });
 
-      const tracksNeedingSpClient = needsUpdate.filter((t) => {
+      const tracksNeedingMetadata = needsUpdate.filter((t) => {
         const c = cacheMap.get(t.uri);
-        return !c || c.trackIsrc === null || c.albumReleaseDate === null;
+        return (
+          !c || c.trackIsrc === null || c.albumReleaseDate === null || c.trackDuration === null
+        );
       });
 
-      const [spclientResult, esperantoResult] = await Promise.allSettled([
-        tracksNeedingSpClient.length > 0
-          ? fetchSpClientForTracks(tracksNeedingSpClient.map((t) => t.uri))
+      perf.start("Fetching from APIs");
+      const [MetadataResult, esperantoResult] = await Promise.allSettled([
+        tracksNeedingMetadata.length > 0
+          ? fetchMetadataForTracks(tracksNeedingMetadata.map((t) => t.uri))
           : Promise.resolve(new Map()),
         tracksNeedingPlayCount.length > 0
           ? fetchPlayCountForTracks(tracksNeedingPlayCount.map((t) => t.uri))
           : Promise.resolve(new Map()),
       ]);
+      perf.end("Fetching from APIs");
 
       if (abortController.signal.aborted) return;
 
-      const webAPIData = spclientResult.status === "fulfilled" ? spclientResult.value : null;
+      const metadataData = MetadataResult.status === "fulfilled" ? MetadataResult.value : null;
       const esperantoData = esperantoResult.status === "fulfilled" ? esperantoResult.value : null;
 
       const updates: DbTrack[] = [];
@@ -422,23 +428,21 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
 
       needsUpdate.forEach((track) => {
         const cached = cacheMap.get(track.uri);
-        const spClientTrack = webAPIData?.get(track.uri);
-
-        const esperantoTrack = esperantoData?.get(track.uri) ?? null;
+        const metadataTrack = metadataData?.get(track.uri) as any;
+        const esperantoTrack = esperantoData?.get(track.uri) as any;
         const playCount = esperantoTrack ?? cached?.trackPlayCount ?? null;
+        const duration = metadataTrack?.duration ?? cached?.trackDuration ?? null;
 
         let fetchedIsrc = null;
-        if (spClientTrack) {
+        if (metadataTrack) {
           fetchedIsrc =
-            spClientTrack?.external_ids?.isrc ??
-            spClientTrack?.external_id?.find((e: any) => e?.type === "isrc")?.id ??
-            null;
+            metadataTrack?.external_id?.find((e: any) => e?.type === "isrc")?.id ?? null;
         }
         const isrc = fetchedIsrc ?? cached?.trackIsrc ?? null;
 
         let fetchedReleaseDate: string | null = null;
-        if (spClientTrack) {
-          const rawDate = spClientTrack?.album?.date;
+        if (metadataTrack) {
+          const rawDate = metadataTrack?.album?.date;
           if (typeof rawDate === "string") fetchedReleaseDate = rawDate;
           else if (rawDate?.year) {
             fetchedReleaseDate = `${rawDate.year}`;
@@ -458,7 +462,7 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
           trackUri: track.uri,
           trackName: track.name,
           trackCoverArt: coverArt,
-          trackDuration: track.duration.milliseconds,
+          trackDuration: duration,
           trackPlayCount: playCount,
           trackIsrc: isrc,
           albumUri: track.album.uri,
@@ -470,6 +474,7 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
         if (index !== -1) {
           updatedDetailedTracks[index] = {
             ...updatedDetailedTracks[index],
+            duration,
             playCount,
             isrc,
             releaseDate,
@@ -568,8 +573,8 @@ function useDuplicateFinder(
     };
 
     const similarDuration = (a: DetailedTrack, b: DetailedTrack) => {
-      if (a.duration.milliseconds == null || b.duration.milliseconds == null) return false;
-      return Math.abs(a.duration.milliseconds - b.duration.milliseconds) <= 5000;
+      if (a.duration == null || b.duration == null) return false;
+      return Math.abs(a.duration - b.duration) <= 5000;
     };
 
     if (groupSettings.probable) {
@@ -722,9 +727,9 @@ const SettingsMenu = () => {
   );
 };
 
-const PlayerAPI = Spicetify.Platform.PlayerAPI;
+const _PlayerAPI = Spicetify.Platform.PlayerAPI;
 
-const playerStore = {
+const _playerStore = {
   subscribe: (callback: () => void) => {
     const listener = () => callback();
     Spicetify.Platform.PlayerAPI._events.addListener("update", listener, {});
@@ -738,77 +743,14 @@ const playerStore = {
 };
 
 const TrackPlaybackControl = ({ uri, duration }: { uri: string; duration: number | null }) => {
-  const trackUri = uri;
-  const trackDuration = duration ?? 0;
-
-  const playerState = useSyncExternalStore(playerStore.subscribe, playerStore.getSnapshot);
-
-  const isActiveTrack = playerState.item?.uri === trackUri;
-  const isPaused = playerState.isPaused;
-  const isPlaying = isActiveTrack && !isPaused;
-
-  const [position, setPosition] = useState(0);
-  const [playerDuration, setPlayerDuration] = useState(trackDuration);
-
-  const isSliderDragging = useRef(false);
-  const seekPositionRef = useRef(0);
-
-  useEffect(() => {
-    if (!isActiveTrack) {
-      setPosition(0);
-      setPlayerDuration(trackDuration);
-      return;
-    }
-
-    setPlayerDuration(playerState.duration);
-
-    if (isSliderDragging.current) return;
-
-    if (isPaused) {
-      setPosition(playerState.positionAsOfTimestamp);
-      return;
-    }
-
-    const intervalId = setInterval(() => {
-      const now = Date.now();
-      const statedPos = PlayerAPI._state.positionAsOfTimestamp;
-      const statedTime = PlayerAPI._state.timestamp;
-      const currentPos = now - statedTime + statedPos;
-
-      setPosition(Math.min(currentPos, playerState.duration));
-    }, 100);
-
-    return () => clearInterval(intervalId);
-  }, [
-    isActiveTrack,
-    isPaused,
-    playerState.duration,
-    playerState.positionAsOfTimestamp,
-    trackDuration,
-  ]);
-
-  const togglePlay = useCallback(() => {
-    if (isActiveTrack) {
-      isPaused ? PlayerAPI.resume({}) : PlayerAPI.pause({});
-    } else {
-      PlayerAPI.play({ uri: trackUri }, {});
-    }
-  }, [isActiveTrack, isPaused, trackUri]);
-
-  const handleSliderChange = useCallback((newPosition: number) => {
-    isSliderDragging.current = true;
-    setPosition(newPosition);
-    seekPositionRef.current = newPosition;
-  }, []);
-
-  const handleSliderRelease = useCallback(() => {
-    isSliderDragging.current = false;
-    if (isActiveTrack) {
-      PlayerAPI.seekTo(seekPositionRef.current);
-    } else {
-      PlayerAPI.play({ uri: trackUri }, {});
-    }
-  }, [isActiveTrack, trackUri]);
+  const {
+    position,
+    duration: playerDuration,
+    isCurrentlyPlayingThisTrack,
+    togglePlay,
+    handleSliderChange,
+    handleSliderRelease,
+  } = usePlayer(uri, duration ?? 0);
 
   const formatTime = (ms: number | undefined) => {
     if (ms == null || ms < 0) return "--:--";
@@ -819,7 +761,7 @@ const TrackPlaybackControl = ({ uri, duration }: { uri: string; duration: number
   return (
     <div className="duplicate-group__playback-controls">
       <button className="duplicate-group__playback-button" onClick={togglePlay}>
-        {isPlaying ? <Icons.React.pause size={20} /> : <Icons.React.play size={20} />}
+        {isCurrentlyPlayingThisTrack ? <Icons.React.pause /> : <Icons.React.play />}
       </button>
       <span className="slider-time">{formatTime(position)}</span>
       <Slider
@@ -864,7 +806,7 @@ const DuplicateRow = ({
       </div>
     </div>
     <div className="duplicate-group__actions">
-      <TrackPlaybackControl duration={track.duration.milliseconds} uri={track.uri} />
+      <TrackPlaybackControl duration={track.duration} uri={track.uri} />
       <button className="duplicate-group__delete-button" onClick={() => onDelete(track)}>
         Delete
       </button>
@@ -896,7 +838,7 @@ const GroupSection = ({
         </div>
         <div className="duplicate-group__heading-length">{groups.length} found</div>
       </div>
-      {groups.length > 0 && (
+      {groups.length > 0 ? (
         <div className="duplicate-group__list">
           {groups.map((g) => (
             <div
@@ -924,6 +866,8 @@ const GroupSection = ({
             </div>
           ))}
         </div>
+      ) : (
+        <div className="duplicate-group__empty">No duplicates found in this category.</div>
       )}
     </div>
   );
@@ -1006,14 +950,18 @@ export function PlaylistDuplicateFinder({
           <h1 className="find-duplicates__title">
             {view === "finder" ? "Playlist Duplicate Finder" : "Settings"}
           </h1>
-          <div className="find-duplicates__dropdown">
-            <Dropdown
-              disabled={playlistsLoading || tracksLoading}
-              onChange={setSelectedUri}
-              options={playlists.map((p) => ({ value: p.uri, label: p.name }))}
-              value={selectedUri ?? ""}
-            />
-          </div>
+          {view === "finder" ? (
+            <div className="find-duplicates__dropdown">
+              <Dropdown
+                disabled={playlistsLoading || tracksLoading}
+                onChange={setSelectedUri}
+                options={playlists.map((p) => ({ value: p.uri, label: p.name }))}
+                value={selectedUri ?? ""}
+              />
+            </div>
+          ) : (
+            ""
+          )}
           <div className="modal__buttonContainer">
             <button
               className="modal__button"
