@@ -307,7 +307,7 @@ function useOwnedPlaylists() {
 
 function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) {
   const [tracks, setTracks] = useState<ReadonlyArray<DetailedTrack>>([]);
-  const [loading, setLoading] = useState(!!playlistUri); // Change false to !!playlistUri
+  const [loading, setLoading] = useState(!!playlistUri);
 
   useEffect(() => {
     if (!playlistUri) {

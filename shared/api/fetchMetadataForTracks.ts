@@ -1,3 +1,5 @@
+// some protobuf defs taken from https://github.com/devgianlu/go-librespot/tree/master/proto/spotify/metadata/metadata.proto
+
 interface FieldInfo {
   name: string;
   type: string;
@@ -67,9 +69,12 @@ const protoSchema: ProtoSchema = {
     },
     enums: {
       ContentRatingTag: {
-        0: "CONTENT_RATING_TAG_UNKNOWN",
+        0: "CONTENT_RATING_TAG_UNSPECIFIED",
         1: "CONTENT_RATING_TAG_EXPLICIT",
-        2: "CONTENT_RATING_TAG_CLEAN",
+        2: "CONTENT_RATING_TAG_MOGEF_19",
+        3: "CONTENT_RATING_TAG_SPOTIFY_18_PLUS",
+        4: "CONTENT_RATING_TAG_EROTIC",
+        5: "CONTENT_RATING_TAG_NOT_FOR_CHILDREN",
       },
     },
   },
