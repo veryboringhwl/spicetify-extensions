@@ -25,7 +25,6 @@ const ColourPicker = ({ value = "#000000", onChange }: ColorPickerProps) => {
   const [currentColor, setCurrentColor] = useState(value);
   const pickerRef = useRef<HTMLDivElement>(null);
 
-  // Color conversion utilities
   const hexToRgb = useCallback((hex: string): RGBColor => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
@@ -122,7 +121,6 @@ const ColourPicker = ({ value = "#000000", onChange }: ColorPickerProps) => {
     };
   }, []);
 
-  // Handle color changes
   const handleColorChange = useCallback(
     (newColor: string) => {
       setCurrentColor(newColor);
@@ -131,7 +129,6 @@ const ColourPicker = ({ value = "#000000", onChange }: ColorPickerProps) => {
     [onChange],
   );
 
-  // Handle hex input change
   const handleHexChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const hex = event.target.value;
@@ -142,7 +139,6 @@ const ColourPicker = ({ value = "#000000", onChange }: ColorPickerProps) => {
     [handleColorChange],
   );
 
-  // Handle RGB input changes
   const handleRgbChange = useCallback(
     (channel: keyof RGBColor, value: string) => {
       const numValue = Number.parseInt(value, 10);
@@ -157,7 +153,6 @@ const ColourPicker = ({ value = "#000000", onChange }: ColorPickerProps) => {
     [currentColor, hexToRgb, rgbToHex, handleColorChange],
   );
 
-  // Handle HSV input changes
   const handleHsvChange = useCallback(
     (channel: keyof HSVColor, value: string) => {
       const numValue = Number.parseInt(value, 10);
@@ -180,7 +175,6 @@ const ColourPicker = ({ value = "#000000", onChange }: ColorPickerProps) => {
     [currentColor, hexToRgb, rgbToHsv, hsvToRgb, rgbToHex, handleColorChange],
   );
 
-  // Close picker when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (pickerRef.current && !pickerRef.current.contains(event.target as Node)) {
@@ -194,7 +188,6 @@ const ColourPicker = ({ value = "#000000", onChange }: ColorPickerProps) => {
     }
   }, [isOpen]);
 
-  // Update current color when value prop changes
   useEffect(() => {
     if (value && /^#[0-9A-F]{6}$/i.test(value)) {
       setCurrentColor(value);

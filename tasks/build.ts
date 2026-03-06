@@ -3,7 +3,7 @@ import { build, type Plugin } from "@esbuild/mod.js";
 import { denoPlugins } from "@oazmi/esbuild-plugin-deno";
 import { join } from "@std/path";
 
-import { inlineCSSPlugin } from "./pluginInlineCSS.ts";
+import { inlineCSSPlugin } from "./pluginInlineCss.ts";
 import { spicetifyShims } from "./spicetifyShimsPlugin.ts";
 
 const APPDATA: string = Deno.env.get("APPDATA") || "";
