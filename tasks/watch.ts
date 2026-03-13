@@ -4,7 +4,7 @@ import { context, type Plugin } from "@esbuild/mod.js";
 import { denoPlugins } from "@oazmi/esbuild-plugin-deno";
 import { join } from "@std/path";
 import { TextLineStream } from "@std/streams";
-import { inlineCSSPlugin } from "./pluginInlineCSS.ts";
+import { inlineCSSPlugin } from "./pluginInlineCss.ts";
 import { spicetifyShims } from "./spicetifyShimsPlugin.ts";
 
 const APPDATA: string = Deno.env.get("APPDATA") || "";
@@ -101,9 +101,10 @@ const watchFolders = async (): Promise<void> => {
 };
 
 const killSpotify = async (): Promise<void> => {
-  await new Deno.Command("taskkill", {
+  const output = await Deno.spawnAndWait("taskkill", {
     args: ["/F", "/IM", "spotify.exe"],
-  }).output();
+  });
+  console.log(`\x1b[36m${output.stdout}.\x1b[0m`);
 };
 
 const applyExtensions = async (): Promise<void> => {

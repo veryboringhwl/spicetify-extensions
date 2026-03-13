@@ -20,7 +20,6 @@ type BaseNodeInfo = {
   occurrences: Set<string>;
 };
 
-// 1. UPDATED: Added isAsync to the function kind
 type NodeInfo =
   | (BaseNodeInfo & { kind: "object"; props: Map<string, string> })
   | (BaseNodeInfo & { kind: "function"; arity: number; isAsync: boolean })
@@ -34,8 +33,7 @@ export const generateTypes = (rootObject: any, rootTypeName: string): string => 
 
   const runtimeUsername: string | null = (() => {
     try {
-      // @ts-expect-error
-      return typeof Spicetify?.Platform?.username !== "undefined"
+      return typeof Spicetify.Platform.username !== "undefined"
         ? String(Spicetify.Platform.username)
         : null;
     } catch (_e) {
