@@ -1,5 +1,9 @@
 import { metadataSchema } from "./schema.ts";
 
+function warn(reason: string, ctx: Record<string, any>) {
+  console.warn(reason, ctx);
+}
+
 export class ProtobufReader {
   private view: DataView;
   private bytes: Uint8Array;
@@ -29,14 +33,23 @@ export class ProtobufReader {
       result |= (byte & 0x7fn) << shift;
       if (!(byte & 0x80n)) return result;
       shift += 7n;
-      if (shift > 70n) break;
+      if (shift > 70n) {
+        warn("Varint too long", {
+          offset: this.offset,
+          shift: shift.toString(),
+        });
+        break;
+      }
     }
     return null;
   }
 
   readZigZagVarint(): bigint {
     const n = this.readVarint();
-    if (n === null) return 0n;
+    if (n === null) {
+      warn("Invalid zigzag varint", { offset: this.offset });
+      return 0n;
+    }
     return (n >> 1n) ^ -(n & 1n);
   }
 
@@ -70,12 +83,20 @@ export class ProtobufReader {
       case 5:
         this.offset += 4;
         break;
+      default:
+        warn("Unknown wire type", {
+          wireType,
+          offset: this.offset,
+        });
     }
   }
 
   decode(schemaName: string): any {
     const schema = metadataSchema[schemaName];
-    if (!schema) return {};
+    if (!schema) {
+      warn("Schema not found", { schemaName });
+      return {};
+    }
 
     const result: Record<string, any> = {};
 
@@ -88,7 +109,30 @@ export class ProtobufReader {
       const field = schema.fields[fieldNumber];
 
       if (!field) {
-        this.skip(wireType);
+        if (wireType === 2) {
+          const len = Number(this.readVarint() ?? 0n);
+          const raw = this.readBytes(len);
+
+          warn("Unknown field", {
+            schema: schemaName,
+            fieldNumber,
+            wireType,
+            length: len,
+            hex: Array.from(raw)
+              .map((b) => b.toString(16).padStart(2, "0"))
+              .join(" "),
+            ascii: new TextDecoder().decode(raw).replace(/[^\x20-\x7E]/g, "."),
+          });
+        } else {
+          warn("Unknown field", {
+            schema: schemaName,
+            fieldNumber,
+            wireType,
+          });
+
+          this.skip(wireType);
+        }
+
         continue;
       }
 
@@ -159,7 +203,16 @@ export class ProtobufReader {
             break;
           }
         }
-      } catch {
+      } catch (err) {
+        warn("Decode error", {
+          schema: schemaName,
+          field: field.name,
+          fieldNumber,
+          wireType,
+          offset: this.offset,
+          error: err,
+        });
+
         continue;
       }
 
@@ -177,9 +230,13 @@ export class ProtobufReader {
   }
 }
 
-/**
- * Static helper for quick decoding.
- */
-export function decodeProtobuf(data: any, schemaName: string): any {
-  return new ProtobufReader(data).decode(schemaName);
+const allDecodedResults: any[] = [];
+
+export function decodeProtobuf(data: any, schemaName: string): any[] {
+  const result = new ProtobufReader(data).decode(schemaName);
+
+  allDecodedResults.push(result);
+  console.log(`[All Decoded Results]:`, allDecodedResults);
+
+  return result;
 }

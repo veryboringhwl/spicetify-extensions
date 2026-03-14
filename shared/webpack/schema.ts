@@ -44,11 +44,23 @@ export const metadataSchema: MetadataSchema = {
       32: { name: "artist_with_role", type: "spotify.metadata.ArtistWithRole", repeated: true },
       36: { name: "canonical_uri", type: "string" },
       37: { name: "prerelease_config", type: "spotify.metadata.PrereleaseConfig" },
-      39: { name: "content_authorization_attributes", type: "bytes" },
+      39: {
+        name: "content_authorization_attributes",
+        type: "spotify.metadata.ContentAuthorizationAttributes",
+      },
       40: { name: "track_content_rating", type: "spotify.metadata.ContentRating", repeated: true },
       41: { name: "audio_formats", type: "spotify.metadata.TrackAudioFormat", repeated: true },
       43: { name: "unknown_field", type: "int32" },
       44: { name: "implementation_details", type: "spotify.metadata.ImplementationDetails" },
+      // literally has nothing but test??
+      // hex:"0a 23 0a 0d 54 45 53 54 5f 43 41 54 45 47 4f 52 59 12 12 0a 10 54 45 53 54 5f 53 55 42 43 41 54 45 47 4f 52 59"
+      // 1: {
+      //   1: "TEST_CATEGORY",
+      //   2: {
+      //     1: "TEST_SUBCATEGORY"
+      //   }
+      // }
+      47: { name: "test", type: "spotify.metadata.TestCategory" },
       129: { name: "media_type", type: "enum", enumType: "MediaType" },
     },
     enums: { MediaType: { 0: "MIXED", 1: "AUDIO", 2: "VIDEO" } },
@@ -145,6 +157,36 @@ export const metadataSchema: MetadataSchema = {
     },
     enums: {
       Format: { 0: "AUDIO_FORMAT_UNKNOWN", 1: "AUDIO_FORMAT_STEREO", 2: "AUDIO_FORMAT_MONO" },
+    },
+  },
+  "spotify.metadata.TestCategory": {
+    fields: {
+      1: { name: "category", type: "string" },
+      2: { name: "subcategory", type: "spotify.metadata.TestSubcategory" },
+    },
+  },
+  "spotify.metadata.TestSubcategory": {
+    fields: {
+      1: { name: "name", type: "string" },
+    },
+  },
+  "spotify.metadata.ContentAuthorizationAttributes": {
+    fields: {
+      1: { name: "authorizations", type: "spotify.metadata.ContentAuthorization", repeated: true },
+    },
+  },
+  "spotify.metadata.ContentAuthorization": {
+    fields: {
+      3: { name: "unknown_3", type: "int32" },
+      4: { name: "unknown_4", type: "int32" },
+      9: { name: "unknown_9", type: "int32" },
+      10: { name: "policy", type: "spotify.metadata.ContentAuthorizationPolicy" },
+    },
+  },
+  "spotify.metadata.ContentAuthorizationPolicy": {
+    fields: {
+      1: { name: "uuid", type: "string" },
+      2: { name: "unknown_2", type: "int32" },
     },
   },
   "spotify.metadata.Artist": {
