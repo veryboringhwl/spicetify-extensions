@@ -230,13 +230,7 @@ export class ProtobufReader {
   }
 }
 
-const allDecodedResults: any[] = [];
-
 export function decodeProtobuf(data: any, schemaName: string): any[] {
   const result = new ProtobufReader(data).decode(schemaName);
-
-  allDecodedResults.push(result);
-  console.log(`[All Decoded Results]:`, allDecodedResults);
-
   return result;
 }

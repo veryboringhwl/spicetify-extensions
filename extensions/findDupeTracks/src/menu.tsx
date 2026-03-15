@@ -1,36 +1,47 @@
 import { Dexie, type Table } from "dexie";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { fetchAllLibraryContents } from "../../../shared/api/fetchAllLibraryContents.ts";
-import { fetchAllPlaylistTracks } from "../../../shared/api/fetchAllPlaylistTracks.ts";
 import { fetchMetadataForTracks } from "../../../shared/api/fetchMetadataForTracks.ts";
 import { fetchPlayCountForTracks } from "../../../shared/api/fetchPlayCountForTracks.ts";
+import { fetchPlaylistTracks } from "../../../shared/api/fetchPlaylistTracksEsperanto.ts";
 import { Dropdown } from "../../../shared/components/dropdown.tsx";
 import { Icons } from "../../../shared/components/icons.tsx";
 import { type Option, OptionRow } from "../../../shared/components/optionRow.tsx";
 import { PopupModal } from "../../../shared/components/popupModal.tsx";
 import { Slider } from "../../../shared/components/slider.tsx";
-import { spotifyComponents } from "../../../shared/components/spotifyComponents.js";
+import { spotifyComponents } from "../../../shared/components/spotifyComponents.ts";
 import { usePlayer } from "../../../shared/hooks/usePlayer.ts";
 
 spotifyComponents();
 
-class DebugTimer {
-  private starts: Map<string, number> = new Map();
+class AppProfiler {
+  private readonly prefix = "AppTrace";
 
-  start(label: string) {
-    this.starts.set(label, performance.now());
+  mark(name: string) {
+    performance.mark(`${this.prefix}:${name}:start`);
   }
 
-  end(label: string) {
-    const startTime = this.starts.get(label);
-    if (startTime) {
-      const duration = performance.now() - startTime;
-      console.debug(`[Debug] ${label}: ${duration.toFixed(2)}ms`);
-      this.starts.delete(label);
+  measure(name: string, customStartMark?: string) {
+    const startMark = customStartMark || `${this.prefix}:${name}:start`;
+    const endMark = `${this.prefix}:${name}:end`;
+
+    performance.mark(endMark);
+
+    const measurement = performance.measure(name, startMark, endMark);
+    console.debug(`[Debug] ${name}: ${measurement.duration.toFixed(2)}ms`);
+    return measurement.duration;
+  }
+
+  async trackAsync<T>(name: string, fn: () => Promise<T>): Promise<T> {
+    this.mark(name);
+    try {
+      return await fn();
+    } finally {
+      this.measure(name);
     }
   }
 }
-const perf = new DebugTimer();
+const perf = new AppProfiler();
 
 type DuplicateCategory = "exact" | "isrc" | "probable" | "likely" | "possible" | "maybe";
 const CATEGORIES: ReadonlyArray<DuplicateCategory> = [
@@ -284,7 +295,7 @@ function useOwnedPlaylists() {
     let active = true;
 
     const fetchPlaylists = async () => {
-      perf.start("Fetch: All Playlists");
+      perf.mark("Fetch: All Playlists");
       const items = await fetchAllLibraryContents();
       if (!active) return;
 
@@ -292,7 +303,7 @@ function useOwnedPlaylists() {
       setPlaylists(valid);
       if (active) {
         setLoading(false);
-        perf.end("Fetch: All Playlists");
+        perf.measure("Fetch: All Playlists");
       }
     };
 
@@ -320,27 +331,56 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
     setLoading(true);
 
     const loadData = async () => {
-      perf.start("LOAD ALL DATA");
+      perf.mark("LOAD ALL DATA");
 
-      const { items } = await fetchAllPlaylistTracks(playlistUri);
+      perf.mark("Fetch: fetchPlaylistTracks");
+      const items = await fetchPlaylistTracks(playlistUri);
+      perf.measure("Fetch: fetchPlaylistTracks");
+
       if (abortController.signal.aborted) return;
 
-      const rawTracks = items as Track[];
-      const trackUris = rawTracks.map((t) => t.uri);
+      perf.mark("Process: Map Raw Tracks");
+      const rawTracks: Track[] = (items as any[]).map((item) => {
+        const metadata = item.trackMetadata || {};
+        const album = metadata.album || {};
+        const covers = album.covers || {};
 
+        const images = [];
+        if (covers.xlargeLink) images.push({ label: "xlarge", url: covers.xlargeLink });
+        if (covers.largeLink) images.push({ label: "large", url: covers.largeLink });
+        if (covers.standardLink) images.push({ label: "standard", url: covers.standardLink });
+        if (covers.smallLink) images.push({ label: "small", url: covers.smallLink });
+
+        return {
+          uri: metadata.link || "",
+          uid: item.rowId || "",
+          name: metadata.name || "",
+          album: {
+            uri: album.link || "",
+            name: album.name || "",
+            images,
+          },
+          artists: (metadata.artist || []).map((a: any) => ({ name: a.name || "" })),
+        };
+      });
+      perf.measure("Process: Map Raw Tracks");
+
+      perf.mark("DB: Bulk Get Tracks");
+      const trackUris = rawTracks.map((t) => t.uri);
       const dbRecords = await db.tracks.bulkGet(trackUris);
       const cacheMap = new Map(
         dbRecords.filter((t): t is DbTrack => !!t).map((t) => [t.trackUri, t]),
       );
+      perf.measure("DB: Bulk Get Tracks");
 
-      const now = Temporal.Now.instant();
+      perf.mark("Process: Cached Track Loop");
       const needsUpdate: Track[] = [];
       const detailedTracks: DetailedTrack[] = [];
 
+      const now = Temporal.Now.instant();
+
       const regex = new RegExp(
-        `\\b(${[...settings.defaultNormaliseWords, ...settings.customNormaliseWords]
-          .map(escapeRegExp)
-          .join("|")})\\b`,
+        `\\b(${[...settings.defaultNormaliseWords, ...settings.customNormaliseWords].map(escapeRegExp).join("|")})\\b`,
         "gi",
       );
 
@@ -390,7 +430,7 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
 
       if (needsUpdate.length === 0) {
         setLoading(false);
-        perf.end("LOAD ALL DATA");
+        perf.measure("LOAD ALL DATA");
         return;
       }
 
@@ -406,7 +446,7 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
         );
       });
 
-      perf.start("Fetching from APIs");
+      perf.mark("Fetching from APIs");
       const [MetadataResult, esperantoResult] = await Promise.allSettled([
         tracksNeedingMetadata.length > 0
           ? fetchMetadataForTracks(tracksNeedingMetadata.map((t) => t.uri))
@@ -415,7 +455,7 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
           ? fetchPlayCountForTracks(tracksNeedingPlayCount.map((t) => t.uri))
           : Promise.resolve(new Map()),
       ]);
-      perf.end("Fetching from APIs");
+      perf.measure("Fetching from APIs");
 
       if (abortController.signal.aborted) return;
 
@@ -486,7 +526,7 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
       await db.tracks.bulkPut(updates);
       if (!abortController.signal.aborted) {
         setTracks(updatedDetailedTracks);
-        perf.end("LOAD ALL DATA");
+        perf.measure("LOAD ALL DATA");
       }
 
       if (!abortController.signal.aborted) setLoading(false);
@@ -504,7 +544,7 @@ function useDuplicateFinder(
   settings: Settings,
 ): DuplicateResults {
   return useMemo(() => {
-    perf.start("Dupe Algorithm: Compute");
+    perf.mark("Dupe Algorithm: Compute");
     const results: DuplicateResults = {
       exact: [],
       isrc: [],
@@ -515,7 +555,7 @@ function useDuplicateFinder(
     };
 
     if (tracks.length < 2) {
-      perf.end("Dupe Algorithm: Compute");
+      perf.measure("Dupe Algorithm: Compute");
       return results;
     }
 
@@ -673,7 +713,7 @@ function useDuplicateFinder(
       }
     }
 
-    perf.end("Dupe Algorithm: Compute");
+    perf.measure("Dupe Algorithm: Compute");
     return results;
   }, [tracks, settings]);
 }
@@ -725,21 +765,6 @@ const SettingsMenu = () => {
       {renderSection("Confirm Delete", "confirmSettings", settingsLabels)}
     </div>
   );
-};
-
-const _PlayerAPI = Spicetify.Platform.PlayerAPI;
-
-const _playerStore = {
-  subscribe: (callback: () => void) => {
-    const listener = () => callback();
-    Spicetify.Platform.PlayerAPI._events.addListener("update", listener, {});
-    return () => {
-      Spicetify.Platform.PlayerAPI._events.removeListener("update", listener, {});
-    };
-  },
-  getSnapshot: () => {
-    return Spicetify.Platform.PlayerAPI._state;
-  },
 };
 
 const TrackPlaybackControl = ({ uri, duration }: { uri: string; duration: number | null }) => {
