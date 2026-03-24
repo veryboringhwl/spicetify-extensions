@@ -220,6 +220,14 @@
   filter: brightness(1.05);
 }
 
+.duplicate-group__no-permission {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  color: var(--fdp-subtext);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .duplicate-settings__section {
   margin-bottom: 24px;
 }

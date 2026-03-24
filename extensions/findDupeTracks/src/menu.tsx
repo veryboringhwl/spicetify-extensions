@@ -806,10 +806,12 @@ const DuplicateRow = ({
   track,
   category,
   onDelete,
+  canAddTo,
 }: {
   track: DetailedTrack;
   category: DuplicateCategory;
   onDelete: (track: DetailedTrack) => void;
+  canAddTo: boolean;
 }) => (
   <div className={`duplicate-group__duplicate-item duplicate-group__item--${category}`}>
     <div className="duplicate-group__duplicate-info">
@@ -832,9 +834,13 @@ const DuplicateRow = ({
     </div>
     <div className="duplicate-group__actions">
       <TrackPlaybackControl duration={track.duration} uri={track.uri} />
-      <button className="duplicate-group__delete-button" onClick={() => onDelete(track)}>
-        Delete
-      </button>
+      {canAddTo ? (
+        <button className="duplicate-group__delete-button" onClick={() => onDelete(track)}>
+          Delete
+        </button>
+      ) : (
+        <span className="duplicate-group__no-permission">No permission</span>
+      )}
     </div>
   </div>
 );
@@ -844,11 +850,13 @@ const GroupSection = ({
   category,
   groups,
   onDelete,
+  canAddTo,
 }: {
   title: { label: string; tooltip: string };
   category: DuplicateCategory;
   groups: ReadonlyArray<DuplicateGroup>;
   onDelete: (cat: DuplicateCategory, t: DetailedTrack) => void;
+  canAddTo: boolean;
 }) => {
   return (
     <div className="duplicate-group">
@@ -871,6 +879,7 @@ const GroupSection = ({
               key={g.mainTrack.uid}
             >
               <DuplicateRow
+                canAddTo={canAddTo}
                 category={category}
                 onDelete={(t) => onDelete(category, t)}
                 track={g.mainTrack}
@@ -880,6 +889,7 @@ const GroupSection = ({
                   <>
                     <div className="duplicate-group__duplicate-thread"></div>
                     <DuplicateRow
+                      canAddTo={canAddTo}
                       category={category}
                       key={dup.uid}
                       onDelete={(t) => onDelete(category, t)}
@@ -914,9 +924,7 @@ export function PlaylistDuplicateFinder({
   const { playlists, loading: playlistsLoading } = useOwnedPlaylists();
 
   const currentPlaylist = useMemo(
-    () =>
-      playlists.find((p) => p.uri === selectedUri) ??
-      (selectedUri ? { uri: selectedUri, name: "Selected Playlist", type: "playlist" } : undefined),
+    () => playlists.find((p) => p.uri === selectedUri),
     [playlists, selectedUri],
   );
 
@@ -1014,6 +1022,7 @@ export function PlaylistDuplicateFinder({
 
               return (
                 <GroupSection
+                  canAddTo={currentPlaylist?.canAddTo === true}
                   category={cat}
                   groups={results[cat]}
                   key={cat}

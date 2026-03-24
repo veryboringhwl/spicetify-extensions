@@ -7,3 +7,8 @@ extensions/*
 !extensions/developerUtilities/
 !extensions/findDupeTracks/
 !extensions/fullscreenLyricsPlus/
+.vs/
+import_map.json
+npm/
+package-lock.json
+**/src/dexie
