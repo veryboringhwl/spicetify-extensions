@@ -850,14 +850,18 @@ const GroupSection = ({
   category,
   groups,
   onDelete,
+  onDeleteAll,
   canAddTo,
 }: {
   title: { label: string; tooltip: string };
   category: DuplicateCategory;
   groups: ReadonlyArray<DuplicateGroup>;
   onDelete: (cat: DuplicateCategory, t: DetailedTrack) => void;
+  onDeleteAll: (cat: DuplicateCategory, trackCount: number) => void;
   canAddTo: boolean;
 }) => {
+  const totalDuplicates = groups.reduce((sum, g) => sum + g.duplicates.length, 0);
+
   return (
     <div className="duplicate-group">
       <div className="duplicate-group__heading">
@@ -869,7 +873,17 @@ const GroupSection = ({
             </div>
           </Spicetify.ReactComponent.TooltipWrapper>
         </div>
-        <div className="duplicate-group__heading-length">{groups.length} found</div>
+        <div className="duplicate-group__heading-actions">
+          <div className="duplicate-group__heading-length">{groups.length} found</div>
+          {totalDuplicates > 0 && (
+            <button
+              className="duplicate-group__delete-all-button"
+              onClick={() => onDeleteAll(category, totalDuplicates)}
+            >
+              Delete All ({totalDuplicates})
+            </button>
+          )}
+        </div>
       </div>
       {groups.length > 0 ? (
         <div className="duplicate-group__list">
@@ -919,6 +933,10 @@ export function PlaylistDuplicateFinder({
     track: DetailedTrack;
     category: DuplicateCategory;
   } | null>(null);
+  const [pendingDeleteAll, setPendingDeleteAll] = useState<{
+    category: DuplicateCategory;
+    trackCount: number;
+  } | null>(null);
 
   const settings = useSettings();
   const { playlists, loading: playlistsLoading } = useOwnedPlaylists();
@@ -962,6 +980,33 @@ export function PlaylistDuplicateFinder({
     setPendingDelete(null);
   };
 
+  const handleDeleteAll = (category: DuplicateCategory, trackCount: number) => {
+    setPendingDeleteAll({ category, trackCount });
+  };
+
+  const handleConfirmDeleteAll = () => {
+    if (!pendingDeleteAll || !currentPlaylist) {
+      setPendingDeleteAll(null);
+      return;
+    }
+
+    const duplicatesToDelete = results[pendingDeleteAll.category].flatMap((g) => g.duplicates);
+    if (duplicatesToDelete.length === 0) {
+      setPendingDeleteAll(null);
+      return;
+    }
+
+    void (async () => {
+      const uids = duplicatesToDelete.map((t) => t.uid);
+      for (const uid of uids) {
+        await Spicetify.Platform.PlaylistAPI.remove(currentPlaylist.uri, [{ uid }]);
+        setTracks((prev) => prev.filter((t) => t.uid !== uid));
+      }
+    })();
+
+    setPendingDeleteAll(null);
+  };
+
   return (
     <>
       <Spicetify.ReactComponent.ConfirmDialog
@@ -977,6 +1022,20 @@ export function PlaylistDuplicateFinder({
         onConfirm={handleConfirmDelete}
         onOutside={() => setPendingDelete(null)}
         titleText="Remove Track"
+      />
+      <Spicetify.ReactComponent.ConfirmDialog
+        cancelText="Cancel"
+        confirmText="Remove All"
+        descriptionText={
+          pendingDeleteAll
+            ? `Are you sure you want to remove ${pendingDeleteAll.trackCount} duplicate tracks from this category? This cannot be undone.`
+            : ""
+        }
+        isOpen={pendingDeleteAll !== null}
+        onClose={() => setPendingDeleteAll(null)}
+        onConfirm={handleConfirmDeleteAll}
+        onOutside={() => setPendingDeleteAll(null)}
+        titleText="Remove All Duplicates"
       />
       <div className="find-duplicates">
         <div className="modal__header">
@@ -1027,6 +1086,7 @@ export function PlaylistDuplicateFinder({
                   groups={results[cat]}
                   key={cat}
                   onDelete={handleDelete}
+                  onDeleteAll={handleDeleteAll}
                   title={CATEGORY_INFO[cat]}
                 />
               );
