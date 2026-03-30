@@ -13,7 +13,7 @@
     "npm:@babel/preset-typescript@7.28.5": "7.28.5_@babel+core@7.28.4",
     "npm:@biomejs/biome@2.4.4": "2.4.4",
     "npm:babel-plugin-react-compiler@19.1.0-rc.3": "19.1.0-rc.3",
-    "npm:dexie@^4.3.0": "4.3.0",
+    "npm:dexie@4.4.1": "4.4.1",
     "npm:esbuild-plugin-babel@0.2.3": "0.2.3_@babel+core@7.28.4",
     "npm:react-compiler-runtime@19.1.0-rc.3": "19.1.0-rc.3_react@19.1.1"
   },
@@ -425,8 +425,8 @@
         "ms"
       ]
     },
-    "dexie@4.3.0": {
-      "integrity": "sha512-5EeoQpJvMKHe6zWt/FSIIuRa3CWlZeIl6zKXt+Lz7BU6RoRRLgX9dZEynRfXrkLcldKYCBiz7xekTEylnie1Ug=="
+    "dexie@4.4.1": {
+      "integrity": "sha512-4Xec5+yrS+TgyFAnMrneFOt/QG8sD3FxlkUVpfypui3SriRN80UN0SZBWmkNAY7ulfKgk0ilvv7M6pBURprdgA=="
     },
     "electron-to-chromium@1.5.221": {
       "integrity": "sha512-/1hFJ39wkW01ogqSyYoA4goOXOtMRy6B+yvA1u42nnsEGtHzIzmk93aPISumVQeblj47JUHLC9coCjUxb1EvtQ=="
@@ -549,7 +549,7 @@
       "npm:@babel/preset-typescript@7.28.5",
       "npm:@biomejs/biome@2.4.4",
       "npm:babel-plugin-react-compiler@19.1.0-rc.3",
-      "npm:dexie@^4.3.0",
+      "npm:dexie@4.4.1",
       "npm:esbuild-plugin-babel@0.2.3",
       "npm:react-compiler-runtime@19.1.0-rc.3"
     ]
