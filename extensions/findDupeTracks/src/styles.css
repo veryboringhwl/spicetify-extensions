@@ -253,17 +253,6 @@
   opacity: 0.5;
 }
 
-.find-duplicates .confirmDialog-buttonCancel {
-  visibility: visible !important;
-  padding: 6px 12px;
-  font-size: 0.85rem;
-  color: var(--fdp-text);
-  background: transparent;
-  border: 1px solid var(--fdp-border);
-  border-radius: 999px;
-  opacity: 1 !important;
-}
-
 .duplicate-settings__section {
   margin-bottom: 24px;
 }
