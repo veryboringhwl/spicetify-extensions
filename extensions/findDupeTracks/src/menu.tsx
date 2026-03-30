@@ -43,39 +43,53 @@ class AppProfiler {
 }
 const perf = new AppProfiler();
 
-type DuplicateCategory = "exact" | "isrc" | "probable" | "likely" | "possible" | "maybe";
+type DuplicateCategory =
+  | "exactMatch"
+  | "sameRecording"
+  | "sameTitleAndArtist"
+  | "sameTitleAndDuration"
+  | "similarTitleAndDuration"
+  | "similarTitleAndArtist"
+  | "similarTitleOnly";
+
 const CATEGORIES: ReadonlyArray<DuplicateCategory> = [
-  "exact",
-  "isrc",
-  "probable",
-  "likely",
-  "possible",
-  "maybe",
+  "exactMatch",
+  "sameRecording",
+  "sameTitleAndArtist",
+  "sameTitleAndDuration",
+  "similarTitleAndDuration",
+  "similarTitleAndArtist",
+  "similarTitleOnly",
 ];
 
 const CATEGORY_INFO: Record<DuplicateCategory, { label: string; tooltip: string }> = {
-  exact: {
+  exactMatch: {
     label: "Identical Tracks",
     tooltip: "The exact same Spotify track added multiple times to the playlist",
   },
-  isrc: {
+  sameRecording: {
     label: "Same Recording",
     tooltip:
       "Different Spotify entries for the same recording (e.g., from different albums but identical audio)",
   },
-  probable: {
+  sameTitleAndArtist: {
     label: "Same Title & Artist",
     tooltip: "Tracks with the same title and at least one shared artist",
   },
-  likely: {
+  sameTitleAndDuration: {
     label: "Title & Length Match",
     tooltip: "Tracks with the same title and similar duration (within 5 seconds)",
   },
-  possible: {
+  similarTitleAndDuration: {
     label: "Similar Songs",
     tooltip: "Tracks with similar titles and durations - may include remixes or covers",
   },
-  maybe: {
+  similarTitleAndArtist: {
+    label: "Similar Title & Same Artist",
+    tooltip:
+      "Tracks that may be duplicates based on name similarity and at least one shared artist",
+  },
+  similarTitleOnly: {
     label: "Possible Matches",
     tooltip: "Tracks that may be duplicates based on name similarity - review VERY CAREFULLY!!",
   },
@@ -123,10 +137,8 @@ type DuplicateResults = Record<DuplicateCategory, ReadonlyArray<DuplicateGroup>>
 interface Settings {
   readonly groupSettings: Record<DuplicateCategory, boolean>;
   readonly confirmSettings: Record<DuplicateCategory, boolean>;
-  readonly defaultNormaliseWords: ReadonlyArray<string>;
-  readonly customNormaliseWords: ReadonlyArray<string>;
+  readonly normalisedWords: ReadonlyArray<string>;
 }
-
 interface DbTrack {
   trackUri: string;
   trackName: string;
@@ -145,7 +157,7 @@ class FindDupeTracks extends Dexie {
 
   constructor() {
     super("findDupeTracks");
-    this.version(0.4)
+    this.version(0.5)
       .stores({
         tracks:
           "&trackUri, trackName, trackCoverArt, trackDuration, trackPlayCount, trackIsrc, albumUri, albumReleaseDate, lastUpdated, ignoreDuplicates",
@@ -160,22 +172,24 @@ const db = new FindDupeTracks();
 
 const DEFAULT_SETTINGS: Settings = {
   groupSettings: {
-    exact: true,
-    isrc: true,
-    probable: true,
-    likely: true,
-    possible: true,
-    maybe: false,
+    exactMatch: true,
+    sameRecording: true,
+    sameTitleAndArtist: true,
+    sameTitleAndDuration: true,
+    similarTitleAndDuration: true,
+    similarTitleAndArtist: true,
+    similarTitleOnly: true,
   },
   confirmSettings: {
-    exact: false,
-    isrc: false,
-    probable: true,
-    likely: true,
-    possible: true,
-    maybe: true,
+    exactMatch: false,
+    sameRecording: false,
+    sameTitleAndArtist: true,
+    sameTitleAndDuration: true,
+    similarTitleAndDuration: true,
+    similarTitleAndArtist: true,
+    similarTitleOnly: true,
   },
-  defaultNormaliseWords: [
+  normalisedWords: [
     "live",
     "remix",
     "mix",
@@ -208,10 +222,9 @@ const DEFAULT_SETTINGS: Settings = {
     "album",
     "single",
   ],
-  customNormaliseWords: [],
 };
 
-const SETTINGS_KEY = "findDupeTracks:settings";
+const SETTINGS_KEY = "findDupeTracks:";
 
 const settingsStore = {
   listeners: new Set<() => void>(),
@@ -379,10 +392,10 @@ function usePlaylistTracks(playlistUri: string | undefined, settings: Settings) 
 
       const now = Temporal.Now.instant();
 
-      const regex = new RegExp(
-        `\\b(${[...settings.defaultNormaliseWords, ...settings.customNormaliseWords].map(escapeRegExp).join("|")})\\b`,
-        "gi",
-      );
+      const regex =
+        settings.normalisedWords.length > 0
+          ? new RegExp(`\\b(${settings.normalisedWords.map(escapeRegExp).join("|")})\\b`, "gi")
+          : /(?!)/;
 
       for (const track of rawTracks) {
         const cached = cacheMap.get(track.uri);
@@ -546,12 +559,13 @@ function useDuplicateFinder(
   return useMemo(() => {
     perf.mark("Dupe Algorithm: Compute");
     const results: DuplicateResults = {
-      exact: [],
-      isrc: [],
-      probable: [],
-      likely: [],
-      possible: [],
-      maybe: [],
+      exactMatch: [],
+      sameRecording: [],
+      sameTitleAndArtist: [],
+      sameTitleAndDuration: [],
+      similarTitleAndDuration: [],
+      similarTitleAndArtist: [],
+      similarTitleOnly: [],
     };
 
     if (tracks.length < 2) {
@@ -589,20 +603,20 @@ function useDuplicateFinder(
       consumedUids.clear();
     };
 
-    if (groupSettings.exact) {
+    if (groupSettings.exactMatch) {
       const groups = Object.groupBy(pool, (t) => t.uri);
       for (const uri in groups) {
         const group = groups[uri];
-        if (group) addGroup(group, "exact");
+        if (group) addGroup(group, "exactMatch");
       }
       flushConsumed();
     }
 
-    if (groupSettings.isrc) {
+    if (groupSettings.sameRecording) {
       const groups = Object.groupBy(pool, (t) => t.isrc || "");
       for (const isrc in groups) {
         const group = groups[isrc];
-        if (isrc && group) addGroup(group, "isrc");
+        if (isrc && group) addGroup(group, "sameRecording");
       }
       flushConsumed();
     }
@@ -617,7 +631,7 @@ function useDuplicateFinder(
       return Math.abs(a.duration - b.duration) <= 5000;
     };
 
-    if (groupSettings.probable) {
+    if (groupSettings.sameTitleAndArtist) {
       const groups = Object.groupBy(pool, (t) => t.normalisedName);
       for (const name in groups) {
         const cluster = groups[name];
@@ -631,7 +645,7 @@ function useDuplicateFinder(
             (t) => base.uid === t.uid || (!processed.has(t.uid) && shareArtist(base, t)),
           );
           if (matches.length > 1) {
-            addGroup(matches, "probable");
+            addGroup(matches, "sameTitleAndArtist");
             matches.forEach((m) => {
               processed.add(m.uid);
             });
@@ -641,7 +655,7 @@ function useDuplicateFinder(
       flushConsumed();
     }
 
-    if (groupSettings.likely) {
+    if (groupSettings.sameTitleAndDuration) {
       const groups = Object.groupBy(pool, (t) => t.normalisedName);
       for (const name in groups) {
         const cluster = groups[name];
@@ -655,7 +669,7 @@ function useDuplicateFinder(
             (t) => base.uid === t.uid || (!processed.has(t.uid) && similarDuration(base, t)),
           );
           if (matches.length > 1) {
-            addGroup(matches, "likely");
+            addGroup(matches, "sameTitleAndDuration");
             matches.forEach((m) => {
               processed.add(m.uid);
             });
@@ -665,7 +679,7 @@ function useDuplicateFinder(
       flushConsumed();
     }
 
-    if (groupSettings.possible) {
+    if (groupSettings.similarTitleAndDuration) {
       const groups = Object.groupBy(pool, (t) => t.normalisedFuzzy);
       for (const name in groups) {
         const cluster = groups[name];
@@ -679,7 +693,7 @@ function useDuplicateFinder(
             (t) => base.uid === t.uid || (!processed.has(t.uid) && similarDuration(base, t)),
           );
           if (matches.length > 1) {
-            addGroup(matches, "possible");
+            addGroup(matches, "similarTitleAndDuration");
             matches.forEach((m) => {
               processed.add(m.uid);
             });
@@ -689,7 +703,48 @@ function useDuplicateFinder(
       flushConsumed();
     }
 
-    if (groupSettings.maybe) {
+    if (groupSettings.similarTitleAndArtist) {
+      const tracksByArtist = new Map<string, DetailedTrack[]>();
+      pool.forEach((t) => {
+        const seenArtists = new Set<string>();
+        t.artists.forEach((a) => {
+          const artistName = a.name.toLowerCase().trim();
+          if (seenArtists.has(artistName)) return;
+          seenArtists.add(artistName);
+
+          if (!tracksByArtist.has(artistName)) {
+            tracksByArtist.set(artistName, []);
+          }
+          tracksByArtist.get(artistName)?.push(t);
+        });
+      });
+
+      for (const artistTracks of tracksByArtist.values()) {
+        if (artistTracks.length < 2) continue;
+
+        for (let i = 0; i < artistTracks.length; i++) {
+          const base = artistTracks[i];
+          if (consumedUids.has(base.uid)) continue;
+
+          const matches = [base];
+          for (let j = i + 1; j < artistTracks.length; j++) {
+            const candidate = artistTracks[j];
+            if (consumedUids.has(candidate.uid)) continue;
+
+            if (calculateSimilarity(base.normalisedFuzzy, candidate.normalisedFuzzy) >= 0.65) {
+              matches.push(candidate);
+            }
+          }
+
+          if (matches.length > 1) {
+            addGroup(matches, "similarTitleAndArtist");
+          }
+        }
+      }
+      flushConsumed();
+    }
+
+    if (groupSettings.similarTitleOnly) {
       pool.sort((a, b) => a.normalisedFuzzy.localeCompare(b.normalisedFuzzy));
 
       for (let i = 0; i < pool.length; i++) {
@@ -704,12 +759,12 @@ function useDuplicateFinder(
 
           if (base.normalisedFuzzy[0] !== candidate.normalisedFuzzy[0]) break;
 
-          if (calculateSimilarity(base.normalisedFuzzy, candidate.normalisedFuzzy) >= 0.8) {
+          if (calculateSimilarity(base.normalisedFuzzy, candidate.normalisedFuzzy) >= 0.65) {
             matches.push(candidate);
           }
         }
 
-        if (matches.length > 1) addGroup(matches, "maybe");
+        if (matches.length > 1) addGroup(matches, "similarTitleOnly");
       }
     }
 
@@ -721,9 +776,24 @@ function useDuplicateFinder(
 const SettingsMenu = () => {
   const settings = useSettings();
 
-  const update = <T extends keyof Settings>(section: T, key: keyof Settings[T], val: boolean) => {
+  const updateSection = <T extends "groupSettings" | "confirmSettings">(
+    section: T,
+    key: keyof Settings[T],
+    val: boolean,
+  ) => {
     const next = { ...settings, [section]: { ...settings[section], [key]: val } };
     settingsStore.update(next);
+  };
+
+  const updateNormalisedWords = (
+    e: React.FocusEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    const input = e.currentTarget;
+    const normalisedWords = input.value
+      .split(",")
+      .map((w) => w.trim())
+      .filter((w) => w.length > 0);
+    settingsStore.update({ ...settings, normalisedWords });
   };
 
   const renderSection = (
@@ -739,7 +809,7 @@ const SettingsMenu = () => {
             desc={labels[cat]}
             key={cat}
             name={`${section}-${cat}`}
-            onChange={(v) => update(section, cat, !!v)}
+            onChange={(v) => updateSection(section, cat, !!v)}
             option={
               {
                 type: "toggle",
@@ -763,6 +833,43 @@ const SettingsMenu = () => {
     <div className="duplicate-settings">
       {renderSection("Display Groups", "groupSettings", settingsLabels)}
       {renderSection("Confirm Delete", "confirmSettings", settingsLabels)}
+      <section className="duplicate-settings__section">
+        <h3 className="duplicate-settings__section-title">Ignored Words</h3>
+        <div className="duplicate-settings__options">
+          <span
+            className="duplicate-settings__input-desc"
+            style={{
+              marginBottom: "8px",
+              display: "block",
+              fontSize: "0.875rem",
+              color: "var(--spice-subtext)",
+            }}
+          >
+            Comma-separated words to ignore when comparing titles (e.g., live, remix, cover)
+          </span>
+          <input
+            className="duplicate-settings__text-input"
+            defaultValue={settings.normalisedWords.join(", ")}
+            onBlur={updateNormalisedWords}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                updateNormalisedWords(e);
+                e.currentTarget.blur();
+              }
+            }}
+            placeholder="custom, words, here"
+            style={{
+              width: "100%",
+              padding: "10px",
+              borderRadius: "4px",
+              border: "1px solid var(--spice-button-disabled)",
+              background: "var(--spice-main)",
+              color: "var(--spice-text)",
+            }}
+            type="text"
+          />
+        </div>
+      </section>
     </div>
   );
 };

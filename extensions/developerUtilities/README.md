@@ -1,43 +1,48 @@
 # Developer Utilities
 
-Adds a collection of useful Utilities to make the developer experience easier!
+A set of developer-focused tools for Spicetify to help you inspect Spotify entities faster.
+
+## Features
+
+From supported right-click menus, this extension adds a **Developer Utils** submenu with options to:
+
+- **Copy Track Props**
+- **Copy Playlist Props**
+- **Copy Album Props**
+- **Copy All Props**
+- **Log ContextMenuV2 Params**
+
+These are useful when debugging extensions, inspecting metadata, or building new context-menu integrations.
 
 ## Usage
 
-Right-click on a Track/Playlist/Album then select **Developer Utils**.
-
-This extension can:
-
-- **Copy Track/Playlist/Album Props**
-- **Copy All Props** into:
-- **Log all ContextMenuV2 parameters** into:
+1. Right-click a supported item (for example a **Track**, **Playlist**, or **Album**).
+2. Open **Developer Utils**.
+3. Choose the action you want:
+   - Copy selected props to your clipboard, or
+   - Log context menu parameters for inspection.
 
 ## Installation
 
-You can install the extension manually or via
-**[marketplace](https://github.com/spicetify/spicetify-marketplace)**
+You can install the extension via **[marketplace](https://github.com/spicetify/spicetify-marketplace)** or manually.
 
 ### Marketplace Installation
 
-1. Go marketplace tab
-2. Search for `Developer Utilities`
-3. Press the `Install` button and reload Spotify
+1. Open the Marketplace tab in Spotify (Spicetify).
+2. Search for **Developer Utilities**.
+3. Click **Install** and reload Spotify if prompted.
 
 ### Manual Installation
 
-1. Clone or download the repository
-2. Navigate to your Spicetify folder (type `spicetify config-dir` in terminal)
-3. Move the `developerUtilities.mjs` from the `dist` folder into the `extensions` folder
-4. Open Terminal and run these commands to apply:
+1. Clone or download this repository.
+2. Run `spicetify config-dir` in your terminal to find your Spicetify config directory.
+3. Move `developerUtilities.mjs` from the `dist` folder into your spicetify `Extensions` folder
+4. Apply changes:
 
 ```
 spicetify config extensions developerUtilities.mjs
 spicetify apply
 ```
-
-Note: Using the `config` command to add the extension will always append the
-file name to the existing extensions list. It does not replace the whole key's
-value.
 
 ## Bug Reports
 
