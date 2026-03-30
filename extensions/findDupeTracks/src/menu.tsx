@@ -913,10 +913,12 @@ const DuplicateRow = ({
   track,
   category,
   onDelete,
+  canAddTo,
 }: {
   track: DetailedTrack;
   category: DuplicateCategory;
   onDelete: (track: DetailedTrack) => void;
+  canAddTo: boolean;
 }) => (
   <div className={`duplicate-group__duplicate-item duplicate-group__item--${category}`}>
     <div className="duplicate-group__duplicate-info">
@@ -939,9 +941,13 @@ const DuplicateRow = ({
     </div>
     <div className="duplicate-group__actions">
       <TrackPlaybackControl duration={track.duration} uri={track.uri} />
-      <button className="duplicate-group__delete-button" onClick={() => onDelete(track)}>
-        Delete
-      </button>
+      {canAddTo ? (
+        <button className="duplicate-group__delete-button" onClick={() => onDelete(track)}>
+          Delete
+        </button>
+      ) : (
+        <span className="duplicate-group__no-permission">No permission</span>
+      )}
     </div>
   </div>
 );
@@ -952,12 +958,14 @@ const GroupSection = ({
   groups,
   onDelete,
   onDeleteAll,
+  canAddTo,
 }: {
   title: { label: string; tooltip: string };
   category: DuplicateCategory;
   groups: ReadonlyArray<DuplicateGroup>;
   onDelete: (cat: DuplicateCategory, t: DetailedTrack) => void;
   onDeleteAll: (cat: DuplicateCategory, trackCount: number) => void;
+  canAddTo: boolean;
 }) => {
   const totalDuplicates = groups.reduce((sum, g) => sum + g.duplicates.length, 0);
 
@@ -974,7 +982,7 @@ const GroupSection = ({
         </div>
         <div className="duplicate-group__heading-actions">
           <div className="duplicate-group__heading-length">{groups.length} found</div>
-          {totalDuplicates > 0 && (
+          {totalDuplicates > 0 && canAddTo && (
             <button
               className="duplicate-group__delete-all-button"
               onClick={() => onDeleteAll(category, totalDuplicates)}
@@ -992,6 +1000,7 @@ const GroupSection = ({
               key={g.mainTrack.uid}
             >
               <DuplicateRow
+                canAddTo={canAddTo}
                 category={category}
                 onDelete={(t) => onDelete(category, t)}
                 track={g.mainTrack}
@@ -1001,6 +1010,7 @@ const GroupSection = ({
                   <>
                     <div className="duplicate-group__duplicate-thread"></div>
                     <DuplicateRow
+                      canAddTo={canAddTo}
                       category={category}
                       key={dup.uid}
                       onDelete={(t) => onDelete(category, t)}
@@ -1180,6 +1190,7 @@ export function PlaylistDuplicateFinder({
 
               return (
                 <GroupSection
+                  canAddTo={currentPlaylist?.canAddTo === true}
                   category={cat}
                   groups={results[cat]}
                   key={cat}
