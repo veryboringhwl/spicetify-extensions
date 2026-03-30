@@ -875,7 +875,7 @@ const GroupSection = ({
         </div>
         <div className="duplicate-group__heading-actions">
           <div className="duplicate-group__heading-length">{groups.length} found</div>
-          {totalDuplicates > 0 && (
+          {totalDuplicates > 0 && canAddTo && (
             <button
               className="duplicate-group__delete-all-button"
               onClick={() => onDeleteAll(category, totalDuplicates)}
