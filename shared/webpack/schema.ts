@@ -44,10 +44,6 @@ export const metadataSchema: MetadataSchema = {
       32: { name: "artist_with_role", type: "spotify.metadata.ArtistWithRole", repeated: true },
       36: { name: "canonical_uri", type: "string" },
       37: { name: "prerelease_config", type: "spotify.metadata.PrereleaseConfig" },
-      39: {
-        name: "content_authorization_attributes",
-        type: "spotify.metadata.ContentAuthorizationAttributes",
-      },
       40: { name: "track_content_rating", type: "spotify.metadata.ContentRating", repeated: true },
       41: { name: "audio_formats", type: "spotify.metadata.TrackAudioFormat", repeated: true },
       43: { name: "unknown_field", type: "int32" },
@@ -168,25 +164,6 @@ export const metadataSchema: MetadataSchema = {
   "spotify.metadata.TestSubcategory": {
     fields: {
       1: { name: "name", type: "string" },
-    },
-  },
-  "spotify.metadata.ContentAuthorizationAttributes": {
-    fields: {
-      1: { name: "authorizations", type: "spotify.metadata.ContentAuthorization", repeated: true },
-    },
-  },
-  "spotify.metadata.ContentAuthorization": {
-    fields: {
-      3: { name: "unknown_3", type: "int32" },
-      4: { name: "unknown_4", type: "int32" },
-      9: { name: "unknown_9", type: "int32" },
-      10: { name: "policy", type: "spotify.metadata.ContentAuthorizationPolicy" },
-    },
-  },
-  "spotify.metadata.ContentAuthorizationPolicy": {
-    fields: {
-      1: { name: "uuid", type: "string" },
-      2: { name: "unknown_2", type: "int32" },
     },
   },
   "spotify.metadata.Artist": {
@@ -343,7 +320,7 @@ export const metadataSchema: MetadataSchema = {
       87: { name: "type", type: "enum", enumType: "EpisodeType" },
     },
     enums: {
-      EpisodeType: { 0: "FULL", 1: "TRAILER", 2: "BONUS" },
+      EpisodeType: { 0: "UNKNOWN", 1: "FULL", 2: "TRAILER", 3: "BONUS" },
     },
   },
   "spotify.metadata.TopTracks": {
