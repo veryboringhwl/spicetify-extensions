@@ -16,7 +16,8 @@ const shared = (globalThis as any)[GLOBAL_KEY];
 export const SpotifyWebpack = {
   getModules() {
     if (!shared.require) {
-      const webpack = (globalThis as any).webpackChunkclient_web;
+      const webpack =
+        (globalThis as any).webpackChunkclient_web || (globalThis as any).rspackChunkclient_web;
       if (!webpack) return shared.modules ?? [];
       shared.require = webpack.push([[Symbol()], {}, (re: any) => re]);
     }
