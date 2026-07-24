@@ -1181,8 +1181,11 @@ export function PlaylistDuplicateFinder({
             <SettingsMenu />
           ) : tracksLoading ? (
             <div className="find-duplicates__loading">
-              {/* @ts-expect-error Spotify thingy */}
-              <UI.ProgressDots size="medium" />
+              <div className="find-duplicates__spinner">
+                <div className="find-duplicates__dot"></div>
+                <div className="find-duplicates__dot"></div>
+                <div className="find-duplicates__dot"></div>
+              </div>
             </div>
           ) : (
             CATEGORIES.map((cat) => {

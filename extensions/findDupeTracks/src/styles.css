@@ -34,7 +34,44 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 16700000px;
+  min-height: 200px;
+}
+
+.find-duplicates__spinner {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.find-duplicates__dot {
+  width: 10px;
+  height: 10px;
+  background: var(--spice-text);
+  border-radius: 50%;
+  animation: find-duplicates__bounce 1.4s ease-in-out infinite both;
+}
+
+.find-duplicates__dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.find-duplicates__dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.find-duplicates__dot:nth-child(3) {
+  animation-delay: 0s;
+}
+
+@keyframes find-duplicates__bounce {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .find-duplicates__content {
