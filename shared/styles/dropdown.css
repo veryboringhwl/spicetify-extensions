@@ -1,7 +1,8 @@
 .dropdown {
   position: relative;
   width: fit-content;
-  min-width: 101px;
+  min-width: 160px;
+  max-width: 320px;
   font-size: 14px;
   cursor: pointer;
 
@@ -21,6 +22,13 @@
     background: rgba(var(--spice-rgb-selected-row), 0.1);
     border: none;
     border-radius: 4px;
+    gap: 8px;
+  }
+
+  .dropdown__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .dropdown__arrow {
