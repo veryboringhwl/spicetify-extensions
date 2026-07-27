@@ -1,11 +1,4 @@
 export const spotifyComponents = async () => {
-  while (
-    !(globalThis as any).webpackChunkclient_web ||
-    (!globalThis as any).rspackChunkclient_web
-  ) {
-    await new Promise((r) => setTimeout(r, 50));
-  }
-
   const ChunkClient =
     (globalThis as any).webpackChunkclient_web || (globalThis as any).rspackChunkclient_web;
   const require = ChunkClient.push([[Symbol()], {}, (re) => re]);
