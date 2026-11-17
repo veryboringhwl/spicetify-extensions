@@ -1,14 +1,14 @@
-import { indexOfNeedle, lastIndexOfNeedle } from "jsr:@std/bytes";
-import type { BuildContext, PluginBuild } from "@esbuild/mod.js";
-import { context, type Plugin } from "@esbuild/mod.js";
-import { denoPlugins } from "@oazmi/esbuild-plugin-deno";
-import { join } from "@std/path";
-import { TextLineStream } from "@std/streams";
+import { spawn, spawnSync } from "node:child_process";
+import { copyFile, readdir, readFile, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import { createInterface } from "node:readline";
+import type { BuildContext, PluginBuild } from "esbuild";
+import { context, type Plugin } from "esbuild";
 import { inlineCSSPlugin } from "./pluginInlineCss.ts";
 import { spicetifyShims } from "./spicetifyShimsPlugin.ts";
 
-const APPDATA: string = Deno.env.get("APPDATA") || "";
-const LOCALAPPDATA: string = Deno.env.get("LOCALAPPDATA") || "";
+const APPDATA: string = process.env.APPDATA || "";
+const LOCALAPPDATA: string = process.env.LOCALAPPDATA || "";
 const SPICETIFY_OUT: string = join(APPDATA, "spicetify", "Extensions") || "";
 const SPOTIFY_OUT: string = join(APPDATA, "Spotify", "Apps", "xpui", "extensions") || "";
 
@@ -17,16 +17,19 @@ const getCurrentTime = (): string => {
   return `${now.getHours()}:${now.getMinutes().toString().padStart(2, "0")}`;
 };
 
+const isNotFoundError = (error: unknown): boolean =>
+  (error as NodeJS.ErrnoException | undefined)?.code === "ENOENT";
+
 async function getEntryFile(folderPath: string): Promise<string | null> {
   const srcDir = join(folderPath, "src");
   try {
-    for await (const dirEntry of Deno.readDir(srcDir)) {
-      if (dirEntry.isFile && dirEntry.name.match(/^app\.(js|jsx|ts|tsx)$/)) {
+    for (const dirEntry of await readdir(srcDir, { withFileTypes: true })) {
+      if (dirEntry.isFile() && dirEntry.name.match(/^app\.(js|jsx|ts|tsx)$/)) {
         return join(srcDir, dirEntry.name);
       }
     }
   } catch (e) {
-    if (!(e instanceof Deno.errors.NotFound)) {
+    if (!isNotFoundError(e)) {
       throw e;
     }
   }
@@ -55,11 +58,6 @@ const watchExtension = async (folderName: string, folderPath: string): Promise<v
     external: ["react", "react-dom", "react-dom/client", "react/jsx-runtime"],
     plugins: [
       spicetifyShims(),
-      ...denoPlugins({
-        initialPluginData: {
-          runtimePackage: "./deno.json",
-        },
-      }),
       inlineCSSPlugin({
         minify: false,
       }),
@@ -68,9 +66,9 @@ const watchExtension = async (folderName: string, folderPath: string): Promise<v
         setup(build: PluginBuild) {
           build.onEnd(async () => {
             console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m ${folderName} changes detected.`);
-            await Deno.copyFile(OUT, join(SPICETIFY_OUT, `${folderName}.mjs`));
+            await copyFile(OUT, join(SPICETIFY_OUT, `${folderName}.mjs`));
             if (shouldWatchSpotify) {
-              await Deno.copyFile(OUT, join(SPOTIFY_OUT, `${folderName}.mjs`));
+              await copyFile(OUT, join(SPOTIFY_OUT, `${folderName}.mjs`));
               await reloadSpotify();
               console.log(`${folderName} was updated.`);
             }
@@ -91,8 +89,8 @@ const watchExtension = async (folderName: string, folderPath: string): Promise<v
 const watchFolders = async (): Promise<void> => {
   const extensionsDir = "extensions";
   const watchPromises: Promise<void>[] = [];
-  for await (const dirEntry of Deno.readDir(extensionsDir)) {
-    if (dirEntry.isDirectory) {
+  for (const dirEntry of await readdir(extensionsDir, { withFileTypes: true })) {
+    if (dirEntry.isDirectory()) {
       const folderPath = join(extensionsDir, dirEntry.name);
       watchPromises.push(watchExtension(dirEntry.name, folderPath));
     }
@@ -101,20 +99,18 @@ const watchFolders = async (): Promise<void> => {
 };
 
 const killSpotify = async (): Promise<void> => {
-  const output = await Deno.spawnAndWait("taskkill", {
-    args: ["/F", "/IM", "spotify.exe"],
-  });
-  console.log(`\x1b[36m${output.stdout}.\x1b[0m`);
+  const output = spawnSync("taskkill", ["/F", "/IM", "spotify.exe"], { encoding: "utf8" });
+  console.log(`\x1b[36m${output.stdout}\x1b[0m`);
 };
 
 const applyExtensions = async (): Promise<void> => {
   const bnkPath = join(LOCALAPPDATA, "Spotify", "offline.bnk");
-  const data = await Deno.readFile(bnkPath);
+  const data = await readFile(bnkPath);
 
   const target = new TextEncoder().encode("app-developer");
   const ascii2 = "2".charCodeAt(0);
 
-  const firstIndex = indexOfNeedle(data, target);
+  const firstIndex = data.indexOf(target);
   if (firstIndex !== -1) {
     const pos = firstIndex + target.length + 1;
     if (pos < data.length) {
@@ -122,7 +118,7 @@ const applyExtensions = async (): Promise<void> => {
     }
   }
 
-  const lastIndex = lastIndexOfNeedle(data, target);
+  const lastIndex = data.lastIndexOf(target);
   if (lastIndex !== -1) {
     const pos = lastIndex + target.length + 2;
     if (pos < data.length) {
@@ -130,16 +126,15 @@ const applyExtensions = async (): Promise<void> => {
     }
   }
 
-  await Deno.writeFile(bnkPath, data);
+  await writeFile(bnkPath, data);
 };
 
 const startSpotify = (): void => {
   const spotifyPath = join(APPDATA, "Spotify", "Spotify.exe");
-  const startCommand = new Deno.Command(spotifyPath, {
-    args: ["--remote-debugging-port=9222"],
+  spawn(spotifyPath, ["--remote-debugging-port=9222"], {
     detached: true,
-  });
-  startCommand.spawn();
+    stdio: "ignore",
+  }).unref();
   console.log("Spotify started.");
 };
 
@@ -189,7 +184,7 @@ const reloadSpotify = async (): Promise<void> => {
   }
 };
 
-const args: string[] = Deno.args;
+const args: string[] = process.argv.slice(2);
 
 const runWatchers = async (): Promise<void> => {
   const startTime = performance.now();
@@ -210,56 +205,55 @@ const runWatchers = async (): Promise<void> => {
 
 await runWatchers();
 
-const runBiome = async (): Promise<void> => {
-  const formatCommand = new Deno.Command("deno", {
-    args: ["task", "check"],
-  });
-  const { stdout } = await formatCommand.output();
-  console.log("Biome:", new TextDecoder().decode(stdout));
+const runCheck = async (): Promise<void> => {
+  const checkCommand = spawnSync(process.execPath, ["run", "check"], { encoding: "utf8" });
+  console.log("Oxc:", checkCommand.stdout);
 };
 
 async function executeCommand(commandString: string): Promise<void> {
   console.log(`Executing: ${commandString}`);
-  const [cmd, ...args] = commandString.split(" ");
+  const [cmd, ...commandArgs] = commandString.split(" ");
 
-  try {
-    const command = new Deno.Command(cmd, {
-      args,
-      stdout: "inherit",
-      stderr: "inherit",
-      stdin: "inherit",
+  await new Promise<void>((resolve) => {
+    const command = spawn(cmd, commandArgs, {
+      stdio: "inherit",
     });
-    const status = await command.spawn().status;
-    if (!status.success) {
-      console.log(`Command exited with code ${status.code}`);
-    }
-  } catch (error) {
-    console.log(error);
-  }
+    command.on("error", (error) => {
+      console.log(error);
+      resolve();
+    });
+    command.on("close", (code) => {
+      if (code) {
+        console.log(`Command exited with code ${code}`);
+      }
+      resolve();
+    });
+  });
 }
 
-Deno.addSignalListener("SIGINT", async () => {
+process.on("SIGINT", async () => {
   console.log(`\x1b[32m[${getCurrentTime()}]\x1b[0m Exiting...`);
 
-  for (const [folderName, context] of Object.entries(contexts)) {
-    await context.dispose();
+  for (const [folderName, buildContext] of Object.entries(contexts)) {
+    await buildContext.dispose();
     console.log(`\x1b[33m${folderName} watcher terminated.\x1b[0m`);
   }
 
-  Deno.exit(0);
+  process.exit(0);
 });
 
-const lineStream = Deno.stdin.readable
-  .pipeThrough(new TextDecoderStream())
-  .pipeThrough(new TextLineStream());
+const lineReader = createInterface({
+  input: process.stdin,
+  crlfDelay: Infinity,
+});
 
 (async () => {
-  for await (const line of lineStream) {
+  for await (const line of lineReader) {
     const command = line.trim();
     if (!command) continue;
 
     if (command === "format" || command === "check") {
-      await runBiome();
+      await runCheck();
     } else {
       await executeCommand(command);
     }

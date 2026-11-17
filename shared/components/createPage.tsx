@@ -29,12 +29,12 @@ const AppRouter = () => {
   }, []);
 
   useEffect(() => {
-    const rootDiv = document.querySelector<HTMLDivElement>(".custom-pages");
+    const pagesRoot = document.querySelector<HTMLDivElement>(".custom-pages");
     const mainEl = document.querySelector<HTMLElement>("main");
     const mainContainer = document.querySelector<HTMLDivElement>(
       ".main-view-container__scroll-node-child",
     );
-    if (!(mainEl && mainContainer && rootDiv)) {
+    if (!(mainEl && mainContainer && pagesRoot)) {
       return;
     }
 
@@ -43,9 +43,9 @@ const AppRouter = () => {
     if (hasPagesActive) {
       mainEl.style.display = "none";
       mainContainer.style.overflow = "hidden";
-      rootDiv.style.height = "100%";
-      rootDiv.style.width = "100%";
-      rootDiv.style.overflow = "hidden";
+      pagesRoot.style.height = "100%";
+      pagesRoot.style.width = "100%";
+      pagesRoot.style.overflow = "hidden";
     } else {
       mainEl.style.display = "";
       mainContainer.style.overflow = "";

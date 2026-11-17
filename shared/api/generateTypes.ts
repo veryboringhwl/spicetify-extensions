@@ -36,7 +36,7 @@ export const generateTypes = (rootObject: any, rootTypeName: string): string => 
       return typeof Spicetify.Platform.username !== "undefined"
         ? String(Spicetify.Platform.username)
         : null;
-    } catch (_e) {
+    } catch {
       return null;
     }
   })();

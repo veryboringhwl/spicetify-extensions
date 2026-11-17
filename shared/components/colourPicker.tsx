@@ -1,4 +1,4 @@
-// biome-ignore-all lint: <explanation>
+// oxlint-disable
 // @ts-nocheck
 
 import { useCallback, useEffect, useRef, useState } from "react";

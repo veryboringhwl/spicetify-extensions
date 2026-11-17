@@ -110,9 +110,11 @@ export const usePlayer = (trackUri: string, trackDuration: number): UsePlayerRet
   const togglePlay = useCallback((): void => {
     const currentPlayingTrack = playerState.item?.uri;
     if (currentPlayingTrack === trackUri) {
-      playerState.isPaused
-        ? Spicetify.Platform.PlayerAPI.resume({})
-        : Spicetify.Platform.PlayerAPI.pause({});
+      if (playerState.isPaused) {
+        Spicetify.Platform.PlayerAPI.resume({});
+      } else {
+        Spicetify.Platform.PlayerAPI.pause({});
+      }
     } else {
       Spicetify.Platform.PlayerAPI.play(
         {

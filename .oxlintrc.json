@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": ["dist/**", "node_modules/**", "shared/types/**"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn"
+  },
+  "rules": {
+    "no-debugger": "off",
+    "no-underscore-dangle": "off",
+    "typescript/no-explicit-any": "off",
+    "unicorn/consistent-function-scoping": "off",
+    "unicorn/no-array-sort": "off",
+    "unicorn/prefer-add-event-listener": "off"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}

@@ -17,7 +17,9 @@ export const SpotifyWebpack = {
   getModules() {
     if (!shared.require) {
       const webpack =
-        (globalThis as any).webpackChunkclient_web || (globalThis as any).rspackChunkclient_web;
+        (globalThis as any).webpackChunkclient_web ||
+        (globalThis as any).rspackChunkclient_web ||
+        (globalThis as any).rspackChunk;
       if (!webpack) return shared.modules ?? [];
       shared.require = webpack.push([[Symbol()], {}, (re: any) => re]);
     }
@@ -114,7 +116,7 @@ export const SpotifyWebpack = {
           foundModuleId = id;
           break;
         }
-      } catch (_e) {}
+      } catch {}
     }
 
     if (!foundModuleId) return null;

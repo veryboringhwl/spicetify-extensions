@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "types": ["bun"]
+  },
+  "include": [
+    "tasks/**/*.ts",
+    "shared/**/*.ts",
+    "shared/**/*.tsx",
+    "extensions/**/*.ts",
+    "extensions/**/*.tsx"
+  ]
+}

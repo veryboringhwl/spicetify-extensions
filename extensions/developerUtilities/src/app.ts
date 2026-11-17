@@ -1,4 +1,4 @@
-// biome-ignore lint: Disabled to avoid regenerating types on page load
+// oxlint-disable-next-line no-unused-vars -- Disabled to avoid regenerating types on page load
 import { generateTypes } from "../../../shared/api/generateTypes.ts";
 import { parseProps } from "../../../shared/api/parseProps.ts";
 // import { createPage } from "../../../shared/components/createPage.tsx";

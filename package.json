@@ -1,0 +1,37 @@
+{
+  "name": "spicetify-extensions",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "release": "bun tasks/release.ts",
+    "dev-build": "bun tasks/build.ts --dev",
+    "build": "bun tasks/build.ts",
+    "dev-watch": "bun tasks/watch.ts --dev",
+    "watch": "bun tasks/watch.ts",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "check": "oxlint --fix && oxfmt"
+  },
+  "dependencies": {
+    "dexie": "4.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.29.13",
+    "@babel/preset-react": "7.28.5",
+    "@babel/preset-typescript": "7.28.5",
+    "@types/bun": "1.4.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "babel-plugin-react-compiler": "19.1.0-rc.3",
+    "esbuild": "0.28.2",
+    "esbuild-plugin-babel": "0.2.3",
+    "oxfmt": "0.79.0",
+    "oxlint": "1.94.0",
+    "react-compiler-runtime": "19.1.0-rc.3"
+  }
+}

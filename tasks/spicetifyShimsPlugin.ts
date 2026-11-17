@@ -1,7 +1,7 @@
-import type { Plugin, PluginBuild } from "@esbuild/mod.d.ts";
-import { join } from "@std/path";
+import { join } from "node:path";
+import type { Plugin, PluginBuild } from "esbuild";
 
-const cwd = Deno.cwd();
+const cwd = process.cwd();
 
 export const spicetifyShims = (): Plugin => ({
   name: "spicetify-shims",

@@ -1,20 +1,24 @@
-import * as esbuild from "@esbuild/mod.js";
-import { denoPlugins } from "@oazmi/esbuild-plugin-deno";
-import { join } from "@std/path";
-import { inlineCSSPlugin } from "./pluginInlineCSS.ts";
+import { spawnSync } from "node:child_process";
+import { readdir } from "node:fs/promises";
+import { join } from "node:path";
+import * as esbuild from "esbuild";
+import { inlineCSSPlugin } from "./pluginInlineCss.ts";
 import { reactCompilerPlugin } from "./reactCompilerPlugin.ts";
 import { spicetifyShims } from "./spicetifyShimsPlugin.ts";
+
+const isNotFoundError = (error: unknown): boolean =>
+  (error as NodeJS.ErrnoException | undefined)?.code === "ENOENT";
 
 const getEntryFile = async (folderPath: string): Promise<string | null> => {
   const srcDir = join(folderPath, "src");
   try {
-    for await (const dirEntry of Deno.readDir(srcDir)) {
-      if (dirEntry.isFile && dirEntry.name.match(/^app\.(js|jsx|ts|tsx)$/)) {
+    for (const dirEntry of await readdir(srcDir, { withFileTypes: true })) {
+      if (dirEntry.isFile() && dirEntry.name.match(/^app\.(js|jsx|ts|tsx)$/)) {
         return join(srcDir, dirEntry.name);
       }
     }
   } catch (e) {
-    if (!(e instanceof Deno.errors.NotFound)) {
+    if (!isNotFoundError(e)) {
       throw e;
     }
   }
@@ -43,11 +47,6 @@ const buildExtension = async (folderName: string, folderPath: string): Promise<v
       inlineCSSPlugin({
         minify: true,
       }),
-      ...denoPlugins({
-        initialPluginData: {
-          runtimePackage: "./deno.json",
-        },
-      }),
       reactCompilerPlugin(),
     ] as esbuild.Plugin[],
     banner: {
@@ -58,8 +57,8 @@ const buildExtension = async (folderName: string, folderPath: string): Promise<v
 
 const buildFolders = async (): Promise<void> => {
   const buildPromises = [];
-  for await (const dirEntry of Deno.readDir("extensions")) {
-    if (dirEntry.isDirectory) {
+  for (const dirEntry of await readdir("extensions", { withFileTypes: true })) {
+    if (dirEntry.isDirectory()) {
       const folderPath = join("extensions", dirEntry.name);
       buildPromises.push(buildExtension(dirEntry.name, folderPath));
     }
@@ -67,24 +66,21 @@ const buildFolders = async (): Promise<void> => {
   await Promise.all(buildPromises);
 };
 
-const runBiome = async (): Promise<void> => {
-  const formatCommand = new Deno.Command("deno", {
-    args: ["task", "check"],
-  });
-  const { stdout } = await formatCommand.output();
-  console.log("Biome:", new TextDecoder().decode(stdout));
+const runCheck = async (): Promise<void> => {
+  const checkCommand = spawnSync(process.execPath, ["run", "check"], { encoding: "utf8" });
+  console.log("Oxc:", checkCommand.stdout);
 };
 
 const runBuilds = async (): Promise<void> => {
   const startTime = performance.now();
 
   await buildFolders();
-  await runBiome();
+  await runCheck();
 
   const endTime = performance.now();
   const elapsed = ((endTime - startTime) / 1000).toFixed(2);
   console.log(`\x1b[33mBuild completed in ${elapsed} seconds.\x1b[0m`);
-  Deno.exit(0);
+  process.exit(0);
 };
 
 await runBuilds();

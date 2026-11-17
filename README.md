@@ -53,3 +53,15 @@ spicetify apply
 
 Issues and pull requests are welcome. If you find a bug or have an idea for an
 improvement, open an issue in this repository.
+
+## Development
+
+This project uses [Bun](https://bun.sh/) for running scripts and managing dependencies.
+
+```sh
+bun install
+bun run build     # build all extensions into dist/
+bun run watch     # rebuild extensions when files change
+bun run dev-watch # watch and reload Spotify (Windows)
+bun run check     # format and lint the codebase
+```
